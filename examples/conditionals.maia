@@ -18,5 +18,4 @@ switch (a) {
         break
     default:
         system.println("a != 1 && a != 2")
-        break
 }

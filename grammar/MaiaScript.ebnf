@@ -3,13 +3,13 @@ Program                  ::= Expression*
 
 Expression               ::= Comment
                            | Block
-                           | Operation
                            | Statement
-
+                           | Operation
+                           
 Block                    ::= '{' Expression* '}'
 
 Operation                ::= VariableAssignment
-VariableAssignment       ::= ConditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=' | '#=' | '@=') ConditionalExpression)*
+VariableAssignment       ::= ConditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') ConditionalExpression)*
 ConditionalExpression    ::= LogicalORExpression ('?' VariableAssignment ':' VariableAssignment)?
 LogicalORExpression      ::= LogicalANDExpression ('||' LogicalANDExpression)*
 LogicalANDExpression     ::= BitwiseORExpression ('&&' BitwiseORExpression)*
@@ -44,6 +44,8 @@ Statement                ::= Do
                            | Continue
                            | If
                            | Switch
+                           | NamespaceDeclaration
+                           | FunctionDeclaration
                            | Return
                            | EmptyStatement
                            
@@ -58,10 +60,21 @@ Else                     ::= 'else' Expression
 Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
 Case                     ::= 'case' Expression ':' Expression*
 Default                  ::= 'default' ':' Expression*
+NamespaceDeclaration     ::= Identifier Block
+FunctionDeclaration      ::= Identifier '(' Arguments ')' Block
+                           | Identifier '(' Arguments ')' ':=' Block
+                           | Identifier '(' Arguments ')' '?=' Block
+                           | Identifier '(' Arguments ')' '=>' Script
+                           | Type Identifier '(' Arguments ')' Script
 Return                   ::= 'return' Expression
 EmptyStatement           ::= ';'
-                           
-Arguments                ::= Expression (',' Expression)*
+
+Type                     ::= 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+
+Arguments                ::= (Type? Expression) (',' (Type? Expression))*
 
 Member                   ::= Identifier ('.' Identifier)* '(' Arguments? ')'
                            | Identifier ('.' Identifier)* ('[' Arguments? ']')*
@@ -100,15 +113,19 @@ ReservedWord             ::= 'break'
                            | 'default'
                            | 'do'
                            | 'else'
+                           | 'f32'
+                           | 'f64'
                            | 'for'
                            | 'foreach'
+                           | 'i32'
+                           | 'i64'
                            | 'if'
                            | 'return'
                            | 'switch'
                            | 'while'
 
-FirstIdentifierChar      ::= '_' | [A-Za-z]
-IdentifierChar           ::= '_' | [0-9] | [A-Za-z]
+FirstIdentifierChar      ::= '$' | '_' | [A-Za-z]
+IdentifierChar           ::= '$' | '_' | [0-9] | [A-Za-z]
 
 Character                ::= "'" SingleCharacter "'"
                            | "'" EscapeSequence "'"
@@ -161,8 +178,13 @@ Octal                    ::= '0' OctalDigit+
 Hexadecimal              ::= '0x' HexDigit+
 
 Comment                  ::= SingleLineComment
+                           | MultiLineComment
 
 SingleLineComment        ::= '//' (SourceCharacter - LineTerminator)*
+                           | '#'  (SourceCharacter - LineTerminator)*
+MultiLineComment         ::= '/*' (SourceCharacter* - (SourceCharacter* '*/' SourceCharacter*)) '*/'
+
+Script                   ::= '/{' (SourceCharacter* - (SourceCharacter* '}/' SourceCharacter*)) '}/'
 
 SourceCharacter          ::= .
 
