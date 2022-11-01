@@ -15,6 +15,7 @@ for (i = 0; i < b.length; i++) {
     system.println(b[i])
 }
 
+// A TCL-like foreach statement.
 foreach(c; key; value) {
     system.println(key + ": " + value)
 }

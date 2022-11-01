@@ -1,3 +1,4 @@
+// Creating a namespace (an object)
 a {
     b = 1
 }

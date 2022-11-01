@@ -11,9 +11,11 @@ d = a / b
 system.println(d)
 d = a % b
 system.println(d)
+// Python-like power operator.
 d = a ** b
 system.println(d)
 
+// C-like operators.
 d = a += b
 system.println(d)
 d = a -= b
