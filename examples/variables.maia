@@ -1,0 +1,13 @@
+a = 1
+b = 2.0
+c = "Hello World!"
+d = [1,2]
+e = [[1,2],[3,4]]
+f = {a:1,b:2.0,c:"Hello World!"}
+
+system.println(a)
+system.println(b)
+system.println(c)
+system.println(d)
+system.println(e)
+system.println(f)

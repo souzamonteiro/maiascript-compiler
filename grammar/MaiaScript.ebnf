@@ -1,0 +1,175 @@
+Program                  ::= Expression*
+                           | EOF
+
+Expression               ::= Comment
+                           | Block
+                           | Operation
+                           | Statement
+
+Block                    ::= '{' Expression* '}'
+
+Operation                ::= VariableAssignment
+VariableAssignment       ::= ConditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=' | '#=' | '@=') ConditionalExpression)*
+ConditionalExpression    ::= LogicalORExpression ('?' VariableAssignment ':' VariableAssignment)?
+LogicalORExpression      ::= LogicalANDExpression ('||' LogicalANDExpression)*
+LogicalANDExpression     ::= BitwiseORExpression ('&&' BitwiseORExpression)*
+BitwiseORExpression      ::= BitwiseXORExpression ('|' BitwiseXORExpression)*
+BitwiseXORExpression     ::= BitwiseANDExpression ('^' BitwiseANDExpression)*
+BitwiseANDExpression     ::= EqualityExpression ('&' EqualityExpression)*
+EqualityExpression       ::= RelationalExpression (('==' | '!=') RelationalExpression)*
+RelationalExpression     ::= ShiftExpression (('<' | '>' | '<=' | '>=') ShiftExpression)*
+ShiftExpression          ::= AdditiveExpression (('<<' | '>>') AdditiveExpression)*
+AdditiveExpression       ::= MultiplicativeExpression (('+' | '-') MultiplicativeExpression)*
+MultiplicativeExpression ::= PowerExpression (('*' | '/' | '%') PowerExpression)*
+PowerExpression          ::= UnaryExpression ('**' UnaryExpression)*
+UnaryExpression          ::= Primary
+                           | Primary '++'
+                           | Primary '--'
+                           | '++' Primary
+                           | '--' Primary
+                           | '+' Primary
+                           | '-' Primary
+                           | '~' Primary
+                           | '!' Primary
+
+Primary                  ::= Member
+                           | Value
+                           | ParenthesizedExpression
+
+Statement                ::= Do
+                           | While
+                           | For
+                           | ForEach
+                           | Break
+                           | Continue
+                           | If
+                           | Switch
+                           | Return
+                           | EmptyStatement
+                           
+Do                       ::= 'do' Expression 'while' '(' Expression ')'
+While                    ::= 'while' '(' Expression ')' Expression
+For                      ::= 'for' '(' Expression ';' Expression ';' Expression ')' Expression
+ForEach                  ::= 'foreach' '(' Expression ';' Expression ';' Expression ')' Expression
+Break                    ::= 'break'
+Continue                 ::= 'continue'
+If                       ::= 'if' '(' Expression ')' Expression Else?
+Else                     ::= 'else' Expression
+Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
+Case                     ::= 'case' Expression ':' Expression*
+Default                  ::= 'default' ':' Expression*
+Return                   ::= 'return' Expression
+EmptyStatement           ::= ';'
+                           
+Arguments                ::= Expression (',' Expression)*
+
+Member                   ::= Identifier ('.' Identifier)* '(' Arguments? ')'
+                           | Identifier ('.' Identifier)* ('[' Arguments? ']')*
+
+Array                    ::= '{' Element (',' Element)* '}'
+Matrix                   ::= '[' Row? (';' Row)* ']'
+
+Element                  ::= (Key ':')? Expression
+Key                      ::= Identifier
+                           | String
+
+Row                      ::= Column (',' Column)*
+Column                   ::= Expression
+
+ParenthesizedExpression  ::= '(' Expression ')'
+
+Value                    ::= Integer
+                           | Real
+                           | Character
+                           | String
+                           | Array
+                           | Matrix
+
+WhiteSpace               ::= WhiteSpace^token
+                         /* ws: definition */
+
+<?TOKENS?>
+
+EOF                      ::= $
+
+Identifier               ::= (FirstIdentifierChar (IdentifierChar)*) - ReservedWord
+
+ReservedWord             ::= 'break'
+                           | 'case'
+                           | 'continue'
+                           | 'default'
+                           | 'do'
+                           | 'else'
+                           | 'for'
+                           | 'foreach'
+                           | 'if'
+                           | 'return'
+                           | 'switch'
+                           | 'while'
+
+FirstIdentifierChar      ::= '_' | [A-Za-z]
+IdentifierChar           ::= '_' | [0-9] | [A-Za-z]
+
+Character                ::= "'" SingleCharacter "'"
+                           | "'" EscapeSequence "'"
+SingleCharacter          ::= InputCharacter - ( "'" | '\' )
+
+String                   ::= '"' StringCharacters? '"'
+StringCharacters         ::= StringCharacter+
+StringCharacter          ::= InputCharacter - ( '"' | '\' )
+                           | EscapeSequence
+EscapeSequence           ::= BackSlash 'b'
+                           | BackSlash 't'
+                           | BackSlash 'n'
+                           | BackSlash 'f'
+                           | BackSlash 'r'
+                           | BackSlash '"'
+                           | BackSlash "'"
+                           | BackSlash BackSlash
+                           | OctalEscape
+                           | HexEscapeSequence
+OctalEscape              ::= '\' OctalDigit+
+HexEscapeSequence        ::= '\x' HexDigit+
+OctalDigit               ::= '0'
+                           | '1'
+                           | '2'
+                           | '3'
+                           | '4'
+                           | '5'
+                           | '6'
+                           | '7'
+HexDigit                 ::= [0-9a-fA-F]
+BackSlash                ::= '\' ( UnicodeMarker '005' [cC] )?
+InputCharacter           ::= UnicodeInputCharacter - ( CR | LF )
+
+UnicodeInputCharacter    ::= UnicodeEscape
+                           | RawInputCharacter
+UnicodeEscape            ::= '\' UnicodeMarker HexDigit HexDigit HexDigit HexDigit
+UnicodeMarker            ::= 'u' | 'U'
+RawInputCharacter        ::= [#x0001-#xD7FF]
+                           | [#xE000-#xFFFD]
+                           | [#x10000-#x10FFFF]
+
+Integer                  ::= '0'
+                           | Digit+ ('u' | 'U')? ('l' | 'll' | 'L' | 'LL' | 'f' | 'F')?
+                           | Octal
+                           | Hexadecimal
+Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
+
+Digit                    ::= [0-9]
+Octal                    ::= '0' OctalDigit+
+Hexadecimal              ::= '0x' HexDigit+
+
+Comment                  ::= SingleLineComment
+
+SingleLineComment        ::= '//' (SourceCharacter - LineTerminator)*
+
+SourceCharacter          ::= .
+
+LineTerminator           ::= LF
+                           | CR
+                           | CR LF
+LF                       ::= #x000A
+CR                       ::= #x000D
+
+WhiteSpace               ::= [#x0009#x000A#x000D#x0020]+

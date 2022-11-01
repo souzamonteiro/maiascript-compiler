@@ -1,0 +1,40 @@
+a = 1
+b = 2.0
+
+d = a + b
+system.println(d)
+d = a - b
+system.println(d)
+d = a * b
+system.println(d)
+d = a / b
+system.println(d)
+d = a % b
+system.println(d)
+d = a ** b
+system.println(d)
+
+d = a += b
+system.println(d)
+d = a -= b
+system.println(d)
+
+d = a & b
+system.println(d)
+d = a | b
+system.println(d)
+d = a ^ b
+system.println(d)
+d = a && b
+system.println(d)
+d = a || b
+system.println(d)
+
+d = a++
+system.println(d)
+d = b--
+system.println(d)
+d = ++a
+system.println(d)
+d = --b
+system.println(d)
