@@ -11,13 +11,18 @@ f1(x) ?= {
     return x
 }
 
+// A parallel function.
+f1(x) #= {
+    return x
+}
+
 // An object constructor.
 f2(x) := {
     return x
 }
 
 // A function in JavaScript.
-f3(x) => /{
+f3(x) /{
     y = x + 1;
     return y;
 }/

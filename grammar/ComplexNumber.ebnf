@@ -1,0 +1,17 @@
+Number                   ::= Complex*
+                           | EOF
+
+Complex                  ::= Real? Imaginary
+
+WhiteSpace               ::= WhiteSpace^token
+                          /* ws: definition */
+
+<?TOKENS?>
+
+EOF                      ::= $
+
+Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
+Imaginary                ::= (('+' | '-')? Real '*' 'i')
+Digit                    ::= [0-9]
+
+WhiteSpace               ::= [#x0009#x000A#x000D#x0020]+

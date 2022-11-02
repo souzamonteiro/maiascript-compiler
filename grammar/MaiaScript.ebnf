@@ -19,9 +19,9 @@ BitwiseANDExpression     ::= EqualityExpression ('&' EqualityExpression)*
 EqualityExpression       ::= RelationalExpression (('==' | '!=') RelationalExpression)*
 RelationalExpression     ::= ShiftExpression (('<' | '>' | '<=' | '>=') ShiftExpression)*
 ShiftExpression          ::= AdditiveExpression (('<<' | '>>') AdditiveExpression)*
-AdditiveExpression       ::= MultiplicativeExpression (('+' | '-') MultiplicativeExpression)*
-MultiplicativeExpression ::= PowerExpression (('*' | '/' | '%') PowerExpression)*
-PowerExpression          ::= UnaryExpression ('**' UnaryExpression)*
+AdditiveExpression       ::= PowerExpression (('+' | '-') PowerExpression)*
+PowerExpression          ::= MultiplicativeExpression ('**' MultiplicativeExpression)*
+MultiplicativeExpression ::= UnaryExpression (('*' | '/' | '%') UnaryExpression)*
 UnaryExpression          ::= Primary
                            | Primary '++'
                            | Primary '--'
@@ -44,6 +44,8 @@ Statement                ::= Do
                            | Continue
                            | If
                            | Switch
+                           | Try
+                           | Test
                            | NamespaceDeclaration
                            | FunctionDeclaration
                            | Return
@@ -60,12 +62,16 @@ Else                     ::= 'else' Expression
 Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
 Case                     ::= 'case' Expression ':' Expression*
 Default                  ::= 'default' ':' Expression*
+Try                      ::= 'try' Expression Catch?
+Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Catch?
+Catch                    ::= 'catch' '(' Expression ')' Expression
 NamespaceDeclaration     ::= Identifier Block
 FunctionDeclaration      ::= Identifier '(' Arguments ')' Block
-                           | Identifier '(' Arguments ')' ':=' Block
+                           | Identifier '(' Arguments ')' '=' Expression
                            | Identifier '(' Arguments ')' '?=' Block
-                           | Identifier '(' Arguments ')' '=>' Script
-                           | Type Identifier '(' Arguments ')' Script
+                           | Identifier '(' Arguments ')' '#=' Block
+                           | Identifier '(' Arguments ')' ':=' Block
+                           | Type? Identifier '(' Arguments ')' Script
 Return                   ::= 'return' Expression
 EmptyStatement           ::= ';'
 
@@ -93,10 +99,13 @@ ParenthesizedExpression  ::= '(' Expression ')'
 
 Value                    ::= Integer
                            | Real
+                           | Complex
                            | Character
                            | String
                            | Array
                            | Matrix
+
+Complex                  ::= Real? Imaginary
 
 WhiteSpace               ::= WhiteSpace^token
                          /* ws: definition */
@@ -109,6 +118,7 @@ Identifier               ::= (FirstIdentifierChar (IdentifierChar)*) - ReservedW
 
 ReservedWord             ::= 'break'
                            | 'case'
+                           | 'catch'
                            | 'continue'
                            | 'default'
                            | 'do'
@@ -122,6 +132,8 @@ ReservedWord             ::= 'break'
                            | 'if'
                            | 'return'
                            | 'switch'
+                           | 'test'
+                           | 'try'
                            | 'while'
 
 FirstIdentifierChar      ::= '$' | '_' | [A-Za-z]
@@ -172,6 +184,7 @@ Integer                  ::= '0'
                            | Octal
                            | Hexadecimal
 Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
+Imaginary                ::= (('+' | '-')? Real '*' 'i')
 
 Digit                    ::= [0-9]
 Octal                    ::= '0' OctalDigit+
