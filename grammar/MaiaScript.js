@@ -1,4 +1,4 @@
-// This file was generated on Wed Nov 2, 2022 15:14 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Wed Nov 2, 2022 19:16 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree -main
 
 function MaiaScript(string, parsingEventHandler)
@@ -114,10 +114,11 @@ function MaiaScript(string, parsingEventHandler)
   this.parse_Program = function()
   {
     eventHandler.startNonterminal("Program", e0);
-    lookahead1W(29);                // END | EOF | Identifier | Character | String | Integer | Real | Imaginary |
+    lookahead1W(30);                // END | EOF | Identifier | Character | String | Integer | Real | Imaginary |
                                     // Comment | WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
     switch (l1)
     {
     case 2:                         // EOF
@@ -129,7 +130,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead1W(25);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         if (l1 == 1)                // END
         {
           break;
@@ -153,112 +155,124 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9347:                    // Identifier '{'
+      case 9731:                    // Identifier '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       }
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       lookahead2W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
       switch (lk)
       {
-      case 457:                     // '{' Identifier
+      case 460:                     // '{' Identifier
         lookahead3W(47);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' |
-                                    // 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' |
-                                    // 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' |
+                                    // '||' | '}' | '~'
         break;
-      case 713:                     // '{' String
+      case 716:                     // '{' String
         lookahead3W(46);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' |
                                     // ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
                                     // '?' | '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' | 'f64' |
-                                    // 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' |
-                                    // 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' |
+                                    // 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' |
+                                    // '~'
         break;
-      case 6473:                    // '{' '['
+      case 6476:                    // '{' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9417:                    // '{' '{'
+      case 9804:                    // '{' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
-      case 585:                     // '{' Character
-      case 841:                     // '{' Integer
-      case 969:                     // '{' Real
-      case 1097:                    // '{' Imaginary
+      case 588:                     // '{' Character
+      case 844:                     // '{' Integer
+      case 972:                     // '{' Real
+      case 1100:                    // '{' Imaginary
         lookahead3W(45);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' |
-                                    // 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' |
-                                    // 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
-      case 1225:                    // '{' Comment
-      case 4809:                    // '{' ';'
-      case 6985:                    // '{' 'break'
-      case 7369:                    // '{' 'continue'
-        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      case 1228:                    // '{' Comment
+      case 4812:                    // '{' ';'
+      case 6988:                    // '{' 'break'
+      case 7372:                    // '{' 'continue'
+        lookahead3W(32);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '}' | '~'
         break;
-      case 2633:                    // '{' '('
-      case 7625:                    // '{' 'do'
-      case 8777:                    // '{' 'return'
-      case 9161:                    // '{' 'try'
+      case 7884:                    // '{' 'f32'
+      case 8012:                    // '{' 'f64'
+      case 8396:                    // '{' 'i32'
+      case 8524:                    // '{' 'i64'
+        lookahead3W(0);             // Identifier | WhiteSpace^token
+        break;
+      case 2636:                    // '{' '('
+      case 7628:                    // '{' 'do'
+      case 8908:                    // '{' 'local'
+      case 9036:                    // '{' 'return'
+      case 9548:                    // '{' 'try'
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
-      case 7881:                    // '{' 'f32'
-      case 8009:                    // '{' 'f64'
-      case 8393:                    // '{' 'i32'
-      case 8521:                    // '{' 'i64'
-        lookahead3W(0);             // Identifier | WhiteSpace^token
-        break;
-      case 1609:                    // '{' '!'
-      case 3273:                    // '{' '+'
-      case 3401:                    // '{' '++'
-      case 3785:                    // '{' '-'
-      case 3913:                    // '{' '--'
-      case 10057:                   // '{' '~'
+      case 1612:                    // '{' '!'
+      case 3276:                    // '{' '+'
+      case 3404:                    // '{' '++'
+      case 3788:                    // '{' '-'
+      case 3916:                    // '{' '--'
+      case 10444:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
-      case 8137:                    // '{' 'for'
-      case 8265:                    // '{' 'foreach'
-      case 8649:                    // '{' 'if'
-      case 8905:                    // '{' 'switch'
-      case 9033:                    // '{' 'test'
-      case 9289:                    // '{' 'while'
+      case 8140:                    // '{' 'for'
+      case 8268:                    // '{' 'foreach'
+      case 8652:                    // '{' 'if'
+      case 8780:                    // '{' 'include'
+      case 9164:                    // '{' 'switch'
+      case 9292:                    // '{' 'test'
+      case 9420:                    // '{' 'throw'
+      case 9676:                    // '{' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -290,12 +304,15 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 78                    // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 81                    // '~'
      && lk != 131                   // Identifier END
      && lk != 387                   // Identifier Identifier
      && lk != 515                   // Identifier Character
@@ -358,322 +375,355 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8323                  // Identifier 'i32'
      && lk != 8451                  // Identifier 'i64'
      && lk != 8579                  // Identifier 'if'
-     && lk != 8707                  // Identifier 'return'
-     && lk != 8835                  // Identifier 'switch'
-     && lk != 8963                  // Identifier 'test'
-     && lk != 9091                  // Identifier 'try'
-     && lk != 9219                  // Identifier 'while'
-     && lk != 9475                  // Identifier '|'
-     && lk != 9603                  // Identifier '|='
-     && lk != 9731                  // Identifier '||'
-     && lk != 9859                  // Identifier '}'
-     && lk != 9929                  // '{' '}'
-     && lk != 9987                  // Identifier '~'
-     && lk != 49609                 // '{' Identifier Identifier
-     && lk != 49737                 // '{' Character Identifier
-     && lk != 49865                 // '{' String Identifier
-     && lk != 49993                 // '{' Integer Identifier
-     && lk != 50121                 // '{' Real Identifier
-     && lk != 50249                 // '{' Imaginary Identifier
-     && lk != 50377                 // '{' Comment Identifier
-     && lk != 53961                 // '{' ';' Identifier
-     && lk != 56137                 // '{' 'break' Identifier
-     && lk != 56521                 // '{' 'continue' Identifier
-     && lk != 65993                 // '{' Identifier Character
-     && lk != 66121                 // '{' Character Character
-     && lk != 66249                 // '{' String Character
-     && lk != 66377                 // '{' Integer Character
-     && lk != 66505                 // '{' Real Character
-     && lk != 66633                 // '{' Imaginary Character
-     && lk != 66761                 // '{' Comment Character
-     && lk != 70345                 // '{' ';' Character
-     && lk != 72521                 // '{' 'break' Character
-     && lk != 72905                 // '{' 'continue' Character
-     && lk != 82377                 // '{' Identifier String
-     && lk != 82505                 // '{' Character String
-     && lk != 82633                 // '{' String String
-     && lk != 82761                 // '{' Integer String
-     && lk != 82889                 // '{' Real String
-     && lk != 83017                 // '{' Imaginary String
-     && lk != 83145                 // '{' Comment String
-     && lk != 86729                 // '{' ';' String
-     && lk != 88905                 // '{' 'break' String
-     && lk != 89289                 // '{' 'continue' String
-     && lk != 98761                 // '{' Identifier Integer
-     && lk != 98889                 // '{' Character Integer
-     && lk != 99017                 // '{' String Integer
-     && lk != 99145                 // '{' Integer Integer
-     && lk != 99273                 // '{' Real Integer
-     && lk != 99401                 // '{' Imaginary Integer
-     && lk != 99529                 // '{' Comment Integer
-     && lk != 103113                // '{' ';' Integer
-     && lk != 105289                // '{' 'break' Integer
-     && lk != 105673                // '{' 'continue' Integer
-     && lk != 115145                // '{' Identifier Real
-     && lk != 115273                // '{' Character Real
-     && lk != 115401                // '{' String Real
-     && lk != 115529                // '{' Integer Real
-     && lk != 115657                // '{' Real Real
-     && lk != 115785                // '{' Imaginary Real
-     && lk != 115913                // '{' Comment Real
-     && lk != 119497                // '{' ';' Real
-     && lk != 121673                // '{' 'break' Real
-     && lk != 122057                // '{' 'continue' Real
-     && lk != 131529                // '{' Identifier Imaginary
-     && lk != 131657                // '{' Character Imaginary
-     && lk != 131785                // '{' String Imaginary
-     && lk != 131913                // '{' Integer Imaginary
-     && lk != 132169                // '{' Imaginary Imaginary
-     && lk != 132297                // '{' Comment Imaginary
-     && lk != 135881                // '{' ';' Imaginary
-     && lk != 138057                // '{' 'break' Imaginary
-     && lk != 138441                // '{' 'continue' Imaginary
-     && lk != 147913                // '{' Identifier Comment
-     && lk != 148041                // '{' Character Comment
-     && lk != 148169                // '{' String Comment
-     && lk != 148297                // '{' Integer Comment
-     && lk != 148425                // '{' Real Comment
-     && lk != 148553                // '{' Imaginary Comment
-     && lk != 148681                // '{' Comment Comment
-     && lk != 152265                // '{' ';' Comment
-     && lk != 154441                // '{' 'break' Comment
-     && lk != 154825                // '{' 'continue' Comment
-     && lk != 197065                // '{' Identifier '!'
-     && lk != 197193                // '{' Character '!'
-     && lk != 197321                // '{' String '!'
-     && lk != 197449                // '{' Integer '!'
-     && lk != 197577                // '{' Real '!'
-     && lk != 197705                // '{' Imaginary '!'
-     && lk != 197833                // '{' Comment '!'
-     && lk != 201417                // '{' ';' '!'
-     && lk != 203593                // '{' 'break' '!'
-     && lk != 203977                // '{' 'continue' '!'
-     && lk != 328265                // '{' Character '('
-     && lk != 328393                // '{' String '('
-     && lk != 328521                // '{' Integer '('
-     && lk != 328649                // '{' Real '('
-     && lk != 328777                // '{' Imaginary '('
-     && lk != 328905                // '{' Comment '('
-     && lk != 332489                // '{' ';' '('
-     && lk != 334665                // '{' 'break' '('
-     && lk != 335049                // '{' 'continue' '('
+     && lk != 8707                  // Identifier 'include'
+     && lk != 8835                  // Identifier 'local'
+     && lk != 8963                  // Identifier 'return'
+     && lk != 9091                  // Identifier 'switch'
+     && lk != 9219                  // Identifier 'test'
+     && lk != 9347                  // Identifier 'throw'
+     && lk != 9475                  // Identifier 'try'
+     && lk != 9603                  // Identifier 'while'
+     && lk != 9859                  // Identifier '|'
+     && lk != 9987                  // Identifier '|='
+     && lk != 10115                 // Identifier '||'
+     && lk != 10243                 // Identifier '}'
+     && lk != 10316                 // '{' '}'
+     && lk != 10371                 // Identifier '~'
+     && lk != 49612                 // '{' Identifier Identifier
+     && lk != 49740                 // '{' Character Identifier
+     && lk != 49868                 // '{' String Identifier
+     && lk != 49996                 // '{' Integer Identifier
+     && lk != 50124                 // '{' Real Identifier
+     && lk != 50252                 // '{' Imaginary Identifier
+     && lk != 50380                 // '{' Comment Identifier
+     && lk != 53964                 // '{' ';' Identifier
+     && lk != 56140                 // '{' 'break' Identifier
+     && lk != 56524                 // '{' 'continue' Identifier
+     && lk != 65996                 // '{' Identifier Character
+     && lk != 66124                 // '{' Character Character
+     && lk != 66252                 // '{' String Character
+     && lk != 66380                 // '{' Integer Character
+     && lk != 66508                 // '{' Real Character
+     && lk != 66636                 // '{' Imaginary Character
+     && lk != 66764                 // '{' Comment Character
+     && lk != 70348                 // '{' ';' Character
+     && lk != 72524                 // '{' 'break' Character
+     && lk != 72908                 // '{' 'continue' Character
+     && lk != 82380                 // '{' Identifier String
+     && lk != 82508                 // '{' Character String
+     && lk != 82636                 // '{' String String
+     && lk != 82764                 // '{' Integer String
+     && lk != 82892                 // '{' Real String
+     && lk != 83020                 // '{' Imaginary String
+     && lk != 83148                 // '{' Comment String
+     && lk != 86732                 // '{' ';' String
+     && lk != 88908                 // '{' 'break' String
+     && lk != 89292                 // '{' 'continue' String
+     && lk != 98764                 // '{' Identifier Integer
+     && lk != 98892                 // '{' Character Integer
+     && lk != 99020                 // '{' String Integer
+     && lk != 99148                 // '{' Integer Integer
+     && lk != 99276                 // '{' Real Integer
+     && lk != 99404                 // '{' Imaginary Integer
+     && lk != 99532                 // '{' Comment Integer
+     && lk != 103116                // '{' ';' Integer
+     && lk != 105292                // '{' 'break' Integer
+     && lk != 105676                // '{' 'continue' Integer
+     && lk != 115148                // '{' Identifier Real
+     && lk != 115276                // '{' Character Real
+     && lk != 115404                // '{' String Real
+     && lk != 115532                // '{' Integer Real
+     && lk != 115660                // '{' Real Real
+     && lk != 115788                // '{' Imaginary Real
+     && lk != 115916                // '{' Comment Real
+     && lk != 119500                // '{' ';' Real
+     && lk != 121676                // '{' 'break' Real
+     && lk != 122060                // '{' 'continue' Real
+     && lk != 131532                // '{' Identifier Imaginary
+     && lk != 131660                // '{' Character Imaginary
+     && lk != 131788                // '{' String Imaginary
+     && lk != 131916                // '{' Integer Imaginary
+     && lk != 132172                // '{' Imaginary Imaginary
+     && lk != 132300                // '{' Comment Imaginary
+     && lk != 135884                // '{' ';' Imaginary
+     && lk != 138060                // '{' 'break' Imaginary
+     && lk != 138444                // '{' 'continue' Imaginary
+     && lk != 147916                // '{' Identifier Comment
+     && lk != 148044                // '{' Character Comment
+     && lk != 148172                // '{' String Comment
+     && lk != 148300                // '{' Integer Comment
+     && lk != 148428                // '{' Real Comment
+     && lk != 148556                // '{' Imaginary Comment
+     && lk != 148684                // '{' Comment Comment
+     && lk != 152268                // '{' ';' Comment
+     && lk != 154444                // '{' 'break' Comment
+     && lk != 154828                // '{' 'continue' Comment
+     && lk != 197068                // '{' Identifier '!'
+     && lk != 197196                // '{' Character '!'
+     && lk != 197324                // '{' String '!'
+     && lk != 197452                // '{' Integer '!'
+     && lk != 197580                // '{' Real '!'
+     && lk != 197708                // '{' Imaginary '!'
+     && lk != 197836                // '{' Comment '!'
+     && lk != 201420                // '{' ';' '!'
+     && lk != 203596                // '{' 'break' '!'
+     && lk != 203980                // '{' 'continue' '!'
+     && lk != 328268                // '{' Character '('
+     && lk != 328396                // '{' String '('
+     && lk != 328524                // '{' Integer '('
+     && lk != 328652                // '{' Real '('
+     && lk != 328780                // '{' Imaginary '('
+     && lk != 328908                // '{' Comment '('
+     && lk != 332492                // '{' ';' '('
+     && lk != 334668                // '{' 'break' '('
+     && lk != 335052                // '{' 'continue' '('
      && lk != 346627                // Identifier '(' ')'
-     && lk != 410825                // '{' Comment '+'
-     && lk != 414409                // '{' ';' '+'
-     && lk != 416585                // '{' 'break' '+'
-     && lk != 416969                // '{' 'continue' '+'
-     && lk != 427209                // '{' Comment '++'
-     && lk != 430793                // '{' ';' '++'
-     && lk != 432969                // '{' 'break' '++'
-     && lk != 433353                // '{' 'continue' '++'
-     && lk != 459209                // '{' Identifier ','
-     && lk != 459337                // '{' Character ','
-     && lk != 459465                // '{' String ','
-     && lk != 459593                // '{' Integer ','
-     && lk != 459721                // '{' Real ','
-     && lk != 459849                // '{' Imaginary ','
-     && lk != 459977                // '{' Comment ','
-     && lk != 463561                // '{' ';' ','
-     && lk != 465737                // '{' 'break' ','
-     && lk != 466121                // '{' 'continue' ','
-     && lk != 476361                // '{' Comment '-'
-     && lk != 479945                // '{' ';' '-'
-     && lk != 482121                // '{' 'break' '-'
-     && lk != 482505                // '{' 'continue' '-'
-     && lk != 492745                // '{' Comment '--'
-     && lk != 496329                // '{' ';' '--'
-     && lk != 498505                // '{' 'break' '--'
-     && lk != 498889                // '{' 'continue' '--'
-     && lk != 573897                // '{' Identifier ':'
-     && lk != 574153                // '{' String ':'
-     && lk != 606665                // '{' Identifier ';'
-     && lk != 606793                // '{' Character ';'
-     && lk != 606921                // '{' String ';'
-     && lk != 607049                // '{' Integer ';'
-     && lk != 607177                // '{' Real ';'
-     && lk != 607305                // '{' Imaginary ';'
-     && lk != 607433                // '{' Comment ';'
-     && lk != 611017                // '{' ';' ';'
-     && lk != 613193                // '{' 'break' ';'
-     && lk != 613577                // '{' 'continue' ';'
-     && lk != 819785                // '{' Character '['
-     && lk != 819913                // '{' String '['
-     && lk != 820041                // '{' Integer '['
-     && lk != 820169                // '{' Real '['
-     && lk != 820297                // '{' Imaginary '['
-     && lk != 820425                // '{' Comment '['
-     && lk != 824009                // '{' ';' '['
-     && lk != 826185                // '{' 'break' '['
-     && lk != 826569                // '{' 'continue' '['
-     && lk != 885193                // '{' Identifier 'break'
-     && lk != 885321                // '{' Character 'break'
-     && lk != 885449                // '{' String 'break'
-     && lk != 885577                // '{' Integer 'break'
-     && lk != 885705                // '{' Real 'break'
-     && lk != 885833                // '{' Imaginary 'break'
-     && lk != 885961                // '{' Comment 'break'
-     && lk != 889545                // '{' ';' 'break'
-     && lk != 891721                // '{' 'break' 'break'
-     && lk != 892105                // '{' 'continue' 'break'
-     && lk != 934345                // '{' Identifier 'continue'
-     && lk != 934473                // '{' Character 'continue'
-     && lk != 934601                // '{' String 'continue'
-     && lk != 934729                // '{' Integer 'continue'
-     && lk != 934857                // '{' Real 'continue'
-     && lk != 934985                // '{' Imaginary 'continue'
-     && lk != 935113                // '{' Comment 'continue'
-     && lk != 938697                // '{' ';' 'continue'
-     && lk != 940873                // '{' 'break' 'continue'
-     && lk != 941257                // '{' 'continue' 'continue'
-     && lk != 967113                // '{' Identifier 'do'
-     && lk != 967241                // '{' Character 'do'
-     && lk != 967369                // '{' String 'do'
-     && lk != 967497                // '{' Integer 'do'
-     && lk != 967625                // '{' Real 'do'
-     && lk != 967753                // '{' Imaginary 'do'
-     && lk != 967881                // '{' Comment 'do'
-     && lk != 971465                // '{' ';' 'do'
-     && lk != 973641                // '{' 'break' 'do'
-     && lk != 974025                // '{' 'continue' 'do'
-     && lk != 999881                // '{' Identifier 'f32'
-     && lk != 1000009               // '{' Character 'f32'
-     && lk != 1000137               // '{' String 'f32'
-     && lk != 1000265               // '{' Integer 'f32'
-     && lk != 1000393               // '{' Real 'f32'
-     && lk != 1000521               // '{' Imaginary 'f32'
-     && lk != 1000649               // '{' Comment 'f32'
-     && lk != 1004233               // '{' ';' 'f32'
-     && lk != 1006409               // '{' 'break' 'f32'
-     && lk != 1006793               // '{' 'continue' 'f32'
-     && lk != 1016265               // '{' Identifier 'f64'
-     && lk != 1016393               // '{' Character 'f64'
-     && lk != 1016521               // '{' String 'f64'
-     && lk != 1016649               // '{' Integer 'f64'
-     && lk != 1016777               // '{' Real 'f64'
-     && lk != 1016905               // '{' Imaginary 'f64'
-     && lk != 1017033               // '{' Comment 'f64'
-     && lk != 1020617               // '{' ';' 'f64'
-     && lk != 1022793               // '{' 'break' 'f64'
-     && lk != 1023177               // '{' 'continue' 'f64'
-     && lk != 1032649               // '{' Identifier 'for'
-     && lk != 1032777               // '{' Character 'for'
-     && lk != 1032905               // '{' String 'for'
-     && lk != 1033033               // '{' Integer 'for'
-     && lk != 1033161               // '{' Real 'for'
-     && lk != 1033289               // '{' Imaginary 'for'
-     && lk != 1033417               // '{' Comment 'for'
-     && lk != 1037001               // '{' ';' 'for'
-     && lk != 1039177               // '{' 'break' 'for'
-     && lk != 1039561               // '{' 'continue' 'for'
-     && lk != 1049033               // '{' Identifier 'foreach'
-     && lk != 1049161               // '{' Character 'foreach'
-     && lk != 1049289               // '{' String 'foreach'
-     && lk != 1049417               // '{' Integer 'foreach'
-     && lk != 1049545               // '{' Real 'foreach'
-     && lk != 1049673               // '{' Imaginary 'foreach'
-     && lk != 1049801               // '{' Comment 'foreach'
-     && lk != 1053385               // '{' ';' 'foreach'
-     && lk != 1055561               // '{' 'break' 'foreach'
-     && lk != 1055945               // '{' 'continue' 'foreach'
-     && lk != 1065417               // '{' Identifier 'i32'
-     && lk != 1065545               // '{' Character 'i32'
-     && lk != 1065673               // '{' String 'i32'
-     && lk != 1065801               // '{' Integer 'i32'
-     && lk != 1065929               // '{' Real 'i32'
-     && lk != 1066057               // '{' Imaginary 'i32'
-     && lk != 1066185               // '{' Comment 'i32'
-     && lk != 1069769               // '{' ';' 'i32'
-     && lk != 1071945               // '{' 'break' 'i32'
-     && lk != 1072329               // '{' 'continue' 'i32'
-     && lk != 1081801               // '{' Identifier 'i64'
-     && lk != 1081929               // '{' Character 'i64'
-     && lk != 1082057               // '{' String 'i64'
-     && lk != 1082185               // '{' Integer 'i64'
-     && lk != 1082313               // '{' Real 'i64'
-     && lk != 1082441               // '{' Imaginary 'i64'
-     && lk != 1082569               // '{' Comment 'i64'
-     && lk != 1086153               // '{' ';' 'i64'
-     && lk != 1088329               // '{' 'break' 'i64'
-     && lk != 1088713               // '{' 'continue' 'i64'
-     && lk != 1098185               // '{' Identifier 'if'
-     && lk != 1098313               // '{' Character 'if'
-     && lk != 1098441               // '{' String 'if'
-     && lk != 1098569               // '{' Integer 'if'
-     && lk != 1098697               // '{' Real 'if'
-     && lk != 1098825               // '{' Imaginary 'if'
-     && lk != 1098953               // '{' Comment 'if'
-     && lk != 1102537               // '{' ';' 'if'
-     && lk != 1104713               // '{' 'break' 'if'
-     && lk != 1105097               // '{' 'continue' 'if'
-     && lk != 1114569               // '{' Identifier 'return'
-     && lk != 1114697               // '{' Character 'return'
-     && lk != 1114825               // '{' String 'return'
-     && lk != 1114953               // '{' Integer 'return'
-     && lk != 1115081               // '{' Real 'return'
-     && lk != 1115209               // '{' Imaginary 'return'
-     && lk != 1115337               // '{' Comment 'return'
-     && lk != 1118921               // '{' ';' 'return'
-     && lk != 1121097               // '{' 'break' 'return'
-     && lk != 1121481               // '{' 'continue' 'return'
-     && lk != 1130953               // '{' Identifier 'switch'
-     && lk != 1131081               // '{' Character 'switch'
-     && lk != 1131209               // '{' String 'switch'
-     && lk != 1131337               // '{' Integer 'switch'
-     && lk != 1131465               // '{' Real 'switch'
-     && lk != 1131593               // '{' Imaginary 'switch'
-     && lk != 1131721               // '{' Comment 'switch'
-     && lk != 1135305               // '{' ';' 'switch'
-     && lk != 1137481               // '{' 'break' 'switch'
-     && lk != 1137865               // '{' 'continue' 'switch'
-     && lk != 1147337               // '{' Identifier 'test'
-     && lk != 1147465               // '{' Character 'test'
-     && lk != 1147593               // '{' String 'test'
-     && lk != 1147721               // '{' Integer 'test'
-     && lk != 1147849               // '{' Real 'test'
-     && lk != 1147977               // '{' Imaginary 'test'
-     && lk != 1148105               // '{' Comment 'test'
-     && lk != 1151689               // '{' ';' 'test'
-     && lk != 1153865               // '{' 'break' 'test'
-     && lk != 1154249               // '{' 'continue' 'test'
-     && lk != 1163721               // '{' Identifier 'try'
-     && lk != 1163849               // '{' Character 'try'
-     && lk != 1163977               // '{' String 'try'
-     && lk != 1164105               // '{' Integer 'try'
-     && lk != 1164233               // '{' Real 'try'
-     && lk != 1164361               // '{' Imaginary 'try'
-     && lk != 1164489               // '{' Comment 'try'
-     && lk != 1168073               // '{' ';' 'try'
-     && lk != 1170249               // '{' 'break' 'try'
-     && lk != 1170633               // '{' 'continue' 'try'
-     && lk != 1180105               // '{' Identifier 'while'
-     && lk != 1180233               // '{' Character 'while'
-     && lk != 1180361               // '{' String 'while'
-     && lk != 1180489               // '{' Integer 'while'
-     && lk != 1180617               // '{' Real 'while'
-     && lk != 1180745               // '{' Imaginary 'while'
-     && lk != 1180873               // '{' Comment 'while'
-     && lk != 1184457               // '{' ';' 'while'
-     && lk != 1186633               // '{' 'break' 'while'
-     && lk != 1187017               // '{' 'continue' 'while'
-     && lk != 1196617               // '{' Character '{'
-     && lk != 1196745               // '{' String '{'
-     && lk != 1196873               // '{' Integer '{'
-     && lk != 1197001               // '{' Real '{'
-     && lk != 1197129               // '{' Imaginary '{'
-     && lk != 1197257               // '{' Comment '{'
-     && lk != 1200841               // '{' ';' '{'
-     && lk != 1203017               // '{' 'break' '{'
-     && lk != 1203401               // '{' 'continue' '{'
-     && lk != 1278409               // '{' Identifier '~'
-     && lk != 1278537               // '{' Character '~'
-     && lk != 1278665               // '{' String '~'
-     && lk != 1278793               // '{' Integer '~'
-     && lk != 1278921               // '{' Real '~'
-     && lk != 1279049               // '{' Imaginary '~'
-     && lk != 1279177               // '{' Comment '~'
-     && lk != 1282761               // '{' ';' '~'
-     && lk != 1284937               // '{' 'break' '~'
-     && lk != 1285321)              // '{' 'continue' '~'
+     && lk != 410828                // '{' Comment '+'
+     && lk != 414412                // '{' ';' '+'
+     && lk != 416588                // '{' 'break' '+'
+     && lk != 416972                // '{' 'continue' '+'
+     && lk != 427212                // '{' Comment '++'
+     && lk != 430796                // '{' ';' '++'
+     && lk != 432972                // '{' 'break' '++'
+     && lk != 433356                // '{' 'continue' '++'
+     && lk != 459212                // '{' Identifier ','
+     && lk != 459340                // '{' Character ','
+     && lk != 459468                // '{' String ','
+     && lk != 459596                // '{' Integer ','
+     && lk != 459724                // '{' Real ','
+     && lk != 459852                // '{' Imaginary ','
+     && lk != 459980                // '{' Comment ','
+     && lk != 463564                // '{' ';' ','
+     && lk != 465740                // '{' 'break' ','
+     && lk != 466124                // '{' 'continue' ','
+     && lk != 476364                // '{' Comment '-'
+     && lk != 479948                // '{' ';' '-'
+     && lk != 482124                // '{' 'break' '-'
+     && lk != 482508                // '{' 'continue' '-'
+     && lk != 492748                // '{' Comment '--'
+     && lk != 496332                // '{' ';' '--'
+     && lk != 498508                // '{' 'break' '--'
+     && lk != 498892                // '{' 'continue' '--'
+     && lk != 573900                // '{' Identifier ':'
+     && lk != 574156                // '{' String ':'
+     && lk != 606668                // '{' Identifier ';'
+     && lk != 606796                // '{' Character ';'
+     && lk != 606924                // '{' String ';'
+     && lk != 607052                // '{' Integer ';'
+     && lk != 607180                // '{' Real ';'
+     && lk != 607308                // '{' Imaginary ';'
+     && lk != 607436                // '{' Comment ';'
+     && lk != 611020                // '{' ';' ';'
+     && lk != 613196                // '{' 'break' ';'
+     && lk != 613580                // '{' 'continue' ';'
+     && lk != 819788                // '{' Character '['
+     && lk != 819916                // '{' String '['
+     && lk != 820044                // '{' Integer '['
+     && lk != 820172                // '{' Real '['
+     && lk != 820300                // '{' Imaginary '['
+     && lk != 820428                // '{' Comment '['
+     && lk != 824012                // '{' ';' '['
+     && lk != 826188                // '{' 'break' '['
+     && lk != 826572                // '{' 'continue' '['
+     && lk != 885196                // '{' Identifier 'break'
+     && lk != 885324                // '{' Character 'break'
+     && lk != 885452                // '{' String 'break'
+     && lk != 885580                // '{' Integer 'break'
+     && lk != 885708                // '{' Real 'break'
+     && lk != 885836                // '{' Imaginary 'break'
+     && lk != 885964                // '{' Comment 'break'
+     && lk != 889548                // '{' ';' 'break'
+     && lk != 891724                // '{' 'break' 'break'
+     && lk != 892108                // '{' 'continue' 'break'
+     && lk != 934348                // '{' Identifier 'continue'
+     && lk != 934476                // '{' Character 'continue'
+     && lk != 934604                // '{' String 'continue'
+     && lk != 934732                // '{' Integer 'continue'
+     && lk != 934860                // '{' Real 'continue'
+     && lk != 934988                // '{' Imaginary 'continue'
+     && lk != 935116                // '{' Comment 'continue'
+     && lk != 938700                // '{' ';' 'continue'
+     && lk != 940876                // '{' 'break' 'continue'
+     && lk != 941260                // '{' 'continue' 'continue'
+     && lk != 967116                // '{' Identifier 'do'
+     && lk != 967244                // '{' Character 'do'
+     && lk != 967372                // '{' String 'do'
+     && lk != 967500                // '{' Integer 'do'
+     && lk != 967628                // '{' Real 'do'
+     && lk != 967756                // '{' Imaginary 'do'
+     && lk != 967884                // '{' Comment 'do'
+     && lk != 971468                // '{' ';' 'do'
+     && lk != 973644                // '{' 'break' 'do'
+     && lk != 974028                // '{' 'continue' 'do'
+     && lk != 999884                // '{' Identifier 'f32'
+     && lk != 1000012               // '{' Character 'f32'
+     && lk != 1000140               // '{' String 'f32'
+     && lk != 1000268               // '{' Integer 'f32'
+     && lk != 1000396               // '{' Real 'f32'
+     && lk != 1000524               // '{' Imaginary 'f32'
+     && lk != 1000652               // '{' Comment 'f32'
+     && lk != 1004236               // '{' ';' 'f32'
+     && lk != 1006412               // '{' 'break' 'f32'
+     && lk != 1006796               // '{' 'continue' 'f32'
+     && lk != 1016268               // '{' Identifier 'f64'
+     && lk != 1016396               // '{' Character 'f64'
+     && lk != 1016524               // '{' String 'f64'
+     && lk != 1016652               // '{' Integer 'f64'
+     && lk != 1016780               // '{' Real 'f64'
+     && lk != 1016908               // '{' Imaginary 'f64'
+     && lk != 1017036               // '{' Comment 'f64'
+     && lk != 1020620               // '{' ';' 'f64'
+     && lk != 1022796               // '{' 'break' 'f64'
+     && lk != 1023180               // '{' 'continue' 'f64'
+     && lk != 1032652               // '{' Identifier 'for'
+     && lk != 1032780               // '{' Character 'for'
+     && lk != 1032908               // '{' String 'for'
+     && lk != 1033036               // '{' Integer 'for'
+     && lk != 1033164               // '{' Real 'for'
+     && lk != 1033292               // '{' Imaginary 'for'
+     && lk != 1033420               // '{' Comment 'for'
+     && lk != 1037004               // '{' ';' 'for'
+     && lk != 1039180               // '{' 'break' 'for'
+     && lk != 1039564               // '{' 'continue' 'for'
+     && lk != 1049036               // '{' Identifier 'foreach'
+     && lk != 1049164               // '{' Character 'foreach'
+     && lk != 1049292               // '{' String 'foreach'
+     && lk != 1049420               // '{' Integer 'foreach'
+     && lk != 1049548               // '{' Real 'foreach'
+     && lk != 1049676               // '{' Imaginary 'foreach'
+     && lk != 1049804               // '{' Comment 'foreach'
+     && lk != 1053388               // '{' ';' 'foreach'
+     && lk != 1055564               // '{' 'break' 'foreach'
+     && lk != 1055948               // '{' 'continue' 'foreach'
+     && lk != 1065420               // '{' Identifier 'i32'
+     && lk != 1065548               // '{' Character 'i32'
+     && lk != 1065676               // '{' String 'i32'
+     && lk != 1065804               // '{' Integer 'i32'
+     && lk != 1065932               // '{' Real 'i32'
+     && lk != 1066060               // '{' Imaginary 'i32'
+     && lk != 1066188               // '{' Comment 'i32'
+     && lk != 1069772               // '{' ';' 'i32'
+     && lk != 1071948               // '{' 'break' 'i32'
+     && lk != 1072332               // '{' 'continue' 'i32'
+     && lk != 1081804               // '{' Identifier 'i64'
+     && lk != 1081932               // '{' Character 'i64'
+     && lk != 1082060               // '{' String 'i64'
+     && lk != 1082188               // '{' Integer 'i64'
+     && lk != 1082316               // '{' Real 'i64'
+     && lk != 1082444               // '{' Imaginary 'i64'
+     && lk != 1082572               // '{' Comment 'i64'
+     && lk != 1086156               // '{' ';' 'i64'
+     && lk != 1088332               // '{' 'break' 'i64'
+     && lk != 1088716               // '{' 'continue' 'i64'
+     && lk != 1098188               // '{' Identifier 'if'
+     && lk != 1098316               // '{' Character 'if'
+     && lk != 1098444               // '{' String 'if'
+     && lk != 1098572               // '{' Integer 'if'
+     && lk != 1098700               // '{' Real 'if'
+     && lk != 1098828               // '{' Imaginary 'if'
+     && lk != 1098956               // '{' Comment 'if'
+     && lk != 1102540               // '{' ';' 'if'
+     && lk != 1104716               // '{' 'break' 'if'
+     && lk != 1105100               // '{' 'continue' 'if'
+     && lk != 1114572               // '{' Identifier 'include'
+     && lk != 1114700               // '{' Character 'include'
+     && lk != 1114828               // '{' String 'include'
+     && lk != 1114956               // '{' Integer 'include'
+     && lk != 1115084               // '{' Real 'include'
+     && lk != 1115212               // '{' Imaginary 'include'
+     && lk != 1115340               // '{' Comment 'include'
+     && lk != 1118924               // '{' ';' 'include'
+     && lk != 1121100               // '{' 'break' 'include'
+     && lk != 1121484               // '{' 'continue' 'include'
+     && lk != 1130956               // '{' Identifier 'local'
+     && lk != 1131084               // '{' Character 'local'
+     && lk != 1131212               // '{' String 'local'
+     && lk != 1131340               // '{' Integer 'local'
+     && lk != 1131468               // '{' Real 'local'
+     && lk != 1131596               // '{' Imaginary 'local'
+     && lk != 1131724               // '{' Comment 'local'
+     && lk != 1135308               // '{' ';' 'local'
+     && lk != 1137484               // '{' 'break' 'local'
+     && lk != 1137868               // '{' 'continue' 'local'
+     && lk != 1147340               // '{' Identifier 'return'
+     && lk != 1147468               // '{' Character 'return'
+     && lk != 1147596               // '{' String 'return'
+     && lk != 1147724               // '{' Integer 'return'
+     && lk != 1147852               // '{' Real 'return'
+     && lk != 1147980               // '{' Imaginary 'return'
+     && lk != 1148108               // '{' Comment 'return'
+     && lk != 1151692               // '{' ';' 'return'
+     && lk != 1153868               // '{' 'break' 'return'
+     && lk != 1154252               // '{' 'continue' 'return'
+     && lk != 1163724               // '{' Identifier 'switch'
+     && lk != 1163852               // '{' Character 'switch'
+     && lk != 1163980               // '{' String 'switch'
+     && lk != 1164108               // '{' Integer 'switch'
+     && lk != 1164236               // '{' Real 'switch'
+     && lk != 1164364               // '{' Imaginary 'switch'
+     && lk != 1164492               // '{' Comment 'switch'
+     && lk != 1168076               // '{' ';' 'switch'
+     && lk != 1170252               // '{' 'break' 'switch'
+     && lk != 1170636               // '{' 'continue' 'switch'
+     && lk != 1180108               // '{' Identifier 'test'
+     && lk != 1180236               // '{' Character 'test'
+     && lk != 1180364               // '{' String 'test'
+     && lk != 1180492               // '{' Integer 'test'
+     && lk != 1180620               // '{' Real 'test'
+     && lk != 1180748               // '{' Imaginary 'test'
+     && lk != 1180876               // '{' Comment 'test'
+     && lk != 1184460               // '{' ';' 'test'
+     && lk != 1186636               // '{' 'break' 'test'
+     && lk != 1187020               // '{' 'continue' 'test'
+     && lk != 1196492               // '{' Identifier 'throw'
+     && lk != 1196620               // '{' Character 'throw'
+     && lk != 1196748               // '{' String 'throw'
+     && lk != 1196876               // '{' Integer 'throw'
+     && lk != 1197004               // '{' Real 'throw'
+     && lk != 1197132               // '{' Imaginary 'throw'
+     && lk != 1197260               // '{' Comment 'throw'
+     && lk != 1200844               // '{' ';' 'throw'
+     && lk != 1203020               // '{' 'break' 'throw'
+     && lk != 1203404               // '{' 'continue' 'throw'
+     && lk != 1212876               // '{' Identifier 'try'
+     && lk != 1213004               // '{' Character 'try'
+     && lk != 1213132               // '{' String 'try'
+     && lk != 1213260               // '{' Integer 'try'
+     && lk != 1213388               // '{' Real 'try'
+     && lk != 1213516               // '{' Imaginary 'try'
+     && lk != 1213644               // '{' Comment 'try'
+     && lk != 1217228               // '{' ';' 'try'
+     && lk != 1219404               // '{' 'break' 'try'
+     && lk != 1219788               // '{' 'continue' 'try'
+     && lk != 1229260               // '{' Identifier 'while'
+     && lk != 1229388               // '{' Character 'while'
+     && lk != 1229516               // '{' String 'while'
+     && lk != 1229644               // '{' Integer 'while'
+     && lk != 1229772               // '{' Real 'while'
+     && lk != 1229900               // '{' Imaginary 'while'
+     && lk != 1230028               // '{' Comment 'while'
+     && lk != 1233612               // '{' ';' 'while'
+     && lk != 1235788               // '{' 'break' 'while'
+     && lk != 1236172               // '{' 'continue' 'while'
+     && lk != 1245772               // '{' Character '{'
+     && lk != 1245900               // '{' String '{'
+     && lk != 1246028               // '{' Integer '{'
+     && lk != 1246156               // '{' Real '{'
+     && lk != 1246284               // '{' Imaginary '{'
+     && lk != 1246412               // '{' Comment '{'
+     && lk != 1249996               // '{' ';' '{'
+     && lk != 1252172               // '{' 'break' '{'
+     && lk != 1252556               // '{' 'continue' '{'
+     && lk != 1327564               // '{' Identifier '~'
+     && lk != 1327692               // '{' Character '~'
+     && lk != 1327820               // '{' String '~'
+     && lk != 1327948               // '{' Integer '~'
+     && lk != 1328076               // '{' Real '~'
+     && lk != 1328204               // '{' Imaginary '~'
+     && lk != 1328332               // '{' Comment '~'
+     && lk != 1331916               // '{' ';' '~'
+     && lk != 1334092               // '{' 'break' '~'
+     && lk != 1334476)              // '{' 'continue' '~'
     {
       lk = memoized(0, e0);
       if (lk == 0)
@@ -727,11 +777,14 @@ function MaiaScript(string, parsingEventHandler)
     case 65:                        // 'i32'
     case 66:                        // 'i64'
     case 67:                        // 'if'
-    case 68:                        // 'return'
-    case 69:                        // 'switch'
-    case 70:                        // 'test'
-    case 71:                        // 'try'
-    case 72:                        // 'while'
+    case 68:                        // 'include'
+    case 69:                        // 'local'
+    case 70:                        // 'return'
+    case 71:                        // 'switch'
+    case 72:                        // 'test'
+    case 73:                        // 'throw'
+    case 74:                        // 'try'
+    case 75:                        // 'while'
       parse_Statement();
       break;
     case -4:
@@ -747,7 +800,7 @@ function MaiaScript(string, parsingEventHandler)
     case 29:                        // '-'
     case 30:                        // '--'
     case 50:                        // '['
-    case 78:                        // '~'
+    case 81:                        // '~'
     case 131:                       // Identifier END
     case 387:                       // Identifier Identifier
     case 515:                       // Identifier Character
@@ -810,29 +863,32 @@ function MaiaScript(string, parsingEventHandler)
     case 8323:                      // Identifier 'i32'
     case 8451:                      // Identifier 'i64'
     case 8579:                      // Identifier 'if'
-    case 8707:                      // Identifier 'return'
-    case 8835:                      // Identifier 'switch'
-    case 8963:                      // Identifier 'test'
-    case 9091:                      // Identifier 'try'
-    case 9219:                      // Identifier 'while'
-    case 9475:                      // Identifier '|'
-    case 9603:                      // Identifier '|='
-    case 9731:                      // Identifier '||'
-    case 9859:                      // Identifier '}'
-    case 9987:                      // Identifier '~'
+    case 8707:                      // Identifier 'include'
+    case 8835:                      // Identifier 'local'
+    case 8963:                      // Identifier 'return'
+    case 9091:                      // Identifier 'switch'
+    case 9219:                      // Identifier 'test'
+    case 9347:                      // Identifier 'throw'
+    case 9475:                      // Identifier 'try'
+    case 9603:                      // Identifier 'while'
+    case 9859:                      // Identifier '|'
+    case 9987:                      // Identifier '|='
+    case 10115:                     // Identifier '||'
+    case 10243:                     // Identifier '}'
+    case 10371:                     // Identifier '~'
     case 346627:                    // Identifier '(' ')'
-    case 459209:                    // '{' Identifier ','
-    case 459337:                    // '{' Character ','
-    case 459465:                    // '{' String ','
-    case 459593:                    // '{' Integer ','
-    case 459721:                    // '{' Real ','
-    case 459849:                    // '{' Imaginary ','
-    case 459977:                    // '{' Comment ','
-    case 463561:                    // '{' ';' ','
-    case 465737:                    // '{' 'break' ','
-    case 466121:                    // '{' 'continue' ','
-    case 573897:                    // '{' Identifier ':'
-    case 574153:                    // '{' String ':'
+    case 459212:                    // '{' Identifier ','
+    case 459340:                    // '{' Character ','
+    case 459468:                    // '{' String ','
+    case 459596:                    // '{' Integer ','
+    case 459724:                    // '{' Real ','
+    case 459852:                    // '{' Imaginary ','
+    case 459980:                    // '{' Comment ','
+    case 463564:                    // '{' ';' ','
+    case 465740:                    // '{' 'break' ','
+    case 466124:                    // '{' 'continue' ','
+    case 573900:                    // '{' Identifier ':'
+    case 574156:                    // '{' String ':'
       parse_Operation();
       break;
     default:
@@ -852,112 +908,124 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9347:                    // Identifier '{'
+      case 9731:                    // Identifier '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       }
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       lookahead2W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
       switch (lk)
       {
-      case 457:                     // '{' Identifier
+      case 460:                     // '{' Identifier
         lookahead3W(47);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' |
-                                    // 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' |
-                                    // 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' |
+                                    // '||' | '}' | '~'
         break;
-      case 713:                     // '{' String
+      case 716:                     // '{' String
         lookahead3W(46);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' |
                                     // ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
                                     // '?' | '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' | 'f64' |
-                                    // 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' |
-                                    // 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' |
+                                    // 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' |
+                                    // '~'
         break;
-      case 6473:                    // '{' '['
+      case 6476:                    // '{' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9417:                    // '{' '{'
+      case 9804:                    // '{' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
-      case 585:                     // '{' Character
-      case 841:                     // '{' Integer
-      case 969:                     // '{' Real
-      case 1097:                    // '{' Imaginary
+      case 588:                     // '{' Character
+      case 844:                     // '{' Integer
+      case 972:                     // '{' Real
+      case 1100:                    // '{' Imaginary
         lookahead3W(45);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' |
-                                    // 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' |
-                                    // 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+                                    // 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
-      case 1225:                    // '{' Comment
-      case 4809:                    // '{' ';'
-      case 6985:                    // '{' 'break'
-      case 7369:                    // '{' 'continue'
-        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      case 1228:                    // '{' Comment
+      case 4812:                    // '{' ';'
+      case 6988:                    // '{' 'break'
+      case 7372:                    // '{' 'continue'
+        lookahead3W(32);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '}' | '~'
         break;
-      case 2633:                    // '{' '('
-      case 7625:                    // '{' 'do'
-      case 8777:                    // '{' 'return'
-      case 9161:                    // '{' 'try'
+      case 7884:                    // '{' 'f32'
+      case 8012:                    // '{' 'f64'
+      case 8396:                    // '{' 'i32'
+      case 8524:                    // '{' 'i64'
+        lookahead3W(0);             // Identifier | WhiteSpace^token
+        break;
+      case 2636:                    // '{' '('
+      case 7628:                    // '{' 'do'
+      case 8908:                    // '{' 'local'
+      case 9036:                    // '{' 'return'
+      case 9548:                    // '{' 'try'
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
-      case 7881:                    // '{' 'f32'
-      case 8009:                    // '{' 'f64'
-      case 8393:                    // '{' 'i32'
-      case 8521:                    // '{' 'i64'
-        lookahead3W(0);             // Identifier | WhiteSpace^token
-        break;
-      case 1609:                    // '{' '!'
-      case 3273:                    // '{' '+'
-      case 3401:                    // '{' '++'
-      case 3785:                    // '{' '-'
-      case 3913:                    // '{' '--'
-      case 10057:                   // '{' '~'
+      case 1612:                    // '{' '!'
+      case 3276:                    // '{' '+'
+      case 3404:                    // '{' '++'
+      case 3788:                    // '{' '-'
+      case 3916:                    // '{' '--'
+      case 10444:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
-      case 8137:                    // '{' 'for'
-      case 8265:                    // '{' 'foreach'
-      case 8649:                    // '{' 'if'
-      case 8905:                    // '{' 'switch'
-      case 9033:                    // '{' 'test'
-      case 9289:                    // '{' 'while'
+      case 8140:                    // '{' 'for'
+      case 8268:                    // '{' 'foreach'
+      case 8652:                    // '{' 'if'
+      case 8780:                    // '{' 'include'
+      case 9164:                    // '{' 'switch'
+      case 9292:                    // '{' 'test'
+      case 9420:                    // '{' 'throw'
+      case 9676:                    // '{' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -989,12 +1057,15 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 78                    // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 81                    // '~'
      && lk != 131                   // Identifier END
      && lk != 387                   // Identifier Identifier
      && lk != 515                   // Identifier Character
@@ -1057,322 +1128,355 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8323                  // Identifier 'i32'
      && lk != 8451                  // Identifier 'i64'
      && lk != 8579                  // Identifier 'if'
-     && lk != 8707                  // Identifier 'return'
-     && lk != 8835                  // Identifier 'switch'
-     && lk != 8963                  // Identifier 'test'
-     && lk != 9091                  // Identifier 'try'
-     && lk != 9219                  // Identifier 'while'
-     && lk != 9475                  // Identifier '|'
-     && lk != 9603                  // Identifier '|='
-     && lk != 9731                  // Identifier '||'
-     && lk != 9859                  // Identifier '}'
-     && lk != 9929                  // '{' '}'
-     && lk != 9987                  // Identifier '~'
-     && lk != 49609                 // '{' Identifier Identifier
-     && lk != 49737                 // '{' Character Identifier
-     && lk != 49865                 // '{' String Identifier
-     && lk != 49993                 // '{' Integer Identifier
-     && lk != 50121                 // '{' Real Identifier
-     && lk != 50249                 // '{' Imaginary Identifier
-     && lk != 50377                 // '{' Comment Identifier
-     && lk != 53961                 // '{' ';' Identifier
-     && lk != 56137                 // '{' 'break' Identifier
-     && lk != 56521                 // '{' 'continue' Identifier
-     && lk != 65993                 // '{' Identifier Character
-     && lk != 66121                 // '{' Character Character
-     && lk != 66249                 // '{' String Character
-     && lk != 66377                 // '{' Integer Character
-     && lk != 66505                 // '{' Real Character
-     && lk != 66633                 // '{' Imaginary Character
-     && lk != 66761                 // '{' Comment Character
-     && lk != 70345                 // '{' ';' Character
-     && lk != 72521                 // '{' 'break' Character
-     && lk != 72905                 // '{' 'continue' Character
-     && lk != 82377                 // '{' Identifier String
-     && lk != 82505                 // '{' Character String
-     && lk != 82633                 // '{' String String
-     && lk != 82761                 // '{' Integer String
-     && lk != 82889                 // '{' Real String
-     && lk != 83017                 // '{' Imaginary String
-     && lk != 83145                 // '{' Comment String
-     && lk != 86729                 // '{' ';' String
-     && lk != 88905                 // '{' 'break' String
-     && lk != 89289                 // '{' 'continue' String
-     && lk != 98761                 // '{' Identifier Integer
-     && lk != 98889                 // '{' Character Integer
-     && lk != 99017                 // '{' String Integer
-     && lk != 99145                 // '{' Integer Integer
-     && lk != 99273                 // '{' Real Integer
-     && lk != 99401                 // '{' Imaginary Integer
-     && lk != 99529                 // '{' Comment Integer
-     && lk != 103113                // '{' ';' Integer
-     && lk != 105289                // '{' 'break' Integer
-     && lk != 105673                // '{' 'continue' Integer
-     && lk != 115145                // '{' Identifier Real
-     && lk != 115273                // '{' Character Real
-     && lk != 115401                // '{' String Real
-     && lk != 115529                // '{' Integer Real
-     && lk != 115657                // '{' Real Real
-     && lk != 115785                // '{' Imaginary Real
-     && lk != 115913                // '{' Comment Real
-     && lk != 119497                // '{' ';' Real
-     && lk != 121673                // '{' 'break' Real
-     && lk != 122057                // '{' 'continue' Real
-     && lk != 131529                // '{' Identifier Imaginary
-     && lk != 131657                // '{' Character Imaginary
-     && lk != 131785                // '{' String Imaginary
-     && lk != 131913                // '{' Integer Imaginary
-     && lk != 132169                // '{' Imaginary Imaginary
-     && lk != 132297                // '{' Comment Imaginary
-     && lk != 135881                // '{' ';' Imaginary
-     && lk != 138057                // '{' 'break' Imaginary
-     && lk != 138441                // '{' 'continue' Imaginary
-     && lk != 147913                // '{' Identifier Comment
-     && lk != 148041                // '{' Character Comment
-     && lk != 148169                // '{' String Comment
-     && lk != 148297                // '{' Integer Comment
-     && lk != 148425                // '{' Real Comment
-     && lk != 148553                // '{' Imaginary Comment
-     && lk != 148681                // '{' Comment Comment
-     && lk != 152265                // '{' ';' Comment
-     && lk != 154441                // '{' 'break' Comment
-     && lk != 154825                // '{' 'continue' Comment
-     && lk != 197065                // '{' Identifier '!'
-     && lk != 197193                // '{' Character '!'
-     && lk != 197321                // '{' String '!'
-     && lk != 197449                // '{' Integer '!'
-     && lk != 197577                // '{' Real '!'
-     && lk != 197705                // '{' Imaginary '!'
-     && lk != 197833                // '{' Comment '!'
-     && lk != 201417                // '{' ';' '!'
-     && lk != 203593                // '{' 'break' '!'
-     && lk != 203977                // '{' 'continue' '!'
-     && lk != 328265                // '{' Character '('
-     && lk != 328393                // '{' String '('
-     && lk != 328521                // '{' Integer '('
-     && lk != 328649                // '{' Real '('
-     && lk != 328777                // '{' Imaginary '('
-     && lk != 328905                // '{' Comment '('
-     && lk != 332489                // '{' ';' '('
-     && lk != 334665                // '{' 'break' '('
-     && lk != 335049                // '{' 'continue' '('
+     && lk != 8707                  // Identifier 'include'
+     && lk != 8835                  // Identifier 'local'
+     && lk != 8963                  // Identifier 'return'
+     && lk != 9091                  // Identifier 'switch'
+     && lk != 9219                  // Identifier 'test'
+     && lk != 9347                  // Identifier 'throw'
+     && lk != 9475                  // Identifier 'try'
+     && lk != 9603                  // Identifier 'while'
+     && lk != 9859                  // Identifier '|'
+     && lk != 9987                  // Identifier '|='
+     && lk != 10115                 // Identifier '||'
+     && lk != 10243                 // Identifier '}'
+     && lk != 10316                 // '{' '}'
+     && lk != 10371                 // Identifier '~'
+     && lk != 49612                 // '{' Identifier Identifier
+     && lk != 49740                 // '{' Character Identifier
+     && lk != 49868                 // '{' String Identifier
+     && lk != 49996                 // '{' Integer Identifier
+     && lk != 50124                 // '{' Real Identifier
+     && lk != 50252                 // '{' Imaginary Identifier
+     && lk != 50380                 // '{' Comment Identifier
+     && lk != 53964                 // '{' ';' Identifier
+     && lk != 56140                 // '{' 'break' Identifier
+     && lk != 56524                 // '{' 'continue' Identifier
+     && lk != 65996                 // '{' Identifier Character
+     && lk != 66124                 // '{' Character Character
+     && lk != 66252                 // '{' String Character
+     && lk != 66380                 // '{' Integer Character
+     && lk != 66508                 // '{' Real Character
+     && lk != 66636                 // '{' Imaginary Character
+     && lk != 66764                 // '{' Comment Character
+     && lk != 70348                 // '{' ';' Character
+     && lk != 72524                 // '{' 'break' Character
+     && lk != 72908                 // '{' 'continue' Character
+     && lk != 82380                 // '{' Identifier String
+     && lk != 82508                 // '{' Character String
+     && lk != 82636                 // '{' String String
+     && lk != 82764                 // '{' Integer String
+     && lk != 82892                 // '{' Real String
+     && lk != 83020                 // '{' Imaginary String
+     && lk != 83148                 // '{' Comment String
+     && lk != 86732                 // '{' ';' String
+     && lk != 88908                 // '{' 'break' String
+     && lk != 89292                 // '{' 'continue' String
+     && lk != 98764                 // '{' Identifier Integer
+     && lk != 98892                 // '{' Character Integer
+     && lk != 99020                 // '{' String Integer
+     && lk != 99148                 // '{' Integer Integer
+     && lk != 99276                 // '{' Real Integer
+     && lk != 99404                 // '{' Imaginary Integer
+     && lk != 99532                 // '{' Comment Integer
+     && lk != 103116                // '{' ';' Integer
+     && lk != 105292                // '{' 'break' Integer
+     && lk != 105676                // '{' 'continue' Integer
+     && lk != 115148                // '{' Identifier Real
+     && lk != 115276                // '{' Character Real
+     && lk != 115404                // '{' String Real
+     && lk != 115532                // '{' Integer Real
+     && lk != 115660                // '{' Real Real
+     && lk != 115788                // '{' Imaginary Real
+     && lk != 115916                // '{' Comment Real
+     && lk != 119500                // '{' ';' Real
+     && lk != 121676                // '{' 'break' Real
+     && lk != 122060                // '{' 'continue' Real
+     && lk != 131532                // '{' Identifier Imaginary
+     && lk != 131660                // '{' Character Imaginary
+     && lk != 131788                // '{' String Imaginary
+     && lk != 131916                // '{' Integer Imaginary
+     && lk != 132172                // '{' Imaginary Imaginary
+     && lk != 132300                // '{' Comment Imaginary
+     && lk != 135884                // '{' ';' Imaginary
+     && lk != 138060                // '{' 'break' Imaginary
+     && lk != 138444                // '{' 'continue' Imaginary
+     && lk != 147916                // '{' Identifier Comment
+     && lk != 148044                // '{' Character Comment
+     && lk != 148172                // '{' String Comment
+     && lk != 148300                // '{' Integer Comment
+     && lk != 148428                // '{' Real Comment
+     && lk != 148556                // '{' Imaginary Comment
+     && lk != 148684                // '{' Comment Comment
+     && lk != 152268                // '{' ';' Comment
+     && lk != 154444                // '{' 'break' Comment
+     && lk != 154828                // '{' 'continue' Comment
+     && lk != 197068                // '{' Identifier '!'
+     && lk != 197196                // '{' Character '!'
+     && lk != 197324                // '{' String '!'
+     && lk != 197452                // '{' Integer '!'
+     && lk != 197580                // '{' Real '!'
+     && lk != 197708                // '{' Imaginary '!'
+     && lk != 197836                // '{' Comment '!'
+     && lk != 201420                // '{' ';' '!'
+     && lk != 203596                // '{' 'break' '!'
+     && lk != 203980                // '{' 'continue' '!'
+     && lk != 328268                // '{' Character '('
+     && lk != 328396                // '{' String '('
+     && lk != 328524                // '{' Integer '('
+     && lk != 328652                // '{' Real '('
+     && lk != 328780                // '{' Imaginary '('
+     && lk != 328908                // '{' Comment '('
+     && lk != 332492                // '{' ';' '('
+     && lk != 334668                // '{' 'break' '('
+     && lk != 335052                // '{' 'continue' '('
      && lk != 346627                // Identifier '(' ')'
-     && lk != 410825                // '{' Comment '+'
-     && lk != 414409                // '{' ';' '+'
-     && lk != 416585                // '{' 'break' '+'
-     && lk != 416969                // '{' 'continue' '+'
-     && lk != 427209                // '{' Comment '++'
-     && lk != 430793                // '{' ';' '++'
-     && lk != 432969                // '{' 'break' '++'
-     && lk != 433353                // '{' 'continue' '++'
-     && lk != 459209                // '{' Identifier ','
-     && lk != 459337                // '{' Character ','
-     && lk != 459465                // '{' String ','
-     && lk != 459593                // '{' Integer ','
-     && lk != 459721                // '{' Real ','
-     && lk != 459849                // '{' Imaginary ','
-     && lk != 459977                // '{' Comment ','
-     && lk != 463561                // '{' ';' ','
-     && lk != 465737                // '{' 'break' ','
-     && lk != 466121                // '{' 'continue' ','
-     && lk != 476361                // '{' Comment '-'
-     && lk != 479945                // '{' ';' '-'
-     && lk != 482121                // '{' 'break' '-'
-     && lk != 482505                // '{' 'continue' '-'
-     && lk != 492745                // '{' Comment '--'
-     && lk != 496329                // '{' ';' '--'
-     && lk != 498505                // '{' 'break' '--'
-     && lk != 498889                // '{' 'continue' '--'
-     && lk != 573897                // '{' Identifier ':'
-     && lk != 574153                // '{' String ':'
-     && lk != 606665                // '{' Identifier ';'
-     && lk != 606793                // '{' Character ';'
-     && lk != 606921                // '{' String ';'
-     && lk != 607049                // '{' Integer ';'
-     && lk != 607177                // '{' Real ';'
-     && lk != 607305                // '{' Imaginary ';'
-     && lk != 607433                // '{' Comment ';'
-     && lk != 611017                // '{' ';' ';'
-     && lk != 613193                // '{' 'break' ';'
-     && lk != 613577                // '{' 'continue' ';'
-     && lk != 819785                // '{' Character '['
-     && lk != 819913                // '{' String '['
-     && lk != 820041                // '{' Integer '['
-     && lk != 820169                // '{' Real '['
-     && lk != 820297                // '{' Imaginary '['
-     && lk != 820425                // '{' Comment '['
-     && lk != 824009                // '{' ';' '['
-     && lk != 826185                // '{' 'break' '['
-     && lk != 826569                // '{' 'continue' '['
-     && lk != 885193                // '{' Identifier 'break'
-     && lk != 885321                // '{' Character 'break'
-     && lk != 885449                // '{' String 'break'
-     && lk != 885577                // '{' Integer 'break'
-     && lk != 885705                // '{' Real 'break'
-     && lk != 885833                // '{' Imaginary 'break'
-     && lk != 885961                // '{' Comment 'break'
-     && lk != 889545                // '{' ';' 'break'
-     && lk != 891721                // '{' 'break' 'break'
-     && lk != 892105                // '{' 'continue' 'break'
-     && lk != 934345                // '{' Identifier 'continue'
-     && lk != 934473                // '{' Character 'continue'
-     && lk != 934601                // '{' String 'continue'
-     && lk != 934729                // '{' Integer 'continue'
-     && lk != 934857                // '{' Real 'continue'
-     && lk != 934985                // '{' Imaginary 'continue'
-     && lk != 935113                // '{' Comment 'continue'
-     && lk != 938697                // '{' ';' 'continue'
-     && lk != 940873                // '{' 'break' 'continue'
-     && lk != 941257                // '{' 'continue' 'continue'
-     && lk != 967113                // '{' Identifier 'do'
-     && lk != 967241                // '{' Character 'do'
-     && lk != 967369                // '{' String 'do'
-     && lk != 967497                // '{' Integer 'do'
-     && lk != 967625                // '{' Real 'do'
-     && lk != 967753                // '{' Imaginary 'do'
-     && lk != 967881                // '{' Comment 'do'
-     && lk != 971465                // '{' ';' 'do'
-     && lk != 973641                // '{' 'break' 'do'
-     && lk != 974025                // '{' 'continue' 'do'
-     && lk != 999881                // '{' Identifier 'f32'
-     && lk != 1000009               // '{' Character 'f32'
-     && lk != 1000137               // '{' String 'f32'
-     && lk != 1000265               // '{' Integer 'f32'
-     && lk != 1000393               // '{' Real 'f32'
-     && lk != 1000521               // '{' Imaginary 'f32'
-     && lk != 1000649               // '{' Comment 'f32'
-     && lk != 1004233               // '{' ';' 'f32'
-     && lk != 1006409               // '{' 'break' 'f32'
-     && lk != 1006793               // '{' 'continue' 'f32'
-     && lk != 1016265               // '{' Identifier 'f64'
-     && lk != 1016393               // '{' Character 'f64'
-     && lk != 1016521               // '{' String 'f64'
-     && lk != 1016649               // '{' Integer 'f64'
-     && lk != 1016777               // '{' Real 'f64'
-     && lk != 1016905               // '{' Imaginary 'f64'
-     && lk != 1017033               // '{' Comment 'f64'
-     && lk != 1020617               // '{' ';' 'f64'
-     && lk != 1022793               // '{' 'break' 'f64'
-     && lk != 1023177               // '{' 'continue' 'f64'
-     && lk != 1032649               // '{' Identifier 'for'
-     && lk != 1032777               // '{' Character 'for'
-     && lk != 1032905               // '{' String 'for'
-     && lk != 1033033               // '{' Integer 'for'
-     && lk != 1033161               // '{' Real 'for'
-     && lk != 1033289               // '{' Imaginary 'for'
-     && lk != 1033417               // '{' Comment 'for'
-     && lk != 1037001               // '{' ';' 'for'
-     && lk != 1039177               // '{' 'break' 'for'
-     && lk != 1039561               // '{' 'continue' 'for'
-     && lk != 1049033               // '{' Identifier 'foreach'
-     && lk != 1049161               // '{' Character 'foreach'
-     && lk != 1049289               // '{' String 'foreach'
-     && lk != 1049417               // '{' Integer 'foreach'
-     && lk != 1049545               // '{' Real 'foreach'
-     && lk != 1049673               // '{' Imaginary 'foreach'
-     && lk != 1049801               // '{' Comment 'foreach'
-     && lk != 1053385               // '{' ';' 'foreach'
-     && lk != 1055561               // '{' 'break' 'foreach'
-     && lk != 1055945               // '{' 'continue' 'foreach'
-     && lk != 1065417               // '{' Identifier 'i32'
-     && lk != 1065545               // '{' Character 'i32'
-     && lk != 1065673               // '{' String 'i32'
-     && lk != 1065801               // '{' Integer 'i32'
-     && lk != 1065929               // '{' Real 'i32'
-     && lk != 1066057               // '{' Imaginary 'i32'
-     && lk != 1066185               // '{' Comment 'i32'
-     && lk != 1069769               // '{' ';' 'i32'
-     && lk != 1071945               // '{' 'break' 'i32'
-     && lk != 1072329               // '{' 'continue' 'i32'
-     && lk != 1081801               // '{' Identifier 'i64'
-     && lk != 1081929               // '{' Character 'i64'
-     && lk != 1082057               // '{' String 'i64'
-     && lk != 1082185               // '{' Integer 'i64'
-     && lk != 1082313               // '{' Real 'i64'
-     && lk != 1082441               // '{' Imaginary 'i64'
-     && lk != 1082569               // '{' Comment 'i64'
-     && lk != 1086153               // '{' ';' 'i64'
-     && lk != 1088329               // '{' 'break' 'i64'
-     && lk != 1088713               // '{' 'continue' 'i64'
-     && lk != 1098185               // '{' Identifier 'if'
-     && lk != 1098313               // '{' Character 'if'
-     && lk != 1098441               // '{' String 'if'
-     && lk != 1098569               // '{' Integer 'if'
-     && lk != 1098697               // '{' Real 'if'
-     && lk != 1098825               // '{' Imaginary 'if'
-     && lk != 1098953               // '{' Comment 'if'
-     && lk != 1102537               // '{' ';' 'if'
-     && lk != 1104713               // '{' 'break' 'if'
-     && lk != 1105097               // '{' 'continue' 'if'
-     && lk != 1114569               // '{' Identifier 'return'
-     && lk != 1114697               // '{' Character 'return'
-     && lk != 1114825               // '{' String 'return'
-     && lk != 1114953               // '{' Integer 'return'
-     && lk != 1115081               // '{' Real 'return'
-     && lk != 1115209               // '{' Imaginary 'return'
-     && lk != 1115337               // '{' Comment 'return'
-     && lk != 1118921               // '{' ';' 'return'
-     && lk != 1121097               // '{' 'break' 'return'
-     && lk != 1121481               // '{' 'continue' 'return'
-     && lk != 1130953               // '{' Identifier 'switch'
-     && lk != 1131081               // '{' Character 'switch'
-     && lk != 1131209               // '{' String 'switch'
-     && lk != 1131337               // '{' Integer 'switch'
-     && lk != 1131465               // '{' Real 'switch'
-     && lk != 1131593               // '{' Imaginary 'switch'
-     && lk != 1131721               // '{' Comment 'switch'
-     && lk != 1135305               // '{' ';' 'switch'
-     && lk != 1137481               // '{' 'break' 'switch'
-     && lk != 1137865               // '{' 'continue' 'switch'
-     && lk != 1147337               // '{' Identifier 'test'
-     && lk != 1147465               // '{' Character 'test'
-     && lk != 1147593               // '{' String 'test'
-     && lk != 1147721               // '{' Integer 'test'
-     && lk != 1147849               // '{' Real 'test'
-     && lk != 1147977               // '{' Imaginary 'test'
-     && lk != 1148105               // '{' Comment 'test'
-     && lk != 1151689               // '{' ';' 'test'
-     && lk != 1153865               // '{' 'break' 'test'
-     && lk != 1154249               // '{' 'continue' 'test'
-     && lk != 1163721               // '{' Identifier 'try'
-     && lk != 1163849               // '{' Character 'try'
-     && lk != 1163977               // '{' String 'try'
-     && lk != 1164105               // '{' Integer 'try'
-     && lk != 1164233               // '{' Real 'try'
-     && lk != 1164361               // '{' Imaginary 'try'
-     && lk != 1164489               // '{' Comment 'try'
-     && lk != 1168073               // '{' ';' 'try'
-     && lk != 1170249               // '{' 'break' 'try'
-     && lk != 1170633               // '{' 'continue' 'try'
-     && lk != 1180105               // '{' Identifier 'while'
-     && lk != 1180233               // '{' Character 'while'
-     && lk != 1180361               // '{' String 'while'
-     && lk != 1180489               // '{' Integer 'while'
-     && lk != 1180617               // '{' Real 'while'
-     && lk != 1180745               // '{' Imaginary 'while'
-     && lk != 1180873               // '{' Comment 'while'
-     && lk != 1184457               // '{' ';' 'while'
-     && lk != 1186633               // '{' 'break' 'while'
-     && lk != 1187017               // '{' 'continue' 'while'
-     && lk != 1196617               // '{' Character '{'
-     && lk != 1196745               // '{' String '{'
-     && lk != 1196873               // '{' Integer '{'
-     && lk != 1197001               // '{' Real '{'
-     && lk != 1197129               // '{' Imaginary '{'
-     && lk != 1197257               // '{' Comment '{'
-     && lk != 1200841               // '{' ';' '{'
-     && lk != 1203017               // '{' 'break' '{'
-     && lk != 1203401               // '{' 'continue' '{'
-     && lk != 1278409               // '{' Identifier '~'
-     && lk != 1278537               // '{' Character '~'
-     && lk != 1278665               // '{' String '~'
-     && lk != 1278793               // '{' Integer '~'
-     && lk != 1278921               // '{' Real '~'
-     && lk != 1279049               // '{' Imaginary '~'
-     && lk != 1279177               // '{' Comment '~'
-     && lk != 1282761               // '{' ';' '~'
-     && lk != 1284937               // '{' 'break' '~'
-     && lk != 1285321)              // '{' 'continue' '~'
+     && lk != 410828                // '{' Comment '+'
+     && lk != 414412                // '{' ';' '+'
+     && lk != 416588                // '{' 'break' '+'
+     && lk != 416972                // '{' 'continue' '+'
+     && lk != 427212                // '{' Comment '++'
+     && lk != 430796                // '{' ';' '++'
+     && lk != 432972                // '{' 'break' '++'
+     && lk != 433356                // '{' 'continue' '++'
+     && lk != 459212                // '{' Identifier ','
+     && lk != 459340                // '{' Character ','
+     && lk != 459468                // '{' String ','
+     && lk != 459596                // '{' Integer ','
+     && lk != 459724                // '{' Real ','
+     && lk != 459852                // '{' Imaginary ','
+     && lk != 459980                // '{' Comment ','
+     && lk != 463564                // '{' ';' ','
+     && lk != 465740                // '{' 'break' ','
+     && lk != 466124                // '{' 'continue' ','
+     && lk != 476364                // '{' Comment '-'
+     && lk != 479948                // '{' ';' '-'
+     && lk != 482124                // '{' 'break' '-'
+     && lk != 482508                // '{' 'continue' '-'
+     && lk != 492748                // '{' Comment '--'
+     && lk != 496332                // '{' ';' '--'
+     && lk != 498508                // '{' 'break' '--'
+     && lk != 498892                // '{' 'continue' '--'
+     && lk != 573900                // '{' Identifier ':'
+     && lk != 574156                // '{' String ':'
+     && lk != 606668                // '{' Identifier ';'
+     && lk != 606796                // '{' Character ';'
+     && lk != 606924                // '{' String ';'
+     && lk != 607052                // '{' Integer ';'
+     && lk != 607180                // '{' Real ';'
+     && lk != 607308                // '{' Imaginary ';'
+     && lk != 607436                // '{' Comment ';'
+     && lk != 611020                // '{' ';' ';'
+     && lk != 613196                // '{' 'break' ';'
+     && lk != 613580                // '{' 'continue' ';'
+     && lk != 819788                // '{' Character '['
+     && lk != 819916                // '{' String '['
+     && lk != 820044                // '{' Integer '['
+     && lk != 820172                // '{' Real '['
+     && lk != 820300                // '{' Imaginary '['
+     && lk != 820428                // '{' Comment '['
+     && lk != 824012                // '{' ';' '['
+     && lk != 826188                // '{' 'break' '['
+     && lk != 826572                // '{' 'continue' '['
+     && lk != 885196                // '{' Identifier 'break'
+     && lk != 885324                // '{' Character 'break'
+     && lk != 885452                // '{' String 'break'
+     && lk != 885580                // '{' Integer 'break'
+     && lk != 885708                // '{' Real 'break'
+     && lk != 885836                // '{' Imaginary 'break'
+     && lk != 885964                // '{' Comment 'break'
+     && lk != 889548                // '{' ';' 'break'
+     && lk != 891724                // '{' 'break' 'break'
+     && lk != 892108                // '{' 'continue' 'break'
+     && lk != 934348                // '{' Identifier 'continue'
+     && lk != 934476                // '{' Character 'continue'
+     && lk != 934604                // '{' String 'continue'
+     && lk != 934732                // '{' Integer 'continue'
+     && lk != 934860                // '{' Real 'continue'
+     && lk != 934988                // '{' Imaginary 'continue'
+     && lk != 935116                // '{' Comment 'continue'
+     && lk != 938700                // '{' ';' 'continue'
+     && lk != 940876                // '{' 'break' 'continue'
+     && lk != 941260                // '{' 'continue' 'continue'
+     && lk != 967116                // '{' Identifier 'do'
+     && lk != 967244                // '{' Character 'do'
+     && lk != 967372                // '{' String 'do'
+     && lk != 967500                // '{' Integer 'do'
+     && lk != 967628                // '{' Real 'do'
+     && lk != 967756                // '{' Imaginary 'do'
+     && lk != 967884                // '{' Comment 'do'
+     && lk != 971468                // '{' ';' 'do'
+     && lk != 973644                // '{' 'break' 'do'
+     && lk != 974028                // '{' 'continue' 'do'
+     && lk != 999884                // '{' Identifier 'f32'
+     && lk != 1000012               // '{' Character 'f32'
+     && lk != 1000140               // '{' String 'f32'
+     && lk != 1000268               // '{' Integer 'f32'
+     && lk != 1000396               // '{' Real 'f32'
+     && lk != 1000524               // '{' Imaginary 'f32'
+     && lk != 1000652               // '{' Comment 'f32'
+     && lk != 1004236               // '{' ';' 'f32'
+     && lk != 1006412               // '{' 'break' 'f32'
+     && lk != 1006796               // '{' 'continue' 'f32'
+     && lk != 1016268               // '{' Identifier 'f64'
+     && lk != 1016396               // '{' Character 'f64'
+     && lk != 1016524               // '{' String 'f64'
+     && lk != 1016652               // '{' Integer 'f64'
+     && lk != 1016780               // '{' Real 'f64'
+     && lk != 1016908               // '{' Imaginary 'f64'
+     && lk != 1017036               // '{' Comment 'f64'
+     && lk != 1020620               // '{' ';' 'f64'
+     && lk != 1022796               // '{' 'break' 'f64'
+     && lk != 1023180               // '{' 'continue' 'f64'
+     && lk != 1032652               // '{' Identifier 'for'
+     && lk != 1032780               // '{' Character 'for'
+     && lk != 1032908               // '{' String 'for'
+     && lk != 1033036               // '{' Integer 'for'
+     && lk != 1033164               // '{' Real 'for'
+     && lk != 1033292               // '{' Imaginary 'for'
+     && lk != 1033420               // '{' Comment 'for'
+     && lk != 1037004               // '{' ';' 'for'
+     && lk != 1039180               // '{' 'break' 'for'
+     && lk != 1039564               // '{' 'continue' 'for'
+     && lk != 1049036               // '{' Identifier 'foreach'
+     && lk != 1049164               // '{' Character 'foreach'
+     && lk != 1049292               // '{' String 'foreach'
+     && lk != 1049420               // '{' Integer 'foreach'
+     && lk != 1049548               // '{' Real 'foreach'
+     && lk != 1049676               // '{' Imaginary 'foreach'
+     && lk != 1049804               // '{' Comment 'foreach'
+     && lk != 1053388               // '{' ';' 'foreach'
+     && lk != 1055564               // '{' 'break' 'foreach'
+     && lk != 1055948               // '{' 'continue' 'foreach'
+     && lk != 1065420               // '{' Identifier 'i32'
+     && lk != 1065548               // '{' Character 'i32'
+     && lk != 1065676               // '{' String 'i32'
+     && lk != 1065804               // '{' Integer 'i32'
+     && lk != 1065932               // '{' Real 'i32'
+     && lk != 1066060               // '{' Imaginary 'i32'
+     && lk != 1066188               // '{' Comment 'i32'
+     && lk != 1069772               // '{' ';' 'i32'
+     && lk != 1071948               // '{' 'break' 'i32'
+     && lk != 1072332               // '{' 'continue' 'i32'
+     && lk != 1081804               // '{' Identifier 'i64'
+     && lk != 1081932               // '{' Character 'i64'
+     && lk != 1082060               // '{' String 'i64'
+     && lk != 1082188               // '{' Integer 'i64'
+     && lk != 1082316               // '{' Real 'i64'
+     && lk != 1082444               // '{' Imaginary 'i64'
+     && lk != 1082572               // '{' Comment 'i64'
+     && lk != 1086156               // '{' ';' 'i64'
+     && lk != 1088332               // '{' 'break' 'i64'
+     && lk != 1088716               // '{' 'continue' 'i64'
+     && lk != 1098188               // '{' Identifier 'if'
+     && lk != 1098316               // '{' Character 'if'
+     && lk != 1098444               // '{' String 'if'
+     && lk != 1098572               // '{' Integer 'if'
+     && lk != 1098700               // '{' Real 'if'
+     && lk != 1098828               // '{' Imaginary 'if'
+     && lk != 1098956               // '{' Comment 'if'
+     && lk != 1102540               // '{' ';' 'if'
+     && lk != 1104716               // '{' 'break' 'if'
+     && lk != 1105100               // '{' 'continue' 'if'
+     && lk != 1114572               // '{' Identifier 'include'
+     && lk != 1114700               // '{' Character 'include'
+     && lk != 1114828               // '{' String 'include'
+     && lk != 1114956               // '{' Integer 'include'
+     && lk != 1115084               // '{' Real 'include'
+     && lk != 1115212               // '{' Imaginary 'include'
+     && lk != 1115340               // '{' Comment 'include'
+     && lk != 1118924               // '{' ';' 'include'
+     && lk != 1121100               // '{' 'break' 'include'
+     && lk != 1121484               // '{' 'continue' 'include'
+     && lk != 1130956               // '{' Identifier 'local'
+     && lk != 1131084               // '{' Character 'local'
+     && lk != 1131212               // '{' String 'local'
+     && lk != 1131340               // '{' Integer 'local'
+     && lk != 1131468               // '{' Real 'local'
+     && lk != 1131596               // '{' Imaginary 'local'
+     && lk != 1131724               // '{' Comment 'local'
+     && lk != 1135308               // '{' ';' 'local'
+     && lk != 1137484               // '{' 'break' 'local'
+     && lk != 1137868               // '{' 'continue' 'local'
+     && lk != 1147340               // '{' Identifier 'return'
+     && lk != 1147468               // '{' Character 'return'
+     && lk != 1147596               // '{' String 'return'
+     && lk != 1147724               // '{' Integer 'return'
+     && lk != 1147852               // '{' Real 'return'
+     && lk != 1147980               // '{' Imaginary 'return'
+     && lk != 1148108               // '{' Comment 'return'
+     && lk != 1151692               // '{' ';' 'return'
+     && lk != 1153868               // '{' 'break' 'return'
+     && lk != 1154252               // '{' 'continue' 'return'
+     && lk != 1163724               // '{' Identifier 'switch'
+     && lk != 1163852               // '{' Character 'switch'
+     && lk != 1163980               // '{' String 'switch'
+     && lk != 1164108               // '{' Integer 'switch'
+     && lk != 1164236               // '{' Real 'switch'
+     && lk != 1164364               // '{' Imaginary 'switch'
+     && lk != 1164492               // '{' Comment 'switch'
+     && lk != 1168076               // '{' ';' 'switch'
+     && lk != 1170252               // '{' 'break' 'switch'
+     && lk != 1170636               // '{' 'continue' 'switch'
+     && lk != 1180108               // '{' Identifier 'test'
+     && lk != 1180236               // '{' Character 'test'
+     && lk != 1180364               // '{' String 'test'
+     && lk != 1180492               // '{' Integer 'test'
+     && lk != 1180620               // '{' Real 'test'
+     && lk != 1180748               // '{' Imaginary 'test'
+     && lk != 1180876               // '{' Comment 'test'
+     && lk != 1184460               // '{' ';' 'test'
+     && lk != 1186636               // '{' 'break' 'test'
+     && lk != 1187020               // '{' 'continue' 'test'
+     && lk != 1196492               // '{' Identifier 'throw'
+     && lk != 1196620               // '{' Character 'throw'
+     && lk != 1196748               // '{' String 'throw'
+     && lk != 1196876               // '{' Integer 'throw'
+     && lk != 1197004               // '{' Real 'throw'
+     && lk != 1197132               // '{' Imaginary 'throw'
+     && lk != 1197260               // '{' Comment 'throw'
+     && lk != 1200844               // '{' ';' 'throw'
+     && lk != 1203020               // '{' 'break' 'throw'
+     && lk != 1203404               // '{' 'continue' 'throw'
+     && lk != 1212876               // '{' Identifier 'try'
+     && lk != 1213004               // '{' Character 'try'
+     && lk != 1213132               // '{' String 'try'
+     && lk != 1213260               // '{' Integer 'try'
+     && lk != 1213388               // '{' Real 'try'
+     && lk != 1213516               // '{' Imaginary 'try'
+     && lk != 1213644               // '{' Comment 'try'
+     && lk != 1217228               // '{' ';' 'try'
+     && lk != 1219404               // '{' 'break' 'try'
+     && lk != 1219788               // '{' 'continue' 'try'
+     && lk != 1229260               // '{' Identifier 'while'
+     && lk != 1229388               // '{' Character 'while'
+     && lk != 1229516               // '{' String 'while'
+     && lk != 1229644               // '{' Integer 'while'
+     && lk != 1229772               // '{' Real 'while'
+     && lk != 1229900               // '{' Imaginary 'while'
+     && lk != 1230028               // '{' Comment 'while'
+     && lk != 1233612               // '{' ';' 'while'
+     && lk != 1235788               // '{' 'break' 'while'
+     && lk != 1236172               // '{' 'continue' 'while'
+     && lk != 1245772               // '{' Character '{'
+     && lk != 1245900               // '{' String '{'
+     && lk != 1246028               // '{' Integer '{'
+     && lk != 1246156               // '{' Real '{'
+     && lk != 1246284               // '{' Imaginary '{'
+     && lk != 1246412               // '{' Comment '{'
+     && lk != 1249996               // '{' ';' '{'
+     && lk != 1252172               // '{' 'break' '{'
+     && lk != 1252556               // '{' 'continue' '{'
+     && lk != 1327564               // '{' Identifier '~'
+     && lk != 1327692               // '{' Character '~'
+     && lk != 1327820               // '{' String '~'
+     && lk != 1327948               // '{' Integer '~'
+     && lk != 1328076               // '{' Real '~'
+     && lk != 1328204               // '{' Imaginary '~'
+     && lk != 1328332               // '{' Comment '~'
+     && lk != 1331916               // '{' ';' '~'
+     && lk != 1334092               // '{' 'break' '~'
+     && lk != 1334476)              // '{' 'continue' '~'
     {
       lk = memoized(0, e0);
       if (lk == 0)
@@ -1428,11 +1532,14 @@ function MaiaScript(string, parsingEventHandler)
     case 65:                        // 'i32'
     case 66:                        // 'i64'
     case 67:                        // 'if'
-    case 68:                        // 'return'
-    case 69:                        // 'switch'
-    case 70:                        // 'test'
-    case 71:                        // 'try'
-    case 72:                        // 'while'
+    case 68:                        // 'include'
+    case 69:                        // 'local'
+    case 70:                        // 'return'
+    case 71:                        // 'switch'
+    case 72:                        // 'test'
+    case 73:                        // 'throw'
+    case 74:                        // 'try'
+    case 75:                        // 'while'
       try_Statement();
       break;
     case -4:
@@ -1448,7 +1555,7 @@ function MaiaScript(string, parsingEventHandler)
     case 29:                        // '-'
     case 30:                        // '--'
     case 50:                        // '['
-    case 78:                        // '~'
+    case 81:                        // '~'
     case 131:                       // Identifier END
     case 387:                       // Identifier Identifier
     case 515:                       // Identifier Character
@@ -1511,29 +1618,32 @@ function MaiaScript(string, parsingEventHandler)
     case 8323:                      // Identifier 'i32'
     case 8451:                      // Identifier 'i64'
     case 8579:                      // Identifier 'if'
-    case 8707:                      // Identifier 'return'
-    case 8835:                      // Identifier 'switch'
-    case 8963:                      // Identifier 'test'
-    case 9091:                      // Identifier 'try'
-    case 9219:                      // Identifier 'while'
-    case 9475:                      // Identifier '|'
-    case 9603:                      // Identifier '|='
-    case 9731:                      // Identifier '||'
-    case 9859:                      // Identifier '}'
-    case 9987:                      // Identifier '~'
+    case 8707:                      // Identifier 'include'
+    case 8835:                      // Identifier 'local'
+    case 8963:                      // Identifier 'return'
+    case 9091:                      // Identifier 'switch'
+    case 9219:                      // Identifier 'test'
+    case 9347:                      // Identifier 'throw'
+    case 9475:                      // Identifier 'try'
+    case 9603:                      // Identifier 'while'
+    case 9859:                      // Identifier '|'
+    case 9987:                      // Identifier '|='
+    case 10115:                     // Identifier '||'
+    case 10243:                     // Identifier '}'
+    case 10371:                     // Identifier '~'
     case 346627:                    // Identifier '(' ')'
-    case 459209:                    // '{' Identifier ','
-    case 459337:                    // '{' Character ','
-    case 459465:                    // '{' String ','
-    case 459593:                    // '{' Integer ','
-    case 459721:                    // '{' Real ','
-    case 459849:                    // '{' Imaginary ','
-    case 459977:                    // '{' Comment ','
-    case 463561:                    // '{' ';' ','
-    case 465737:                    // '{' 'break' ','
-    case 466121:                    // '{' 'continue' ','
-    case 573897:                    // '{' Identifier ':'
-    case 574153:                    // '{' String ':'
+    case 459212:                    // '{' Identifier ','
+    case 459340:                    // '{' Character ','
+    case 459468:                    // '{' String ','
+    case 459596:                    // '{' Integer ','
+    case 459724:                    // '{' Real ','
+    case 459852:                    // '{' Imaginary ','
+    case 459980:                    // '{' Comment ','
+    case 463564:                    // '{' ';' ','
+    case 465740:                    // '{' 'break' ','
+    case 466124:                    // '{' 'continue' ','
+    case 573900:                    // '{' Identifier ':'
+    case 574156:                    // '{' String ':'
       try_Operation();
       break;
     case -5:
@@ -1546,40 +1656,42 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Block()
   {
     eventHandler.startNonterminal("Block", e0);
-    consume(73);                    // '{'
+    consume(76);                    // '{'
     for (;;)
     {
       lookahead1W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
-      if (l1 == 77)                 // '}'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
+      if (l1 == 80)                 // '}'
       {
         break;
       }
       whitespace();
       parse_Expression();
     }
-    consume(77);                    // '}'
+    consume(80);                    // '}'
     eventHandler.endNonterminal("Block", e0);
   }
 
   function try_Block()
   {
-    consumeT(73);                   // '{'
+    consumeT(76);                   // '{'
     for (;;)
     {
       lookahead1W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
-      if (l1 == 77)                 // '}'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
+      if (l1 == 80)                 // '}'
       {
         break;
       }
       try_Expression();
     }
-    consumeT(77);                   // '}'
+    consumeT(80);                   // '}'
   }
 
   function parse_Operation()
@@ -1614,7 +1726,7 @@ function MaiaScript(string, parsingEventHandler)
       case 47:                      // '>>='
       case 49:                      // '?='
       case 53:                      // '^='
-      case 75:                      // '|='
+      case 78:                      // '|='
         lookahead2W(23);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
         switch (lk)
@@ -1631,15 +1743,15 @@ function MaiaScript(string, parsingEventHandler)
         case 431:                   // '>>=' Identifier
         case 433:                   // '?=' Identifier
         case 437:                   // '^=' Identifier
-        case 459:                   // '|=' Identifier
+        case 462:                   // '|=' Identifier
           lookahead3W(49);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 6416:                  // '%=' '['
         case 6419:                  // '&=' '['
@@ -1653,42 +1765,44 @@ function MaiaScript(string, parsingEventHandler)
         case 6447:                  // '>>=' '['
         case 6449:                  // '?=' '['
         case 6453:                  // '^=' '['
-        case 6475:                  // '|=' '['
+        case 6478:                  // '|=' '['
           lookahead3W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         case 2576:                  // '%=' '('
-        case 9360:                  // '%=' '{'
+        case 9744:                  // '%=' '{'
         case 2579:                  // '&=' '('
-        case 9363:                  // '&=' '{'
+        case 9747:                  // '&=' '{'
         case 2584:                  // '*=' '('
-        case 9368:                  // '*=' '{'
+        case 9752:                  // '*=' '{'
         case 2587:                  // '+=' '('
-        case 9371:                  // '+=' '{'
+        case 9755:                  // '+=' '{'
         case 2591:                  // '-=' '('
-        case 9375:                  // '-=' '{'
+        case 9759:                  // '-=' '{'
         case 2594:                  // '/=' '('
-        case 9378:                  // '/=' '{'
+        case 9762:                  // '/=' '{'
         case 2596:                  // ':=' '('
-        case 9380:                  // ':=' '{'
+        case 9764:                  // ':=' '{'
         case 2600:                  // '<<=' '('
-        case 9384:                  // '<<=' '{'
+        case 9768:                  // '<<=' '{'
         case 2602:                  // '=' '('
-        case 9386:                  // '=' '{'
+        case 9770:                  // '=' '{'
         case 2607:                  // '>>=' '('
-        case 9391:                  // '>>=' '{'
+        case 9775:                  // '>>=' '{'
         case 2609:                  // '?=' '('
-        case 9393:                  // '?=' '{'
+        case 9777:                  // '?=' '{'
         case 2613:                  // '^=' '('
-        case 9397:                  // '^=' '{'
-        case 2635:                  // '|=' '('
-        case 9419:                  // '|=' '{'
+        case 9781:                  // '^=' '{'
+        case 2638:                  // '|=' '('
+        case 9806:                  // '|=' '{'
           lookahead3W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           break;
         case 528:                   // '%=' Character
         case 656:                   // '%=' String
@@ -1750,98 +1864,98 @@ function MaiaScript(string, parsingEventHandler)
         case 821:                   // '^=' Integer
         case 949:                   // '^=' Real
         case 1077:                  // '^=' Imaginary
-        case 587:                   // '|=' Character
-        case 715:                   // '|=' String
-        case 843:                   // '|=' Integer
-        case 971:                   // '|=' Real
-        case 1099:                  // '|=' Imaginary
+        case 590:                   // '|=' Character
+        case 718:                   // '|=' String
+        case 846:                   // '|=' Integer
+        case 974:                   // '|=' Real
+        case 1102:                  // '|=' Imaginary
           lookahead3W(48);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 1552:                  // '%=' '!'
         case 3216:                  // '%=' '+'
         case 3344:                  // '%=' '++'
         case 3728:                  // '%=' '-'
         case 3856:                  // '%=' '--'
-        case 10000:                 // '%=' '~'
+        case 10384:                 // '%=' '~'
         case 1555:                  // '&=' '!'
         case 3219:                  // '&=' '+'
         case 3347:                  // '&=' '++'
         case 3731:                  // '&=' '-'
         case 3859:                  // '&=' '--'
-        case 10003:                 // '&=' '~'
+        case 10387:                 // '&=' '~'
         case 1560:                  // '*=' '!'
         case 3224:                  // '*=' '+'
         case 3352:                  // '*=' '++'
         case 3736:                  // '*=' '-'
         case 3864:                  // '*=' '--'
-        case 10008:                 // '*=' '~'
+        case 10392:                 // '*=' '~'
         case 1563:                  // '+=' '!'
         case 3227:                  // '+=' '+'
         case 3355:                  // '+=' '++'
         case 3739:                  // '+=' '-'
         case 3867:                  // '+=' '--'
-        case 10011:                 // '+=' '~'
+        case 10395:                 // '+=' '~'
         case 1567:                  // '-=' '!'
         case 3231:                  // '-=' '+'
         case 3359:                  // '-=' '++'
         case 3743:                  // '-=' '-'
         case 3871:                  // '-=' '--'
-        case 10015:                 // '-=' '~'
+        case 10399:                 // '-=' '~'
         case 1570:                  // '/=' '!'
         case 3234:                  // '/=' '+'
         case 3362:                  // '/=' '++'
         case 3746:                  // '/=' '-'
         case 3874:                  // '/=' '--'
-        case 10018:                 // '/=' '~'
+        case 10402:                 // '/=' '~'
         case 1572:                  // ':=' '!'
         case 3236:                  // ':=' '+'
         case 3364:                  // ':=' '++'
         case 3748:                  // ':=' '-'
         case 3876:                  // ':=' '--'
-        case 10020:                 // ':=' '~'
+        case 10404:                 // ':=' '~'
         case 1576:                  // '<<=' '!'
         case 3240:                  // '<<=' '+'
         case 3368:                  // '<<=' '++'
         case 3752:                  // '<<=' '-'
         case 3880:                  // '<<=' '--'
-        case 10024:                 // '<<=' '~'
+        case 10408:                 // '<<=' '~'
         case 1578:                  // '=' '!'
         case 3242:                  // '=' '+'
         case 3370:                  // '=' '++'
         case 3754:                  // '=' '-'
         case 3882:                  // '=' '--'
-        case 10026:                 // '=' '~'
+        case 10410:                 // '=' '~'
         case 1583:                  // '>>=' '!'
         case 3247:                  // '>>=' '+'
         case 3375:                  // '>>=' '++'
         case 3759:                  // '>>=' '-'
         case 3887:                  // '>>=' '--'
-        case 10031:                 // '>>=' '~'
+        case 10415:                 // '>>=' '~'
         case 1585:                  // '?=' '!'
         case 3249:                  // '?=' '+'
         case 3377:                  // '?=' '++'
         case 3761:                  // '?=' '-'
         case 3889:                  // '?=' '--'
-        case 10033:                 // '?=' '~'
+        case 10417:                 // '?=' '~'
         case 1589:                  // '^=' '!'
         case 3253:                  // '^=' '+'
         case 3381:                  // '^=' '++'
         case 3765:                  // '^=' '-'
         case 3893:                  // '^=' '--'
-        case 10037:                 // '^=' '~'
-        case 1611:                  // '|=' '!'
-        case 3275:                  // '|=' '+'
-        case 3403:                  // '|=' '++'
-        case 3787:                  // '|=' '-'
-        case 3915:                  // '|=' '--'
-        case 10059:                 // '|=' '~'
+        case 10421:                 // '^=' '~'
+        case 1614:                  // '|=' '!'
+        case 3278:                  // '|=' '+'
+        case 3406:                  // '|=' '++'
+        case 3790:                  // '|=' '-'
+        case 3918:                  // '|=' '--'
+        case 10446:                 // '|=' '~'
           lookahead3W(22);          // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
           break;
@@ -1884,14 +1998,17 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 65                  // 'i32'
        && lk != 66                  // 'i64'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 77                  // '}'
-       && lk != 78)                 // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 80                  // '}'
+       && lk != 81)                 // '~'
       {
         lk = memoized(1, e0);
         if (lk == 0)
@@ -1934,8 +2051,8 @@ function MaiaScript(string, parsingEventHandler)
             case 53:                // '^='
               consumeT(53);         // '^='
               break;
-            case 75:                // '|='
-              consumeT(75);         // '|='
+            case 78:                // '|='
+              consumeT(78);         // '|='
               break;
             case 49:                // '?='
               consumeT(49);         // '?='
@@ -1995,8 +2112,8 @@ function MaiaScript(string, parsingEventHandler)
       case 53:                      // '^='
         consume(53);                // '^='
         break;
-      case 75:                      // '|='
-        consume(75);                // '|='
+      case 78:                      // '|='
+        consume(78);                // '|='
         break;
       case 49:                      // '?='
         consume(49);                // '?='
@@ -2031,7 +2148,7 @@ function MaiaScript(string, parsingEventHandler)
       case 47:                      // '>>='
       case 49:                      // '?='
       case 53:                      // '^='
-      case 75:                      // '|='
+      case 78:                      // '|='
         lookahead2W(23);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
         switch (lk)
@@ -2048,15 +2165,15 @@ function MaiaScript(string, parsingEventHandler)
         case 431:                   // '>>=' Identifier
         case 433:                   // '?=' Identifier
         case 437:                   // '^=' Identifier
-        case 459:                   // '|=' Identifier
+        case 462:                   // '|=' Identifier
           lookahead3W(49);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 6416:                  // '%=' '['
         case 6419:                  // '&=' '['
@@ -2070,42 +2187,44 @@ function MaiaScript(string, parsingEventHandler)
         case 6447:                  // '>>=' '['
         case 6449:                  // '?=' '['
         case 6453:                  // '^=' '['
-        case 6475:                  // '|=' '['
+        case 6478:                  // '|=' '['
           lookahead3W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         case 2576:                  // '%=' '('
-        case 9360:                  // '%=' '{'
+        case 9744:                  // '%=' '{'
         case 2579:                  // '&=' '('
-        case 9363:                  // '&=' '{'
+        case 9747:                  // '&=' '{'
         case 2584:                  // '*=' '('
-        case 9368:                  // '*=' '{'
+        case 9752:                  // '*=' '{'
         case 2587:                  // '+=' '('
-        case 9371:                  // '+=' '{'
+        case 9755:                  // '+=' '{'
         case 2591:                  // '-=' '('
-        case 9375:                  // '-=' '{'
+        case 9759:                  // '-=' '{'
         case 2594:                  // '/=' '('
-        case 9378:                  // '/=' '{'
+        case 9762:                  // '/=' '{'
         case 2596:                  // ':=' '('
-        case 9380:                  // ':=' '{'
+        case 9764:                  // ':=' '{'
         case 2600:                  // '<<=' '('
-        case 9384:                  // '<<=' '{'
+        case 9768:                  // '<<=' '{'
         case 2602:                  // '=' '('
-        case 9386:                  // '=' '{'
+        case 9770:                  // '=' '{'
         case 2607:                  // '>>=' '('
-        case 9391:                  // '>>=' '{'
+        case 9775:                  // '>>=' '{'
         case 2609:                  // '?=' '('
-        case 9393:                  // '?=' '{'
+        case 9777:                  // '?=' '{'
         case 2613:                  // '^=' '('
-        case 9397:                  // '^=' '{'
-        case 2635:                  // '|=' '('
-        case 9419:                  // '|=' '{'
+        case 9781:                  // '^=' '{'
+        case 2638:                  // '|=' '('
+        case 9806:                  // '|=' '{'
           lookahead3W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           break;
         case 528:                   // '%=' Character
         case 656:                   // '%=' String
@@ -2167,98 +2286,98 @@ function MaiaScript(string, parsingEventHandler)
         case 821:                   // '^=' Integer
         case 949:                   // '^=' Real
         case 1077:                  // '^=' Imaginary
-        case 587:                   // '|=' Character
-        case 715:                   // '|=' String
-        case 843:                   // '|=' Integer
-        case 971:                   // '|=' Real
-        case 1099:                  // '|=' Imaginary
+        case 590:                   // '|=' Character
+        case 718:                   // '|=' String
+        case 846:                   // '|=' Integer
+        case 974:                   // '|=' Real
+        case 1102:                  // '|=' Imaginary
           lookahead3W(48);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 1552:                  // '%=' '!'
         case 3216:                  // '%=' '+'
         case 3344:                  // '%=' '++'
         case 3728:                  // '%=' '-'
         case 3856:                  // '%=' '--'
-        case 10000:                 // '%=' '~'
+        case 10384:                 // '%=' '~'
         case 1555:                  // '&=' '!'
         case 3219:                  // '&=' '+'
         case 3347:                  // '&=' '++'
         case 3731:                  // '&=' '-'
         case 3859:                  // '&=' '--'
-        case 10003:                 // '&=' '~'
+        case 10387:                 // '&=' '~'
         case 1560:                  // '*=' '!'
         case 3224:                  // '*=' '+'
         case 3352:                  // '*=' '++'
         case 3736:                  // '*=' '-'
         case 3864:                  // '*=' '--'
-        case 10008:                 // '*=' '~'
+        case 10392:                 // '*=' '~'
         case 1563:                  // '+=' '!'
         case 3227:                  // '+=' '+'
         case 3355:                  // '+=' '++'
         case 3739:                  // '+=' '-'
         case 3867:                  // '+=' '--'
-        case 10011:                 // '+=' '~'
+        case 10395:                 // '+=' '~'
         case 1567:                  // '-=' '!'
         case 3231:                  // '-=' '+'
         case 3359:                  // '-=' '++'
         case 3743:                  // '-=' '-'
         case 3871:                  // '-=' '--'
-        case 10015:                 // '-=' '~'
+        case 10399:                 // '-=' '~'
         case 1570:                  // '/=' '!'
         case 3234:                  // '/=' '+'
         case 3362:                  // '/=' '++'
         case 3746:                  // '/=' '-'
         case 3874:                  // '/=' '--'
-        case 10018:                 // '/=' '~'
+        case 10402:                 // '/=' '~'
         case 1572:                  // ':=' '!'
         case 3236:                  // ':=' '+'
         case 3364:                  // ':=' '++'
         case 3748:                  // ':=' '-'
         case 3876:                  // ':=' '--'
-        case 10020:                 // ':=' '~'
+        case 10404:                 // ':=' '~'
         case 1576:                  // '<<=' '!'
         case 3240:                  // '<<=' '+'
         case 3368:                  // '<<=' '++'
         case 3752:                  // '<<=' '-'
         case 3880:                  // '<<=' '--'
-        case 10024:                 // '<<=' '~'
+        case 10408:                 // '<<=' '~'
         case 1578:                  // '=' '!'
         case 3242:                  // '=' '+'
         case 3370:                  // '=' '++'
         case 3754:                  // '=' '-'
         case 3882:                  // '=' '--'
-        case 10026:                 // '=' '~'
+        case 10410:                 // '=' '~'
         case 1583:                  // '>>=' '!'
         case 3247:                  // '>>=' '+'
         case 3375:                  // '>>=' '++'
         case 3759:                  // '>>=' '-'
         case 3887:                  // '>>=' '--'
-        case 10031:                 // '>>=' '~'
+        case 10415:                 // '>>=' '~'
         case 1585:                  // '?=' '!'
         case 3249:                  // '?=' '+'
         case 3377:                  // '?=' '++'
         case 3761:                  // '?=' '-'
         case 3889:                  // '?=' '--'
-        case 10033:                 // '?=' '~'
+        case 10417:                 // '?=' '~'
         case 1589:                  // '^=' '!'
         case 3253:                  // '^=' '+'
         case 3381:                  // '^=' '++'
         case 3765:                  // '^=' '-'
         case 3893:                  // '^=' '--'
-        case 10037:                 // '^=' '~'
-        case 1611:                  // '|=' '!'
-        case 3275:                  // '|=' '+'
-        case 3403:                  // '|=' '++'
-        case 3787:                  // '|=' '-'
-        case 3915:                  // '|=' '--'
-        case 10059:                 // '|=' '~'
+        case 10421:                 // '^=' '~'
+        case 1614:                  // '|=' '!'
+        case 3278:                  // '|=' '+'
+        case 3406:                  // '|=' '++'
+        case 3790:                  // '|=' '-'
+        case 3918:                  // '|=' '--'
+        case 10446:                 // '|=' '~'
           lookahead3W(22);          // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
           break;
@@ -2301,14 +2420,17 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 65                  // 'i32'
        && lk != 66                  // 'i64'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 77                  // '}'
-       && lk != 78)                 // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 80                  // '}'
+       && lk != 81)                 // '~'
       {
         lk = memoized(1, e0);
         if (lk == 0)
@@ -2351,8 +2473,8 @@ function MaiaScript(string, parsingEventHandler)
             case 53:                // '^='
               consumeT(53);         // '^='
               break;
-            case 75:                // '|='
-              consumeT(75);         // '|='
+            case 78:                // '|='
+              consumeT(78);         // '|='
               break;
             case 49:                // '?='
               consumeT(49);         // '?='
@@ -2413,8 +2535,8 @@ function MaiaScript(string, parsingEventHandler)
       case 53:                      // '^='
         consumeT(53);               // '^='
         break;
-      case 75:                      // '|='
-        consumeT(75);               // '|='
+      case 78:                      // '|='
+        consumeT(78);               // '|='
         break;
       case 49:                      // '?='
         consumeT(49);               // '?='
@@ -2470,11 +2592,11 @@ function MaiaScript(string, parsingEventHandler)
     parse_LogicalANDExpression();
     for (;;)
     {
-      if (l1 != 76)                 // '||'
+      if (l1 != 79)                 // '||'
       {
         break;
       }
-      consume(76);                  // '||'
+      consume(79);                  // '||'
       lookahead1W(23);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
       whitespace();
@@ -2488,11 +2610,11 @@ function MaiaScript(string, parsingEventHandler)
     try_LogicalANDExpression();
     for (;;)
     {
-      if (l1 != 76)                 // '||'
+      if (l1 != 79)                 // '||'
       {
         break;
       }
-      consumeT(76);                 // '||'
+      consumeT(79);                 // '||'
       lookahead1W(23);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
       try_LogicalANDExpression();
@@ -2540,11 +2662,11 @@ function MaiaScript(string, parsingEventHandler)
     parse_BitwiseXORExpression();
     for (;;)
     {
-      if (l1 != 74)                 // '|'
+      if (l1 != 77)                 // '|'
       {
         break;
       }
-      consume(74);                  // '|'
+      consume(77);                  // '|'
       lookahead1W(23);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
       whitespace();
@@ -2558,11 +2680,11 @@ function MaiaScript(string, parsingEventHandler)
     try_BitwiseXORExpression();
     for (;;)
     {
-      if (l1 != 74)                 // '|'
+      if (l1 != 77)                 // '|'
       {
         break;
       }
-      consumeT(74);                 // '|'
+      consumeT(77);                 // '|'
       lookahead1W(23);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
       try_BitwiseXORExpression();
@@ -2830,24 +2952,26 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 6425:                  // '+' '['
         case 6429:                  // '-' '['
           lookahead3W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         case 2585:                  // '+' '('
-        case 9369:                  // '+' '{'
+        case 9753:                  // '+' '{'
         case 2589:                  // '-' '('
-        case 9373:                  // '-' '{'
+        case 9757:                  // '-' '{'
           lookahead3W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           break;
         case 537:                   // '+' Character
         case 665:                   // '+' String
@@ -2865,8 +2989,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         }
         break;
@@ -2929,17 +3053,20 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 65                  // 'i32'
        && lk != 66                  // 'i64'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 74                  // '|'
-       && lk != 75                  // '|='
-       && lk != 76                  // '||'
-       && lk != 77                  // '}'
-       && lk != 78                  // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 77                  // '|'
+       && lk != 78                  // '|='
+       && lk != 79                  // '||'
+       && lk != 80                  // '}'
+       && lk != 81                  // '~'
        && lk != 1561                // '+' '!'
        && lk != 1565                // '-' '!'
        && lk != 3225                // '+' '+'
@@ -2950,8 +3077,8 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 3741                // '-' '-'
        && lk != 3865                // '+' '--'
        && lk != 3869                // '-' '--'
-       && lk != 10009               // '+' '~'
-       && lk != 10013               // '-' '~'
+       && lk != 10393               // '+' '~'
+       && lk != 10397               // '-' '~'
        && lk != 344473              // '+' Identifier ')'
        && lk != 344477              // '-' Identifier ')'
        && lk != 344601              // '+' Character ')'
@@ -3115,17 +3242,20 @@ function MaiaScript(string, parsingEventHandler)
        || lk == 65                  // 'i32'
        || lk == 66                  // 'i64'
        || lk == 67                  // 'if'
-       || lk == 68                  // 'return'
-       || lk == 69                  // 'switch'
-       || lk == 70                  // 'test'
-       || lk == 71                  // 'try'
-       || lk == 72                  // 'while'
-       || lk == 73                  // '{'
-       || lk == 74                  // '|'
-       || lk == 75                  // '|='
-       || lk == 76                  // '||'
-       || lk == 77                  // '}'
-       || lk == 78)                 // '~'
+       || lk == 68                  // 'include'
+       || lk == 69                  // 'local'
+       || lk == 70                  // 'return'
+       || lk == 71                  // 'switch'
+       || lk == 72                  // 'test'
+       || lk == 73                  // 'throw'
+       || lk == 74                  // 'try'
+       || lk == 75                  // 'while'
+       || lk == 76                  // '{'
+       || lk == 77                  // '|'
+       || lk == 78                  // '|='
+       || lk == 79                  // '||'
+       || lk == 80                  // '}'
+       || lk == 81)                 // '~'
       {
         break;
       }
@@ -3166,24 +3296,26 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         case 6425:                  // '+' '['
         case 6429:                  // '-' '['
           lookahead3W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         case 2585:                  // '+' '('
-        case 9369:                  // '+' '{'
+        case 9753:                  // '+' '{'
         case 2589:                  // '-' '('
-        case 9373:                  // '-' '{'
+        case 9757:                  // '-' '{'
           lookahead3W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           break;
         case 537:                   // '+' Character
         case 665:                   // '+' String
@@ -3201,8 +3333,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
           break;
         }
         break;
@@ -3265,17 +3397,20 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 65                  // 'i32'
        && lk != 66                  // 'i64'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 74                  // '|'
-       && lk != 75                  // '|='
-       && lk != 76                  // '||'
-       && lk != 77                  // '}'
-       && lk != 78                  // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 77                  // '|'
+       && lk != 78                  // '|='
+       && lk != 79                  // '||'
+       && lk != 80                  // '}'
+       && lk != 81                  // '~'
        && lk != 1561                // '+' '!'
        && lk != 1565                // '-' '!'
        && lk != 3225                // '+' '+'
@@ -3286,8 +3421,8 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 3741                // '-' '-'
        && lk != 3865                // '+' '--'
        && lk != 3869                // '-' '--'
-       && lk != 10009               // '+' '~'
-       && lk != 10013               // '-' '~'
+       && lk != 10393               // '+' '~'
+       && lk != 10397               // '-' '~'
        && lk != 344473              // '+' Identifier ')'
        && lk != 344477              // '-' Identifier ')'
        && lk != 344601              // '+' Character ')'
@@ -3452,17 +3587,20 @@ function MaiaScript(string, parsingEventHandler)
        || lk == 65                  // 'i32'
        || lk == 66                  // 'i64'
        || lk == 67                  // 'if'
-       || lk == 68                  // 'return'
-       || lk == 69                  // 'switch'
-       || lk == 70                  // 'test'
-       || lk == 71                  // 'try'
-       || lk == 72                  // 'while'
-       || lk == 73                  // '{'
-       || lk == 74                  // '|'
-       || lk == 75                  // '|='
-       || lk == 76                  // '||'
-       || lk == 77                  // '}'
-       || lk == 78)                 // '~'
+       || lk == 68                  // 'include'
+       || lk == 69                  // 'local'
+       || lk == 70                  // 'return'
+       || lk == 71                  // 'switch'
+       || lk == 72                  // 'test'
+       || lk == 73                  // 'throw'
+       || lk == 74                  // 'try'
+       || lk == 75                  // 'while'
+       || lk == 76                  // '{'
+       || lk == 77                  // '|'
+       || lk == 78                  // '|='
+       || lk == 79                  // '||'
+       || lk == 80                  // '}'
+       || lk == 81)                 // '~'
       {
         break;
       }
@@ -3527,8 +3665,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       if (l1 != 15                  // '%'
        && l1 != 22                  // '*'
        && l1 != 33)                 // '/'
@@ -3565,8 +3703,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       if (l1 != 15                  // '%'
        && l1 != 22                  // '*'
        && l1 != 33)                 // '/'
@@ -3602,15 +3740,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -3619,7 +3758,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 3331:                    // Identifier '++'
       case 3843:                    // Identifier '--'
@@ -3629,8 +3769,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -3641,8 +3781,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 1031:                    // Real Imaginary
@@ -3654,8 +3794,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -3663,7 +3803,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 404:                     // '(' Identifier
@@ -3673,7 +3814,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // '[' | '^' | '^=' | '{' | '|' | '|=' | '||'
         break;
       case 916:                     // '(' Real
-        lookahead3W(34);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' |
+        lookahead3W(33);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' |
                                     // '^' | '^=' | '|' | '|=' | '||'
@@ -3682,19 +3823,21 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9364:                    // '(' '{'
+      case 9748:                    // '(' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 532:                     // '(' Character
       case 660:                     // '(' String
       case 788:                     // '(' Integer
       case 1044:                    // '(' Imaginary
-        lookahead3W(33);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '**' |
+        lookahead3W(29);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | '-' | '--' | '-=' | '/' | '/=' | ':=' | '<' | '<<' |
                                     // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' | '^=' |
                                     // '|' | '|=' | '||'
@@ -3705,36 +3848,40 @@ function MaiaScript(string, parsingEventHandler)
       case 7316:                    // '(' 'continue'
         lookahead3W(5);             // WhiteSpace^token | ')'
         break;
-      case 2580:                    // '(' '('
-      case 7572:                    // '(' 'do'
-      case 8724:                    // '(' 'return'
-      case 9108:                    // '(' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
-        break;
       case 7828:                    // '(' 'f32'
       case 7956:                    // '(' 'f64'
       case 8340:                    // '(' 'i32'
       case 8468:                    // '(' 'i64'
         lookahead3W(0);             // Identifier | WhiteSpace^token
         break;
+      case 2580:                    // '(' '('
+      case 7572:                    // '(' 'do'
+      case 8852:                    // '(' 'local'
+      case 8980:                    // '(' 'return'
+      case 9492:                    // '(' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+        break;
       case 1556:                    // '(' '!'
       case 3220:                    // '(' '+'
       case 3348:                    // '(' '++'
       case 3732:                    // '(' '-'
       case 3860:                    // '(' '--'
-      case 10004:                   // '(' '~'
+      case 10388:                   // '(' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8084:                    // '(' 'for'
       case 8212:                    // '(' 'foreach'
       case 8596:                    // '(' 'if'
-      case 8852:                    // '(' 'switch'
-      case 8980:                    // '(' 'test'
-      case 9236:                    // '(' 'while'
+      case 8724:                    // '(' 'include'
+      case 9108:                    // '(' 'switch'
+      case 9236:                    // '(' 'test'
+      case 9364:                    // '(' 'throw'
+      case 9620:                    // '(' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -3743,11 +3890,12 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(27);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 434:                     // '[' Identifier
-        lookahead3W(44);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(43);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -3759,16 +3907,18 @@ function MaiaScript(string, parsingEventHandler)
                                     // '?=' | ']' | '^' | '^=' | '|' | '|=' | '||'
         break;
       case 4786:                    // '[' ';'
-        lookahead3W(30);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 6450:                    // '[' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 6578:                    // '[' ']'
         lookahead3W(48);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
@@ -3777,14 +3927,15 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
-      case 9394:                    // '[' '{'
+      case 9778:                    // '[' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 1202:                    // '[' Comment
       case 6962:                    // '[' 'break'
@@ -3800,121 +3951,132 @@ function MaiaScript(string, parsingEventHandler)
                                     // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | ']' |
                                     // '^' | '^=' | '|' | '|=' | '||'
         break;
-      case 2610:                    // '[' '('
-      case 7602:                    // '[' 'do'
-      case 8754:                    // '[' 'return'
-      case 9138:                    // '[' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
-        break;
       case 7858:                    // '[' 'f32'
       case 7986:                    // '[' 'f64'
       case 8370:                    // '[' 'i32'
       case 8498:                    // '[' 'i64'
         lookahead3W(0);             // Identifier | WhiteSpace^token
         break;
+      case 2610:                    // '[' '('
+      case 7602:                    // '[' 'do'
+      case 8882:                    // '[' 'local'
+      case 9010:                    // '[' 'return'
+      case 9522:                    // '[' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+        break;
       case 1586:                    // '[' '!'
       case 3250:                    // '[' '+'
       case 3378:                    // '[' '++'
       case 3762:                    // '[' '-'
       case 3890:                    // '[' '--'
-      case 10034:                   // '[' '~'
+      case 10418:                   // '[' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8114:                    // '[' 'for'
       case 8242:                    // '[' 'foreach'
       case 8626:                    // '[' 'if'
-      case 8882:                    // '[' 'switch'
-      case 9010:                    // '[' 'test'
-      case 9266:                    // '[' 'while'
+      case 8754:                    // '[' 'include'
+      case 9138:                    // '[' 'switch'
+      case 9266:                    // '[' 'test'
+      case 9394:                    // '[' 'throw'
+      case 9650:                    // '[' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
-      case 457:                     // '{' Identifier
-        lookahead3W(43);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      case 460:                     // '{' Identifier
+        lookahead3W(42);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
         break;
-      case 713:                     // '{' String
+      case 716:                     // '{' String
         lookahead3W(37);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
                                     // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' | ':=' | '<' |
                                     // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' |
                                     // '^=' | '|' | '|=' | '||' | '}'
         break;
-      case 969:                     // '{' Real
+      case 972:                     // '{' Real
         lookahead3W(36);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' |
                                     // '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
-      case 6473:                    // '{' '['
+      case 6476:                    // '{' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9417:                    // '{' '{'
+      case 9804:                    // '{' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
-      case 585:                     // '{' Character
-      case 841:                     // '{' Integer
-      case 1097:                    // '{' Imaginary
-        lookahead3W(35);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
+      case 588:                     // '{' Character
+      case 844:                     // '{' Integer
+      case 1100:                    // '{' Imaginary
+        lookahead3W(34);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
                                     // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' | '<' | '<<' |
                                     // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' | '^=' |
                                     // '|' | '|=' | '||' | '}'
         break;
-      case 1225:                    // '{' Comment
-      case 4809:                    // '{' ';'
-      case 6985:                    // '{' 'break'
-      case 7369:                    // '{' 'continue'
+      case 1228:                    // '{' Comment
+      case 4812:                    // '{' ';'
+      case 6988:                    // '{' 'break'
+      case 7372:                    // '{' 'continue'
         lookahead3W(19);            // WhiteSpace^token | ',' | '}'
         break;
-      case 2633:                    // '{' '('
-      case 7625:                    // '{' 'do'
-      case 8777:                    // '{' 'return'
-      case 9161:                    // '{' 'try'
+      case 7884:                    // '{' 'f32'
+      case 8012:                    // '{' 'f64'
+      case 8396:                    // '{' 'i32'
+      case 8524:                    // '{' 'i64'
+        lookahead3W(0);             // Identifier | WhiteSpace^token
+        break;
+      case 2636:                    // '{' '('
+      case 7628:                    // '{' 'do'
+      case 8908:                    // '{' 'local'
+      case 9036:                    // '{' 'return'
+      case 9548:                    // '{' 'try'
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
-      case 7881:                    // '{' 'f32'
-      case 8009:                    // '{' 'f64'
-      case 8393:                    // '{' 'i32'
-      case 8521:                    // '{' 'i64'
-        lookahead3W(0);             // Identifier | WhiteSpace^token
-        break;
-      case 1609:                    // '{' '!'
-      case 3273:                    // '{' '+'
-      case 3401:                    // '{' '++'
-      case 3785:                    // '{' '-'
-      case 3913:                    // '{' '--'
-      case 10057:                   // '{' '~'
+      case 1612:                    // '{' '!'
+      case 3276:                    // '{' '+'
+      case 3404:                    // '{' '++'
+      case 3788:                    // '{' '-'
+      case 3916:                    // '{' '--'
+      case 10444:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
-      case 8137:                    // '{' 'for'
-      case 8265:                    // '{' 'foreach'
-      case 8649:                    // '{' 'if'
-      case 8905:                    // '{' 'switch'
-      case 9033:                    // '{' 'test'
-      case 9289:                    // '{' 'while'
+      case 8140:                    // '{' 'for'
+      case 8268:                    // '{' 'foreach'
+      case 8652:                    // '{' 'if'
+      case 8780:                    // '{' 'include'
+      case 9164:                    // '{' 'switch'
+      case 9292:                    // '{' 'test'
+      case 9420:                    // '{' 'throw'
+      case 9676:                    // '{' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -3929,8 +4091,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 3332:                    // Character '++'
@@ -3947,8 +4109,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -3960,7 +4122,7 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 26                    // '++'
      && lk != 29                    // '-'
      && lk != 30                    // '--'
-     && lk != 78                    // '~'
+     && lk != 81                    // '~'
      && lk != 131                   // Identifier END
      && lk != 132                   // Character END
      && lk != 133                   // String END
@@ -4318,72 +4480,90 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8582                  // Integer 'if'
      && lk != 8583                  // Real 'if'
      && lk != 8584                  // Imaginary 'if'
-     && lk != 8707                  // Identifier 'return'
-     && lk != 8708                  // Character 'return'
-     && lk != 8709                  // String 'return'
-     && lk != 8710                  // Integer 'return'
-     && lk != 8711                  // Real 'return'
-     && lk != 8712                  // Imaginary 'return'
-     && lk != 8835                  // Identifier 'switch'
-     && lk != 8836                  // Character 'switch'
-     && lk != 8837                  // String 'switch'
-     && lk != 8838                  // Integer 'switch'
-     && lk != 8839                  // Real 'switch'
-     && lk != 8840                  // Imaginary 'switch'
-     && lk != 8963                  // Identifier 'test'
-     && lk != 8964                  // Character 'test'
-     && lk != 8965                  // String 'test'
-     && lk != 8966                  // Integer 'test'
-     && lk != 8967                  // Real 'test'
-     && lk != 8968                  // Imaginary 'test'
-     && lk != 9091                  // Identifier 'try'
-     && lk != 9092                  // Character 'try'
-     && lk != 9093                  // String 'try'
-     && lk != 9094                  // Integer 'try'
-     && lk != 9095                  // Real 'try'
-     && lk != 9096                  // Imaginary 'try'
-     && lk != 9219                  // Identifier 'while'
-     && lk != 9220                  // Character 'while'
-     && lk != 9221                  // String 'while'
-     && lk != 9222                  // Integer 'while'
-     && lk != 9223                  // Real 'while'
-     && lk != 9224                  // Imaginary 'while'
-     && lk != 9347                  // Identifier '{'
-     && lk != 9348                  // Character '{'
-     && lk != 9349                  // String '{'
-     && lk != 9350                  // Integer '{'
-     && lk != 9351                  // Real '{'
-     && lk != 9352                  // Imaginary '{'
-     && lk != 9475                  // Identifier '|'
-     && lk != 9476                  // Character '|'
-     && lk != 9477                  // String '|'
-     && lk != 9478                  // Integer '|'
-     && lk != 9479                  // Real '|'
-     && lk != 9480                  // Imaginary '|'
-     && lk != 9603                  // Identifier '|='
-     && lk != 9604                  // Character '|='
-     && lk != 9605                  // String '|='
-     && lk != 9606                  // Integer '|='
-     && lk != 9607                  // Real '|='
-     && lk != 9608                  // Imaginary '|='
-     && lk != 9731                  // Identifier '||'
-     && lk != 9732                  // Character '||'
-     && lk != 9733                  // String '||'
-     && lk != 9734                  // Integer '||'
-     && lk != 9735                  // Real '||'
-     && lk != 9736                  // Imaginary '||'
-     && lk != 9859                  // Identifier '}'
-     && lk != 9860                  // Character '}'
-     && lk != 9861                  // String '}'
-     && lk != 9862                  // Integer '}'
-     && lk != 9863                  // Real '}'
-     && lk != 9864                  // Imaginary '}'
-     && lk != 9987                  // Identifier '~'
-     && lk != 9988                  // Character '~'
-     && lk != 9989                  // String '~'
-     && lk != 9990                  // Integer '~'
-     && lk != 9991                  // Real '~'
-     && lk != 9992                  // Imaginary '~'
+     && lk != 8707                  // Identifier 'include'
+     && lk != 8708                  // Character 'include'
+     && lk != 8709                  // String 'include'
+     && lk != 8710                  // Integer 'include'
+     && lk != 8711                  // Real 'include'
+     && lk != 8712                  // Imaginary 'include'
+     && lk != 8835                  // Identifier 'local'
+     && lk != 8836                  // Character 'local'
+     && lk != 8837                  // String 'local'
+     && lk != 8838                  // Integer 'local'
+     && lk != 8839                  // Real 'local'
+     && lk != 8840                  // Imaginary 'local'
+     && lk != 8963                  // Identifier 'return'
+     && lk != 8964                  // Character 'return'
+     && lk != 8965                  // String 'return'
+     && lk != 8966                  // Integer 'return'
+     && lk != 8967                  // Real 'return'
+     && lk != 8968                  // Imaginary 'return'
+     && lk != 9091                  // Identifier 'switch'
+     && lk != 9092                  // Character 'switch'
+     && lk != 9093                  // String 'switch'
+     && lk != 9094                  // Integer 'switch'
+     && lk != 9095                  // Real 'switch'
+     && lk != 9096                  // Imaginary 'switch'
+     && lk != 9219                  // Identifier 'test'
+     && lk != 9220                  // Character 'test'
+     && lk != 9221                  // String 'test'
+     && lk != 9222                  // Integer 'test'
+     && lk != 9223                  // Real 'test'
+     && lk != 9224                  // Imaginary 'test'
+     && lk != 9347                  // Identifier 'throw'
+     && lk != 9348                  // Character 'throw'
+     && lk != 9349                  // String 'throw'
+     && lk != 9350                  // Integer 'throw'
+     && lk != 9351                  // Real 'throw'
+     && lk != 9352                  // Imaginary 'throw'
+     && lk != 9475                  // Identifier 'try'
+     && lk != 9476                  // Character 'try'
+     && lk != 9477                  // String 'try'
+     && lk != 9478                  // Integer 'try'
+     && lk != 9479                  // Real 'try'
+     && lk != 9480                  // Imaginary 'try'
+     && lk != 9603                  // Identifier 'while'
+     && lk != 9604                  // Character 'while'
+     && lk != 9605                  // String 'while'
+     && lk != 9606                  // Integer 'while'
+     && lk != 9607                  // Real 'while'
+     && lk != 9608                  // Imaginary 'while'
+     && lk != 9731                  // Identifier '{'
+     && lk != 9732                  // Character '{'
+     && lk != 9733                  // String '{'
+     && lk != 9734                  // Integer '{'
+     && lk != 9735                  // Real '{'
+     && lk != 9736                  // Imaginary '{'
+     && lk != 9859                  // Identifier '|'
+     && lk != 9860                  // Character '|'
+     && lk != 9861                  // String '|'
+     && lk != 9862                  // Integer '|'
+     && lk != 9863                  // Real '|'
+     && lk != 9864                  // Imaginary '|'
+     && lk != 9987                  // Identifier '|='
+     && lk != 9988                  // Character '|='
+     && lk != 9989                  // String '|='
+     && lk != 9990                  // Integer '|='
+     && lk != 9991                  // Real '|='
+     && lk != 9992                  // Imaginary '|='
+     && lk != 10115                 // Identifier '||'
+     && lk != 10116                 // Character '||'
+     && lk != 10117                 // String '||'
+     && lk != 10118                 // Integer '||'
+     && lk != 10119                 // Real '||'
+     && lk != 10120                 // Imaginary '||'
+     && lk != 10243                 // Identifier '}'
+     && lk != 10244                 // Character '}'
+     && lk != 10245                 // String '}'
+     && lk != 10246                 // Integer '}'
+     && lk != 10247                 // Real '}'
+     && lk != 10248                 // Imaginary '}'
+     && lk != 10371                 // Identifier '~'
+     && lk != 10372                 // Character '~'
+     && lk != 10373                 // String '~'
+     && lk != 10374                 // Integer '~'
+     && lk != 10375                 // Real '~'
+     && lk != 10376                 // Imaginary '~'
      && lk != 17415                 // Real Imaginary END
      && lk != 19715                 // Identifier '++' END
      && lk != 19716                 // Character '++' END
@@ -5152,148 +5332,190 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1101575               // Real '--' 'if'
      && lk != 1101576               // Imaginary '--' 'if'
      && lk != 1104306               // '[' ']' 'if'
-     && lk != 1115143               // Real Imaginary 'return'
-     && lk != 1117443               // Identifier '++' 'return'
-     && lk != 1117444               // Character '++' 'return'
-     && lk != 1117445               // String '++' 'return'
-     && lk != 1117446               // Integer '++' 'return'
-     && lk != 1117447               // Real '++' 'return'
-     && lk != 1117448               // Imaginary '++' 'return'
-     && lk != 1117955               // Identifier '--' 'return'
-     && lk != 1117956               // Character '--' 'return'
-     && lk != 1117957               // String '--' 'return'
-     && lk != 1117958               // Integer '--' 'return'
-     && lk != 1117959               // Real '--' 'return'
-     && lk != 1117960               // Imaginary '--' 'return'
-     && lk != 1120690               // '[' ']' 'return'
-     && lk != 1131527               // Real Imaginary 'switch'
-     && lk != 1133827               // Identifier '++' 'switch'
-     && lk != 1133828               // Character '++' 'switch'
-     && lk != 1133829               // String '++' 'switch'
-     && lk != 1133830               // Integer '++' 'switch'
-     && lk != 1133831               // Real '++' 'switch'
-     && lk != 1133832               // Imaginary '++' 'switch'
-     && lk != 1134339               // Identifier '--' 'switch'
-     && lk != 1134340               // Character '--' 'switch'
-     && lk != 1134341               // String '--' 'switch'
-     && lk != 1134342               // Integer '--' 'switch'
-     && lk != 1134343               // Real '--' 'switch'
-     && lk != 1134344               // Imaginary '--' 'switch'
-     && lk != 1137074               // '[' ']' 'switch'
-     && lk != 1147911               // Real Imaginary 'test'
-     && lk != 1150211               // Identifier '++' 'test'
-     && lk != 1150212               // Character '++' 'test'
-     && lk != 1150213               // String '++' 'test'
-     && lk != 1150214               // Integer '++' 'test'
-     && lk != 1150215               // Real '++' 'test'
-     && lk != 1150216               // Imaginary '++' 'test'
-     && lk != 1150723               // Identifier '--' 'test'
-     && lk != 1150724               // Character '--' 'test'
-     && lk != 1150725               // String '--' 'test'
-     && lk != 1150726               // Integer '--' 'test'
-     && lk != 1150727               // Real '--' 'test'
-     && lk != 1150728               // Imaginary '--' 'test'
-     && lk != 1153458               // '[' ']' 'test'
-     && lk != 1164295               // Real Imaginary 'try'
-     && lk != 1166595               // Identifier '++' 'try'
-     && lk != 1166596               // Character '++' 'try'
-     && lk != 1166597               // String '++' 'try'
-     && lk != 1166598               // Integer '++' 'try'
-     && lk != 1166599               // Real '++' 'try'
-     && lk != 1166600               // Imaginary '++' 'try'
-     && lk != 1167107               // Identifier '--' 'try'
-     && lk != 1167108               // Character '--' 'try'
-     && lk != 1167109               // String '--' 'try'
-     && lk != 1167110               // Integer '--' 'try'
-     && lk != 1167111               // Real '--' 'try'
-     && lk != 1167112               // Imaginary '--' 'try'
-     && lk != 1169842               // '[' ']' 'try'
-     && lk != 1180679               // Real Imaginary 'while'
-     && lk != 1182979               // Identifier '++' 'while'
-     && lk != 1182980               // Character '++' 'while'
-     && lk != 1182981               // String '++' 'while'
-     && lk != 1182982               // Integer '++' 'while'
-     && lk != 1182983               // Real '++' 'while'
-     && lk != 1182984               // Imaginary '++' 'while'
-     && lk != 1183491               // Identifier '--' 'while'
-     && lk != 1183492               // Character '--' 'while'
-     && lk != 1183493               // String '--' 'while'
-     && lk != 1183494               // Integer '--' 'while'
-     && lk != 1183495               // Real '--' 'while'
-     && lk != 1183496               // Imaginary '--' 'while'
-     && lk != 1186226               // '[' ']' 'while'
-     && lk != 1197063               // Real Imaginary '{'
-     && lk != 1202610               // '[' ']' '{'
-     && lk != 1213447               // Real Imaginary '|'
-     && lk != 1215747               // Identifier '++' '|'
-     && lk != 1215748               // Character '++' '|'
-     && lk != 1215749               // String '++' '|'
-     && lk != 1215750               // Integer '++' '|'
-     && lk != 1215751               // Real '++' '|'
-     && lk != 1215752               // Imaginary '++' '|'
-     && lk != 1216259               // Identifier '--' '|'
-     && lk != 1216260               // Character '--' '|'
-     && lk != 1216261               // String '--' '|'
-     && lk != 1216262               // Integer '--' '|'
-     && lk != 1216263               // Real '--' '|'
-     && lk != 1216264               // Imaginary '--' '|'
-     && lk != 1218994               // '[' ']' '|'
-     && lk != 1229831               // Real Imaginary '|='
-     && lk != 1232131               // Identifier '++' '|='
-     && lk != 1232132               // Character '++' '|='
-     && lk != 1232133               // String '++' '|='
-     && lk != 1232134               // Integer '++' '|='
-     && lk != 1232135               // Real '++' '|='
-     && lk != 1232136               // Imaginary '++' '|='
-     && lk != 1232643               // Identifier '--' '|='
-     && lk != 1232644               // Character '--' '|='
-     && lk != 1232645               // String '--' '|='
-     && lk != 1232646               // Integer '--' '|='
-     && lk != 1232647               // Real '--' '|='
-     && lk != 1232648               // Imaginary '--' '|='
-     && lk != 1235378               // '[' ']' '|='
-     && lk != 1246215               // Real Imaginary '||'
-     && lk != 1248515               // Identifier '++' '||'
-     && lk != 1248516               // Character '++' '||'
-     && lk != 1248517               // String '++' '||'
-     && lk != 1248518               // Integer '++' '||'
-     && lk != 1248519               // Real '++' '||'
-     && lk != 1248520               // Imaginary '++' '||'
-     && lk != 1249027               // Identifier '--' '||'
-     && lk != 1249028               // Character '--' '||'
-     && lk != 1249029               // String '--' '||'
-     && lk != 1249030               // Integer '--' '||'
-     && lk != 1249031               // Real '--' '||'
-     && lk != 1249032               // Imaginary '--' '||'
-     && lk != 1251762               // '[' ']' '||'
-     && lk != 1262599               // Real Imaginary '}'
-     && lk != 1264899               // Identifier '++' '}'
-     && lk != 1264900               // Character '++' '}'
-     && lk != 1264901               // String '++' '}'
-     && lk != 1264902               // Integer '++' '}'
-     && lk != 1264903               // Real '++' '}'
-     && lk != 1264904               // Imaginary '++' '}'
-     && lk != 1265411               // Identifier '--' '}'
-     && lk != 1265412               // Character '--' '}'
-     && lk != 1265413               // String '--' '}'
-     && lk != 1265414               // Integer '--' '}'
-     && lk != 1265415               // Real '--' '}'
-     && lk != 1265416               // Imaginary '--' '}'
-     && lk != 1268146               // '[' ']' '}'
-     && lk != 1278983               // Real Imaginary '~'
-     && lk != 1281283               // Identifier '++' '~'
-     && lk != 1281284               // Character '++' '~'
-     && lk != 1281285               // String '++' '~'
-     && lk != 1281286               // Integer '++' '~'
-     && lk != 1281287               // Real '++' '~'
-     && lk != 1281288               // Imaginary '++' '~'
-     && lk != 1281795               // Identifier '--' '~'
-     && lk != 1281796               // Character '--' '~'
-     && lk != 1281797               // String '--' '~'
-     && lk != 1281798               // Integer '--' '~'
-     && lk != 1281799               // Real '--' '~'
-     && lk != 1281800               // Imaginary '--' '~'
-     && lk != 1284530)              // '[' ']' '~'
+     && lk != 1115143               // Real Imaginary 'include'
+     && lk != 1117443               // Identifier '++' 'include'
+     && lk != 1117444               // Character '++' 'include'
+     && lk != 1117445               // String '++' 'include'
+     && lk != 1117446               // Integer '++' 'include'
+     && lk != 1117447               // Real '++' 'include'
+     && lk != 1117448               // Imaginary '++' 'include'
+     && lk != 1117955               // Identifier '--' 'include'
+     && lk != 1117956               // Character '--' 'include'
+     && lk != 1117957               // String '--' 'include'
+     && lk != 1117958               // Integer '--' 'include'
+     && lk != 1117959               // Real '--' 'include'
+     && lk != 1117960               // Imaginary '--' 'include'
+     && lk != 1120690               // '[' ']' 'include'
+     && lk != 1131527               // Real Imaginary 'local'
+     && lk != 1133827               // Identifier '++' 'local'
+     && lk != 1133828               // Character '++' 'local'
+     && lk != 1133829               // String '++' 'local'
+     && lk != 1133830               // Integer '++' 'local'
+     && lk != 1133831               // Real '++' 'local'
+     && lk != 1133832               // Imaginary '++' 'local'
+     && lk != 1134339               // Identifier '--' 'local'
+     && lk != 1134340               // Character '--' 'local'
+     && lk != 1134341               // String '--' 'local'
+     && lk != 1134342               // Integer '--' 'local'
+     && lk != 1134343               // Real '--' 'local'
+     && lk != 1134344               // Imaginary '--' 'local'
+     && lk != 1137074               // '[' ']' 'local'
+     && lk != 1147911               // Real Imaginary 'return'
+     && lk != 1150211               // Identifier '++' 'return'
+     && lk != 1150212               // Character '++' 'return'
+     && lk != 1150213               // String '++' 'return'
+     && lk != 1150214               // Integer '++' 'return'
+     && lk != 1150215               // Real '++' 'return'
+     && lk != 1150216               // Imaginary '++' 'return'
+     && lk != 1150723               // Identifier '--' 'return'
+     && lk != 1150724               // Character '--' 'return'
+     && lk != 1150725               // String '--' 'return'
+     && lk != 1150726               // Integer '--' 'return'
+     && lk != 1150727               // Real '--' 'return'
+     && lk != 1150728               // Imaginary '--' 'return'
+     && lk != 1153458               // '[' ']' 'return'
+     && lk != 1164295               // Real Imaginary 'switch'
+     && lk != 1166595               // Identifier '++' 'switch'
+     && lk != 1166596               // Character '++' 'switch'
+     && lk != 1166597               // String '++' 'switch'
+     && lk != 1166598               // Integer '++' 'switch'
+     && lk != 1166599               // Real '++' 'switch'
+     && lk != 1166600               // Imaginary '++' 'switch'
+     && lk != 1167107               // Identifier '--' 'switch'
+     && lk != 1167108               // Character '--' 'switch'
+     && lk != 1167109               // String '--' 'switch'
+     && lk != 1167110               // Integer '--' 'switch'
+     && lk != 1167111               // Real '--' 'switch'
+     && lk != 1167112               // Imaginary '--' 'switch'
+     && lk != 1169842               // '[' ']' 'switch'
+     && lk != 1180679               // Real Imaginary 'test'
+     && lk != 1182979               // Identifier '++' 'test'
+     && lk != 1182980               // Character '++' 'test'
+     && lk != 1182981               // String '++' 'test'
+     && lk != 1182982               // Integer '++' 'test'
+     && lk != 1182983               // Real '++' 'test'
+     && lk != 1182984               // Imaginary '++' 'test'
+     && lk != 1183491               // Identifier '--' 'test'
+     && lk != 1183492               // Character '--' 'test'
+     && lk != 1183493               // String '--' 'test'
+     && lk != 1183494               // Integer '--' 'test'
+     && lk != 1183495               // Real '--' 'test'
+     && lk != 1183496               // Imaginary '--' 'test'
+     && lk != 1186226               // '[' ']' 'test'
+     && lk != 1197063               // Real Imaginary 'throw'
+     && lk != 1199363               // Identifier '++' 'throw'
+     && lk != 1199364               // Character '++' 'throw'
+     && lk != 1199365               // String '++' 'throw'
+     && lk != 1199366               // Integer '++' 'throw'
+     && lk != 1199367               // Real '++' 'throw'
+     && lk != 1199368               // Imaginary '++' 'throw'
+     && lk != 1199875               // Identifier '--' 'throw'
+     && lk != 1199876               // Character '--' 'throw'
+     && lk != 1199877               // String '--' 'throw'
+     && lk != 1199878               // Integer '--' 'throw'
+     && lk != 1199879               // Real '--' 'throw'
+     && lk != 1199880               // Imaginary '--' 'throw'
+     && lk != 1202610               // '[' ']' 'throw'
+     && lk != 1213447               // Real Imaginary 'try'
+     && lk != 1215747               // Identifier '++' 'try'
+     && lk != 1215748               // Character '++' 'try'
+     && lk != 1215749               // String '++' 'try'
+     && lk != 1215750               // Integer '++' 'try'
+     && lk != 1215751               // Real '++' 'try'
+     && lk != 1215752               // Imaginary '++' 'try'
+     && lk != 1216259               // Identifier '--' 'try'
+     && lk != 1216260               // Character '--' 'try'
+     && lk != 1216261               // String '--' 'try'
+     && lk != 1216262               // Integer '--' 'try'
+     && lk != 1216263               // Real '--' 'try'
+     && lk != 1216264               // Imaginary '--' 'try'
+     && lk != 1218994               // '[' ']' 'try'
+     && lk != 1229831               // Real Imaginary 'while'
+     && lk != 1232131               // Identifier '++' 'while'
+     && lk != 1232132               // Character '++' 'while'
+     && lk != 1232133               // String '++' 'while'
+     && lk != 1232134               // Integer '++' 'while'
+     && lk != 1232135               // Real '++' 'while'
+     && lk != 1232136               // Imaginary '++' 'while'
+     && lk != 1232643               // Identifier '--' 'while'
+     && lk != 1232644               // Character '--' 'while'
+     && lk != 1232645               // String '--' 'while'
+     && lk != 1232646               // Integer '--' 'while'
+     && lk != 1232647               // Real '--' 'while'
+     && lk != 1232648               // Imaginary '--' 'while'
+     && lk != 1235378               // '[' ']' 'while'
+     && lk != 1246215               // Real Imaginary '{'
+     && lk != 1251762               // '[' ']' '{'
+     && lk != 1262599               // Real Imaginary '|'
+     && lk != 1264899               // Identifier '++' '|'
+     && lk != 1264900               // Character '++' '|'
+     && lk != 1264901               // String '++' '|'
+     && lk != 1264902               // Integer '++' '|'
+     && lk != 1264903               // Real '++' '|'
+     && lk != 1264904               // Imaginary '++' '|'
+     && lk != 1265411               // Identifier '--' '|'
+     && lk != 1265412               // Character '--' '|'
+     && lk != 1265413               // String '--' '|'
+     && lk != 1265414               // Integer '--' '|'
+     && lk != 1265415               // Real '--' '|'
+     && lk != 1265416               // Imaginary '--' '|'
+     && lk != 1268146               // '[' ']' '|'
+     && lk != 1278983               // Real Imaginary '|='
+     && lk != 1281283               // Identifier '++' '|='
+     && lk != 1281284               // Character '++' '|='
+     && lk != 1281285               // String '++' '|='
+     && lk != 1281286               // Integer '++' '|='
+     && lk != 1281287               // Real '++' '|='
+     && lk != 1281288               // Imaginary '++' '|='
+     && lk != 1281795               // Identifier '--' '|='
+     && lk != 1281796               // Character '--' '|='
+     && lk != 1281797               // String '--' '|='
+     && lk != 1281798               // Integer '--' '|='
+     && lk != 1281799               // Real '--' '|='
+     && lk != 1281800               // Imaginary '--' '|='
+     && lk != 1284530               // '[' ']' '|='
+     && lk != 1295367               // Real Imaginary '||'
+     && lk != 1297667               // Identifier '++' '||'
+     && lk != 1297668               // Character '++' '||'
+     && lk != 1297669               // String '++' '||'
+     && lk != 1297670               // Integer '++' '||'
+     && lk != 1297671               // Real '++' '||'
+     && lk != 1297672               // Imaginary '++' '||'
+     && lk != 1298179               // Identifier '--' '||'
+     && lk != 1298180               // Character '--' '||'
+     && lk != 1298181               // String '--' '||'
+     && lk != 1298182               // Integer '--' '||'
+     && lk != 1298183               // Real '--' '||'
+     && lk != 1298184               // Imaginary '--' '||'
+     && lk != 1300914               // '[' ']' '||'
+     && lk != 1311751               // Real Imaginary '}'
+     && lk != 1314051               // Identifier '++' '}'
+     && lk != 1314052               // Character '++' '}'
+     && lk != 1314053               // String '++' '}'
+     && lk != 1314054               // Integer '++' '}'
+     && lk != 1314055               // Real '++' '}'
+     && lk != 1314056               // Imaginary '++' '}'
+     && lk != 1314563               // Identifier '--' '}'
+     && lk != 1314564               // Character '--' '}'
+     && lk != 1314565               // String '--' '}'
+     && lk != 1314566               // Integer '--' '}'
+     && lk != 1314567               // Real '--' '}'
+     && lk != 1314568               // Imaginary '--' '}'
+     && lk != 1317298               // '[' ']' '}'
+     && lk != 1328135               // Real Imaginary '~'
+     && lk != 1330435               // Identifier '++' '~'
+     && lk != 1330436               // Character '++' '~'
+     && lk != 1330437               // String '++' '~'
+     && lk != 1330438               // Integer '++' '~'
+     && lk != 1330439               // Real '++' '~'
+     && lk != 1330440               // Imaginary '++' '~'
+     && lk != 1330947               // Identifier '--' '~'
+     && lk != 1330948               // Character '--' '~'
+     && lk != 1330949               // String '--' '~'
+     && lk != 1330950               // Integer '--' '~'
+     && lk != 1330951               // Real '--' '~'
+     && lk != 1330952               // Imaginary '--' '~'
+     && lk != 1333682)              // '[' ']' '~'
     {
       lk = memoized(3, e0);
       if (lk == 0)
@@ -5659,66 +5881,84 @@ function MaiaScript(string, parsingEventHandler)
     case 1101062:                   // Integer '++' 'if'
     case 1101063:                   // Real '++' 'if'
     case 1101064:                   // Imaginary '++' 'if'
-    case 1117443:                   // Identifier '++' 'return'
-    case 1117444:                   // Character '++' 'return'
-    case 1117445:                   // String '++' 'return'
-    case 1117446:                   // Integer '++' 'return'
-    case 1117447:                   // Real '++' 'return'
-    case 1117448:                   // Imaginary '++' 'return'
-    case 1133827:                   // Identifier '++' 'switch'
-    case 1133828:                   // Character '++' 'switch'
-    case 1133829:                   // String '++' 'switch'
-    case 1133830:                   // Integer '++' 'switch'
-    case 1133831:                   // Real '++' 'switch'
-    case 1133832:                   // Imaginary '++' 'switch'
-    case 1150211:                   // Identifier '++' 'test'
-    case 1150212:                   // Character '++' 'test'
-    case 1150213:                   // String '++' 'test'
-    case 1150214:                   // Integer '++' 'test'
-    case 1150215:                   // Real '++' 'test'
-    case 1150216:                   // Imaginary '++' 'test'
-    case 1166595:                   // Identifier '++' 'try'
-    case 1166596:                   // Character '++' 'try'
-    case 1166597:                   // String '++' 'try'
-    case 1166598:                   // Integer '++' 'try'
-    case 1166599:                   // Real '++' 'try'
-    case 1166600:                   // Imaginary '++' 'try'
-    case 1182979:                   // Identifier '++' 'while'
-    case 1182980:                   // Character '++' 'while'
-    case 1182981:                   // String '++' 'while'
-    case 1182982:                   // Integer '++' 'while'
-    case 1182983:                   // Real '++' 'while'
-    case 1182984:                   // Imaginary '++' 'while'
-    case 1215747:                   // Identifier '++' '|'
-    case 1215748:                   // Character '++' '|'
-    case 1215749:                   // String '++' '|'
-    case 1215750:                   // Integer '++' '|'
-    case 1215751:                   // Real '++' '|'
-    case 1215752:                   // Imaginary '++' '|'
-    case 1232131:                   // Identifier '++' '|='
-    case 1232132:                   // Character '++' '|='
-    case 1232133:                   // String '++' '|='
-    case 1232134:                   // Integer '++' '|='
-    case 1232135:                   // Real '++' '|='
-    case 1232136:                   // Imaginary '++' '|='
-    case 1248515:                   // Identifier '++' '||'
-    case 1248516:                   // Character '++' '||'
-    case 1248517:                   // String '++' '||'
-    case 1248518:                   // Integer '++' '||'
-    case 1248519:                   // Real '++' '||'
-    case 1248520:                   // Imaginary '++' '||'
-    case 1264899:                   // Identifier '++' '}'
-    case 1264900:                   // Character '++' '}'
-    case 1264901:                   // String '++' '}'
-    case 1264902:                   // Integer '++' '}'
-    case 1264903:                   // Real '++' '}'
-    case 1264904:                   // Imaginary '++' '}'
-    case 1281283:                   // Identifier '++' '~'
-    case 1281284:                   // Character '++' '~'
-    case 1281285:                   // String '++' '~'
-    case 1281286:                   // Integer '++' '~'
-    case 1281287:                   // Real '++' '~'
-    case 1281288:                   // Imaginary '++' '~'
+    case 1117443:                   // Identifier '++' 'include'
+    case 1117444:                   // Character '++' 'include'
+    case 1117445:                   // String '++' 'include'
+    case 1117446:                   // Integer '++' 'include'
+    case 1117447:                   // Real '++' 'include'
+    case 1117448:                   // Imaginary '++' 'include'
+    case 1133827:                   // Identifier '++' 'local'
+    case 1133828:                   // Character '++' 'local'
+    case 1133829:                   // String '++' 'local'
+    case 1133830:                   // Integer '++' 'local'
+    case 1133831:                   // Real '++' 'local'
+    case 1133832:                   // Imaginary '++' 'local'
+    case 1150211:                   // Identifier '++' 'return'
+    case 1150212:                   // Character '++' 'return'
+    case 1150213:                   // String '++' 'return'
+    case 1150214:                   // Integer '++' 'return'
+    case 1150215:                   // Real '++' 'return'
+    case 1150216:                   // Imaginary '++' 'return'
+    case 1166595:                   // Identifier '++' 'switch'
+    case 1166596:                   // Character '++' 'switch'
+    case 1166597:                   // String '++' 'switch'
+    case 1166598:                   // Integer '++' 'switch'
+    case 1166599:                   // Real '++' 'switch'
+    case 1166600:                   // Imaginary '++' 'switch'
+    case 1182979:                   // Identifier '++' 'test'
+    case 1182980:                   // Character '++' 'test'
+    case 1182981:                   // String '++' 'test'
+    case 1182982:                   // Integer '++' 'test'
+    case 1182983:                   // Real '++' 'test'
+    case 1182984:                   // Imaginary '++' 'test'
+    case 1199363:                   // Identifier '++' 'throw'
+    case 1199364:                   // Character '++' 'throw'
+    case 1199365:                   // String '++' 'throw'
+    case 1199366:                   // Integer '++' 'throw'
+    case 1199367:                   // Real '++' 'throw'
+    case 1199368:                   // Imaginary '++' 'throw'
+    case 1215747:                   // Identifier '++' 'try'
+    case 1215748:                   // Character '++' 'try'
+    case 1215749:                   // String '++' 'try'
+    case 1215750:                   // Integer '++' 'try'
+    case 1215751:                   // Real '++' 'try'
+    case 1215752:                   // Imaginary '++' 'try'
+    case 1232131:                   // Identifier '++' 'while'
+    case 1232132:                   // Character '++' 'while'
+    case 1232133:                   // String '++' 'while'
+    case 1232134:                   // Integer '++' 'while'
+    case 1232135:                   // Real '++' 'while'
+    case 1232136:                   // Imaginary '++' 'while'
+    case 1264899:                   // Identifier '++' '|'
+    case 1264900:                   // Character '++' '|'
+    case 1264901:                   // String '++' '|'
+    case 1264902:                   // Integer '++' '|'
+    case 1264903:                   // Real '++' '|'
+    case 1264904:                   // Imaginary '++' '|'
+    case 1281283:                   // Identifier '++' '|='
+    case 1281284:                   // Character '++' '|='
+    case 1281285:                   // String '++' '|='
+    case 1281286:                   // Integer '++' '|='
+    case 1281287:                   // Real '++' '|='
+    case 1281288:                   // Imaginary '++' '|='
+    case 1297667:                   // Identifier '++' '||'
+    case 1297668:                   // Character '++' '||'
+    case 1297669:                   // String '++' '||'
+    case 1297670:                   // Integer '++' '||'
+    case 1297671:                   // Real '++' '||'
+    case 1297672:                   // Imaginary '++' '||'
+    case 1314051:                   // Identifier '++' '}'
+    case 1314052:                   // Character '++' '}'
+    case 1314053:                   // String '++' '}'
+    case 1314054:                   // Integer '++' '}'
+    case 1314055:                   // Real '++' '}'
+    case 1314056:                   // Imaginary '++' '}'
+    case 1330435:                   // Identifier '++' '~'
+    case 1330436:                   // Character '++' '~'
+    case 1330437:                   // String '++' '~'
+    case 1330438:                   // Integer '++' '~'
+    case 1330439:                   // Real '++' '~'
+    case 1330440:                   // Imaginary '++' '~'
       parse_Primary();
       lookahead1W(6);               // WhiteSpace^token | '++'
       consume(26);                  // '++'
@@ -6048,66 +6288,84 @@ function MaiaScript(string, parsingEventHandler)
     case 1101574:                   // Integer '--' 'if'
     case 1101575:                   // Real '--' 'if'
     case 1101576:                   // Imaginary '--' 'if'
-    case 1117955:                   // Identifier '--' 'return'
-    case 1117956:                   // Character '--' 'return'
-    case 1117957:                   // String '--' 'return'
-    case 1117958:                   // Integer '--' 'return'
-    case 1117959:                   // Real '--' 'return'
-    case 1117960:                   // Imaginary '--' 'return'
-    case 1134339:                   // Identifier '--' 'switch'
-    case 1134340:                   // Character '--' 'switch'
-    case 1134341:                   // String '--' 'switch'
-    case 1134342:                   // Integer '--' 'switch'
-    case 1134343:                   // Real '--' 'switch'
-    case 1134344:                   // Imaginary '--' 'switch'
-    case 1150723:                   // Identifier '--' 'test'
-    case 1150724:                   // Character '--' 'test'
-    case 1150725:                   // String '--' 'test'
-    case 1150726:                   // Integer '--' 'test'
-    case 1150727:                   // Real '--' 'test'
-    case 1150728:                   // Imaginary '--' 'test'
-    case 1167107:                   // Identifier '--' 'try'
-    case 1167108:                   // Character '--' 'try'
-    case 1167109:                   // String '--' 'try'
-    case 1167110:                   // Integer '--' 'try'
-    case 1167111:                   // Real '--' 'try'
-    case 1167112:                   // Imaginary '--' 'try'
-    case 1183491:                   // Identifier '--' 'while'
-    case 1183492:                   // Character '--' 'while'
-    case 1183493:                   // String '--' 'while'
-    case 1183494:                   // Integer '--' 'while'
-    case 1183495:                   // Real '--' 'while'
-    case 1183496:                   // Imaginary '--' 'while'
-    case 1216259:                   // Identifier '--' '|'
-    case 1216260:                   // Character '--' '|'
-    case 1216261:                   // String '--' '|'
-    case 1216262:                   // Integer '--' '|'
-    case 1216263:                   // Real '--' '|'
-    case 1216264:                   // Imaginary '--' '|'
-    case 1232643:                   // Identifier '--' '|='
-    case 1232644:                   // Character '--' '|='
-    case 1232645:                   // String '--' '|='
-    case 1232646:                   // Integer '--' '|='
-    case 1232647:                   // Real '--' '|='
-    case 1232648:                   // Imaginary '--' '|='
-    case 1249027:                   // Identifier '--' '||'
-    case 1249028:                   // Character '--' '||'
-    case 1249029:                   // String '--' '||'
-    case 1249030:                   // Integer '--' '||'
-    case 1249031:                   // Real '--' '||'
-    case 1249032:                   // Imaginary '--' '||'
-    case 1265411:                   // Identifier '--' '}'
-    case 1265412:                   // Character '--' '}'
-    case 1265413:                   // String '--' '}'
-    case 1265414:                   // Integer '--' '}'
-    case 1265415:                   // Real '--' '}'
-    case 1265416:                   // Imaginary '--' '}'
-    case 1281795:                   // Identifier '--' '~'
-    case 1281796:                   // Character '--' '~'
-    case 1281797:                   // String '--' '~'
-    case 1281798:                   // Integer '--' '~'
-    case 1281799:                   // Real '--' '~'
-    case 1281800:                   // Imaginary '--' '~'
+    case 1117955:                   // Identifier '--' 'include'
+    case 1117956:                   // Character '--' 'include'
+    case 1117957:                   // String '--' 'include'
+    case 1117958:                   // Integer '--' 'include'
+    case 1117959:                   // Real '--' 'include'
+    case 1117960:                   // Imaginary '--' 'include'
+    case 1134339:                   // Identifier '--' 'local'
+    case 1134340:                   // Character '--' 'local'
+    case 1134341:                   // String '--' 'local'
+    case 1134342:                   // Integer '--' 'local'
+    case 1134343:                   // Real '--' 'local'
+    case 1134344:                   // Imaginary '--' 'local'
+    case 1150723:                   // Identifier '--' 'return'
+    case 1150724:                   // Character '--' 'return'
+    case 1150725:                   // String '--' 'return'
+    case 1150726:                   // Integer '--' 'return'
+    case 1150727:                   // Real '--' 'return'
+    case 1150728:                   // Imaginary '--' 'return'
+    case 1167107:                   // Identifier '--' 'switch'
+    case 1167108:                   // Character '--' 'switch'
+    case 1167109:                   // String '--' 'switch'
+    case 1167110:                   // Integer '--' 'switch'
+    case 1167111:                   // Real '--' 'switch'
+    case 1167112:                   // Imaginary '--' 'switch'
+    case 1183491:                   // Identifier '--' 'test'
+    case 1183492:                   // Character '--' 'test'
+    case 1183493:                   // String '--' 'test'
+    case 1183494:                   // Integer '--' 'test'
+    case 1183495:                   // Real '--' 'test'
+    case 1183496:                   // Imaginary '--' 'test'
+    case 1199875:                   // Identifier '--' 'throw'
+    case 1199876:                   // Character '--' 'throw'
+    case 1199877:                   // String '--' 'throw'
+    case 1199878:                   // Integer '--' 'throw'
+    case 1199879:                   // Real '--' 'throw'
+    case 1199880:                   // Imaginary '--' 'throw'
+    case 1216259:                   // Identifier '--' 'try'
+    case 1216260:                   // Character '--' 'try'
+    case 1216261:                   // String '--' 'try'
+    case 1216262:                   // Integer '--' 'try'
+    case 1216263:                   // Real '--' 'try'
+    case 1216264:                   // Imaginary '--' 'try'
+    case 1232643:                   // Identifier '--' 'while'
+    case 1232644:                   // Character '--' 'while'
+    case 1232645:                   // String '--' 'while'
+    case 1232646:                   // Integer '--' 'while'
+    case 1232647:                   // Real '--' 'while'
+    case 1232648:                   // Imaginary '--' 'while'
+    case 1265411:                   // Identifier '--' '|'
+    case 1265412:                   // Character '--' '|'
+    case 1265413:                   // String '--' '|'
+    case 1265414:                   // Integer '--' '|'
+    case 1265415:                   // Real '--' '|'
+    case 1265416:                   // Imaginary '--' '|'
+    case 1281795:                   // Identifier '--' '|='
+    case 1281796:                   // Character '--' '|='
+    case 1281797:                   // String '--' '|='
+    case 1281798:                   // Integer '--' '|='
+    case 1281799:                   // Real '--' '|='
+    case 1281800:                   // Imaginary '--' '|='
+    case 1298179:                   // Identifier '--' '||'
+    case 1298180:                   // Character '--' '||'
+    case 1298181:                   // String '--' '||'
+    case 1298182:                   // Integer '--' '||'
+    case 1298183:                   // Real '--' '||'
+    case 1298184:                   // Imaginary '--' '||'
+    case 1314563:                   // Identifier '--' '}'
+    case 1314564:                   // Character '--' '}'
+    case 1314565:                   // String '--' '}'
+    case 1314566:                   // Integer '--' '}'
+    case 1314567:                   // Real '--' '}'
+    case 1314568:                   // Imaginary '--' '}'
+    case 1330947:                   // Identifier '--' '~'
+    case 1330948:                   // Character '--' '~'
+    case 1330949:                   // String '--' '~'
+    case 1330950:                   // Integer '--' '~'
+    case 1330951:                   // Real '--' '~'
+    case 1330952:                   // Imaginary '--' '~'
       parse_Primary();
       lookahead1W(7);               // WhiteSpace^token | '--'
       consume(30);                  // '--'
@@ -6140,8 +6398,8 @@ function MaiaScript(string, parsingEventHandler)
       whitespace();
       parse_Primary();
       break;
-    case 78:                        // '~'
-      consume(78);                  // '~'
+    case 81:                        // '~'
+      consume(81);                  // '~'
       lookahead1W(22);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
       whitespace();
@@ -6171,15 +6429,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -6188,7 +6447,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 3331:                    // Identifier '++'
       case 3843:                    // Identifier '--'
@@ -6198,8 +6458,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -6210,8 +6470,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 1031:                    // Real Imaginary
@@ -6223,8 +6483,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -6232,7 +6492,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 404:                     // '(' Identifier
@@ -6242,7 +6503,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // '[' | '^' | '^=' | '{' | '|' | '|=' | '||'
         break;
       case 916:                     // '(' Real
-        lookahead3W(34);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' |
+        lookahead3W(33);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' |
                                     // '^' | '^=' | '|' | '|=' | '||'
@@ -6251,19 +6512,21 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9364:                    // '(' '{'
+      case 9748:                    // '(' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 532:                     // '(' Character
       case 660:                     // '(' String
       case 788:                     // '(' Integer
       case 1044:                    // '(' Imaginary
-        lookahead3W(33);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '**' |
+        lookahead3W(29);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | '-' | '--' | '-=' | '/' | '/=' | ':=' | '<' | '<<' |
                                     // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' | '^=' |
                                     // '|' | '|=' | '||'
@@ -6274,36 +6537,40 @@ function MaiaScript(string, parsingEventHandler)
       case 7316:                    // '(' 'continue'
         lookahead3W(5);             // WhiteSpace^token | ')'
         break;
-      case 2580:                    // '(' '('
-      case 7572:                    // '(' 'do'
-      case 8724:                    // '(' 'return'
-      case 9108:                    // '(' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
-        break;
       case 7828:                    // '(' 'f32'
       case 7956:                    // '(' 'f64'
       case 8340:                    // '(' 'i32'
       case 8468:                    // '(' 'i64'
         lookahead3W(0);             // Identifier | WhiteSpace^token
         break;
+      case 2580:                    // '(' '('
+      case 7572:                    // '(' 'do'
+      case 8852:                    // '(' 'local'
+      case 8980:                    // '(' 'return'
+      case 9492:                    // '(' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+        break;
       case 1556:                    // '(' '!'
       case 3220:                    // '(' '+'
       case 3348:                    // '(' '++'
       case 3732:                    // '(' '-'
       case 3860:                    // '(' '--'
-      case 10004:                   // '(' '~'
+      case 10388:                   // '(' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8084:                    // '(' 'for'
       case 8212:                    // '(' 'foreach'
       case 8596:                    // '(' 'if'
-      case 8852:                    // '(' 'switch'
-      case 8980:                    // '(' 'test'
-      case 9236:                    // '(' 'while'
+      case 8724:                    // '(' 'include'
+      case 9108:                    // '(' 'switch'
+      case 9236:                    // '(' 'test'
+      case 9364:                    // '(' 'throw'
+      case 9620:                    // '(' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -6312,11 +6579,12 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(27);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 434:                     // '[' Identifier
-        lookahead3W(44);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(43);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -6328,16 +6596,18 @@ function MaiaScript(string, parsingEventHandler)
                                     // '?=' | ']' | '^' | '^=' | '|' | '|=' | '||'
         break;
       case 4786:                    // '[' ';'
-        lookahead3W(30);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 6450:                    // '[' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 6578:                    // '[' ']'
         lookahead3W(48);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
@@ -6346,14 +6616,15 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
-      case 9394:                    // '[' '{'
+      case 9778:                    // '[' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 1202:                    // '[' Comment
       case 6962:                    // '[' 'break'
@@ -6369,121 +6640,132 @@ function MaiaScript(string, parsingEventHandler)
                                     // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | ']' |
                                     // '^' | '^=' | '|' | '|=' | '||'
         break;
-      case 2610:                    // '[' '('
-      case 7602:                    // '[' 'do'
-      case 8754:                    // '[' 'return'
-      case 9138:                    // '[' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
-        break;
       case 7858:                    // '[' 'f32'
       case 7986:                    // '[' 'f64'
       case 8370:                    // '[' 'i32'
       case 8498:                    // '[' 'i64'
         lookahead3W(0);             // Identifier | WhiteSpace^token
         break;
+      case 2610:                    // '[' '('
+      case 7602:                    // '[' 'do'
+      case 8882:                    // '[' 'local'
+      case 9010:                    // '[' 'return'
+      case 9522:                    // '[' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+        break;
       case 1586:                    // '[' '!'
       case 3250:                    // '[' '+'
       case 3378:                    // '[' '++'
       case 3762:                    // '[' '-'
       case 3890:                    // '[' '--'
-      case 10034:                   // '[' '~'
+      case 10418:                   // '[' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8114:                    // '[' 'for'
       case 8242:                    // '[' 'foreach'
       case 8626:                    // '[' 'if'
-      case 8882:                    // '[' 'switch'
-      case 9010:                    // '[' 'test'
-      case 9266:                    // '[' 'while'
+      case 8754:                    // '[' 'include'
+      case 9138:                    // '[' 'switch'
+      case 9266:                    // '[' 'test'
+      case 9394:                    // '[' 'throw'
+      case 9650:                    // '[' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
-      case 457:                     // '{' Identifier
-        lookahead3W(43);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      case 460:                     // '{' Identifier
+        lookahead3W(42);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
         break;
-      case 713:                     // '{' String
+      case 716:                     // '{' String
         lookahead3W(37);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
                                     // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' | ':=' | '<' |
                                     // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' |
                                     // '^=' | '|' | '|=' | '||' | '}'
         break;
-      case 969:                     // '{' Real
+      case 972:                     // '{' Real
         lookahead3W(36);            // Imaginary | WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' |
                                     // '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
-      case 6473:                    // '{' '['
+      case 6476:                    // '{' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9417:                    // '{' '{'
+      case 9804:                    // '{' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
-      case 585:                     // '{' Character
-      case 841:                     // '{' Integer
-      case 1097:                    // '{' Imaginary
-        lookahead3W(35);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
+      case 588:                     // '{' Character
+      case 844:                     // '{' Integer
+      case 1100:                    // '{' Imaginary
+        lookahead3W(34);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '*' | '**' | '*=' |
                                     // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' | '<' | '<<' |
                                     // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '?=' | '^' | '^=' |
                                     // '|' | '|=' | '||' | '}'
         break;
-      case 1225:                    // '{' Comment
-      case 4809:                    // '{' ';'
-      case 6985:                    // '{' 'break'
-      case 7369:                    // '{' 'continue'
+      case 1228:                    // '{' Comment
+      case 4812:                    // '{' ';'
+      case 6988:                    // '{' 'break'
+      case 7372:                    // '{' 'continue'
         lookahead3W(19);            // WhiteSpace^token | ',' | '}'
         break;
-      case 2633:                    // '{' '('
-      case 7625:                    // '{' 'do'
-      case 8777:                    // '{' 'return'
-      case 9161:                    // '{' 'try'
+      case 7884:                    // '{' 'f32'
+      case 8012:                    // '{' 'f64'
+      case 8396:                    // '{' 'i32'
+      case 8524:                    // '{' 'i64'
+        lookahead3W(0);             // Identifier | WhiteSpace^token
+        break;
+      case 2636:                    // '{' '('
+      case 7628:                    // '{' 'do'
+      case 8908:                    // '{' 'local'
+      case 9036:                    // '{' 'return'
+      case 9548:                    // '{' 'try'
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
-      case 7881:                    // '{' 'f32'
-      case 8009:                    // '{' 'f64'
-      case 8393:                    // '{' 'i32'
-      case 8521:                    // '{' 'i64'
-        lookahead3W(0);             // Identifier | WhiteSpace^token
-        break;
-      case 1609:                    // '{' '!'
-      case 3273:                    // '{' '+'
-      case 3401:                    // '{' '++'
-      case 3785:                    // '{' '-'
-      case 3913:                    // '{' '--'
-      case 10057:                   // '{' '~'
+      case 1612:                    // '{' '!'
+      case 3276:                    // '{' '+'
+      case 3404:                    // '{' '++'
+      case 3788:                    // '{' '-'
+      case 3916:                    // '{' '--'
+      case 10444:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
-      case 8137:                    // '{' 'for'
-      case 8265:                    // '{' 'foreach'
-      case 8649:                    // '{' 'if'
-      case 8905:                    // '{' 'switch'
-      case 9033:                    // '{' 'test'
-      case 9289:                    // '{' 'while'
+      case 8140:                    // '{' 'for'
+      case 8268:                    // '{' 'foreach'
+      case 8652:                    // '{' 'if'
+      case 8780:                    // '{' 'include'
+      case 9164:                    // '{' 'switch'
+      case 9292:                    // '{' 'test'
+      case 9420:                    // '{' 'throw'
+      case 9676:                    // '{' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -6498,8 +6780,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 3332:                    // Character '++'
@@ -6516,8 +6798,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -6529,7 +6811,7 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 26                    // '++'
      && lk != 29                    // '-'
      && lk != 30                    // '--'
-     && lk != 78                    // '~'
+     && lk != 81                    // '~'
      && lk != 131                   // Identifier END
      && lk != 132                   // Character END
      && lk != 133                   // String END
@@ -6887,72 +7169,90 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8582                  // Integer 'if'
      && lk != 8583                  // Real 'if'
      && lk != 8584                  // Imaginary 'if'
-     && lk != 8707                  // Identifier 'return'
-     && lk != 8708                  // Character 'return'
-     && lk != 8709                  // String 'return'
-     && lk != 8710                  // Integer 'return'
-     && lk != 8711                  // Real 'return'
-     && lk != 8712                  // Imaginary 'return'
-     && lk != 8835                  // Identifier 'switch'
-     && lk != 8836                  // Character 'switch'
-     && lk != 8837                  // String 'switch'
-     && lk != 8838                  // Integer 'switch'
-     && lk != 8839                  // Real 'switch'
-     && lk != 8840                  // Imaginary 'switch'
-     && lk != 8963                  // Identifier 'test'
-     && lk != 8964                  // Character 'test'
-     && lk != 8965                  // String 'test'
-     && lk != 8966                  // Integer 'test'
-     && lk != 8967                  // Real 'test'
-     && lk != 8968                  // Imaginary 'test'
-     && lk != 9091                  // Identifier 'try'
-     && lk != 9092                  // Character 'try'
-     && lk != 9093                  // String 'try'
-     && lk != 9094                  // Integer 'try'
-     && lk != 9095                  // Real 'try'
-     && lk != 9096                  // Imaginary 'try'
-     && lk != 9219                  // Identifier 'while'
-     && lk != 9220                  // Character 'while'
-     && lk != 9221                  // String 'while'
-     && lk != 9222                  // Integer 'while'
-     && lk != 9223                  // Real 'while'
-     && lk != 9224                  // Imaginary 'while'
-     && lk != 9347                  // Identifier '{'
-     && lk != 9348                  // Character '{'
-     && lk != 9349                  // String '{'
-     && lk != 9350                  // Integer '{'
-     && lk != 9351                  // Real '{'
-     && lk != 9352                  // Imaginary '{'
-     && lk != 9475                  // Identifier '|'
-     && lk != 9476                  // Character '|'
-     && lk != 9477                  // String '|'
-     && lk != 9478                  // Integer '|'
-     && lk != 9479                  // Real '|'
-     && lk != 9480                  // Imaginary '|'
-     && lk != 9603                  // Identifier '|='
-     && lk != 9604                  // Character '|='
-     && lk != 9605                  // String '|='
-     && lk != 9606                  // Integer '|='
-     && lk != 9607                  // Real '|='
-     && lk != 9608                  // Imaginary '|='
-     && lk != 9731                  // Identifier '||'
-     && lk != 9732                  // Character '||'
-     && lk != 9733                  // String '||'
-     && lk != 9734                  // Integer '||'
-     && lk != 9735                  // Real '||'
-     && lk != 9736                  // Imaginary '||'
-     && lk != 9859                  // Identifier '}'
-     && lk != 9860                  // Character '}'
-     && lk != 9861                  // String '}'
-     && lk != 9862                  // Integer '}'
-     && lk != 9863                  // Real '}'
-     && lk != 9864                  // Imaginary '}'
-     && lk != 9987                  // Identifier '~'
-     && lk != 9988                  // Character '~'
-     && lk != 9989                  // String '~'
-     && lk != 9990                  // Integer '~'
-     && lk != 9991                  // Real '~'
-     && lk != 9992                  // Imaginary '~'
+     && lk != 8707                  // Identifier 'include'
+     && lk != 8708                  // Character 'include'
+     && lk != 8709                  // String 'include'
+     && lk != 8710                  // Integer 'include'
+     && lk != 8711                  // Real 'include'
+     && lk != 8712                  // Imaginary 'include'
+     && lk != 8835                  // Identifier 'local'
+     && lk != 8836                  // Character 'local'
+     && lk != 8837                  // String 'local'
+     && lk != 8838                  // Integer 'local'
+     && lk != 8839                  // Real 'local'
+     && lk != 8840                  // Imaginary 'local'
+     && lk != 8963                  // Identifier 'return'
+     && lk != 8964                  // Character 'return'
+     && lk != 8965                  // String 'return'
+     && lk != 8966                  // Integer 'return'
+     && lk != 8967                  // Real 'return'
+     && lk != 8968                  // Imaginary 'return'
+     && lk != 9091                  // Identifier 'switch'
+     && lk != 9092                  // Character 'switch'
+     && lk != 9093                  // String 'switch'
+     && lk != 9094                  // Integer 'switch'
+     && lk != 9095                  // Real 'switch'
+     && lk != 9096                  // Imaginary 'switch'
+     && lk != 9219                  // Identifier 'test'
+     && lk != 9220                  // Character 'test'
+     && lk != 9221                  // String 'test'
+     && lk != 9222                  // Integer 'test'
+     && lk != 9223                  // Real 'test'
+     && lk != 9224                  // Imaginary 'test'
+     && lk != 9347                  // Identifier 'throw'
+     && lk != 9348                  // Character 'throw'
+     && lk != 9349                  // String 'throw'
+     && lk != 9350                  // Integer 'throw'
+     && lk != 9351                  // Real 'throw'
+     && lk != 9352                  // Imaginary 'throw'
+     && lk != 9475                  // Identifier 'try'
+     && lk != 9476                  // Character 'try'
+     && lk != 9477                  // String 'try'
+     && lk != 9478                  // Integer 'try'
+     && lk != 9479                  // Real 'try'
+     && lk != 9480                  // Imaginary 'try'
+     && lk != 9603                  // Identifier 'while'
+     && lk != 9604                  // Character 'while'
+     && lk != 9605                  // String 'while'
+     && lk != 9606                  // Integer 'while'
+     && lk != 9607                  // Real 'while'
+     && lk != 9608                  // Imaginary 'while'
+     && lk != 9731                  // Identifier '{'
+     && lk != 9732                  // Character '{'
+     && lk != 9733                  // String '{'
+     && lk != 9734                  // Integer '{'
+     && lk != 9735                  // Real '{'
+     && lk != 9736                  // Imaginary '{'
+     && lk != 9859                  // Identifier '|'
+     && lk != 9860                  // Character '|'
+     && lk != 9861                  // String '|'
+     && lk != 9862                  // Integer '|'
+     && lk != 9863                  // Real '|'
+     && lk != 9864                  // Imaginary '|'
+     && lk != 9987                  // Identifier '|='
+     && lk != 9988                  // Character '|='
+     && lk != 9989                  // String '|='
+     && lk != 9990                  // Integer '|='
+     && lk != 9991                  // Real '|='
+     && lk != 9992                  // Imaginary '|='
+     && lk != 10115                 // Identifier '||'
+     && lk != 10116                 // Character '||'
+     && lk != 10117                 // String '||'
+     && lk != 10118                 // Integer '||'
+     && lk != 10119                 // Real '||'
+     && lk != 10120                 // Imaginary '||'
+     && lk != 10243                 // Identifier '}'
+     && lk != 10244                 // Character '}'
+     && lk != 10245                 // String '}'
+     && lk != 10246                 // Integer '}'
+     && lk != 10247                 // Real '}'
+     && lk != 10248                 // Imaginary '}'
+     && lk != 10371                 // Identifier '~'
+     && lk != 10372                 // Character '~'
+     && lk != 10373                 // String '~'
+     && lk != 10374                 // Integer '~'
+     && lk != 10375                 // Real '~'
+     && lk != 10376                 // Imaginary '~'
      && lk != 17415                 // Real Imaginary END
      && lk != 19715                 // Identifier '++' END
      && lk != 19716                 // Character '++' END
@@ -7721,148 +8021,190 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1101575               // Real '--' 'if'
      && lk != 1101576               // Imaginary '--' 'if'
      && lk != 1104306               // '[' ']' 'if'
-     && lk != 1115143               // Real Imaginary 'return'
-     && lk != 1117443               // Identifier '++' 'return'
-     && lk != 1117444               // Character '++' 'return'
-     && lk != 1117445               // String '++' 'return'
-     && lk != 1117446               // Integer '++' 'return'
-     && lk != 1117447               // Real '++' 'return'
-     && lk != 1117448               // Imaginary '++' 'return'
-     && lk != 1117955               // Identifier '--' 'return'
-     && lk != 1117956               // Character '--' 'return'
-     && lk != 1117957               // String '--' 'return'
-     && lk != 1117958               // Integer '--' 'return'
-     && lk != 1117959               // Real '--' 'return'
-     && lk != 1117960               // Imaginary '--' 'return'
-     && lk != 1120690               // '[' ']' 'return'
-     && lk != 1131527               // Real Imaginary 'switch'
-     && lk != 1133827               // Identifier '++' 'switch'
-     && lk != 1133828               // Character '++' 'switch'
-     && lk != 1133829               // String '++' 'switch'
-     && lk != 1133830               // Integer '++' 'switch'
-     && lk != 1133831               // Real '++' 'switch'
-     && lk != 1133832               // Imaginary '++' 'switch'
-     && lk != 1134339               // Identifier '--' 'switch'
-     && lk != 1134340               // Character '--' 'switch'
-     && lk != 1134341               // String '--' 'switch'
-     && lk != 1134342               // Integer '--' 'switch'
-     && lk != 1134343               // Real '--' 'switch'
-     && lk != 1134344               // Imaginary '--' 'switch'
-     && lk != 1137074               // '[' ']' 'switch'
-     && lk != 1147911               // Real Imaginary 'test'
-     && lk != 1150211               // Identifier '++' 'test'
-     && lk != 1150212               // Character '++' 'test'
-     && lk != 1150213               // String '++' 'test'
-     && lk != 1150214               // Integer '++' 'test'
-     && lk != 1150215               // Real '++' 'test'
-     && lk != 1150216               // Imaginary '++' 'test'
-     && lk != 1150723               // Identifier '--' 'test'
-     && lk != 1150724               // Character '--' 'test'
-     && lk != 1150725               // String '--' 'test'
-     && lk != 1150726               // Integer '--' 'test'
-     && lk != 1150727               // Real '--' 'test'
-     && lk != 1150728               // Imaginary '--' 'test'
-     && lk != 1153458               // '[' ']' 'test'
-     && lk != 1164295               // Real Imaginary 'try'
-     && lk != 1166595               // Identifier '++' 'try'
-     && lk != 1166596               // Character '++' 'try'
-     && lk != 1166597               // String '++' 'try'
-     && lk != 1166598               // Integer '++' 'try'
-     && lk != 1166599               // Real '++' 'try'
-     && lk != 1166600               // Imaginary '++' 'try'
-     && lk != 1167107               // Identifier '--' 'try'
-     && lk != 1167108               // Character '--' 'try'
-     && lk != 1167109               // String '--' 'try'
-     && lk != 1167110               // Integer '--' 'try'
-     && lk != 1167111               // Real '--' 'try'
-     && lk != 1167112               // Imaginary '--' 'try'
-     && lk != 1169842               // '[' ']' 'try'
-     && lk != 1180679               // Real Imaginary 'while'
-     && lk != 1182979               // Identifier '++' 'while'
-     && lk != 1182980               // Character '++' 'while'
-     && lk != 1182981               // String '++' 'while'
-     && lk != 1182982               // Integer '++' 'while'
-     && lk != 1182983               // Real '++' 'while'
-     && lk != 1182984               // Imaginary '++' 'while'
-     && lk != 1183491               // Identifier '--' 'while'
-     && lk != 1183492               // Character '--' 'while'
-     && lk != 1183493               // String '--' 'while'
-     && lk != 1183494               // Integer '--' 'while'
-     && lk != 1183495               // Real '--' 'while'
-     && lk != 1183496               // Imaginary '--' 'while'
-     && lk != 1186226               // '[' ']' 'while'
-     && lk != 1197063               // Real Imaginary '{'
-     && lk != 1202610               // '[' ']' '{'
-     && lk != 1213447               // Real Imaginary '|'
-     && lk != 1215747               // Identifier '++' '|'
-     && lk != 1215748               // Character '++' '|'
-     && lk != 1215749               // String '++' '|'
-     && lk != 1215750               // Integer '++' '|'
-     && lk != 1215751               // Real '++' '|'
-     && lk != 1215752               // Imaginary '++' '|'
-     && lk != 1216259               // Identifier '--' '|'
-     && lk != 1216260               // Character '--' '|'
-     && lk != 1216261               // String '--' '|'
-     && lk != 1216262               // Integer '--' '|'
-     && lk != 1216263               // Real '--' '|'
-     && lk != 1216264               // Imaginary '--' '|'
-     && lk != 1218994               // '[' ']' '|'
-     && lk != 1229831               // Real Imaginary '|='
-     && lk != 1232131               // Identifier '++' '|='
-     && lk != 1232132               // Character '++' '|='
-     && lk != 1232133               // String '++' '|='
-     && lk != 1232134               // Integer '++' '|='
-     && lk != 1232135               // Real '++' '|='
-     && lk != 1232136               // Imaginary '++' '|='
-     && lk != 1232643               // Identifier '--' '|='
-     && lk != 1232644               // Character '--' '|='
-     && lk != 1232645               // String '--' '|='
-     && lk != 1232646               // Integer '--' '|='
-     && lk != 1232647               // Real '--' '|='
-     && lk != 1232648               // Imaginary '--' '|='
-     && lk != 1235378               // '[' ']' '|='
-     && lk != 1246215               // Real Imaginary '||'
-     && lk != 1248515               // Identifier '++' '||'
-     && lk != 1248516               // Character '++' '||'
-     && lk != 1248517               // String '++' '||'
-     && lk != 1248518               // Integer '++' '||'
-     && lk != 1248519               // Real '++' '||'
-     && lk != 1248520               // Imaginary '++' '||'
-     && lk != 1249027               // Identifier '--' '||'
-     && lk != 1249028               // Character '--' '||'
-     && lk != 1249029               // String '--' '||'
-     && lk != 1249030               // Integer '--' '||'
-     && lk != 1249031               // Real '--' '||'
-     && lk != 1249032               // Imaginary '--' '||'
-     && lk != 1251762               // '[' ']' '||'
-     && lk != 1262599               // Real Imaginary '}'
-     && lk != 1264899               // Identifier '++' '}'
-     && lk != 1264900               // Character '++' '}'
-     && lk != 1264901               // String '++' '}'
-     && lk != 1264902               // Integer '++' '}'
-     && lk != 1264903               // Real '++' '}'
-     && lk != 1264904               // Imaginary '++' '}'
-     && lk != 1265411               // Identifier '--' '}'
-     && lk != 1265412               // Character '--' '}'
-     && lk != 1265413               // String '--' '}'
-     && lk != 1265414               // Integer '--' '}'
-     && lk != 1265415               // Real '--' '}'
-     && lk != 1265416               // Imaginary '--' '}'
-     && lk != 1268146               // '[' ']' '}'
-     && lk != 1278983               // Real Imaginary '~'
-     && lk != 1281283               // Identifier '++' '~'
-     && lk != 1281284               // Character '++' '~'
-     && lk != 1281285               // String '++' '~'
-     && lk != 1281286               // Integer '++' '~'
-     && lk != 1281287               // Real '++' '~'
-     && lk != 1281288               // Imaginary '++' '~'
-     && lk != 1281795               // Identifier '--' '~'
-     && lk != 1281796               // Character '--' '~'
-     && lk != 1281797               // String '--' '~'
-     && lk != 1281798               // Integer '--' '~'
-     && lk != 1281799               // Real '--' '~'
-     && lk != 1281800               // Imaginary '--' '~'
-     && lk != 1284530)              // '[' ']' '~'
+     && lk != 1115143               // Real Imaginary 'include'
+     && lk != 1117443               // Identifier '++' 'include'
+     && lk != 1117444               // Character '++' 'include'
+     && lk != 1117445               // String '++' 'include'
+     && lk != 1117446               // Integer '++' 'include'
+     && lk != 1117447               // Real '++' 'include'
+     && lk != 1117448               // Imaginary '++' 'include'
+     && lk != 1117955               // Identifier '--' 'include'
+     && lk != 1117956               // Character '--' 'include'
+     && lk != 1117957               // String '--' 'include'
+     && lk != 1117958               // Integer '--' 'include'
+     && lk != 1117959               // Real '--' 'include'
+     && lk != 1117960               // Imaginary '--' 'include'
+     && lk != 1120690               // '[' ']' 'include'
+     && lk != 1131527               // Real Imaginary 'local'
+     && lk != 1133827               // Identifier '++' 'local'
+     && lk != 1133828               // Character '++' 'local'
+     && lk != 1133829               // String '++' 'local'
+     && lk != 1133830               // Integer '++' 'local'
+     && lk != 1133831               // Real '++' 'local'
+     && lk != 1133832               // Imaginary '++' 'local'
+     && lk != 1134339               // Identifier '--' 'local'
+     && lk != 1134340               // Character '--' 'local'
+     && lk != 1134341               // String '--' 'local'
+     && lk != 1134342               // Integer '--' 'local'
+     && lk != 1134343               // Real '--' 'local'
+     && lk != 1134344               // Imaginary '--' 'local'
+     && lk != 1137074               // '[' ']' 'local'
+     && lk != 1147911               // Real Imaginary 'return'
+     && lk != 1150211               // Identifier '++' 'return'
+     && lk != 1150212               // Character '++' 'return'
+     && lk != 1150213               // String '++' 'return'
+     && lk != 1150214               // Integer '++' 'return'
+     && lk != 1150215               // Real '++' 'return'
+     && lk != 1150216               // Imaginary '++' 'return'
+     && lk != 1150723               // Identifier '--' 'return'
+     && lk != 1150724               // Character '--' 'return'
+     && lk != 1150725               // String '--' 'return'
+     && lk != 1150726               // Integer '--' 'return'
+     && lk != 1150727               // Real '--' 'return'
+     && lk != 1150728               // Imaginary '--' 'return'
+     && lk != 1153458               // '[' ']' 'return'
+     && lk != 1164295               // Real Imaginary 'switch'
+     && lk != 1166595               // Identifier '++' 'switch'
+     && lk != 1166596               // Character '++' 'switch'
+     && lk != 1166597               // String '++' 'switch'
+     && lk != 1166598               // Integer '++' 'switch'
+     && lk != 1166599               // Real '++' 'switch'
+     && lk != 1166600               // Imaginary '++' 'switch'
+     && lk != 1167107               // Identifier '--' 'switch'
+     && lk != 1167108               // Character '--' 'switch'
+     && lk != 1167109               // String '--' 'switch'
+     && lk != 1167110               // Integer '--' 'switch'
+     && lk != 1167111               // Real '--' 'switch'
+     && lk != 1167112               // Imaginary '--' 'switch'
+     && lk != 1169842               // '[' ']' 'switch'
+     && lk != 1180679               // Real Imaginary 'test'
+     && lk != 1182979               // Identifier '++' 'test'
+     && lk != 1182980               // Character '++' 'test'
+     && lk != 1182981               // String '++' 'test'
+     && lk != 1182982               // Integer '++' 'test'
+     && lk != 1182983               // Real '++' 'test'
+     && lk != 1182984               // Imaginary '++' 'test'
+     && lk != 1183491               // Identifier '--' 'test'
+     && lk != 1183492               // Character '--' 'test'
+     && lk != 1183493               // String '--' 'test'
+     && lk != 1183494               // Integer '--' 'test'
+     && lk != 1183495               // Real '--' 'test'
+     && lk != 1183496               // Imaginary '--' 'test'
+     && lk != 1186226               // '[' ']' 'test'
+     && lk != 1197063               // Real Imaginary 'throw'
+     && lk != 1199363               // Identifier '++' 'throw'
+     && lk != 1199364               // Character '++' 'throw'
+     && lk != 1199365               // String '++' 'throw'
+     && lk != 1199366               // Integer '++' 'throw'
+     && lk != 1199367               // Real '++' 'throw'
+     && lk != 1199368               // Imaginary '++' 'throw'
+     && lk != 1199875               // Identifier '--' 'throw'
+     && lk != 1199876               // Character '--' 'throw'
+     && lk != 1199877               // String '--' 'throw'
+     && lk != 1199878               // Integer '--' 'throw'
+     && lk != 1199879               // Real '--' 'throw'
+     && lk != 1199880               // Imaginary '--' 'throw'
+     && lk != 1202610               // '[' ']' 'throw'
+     && lk != 1213447               // Real Imaginary 'try'
+     && lk != 1215747               // Identifier '++' 'try'
+     && lk != 1215748               // Character '++' 'try'
+     && lk != 1215749               // String '++' 'try'
+     && lk != 1215750               // Integer '++' 'try'
+     && lk != 1215751               // Real '++' 'try'
+     && lk != 1215752               // Imaginary '++' 'try'
+     && lk != 1216259               // Identifier '--' 'try'
+     && lk != 1216260               // Character '--' 'try'
+     && lk != 1216261               // String '--' 'try'
+     && lk != 1216262               // Integer '--' 'try'
+     && lk != 1216263               // Real '--' 'try'
+     && lk != 1216264               // Imaginary '--' 'try'
+     && lk != 1218994               // '[' ']' 'try'
+     && lk != 1229831               // Real Imaginary 'while'
+     && lk != 1232131               // Identifier '++' 'while'
+     && lk != 1232132               // Character '++' 'while'
+     && lk != 1232133               // String '++' 'while'
+     && lk != 1232134               // Integer '++' 'while'
+     && lk != 1232135               // Real '++' 'while'
+     && lk != 1232136               // Imaginary '++' 'while'
+     && lk != 1232643               // Identifier '--' 'while'
+     && lk != 1232644               // Character '--' 'while'
+     && lk != 1232645               // String '--' 'while'
+     && lk != 1232646               // Integer '--' 'while'
+     && lk != 1232647               // Real '--' 'while'
+     && lk != 1232648               // Imaginary '--' 'while'
+     && lk != 1235378               // '[' ']' 'while'
+     && lk != 1246215               // Real Imaginary '{'
+     && lk != 1251762               // '[' ']' '{'
+     && lk != 1262599               // Real Imaginary '|'
+     && lk != 1264899               // Identifier '++' '|'
+     && lk != 1264900               // Character '++' '|'
+     && lk != 1264901               // String '++' '|'
+     && lk != 1264902               // Integer '++' '|'
+     && lk != 1264903               // Real '++' '|'
+     && lk != 1264904               // Imaginary '++' '|'
+     && lk != 1265411               // Identifier '--' '|'
+     && lk != 1265412               // Character '--' '|'
+     && lk != 1265413               // String '--' '|'
+     && lk != 1265414               // Integer '--' '|'
+     && lk != 1265415               // Real '--' '|'
+     && lk != 1265416               // Imaginary '--' '|'
+     && lk != 1268146               // '[' ']' '|'
+     && lk != 1278983               // Real Imaginary '|='
+     && lk != 1281283               // Identifier '++' '|='
+     && lk != 1281284               // Character '++' '|='
+     && lk != 1281285               // String '++' '|='
+     && lk != 1281286               // Integer '++' '|='
+     && lk != 1281287               // Real '++' '|='
+     && lk != 1281288               // Imaginary '++' '|='
+     && lk != 1281795               // Identifier '--' '|='
+     && lk != 1281796               // Character '--' '|='
+     && lk != 1281797               // String '--' '|='
+     && lk != 1281798               // Integer '--' '|='
+     && lk != 1281799               // Real '--' '|='
+     && lk != 1281800               // Imaginary '--' '|='
+     && lk != 1284530               // '[' ']' '|='
+     && lk != 1295367               // Real Imaginary '||'
+     && lk != 1297667               // Identifier '++' '||'
+     && lk != 1297668               // Character '++' '||'
+     && lk != 1297669               // String '++' '||'
+     && lk != 1297670               // Integer '++' '||'
+     && lk != 1297671               // Real '++' '||'
+     && lk != 1297672               // Imaginary '++' '||'
+     && lk != 1298179               // Identifier '--' '||'
+     && lk != 1298180               // Character '--' '||'
+     && lk != 1298181               // String '--' '||'
+     && lk != 1298182               // Integer '--' '||'
+     && lk != 1298183               // Real '--' '||'
+     && lk != 1298184               // Imaginary '--' '||'
+     && lk != 1300914               // '[' ']' '||'
+     && lk != 1311751               // Real Imaginary '}'
+     && lk != 1314051               // Identifier '++' '}'
+     && lk != 1314052               // Character '++' '}'
+     && lk != 1314053               // String '++' '}'
+     && lk != 1314054               // Integer '++' '}'
+     && lk != 1314055               // Real '++' '}'
+     && lk != 1314056               // Imaginary '++' '}'
+     && lk != 1314563               // Identifier '--' '}'
+     && lk != 1314564               // Character '--' '}'
+     && lk != 1314565               // String '--' '}'
+     && lk != 1314566               // Integer '--' '}'
+     && lk != 1314567               // Real '--' '}'
+     && lk != 1314568               // Imaginary '--' '}'
+     && lk != 1317298               // '[' ']' '}'
+     && lk != 1328135               // Real Imaginary '~'
+     && lk != 1330435               // Identifier '++' '~'
+     && lk != 1330436               // Character '++' '~'
+     && lk != 1330437               // String '++' '~'
+     && lk != 1330438               // Integer '++' '~'
+     && lk != 1330439               // Real '++' '~'
+     && lk != 1330440               // Imaginary '++' '~'
+     && lk != 1330947               // Identifier '--' '~'
+     && lk != 1330948               // Character '--' '~'
+     && lk != 1330949               // String '--' '~'
+     && lk != 1330950               // Integer '--' '~'
+     && lk != 1330951               // Real '--' '~'
+     && lk != 1330952               // Imaginary '--' '~'
+     && lk != 1333682)              // '[' ']' '~'
     {
       lk = memoized(3, e0);
       if (lk == 0)
@@ -8230,66 +8572,84 @@ function MaiaScript(string, parsingEventHandler)
     case 1101062:                   // Integer '++' 'if'
     case 1101063:                   // Real '++' 'if'
     case 1101064:                   // Imaginary '++' 'if'
-    case 1117443:                   // Identifier '++' 'return'
-    case 1117444:                   // Character '++' 'return'
-    case 1117445:                   // String '++' 'return'
-    case 1117446:                   // Integer '++' 'return'
-    case 1117447:                   // Real '++' 'return'
-    case 1117448:                   // Imaginary '++' 'return'
-    case 1133827:                   // Identifier '++' 'switch'
-    case 1133828:                   // Character '++' 'switch'
-    case 1133829:                   // String '++' 'switch'
-    case 1133830:                   // Integer '++' 'switch'
-    case 1133831:                   // Real '++' 'switch'
-    case 1133832:                   // Imaginary '++' 'switch'
-    case 1150211:                   // Identifier '++' 'test'
-    case 1150212:                   // Character '++' 'test'
-    case 1150213:                   // String '++' 'test'
-    case 1150214:                   // Integer '++' 'test'
-    case 1150215:                   // Real '++' 'test'
-    case 1150216:                   // Imaginary '++' 'test'
-    case 1166595:                   // Identifier '++' 'try'
-    case 1166596:                   // Character '++' 'try'
-    case 1166597:                   // String '++' 'try'
-    case 1166598:                   // Integer '++' 'try'
-    case 1166599:                   // Real '++' 'try'
-    case 1166600:                   // Imaginary '++' 'try'
-    case 1182979:                   // Identifier '++' 'while'
-    case 1182980:                   // Character '++' 'while'
-    case 1182981:                   // String '++' 'while'
-    case 1182982:                   // Integer '++' 'while'
-    case 1182983:                   // Real '++' 'while'
-    case 1182984:                   // Imaginary '++' 'while'
-    case 1215747:                   // Identifier '++' '|'
-    case 1215748:                   // Character '++' '|'
-    case 1215749:                   // String '++' '|'
-    case 1215750:                   // Integer '++' '|'
-    case 1215751:                   // Real '++' '|'
-    case 1215752:                   // Imaginary '++' '|'
-    case 1232131:                   // Identifier '++' '|='
-    case 1232132:                   // Character '++' '|='
-    case 1232133:                   // String '++' '|='
-    case 1232134:                   // Integer '++' '|='
-    case 1232135:                   // Real '++' '|='
-    case 1232136:                   // Imaginary '++' '|='
-    case 1248515:                   // Identifier '++' '||'
-    case 1248516:                   // Character '++' '||'
-    case 1248517:                   // String '++' '||'
-    case 1248518:                   // Integer '++' '||'
-    case 1248519:                   // Real '++' '||'
-    case 1248520:                   // Imaginary '++' '||'
-    case 1264899:                   // Identifier '++' '}'
-    case 1264900:                   // Character '++' '}'
-    case 1264901:                   // String '++' '}'
-    case 1264902:                   // Integer '++' '}'
-    case 1264903:                   // Real '++' '}'
-    case 1264904:                   // Imaginary '++' '}'
-    case 1281283:                   // Identifier '++' '~'
-    case 1281284:                   // Character '++' '~'
-    case 1281285:                   // String '++' '~'
-    case 1281286:                   // Integer '++' '~'
-    case 1281287:                   // Real '++' '~'
-    case 1281288:                   // Imaginary '++' '~'
+    case 1117443:                   // Identifier '++' 'include'
+    case 1117444:                   // Character '++' 'include'
+    case 1117445:                   // String '++' 'include'
+    case 1117446:                   // Integer '++' 'include'
+    case 1117447:                   // Real '++' 'include'
+    case 1117448:                   // Imaginary '++' 'include'
+    case 1133827:                   // Identifier '++' 'local'
+    case 1133828:                   // Character '++' 'local'
+    case 1133829:                   // String '++' 'local'
+    case 1133830:                   // Integer '++' 'local'
+    case 1133831:                   // Real '++' 'local'
+    case 1133832:                   // Imaginary '++' 'local'
+    case 1150211:                   // Identifier '++' 'return'
+    case 1150212:                   // Character '++' 'return'
+    case 1150213:                   // String '++' 'return'
+    case 1150214:                   // Integer '++' 'return'
+    case 1150215:                   // Real '++' 'return'
+    case 1150216:                   // Imaginary '++' 'return'
+    case 1166595:                   // Identifier '++' 'switch'
+    case 1166596:                   // Character '++' 'switch'
+    case 1166597:                   // String '++' 'switch'
+    case 1166598:                   // Integer '++' 'switch'
+    case 1166599:                   // Real '++' 'switch'
+    case 1166600:                   // Imaginary '++' 'switch'
+    case 1182979:                   // Identifier '++' 'test'
+    case 1182980:                   // Character '++' 'test'
+    case 1182981:                   // String '++' 'test'
+    case 1182982:                   // Integer '++' 'test'
+    case 1182983:                   // Real '++' 'test'
+    case 1182984:                   // Imaginary '++' 'test'
+    case 1199363:                   // Identifier '++' 'throw'
+    case 1199364:                   // Character '++' 'throw'
+    case 1199365:                   // String '++' 'throw'
+    case 1199366:                   // Integer '++' 'throw'
+    case 1199367:                   // Real '++' 'throw'
+    case 1199368:                   // Imaginary '++' 'throw'
+    case 1215747:                   // Identifier '++' 'try'
+    case 1215748:                   // Character '++' 'try'
+    case 1215749:                   // String '++' 'try'
+    case 1215750:                   // Integer '++' 'try'
+    case 1215751:                   // Real '++' 'try'
+    case 1215752:                   // Imaginary '++' 'try'
+    case 1232131:                   // Identifier '++' 'while'
+    case 1232132:                   // Character '++' 'while'
+    case 1232133:                   // String '++' 'while'
+    case 1232134:                   // Integer '++' 'while'
+    case 1232135:                   // Real '++' 'while'
+    case 1232136:                   // Imaginary '++' 'while'
+    case 1264899:                   // Identifier '++' '|'
+    case 1264900:                   // Character '++' '|'
+    case 1264901:                   // String '++' '|'
+    case 1264902:                   // Integer '++' '|'
+    case 1264903:                   // Real '++' '|'
+    case 1264904:                   // Imaginary '++' '|'
+    case 1281283:                   // Identifier '++' '|='
+    case 1281284:                   // Character '++' '|='
+    case 1281285:                   // String '++' '|='
+    case 1281286:                   // Integer '++' '|='
+    case 1281287:                   // Real '++' '|='
+    case 1281288:                   // Imaginary '++' '|='
+    case 1297667:                   // Identifier '++' '||'
+    case 1297668:                   // Character '++' '||'
+    case 1297669:                   // String '++' '||'
+    case 1297670:                   // Integer '++' '||'
+    case 1297671:                   // Real '++' '||'
+    case 1297672:                   // Imaginary '++' '||'
+    case 1314051:                   // Identifier '++' '}'
+    case 1314052:                   // Character '++' '}'
+    case 1314053:                   // String '++' '}'
+    case 1314054:                   // Integer '++' '}'
+    case 1314055:                   // Real '++' '}'
+    case 1314056:                   // Imaginary '++' '}'
+    case 1330435:                   // Identifier '++' '~'
+    case 1330436:                   // Character '++' '~'
+    case 1330437:                   // String '++' '~'
+    case 1330438:                   // Integer '++' '~'
+    case 1330439:                   // Real '++' '~'
+    case 1330440:                   // Imaginary '++' '~'
       try_Primary();
       lookahead1W(6);               // WhiteSpace^token | '++'
       consumeT(26);                 // '++'
@@ -8619,66 +8979,84 @@ function MaiaScript(string, parsingEventHandler)
     case 1101574:                   // Integer '--' 'if'
     case 1101575:                   // Real '--' 'if'
     case 1101576:                   // Imaginary '--' 'if'
-    case 1117955:                   // Identifier '--' 'return'
-    case 1117956:                   // Character '--' 'return'
-    case 1117957:                   // String '--' 'return'
-    case 1117958:                   // Integer '--' 'return'
-    case 1117959:                   // Real '--' 'return'
-    case 1117960:                   // Imaginary '--' 'return'
-    case 1134339:                   // Identifier '--' 'switch'
-    case 1134340:                   // Character '--' 'switch'
-    case 1134341:                   // String '--' 'switch'
-    case 1134342:                   // Integer '--' 'switch'
-    case 1134343:                   // Real '--' 'switch'
-    case 1134344:                   // Imaginary '--' 'switch'
-    case 1150723:                   // Identifier '--' 'test'
-    case 1150724:                   // Character '--' 'test'
-    case 1150725:                   // String '--' 'test'
-    case 1150726:                   // Integer '--' 'test'
-    case 1150727:                   // Real '--' 'test'
-    case 1150728:                   // Imaginary '--' 'test'
-    case 1167107:                   // Identifier '--' 'try'
-    case 1167108:                   // Character '--' 'try'
-    case 1167109:                   // String '--' 'try'
-    case 1167110:                   // Integer '--' 'try'
-    case 1167111:                   // Real '--' 'try'
-    case 1167112:                   // Imaginary '--' 'try'
-    case 1183491:                   // Identifier '--' 'while'
-    case 1183492:                   // Character '--' 'while'
-    case 1183493:                   // String '--' 'while'
-    case 1183494:                   // Integer '--' 'while'
-    case 1183495:                   // Real '--' 'while'
-    case 1183496:                   // Imaginary '--' 'while'
-    case 1216259:                   // Identifier '--' '|'
-    case 1216260:                   // Character '--' '|'
-    case 1216261:                   // String '--' '|'
-    case 1216262:                   // Integer '--' '|'
-    case 1216263:                   // Real '--' '|'
-    case 1216264:                   // Imaginary '--' '|'
-    case 1232643:                   // Identifier '--' '|='
-    case 1232644:                   // Character '--' '|='
-    case 1232645:                   // String '--' '|='
-    case 1232646:                   // Integer '--' '|='
-    case 1232647:                   // Real '--' '|='
-    case 1232648:                   // Imaginary '--' '|='
-    case 1249027:                   // Identifier '--' '||'
-    case 1249028:                   // Character '--' '||'
-    case 1249029:                   // String '--' '||'
-    case 1249030:                   // Integer '--' '||'
-    case 1249031:                   // Real '--' '||'
-    case 1249032:                   // Imaginary '--' '||'
-    case 1265411:                   // Identifier '--' '}'
-    case 1265412:                   // Character '--' '}'
-    case 1265413:                   // String '--' '}'
-    case 1265414:                   // Integer '--' '}'
-    case 1265415:                   // Real '--' '}'
-    case 1265416:                   // Imaginary '--' '}'
-    case 1281795:                   // Identifier '--' '~'
-    case 1281796:                   // Character '--' '~'
-    case 1281797:                   // String '--' '~'
-    case 1281798:                   // Integer '--' '~'
-    case 1281799:                   // Real '--' '~'
-    case 1281800:                   // Imaginary '--' '~'
+    case 1117955:                   // Identifier '--' 'include'
+    case 1117956:                   // Character '--' 'include'
+    case 1117957:                   // String '--' 'include'
+    case 1117958:                   // Integer '--' 'include'
+    case 1117959:                   // Real '--' 'include'
+    case 1117960:                   // Imaginary '--' 'include'
+    case 1134339:                   // Identifier '--' 'local'
+    case 1134340:                   // Character '--' 'local'
+    case 1134341:                   // String '--' 'local'
+    case 1134342:                   // Integer '--' 'local'
+    case 1134343:                   // Real '--' 'local'
+    case 1134344:                   // Imaginary '--' 'local'
+    case 1150723:                   // Identifier '--' 'return'
+    case 1150724:                   // Character '--' 'return'
+    case 1150725:                   // String '--' 'return'
+    case 1150726:                   // Integer '--' 'return'
+    case 1150727:                   // Real '--' 'return'
+    case 1150728:                   // Imaginary '--' 'return'
+    case 1167107:                   // Identifier '--' 'switch'
+    case 1167108:                   // Character '--' 'switch'
+    case 1167109:                   // String '--' 'switch'
+    case 1167110:                   // Integer '--' 'switch'
+    case 1167111:                   // Real '--' 'switch'
+    case 1167112:                   // Imaginary '--' 'switch'
+    case 1183491:                   // Identifier '--' 'test'
+    case 1183492:                   // Character '--' 'test'
+    case 1183493:                   // String '--' 'test'
+    case 1183494:                   // Integer '--' 'test'
+    case 1183495:                   // Real '--' 'test'
+    case 1183496:                   // Imaginary '--' 'test'
+    case 1199875:                   // Identifier '--' 'throw'
+    case 1199876:                   // Character '--' 'throw'
+    case 1199877:                   // String '--' 'throw'
+    case 1199878:                   // Integer '--' 'throw'
+    case 1199879:                   // Real '--' 'throw'
+    case 1199880:                   // Imaginary '--' 'throw'
+    case 1216259:                   // Identifier '--' 'try'
+    case 1216260:                   // Character '--' 'try'
+    case 1216261:                   // String '--' 'try'
+    case 1216262:                   // Integer '--' 'try'
+    case 1216263:                   // Real '--' 'try'
+    case 1216264:                   // Imaginary '--' 'try'
+    case 1232643:                   // Identifier '--' 'while'
+    case 1232644:                   // Character '--' 'while'
+    case 1232645:                   // String '--' 'while'
+    case 1232646:                   // Integer '--' 'while'
+    case 1232647:                   // Real '--' 'while'
+    case 1232648:                   // Imaginary '--' 'while'
+    case 1265411:                   // Identifier '--' '|'
+    case 1265412:                   // Character '--' '|'
+    case 1265413:                   // String '--' '|'
+    case 1265414:                   // Integer '--' '|'
+    case 1265415:                   // Real '--' '|'
+    case 1265416:                   // Imaginary '--' '|'
+    case 1281795:                   // Identifier '--' '|='
+    case 1281796:                   // Character '--' '|='
+    case 1281797:                   // String '--' '|='
+    case 1281798:                   // Integer '--' '|='
+    case 1281799:                   // Real '--' '|='
+    case 1281800:                   // Imaginary '--' '|='
+    case 1298179:                   // Identifier '--' '||'
+    case 1298180:                   // Character '--' '||'
+    case 1298181:                   // String '--' '||'
+    case 1298182:                   // Integer '--' '||'
+    case 1298183:                   // Real '--' '||'
+    case 1298184:                   // Imaginary '--' '||'
+    case 1314563:                   // Identifier '--' '}'
+    case 1314564:                   // Character '--' '}'
+    case 1314565:                   // String '--' '}'
+    case 1314566:                   // Integer '--' '}'
+    case 1314567:                   // Real '--' '}'
+    case 1314568:                   // Imaginary '--' '}'
+    case 1330947:                   // Identifier '--' '~'
+    case 1330948:                   // Character '--' '~'
+    case 1330949:                   // String '--' '~'
+    case 1330950:                   // Integer '--' '~'
+    case 1330951:                   // Real '--' '~'
+    case 1330952:                   // Imaginary '--' '~'
       try_Primary();
       lookahead1W(7);               // WhiteSpace^token | '--'
       consumeT(30);                 // '--'
@@ -8707,8 +9085,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // '(' | '[' | '{'
       try_Primary();
       break;
-    case 78:                        // '~'
-      consumeT(78);                 // '~'
+    case 81:                        // '~'
+      consumeT(81);                 // '~'
       lookahead1W(22);              // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
       try_Primary();
@@ -8774,7 +9152,7 @@ function MaiaScript(string, parsingEventHandler)
     case 59:                        // 'do'
       parse_Do();
       break;
-    case 72:                        // 'while'
+    case 75:                        // 'while'
       parse_While();
       break;
     case 63:                        // 'for'
@@ -8792,20 +9170,29 @@ function MaiaScript(string, parsingEventHandler)
     case 67:                        // 'if'
       parse_If();
       break;
-    case 69:                        // 'switch'
+    case 71:                        // 'switch'
       parse_Switch();
       break;
-    case 71:                        // 'try'
+    case 74:                        // 'try'
       parse_Try();
       break;
-    case 70:                        // 'test'
+    case 72:                        // 'test'
       parse_Test();
       break;
-    case 9347:                      // Identifier '{'
+    case 9731:                      // Identifier '{'
       parse_NamespaceDeclaration();
       break;
-    case 68:                        // 'return'
+    case 70:                        // 'return'
       parse_Return();
+      break;
+    case 68:                        // 'include'
+      parse_Include();
+      break;
+    case 69:                        // 'local'
+      parse_Local();
+      break;
+    case 73:                        // 'throw'
+      parse_Throw();
       break;
     case 37:                        // ';'
       parse_EmptyStatement();
@@ -8831,7 +9218,7 @@ function MaiaScript(string, parsingEventHandler)
     case 59:                        // 'do'
       try_Do();
       break;
-    case 72:                        // 'while'
+    case 75:                        // 'while'
       try_While();
       break;
     case 63:                        // 'for'
@@ -8849,20 +9236,29 @@ function MaiaScript(string, parsingEventHandler)
     case 67:                        // 'if'
       try_If();
       break;
-    case 69:                        // 'switch'
+    case 71:                        // 'switch'
       try_Switch();
       break;
-    case 71:                        // 'try'
+    case 74:                        // 'try'
       try_Try();
       break;
-    case 70:                        // 'test'
+    case 72:                        // 'test'
       try_Test();
       break;
-    case 9347:                      // Identifier '{'
+    case 9731:                      // Identifier '{'
       try_NamespaceDeclaration();
       break;
-    case 68:                        // 'return'
+    case 70:                        // 'return'
       try_Return();
+      break;
+    case 68:                        // 'include'
+      try_Include();
+      break;
+    case 69:                        // 'local'
+      try_Local();
+      break;
+    case 73:                        // 'throw'
+      try_Throw();
       break;
     case 37:                        // ';'
       try_EmptyStatement();
@@ -8879,17 +9275,19 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(14);                // WhiteSpace^token | 'while'
-    consume(72);                    // 'while'
+    consume(75);                    // 'while'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consume(20);                    // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -8903,16 +9301,18 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(14);                // WhiteSpace^token | 'while'
-    consumeT(72);                   // 'while'
+    consumeT(75);                   // 'while'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consumeT(20);                   // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
@@ -8921,13 +9321,14 @@ function MaiaScript(string, parsingEventHandler)
   function parse_While()
   {
     eventHandler.startNonterminal("While", e0);
-    consume(72);                    // 'while'
+    consume(75);                    // 'while'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consume(20);                    // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -8935,7 +9336,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("While", e0);
@@ -8943,20 +9345,22 @@ function MaiaScript(string, parsingEventHandler)
 
   function try_While()
   {
-    consumeT(72);                   // 'while'
+    consumeT(75);                   // 'while'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consumeT(20);                   // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
@@ -8969,7 +9373,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
@@ -8977,7 +9382,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
@@ -8985,7 +9391,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -8993,7 +9400,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("For", e0);
@@ -9007,28 +9415,32 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
     consumeT(37);                   // ';'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
     consumeT(37);                   // ';'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
@@ -9041,7 +9453,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
@@ -9049,7 +9462,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
@@ -9057,7 +9471,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -9065,7 +9480,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("ForEach", e0);
@@ -9079,28 +9495,32 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
     consumeT(37);                   // ';'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(10);                // WhiteSpace^token | ';'
     consumeT(37);                   // ';'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
@@ -9137,7 +9557,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -9145,21 +9566,23 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 60:                        // 'else'
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 444:                     // 'else' Identifier
@@ -9169,39 +9592,32 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       case 6460:                    // 'else' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9404:                    // 'else' '{'
+      case 9788:                    // 'else' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 1212:                    // 'else' Comment
       case 4796:                    // 'else' ';'
       case 6972:                    // 'else' 'break'
       case 7356:                    // 'else' 'continue'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
-        break;
-      case 2620:                    // 'else' '('
-      case 7612:                    // 'else' 'do'
-      case 8764:                    // 'else' 'return'
-      case 9148:                    // 'else' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
         break;
       case 7868:                    // 'else' 'f32'
       case 7996:                    // 'else' 'f64'
@@ -9220,24 +9636,37 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      case 2620:                    // 'else' '('
+      case 7612:                    // 'else' 'do'
+      case 8892:                    // 'else' 'local'
+      case 9020:                    // 'else' 'return'
+      case 9532:                    // 'else' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       case 1596:                    // 'else' '!'
       case 3260:                    // 'else' '+'
       case 3388:                    // 'else' '++'
       case 3772:                    // 'else' '-'
       case 3900:                    // 'else' '--'
-      case 10044:                   // 'else' '~'
+      case 10428:                   // 'else' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8124:                    // 'else' 'for'
       case 8252:                    // 'else' 'foreach'
       case 8636:                    // 'else' 'if'
-      case 8892:                    // 'else' 'switch'
-      case 9020:                    // 'else' 'test'
-      case 9276:                    // 'else' 'while'
+      case 8764:                    // 'else' 'include'
+      case 9148:                    // 'else' 'switch'
+      case 9276:                    // 'else' 'test'
+      case 9404:                    // 'else' 'throw'
+      case 9660:                    // 'else' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -9278,14 +9707,17 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 77                    // '}'
-     && lk != 78)                   // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 80                    // '}'
+     && lk != 81)                   // '~'
     {
       lk = memoized(4, e0);
       if (lk == 0)
@@ -9326,27 +9758,30 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 60:                        // 'else'
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 444:                     // 'else' Identifier
@@ -9356,39 +9791,32 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       case 6460:                    // 'else' '['
         lookahead3W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
-      case 9404:                    // 'else' '{'
+      case 9788:                    // 'else' '{'
         lookahead3W(28);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
         break;
       case 1212:                    // 'else' Comment
       case 4796:                    // 'else' ';'
       case 6972:                    // 'else' 'break'
       case 7356:                    // 'else' 'continue'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
-        break;
-      case 2620:                    // 'else' '('
-      case 7612:                    // 'else' 'do'
-      case 8764:                    // 'else' 'return'
-      case 9148:                    // 'else' 'try'
-        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
         break;
       case 7868:                    // 'else' 'f32'
       case 7996:                    // 'else' 'f64'
@@ -9407,24 +9835,37 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      case 2620:                    // 'else' '('
+      case 7612:                    // 'else' 'do'
+      case 8892:                    // 'else' 'local'
+      case 9020:                    // 'else' 'return'
+      case 9532:                    // 'else' 'try'
+        lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       case 1596:                    // 'else' '!'
       case 3260:                    // 'else' '+'
       case 3388:                    // 'else' '++'
       case 3772:                    // 'else' '-'
       case 3900:                    // 'else' '--'
-      case 10044:                   // 'else' '~'
+      case 10428:                   // 'else' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
         break;
       case 8124:                    // 'else' 'for'
       case 8252:                    // 'else' 'foreach'
       case 8636:                    // 'else' 'if'
-      case 8892:                    // 'else' 'switch'
-      case 9020:                    // 'else' 'test'
-      case 9276:                    // 'else' 'while'
+      case 8764:                    // 'else' 'include'
+      case 9148:                    // 'else' 'switch'
+      case 9276:                    // 'else' 'test'
+      case 9404:                    // 'else' 'throw'
+      case 9660:                    // 'else' 'while'
         lookahead3W(4);             // WhiteSpace^token | '('
         break;
       }
@@ -9465,14 +9906,17 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 77                    // '}'
-     && lk != 78)                   // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 80                    // '}'
+     && lk != 81)                   // '~'
     {
       lk = memoized(4, e0);
       if (lk == 0)
@@ -9510,7 +9954,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("Else", e0);
@@ -9522,26 +9967,28 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
   function parse_Switch()
   {
     eventHandler.startNonterminal("Switch", e0);
-    consume(69);                    // 'switch'
+    consume(71);                    // 'switch'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consume(20);                    // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consume(21);                    // ')'
     lookahead1W(15);                // WhiteSpace^token | '{'
-    consume(73);                    // '{'
+    consume(76);                    // '{'
     for (;;)
     {
       lookahead1W(13);              // WhiteSpace^token | 'case'
@@ -9557,24 +10004,25 @@ function MaiaScript(string, parsingEventHandler)
       whitespace();
       parse_Default();
     }
-    consume(77);                    // '}'
+    consume(80);                    // '}'
     eventHandler.endNonterminal("Switch", e0);
   }
 
   function try_Switch()
   {
-    consumeT(69);                   // 'switch'
+    consumeT(71);                   // 'switch'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consumeT(20);                   // '('
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(15);                // WhiteSpace^token | '{'
-    consumeT(73);                   // '{'
+    consumeT(76);                   // '{'
     for (;;)
     {
       lookahead1W(13);              // WhiteSpace^token | 'case'
@@ -9588,7 +10036,7 @@ function MaiaScript(string, parsingEventHandler)
     {
       try_Default();
     }
-    consumeT(77);                   // '}'
+    consumeT(80);                   // '}'
   }
 
   function parse_Case()
@@ -9598,21 +10046,22 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(8);                 // WhiteSpace^token | ':'
     consume(35);                    // ':'
     for (;;)
     {
-      lookahead1W(32);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      lookahead1W(35);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'case' | 'continue' | 'default' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '}' | '~'
       if (l1 == 55                  // 'case'
        || l1 == 58                  // 'default'
-       || l1 == 77)                 // '}'
+       || l1 == 80)                 // '}'
       {
         break;
       }
@@ -9628,20 +10077,21 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(8);                 // WhiteSpace^token | ':'
     consumeT(35);                   // ':'
     for (;;)
     {
-      lookahead1W(32);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      lookahead1W(35);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'case' | 'continue' | 'default' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '}' | '~'
       if (l1 == 55                  // 'case'
        || l1 == 58                  // 'default'
-       || l1 == 77)                 // '}'
+       || l1 == 80)                 // '}'
       {
         break;
       }
@@ -9660,8 +10110,9 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
-      if (l1 == 77)                 // '}'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
+      if (l1 == 80)                 // '}'
       {
         break;
       }
@@ -9681,8 +10132,9 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(28);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
-      if (l1 == 77)                 // '}'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
+      if (l1 == 80)                 // '}'
       {
         break;
       }
@@ -9693,18 +10145,19 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Try()
   {
     eventHandler.startNonterminal("Try", e0);
-    consume(71);                    // 'try'
+    consume(74);                    // 'try'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 56:                        // 'catch'
@@ -9715,7 +10168,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -9747,13 +10201,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067576               // 'catch' '(' 'i32'
      || lk == 1083960               // 'catch' '(' 'i64'
      || lk == 1100344               // 'catch' '(' 'if'
-     || lk == 1116728               // 'catch' '(' 'return'
-     || lk == 1133112               // 'catch' '(' 'switch'
-     || lk == 1149496               // 'catch' '(' 'test'
-     || lk == 1165880               // 'catch' '(' 'try'
-     || lk == 1182264               // 'catch' '(' 'while'
-     || lk == 1198648               // 'catch' '(' '{'
-     || lk == 1280568)              // 'catch' '(' '~'
+     || lk == 1116728               // 'catch' '(' 'include'
+     || lk == 1133112               // 'catch' '(' 'local'
+     || lk == 1149496               // 'catch' '(' 'return'
+     || lk == 1165880               // 'catch' '(' 'switch'
+     || lk == 1182264               // 'catch' '(' 'test'
+     || lk == 1198648               // 'catch' '(' 'throw'
+     || lk == 1215032               // 'catch' '(' 'try'
+     || lk == 1231416               // 'catch' '(' 'while'
+     || lk == 1247800               // 'catch' '(' '{'
+     || lk == 1329720)              // 'catch' '(' '~'
     {
       lk = memoized(5, e0);
       if (lk == 0)
@@ -9788,17 +10245,18 @@ function MaiaScript(string, parsingEventHandler)
 
   function try_Try()
   {
-    consumeT(71);                   // 'try'
+    consumeT(74);                   // 'try'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 56:                        // 'catch'
@@ -9809,7 +10267,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -9841,13 +10300,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067576               // 'catch' '(' 'i32'
      || lk == 1083960               // 'catch' '(' 'i64'
      || lk == 1100344               // 'catch' '(' 'if'
-     || lk == 1116728               // 'catch' '(' 'return'
-     || lk == 1133112               // 'catch' '(' 'switch'
-     || lk == 1149496               // 'catch' '(' 'test'
-     || lk == 1165880               // 'catch' '(' 'try'
-     || lk == 1182264               // 'catch' '(' 'while'
-     || lk == 1198648               // 'catch' '(' '{'
-     || lk == 1280568)              // 'catch' '(' '~'
+     || lk == 1116728               // 'catch' '(' 'include'
+     || lk == 1133112               // 'catch' '(' 'local'
+     || lk == 1149496               // 'catch' '(' 'return'
+     || lk == 1165880               // 'catch' '(' 'switch'
+     || lk == 1182264               // 'catch' '(' 'test'
+     || lk == 1198648               // 'catch' '(' 'throw'
+     || lk == 1215032               // 'catch' '(' 'try'
+     || lk == 1231416               // 'catch' '(' 'while'
+     || lk == 1247800               // 'catch' '(' '{'
+     || lk == 1329720)              // 'catch' '(' '~'
     {
       lk = memoized(5, e0);
       if (lk == 0)
@@ -9881,34 +10343,37 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Test()
   {
     eventHandler.startNonterminal("Test", e0);
-    consume(70);                    // 'test'
+    consume(72);                    // 'test'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consume(20);                    // '('
     lookahead1W(26);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
     switch (l1)
     {
     case 37:                        // ';'
       lookahead2W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 2725:                    // ';' ')'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
         break;
       case 4773:                    // ';' ';'
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       }
       break;
@@ -9940,13 +10405,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 78                    // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 81                    // '~'
      && lk != 421                   // ';' Identifier
      && lk != 549                   // ';' Character
      && lk != 677                   // ';' String
@@ -9971,13 +10439,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8357                  // ';' 'i32'
      && lk != 8485                  // ';' 'i64'
      && lk != 8613                  // ';' 'if'
-     && lk != 8741                  // ';' 'return'
-     && lk != 8869                  // ';' 'switch'
-     && lk != 8997                  // ';' 'test'
-     && lk != 9125                  // ';' 'try'
-     && lk != 9253                  // ';' 'while'
-     && lk != 9381                  // ';' '{'
-     && lk != 10021)                // ';' '~'
+     && lk != 8741                  // ';' 'include'
+     && lk != 8869                  // ';' 'local'
+     && lk != 8997                  // ';' 'return'
+     && lk != 9125                  // ';' 'switch'
+     && lk != 9253                  // ';' 'test'
+     && lk != 9381                  // ';' 'throw'
+     && lk != 9509                  // ';' 'try'
+     && lk != 9637                  // ';' 'while'
+     && lk != 9765                  // ';' '{'
+     && lk != 10405)                // ';' '~'
     {
       lk = memoized(6, e0);
       if (lk == 0)
@@ -10027,13 +10498,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 65                    // 'i32'
      || lk == 66                    // 'i64'
      || lk == 67                    // 'if'
-     || lk == 68                    // 'return'
-     || lk == 69                    // 'switch'
-     || lk == 70                    // 'test'
-     || lk == 71                    // 'try'
-     || lk == 72                    // 'while'
-     || lk == 73                    // '{'
-     || lk == 78)                   // '~'
+     || lk == 68                    // 'include'
+     || lk == 69                    // 'local'
+     || lk == 70                    // 'return'
+     || lk == 71                    // 'switch'
+     || lk == 72                    // 'test'
+     || lk == 73                    // 'throw'
+     || lk == 74                    // 'try'
+     || lk == 75                    // 'while'
+     || lk == 76                    // '{'
+     || lk == 81)                   // '~'
     {
       whitespace();
       parse_Expression();
@@ -10045,28 +10519,31 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (l1)
       {
       case 37:                      // ';'
         lookahead2W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         switch (lk)
         {
         case 2725:                  // ';' ')'
-          lookahead3W(41);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
           break;
         case 4773:                  // ';' ';'
           lookahead3W(26);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         }
         break;
@@ -10108,14 +10585,17 @@ function MaiaScript(string, parsingEventHandler)
        || lk == 1067685             // ';' ')' 'i32'
        || lk == 1084069             // ';' ')' 'i64'
        || lk == 1100453             // ';' ')' 'if'
-       || lk == 1116837             // ';' ')' 'return'
-       || lk == 1133221             // ';' ')' 'switch'
-       || lk == 1149605             // ';' ')' 'test'
-       || lk == 1165989             // ';' ')' 'try'
-       || lk == 1182373             // ';' ')' 'while'
-       || lk == 1198757             // ';' ')' '{'
-       || lk == 1264293             // ';' ')' '}'
-       || lk == 1280677)            // ';' ')' '~'
+       || lk == 1116837             // ';' ')' 'include'
+       || lk == 1133221             // ';' ')' 'local'
+       || lk == 1149605             // ';' ')' 'return'
+       || lk == 1165989             // ';' ')' 'switch'
+       || lk == 1182373             // ';' ')' 'test'
+       || lk == 1198757             // ';' ')' 'throw'
+       || lk == 1215141             // ';' ')' 'try'
+       || lk == 1231525             // ';' ')' 'while'
+       || lk == 1247909             // ';' ')' '{'
+       || lk == 1313445             // ';' ')' '}'
+       || lk == 1329829)            // ';' ')' '~'
       {
         lk = memoized(7, e0);
         if (lk == 0)
@@ -10166,13 +10646,16 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 8357                // ';' 'i32'
        && lk != 8485                // ';' 'i64'
        && lk != 8613                // ';' 'if'
-       && lk != 8741                // ';' 'return'
-       && lk != 8869                // ';' 'switch'
-       && lk != 8997                // ';' 'test'
-       && lk != 9125                // ';' 'try'
-       && lk != 9253                // ';' 'while'
-       && lk != 9381                // ';' '{'
-       && lk != 10021)              // ';' '~'
+       && lk != 8741                // ';' 'include'
+       && lk != 8869                // ';' 'local'
+       && lk != 8997                // ';' 'return'
+       && lk != 9125                // ';' 'switch'
+       && lk != 9253                // ';' 'test'
+       && lk != 9381                // ';' 'throw'
+       && lk != 9509                // ';' 'try'
+       && lk != 9637                // ';' 'while'
+       && lk != 9765                // ';' '{'
+       && lk != 10405)              // ';' '~'
       {
         whitespace();
         parse_Expression();
@@ -10184,7 +10667,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead1W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         if (l1 != 21)               // ')'
         {
           whitespace();
@@ -10194,11 +10678,11 @@ function MaiaScript(string, parsingEventHandler)
     }
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consume(21);                    // ')'
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 56:                        // 'catch'
@@ -10209,7 +10693,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -10241,13 +10726,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067576               // 'catch' '(' 'i32'
      || lk == 1083960               // 'catch' '(' 'i64'
      || lk == 1100344               // 'catch' '(' 'if'
-     || lk == 1116728               // 'catch' '(' 'return'
-     || lk == 1133112               // 'catch' '(' 'switch'
-     || lk == 1149496               // 'catch' '(' 'test'
-     || lk == 1165880               // 'catch' '(' 'try'
-     || lk == 1182264               // 'catch' '(' 'while'
-     || lk == 1198648               // 'catch' '(' '{'
-     || lk == 1280568)              // 'catch' '(' '~'
+     || lk == 1116728               // 'catch' '(' 'include'
+     || lk == 1133112               // 'catch' '(' 'local'
+     || lk == 1149496               // 'catch' '(' 'return'
+     || lk == 1165880               // 'catch' '(' 'switch'
+     || lk == 1182264               // 'catch' '(' 'test'
+     || lk == 1198648               // 'catch' '(' 'throw'
+     || lk == 1215032               // 'catch' '(' 'try'
+     || lk == 1231416               // 'catch' '(' 'while'
+     || lk == 1247800               // 'catch' '(' '{'
+     || lk == 1329720)              // 'catch' '(' '~'
     {
       lk = memoized(8, e0);
       if (lk == 0)
@@ -10282,34 +10770,37 @@ function MaiaScript(string, parsingEventHandler)
 
   function try_Test()
   {
-    consumeT(70);                   // 'test'
+    consumeT(72);                   // 'test'
     lookahead1W(4);                 // WhiteSpace^token | '('
     consumeT(20);                   // '('
     lookahead1W(26);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
     switch (l1)
     {
     case 37:                        // ';'
       lookahead2W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 2725:                    // ';' ')'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
         break;
       case 4773:                    // ';' ';'
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       }
       break;
@@ -10341,13 +10832,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 65                    // 'i32'
      && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 78                    // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 81                    // '~'
      && lk != 421                   // ';' Identifier
      && lk != 549                   // ';' Character
      && lk != 677                   // ';' String
@@ -10372,13 +10866,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8357                  // ';' 'i32'
      && lk != 8485                  // ';' 'i64'
      && lk != 8613                  // ';' 'if'
-     && lk != 8741                  // ';' 'return'
-     && lk != 8869                  // ';' 'switch'
-     && lk != 8997                  // ';' 'test'
-     && lk != 9125                  // ';' 'try'
-     && lk != 9253                  // ';' 'while'
-     && lk != 9381                  // ';' '{'
-     && lk != 10021)                // ';' '~'
+     && lk != 8741                  // ';' 'include'
+     && lk != 8869                  // ';' 'local'
+     && lk != 8997                  // ';' 'return'
+     && lk != 9125                  // ';' 'switch'
+     && lk != 9253                  // ';' 'test'
+     && lk != 9381                  // ';' 'throw'
+     && lk != 9509                  // ';' 'try'
+     && lk != 9637                  // ';' 'while'
+     && lk != 9765                  // ';' '{'
+     && lk != 10405)                // ';' '~'
     {
       lk = memoized(6, e0);
       if (lk == 0)
@@ -10428,13 +10925,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 65                    // 'i32'
      || lk == 66                    // 'i64'
      || lk == 67                    // 'if'
-     || lk == 68                    // 'return'
-     || lk == 69                    // 'switch'
-     || lk == 70                    // 'test'
-     || lk == 71                    // 'try'
-     || lk == 72                    // 'while'
-     || lk == 73                    // '{'
-     || lk == 78)                   // '~'
+     || lk == 68                    // 'include'
+     || lk == 69                    // 'local'
+     || lk == 70                    // 'return'
+     || lk == 71                    // 'switch'
+     || lk == 72                    // 'test'
+     || lk == 73                    // 'throw'
+     || lk == 74                    // 'try'
+     || lk == 75                    // 'while'
+     || lk == 76                    // '{'
+     || lk == 81)                   // '~'
     {
       try_Expression();
     }
@@ -10445,28 +10945,31 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (l1)
       {
       case 37:                      // ';'
         lookahead2W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         switch (lk)
         {
         case 2725:                  // ';' ')'
-          lookahead3W(41);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
           break;
         case 4773:                  // ';' ';'
           lookahead3W(26);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           break;
         }
         break;
@@ -10508,14 +11011,17 @@ function MaiaScript(string, parsingEventHandler)
        || lk == 1067685             // ';' ')' 'i32'
        || lk == 1084069             // ';' ')' 'i64'
        || lk == 1100453             // ';' ')' 'if'
-       || lk == 1116837             // ';' ')' 'return'
-       || lk == 1133221             // ';' ')' 'switch'
-       || lk == 1149605             // ';' ')' 'test'
-       || lk == 1165989             // ';' ')' 'try'
-       || lk == 1182373             // ';' ')' 'while'
-       || lk == 1198757             // ';' ')' '{'
-       || lk == 1264293             // ';' ')' '}'
-       || lk == 1280677)            // ';' ')' '~'
+       || lk == 1116837             // ';' ')' 'include'
+       || lk == 1133221             // ';' ')' 'local'
+       || lk == 1149605             // ';' ')' 'return'
+       || lk == 1165989             // ';' ')' 'switch'
+       || lk == 1182373             // ';' ')' 'test'
+       || lk == 1198757             // ';' ')' 'throw'
+       || lk == 1215141             // ';' ')' 'try'
+       || lk == 1231525             // ';' ')' 'while'
+       || lk == 1247909             // ';' ')' '{'
+       || lk == 1313445             // ';' ')' '}'
+       || lk == 1329829)            // ';' ')' '~'
       {
         lk = memoized(7, e0);
         if (lk == 0)
@@ -10566,13 +11072,16 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 8357                // ';' 'i32'
        && lk != 8485                // ';' 'i64'
        && lk != 8613                // ';' 'if'
-       && lk != 8741                // ';' 'return'
-       && lk != 8869                // ';' 'switch'
-       && lk != 8997                // ';' 'test'
-       && lk != 9125                // ';' 'try'
-       && lk != 9253                // ';' 'while'
-       && lk != 9381                // ';' '{'
-       && lk != 10021)              // ';' '~'
+       && lk != 8741                // ';' 'include'
+       && lk != 8869                // ';' 'local'
+       && lk != 8997                // ';' 'return'
+       && lk != 9125                // ';' 'switch'
+       && lk != 9253                // ';' 'test'
+       && lk != 9381                // ';' 'throw'
+       && lk != 9509                // ';' 'try'
+       && lk != 9637                // ';' 'while'
+       && lk != 9765                // ';' '{'
+       && lk != 10405)              // ';' '~'
       {
         try_Expression();
       }
@@ -10583,7 +11092,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead1W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         if (l1 != 21)               // ')'
         {
           try_Expression();
@@ -10592,11 +11102,11 @@ function MaiaScript(string, parsingEventHandler)
     }
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
+    lookahead1W(44);                // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
-                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'return' | 'switch' |
-                                    // 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'include' | 'local' |
+                                    // 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' | '{' | '}' | '~'
     switch (l1)
     {
     case 56:                        // 'catch'
@@ -10607,7 +11117,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -10639,13 +11150,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067576               // 'catch' '(' 'i32'
      || lk == 1083960               // 'catch' '(' 'i64'
      || lk == 1100344               // 'catch' '(' 'if'
-     || lk == 1116728               // 'catch' '(' 'return'
-     || lk == 1133112               // 'catch' '(' 'switch'
-     || lk == 1149496               // 'catch' '(' 'test'
-     || lk == 1165880               // 'catch' '(' 'try'
-     || lk == 1182264               // 'catch' '(' 'while'
-     || lk == 1198648               // 'catch' '(' '{'
-     || lk == 1280568)              // 'catch' '(' '~'
+     || lk == 1116728               // 'catch' '(' 'include'
+     || lk == 1133112               // 'catch' '(' 'local'
+     || lk == 1149496               // 'catch' '(' 'return'
+     || lk == 1165880               // 'catch' '(' 'switch'
+     || lk == 1182264               // 'catch' '(' 'test'
+     || lk == 1198648               // 'catch' '(' 'throw'
+     || lk == 1215032               // 'catch' '(' 'try'
+     || lk == 1231416               // 'catch' '(' 'while'
+     || lk == 1247800               // 'catch' '(' '{'
+     || lk == 1329720)              // 'catch' '(' '~'
     {
       lk = memoized(8, e0);
       if (lk == 0)
@@ -10685,7 +11199,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -10693,7 +11208,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("Catch", e0);
@@ -10707,14 +11223,16 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
@@ -10748,7 +11266,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -10775,7 +11294,8 @@ function MaiaScript(string, parsingEventHandler)
           lookahead1W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           try_Arguments();
           consumeT(21);             // ')'
           lookahead1W(15);          // WhiteSpace^token | '{'
@@ -10796,7 +11316,8 @@ function MaiaScript(string, parsingEventHandler)
             lookahead1W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             try_Arguments();
             consumeT(21);           // ')'
             lookahead1W(11);        // WhiteSpace^token | '='
@@ -10804,7 +11325,8 @@ function MaiaScript(string, parsingEventHandler)
             lookahead1W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             try_Expression();
             lk = -2;
           }
@@ -10822,7 +11344,8 @@ function MaiaScript(string, parsingEventHandler)
               lookahead1W(24);      // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
               try_Arguments();
               consumeT(21);         // ')'
               lookahead1W(12);      // WhiteSpace^token | '?='
@@ -10845,7 +11368,8 @@ function MaiaScript(string, parsingEventHandler)
                 lookahead1W(24);    // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
                 try_Arguments();
                 consumeT(21);       // ')'
                 lookahead1W(3);     // WhiteSpace^token | '#='
@@ -10868,7 +11392,8 @@ function MaiaScript(string, parsingEventHandler)
                   lookahead1W(24);  // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
                   try_Arguments();
                   consumeT(21);     // ')'
                   lookahead1W(9);   // WhiteSpace^token | ':='
@@ -10901,7 +11426,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -10916,7 +11442,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -10925,7 +11452,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Expression();
       break;
@@ -10936,7 +11464,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -10953,7 +11482,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -10970,7 +11500,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -10993,7 +11524,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Arguments();
       consume(21);                  // ')'
@@ -11015,7 +11547,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead3W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         break;
       }
       break;
@@ -11042,7 +11575,8 @@ function MaiaScript(string, parsingEventHandler)
           lookahead1W(24);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
           try_Arguments();
           consumeT(21);             // ')'
           lookahead1W(15);          // WhiteSpace^token | '{'
@@ -11064,7 +11598,8 @@ function MaiaScript(string, parsingEventHandler)
             lookahead1W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             try_Arguments();
             consumeT(21);           // ')'
             lookahead1W(11);        // WhiteSpace^token | '='
@@ -11072,7 +11607,8 @@ function MaiaScript(string, parsingEventHandler)
             lookahead1W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             try_Expression();
             memoize(9, e0A, -2);
             lk = -7;
@@ -11091,7 +11627,8 @@ function MaiaScript(string, parsingEventHandler)
               lookahead1W(24);      // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
               try_Arguments();
               consumeT(21);         // ')'
               lookahead1W(12);      // WhiteSpace^token | '?='
@@ -11115,7 +11652,8 @@ function MaiaScript(string, parsingEventHandler)
                 lookahead1W(24);    // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
                 try_Arguments();
                 consumeT(21);       // ')'
                 lookahead1W(3);     // WhiteSpace^token | '#='
@@ -11139,7 +11677,8 @@ function MaiaScript(string, parsingEventHandler)
                   lookahead1W(24);  // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
                   try_Arguments();
                   consumeT(21);     // ')'
                   lookahead1W(9);   // WhiteSpace^token | ':='
@@ -11173,7 +11712,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(15);              // WhiteSpace^token | '{'
@@ -11186,7 +11726,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(11);              // WhiteSpace^token | '='
@@ -11194,7 +11735,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Expression();
       break;
     case -3:
@@ -11204,7 +11746,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(12);              // WhiteSpace^token | '?='
@@ -11219,7 +11762,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(3);               // WhiteSpace^token | '#='
@@ -11234,7 +11778,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(9);               // WhiteSpace^token | ':='
@@ -11256,7 +11801,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Arguments();
       consumeT(21);                 // ')'
       lookahead1W(2);               // Script | WhiteSpace^token
@@ -11267,11 +11813,12 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Return()
   {
     eventHandler.startNonterminal("Return", e0);
-    consume(68);                    // 'return'
+    consume(70);                    // 'return'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("Return", e0);
@@ -11279,12 +11826,110 @@ function MaiaScript(string, parsingEventHandler)
 
   function try_Return()
   {
-    consumeT(68);                   // 'return'
+    consumeT(70);                   // 'return'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
+  }
+
+  function parse_Include()
+  {
+    eventHandler.startNonterminal("Include", e0);
+    consume(68);                    // 'include'
+    lookahead1W(4);                 // WhiteSpace^token | '('
+    consume(20);                    // '('
+    lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+    whitespace();
+    parse_Expression();
+    lookahead1W(5);                 // WhiteSpace^token | ')'
+    consume(21);                    // ')'
+    eventHandler.endNonterminal("Include", e0);
+  }
+
+  function try_Include()
+  {
+    consumeT(68);                   // 'include'
+    lookahead1W(4);                 // WhiteSpace^token | '('
+    consumeT(20);                   // '('
+    lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+    try_Expression();
+    lookahead1W(5);                 // WhiteSpace^token | ')'
+    consumeT(21);                   // ')'
+  }
+
+  function parse_Local()
+  {
+    eventHandler.startNonterminal("Local", e0);
+    consume(69);                    // 'local'
+    lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+    whitespace();
+    parse_Expression();
+    eventHandler.endNonterminal("Local", e0);
+  }
+
+  function try_Local()
+  {
+    consumeT(69);                   // 'local'
+    lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
+                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
+    try_Expression();
+  }
+
+  function parse_Throw()
+  {
+    eventHandler.startNonterminal("Throw", e0);
+    consume(73);                    // 'throw'
+    lookahead1W(4);                 // WhiteSpace^token | '('
+    consume(20);                    // '('
+    lookahead1W(26);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
+    if (l1 != 21)                   // ')'
+    {
+      whitespace();
+      parse_Expression();
+    }
+    lookahead1W(5);                 // WhiteSpace^token | ')'
+    consume(21);                    // ')'
+    eventHandler.endNonterminal("Throw", e0);
+  }
+
+  function try_Throw()
+  {
+    consumeT(73);                   // 'throw'
+    lookahead1W(4);                 // WhiteSpace^token | '('
+    consumeT(20);                   // '('
+    lookahead1W(26);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
+    if (l1 != 21)                   // ')'
+    {
+      try_Expression();
+    }
+    lookahead1W(5);                 // WhiteSpace^token | ')'
+    consumeT(21);                   // ')'
   }
 
   function parse_EmptyStatement()
@@ -11349,14 +11994,15 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 445:                     // 'f32' Identifier
       case 446:                     // 'f64' Identifier
       case 449:                     // 'i32' Identifier
       case 450:                     // 'i64' Identifier
-        lookahead3W(42);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
+        lookahead3W(41);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -11416,13 +12062,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 63                    // 'for'
      && lk != 64                    // 'foreach'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 78)                   // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 81)                   // '~'
     {
       whitespace();
       parse_Type();
@@ -11430,7 +12079,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     for (;;)
@@ -11444,7 +12094,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (l1)
       {
       case 61:                      // 'f32'
@@ -11454,14 +12105,15 @@ function MaiaScript(string, parsingEventHandler)
         lookahead2W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         switch (lk)
         {
         case 445:                   // 'f32' Identifier
         case 446:                   // 'f64' Identifier
         case 449:                   // 'i32' Identifier
         case 450:                   // 'i64' Identifier
-          lookahead3W(42);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
+          lookahead3W(41);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -11521,13 +12173,16 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 63                  // 'for'
        && lk != 64                  // 'foreach'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 78                  // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 81                  // '~'
        && lk != 459197              // 'f32' Identifier ','
        && lk != 459198              // 'f64' Identifier ','
        && lk != 459201              // 'i32' Identifier ','
@@ -11539,7 +12194,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Expression();
     }
@@ -11557,14 +12213,15 @@ function MaiaScript(string, parsingEventHandler)
       lookahead2W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (lk)
       {
       case 445:                     // 'f32' Identifier
       case 446:                     // 'f64' Identifier
       case 449:                     // 'i32' Identifier
       case 450:                     // 'i64' Identifier
-        lookahead3W(42);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
+        lookahead3W(41);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -11624,20 +12281,24 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 63                    // 'for'
      && lk != 64                    // 'foreach'
      && lk != 67                    // 'if'
-     && lk != 68                    // 'return'
-     && lk != 69                    // 'switch'
-     && lk != 70                    // 'test'
-     && lk != 71                    // 'try'
-     && lk != 72                    // 'while'
-     && lk != 73                    // '{'
-     && lk != 78)                   // '~'
+     && lk != 68                    // 'include'
+     && lk != 69                    // 'local'
+     && lk != 70                    // 'return'
+     && lk != 71                    // 'switch'
+     && lk != 72                    // 'test'
+     && lk != 73                    // 'throw'
+     && lk != 74                    // 'try'
+     && lk != 75                    // 'while'
+     && lk != 76                    // '{'
+     && lk != 81)                   // '~'
     {
       try_Type();
     }
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     for (;;)
     {
@@ -11650,7 +12311,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       switch (l1)
       {
       case 61:                      // 'f32'
@@ -11660,14 +12322,15 @@ function MaiaScript(string, parsingEventHandler)
         lookahead2W(24);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
         switch (lk)
         {
         case 445:                   // 'f32' Identifier
         case 446:                   // 'f64' Identifier
         case 449:                   // 'i32' Identifier
         case 450:                   // 'i64' Identifier
-          lookahead3W(42);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
+          lookahead3W(41);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -11727,13 +12390,16 @@ function MaiaScript(string, parsingEventHandler)
        && lk != 63                  // 'for'
        && lk != 64                  // 'foreach'
        && lk != 67                  // 'if'
-       && lk != 68                  // 'return'
-       && lk != 69                  // 'switch'
-       && lk != 70                  // 'test'
-       && lk != 71                  // 'try'
-       && lk != 72                  // 'while'
-       && lk != 73                  // '{'
-       && lk != 78                  // '~'
+       && lk != 68                  // 'include'
+       && lk != 69                  // 'local'
+       && lk != 70                  // 'return'
+       && lk != 71                  // 'switch'
+       && lk != 72                  // 'test'
+       && lk != 73                  // 'throw'
+       && lk != 74                  // 'try'
+       && lk != 75                  // 'while'
+       && lk != 76                  // '{'
+       && lk != 81                  // '~'
        && lk != 459197              // 'f32' Identifier ','
        && lk != 459198              // 'f64' Identifier ','
        && lk != 459201              // 'i32' Identifier ','
@@ -11744,7 +12410,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Expression();
     }
   }
@@ -11761,15 +12428,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -11805,13 +12473,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067523               // Identifier '(' 'i32'
      || lk == 1083907               // Identifier '(' 'i64'
      || lk == 1100291               // Identifier '(' 'if'
-     || lk == 1116675               // Identifier '(' 'return'
-     || lk == 1133059               // Identifier '(' 'switch'
-     || lk == 1149443               // Identifier '(' 'test'
-     || lk == 1165827               // Identifier '(' 'try'
-     || lk == 1182211               // Identifier '(' 'while'
-     || lk == 1198595               // Identifier '(' '{'
-     || lk == 1280515)              // Identifier '(' '~'
+     || lk == 1116675               // Identifier '(' 'include'
+     || lk == 1133059               // Identifier '(' 'local'
+     || lk == 1149443               // Identifier '(' 'return'
+     || lk == 1165827               // Identifier '(' 'switch'
+     || lk == 1182211               // Identifier '(' 'test'
+     || lk == 1198595               // Identifier '(' 'throw'
+     || lk == 1214979               // Identifier '(' 'try'
+     || lk == 1231363               // Identifier '(' 'while'
+     || lk == 1247747               // Identifier '(' '{'
+     || lk == 1329667)              // Identifier '(' '~'
     {
       lk = memoized(12, e0);
       if (lk == 0)
@@ -11838,7 +12509,8 @@ function MaiaScript(string, parsingEventHandler)
           lookahead1W(26);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           if (l1 != 21)             // ')'
           {
             try_Arguments();
@@ -11877,7 +12549,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       if (l1 != 21)                 // ')'
       {
         whitespace();
@@ -11895,8 +12568,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         if (l1 != 32)               // '.'
         {
           break;
@@ -11913,19 +12586,20 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         switch (l1)
         {
         case 50:                    // '['
           lookahead2W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           switch (lk)
           {
           case 434:                 // '[' Identifier
-            lookahead3W(44);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+            lookahead3W(43);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -11937,16 +12611,18 @@ function MaiaScript(string, parsingEventHandler)
                                     // '?=' | ']' | '^' | '^=' | '|' | '|=' | '||'
             break;
           case 4786:                // '[' ';'
-            lookahead3W(30);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+            lookahead3W(31);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
             break;
           case 6450:                // '[' '['
             lookahead3W(27);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
             break;
           case 6578:                // '[' ']'
             lookahead3W(48);        // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
@@ -11955,14 +12631,15 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
             break;
-          case 9394:                // '[' '{'
+          case 9778:                // '[' '{'
             lookahead3W(28);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
             break;
           case 1202:                // '[' Comment
           case 6962:                // '[' 'break'
@@ -11983,16 +12660,18 @@ function MaiaScript(string, parsingEventHandler)
           case 3378:                // '[' '++'
           case 3762:                // '[' '-'
           case 3890:                // '[' '--'
-          case 10034:               // '[' '~'
+          case 10418:               // '[' '~'
             lookahead3W(22);        // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
             break;
           case 8114:                // '[' 'for'
           case 8242:                // '[' 'foreach'
           case 8626:                // '[' 'if'
-          case 8882:                // '[' 'switch'
-          case 9010:                // '[' 'test'
-          case 9266:                // '[' 'while'
+          case 8754:                // '[' 'include'
+          case 9138:                // '[' 'switch'
+          case 9266:                // '[' 'test'
+          case 9394:                // '[' 'throw'
+          case 9650:                // '[' 'while'
             lookahead3W(4);         // WhiteSpace^token | '('
             break;
           case 2610:                // '[' '('
@@ -12001,12 +12680,14 @@ function MaiaScript(string, parsingEventHandler)
           case 7986:                // '[' 'f64'
           case 8370:                // '[' 'i32'
           case 8498:                // '[' 'i64'
-          case 8754:                // '[' 'return'
-          case 9138:                // '[' 'try'
+          case 8882:                // '[' 'local'
+          case 9010:                // '[' 'return'
+          case 9522:                // '[' 'try'
             lookahead3W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             break;
           }
           break;
@@ -12074,17 +12755,20 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 65                // 'i32'
          && lk != 66                // 'i64'
          && lk != 67                // 'if'
-         && lk != 68                // 'return'
-         && lk != 69                // 'switch'
-         && lk != 70                // 'test'
-         && lk != 71                // 'try'
-         && lk != 72                // 'while'
-         && lk != 73                // '{'
-         && lk != 74                // '|'
-         && lk != 75                // '|='
-         && lk != 76                // '||'
-         && lk != 77                // '}'
-         && lk != 78                // '~'
+         && lk != 68                // 'include'
+         && lk != 69                // 'local'
+         && lk != 70                // 'return'
+         && lk != 71                // 'switch'
+         && lk != 72                // 'test'
+         && lk != 73                // 'throw'
+         && lk != 74                // 'try'
+         && lk != 75                // 'while'
+         && lk != 76                // '{'
+         && lk != 77                // '|'
+         && lk != 78                // '|='
+         && lk != 79                // '||'
+         && lk != 80                // '}'
+         && lk != 81                // '~'
          && lk != 53938             // '[' ';' Identifier
          && lk != 70322             // '[' ';' Character
          && lk != 73394             // '[' 'f32' Character
@@ -12221,41 +12905,56 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 1105714           // '[' 'f64' 'if'
          && lk != 1106098           // '[' 'i32' 'if'
          && lk != 1106226           // '[' 'i64' 'if'
-         && lk != 1118898           // '[' ';' 'return'
-         && lk != 1121970           // '[' 'f32' 'return'
-         && lk != 1122098           // '[' 'f64' 'return'
-         && lk != 1122482           // '[' 'i32' 'return'
-         && lk != 1122610           // '[' 'i64' 'return'
-         && lk != 1135282           // '[' ';' 'switch'
-         && lk != 1138354           // '[' 'f32' 'switch'
-         && lk != 1138482           // '[' 'f64' 'switch'
-         && lk != 1138866           // '[' 'i32' 'switch'
-         && lk != 1138994           // '[' 'i64' 'switch'
-         && lk != 1151666           // '[' ';' 'test'
-         && lk != 1154738           // '[' 'f32' 'test'
-         && lk != 1154866           // '[' 'f64' 'test'
-         && lk != 1155250           // '[' 'i32' 'test'
-         && lk != 1155378           // '[' 'i64' 'test'
-         && lk != 1168050           // '[' ';' 'try'
-         && lk != 1171122           // '[' 'f32' 'try'
-         && lk != 1171250           // '[' 'f64' 'try'
-         && lk != 1171634           // '[' 'i32' 'try'
-         && lk != 1171762           // '[' 'i64' 'try'
-         && lk != 1184434           // '[' ';' 'while'
-         && lk != 1187506           // '[' 'f32' 'while'
-         && lk != 1187634           // '[' 'f64' 'while'
-         && lk != 1188018           // '[' 'i32' 'while'
-         && lk != 1188146           // '[' 'i64' 'while'
-         && lk != 1200818           // '[' ';' '{'
-         && lk != 1203890           // '[' 'f32' '{'
-         && lk != 1204018           // '[' 'f64' '{'
-         && lk != 1204402           // '[' 'i32' '{'
-         && lk != 1204530           // '[' 'i64' '{'
-         && lk != 1282738           // '[' ';' '~'
-         && lk != 1285810           // '[' 'f32' '~'
-         && lk != 1285938           // '[' 'f64' '~'
-         && lk != 1286322           // '[' 'i32' '~'
-         && lk != 1286450)          // '[' 'i64' '~'
+         && lk != 1118898           // '[' ';' 'include'
+         && lk != 1121970           // '[' 'f32' 'include'
+         && lk != 1122098           // '[' 'f64' 'include'
+         && lk != 1122482           // '[' 'i32' 'include'
+         && lk != 1122610           // '[' 'i64' 'include'
+         && lk != 1135282           // '[' ';' 'local'
+         && lk != 1138354           // '[' 'f32' 'local'
+         && lk != 1138482           // '[' 'f64' 'local'
+         && lk != 1138866           // '[' 'i32' 'local'
+         && lk != 1138994           // '[' 'i64' 'local'
+         && lk != 1151666           // '[' ';' 'return'
+         && lk != 1154738           // '[' 'f32' 'return'
+         && lk != 1154866           // '[' 'f64' 'return'
+         && lk != 1155250           // '[' 'i32' 'return'
+         && lk != 1155378           // '[' 'i64' 'return'
+         && lk != 1168050           // '[' ';' 'switch'
+         && lk != 1171122           // '[' 'f32' 'switch'
+         && lk != 1171250           // '[' 'f64' 'switch'
+         && lk != 1171634           // '[' 'i32' 'switch'
+         && lk != 1171762           // '[' 'i64' 'switch'
+         && lk != 1184434           // '[' ';' 'test'
+         && lk != 1187506           // '[' 'f32' 'test'
+         && lk != 1187634           // '[' 'f64' 'test'
+         && lk != 1188018           // '[' 'i32' 'test'
+         && lk != 1188146           // '[' 'i64' 'test'
+         && lk != 1200818           // '[' ';' 'throw'
+         && lk != 1203890           // '[' 'f32' 'throw'
+         && lk != 1204018           // '[' 'f64' 'throw'
+         && lk != 1204402           // '[' 'i32' 'throw'
+         && lk != 1204530           // '[' 'i64' 'throw'
+         && lk != 1217202           // '[' ';' 'try'
+         && lk != 1220274           // '[' 'f32' 'try'
+         && lk != 1220402           // '[' 'f64' 'try'
+         && lk != 1220786           // '[' 'i32' 'try'
+         && lk != 1220914           // '[' 'i64' 'try'
+         && lk != 1233586           // '[' ';' 'while'
+         && lk != 1236658           // '[' 'f32' 'while'
+         && lk != 1236786           // '[' 'f64' 'while'
+         && lk != 1237170           // '[' 'i32' 'while'
+         && lk != 1237298           // '[' 'i64' 'while'
+         && lk != 1249970           // '[' ';' '{'
+         && lk != 1253042           // '[' 'f32' '{'
+         && lk != 1253170           // '[' 'f64' '{'
+         && lk != 1253554           // '[' 'i32' '{'
+         && lk != 1253682           // '[' 'i64' '{'
+         && lk != 1331890           // '[' ';' '~'
+         && lk != 1334962           // '[' 'f32' '~'
+         && lk != 1335090           // '[' 'f64' '~'
+         && lk != 1335474           // '[' 'i32' '~'
+         && lk != 1335602)          // '[' 'i64' '~'
         {
           lk = memoized(13, e0);
           if (lk == 0)
@@ -12270,7 +12969,8 @@ function MaiaScript(string, parsingEventHandler)
               lookahead1W(27);      // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
               if (l1 != 51)         // ']'
               {
                 try_Arguments();
@@ -12351,17 +13051,20 @@ function MaiaScript(string, parsingEventHandler)
          || lk == 65                // 'i32'
          || lk == 66                // 'i64'
          || lk == 67                // 'if'
-         || lk == 68                // 'return'
-         || lk == 69                // 'switch'
-         || lk == 70                // 'test'
-         || lk == 71                // 'try'
-         || lk == 72                // 'while'
-         || lk == 73                // '{'
-         || lk == 74                // '|'
-         || lk == 75                // '|='
-         || lk == 76                // '||'
-         || lk == 77                // '}'
-         || lk == 78                // '~'
+         || lk == 68                // 'include'
+         || lk == 69                // 'local'
+         || lk == 70                // 'return'
+         || lk == 71                // 'switch'
+         || lk == 72                // 'test'
+         || lk == 73                // 'throw'
+         || lk == 74                // 'try'
+         || lk == 75                // 'while'
+         || lk == 76                // '{'
+         || lk == 77                // '|'
+         || lk == 78                // '|='
+         || lk == 79                // '||'
+         || lk == 80                // '}'
+         || lk == 81                // '~'
          || lk == 53938             // '[' ';' Identifier
          || lk == 70322             // '[' ';' Character
          || lk == 86706             // '[' ';' String
@@ -12396,13 +13099,16 @@ function MaiaScript(string, parsingEventHandler)
          || lk == 1069746           // '[' ';' 'i32'
          || lk == 1086130           // '[' ';' 'i64'
          || lk == 1102514           // '[' ';' 'if'
-         || lk == 1118898           // '[' ';' 'return'
-         || lk == 1135282           // '[' ';' 'switch'
-         || lk == 1151666           // '[' ';' 'test'
-         || lk == 1168050           // '[' ';' 'try'
-         || lk == 1184434           // '[' ';' 'while'
-         || lk == 1200818           // '[' ';' '{'
-         || lk == 1282738)          // '[' ';' '~'
+         || lk == 1118898           // '[' ';' 'include'
+         || lk == 1135282           // '[' ';' 'local'
+         || lk == 1151666           // '[' ';' 'return'
+         || lk == 1168050           // '[' ';' 'switch'
+         || lk == 1184434           // '[' ';' 'test'
+         || lk == 1200818           // '[' ';' 'throw'
+         || lk == 1217202           // '[' ';' 'try'
+         || lk == 1233586           // '[' ';' 'while'
+         || lk == 1249970           // '[' ';' '{'
+         || lk == 1331890)          // '[' ';' '~'
         {
           break;
         }
@@ -12410,7 +13116,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead1W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         if (l1 != 51)               // ']'
         {
           whitespace();
@@ -12433,15 +13140,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 2563:                    // Identifier '('
         lookahead3W(26);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -12477,13 +13185,16 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1067523               // Identifier '(' 'i32'
      || lk == 1083907               // Identifier '(' 'i64'
      || lk == 1100291               // Identifier '(' 'if'
-     || lk == 1116675               // Identifier '(' 'return'
-     || lk == 1133059               // Identifier '(' 'switch'
-     || lk == 1149443               // Identifier '(' 'test'
-     || lk == 1165827               // Identifier '(' 'try'
-     || lk == 1182211               // Identifier '(' 'while'
-     || lk == 1198595               // Identifier '(' '{'
-     || lk == 1280515)              // Identifier '(' '~'
+     || lk == 1116675               // Identifier '(' 'include'
+     || lk == 1133059               // Identifier '(' 'local'
+     || lk == 1149443               // Identifier '(' 'return'
+     || lk == 1165827               // Identifier '(' 'switch'
+     || lk == 1182211               // Identifier '(' 'test'
+     || lk == 1198595               // Identifier '(' 'throw'
+     || lk == 1214979               // Identifier '(' 'try'
+     || lk == 1231363               // Identifier '(' 'while'
+     || lk == 1247747               // Identifier '(' '{'
+     || lk == 1329667)              // Identifier '(' '~'
     {
       lk = memoized(12, e0);
       if (lk == 0)
@@ -12510,7 +13221,8 @@ function MaiaScript(string, parsingEventHandler)
           lookahead1W(26);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           if (l1 != 21)             // ')'
           {
             try_Arguments();
@@ -12550,7 +13262,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(26);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       if (l1 != 21)                 // ')'
       {
         try_Arguments();
@@ -12569,8 +13282,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
                                     // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         if (l1 != 32)               // '.'
         {
           break;
@@ -12587,19 +13300,20 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         switch (l1)
         {
         case 50:                    // '['
           lookahead2W(27);          // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
           switch (lk)
           {
           case 434:                 // '[' Identifier
-            lookahead3W(44);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+            lookahead3W(43);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -12611,16 +13325,18 @@ function MaiaScript(string, parsingEventHandler)
                                     // '?=' | ']' | '^' | '^=' | '|' | '|=' | '||'
             break;
           case 4786:                // '[' ';'
-            lookahead3W(30);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+            lookahead3W(31);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
             break;
           case 6450:                // '[' '['
             lookahead3W(27);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
             break;
           case 6578:                // '[' ']'
             lookahead3W(48);        // END | Identifier | Character | String | Integer | Real | Imaginary | Comment |
@@ -12629,14 +13345,15 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
             break;
-          case 9394:                // '[' '{'
+          case 9778:                // '[' '{'
             lookahead3W(28);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '}' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '}' | '~'
             break;
           case 1202:                // '[' Comment
           case 6962:                // '[' 'break'
@@ -12657,16 +13374,18 @@ function MaiaScript(string, parsingEventHandler)
           case 3378:                // '[' '++'
           case 3762:                // '[' '-'
           case 3890:                // '[' '--'
-          case 10034:               // '[' '~'
+          case 10418:               // '[' '~'
             lookahead3W(22);        // Identifier | Character | String | Integer | Real | Imaginary | WhiteSpace^token |
                                     // '(' | '[' | '{'
             break;
           case 8114:                // '[' 'for'
           case 8242:                // '[' 'foreach'
           case 8626:                // '[' 'if'
-          case 8882:                // '[' 'switch'
-          case 9010:                // '[' 'test'
-          case 9266:                // '[' 'while'
+          case 8754:                // '[' 'include'
+          case 9138:                // '[' 'switch'
+          case 9266:                // '[' 'test'
+          case 9394:                // '[' 'throw'
+          case 9650:                // '[' 'while'
             lookahead3W(4);         // WhiteSpace^token | '('
             break;
           case 2610:                // '[' '('
@@ -12675,12 +13394,14 @@ function MaiaScript(string, parsingEventHandler)
           case 7986:                // '[' 'f64'
           case 8370:                // '[' 'i32'
           case 8498:                // '[' 'i64'
-          case 8754:                // '[' 'return'
-          case 9138:                // '[' 'try'
+          case 8882:                // '[' 'local'
+          case 9010:                // '[' 'return'
+          case 9522:                // '[' 'try'
             lookahead3W(24);        // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
             break;
           }
           break;
@@ -12748,17 +13469,20 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 65                // 'i32'
          && lk != 66                // 'i64'
          && lk != 67                // 'if'
-         && lk != 68                // 'return'
-         && lk != 69                // 'switch'
-         && lk != 70                // 'test'
-         && lk != 71                // 'try'
-         && lk != 72                // 'while'
-         && lk != 73                // '{'
-         && lk != 74                // '|'
-         && lk != 75                // '|='
-         && lk != 76                // '||'
-         && lk != 77                // '}'
-         && lk != 78                // '~'
+         && lk != 68                // 'include'
+         && lk != 69                // 'local'
+         && lk != 70                // 'return'
+         && lk != 71                // 'switch'
+         && lk != 72                // 'test'
+         && lk != 73                // 'throw'
+         && lk != 74                // 'try'
+         && lk != 75                // 'while'
+         && lk != 76                // '{'
+         && lk != 77                // '|'
+         && lk != 78                // '|='
+         && lk != 79                // '||'
+         && lk != 80                // '}'
+         && lk != 81                // '~'
          && lk != 53938             // '[' ';' Identifier
          && lk != 70322             // '[' ';' Character
          && lk != 73394             // '[' 'f32' Character
@@ -12895,41 +13619,56 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 1105714           // '[' 'f64' 'if'
          && lk != 1106098           // '[' 'i32' 'if'
          && lk != 1106226           // '[' 'i64' 'if'
-         && lk != 1118898           // '[' ';' 'return'
-         && lk != 1121970           // '[' 'f32' 'return'
-         && lk != 1122098           // '[' 'f64' 'return'
-         && lk != 1122482           // '[' 'i32' 'return'
-         && lk != 1122610           // '[' 'i64' 'return'
-         && lk != 1135282           // '[' ';' 'switch'
-         && lk != 1138354           // '[' 'f32' 'switch'
-         && lk != 1138482           // '[' 'f64' 'switch'
-         && lk != 1138866           // '[' 'i32' 'switch'
-         && lk != 1138994           // '[' 'i64' 'switch'
-         && lk != 1151666           // '[' ';' 'test'
-         && lk != 1154738           // '[' 'f32' 'test'
-         && lk != 1154866           // '[' 'f64' 'test'
-         && lk != 1155250           // '[' 'i32' 'test'
-         && lk != 1155378           // '[' 'i64' 'test'
-         && lk != 1168050           // '[' ';' 'try'
-         && lk != 1171122           // '[' 'f32' 'try'
-         && lk != 1171250           // '[' 'f64' 'try'
-         && lk != 1171634           // '[' 'i32' 'try'
-         && lk != 1171762           // '[' 'i64' 'try'
-         && lk != 1184434           // '[' ';' 'while'
-         && lk != 1187506           // '[' 'f32' 'while'
-         && lk != 1187634           // '[' 'f64' 'while'
-         && lk != 1188018           // '[' 'i32' 'while'
-         && lk != 1188146           // '[' 'i64' 'while'
-         && lk != 1200818           // '[' ';' '{'
-         && lk != 1203890           // '[' 'f32' '{'
-         && lk != 1204018           // '[' 'f64' '{'
-         && lk != 1204402           // '[' 'i32' '{'
-         && lk != 1204530           // '[' 'i64' '{'
-         && lk != 1282738           // '[' ';' '~'
-         && lk != 1285810           // '[' 'f32' '~'
-         && lk != 1285938           // '[' 'f64' '~'
-         && lk != 1286322           // '[' 'i32' '~'
-         && lk != 1286450)          // '[' 'i64' '~'
+         && lk != 1118898           // '[' ';' 'include'
+         && lk != 1121970           // '[' 'f32' 'include'
+         && lk != 1122098           // '[' 'f64' 'include'
+         && lk != 1122482           // '[' 'i32' 'include'
+         && lk != 1122610           // '[' 'i64' 'include'
+         && lk != 1135282           // '[' ';' 'local'
+         && lk != 1138354           // '[' 'f32' 'local'
+         && lk != 1138482           // '[' 'f64' 'local'
+         && lk != 1138866           // '[' 'i32' 'local'
+         && lk != 1138994           // '[' 'i64' 'local'
+         && lk != 1151666           // '[' ';' 'return'
+         && lk != 1154738           // '[' 'f32' 'return'
+         && lk != 1154866           // '[' 'f64' 'return'
+         && lk != 1155250           // '[' 'i32' 'return'
+         && lk != 1155378           // '[' 'i64' 'return'
+         && lk != 1168050           // '[' ';' 'switch'
+         && lk != 1171122           // '[' 'f32' 'switch'
+         && lk != 1171250           // '[' 'f64' 'switch'
+         && lk != 1171634           // '[' 'i32' 'switch'
+         && lk != 1171762           // '[' 'i64' 'switch'
+         && lk != 1184434           // '[' ';' 'test'
+         && lk != 1187506           // '[' 'f32' 'test'
+         && lk != 1187634           // '[' 'f64' 'test'
+         && lk != 1188018           // '[' 'i32' 'test'
+         && lk != 1188146           // '[' 'i64' 'test'
+         && lk != 1200818           // '[' ';' 'throw'
+         && lk != 1203890           // '[' 'f32' 'throw'
+         && lk != 1204018           // '[' 'f64' 'throw'
+         && lk != 1204402           // '[' 'i32' 'throw'
+         && lk != 1204530           // '[' 'i64' 'throw'
+         && lk != 1217202           // '[' ';' 'try'
+         && lk != 1220274           // '[' 'f32' 'try'
+         && lk != 1220402           // '[' 'f64' 'try'
+         && lk != 1220786           // '[' 'i32' 'try'
+         && lk != 1220914           // '[' 'i64' 'try'
+         && lk != 1233586           // '[' ';' 'while'
+         && lk != 1236658           // '[' 'f32' 'while'
+         && lk != 1236786           // '[' 'f64' 'while'
+         && lk != 1237170           // '[' 'i32' 'while'
+         && lk != 1237298           // '[' 'i64' 'while'
+         && lk != 1249970           // '[' ';' '{'
+         && lk != 1253042           // '[' 'f32' '{'
+         && lk != 1253170           // '[' 'f64' '{'
+         && lk != 1253554           // '[' 'i32' '{'
+         && lk != 1253682           // '[' 'i64' '{'
+         && lk != 1331890           // '[' ';' '~'
+         && lk != 1334962           // '[' 'f32' '~'
+         && lk != 1335090           // '[' 'f64' '~'
+         && lk != 1335474           // '[' 'i32' '~'
+         && lk != 1335602)          // '[' 'i64' '~'
         {
           lk = memoized(13, e0);
           if (lk == 0)
@@ -12944,7 +13683,8 @@ function MaiaScript(string, parsingEventHandler)
               lookahead1W(27);      // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
               if (l1 != 51)         // ']'
               {
                 try_Arguments();
@@ -13026,17 +13766,20 @@ function MaiaScript(string, parsingEventHandler)
          || lk == 65                // 'i32'
          || lk == 66                // 'i64'
          || lk == 67                // 'if'
-         || lk == 68                // 'return'
-         || lk == 69                // 'switch'
-         || lk == 70                // 'test'
-         || lk == 71                // 'try'
-         || lk == 72                // 'while'
-         || lk == 73                // '{'
-         || lk == 74                // '|'
-         || lk == 75                // '|='
-         || lk == 76                // '||'
-         || lk == 77                // '}'
-         || lk == 78                // '~'
+         || lk == 68                // 'include'
+         || lk == 69                // 'local'
+         || lk == 70                // 'return'
+         || lk == 71                // 'switch'
+         || lk == 72                // 'test'
+         || lk == 73                // 'throw'
+         || lk == 74                // 'try'
+         || lk == 75                // 'while'
+         || lk == 76                // '{'
+         || lk == 77                // '|'
+         || lk == 78                // '|='
+         || lk == 79                // '||'
+         || lk == 80                // '}'
+         || lk == 81                // '~'
          || lk == 53938             // '[' ';' Identifier
          || lk == 70322             // '[' ';' Character
          || lk == 86706             // '[' ';' String
@@ -13071,13 +13814,16 @@ function MaiaScript(string, parsingEventHandler)
          || lk == 1069746           // '[' ';' 'i32'
          || lk == 1086130           // '[' ';' 'i64'
          || lk == 1102514           // '[' ';' 'if'
-         || lk == 1118898           // '[' ';' 'return'
-         || lk == 1135282           // '[' ';' 'switch'
-         || lk == 1151666           // '[' ';' 'test'
-         || lk == 1168050           // '[' ';' 'try'
-         || lk == 1184434           // '[' ';' 'while'
-         || lk == 1200818           // '[' ';' '{'
-         || lk == 1282738)          // '[' ';' '~'
+         || lk == 1118898           // '[' ';' 'include'
+         || lk == 1135282           // '[' ';' 'local'
+         || lk == 1151666           // '[' ';' 'return'
+         || lk == 1168050           // '[' ';' 'switch'
+         || lk == 1184434           // '[' ';' 'test'
+         || lk == 1200818           // '[' ';' 'throw'
+         || lk == 1217202           // '[' ';' 'try'
+         || lk == 1233586           // '[' ';' 'while'
+         || lk == 1249970           // '[' ';' '{'
+         || lk == 1331890)          // '[' ';' '~'
         {
           break;
         }
@@ -13085,7 +13831,8 @@ function MaiaScript(string, parsingEventHandler)
         lookahead1W(27);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         if (l1 != 51)               // ']'
         {
           try_Arguments();
@@ -13098,11 +13845,12 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Array()
   {
     eventHandler.startNonterminal("Array", e0);
-    consume(73);                    // '{'
+    consume(76);                    // '{'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Element();
     for (;;)
@@ -13116,21 +13864,23 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Element();
     }
-    consume(77);                    // '}'
+    consume(80);                    // '}'
     eventHandler.endNonterminal("Array", e0);
   }
 
   function try_Array()
   {
-    consumeT(73);                   // '{'
+    consumeT(76);                   // '{'
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Element();
     for (;;)
     {
@@ -13143,10 +13893,11 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Element();
     }
-    consumeT(77);                   // '}'
+    consumeT(80);                   // '}'
   }
 
   function parse_Matrix()
@@ -13156,21 +13907,24 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(27);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
     switch (l1)
     {
     case 37:                        // ';'
-      lookahead2W(30);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      lookahead2W(31);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 4773:                    // ';' ';'
-        lookahead3W(30);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       }
       break;
@@ -13228,13 +13982,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8357                  // ';' 'i32'
      && lk != 8485                  // ';' 'i64'
      && lk != 8613                  // ';' 'if'
-     && lk != 8741                  // ';' 'return'
-     && lk != 8869                  // ';' 'switch'
-     && lk != 8997                  // ';' 'test'
-     && lk != 9125                  // ';' 'try'
-     && lk != 9253                  // ';' 'while'
-     && lk != 9381                  // ';' '{'
-     && lk != 10021                 // ';' '~'
+     && lk != 8741                  // ';' 'include'
+     && lk != 8869                  // ';' 'local'
+     && lk != 8997                  // ';' 'return'
+     && lk != 9125                  // ';' 'switch'
+     && lk != 9253                  // ';' 'test'
+     && lk != 9381                  // ';' 'throw'
+     && lk != 9509                  // ';' 'try'
+     && lk != 9637                  // ';' 'while'
+     && lk != 9765                  // ';' '{'
+     && lk != 10405                 // ';' '~'
      && lk != 463525                // ';' ';' ','
      && lk != 840357)               // ';' ';' ']'
     {
@@ -13251,7 +14008,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Row();
     }
@@ -13265,21 +14023,24 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(27);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
     switch (l1)
     {
     case 37:                        // ';'
-      lookahead2W(30);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+      lookahead2W(31);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
       switch (lk)
       {
       case 4773:                    // ';' ';'
-        lookahead3W(30);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
+        lookahead3W(31);            // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | ',' | '-' | '--' | ';' | '[' | ']' |
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
-                                    // 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
+                                    // 'while' | '{' | '~'
         break;
       }
       break;
@@ -13337,13 +14098,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 8357                  // ';' 'i32'
      && lk != 8485                  // ';' 'i64'
      && lk != 8613                  // ';' 'if'
-     && lk != 8741                  // ';' 'return'
-     && lk != 8869                  // ';' 'switch'
-     && lk != 8997                  // ';' 'test'
-     && lk != 9125                  // ';' 'try'
-     && lk != 9253                  // ';' 'while'
-     && lk != 9381                  // ';' '{'
-     && lk != 10021                 // ';' '~'
+     && lk != 8741                  // ';' 'include'
+     && lk != 8869                  // ';' 'local'
+     && lk != 8997                  // ';' 'return'
+     && lk != 9125                  // ';' 'switch'
+     && lk != 9253                  // ';' 'test'
+     && lk != 9381                  // ';' 'throw'
+     && lk != 9509                  // ';' 'try'
+     && lk != 9637                  // ';' 'while'
+     && lk != 9765                  // ';' '{'
+     && lk != 10405                 // ';' '~'
      && lk != 463525                // ';' ';' ','
      && lk != 840357)               // ';' ';' ']'
     {
@@ -13359,7 +14123,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Row();
     }
     consumeT(51);                   // ']'
@@ -13371,7 +14136,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(43);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      lookahead2W(42);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -13396,7 +14161,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     eventHandler.endNonterminal("Element", e0);
@@ -13407,7 +14173,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(43);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      lookahead2W(42);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -13431,7 +14197,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
   }
 
@@ -13476,7 +14243,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       whitespace();
       parse_Column();
     }
@@ -13497,7 +14265,8 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(24);              // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
       try_Column();
     }
   }
@@ -13521,7 +14290,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     whitespace();
     parse_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
@@ -13535,7 +14305,8 @@ function MaiaScript(string, parsingEventHandler)
     lookahead1W(24);                // Identifier | Character | String | Integer | Real | Imaginary | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'return' | 'switch' | 'test' | 'try' | 'while' | '{' | '~'
+                                    // 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' | 'while' |
+                                    // '{' | '~'
     try_Expression();
     lookahead1W(5);                 // WhiteSpace^token | ')'
     consumeT(21);                   // ')'
@@ -13553,8 +14324,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 1031:                    // Real Imaginary
@@ -13564,8 +14335,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -13628,17 +14399,20 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1065991               // Real Imaginary 'i32'
      || lk == 1082375               // Real Imaginary 'i64'
      || lk == 1098759               // Real Imaginary 'if'
-     || lk == 1115143               // Real Imaginary 'return'
-     || lk == 1131527               // Real Imaginary 'switch'
-     || lk == 1147911               // Real Imaginary 'test'
-     || lk == 1164295               // Real Imaginary 'try'
-     || lk == 1180679               // Real Imaginary 'while'
-     || lk == 1197063               // Real Imaginary '{'
-     || lk == 1213447               // Real Imaginary '|'
-     || lk == 1229831               // Real Imaginary '|='
-     || lk == 1246215               // Real Imaginary '||'
-     || lk == 1262599               // Real Imaginary '}'
-     || lk == 1278983)              // Real Imaginary '~'
+     || lk == 1115143               // Real Imaginary 'include'
+     || lk == 1131527               // Real Imaginary 'local'
+     || lk == 1147911               // Real Imaginary 'return'
+     || lk == 1164295               // Real Imaginary 'switch'
+     || lk == 1180679               // Real Imaginary 'test'
+     || lk == 1197063               // Real Imaginary 'throw'
+     || lk == 1213447               // Real Imaginary 'try'
+     || lk == 1229831               // Real Imaginary 'while'
+     || lk == 1246215               // Real Imaginary '{'
+     || lk == 1262599               // Real Imaginary '|'
+     || lk == 1278983               // Real Imaginary '|='
+     || lk == 1295367               // Real Imaginary '||'
+     || lk == 1311751               // Real Imaginary '}'
+     || lk == 1328135)              // Real Imaginary '~'
     {
       lk = memoized(15, e0);
       if (lk == 0)
@@ -13684,7 +14458,7 @@ function MaiaScript(string, parsingEventHandler)
     case 5:                         // String
       consume(5);                   // String
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       parse_Array();
       break;
     case 50:                        // '['
@@ -13707,8 +14481,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
       switch (lk)
       {
       case 1031:                    // Real Imaginary
@@ -13718,8 +14492,8 @@ function MaiaScript(string, parsingEventHandler)
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
                                     // '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
                                     // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
-                                    // 'i32' | 'i64' | 'if' | 'return' | 'switch' | 'test' | 'try' | 'while' | '{' |
-                                    // '|' | '|=' | '||' | '}' | '~'
+                                    // 'i32' | 'i64' | 'if' | 'include' | 'local' | 'return' | 'switch' | 'test' |
+                                    // 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       }
       break;
@@ -13782,17 +14556,20 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1065991               // Real Imaginary 'i32'
      || lk == 1082375               // Real Imaginary 'i64'
      || lk == 1098759               // Real Imaginary 'if'
-     || lk == 1115143               // Real Imaginary 'return'
-     || lk == 1131527               // Real Imaginary 'switch'
-     || lk == 1147911               // Real Imaginary 'test'
-     || lk == 1164295               // Real Imaginary 'try'
-     || lk == 1180679               // Real Imaginary 'while'
-     || lk == 1197063               // Real Imaginary '{'
-     || lk == 1213447               // Real Imaginary '|'
-     || lk == 1229831               // Real Imaginary '|='
-     || lk == 1246215               // Real Imaginary '||'
-     || lk == 1262599               // Real Imaginary '}'
-     || lk == 1278983)              // Real Imaginary '~'
+     || lk == 1115143               // Real Imaginary 'include'
+     || lk == 1131527               // Real Imaginary 'local'
+     || lk == 1147911               // Real Imaginary 'return'
+     || lk == 1164295               // Real Imaginary 'switch'
+     || lk == 1180679               // Real Imaginary 'test'
+     || lk == 1197063               // Real Imaginary 'throw'
+     || lk == 1213447               // Real Imaginary 'try'
+     || lk == 1229831               // Real Imaginary 'while'
+     || lk == 1246215               // Real Imaginary '{'
+     || lk == 1262599               // Real Imaginary '|'
+     || lk == 1278983               // Real Imaginary '|='
+     || lk == 1295367               // Real Imaginary '||'
+     || lk == 1311751               // Real Imaginary '}'
+     || lk == 1328135)              // Real Imaginary '~'
     {
       lk = memoized(15, e0);
       if (lk == 0)
@@ -13839,7 +14616,7 @@ function MaiaScript(string, parsingEventHandler)
     case 5:                         // String
       consumeT(5);                  // String
       break;
-    case 73:                        // '{'
+    case 76:                        // '{'
       try_Array();
       break;
     case 50:                        // '['
@@ -14004,7 +14781,7 @@ function MaiaScript(string, parsingEventHandler)
     var result = MaiaScript.INITIAL[tokenSetId];
     var state = 0;
 
-    for (var code = result & 255; code != 0; )
+    for (var code = result & 511; code != 0; )
     {
       var charclass;
       var c0 = current < size ? input.charCodeAt(current) : 0;
@@ -14041,18 +14818,18 @@ function MaiaScript(string, parsingEventHandler)
       }
 
       state = code;
-      var i0 = (charclass << 8) + code - 1;
-      code = MaiaScript.TRANSITION[(i0 & 7) + MaiaScript.TRANSITION[i0 >> 3]];
+      var i0 = (charclass << 9) + code - 1;
+      code = MaiaScript.TRANSITION[(i0 & 15) + MaiaScript.TRANSITION[i0 >> 4]];
 
-      if (code > 255)
+      if (code > 511)
       {
         result = code;
-        code &= 255;
+        code &= 511;
         end = current;
       }
     }
 
-    result >>= 8;
+    result >>= 9;
     if (result == 0)
     {
       end = current - 1;
@@ -14169,11 +14946,11 @@ MaiaScript.XmlSerializer = function(log, indent)
 MaiaScript.getTokenSet = function(tokenSetId)
 {
   var set = [];
-  var s = tokenSetId < 0 ? - tokenSetId : MaiaScript.INITIAL[tokenSetId] & 255;
-  for (var i = 0; i < 79; i += 32)
+  var s = tokenSetId < 0 ? - tokenSetId : MaiaScript.INITIAL[tokenSetId] & 511;
+  for (var i = 0; i < 82; i += 32)
   {
     var j = i;
-    var i0 = (i >> 5) * 246 + s - 1;
+    var i0 = (i >> 5) * 269 + s - 1;
     var f = MaiaScript.EXPECTED[(i0 & 3) + MaiaScript.EXPECTED[i0 >> 2]];
     for ( ; f != 0; f >>>= 1, ++j)
     {
@@ -14295,266 +15072,353 @@ MaiaScript.MAP2 =
 
 MaiaScript.INITIAL =
 [
-  /*  0 */ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 537, 26, 27, 28,
-  /* 29 */ 541, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 553, 42, 43, 44, 45, 46, 47, 560, 561
+  /*  0 */ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 1049, 26, 27, 28,
+  /* 29 */ 29, 1054, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 1068, 45, 46, 47, 1072, 1073
 ];
 
 MaiaScript.TRANSITION =
 [
-  /*    0 */ 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /*   18 */ 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /*   36 */ 3148, 3148, 3148, 3148, 2557, 3147, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /*   54 */ 3148, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 2208, 2208, 2208, 2208, 2208, 2208, 2214, 3148,
-  /*   72 */ 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148,
-  /*   90 */ 3148, 3148, 3148, 2458, 2728, 3148, 2208, 2208, 2208, 2208, 2208, 2208, 2214, 3148, 3148, 3148, 3148, 3148,
-  /*  108 */ 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /*  126 */ 3148, 3148, 3148, 3148, 2345, 2224, 2248, 2231, 2238, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047,
-  /*  144 */ 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148,
-  /*  162 */ 2558, 2921, 3148, 2725, 4190, 3148, 2306, 3227, 3148, 3148, 3148, 3148, 3148, 3050, 3146, 2556, 3148, 3148,
-  /*  180 */ 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 4170, 2256, 3148, 3873, 3148, 3148, 2530, 3148, 2526,
-  /*  198 */ 2472, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148,
-  /*  216 */ 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227,
-  /*  234 */ 2285, 3730, 3148, 2273, 2285, 3974, 3148, 2284, 2286, 4345, 3498, 3148, 2284, 2285, 3731, 2968, 2286, 3148,
-  /*  252 */ 2287, 2276, 4185, 3148, 3148, 3148, 3148, 3148, 2297, 2296, 2305, 3148, 2557, 3227, 3148, 3148, 3148, 3148,
-  /*  270 */ 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148,
-  /*  288 */ 3148, 3148, 3148, 3148, 2315, 2314, 2323, 3148, 2557, 3227, 3148, 3828, 3148, 3148, 3148, 4047, 3148, 2556,
-  /*  306 */ 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 2574, 2336,
-  /*  324 */ 3148, 2332, 2344, 3148, 2557, 3450, 3148, 3148, 3148, 3148, 3148, 3050, 2353, 2556, 3148, 3148, 2240, 3207,
-  /*  342 */ 2556, 3148, 3148, 3287, 3148, 3148, 3148, 4228, 2728, 3148, 4307, 3148, 2363, 2369, 4312, 2369, 4311, 3148,
-  /*  360 */ 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148,
-  /*  378 */ 3148, 3148, 3148, 2458, 2728, 3148, 2379, 3148, 3682, 3685, 2377, 2377, 3686, 3148, 2557, 3227, 3148, 3148,
-  /*  396 */ 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458,
-  /*  414 */ 2728, 3148, 3148, 3148, 3148, 3148, 2388, 2387, 2396, 3148, 2557, 3440, 3148, 3565, 3148, 2552, 3148, 4047,
-  /*  432 */ 3148, 2405, 3148, 3148, 2416, 2473, 2405, 3148, 3148, 3148, 3148, 2414, 3148, 2458, 2728, 3148, 2900, 3148,
-  /*  450 */ 2216, 2424, 2448, 2431, 2438, 3148, 2456, 2466, 3148, 3687, 3687, 3148, 3148, 4047, 3148, 2556, 3148, 3148,
-  /*  468 */ 2240, 3148, 2556, 3148, 4043, 3046, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 4422, 3888, 2907, 2481,
-  /*  486 */ 4427, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148,
-  /*  504 */ 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 2845, 3148, 2620, 2489, 2512, 2496, 2503, 2540, 2914, 2520,
-  /*  522 */ 3148, 3148, 2538, 2548, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 4043, 3046, 3148, 3148,
-  /*  540 */ 3148, 2458, 2728, 3148, 3148, 3148, 2572, 3148, 2397, 2566, 2572, 2638, 2557, 2582, 3148, 3148, 3148, 3148,
-  /*  558 */ 3148, 4047, 4225, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148,
-  /*  576 */ 2875, 3148, 3148, 2604, 2628, 2611, 2618, 3148, 2557, 3513, 3148, 3148, 3148, 3229, 3148, 4047, 3148, 2556,
-  /*  594 */ 3148, 3148, 3523, 3148, 2636, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3118, 3148, 3329, 2650,
-  /*  612 */ 3113, 2646, 2658, 3488, 2557, 2668, 2285, 3730, 3149, 2686, 2285, 4097, 3261, 2284, 2286, 4345, 3548, 4361,
-  /*  630 */ 2284, 2285, 4295, 2700, 4346, 2712, 2660, 2720, 2736, 3148, 3118, 3148, 3404, 2758, 3113, 2754, 2766, 3488,
-  /*  648 */ 2557, 2668, 2285, 3730, 3149, 2686, 2285, 4097, 3261, 2284, 2286, 4345, 3548, 2776, 2284, 2285, 3612, 2784,
-  /*  666 */ 4346, 2796, 2660, 2720, 4185, 3148, 3118, 3148, 3404, 2758, 3113, 2754, 2766, 3488, 2557, 2668, 2285, 3730,
-  /*  684 */ 3149, 2686, 2692, 4097, 3261, 2804, 2286, 4345, 3548, 2776, 2284, 2285, 3612, 2784, 4346, 2796, 2660, 2720,
-  /*  702 */ 4185, 3148, 3118, 3148, 3404, 2758, 3113, 2754, 2831, 2838, 2557, 2668, 3863, 3730, 3149, 2686, 2285, 4097,
-  /*  720 */ 3261, 2284, 2286, 4345, 3548, 2776, 2284, 2285, 3612, 2784, 4346, 2796, 2660, 2720, 4185, 3148, 3118, 3148,
-  /*  738 */ 3404, 2758, 3113, 2754, 2766, 3488, 2557, 2668, 2285, 3730, 3149, 2686, 2691, 4097, 3261, 2853, 2286, 4345,
-  /*  756 */ 3548, 2776, 2284, 2285, 3612, 2784, 4346, 2796, 2660, 2720, 4185, 3148, 3118, 3148, 3404, 2758, 3113, 2754,
-  /*  774 */ 2766, 3488, 2557, 2668, 2285, 3730, 3149, 2686, 2285, 4097, 3261, 2284, 2286, 4345, 3548, 2776, 2284, 2285,
-  /*  792 */ 3612, 2784, 4346, 2861, 2660, 2869, 4243, 3148, 3118, 3148, 3404, 2758, 3113, 2754, 2886, 2893, 2557, 2668,
-  /*  810 */ 3858, 3730, 3149, 2686, 2285, 4097, 3261, 2284, 2286, 4345, 3548, 2776, 2284, 2285, 3612, 2784, 4346, 2796,
-  /*  828 */ 2660, 2720, 4185, 3148, 3118, 3148, 3404, 2758, 3113, 2754, 2766, 3488, 2557, 2668, 2285, 3730, 3149, 2686,
-  /*  846 */ 2285, 4038, 4249, 2284, 2286, 4345, 3548, 2929, 2284, 2285, 3612, 2784, 4346, 2796, 2660, 2720, 4185, 3148,
-  /*  864 */ 3148, 2937, 3148, 3148, 2949, 2957, 2964, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556,
-  /*  882 */ 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 2592, 2589, 2979,
-  /*  900 */ 3957, 2976, 2594, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148,
-  /*  918 */ 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 3148, 3148, 2988, 2987, 2996, 3148,
-  /*  936 */ 2557, 3227, 3148, 3148, 2675, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148,
-  /*  954 */ 3148, 3148, 3148, 2458, 2728, 3148, 3148, 4461, 3148, 3148, 3007, 3006, 3015, 3148, 3025, 3227, 3148, 4374,
-  /*  972 */ 3033, 3041, 3148, 4047, 3148, 2556, 2406, 3058, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458,
-  /*  990 */ 2728, 3148, 3148, 3148, 3148, 3148, 3069, 3068, 3077, 3148, 2557, 3227, 3148, 3148, 4268, 3148, 3148, 4047,
-  /* 1008 */ 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3877,
-  /* 1026 */ 3148, 3148, 3088, 3087, 3096, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148,
-  /* 1044 */ 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /* 1062 */ 3148, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148,
-  /* 1080 */ 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227,
-  /* 1098 */ 2285, 3730, 3148, 2273, 2285, 3974, 2324, 2284, 2286, 4345, 3498, 3106, 2284, 2285, 4129, 3128, 2286, 3202,
-  /* 1116 */ 2660, 2720, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730, 3148, 2273,
-  /* 1134 */ 2285, 3974, 2324, 2284, 2286, 4345, 3498, 3106, 2284, 2285, 4129, 3128, 2286, 3202, 2768, 3140, 4219, 3148,
-  /* 1152 */ 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730, 3148, 2273, 2285, 3974, 2324, 2284,
-  /* 1170 */ 2286, 4345, 3623, 3157, 2284, 2285, 4129, 3128, 2286, 3202, 2660, 2720, 4185, 3148, 3732, 3148, 2966, 2285,
-  /* 1188 */ 3148, 3595, 4344, 2288, 2557, 3165, 2285, 3730, 3148, 2273, 2285, 3974, 3753, 2284, 2286, 4345, 3498, 3106,
-  /* 1206 */ 2284, 2285, 4129, 3128, 2286, 3202, 2660, 2720, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288,
-  /* 1224 */ 2557, 3180, 2285, 3730, 3148, 2273, 2285, 3974, 4141, 2284, 2286, 4345, 3498, 3148, 2284, 2285, 3731, 2968,
-  /* 1242 */ 2286, 3148, 2287, 2276, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730,
-  /* 1260 */ 3148, 2273, 2285, 3974, 3148, 2284, 2286, 4345, 3623, 3733, 2284, 2285, 3731, 2968, 2286, 3148, 2287, 2276,
-  /* 1278 */ 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3195, 2285, 3730, 3148, 2273, 2285, 3668,
-  /* 1296 */ 3802, 2284, 2286, 4345, 3498, 2678, 2284, 2285, 3731, 2968, 2286, 3148, 2287, 2276, 3215, 3148, 3148, 3148,
-  /* 1314 */ 2440, 3237, 2439, 3237, 3244, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148,
-  /* 1332 */ 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /* 1350 */ 3148, 3148, 4191, 3254, 3148, 3148, 3148, 3148, 3148, 3050, 3843, 2556, 3148, 3148, 2240, 3148, 2556, 3148,
-  /* 1368 */ 3148, 3148, 3148, 3148, 3148, 3340, 3269, 3148, 3148, 3148, 3986, 3303, 3985, 3298, 3308, 3148, 2557, 3227,
-  /* 1386 */ 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148,
-  /* 1404 */ 3148, 2458, 2728, 3148, 3148, 3148, 3148, 3148, 3319, 3318, 3327, 3148, 2557, 3227, 3148, 3148, 3148, 3148,
-  /* 1422 */ 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148,
-  /* 1440 */ 3732, 3148, 2966, 2285, 3148, 3595, 2818, 2288, 2878, 3227, 2821, 3337, 3148, 3348, 2285, 3974, 2324, 2284,
-  /* 1458 */ 2286, 3359, 3498, 3106, 3367, 3377, 4204, 3387, 2286, 3202, 2660, 2720, 4185, 3148, 3402, 3148, 2596, 3416,
-  /* 1476 */ 3148, 3412, 3424, 2288, 2557, 3227, 2285, 3730, 3148, 2273, 2285, 3928, 3172, 2284, 2286, 4345, 3498, 3106,
-  /* 1494 */ 2284, 2285, 4129, 3128, 2286, 3202, 2660, 3434, 4185, 3148, 3448, 3290, 2998, 3458, 3148, 3466, 3473, 2288,
-  /* 1512 */ 2557, 3227, 2285, 3730, 3148, 2273, 2285, 3974, 2324, 2284, 2286, 3598, 3498, 3106, 2284, 3485, 4129, 3128,
-  /* 1530 */ 3496, 3202, 3506, 3140, 4219, 3148, 3521, 3148, 3017, 3531, 3148, 3538, 3545, 2288, 2557, 3227, 2285, 3730,
-  /* 1548 */ 3148, 2273, 2285, 3974, 2324, 2284, 2286, 4345, 3498, 3106, 2284, 2285, 4129, 3128, 2286, 3202, 2660, 2720,
-  /* 1566 */ 4185, 3148, 3563, 3148, 3060, 3556, 3148, 3573, 3580, 3591, 2557, 3227, 3583, 4167, 3148, 3606, 2285, 3974,
-  /* 1584 */ 2324, 3620, 2286, 2690, 3631, 3157, 3639, 3651, 4016, 3128, 3663, 3202, 2660, 2720, 3676, 3148, 3695, 3148,
-  /* 1602 */ 3079, 3709, 3148, 3705, 3717, 3728, 2557, 3165, 3916, 3730, 3148, 2273, 3741, 3928, 3187, 2284, 3379, 4345,
-  /* 1620 */ 3498, 3106, 2284, 2285, 4129, 3128, 2286, 3202, 2660, 3434, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595,
-  /* 1638 */ 4344, 2788, 3120, 3227, 2285, 3750, 3148, 2273, 2285, 3974, 3148, 2284, 2286, 4345, 3498, 3148, 2284, 3476,
-  /* 1656 */ 3731, 2968, 3941, 3148, 3970, 3275, 4185, 3148, 3761, 3148, 3098, 3776, 3148, 3772, 3784, 2288, 2557, 3227,
-  /* 1674 */ 2285, 3730, 3148, 2273, 3369, 3795, 3148, 2284, 3812, 4345, 3498, 3148, 2284, 3426, 3825, 4071, 2286, 3148,
-  /* 1692 */ 2287, 2276, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730, 3148, 2273,
-  /* 1710 */ 2285, 3974, 3148, 2284, 2286, 4345, 3498, 3148, 2284, 3477, 3731, 4400, 2286, 3148, 2287, 2276, 4185, 3148,
-  /* 1728 */ 3732, 3148, 2966, 2285, 3148, 3595, 2811, 2288, 2557, 3836, 2285, 3730, 3148, 3853, 2285, 3974, 3764, 2284,
-  /* 1746 */ 2286, 4345, 3132, 3885, 3896, 2285, 3731, 2968, 4112, 3148, 3655, 2276, 4185, 3148, 3732, 3148, 2966, 2285,
-  /* 1764 */ 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730, 3148, 3904, 2285, 3928, 3146, 3912, 2286, 4345, 3498, 3148,
-  /* 1782 */ 2284, 2285, 3731, 2968, 3643, 3148, 3924, 3351, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 3394, 2288,
-  /* 1800 */ 2557, 3227, 3936, 3954, 3148, 3965, 2285, 3974, 3148, 2284, 2286, 4345, 3498, 3148, 2284, 2285, 3731, 2968,
-  /* 1818 */ 2286, 3148, 2287, 2276, 4185, 3148, 3982, 3148, 3804, 3998, 3148, 3994, 4006, 3868, 2557, 3227, 4024, 3730,
-  /* 1836 */ 3148, 2273, 2704, 3928, 3146, 4032, 2286, 4345, 3498, 3148, 2284, 2285, 4055, 4059, 2286, 3148, 2287, 3351,
-  /* 1854 */ 4185, 3148, 4067, 3148, 3246, 4083, 3148, 4079, 4091, 2288, 2557, 3227, 2285, 3730, 3148, 4105, 4110, 3817,
-  /* 1872 */ 3148, 2284, 4338, 4120, 3498, 3148, 2284, 2285, 3731, 2968, 2286, 3148, 2287, 2276, 4185, 3148, 4137, 3148,
-  /* 1890 */ 3845, 4153, 3148, 4149, 4161, 2288, 2557, 3227, 2285, 3730, 3148, 4178, 3787, 3928, 3146, 2284, 4199, 4212,
-  /* 1908 */ 4282, 3148, 4236, 2285, 3731, 2968, 2286, 3148, 2287, 3221, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595,
-  /* 1926 */ 4344, 2288, 2557, 3195, 2285, 3730, 3148, 2273, 2285, 3668, 3802, 2284, 2286, 4345, 4257, 2678, 4276, 3742,
-  /* 1944 */ 3731, 2968, 4290, 3148, 3720, 3281, 3215, 3148, 4303, 2355, 3310, 4324, 3148, 4320, 4332, 4126, 2557, 3227,
-  /* 1962 */ 2823, 3730, 3148, 2273, 2285, 3974, 3148, 2284, 2286, 4345, 3498, 3148, 2284, 2285, 3731, 2968, 2286, 3148,
-  /* 1980 */ 2287, 2276, 4185, 3148, 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 4354, 2285, 3730, 3148, 2273,
-  /* 1998 */ 2285, 3946, 4264, 2284, 2286, 4345, 3498, 3148, 2284, 2285, 3731, 2968, 2286, 3148, 2287, 2276, 4185, 3148,
-  /* 2016 */ 3732, 3148, 2966, 2285, 3148, 3595, 4344, 2288, 2557, 3227, 2285, 3730, 3148, 2273, 2285, 4369, 3148, 2284,
-  /* 2034 */ 4011, 4345, 3498, 3148, 2284, 2285, 3731, 2968, 2286, 3148, 2287, 2276, 4185, 3148, 3148, 4428, 4382, 4388,
-  /* 2052 */ 4428, 4388, 4396, 2239, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148,
-  /* 2070 */ 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 3148, 3148, 4409, 4408, 4417, 3148,
-  /* 2088 */ 2557, 3227, 3148, 3148, 3697, 3148, 3148, 4047, 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148,
-  /* 2106 */ 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148, 2262, 2742, 2746, 4436, 2265, 3148, 2557, 3227, 3148, 3148,
-  /* 2124 */ 3148, 3148, 3148, 2941, 3148, 2556, 3148, 3148, 2939, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458,
-  /* 2142 */ 2728, 3148, 3148, 3148, 2504, 4448, 3148, 4444, 4456, 3148, 2557, 3227, 3148, 3148, 3148, 3148, 3148, 4047,
-  /* 2160 */ 3148, 2556, 3148, 3148, 2240, 3148, 2556, 3148, 3148, 3148, 3148, 3148, 3148, 2458, 2728, 3148, 3148, 3148,
-  /* 2178 */ 3148, 4465, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148,
-  /* 2196 */ 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3148, 3122, 3122, 3122, 3122, 3122, 3122,
-  /* 2214 */ 3122, 3122, 0, 0, 0, 0, 0, 0, 62, 6733, 3328, 3328, 3328, 3328, 3328, 3328, 3328, 3328, 92, 92, 92, 3420,
-  /* 2236 */ 3420, 3420, 3420, 0, 0, 0, 0, 0, 0, 0, 125, 0, 92, 92, 92, 92, 92, 92, 92, 92, 0, 1608, 1536, 1536, 1536,
-  /* 2261 */ 1536, 0, 0, 0, 19968, 0, 0, 0, 0, 0, 0, 0, 0, 1075, 1075, 0, 0, 1075, 1075, 1075, 72, 0, 0, 137, 1075,
-  /* 2286 */ 1075, 1075, 1075, 1075, 1075, 1075, 1075, 0, 0, 0, 0, 4189, 4189, 4189, 4189, 4189, 4189, 4189, 4189, 4189,
-  /* 2306 */ 0, 0, 0, 0, 0, 0, 0, 1536, 0, 4702, 4702, 4702, 4702, 4702, 4702, 4702, 4702, 4702, 0, 0, 0, 0, 0, 0, 0,
-  /* 2331 */ 1928, 73, 0, 0, 0, 73, 73, 73, 73, 73, 73, 73, 73, 73, 0, 0, 0, 0, 0, 0, 0, 3328, 1280, 129, 0, 0, 0, 0, 0,
-  /* 2360 */ 0, 71, 0, 5376, 5376, 0, 0, 0, 0, 5376, 5376, 5376, 5376, 5376, 5376, 5376, 5376, 5632, 5632, 0, 0, 0, 0,
-  /* 2383 */ 0, 5632, 0, 0, 0, 5983, 5983, 5983, 5983, 5983, 5983, 5983, 5983, 5983, 0, 0, 0, 0, 0, 0, 0, 8448, 177, 0,
-  /* 2407 */ 0, 0, 0, 0, 0, 0, 10496, 195, 0, 0, 0, 0, 0, 0, 195, 125, 0, 6733, 6733, 6733, 6733, 6733, 6733, 6733,
-  /* 2431 */ 6733, 6752, 6752, 6752, 6760, 6760, 6760, 6760, 0, 0, 0, 0, 0, 0, 0, 13056, 13056, 6752, 6760, 6752, 6760,
-  /* 2452 */ 6752, 6752, 6760, 6752, 0, 6912, 0, 0, 0, 0, 0, 72, 0, 0, 129, 0, 0, 0, 6912, 0, 2639, 0, 0, 0, 0, 0, 0, 0,
-  /* 2480 */ 195, 7424, 7424, 7424, 7424, 7424, 7424, 7424, 7424, 7758, 7758, 7758, 7758, 7758, 7758, 7758, 7758, 7777,
-  /* 2498 */ 7777, 7777, 7788, 7788, 7788, 7788, 0, 0, 0, 0, 0, 0, 0, 20224, 7777, 7785, 7777, 7785, 7777, 7777, 7785,
-  /* 2519 */ 7777, 129, 123, 0, 0, 123, 8059, 2639, 0, 0, 0, 2639, 2639, 2639, 2639, 2639, 2639, 2639, 2639, 7936, 0, 0,
-  /* 2541 */ 0, 0, 0, 0, 123, 0, 0, 8059, 0, 0, 8059, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0, 0, 0, 72, 72, 0, 8448, 8448, 8448,
-  /* 2570 */ 0, 0, 8448, 0, 0, 0, 0, 0, 0, 0, 73, 73, 129, 0, 132, 132, 0, 0, 2639, 0, 0, 9728, 0, 0, 9728, 0, 0, 0, 0,
-  /* 2599 */ 0, 0, 0, 1076, 1076, 80, 80, 80, 80, 80, 80, 80, 80, 8802, 8802, 8802, 8813, 8813, 8813, 8813, 0, 0, 0, 0,
-  /* 2623 */ 0, 0, 0, 74, 7758, 8802, 8802, 8802, 8802, 8802, 8802, 8802, 8802, 2560, 0, 0, 0, 0, 0, 0, 0, 124, 0, 1867,
-  /* 2647 */ 0, 0, 0, 1867, 1867, 1867, 1867, 1867, 1867, 1867, 1867, 1867, 0, 1075, 1075, 1075, 1075, 1075, 1075, 72,
-  /* 2667 */ 129, 129, 131, 1868, 1868, 63, 131, 2639, 0, 0, 10392, 0, 0, 0, 0, 0, 202, 0, 0, 63, 1075, 1075, 131, 0,
-  /* 2691 */ 1075, 1075, 1075, 51, 1075, 1075, 1075, 1075, 1075, 221, 222, 203, 2272, 1075, 1075, 1075, 1075, 161, 1075,
-  /* 2710 */ 1075, 1075, 217, 171, 171, 232, 232, 234, 2272, 2272, 129, 0, 1075, 1075, 1075, 72, 0, 0, 0, 72, 72, 72,
-  /* 2732 */ 72, 72, 0, 0, 1075, 72, 244, 245, 72, 72, 0, 0, 0, 19968, 0, 0, 19968, 19968, 19968, 0, 0, 0, 1868, 0, 0,
-  /* 2757 */ 0, 1868, 1868, 1868, 1868, 1868, 1868, 1868, 1868, 1868, 0, 1075, 1075, 1075, 1075, 1075, 1075, 238, 129,
-  /* 2776 */ 0, 199, 72, 172, 201, 0, 203, 2224, 221, 0, 203, 2272, 1075, 1075, 1075, 1075, 1146, 0, 0, 0, 217, 171,
-  /* 2798 */ 171, 232, 232, 0, 2272, 2272, 137, 1075, 1075, 15923, 1075, 1075, 16947, 1075, 0, 1075, 1075, 1075, 1075,
-  /* 2817 */ 1138, 1075, 0, 1075, 1075, 1135, 1075, 1075, 1075, 1075, 1075, 1075, 1170, 1075, 1868, 0, 1075, 1075, 1075,
-  /* 2836 */ 1075, 1075, 1139, 1075, 1075, 1075, 1075, 63, 63, 0, 62, 0, 0, 0, 0, 0, 67, 137, 1075, 1075, 1075, 16179,
-  /* 2858 */ 1075, 1075, 17203, 217, 231, 171, 233, 232, 0, 2272, 2272, 129, 240, 1075, 1075, 1075, 72, 0, 0, 64, 0, 0,
-  /* 2880 */ 0, 0, 0, 126, 0, 72, 1868, 0, 1075, 1075, 1075, 1075, 1075, 1140, 1075, 1075, 1075, 1075, 63, 63, 0, 62, 0,
-  /* 2903 */ 0, 0, 0, 66, 0, 0, 7424, 7424, 7424, 7424, 7424, 0, 0, 7936, 0, 0, 0, 0, 72, 72, 72, 72, 72, 72, 72, 72, 0,
-  /* 2930 */ 199, 72, 0, 201, 0, 203, 2224, 9216, 68, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 68, 68, 68, 68, 9284, 68, 68, 68,
-  /* 2957 */ 9216, 68, 9284, 68, 68, 9284, 9284, 9284, 0, 0, 0, 0, 0, 0, 0, 1075, 1075, 1075, 1075, 9728, 0, 0, 9728,
-  /* 2980 */ 9728, 9728, 9728, 9728, 9728, 9728, 9728, 0, 10083, 10083, 10083, 10083, 10083, 10083, 10083, 10083, 10083,
-  /* 2997 */ 0, 0, 0, 0, 0, 0, 0, 1077, 1077, 0, 11108, 11108, 11108, 11108, 11108, 11108, 11108, 11108, 11108, 0, 0, 0,
-  /* 3019 */ 0, 0, 0, 0, 1078, 1078, 3840, 0, 0, 9472, 12800, 0, 0, 72, 8192, 8960, 10752, 11264, 11776, 13824, 19456,
-  /* 3040 */ 7168, 8192, 0, 0, 8192, 8960, 0, 0, 0, 223, 0, 0, 0, 0, 125, 0, 0, 72, 12288, 0, 0, 0, 0, 0, 0, 0, 1079,
-  /* 3067 */ 1079, 0, 11621, 11621, 11621, 11621, 11621, 11621, 11621, 11621, 11621, 0, 0, 0, 0, 0, 0, 0, 1080, 1080, 0,
-  /* 3088 */ 12613, 12613, 12613, 12613, 12613, 12613, 12613, 12613, 12613, 0, 0, 0, 0, 0, 0, 0, 1081, 1081, 0, 199, 72,
-  /* 3109 */ 0, 201, 0, 203, 0, 63, 0, 63, 0, 0, 63, 0, 0, 0, 0, 0, 0, 127, 72, 221, 0, 203, 0, 1075, 1075, 1075, 1075,
-  /* 3136 */ 1181, 0, 125, 0, 239, 0, 1075, 1075, 1075, 72, 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 63, 0, 199, 72, 0, 201, 0,
-  /* 3163 */ 203, 204, 129, 0, 1792, 1792, 0, 0, 2639, 0, 129, 0, 0, 0, 0, 0, 1928, 129, 0, 1925, 1925, 0, 0, 2639, 0,
-  /* 3188 */ 129, 0, 0, 0, 1792, 0, 1928, 129, 0, 1926, 1926, 0, 0, 2639, 0, 171, 171, 232, 232, 0, 0, 0, 1280, 0, 1280,
-  /* 3213 */ 0, 0, 1075, 243, 72, 72, 72, 72, 0, 0, 1075, 1075, 15155, 72, 129, 0, 0, 0, 0, 0, 2639, 0, 0, 0, 13056,
-  /* 3238 */ 13056, 13056, 13056, 13056, 13056, 13056, 13056, 0, 0, 0, 0, 0, 0, 0, 1083, 1083, 130, 0, 0, 0, 0, 0, 2639,
-  /* 3261 */ 0, 172, 131, 2224, 0, 0, 0, 1928, 0, 242, 128, 128, 128, 128, 0, 0, 1075, 16691, 1075, 72, 0, 0, 1265,
-  /* 3284 */ 1075, 1075, 72, 0, 0, 1280, 0, 0, 0, 0, 0, 70, 0, 0, 13312, 13312, 0, 13312, 0, 0, 0, 13312, 0, 0, 13312,
-  /* 3309 */ 0, 0, 0, 0, 0, 0, 0, 1085, 1085, 0, 13670, 13670, 13670, 13670, 13670, 13670, 13670, 13670, 13670, 0, 0, 0,
-  /* 3331 */ 0, 0, 0, 0, 1867, 1867, 1075, 1174, 1075, 0, 0, 0, 0, 0, 242, 174, 0, 0, 1178, 1075, 0, 0, 1075, 1075,
-  /* 3355 */ 1075, 72, 129, 0, 0, 1075, 1075, 1213, 1075, 1075, 1075, 1216, 137, 1229, 1075, 1075, 1075, 1075, 1075,
-  /* 3374 */ 1075, 1187, 1075, 1075, 1235, 1075, 1075, 1075, 1075, 1075, 1075, 1210, 0, 221, 0, 203, 0, 1075, 1075,
-  /* 3393 */ 1250, 1075, 0, 1075, 1075, 1136, 51, 1075, 1141, 1076, 0, 0, 0, 0, 0, 0, 0, 1868, 1868, 1105, 0, 0, 0,
-  /* 3416 */ 1105, 1105, 1105, 1105, 1105, 1105, 1105, 1105, 1105, 0, 1075, 1075, 1075, 1075, 1075, 1075, 1237, 1075,
-  /* 3434 */ 129, 0, 1075, 1075, 1075, 72, 129, 0, 0, 0, 0, 0, 2639, 137, 1077, 0, 0, 0, 0, 0, 0, 0, 2639, 0, 1106,
-  /* 3459 */ 1106, 1106, 1106, 1106, 1106, 1106, 1114, 1130, 0, 0, 0, 1106, 1106, 1106, 1130, 0, 1075, 1075, 1075, 1075,
-  /* 3479 */ 1075, 1075, 51, 1075, 1075, 1075, 1075, 1075, 1236, 1075, 1075, 1075, 1075, 1075, 63, 63, 0, 1252, 1075,
-  /* 3498 */ 1075, 1075, 1075, 1075, 1075, 0, 125, 0, 1075, 1260, 1075, 1075, 1075, 1075, 238, 129, 0, 0, 0, 0, 0, 2639,
-  /* 3520 */ 2639, 1078, 0, 0, 0, 0, 0, 0, 0, 2816, 0, 1107, 1107, 1107, 1107, 1107, 1107, 1107, 1115, 0, 0, 0, 1107,
-  /* 3543 */ 1107, 1107, 1115, 0, 1075, 1075, 1075, 1075, 1075, 1075, 166, 125, 0, 1079, 1079, 1079, 1079, 1079, 1079,
-  /* 3562 */ 1079, 1079, 0, 0, 0, 0, 0, 0, 0, 6144, 0, 1131, 0, 0, 0, 1079, 1079, 1079, 1131, 0, 1075, 1075, 1075, 1137,
-  /* 3586 */ 1075, 1075, 1169, 1075, 1171, 1075, 1142, 1075, 1144, 1075, 0, 0, 0, 1075, 1075, 1075, 1075, 1214, 1075,
-  /* 3605 */ 1075, 0, 1075, 1075, 0, 0, 1180, 1075, 1075, 0, 217, 0, 219, 219, 221, 137, 1202, 1075, 1075, 1075, 1075,
-  /* 3626 */ 1075, 1075, 196, 125, 0, 1217, 1075, 1075, 1075, 1075, 196, 125, 14336, 137, 1075, 1075, 1231, 1075, 1075,
-  /* 3645 */ 1075, 1075, 1254, 1075, 51, 0, 14387, 1075, 1075, 15667, 1075, 1075, 1075, 1075, 1261, 1075, 0, 0, 1075,
-  /* 3664 */ 18739, 1075, 1075, 1075, 1075, 1075, 0, 0, 125, 0, 0, 170, 14899, 72, 72, 72, 72, 72, 0, 0, 5632, 0, 5632,
-  /* 3687 */ 0, 0, 0, 0, 0, 0, 0, 6912, 1080, 0, 0, 0, 0, 0, 0, 0, 19712, 0, 1108, 0, 0, 0, 1108, 1108, 1108, 1108,
-  /* 3713 */ 1108, 1108, 1108, 1108, 1108, 0, 1075, 1075, 1075, 1075, 1075, 1075, 1181, 0, 0, 51, 1075, 1075, 1075,
-  /* 3732 */ 1075, 0, 0, 0, 0, 0, 0, 0, 204, 1184, 1075, 1075, 1075, 1075, 1075, 1075, 1075, 1238, 1173, 1075, 1075, 0,
-  /* 3754 */ 0, 0, 0, 0, 1792, 0, 1928, 1081, 0, 0, 0, 0, 0, 0, 0, 1927, 1792, 0, 1109, 0, 0, 0, 1109, 1109, 1109, 1109,
-  /* 3780 */ 1109, 1109, 1109, 1109, 1109, 0, 1075, 1075, 1075, 1075, 1075, 1075, 1186, 1075, 1075, 1075, 1189, 0, 0,
-  /* 3799 */ 125, 0, 169, 0, 173, 0, 0, 0, 0, 0, 0, 1082, 1082, 1075, 1206, 1075, 1075, 1208, 1075, 1075, 0, 0, 125,
-  /* 3822 */ 168, 0, 0, 1075, 1075, 2304, 0, 0, 0, 0, 0, 4864, 0, 0, 129, 0, 1927, 1927, 0, 0, 2639, 0, 174, 0, 0, 0, 0,
-  /* 3849 */ 0, 0, 1084, 1084, 0, 1075, 1179, 0, 0, 1075, 1075, 1075, 1165, 1168, 1075, 1075, 1075, 1164, 1167, 1075,
-  /* 3869 */ 1075, 1075, 1145, 1075, 0, 0, 0, 65, 0, 0, 0, 0, 69, 0, 0, 0, 197, 0, 0, 0, 0, 0, 0, 0, 7424, 7424, 0, 137,
-  /* 3897 */ 1075, 1075, 1075, 1075, 1075, 1075, 1234, 0, 1075, 1075, 0, 0, 1075, 1075, 1183, 137, 1075, 1203, 1075,
-  /* 3916 */ 1075, 1075, 1075, 1075, 17459, 1075, 1075, 1075, 1259, 1075, 17715, 1075, 1075, 1075, 0, 0, 125, 0, 0, 72,
-  /* 3936 */ 1075, 1163, 15411, 1166, 1075, 1075, 1075, 1075, 14643, 1075, 1075, 1075, 0, 0, 125, 0, 0, 171, 1075, 1163,
-  /* 3956 */ 15411, 0, 0, 0, 0, 0, 9728, 9728, 0, 0, 1163, 1075, 0, 0, 1075, 1075, 1075, 17971, 1075, 1075, 0, 0, 125,
-  /* 3979 */ 0, 0, 0, 1082, 0, 0, 0, 0, 0, 0, 0, 13312, 13312, 0, 0, 1110, 0, 0, 0, 1110, 1110, 1110, 1110, 1110, 1110,
-  /* 4004 */ 1110, 1110, 1110, 0, 1075, 1134, 1075, 1075, 1075, 1075, 18483, 1075, 1075, 1075, 0, 0, 18688, 219, 219,
-  /* 4023 */ 221, 1162, 1075, 1075, 1075, 1075, 1075, 1075, 1172, 137, 1075, 1075, 1075, 1075, 16564, 1075, 1075, 63,
-  /* 4041 */ 166, 125, 0, 0, 0, 216, 0, 0, 0, 0, 125, 0, 0, 0, 1075, 1239, 0, 0, 0, 0, 0, 0, 1075, 1075, 1075, 1251,
-  /* 4067 */ 1083, 0, 0, 0, 0, 0, 0, 0, 1075, 1249, 1075, 1075, 1111, 0, 0, 0, 1111, 1111, 1111, 1111, 1111, 1111, 1111,
-  /* 4090 */ 1111, 1111, 0, 1075, 1075, 1075, 1075, 1075, 1075, 63, 166, 125, 0, 0, 72, 0, 1075, 1075, 0, 0, 1075, 1181,
-  /* 4112 */ 1075, 1075, 1075, 1075, 1075, 1188, 1075, 0, 0, 1209, 1212, 1075, 1075, 1075, 1075, 1075, 1143, 1075, 1075,
-  /* 4131 */ 0, 0, 0, 219, 219, 221, 1084, 0, 0, 0, 0, 0, 0, 0, 1792, 1925, 0, 0, 1112, 0, 0, 0, 1112, 1112, 1112, 1112,
-  /* 4157 */ 1112, 1112, 1112, 1112, 1112, 0, 1075, 1075, 1075, 1075, 1075, 1075, 1175, 0, 0, 0, 0, 0, 1608, 129, 0, 0,
-  /* 4179 */ 1075, 1075, 0, 0, 1075, 1182, 1075, 72, 72, 72, 72, 72, 0, 0, 0, 0, 0, 0, 0, 128, 1205, 1075, 1075, 1075,
-  /* 4203 */ 1075, 1182, 1075, 0, 0, 0, 219, 219, 221, 0, 1211, 1075, 1075, 1075, 1075, 1215, 1075, 72, 72, 72, 72, 238,
-  /* 4225 */ 0, 0, 132, 0, 0, 0, 0, 0, 72, 1409, 0, 137, 1075, 1230, 1075, 1075, 1233, 18227, 1075, 72, 72, 72, 246, 72,
-  /* 4249 */ 0, 0, 131, 2224, 0, 0, 0, 1928, 1075, 1218, 1075, 1075, 1075, 0, 125, 0, 175, 0, 0, 0, 0, 0, 0, 12185, 0,
-  /* 4274 */ 0, 0, 137, 1075, 1075, 1075, 1232, 1075, 1075, 1075, 1182, 51, 1075, 0, 125, 0, 1075, 1075, 1253, 1075,
-  /* 4294 */ 1075, 1075, 1075, 0, 217, 0, 218, 219, 220, 1085, 0, 0, 0, 0, 0, 0, 0, 5376, 0, 0, 0, 0, 0, 0, 0, 5376,
-  /* 4320 */ 1113, 0, 0, 0, 1113, 1113, 1113, 1113, 1113, 1113, 1113, 1113, 1113, 0, 1075, 1075, 1075, 1075, 1075, 1075,
-  /* 4340 */ 1207, 1075, 1075, 1209, 1075, 0, 1075, 1075, 1075, 1075, 1075, 1075, 1075, 217, 129, 0, 136, 0, 0, 0, 2639,
-  /* 4361 */ 0, 198, 72, 172, 200, 0, 203, 2224, 51, 1075, 0, 0, 125, 0, 0, 0, 3584, 4352, 5120, 6400, 7168, 0, 18944,
-  /* 4384 */ 0, 0, 0, 0, 18944, 18944, 18944, 18944, 18944, 18944, 18944, 18944, 18944, 0, 0, 0, 0, 0, 0, 0, 14131,
-  /* 4405 */ 1075, 1075, 1075, 0, 19303, 19303, 19303, 19303, 19303, 19303, 19303, 19303, 19303, 0, 0, 0, 0, 0, 0, 0,
-  /* 4425 */ 7424, 7424, 7424, 0, 0, 0, 0, 0, 0, 0, 18944, 19968, 0, 19968, 0, 19968, 19968, 19968, 19968, 20224, 0, 0,
-  /* 4447 */ 0, 20224, 20224, 20224, 20224, 20224, 20224, 20224, 20224, 20224, 0, 0, 0, 0, 0, 0, 0, 11008, 0, 0, 0, 0,
-  /* 4469 */ 768, 0, 0, 0
+  /*    0 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*   18 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*   36 */ 2799, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321,
+  /*   54 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2208, 2208, 2208, 2222, 2360, 2321, 2321, 2321,
+  /*   72 */ 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*   90 */ 2321, 2321, 2321, 2321, 2321, 2321, 2208, 2208, 2208, 2222, 2321, 2321, 2321, 2321, 2240, 2321, 2321, 2278,
+  /*  108 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  126 */ 2321, 2321, 2321, 6374, 2305, 2320, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321,
+  /*  144 */ 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4715,
+  /*  162 */ 4710, 5078, 5244, 2321, 2321, 2321, 2338, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 6125, 2321, 2321, 2321,
+  /*  180 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2650, 5465, 3666, 3712, 2360, 2321,
+  /*  198 */ 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  216 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 2376, 5376,
+  /*  234 */ 5964, 2406, 5964, 3405, 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  252 */ 2321, 2321, 2321, 2321, 2321, 6147, 2434, 2449, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321,
+  /*  270 */ 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  288 */ 2321, 2620, 2468, 2483, 2360, 2486, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321,
+  /*  306 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4922, 4917, 2502,
+  /*  324 */ 5687, 2321, 2321, 2321, 2521, 2321, 2321, 2573, 2321, 4863, 2321, 2321, 6027, 2321, 2321, 2321, 2321, 2321,
+  /*  342 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2254, 3162, 3148, 2258, 2360, 2321, 2321, 2321,
+  /*  360 */ 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  378 */ 2321, 2321, 2321, 2321, 2321, 2321, 6138, 3221, 3233, 6143, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278,
+  /*  396 */ 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  414 */ 2321, 2321, 2321, 2740, 2601, 2616, 2360, 2289, 2224, 2321, 2636, 2321, 2321, 2670, 2321, 2321, 3470, 4858,
+  /*  432 */ 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2698, 6515,
+  /*  450 */ 2721, 2736, 3697, 2322, 5679, 2321, 2240, 2321, 2321, 2278, 2321, 5053, 2321, 2321, 5066, 2321, 2321, 2321,
+  /*  468 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2901, 2756, 2771, 2360, 2321,
+  /*  486 */ 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  504 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2791, 4266, 2815, 2830, 2967, 2321, 2887, 2321, 2240, 2321,
+  /*  522 */ 2321, 2278, 2321, 5053, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  540 */ 2321, 2321, 2321, 2321, 2321, 2917, 6399, 2937, 3791, 2321, 2321, 2321, 2953, 2321, 2321, 2278, 2321, 2321,
+  /*  558 */ 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  576 */ 4494, 4887, 2983, 2998, 2360, 3712, 3714, 2321, 2240, 2321, 2321, 3018, 2321, 2321, 2321, 2321, 5066, 2321,
+  /*  594 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3046, 5358, 3298, 3313,
+  /*  612 */ 4680, 3397, 5865, 5024, 3066, 5376, 5964, 3096, 5964, 4464, 5985, 3133, 3849, 2321, 2321, 2321, 2321, 2321,
+  /*  630 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3046, 6096, 3328, 3343, 4680, 3397, 5865, 5024,
+  /*  648 */ 3066, 5376, 5964, 3178, 5964, 4977, 5985, 3206, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  666 */ 2321, 2321, 2321, 2321, 2321, 2321, 3046, 6096, 3328, 3343, 4680, 3397, 5865, 2418, 3066, 3249, 5964, 3178,
+  /*  684 */ 5964, 4977, 5985, 3206, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  702 */ 2321, 2321, 3046, 6096, 3328, 3283, 4680, 3359, 5865, 5024, 3066, 5376, 5964, 3178, 5964, 4977, 5985, 3206,
+  /*  720 */ 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3046, 6096,
+  /*  738 */ 3328, 3343, 4680, 3397, 5865, 4293, 3066, 3383, 5964, 3178, 5964, 4977, 5985, 3206, 3190, 2321, 2321, 2321,
+  /*  756 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3046, 6096, 3328, 3343, 4680, 3397,
+  /*  774 */ 5865, 5024, 3066, 5376, 5964, 3178, 5964, 4977, 5821, 3425, 3528, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  792 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3046, 6096, 3328, 3441, 4680, 3457, 5865, 5024, 3066, 5376,
+  /*  810 */ 5964, 3178, 5964, 4977, 5985, 3206, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  828 */ 2321, 2321, 2321, 2321, 3046, 6096, 3328, 3343, 4680, 3397, 5865, 5024, 3486, 5376, 5964, 3516, 5964, 4977,
+  /*  846 */ 5985, 3206, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  864 */ 5711, 2654, 3544, 3559, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321,
+  /*  882 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4578, 3880, 3931, 3895,
+  /*  900 */ 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321,
+  /*  918 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2775, 3579, 3594, 2360, 2321, 4572, 2321,
+  /*  936 */ 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  954 */ 2321, 2321, 2321, 2321, 2321, 2321, 3599, 2921, 3615, 3630, 3653, 3900, 3682, 2321, 2240, 2505, 2321, 2278,
+  /*  972 */ 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /*  990 */ 2321, 2321, 2321, 4498, 3730, 3745, 2360, 2321, 2352, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321,
+  /* 1008 */ 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2262, 3002,
+  /* 1026 */ 3768, 3783, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321,
+  /* 1044 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2360, 2321,
+  /* 1062 */ 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1080 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 3807, 5376,
+  /* 1098 */ 5964, 3837, 5964, 4829, 4422, 3865, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1116 */ 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 3807, 5376, 5964, 3837, 5964, 4829,
+  /* 1134 */ 4422, 3916, 4081, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1152 */ 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 3807, 5376, 5964, 3947, 5964, 4829, 4422, 3865, 3190, 2321,
+  /* 1170 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378,
+  /* 1188 */ 2557, 3397, 3409, 5965, 3975, 5376, 5964, 3837, 5964, 4829, 4422, 3865, 3190, 2321, 2321, 2321, 2321, 2321,
+  /* 1206 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 4239, 3397, 3409, 5965,
+  /* 1224 */ 4030, 5376, 5964, 2406, 5964, 3405, 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1242 */ 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 2376, 5376, 5964, 4069,
+  /* 1260 */ 5964, 3405, 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1278 */ 2321, 2321, 3467, 3267, 3262, 4378, 4404, 3397, 3409, 5965, 4097, 5376, 5964, 4144, 5964, 3405, 4380, 5642,
+  /* 1296 */ 3959, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 6469,
+  /* 1314 */ 4633, 4648, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321,
+  /* 1332 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 5103, 2321,
+  /* 1350 */ 2321, 2321, 4172, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 6014, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1368 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2535, 6040, 2549, 2360, 2321, 2321, 2321, 2240, 2321,
+  /* 1386 */ 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1404 */ 2321, 2321, 2321, 2321, 2321, 3050, 4216, 4231, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321,
+  /* 1422 */ 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1440 */ 3467, 3267, 3262, 4818, 4742, 4255, 3752, 5965, 3807, 5376, 4282, 4309, 4350, 4525, 4422, 3865, 3190, 2321,
+  /* 1458 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4396, 4949, 5133, 4420,
+  /* 1476 */ 2360, 3397, 3409, 5965, 4438, 5376, 5964, 3837, 5964, 4829, 4422, 3865, 4156, 2321, 2321, 2321, 2321, 2321,
+  /* 1494 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4480, 4014, 6429, 4514, 2360, 3397, 3409, 4452,
+  /* 1512 */ 3807, 5552, 5815, 3837, 4044, 4829, 4541, 4557, 4081, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1530 */ 2321, 2321, 2321, 2321, 2321, 2321, 4594, 5618, 2845, 2860, 2360, 3397, 3409, 5965, 3807, 5376, 5964, 3837,
+  /* 1548 */ 5964, 4829, 2390, 4618, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1566 */ 2321, 2321, 4672, 5419, 5785, 4696, 2360, 4731, 2705, 5965, 4758, 5376, 3108, 4803, 5304, 2871, 6302, 3865,
+  /* 1584 */ 4845, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4879, 5522,
+  /* 1602 */ 5274, 4903, 2557, 4938, 3409, 4965, 4993, 5376, 5023, 3837, 5964, 4829, 4422, 3865, 4156, 2321, 2321, 2321,
+  /* 1620 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 5771, 6202, 4003,
+  /* 1638 */ 3409, 5965, 2376, 5376, 5964, 2406, 5440, 3405, 5163, 6260, 5040, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1656 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 5095, 5577, 4787, 5119, 2360, 3397, 3409, 3080, 5149, 3989,
+  /* 1674 */ 5964, 2406, 3117, 5191, 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1692 */ 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5965, 2376, 5376, 5964, 2406, 5441, 3367,
+  /* 1710 */ 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1728 */ 5236, 2585, 5220, 5260, 4602, 3397, 5928, 5965, 5290, 5376, 3821, 5330, 5958, 5924, 5346, 6084, 3190, 2321,
+  /* 1746 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4773,
+  /* 1764 */ 2360, 5607, 3409, 5374, 5392, 5376, 5964, 2406, 5964, 3405, 4111, 6457, 4156, 2321, 2321, 2321, 2321, 2321,
+  /* 1782 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 5206, 2360, 5408, 3637, 5965,
+  /* 1800 */ 2376, 5376, 4053, 2406, 5435, 3405, 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1818 */ 2321, 2321, 2321, 2321, 2321, 2321, 5457, 2682, 5495, 5481, 2360, 5511, 3409, 5314, 5538, 5593, 5964, 2406,
+  /* 1836 */ 5964, 5634, 5658, 5642, 4156, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1854 */ 2321, 2321, 5703, 3030, 5741, 5727, 2360, 3397, 3409, 5757, 5801, 3500, 5837, 2406, 5964, 3405, 4380, 5642,
+  /* 1872 */ 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 5856, 5175,
+  /* 1890 */ 5895, 5881, 2360, 3397, 3409, 4364, 5538, 5007, 5911, 5944, 5981, 3405, 4380, 5642, 6001, 2321, 2321, 2321,
+  /* 1908 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 4404, 3397,
+  /* 1926 */ 3409, 5965, 4097, 5376, 4322, 4144, 6056, 3405, 6072, 4128, 6112, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1944 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 6163, 6272, 6232, 6218, 2360, 5566, 3409, 5965, 2376, 5376,
+  /* 1962 */ 5964, 2406, 5964, 4120, 6248, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 1980 */ 2321, 2321, 2321, 2321, 3467, 3267, 3262, 4378, 4656, 3397, 3409, 5965, 6288, 5376, 5964, 2406, 5964, 3405,
+  /* 1998 */ 4380, 5642, 3190, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 2016 */ 3467, 3267, 3262, 4378, 2360, 3397, 3409, 5840, 2376, 4334, 5964, 2406, 5964, 3405, 4380, 5642, 3190, 2321,
+  /* 2034 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 5079, 6318, 6178, 6193,
+  /* 2052 */ 6334, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321,
+  /* 2070 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 3563, 6350, 6365, 2360, 2321, 5670, 2321,
+  /* 2088 */ 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 2106 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 4186, 4200, 6390, 2360, 2321, 2321, 2321, 6415, 2321, 2321, 6445,
+  /* 2124 */ 2321, 2321, 2321, 2321, 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 2142 */ 2321, 2321, 2321, 6489, 6485, 6505, 2360, 2321, 2321, 2321, 2240, 2321, 2321, 2278, 2321, 2321, 2321, 2321,
+  /* 2160 */ 5066, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2452,
+  /* 2178 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321,
+  /* 2196 */ 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 6194, 6194, 6194, 6194, 6194, 6194,
+  /* 2214 */ 6194, 6194, 6194, 6194, 6194, 6194, 6194, 6194, 6194, 6194, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142,
+  /* 2239 */ 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 10752, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2272 */ 0, 0, 70, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12288, 0,
+  /* 2305 */ 92, 92, 6656, 92, 92, 92, 92, 92, 92, 92, 92, 6656, 6748, 6748, 6748, 6748, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2331 */ 0, 0, 0, 0, 0, 0, 13824, 0, 130, 0, 0, 73, 0, 134, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 24223, 0, 0, 0, 0, 0,
+  /* 2362 */ 0, 0, 0, 0, 0, 0, 73, 134, 0, 0, 0, 0, 0, 5200, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 2099, 2099,
+  /* 2392 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2213, 2099, 0, 0, 182, 182, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2416 */ 0, 142, 2099, 2099, 2099, 2099, 51, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 64, 8285,
+  /* 2435 */ 8285, 0, 8285, 8285, 8285, 8285, 8285, 8285, 8285, 8285, 0, 8285, 8285, 8285, 8285, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2458 */ 0, 0, 0, 0, 0, 0, 0, 1536, 0, 0, 9310, 9310, 0, 9310, 9310, 9310, 9310, 9310, 9310, 9310, 9310, 0, 9310,
+  /* 2481 */ 9310, 9310, 9310, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9728, 0, 0, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2512 */ 0, 0, 0, 0, 0, 0, 20992, 24576, 0, 0, 130, 0, 0, 73, 2560, 134, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 26624,
+  /* 2540 */ 26624, 0, 0, 0, 0, 26624, 0, 0, 0, 26624, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 134, 0, 3584,
+  /* 2569 */ 3584, 0, 0, 5200, 0, 130, 0, 0, 0, 0, 2560, 0, 2560, 0, 0, 142, 0, 0, 0, 0, 0, 0, 2106, 2106, 2135, 2135,
+  /* 2595 */ 2135, 2135, 0, 2135, 2135, 2135, 11871, 11871, 0, 11871, 11871, 11871, 11871, 11871, 11871, 11871, 11871,
+  /* 2612 */ 0, 11871, 11871, 11871, 11871, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9310, 0, 0, 0, 0, 130, 0, 0, 0,
+  /* 2641 */ 0, 0, 0, 0, 0, 0, 0, 0, 188, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 212, 130, 0, 0,
+  /* 2674 */ 0, 0, 0, 0, 0, 0, 212, 188, 0, 0, 0, 0, 0, 0, 2107, 2107, 2136, 2136, 2136, 2136, 0, 2136, 2136, 2136, 0,
+  /* 2699 */ 63, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2209, 2099, 2099, 0, 0, 2212, 13416, 13408, 13390,
+  /* 2724 */ 13416, 13408, 13408, 13416, 13408, 13408, 13408, 13408, 13390, 13416, 13416, 13416, 13416, 0, 0, 0, 0, 0,
+  /* 2742 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11871, 0, 0, 0, 0, 14848, 0, 14848, 14848, 14848, 14848, 0, 14848, 14848,
+  /* 2766 */ 14848, 14848, 14848, 14848, 14848, 14848, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20067, 0, 0, 0, 0,
+  /* 2792 */ 63, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 73, 134, 0, 0, 0, 0, 0, 0, 15465, 15457, 15439, 15465,
+  /* 2819 */ 15457, 15457, 15465, 15457, 15457, 15457, 15457, 15439, 15470, 15470, 15470, 15470, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2839 */ 0, 0, 0, 0, 0, 128, 0, 0, 2155, 0, 0, 0, 0, 0, 0, 0, 0, 2155, 2132, 2132, 2132, 2155, 0, 2099, 2099, 2099,
+  /* 2865 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 38912, 240, 240, 242, 242, 0, 220, 0, 2099,
+  /* 2885 */ 2099, 2099, 15872, 0, 0, 0, 0, 0, 0, 128, 16000, 0, 0, 0, 0, 16000, 0, 0, 0, 14848, 14848, 14848, 0, 0, 0,
+  /* 2910 */ 0, 0, 0, 0, 0, 14848, 14848, 16896, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22116, 0, 0, 0, 16896, 0,
+  /* 2939 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 0, 130, 0, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0, 142, 0, 0, 0, 15872,
+  /* 2971 */ 0, 0, 0, 0, 73, 134, 128, 0, 0, 128, 16000, 5200, 17506, 17506, 81, 17506, 17506, 17506, 17506, 17506,
+  /* 2991 */ 17506, 17506, 17506, 81, 17519, 17519, 17519, 17519, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25158, 0,
+  /* 3016 */ 0, 0, 0, 5632, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5120, 0, 0, 0, 0, 0, 0, 2108, 2108, 2137, 2137, 2137, 2137, 0,
+  /* 3043 */ 2137, 2137, 2137, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27238, 0, 0, 0, 177, 130, 0, 0, 73, 0,
+  /* 3072 */ 183, 136, 4283, 0, 0, 0, 3725, 142, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2221, 2099,
+  /* 3092 */ 2099, 2099, 2224, 0, 177, 130, 0, 0, 215, 73, 183, 217, 0, 220, 4283, 142, 2099, 2099, 2099, 2099, 51,
+  /* 3113 */ 2099, 2099, 2099, 2255, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2281, 2099,
+  /* 3131 */ 2099, 2099, 254, 254, 256, 4341, 4341, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 73, 134, 134, 0, 0, 10752,
+  /* 3151 */ 0, 0, 0, 0, 10752, 10752, 10752, 10752, 10752, 10752, 10752, 10752, 10752, 0, 0, 0, 0, 10752, 10752, 10752,
+  /* 3171 */ 10752, 10752, 10752, 0, 10752, 10752, 10752, 177, 130, 0, 0, 216, 73, 183, 218, 0, 220, 4283, 142, 2099,
+  /* 3191 */ 2099, 2099, 2099, 73, 0, 0, 2099, 73, 73, 73, 73, 73, 0, 0, 0, 254, 254, 0, 4341, 4341, 2099, 2099, 2099,
+  /* 3214 */ 2099, 2099, 2099, 2099, 73, 134, 134, 0, 0, 11264, 0, 11264, 0, 0, 0, 0, 11264, 0, 0, 11264, 0, 0, 0, 0, 0,
+  /* 3239 */ 0, 11264, 11264, 0, 0, 11264, 0, 0, 0, 11264, 31795, 2099, 2099, 33843, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 3259 */ 2099, 2099, 2099, 0, 0, 2099, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 0, 2099, 2099,
+  /* 3282 */ 2099, 3661, 0, 2099, 2099, 2099, 2099, 2099, 2165, 2165, 2099, 2099, 2099, 2099, 2099, 64, 64, 0, 3660, 64,
+  /* 3302 */ 0, 0, 64, 0, 0, 0, 0, 3660, 3660, 3660, 3660, 3660, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 3323 */ 2099, 2099, 2099, 2099, 64, 64, 0, 3661, 64, 0, 0, 64, 0, 0, 0, 0, 3661, 3661, 3661, 3661, 3661, 0, 2099,
+  /* 3346 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 64, 64, 0, 2099, 2099, 2099, 2193, 2196,
+  /* 3365 */ 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28211, 2099, 2099, 2099, 32307, 2099, 2099,
+  /* 3387 */ 34355, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 3405 */ 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099, 0, 0, 2099, 255, 254, 0, 4341,
+  /* 3429 */ 4341, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 73, 134, 134, 263, 3661, 0, 2099, 2099, 2099, 2099, 2099,
+  /* 3448 */ 2166, 2166, 2099, 2099, 2099, 2099, 2099, 64, 64, 0, 2099, 2099, 2099, 2194, 2197, 2099, 2099, 2099, 2099,
+  /* 3467 */ 2099, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 212, 0, 0, 177, 130, 0, 0, 0, 0, 0, 136, 4283, 0, 0, 0,
+  /* 3498 */ 3725, 142, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2244, 2099, 2099, 2099, 0, 0, 2247, 177,
+  /* 3517 */ 130, 0, 0, 216, 73, 0, 218, 0, 220, 4283, 142, 2099, 2099, 2099, 2099, 73, 0, 0, 2099, 73, 73, 73, 269, 73,
+  /* 3541 */ 0, 0, 0, 69, 69, 0, 69, 18501, 69, 69, 69, 69, 18501, 69, 18432, 69, 18501, 18501, 18501, 0, 0, 0, 0, 0, 0,
+  /* 3566 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 40039, 0, 0, 0, 20067, 20067, 0, 20067, 20067, 20067, 20067, 20067, 20067,
+  /* 3588 */ 20067, 20067, 0, 20067, 20067, 20067, 20067, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22016, 0, 0, 0,
+  /* 3614 */ 0, 22116, 22116, 0, 22116, 22116, 22116, 22116, 22116, 22116, 22116, 22116, 0, 22116, 22116, 22116, 22116,
+  /* 3631 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2192, 30771, 2192, 2099, 0, 0, 2099, 0, 7680, 0, 0, 18944,
+  /* 3658 */ 25600, 0, 0, 73, 134, 0, 0, 0, 0, 0, 5200, 0, 0, 0, 0, 0, 0, 0, 0, 5200, 5200, 5200, 5200, 5200, 16384,
+  /* 3683 */ 17920, 21504, 22528, 23552, 27648, 40448, 14336, 16384, 0, 0, 0, 0, 16384, 17920, 0, 0, 13824, 0, 0, 0, 0,
+  /* 3704 */ 0, 73, 134, 0, 0, 0, 13824, 0, 5200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5200, 0, 23141, 23141, 0,
+  /* 3733 */ 23141, 23141, 23141, 23141, 23141, 23141, 23141, 23141, 0, 23141, 23141, 23141, 23141, 0, 0, 0, 0, 0, 0, 0,
+  /* 3753 */ 0, 0, 0, 0, 0, 0, 0, 0, 2208, 2099, 2210, 2099, 0, 0, 2099, 25158, 25158, 0, 25158, 25158, 25158, 25158,
+  /* 3775 */ 25158, 25158, 25158, 25158, 0, 25158, 25158, 25158, 25158, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73,
+  /* 3800 */ 134, 0, 137, 137, 0, 0, 5200, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3725, 142, 2099, 2099, 2099, 2099,
+  /* 3825 */ 2099, 2099, 2099, 2099, 2099, 2256, 2099, 2099, 2099, 2099, 2099, 2213, 0, 130, 0, 0, 216, 73, 0, 218, 0,
+  /* 3846 */ 220, 0, 142, 2099, 2099, 2099, 2099, 73, 0, 0, 2099, 73, 267, 268, 73, 73, 0, 0, 0, 254, 254, 0, 0, 0,
+  /* 3870 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 73, 134, 134, 0, 0, 19456, 0, 0, 19456, 0, 0, 19456, 19456,
+  /* 3890 */ 19456, 19456, 0, 19456, 19456, 19456, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7168, 8704, 10240,
+  /* 3914 */ 12800, 14336, 254, 254, 0, 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 261, 134, 262, 0, 0, 19456, 0,
+  /* 3935 */ 0, 19456, 19456, 0, 0, 0, 19456, 19456, 19456, 19456, 19456, 19456, 213, 130, 0, 0, 216, 73, 0, 218, 0,
+  /* 3956 */ 220, 221, 142, 2099, 2099, 2099, 2099, 73, 0, 0, 2099, 266, 73, 73, 73, 73, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0,
+  /* 3982 */ 0, 0, 0, 3584, 0, 3725, 142, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2243, 2099, 2099, 2099, 2246,
+  /* 4002 */ 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2203, 2205, 0, 0, 0, 0, 0, 0, 2101, 2101, 2131, 2131,
+  /* 4024 */ 2131, 2131, 0, 2131, 2131, 2131, 0, 130, 0, 0, 0, 0, 0, 0, 0, 3584, 3722, 0, 0, 142, 2099, 2099, 2099,
+  /* 4047 */ 2099, 2099, 2099, 2099, 2099, 2280, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 4065 */ 2099, 2099, 2259, 2099, 213, 130, 0, 0, 0, 0, 0, 0, 0, 0, 221, 142, 2099, 2099, 2099, 2099, 73, 0, 134,
+  /* 4088 */ 2099, 73, 73, 73, 73, 261, 0, 0, 0, 0, 130, 0, 0, 181, 0, 184, 0, 0, 0, 0, 0, 0, 142, 2099, 2099, 2099,
+  /* 4114 */ 2099, 2099, 2099, 2099, 2099, 2300, 2099, 2099, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099,
+  /* 4137 */ 2099, 2099, 2213, 0, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 219, 0, 0, 142, 2099, 2099, 2099, 2099, 73, 134, 0,
+  /* 4163 */ 2099, 73, 73, 73, 73, 73, 0, 0, 0, 0, 130, 0, 0, 73, 0, 185, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 41472, 0, 0,
+  /* 4192 */ 0, 0, 0, 0, 0, 41472, 0, 0, 0, 41472, 41472, 41472, 41472, 0, 0, 0, 0, 41472, 0, 41472, 41472, 41472,
+  /* 4214 */ 41472, 41472, 27238, 27238, 0, 27238, 27238, 27238, 27238, 27238, 27238, 27238, 27238, 0, 27238, 27238,
+  /* 4230 */ 27238, 27238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 134, 0, 3722, 3722, 0, 0, 5200, 0, 2099,
+  /* 4257 */ 2161, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 75, 15439, 15439, 15439, 15439,
+  /* 4277 */ 15439, 15457, 15439, 15439, 15439, 2099, 2099, 2099, 2251, 2099, 2099, 2099, 2254, 2099, 2099, 2257, 2099,
+  /* 4294 */ 2099, 2099, 2099, 2099, 51, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 64, 0, 130, 0, 0, 216,
+  /* 4314 */ 73, 0, 218, 0, 220, 0, 142, 2270, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2258,
+  /* 4334 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 38451, 2099, 0, 0, 2099, 2274, 2099,
+  /* 4352 */ 2099, 2099, 2099, 2099, 2099, 2279, 2099, 2099, 2099, 2099, 2099, 2099, 2214, 2099, 2099, 2099, 2099, 2099,
+  /* 4370 */ 2099, 2099, 2099, 2220, 2099, 2099, 2099, 2099, 2099, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 4388 */ 2099, 2099, 2099, 2099, 0, 0, 0, 0, 2100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 134, 0, 3723,
+  /* 4416 */ 3723, 0, 0, 5200, 2130, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0,
+  /* 4436 */ 182, 182, 0, 130, 0, 0, 73, 0, 134, 0, 0, 0, 0, 0, 3725, 142, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 4459 */ 2218, 2219, 2099, 2099, 2099, 2099, 2099, 2099, 0, 238, 0, 239, 240, 241, 242, 243, 220, 4341, 2099, 2099,
+  /* 4479 */ 2099, 2101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23141,
+  /* 4511 */ 0, 0, 0, 2156, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 240,
+  /* 4532 */ 240, 242, 242, 0, 220, 0, 2099, 2099, 2295, 2099, 2099, 2099, 2298, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 4551 */ 2099, 2099, 0, 0, 182, 182, 254, 254, 0, 0, 0, 2099, 2306, 2099, 2099, 2099, 2099, 2099, 261, 134, 262, 0,
+  /* 4573 */ 0, 20638, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19456, 0, 0, 0, 0, 0, 2102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 4605 */ 0, 0, 0, 0, 0, 73, 134, 0, 3724, 3724, 0, 0, 5200, 254, 254, 0, 0, 0, 2099, 2099, 2307, 2099, 2099, 2099,
+  /* 4629 */ 2099, 73, 134, 134, 0, 0, 26112, 0, 0, 0, 0, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112,
+  /* 4649 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 134, 0, 141, 0, 0, 0, 5200, 2103, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 4681 */ 0, 0, 0, 0, 0, 0, 0, 73, 134, 136, 3661, 3661, 64, 136, 5200, 2157, 0, 2099, 2099, 2099, 2163, 2099, 2099,
+  /* 4704 */ 2099, 2099, 2170, 2099, 2172, 2099, 0, 0, 73, 0, 0, 0, 0, 0, 0, 0, 0, 73, 73, 73, 73, 73, 73, 0, 73, 73,
+  /* 4730 */ 73, 0, 2099, 2099, 2163, 2099, 2099, 2099, 2200, 2099, 2202, 2099, 0, 0, 0, 0, 0, 0, 131, 0, 73, 134, 0, 0,
+  /* 4754 */ 0, 0, 0, 5200, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3725, 142, 2237, 2099, 0, 2099, 2099, 2099, 2099,
+  /* 4779 */ 2099, 2099, 2168, 2099, 2099, 2099, 2099, 2099, 0, 0, 2134, 0, 0, 0, 0, 0, 0, 0, 0, 2134, 2134, 2134, 2134,
+  /* 4802 */ 2134, 213, 130, 28672, 0, 216, 73, 0, 218, 0, 220, 221, 142, 2099, 2099, 2272, 2099, 0, 2099, 2099, 2161,
+  /* 4823 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 240, 240, 242, 242, 0, 220, 0, 2099, 2099,
+  /* 4844 */ 2099, 2099, 2099, 35379, 2099, 73, 0, 0, 29747, 73, 73, 73, 73, 73, 0, 0, 0, 0, 212, 0, 0, 0, 0, 0, 0, 0,
+  /* 4870 */ 0, 0, 0, 0, 2560, 0, 0, 0, 0, 2104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 81, 81, 81, 81, 17506, 81,
+  /* 4901 */ 81, 81, 2133, 0, 2099, 2099, 2099, 2099, 2099, 2099, 51, 2099, 2099, 2099, 2099, 2099, 0, 0, 74, 0, 0, 0,
+  /* 4923 */ 0, 0, 0, 0, 0, 74, 74, 74, 74, 74, 74, 0, 74, 74, 74, 0, 2099, 2099, 2099, 2099, 34867, 2099, 2099, 2099,
+  /* 4947 */ 2099, 2099, 0, 0, 0, 0, 0, 0, 2100, 2100, 2130, 2130, 2130, 2130, 0, 2130, 2130, 2130, 2099, 2099, 2216,
+  /* 4968 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 238, 0, 240, 240, 242, 242, 0,
+  /* 4988 */ 220, 4341, 2099, 2099, 2099, 0, 130, 0, 0, 73, 0, 134, 0, 0, 0, 3584, 0, 3725, 142, 2099, 2099, 2099, 2099,
+  /* 5011 */ 2099, 2099, 2099, 2242, 2099, 2099, 2099, 2099, 2099, 0, 0, 2214, 2248, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5030 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 64, 2099, 33331, 2099, 2099, 73, 0, 0, 2099, 73, 73,
+  /* 5050 */ 73, 73, 73, 0, 0, 0, 0, 237, 0, 0, 0, 0, 0, 0, 0, 244, 0, 0, 0, 0, 73, 0, 0, 0, 73, 73, 73, 73, 73, 0, 0,
+  /* 5081 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39424, 2105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 133, 135,
+  /* 5113 */ 0, 0, 0, 0, 0, 5200, 2134, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0,
+  /* 5135 */ 2130, 0, 0, 0, 0, 0, 0, 0, 0, 2130, 2130, 2130, 2130, 2130, 0, 130, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142,
+  /* 5163 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 29235, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 2109, 2109,
+  /* 5183 */ 2138, 2138, 2138, 2138, 0, 2138, 2138, 2138, 2099, 2099, 2099, 4608, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2294,
+  /* 5206 */ 2099, 0, 2099, 2099, 2162, 51, 2099, 2167, 2099, 2169, 2099, 2099, 2099, 2099, 0, 0, 2135, 0, 0, 0, 0, 0,
+  /* 5228 */ 0, 0, 0, 2135, 2135, 2135, 2135, 2135, 2106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3072, 134, 0, 0,
+  /* 5256 */ 0, 0, 0, 5200, 2135, 0, 2099, 2099, 2099, 2099, 2164, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 2133,
+  /* 5277 */ 0, 0, 0, 0, 0, 0, 0, 0, 2133, 2133, 2133, 2133, 2133, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 3724, 3584, 0, 142,
+  /* 5304 */ 2099, 2099, 2099, 2099, 2099, 2099, 28723, 2099, 2099, 31283, 2099, 2099, 2099, 2099, 2099, 2099, 169,
+  /* 5321 */ 2099, 2099, 2099, 2099, 2099, 2223, 2099, 2099, 0, 0, 130, 0, 214, 0, 0, 0, 0, 0, 0, 0, 142, 2099, 2099,
+  /* 5344 */ 2099, 2273, 2099, 35891, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2222, 2099, 2099, 0, 0, 0, 0, 0, 0,
+  /* 5364 */ 3660, 3660, 3660, 3660, 3660, 3660, 0, 3660, 3660, 3660, 2099, 2215, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5382 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 2099, 0, 130, 0, 0, 73, 0, 134, 0, 0, 0, 0, 0, 0, 142,
+  /* 5406 */ 2099, 2238, 0, 2099, 2192, 30771, 2195, 2099, 2199, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 2103, 2103,
+  /* 5427 */ 2103, 2103, 2103, 2103, 0, 2103, 2103, 2103, 2099, 2099, 2099, 2099, 2277, 2099, 2099, 2099, 2099, 2099,
+  /* 5445 */ 2099, 2099, 2099, 2099, 2099, 2099, 51, 2099, 2099, 2099, 2099, 2099, 2107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5468 */ 0, 0, 0, 0, 0, 5200, 5200, 5200, 5200, 0, 5200, 5200, 5200, 2136, 0, 2099, 2160, 2099, 2099, 2099, 2099,
+  /* 5489 */ 2099, 2099, 2099, 2099, 2174, 2099, 0, 0, 2136, 0, 0, 0, 0, 0, 0, 0, 0, 2136, 2136, 2136, 2136, 2136, 0,
+  /* 5512 */ 2191, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2204, 2099, 0, 0, 0, 0, 0, 0, 2104, 2104, 2133, 2133, 2133,
+  /* 5533 */ 2133, 0, 2133, 2133, 2133, 0, 130, 0, 0, 73, 0, 134, 0, 0, 0, 0, 0, 0, 142, 2099, 2099, 2099, 2099, 2099,
+  /* 5557 */ 2240, 2241, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2201, 2099,
+  /* 5576 */ 2099, 0, 0, 0, 0, 0, 0, 2105, 2105, 2134, 2134, 2134, 2134, 0, 2134, 2134, 2134, 2099, 2099, 32959, 2099,
+  /* 5597 */ 2099, 2099, 2099, 2099, 2099, 2099, 2245, 2099, 2099, 0, 0, 2099, 2099, 2099, 2099, 2198, 2099, 2099, 2099,
+  /* 5616 */ 2099, 2099, 0, 0, 0, 0, 0, 0, 2102, 2102, 2132, 2132, 2132, 2132, 0, 2132, 2132, 2132, 2099, 2284, 2099, 0,
+  /* 5638 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 2099, 2099, 2297, 2099,
+  /* 5662 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 0, 40960, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13824,
+  /* 5687 */ 0, 0, 0, 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 0, 0, 5200, 2108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5719 */ 18432, 69, 0, 0, 0, 0, 0, 0, 2137, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5740 */ 2099, 0, 0, 2137, 0, 0, 0, 0, 0, 0, 0, 0, 2137, 2137, 2137, 2137, 2137, 2213, 2099, 2099, 2213, 2099, 2099,
+  /* 5763 */ 2099, 2099, 2099, 2099, 2099, 2222, 2099, 2099, 2099, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5781 */ 2099, 2099, 2173, 2175, 0, 0, 2103, 0, 0, 0, 0, 0, 0, 0, 0, 2157, 2103, 2103, 2103, 2157, 0, 130, 179, 0,
+  /* 5805 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 2099, 2099, 2099, 2099, 2099, 2252, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5827 */ 2099, 2099, 2099, 2099, 2099, 2099, 238, 238, 253, 182, 2099, 2247, 2250, 2099, 2099, 2099, 2099, 2099,
+  /* 5845 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 51, 2099, 0, 2109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5870 */ 0, 0, 64, 64, 2099, 2099, 2099, 2099, 136, 0, 2099, 2138, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5890 */ 2099, 2099, 2099, 2099, 2099, 0, 0, 2138, 0, 0, 0, 0, 0, 0, 0, 0, 2138, 2138, 2138, 2138, 2138, 2099, 2249,
+  /* 5913 */ 2099, 2099, 2099, 2099, 2253, 2099, 2099, 2099, 2099, 2099, 2214, 51, 2099, 2099, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5935 */ 0, 0, 2099, 2099, 2099, 2211, 0, 0, 2099, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 2099, 2271, 2099, 2099,
+  /* 5960 */ 2099, 2099, 2099, 2278, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5978 */ 2099, 2099, 0, 2099, 2099, 2276, 37427, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 5996 */ 2099, 238, 238, 182, 182, 2099, 2099, 2099, 30259, 73, 134, 0, 2099, 73, 73, 73, 73, 73, 0, 0, 0, 0, 265,
+  /* 6019 */ 185, 0, 0, 265, 133, 133, 133, 133, 0, 0, 0, 0, 73, 2694, 0, 0, 73, 73, 73, 73, 73, 0, 0, 0, 0, 0, 26624,
+  /* 6046 */ 26624, 0, 26624, 0, 26624, 26624, 0, 0, 0, 26624, 2099, 2275, 2099, 2099, 2099, 2099, 2099, 2099, 2099,
+  /* 6065 */ 2099, 2099, 2099, 2099, 2282, 2099, 2283, 2296, 2099, 2099, 2099, 2099, 2099, 2299, 2099, 2099, 2099, 2099,
+  /* 6083 */ 2099, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099, 2099, 2308, 2099, 0, 0, 0, 0, 0, 0, 3661, 3661, 3661, 3661,
+  /* 6106 */ 3661, 3661, 0, 3661, 3661, 3661, 2312, 2099, 2099, 2099, 73, 0, 0, 2099, 266, 73, 73, 73, 73, 0, 0, 0, 0,
+  /* 6129 */ 3145, 134, 0, 0, 3145, 3072, 3072, 3072, 3072, 0, 0, 0, 0, 0, 11264, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 6157 */ 0, 0, 8285, 0, 0, 0, 2110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 39424, 0, 0, 0, 0, 39424,
+  /* 6186 */ 39424, 39424, 39424, 39424, 39424, 39424, 39424, 39424, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132,
+  /* 6210 */ 73, 134, 0, 0, 0, 0, 0, 5200, 2139, 0, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2099, 2171, 2099,
+  /* 6231 */ 2099, 0, 0, 2139, 0, 0, 0, 0, 0, 0, 0, 0, 2139, 2139, 2139, 2139, 2139, 2099, 2099, 2099, 2099, 37939,
+  /* 6253 */ 2099, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 0, 0, 0, 2099, 2099, 2099, 2099, 36915, 2099, 2099, 0, 0,
+  /* 6274 */ 0, 0, 0, 0, 2110, 2110, 2139, 2139, 2139, 2139, 0, 2139, 2139, 2139, 0, 130, 0, 0, 182, 0, 186, 0, 0, 0, 0,
+  /* 6299 */ 0, 0, 142, 2099, 2099, 2099, 2099, 2099, 38963, 2099, 2099, 2099, 2099, 2099, 2099, 0, 0, 182, 182, 0,
+  /* 6319 */ 39424, 0, 0, 0, 0, 39424, 39424, 39424, 39424, 39424, 39424, 0, 39424, 39424, 39424, 130, 0, 0, 0, 0, 0, 0,
+  /* 6341 */ 0, 73, 134, 0, 0, 0, 0, 0, 5200, 40039, 40039, 0, 40039, 40039, 40039, 40039, 40039, 40039, 40039, 40039,
+  /* 6361 */ 0, 40039, 40039, 40039, 40039, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6656, 6656, 6656, 6656, 6656,
+  /* 6386 */ 92, 6656, 6656, 6656, 41472, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16896, 16896, 16896, 16896, 0, 0,
+  /* 6412 */ 0, 16896, 0, 0, 178, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 2154, 0, 0, 0, 0, 0, 0, 0, 0, 2156, 2131,
+  /* 6442 */ 2131, 2131, 2156, 0, 178, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 2305, 2099, 2099, 36403, 2099,
+  /* 6467 */ 2099, 2099, 0, 0, 0, 0, 0, 0, 26112, 26112, 26112, 26112, 26112, 26112, 0, 26112, 26112, 26112, 0, 0,
+  /* 6487 */ 41984, 0, 0, 0, 0, 0, 0, 0, 0, 41984, 41984, 41984, 41984, 41984, 0, 41984, 41984, 41984, 41984, 0, 0, 0,
+  /* 6509 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 13390, 13390, 13390, 13390, 13390, 13408, 13390, 13390, 13390
 ];
 
 MaiaScript.EXPECTED =
 [
-  /*   0 */ 185, 189, 193, 193, 197, 201, 208, 205, 212, 216, 220, 224, 227, 243, 243, 282, 233, 388, 248, 252, 243,
-  /*  21 */ 243, 229, 256, 264, 349, 271, 242, 243, 243, 281, 288, 295, 275, 242, 243, 243, 244, 279, 243, 243, 286,
-  /*  42 */ 290, 294, 242, 243, 243, 243, 281, 290, 294, 243, 243, 280, 448, 295, 243, 453, 451, 454, 299, 301, 265,
-  /*  63 */ 394, 307, 267, 311, 315, 324, 318, 320, 328, 332, 336, 265, 265, 265, 265, 343, 265, 265, 367, 347, 460,
-  /*  84 */ 259, 260, 353, 303, 357, 265, 265, 265, 432, 265, 265, 366, 371, 265, 432, 375, 387, 265, 265, 379, 265,
-  /* 105 */ 366, 365, 433, 386, 265, 265, 265, 367, 265, 392, 265, 265, 363, 401, 265, 398, 363, 265, 265, 265, 265,
-  /* 126 */ 239, 408, 339, 412, 413, 417, 420, 424, 428, 431, 265, 265, 265, 265, 236, 265, 265, 266, 437, 459, 265,
-  /* 147 */ 265, 360, 265, 265, 265, 265, 265, 236, 265, 265, 265, 404, 441, 459, 265, 265, 265, 265, 459, 265, 266,
-  /* 168 */ 445, 265, 265, 265, 459, 265, 381, 458, 265, 265, 265, 382, 265, 266, 265, 265, 265, 2056, 2304, 3072,
-  /* 188 */ 18432, 1050624, 2099200, 67110912, 1073743872, 2048, 2048, 2048, 2048, 1050624, 1050624, 2099200, 268437504,
-  /* 201 */ 270534656, 268437504, 1051128, 1712331256, 1712331772, 1980767224, 1980767224, 1712331768, 1714428920,
-  /* 210 */ 1712331768, 1712331768, -269506560, -269506304, -3168256, -3168000, -3168256, -3168256, -3168000,
-  /* 219 */ -268457984, 1982864376, -22528, -2119680, -2119680, -2114568, -2114568, -2114568, -17416, 2048, 8, 8, 8,
-  /* 232 */ 8192, 16384, 67108864, 1073741824, 0, 0, 256, 0, 0, 256, 512, 8, 8, 8, 8, 0, 16, 384, 448, 448, 67109120,
-  /* 253 */ 1073742208, 512, 512, 65536, 786432, 25165824, 201326592, 0, 0, 0, 4, -1073741824, 0, 0, 0, 0, 1, 0,
-  /* 271 */ -1073741568, 8, 8, -1073741440, 64, 64, 64, 64, 0, 8, 8, 8, 256, 256, 1024, 8, 256, 1024, 0, 0, 32, 32, 16,
-  /* 294 */ 16, 16, 16, 384, 384, 8, 32, 32, 32, 0, 0, 0, 58720256, 32, 1024, 131072, 8388608, 32, 0, 524288, 524320,
-  /* 315 */ 262144, 262144, -364642272, -364642272, -289144800, 3407830, 3407830, 3407838, 3932150, -364117984,
-  /* 325 */ -364642272, -364642272, -364117984, 3932150, 3669975, -3407832, 4194263, 3669983, 4194295, -361234442,
-  /* 335 */ -361234434, -361234433, -2, -1, 0, 0, 512, 16896, 0, 16, 131072, 8388608, 134217728, -536870912, 0, 0, 0,
-  /* 352 */ 201326848, 896, 2048, 57344, 2097152, 268435456, 0, 4, 0, 0, 6144, 0, 0, 33554432, 0, 0, 0, 4194304,
-  /* 370 */ 33554432, 33554432, 536870912, 1073741824, 0x80000000, 67108864, 256, 32768, 25165824, 0, 8388608, 0, 0, 1,
-  /* 384 */ 16, 32, 16777216, 268435456, 0, 0, 0, 32, 67108864, 16777216, 0, 0, 8, 16, 33554432, 0, 67108864, 0, 0,
-  /* 403 */ 67108864, 0, 1, 2, 4, 0, 512, 0, 8192, 17407, 17407, 17407, 25599, 25599, 7168, 7168, 15360, 15360, 7168,
-  /* 422 */ 7168, 7680, 25599, 7680, 15872, 7680, 32767, 32767, 32767, 32767, 0, 0, 0, 8388608, 67108864, 14, 16, 32,
-  /* 440 */ 192, 16, 32, 64, 128, 16, 32, 64, 256, 32, 32, 16, 16, 8, 8, 32, 16, 16, 32, 256, 0, 0, 0, 41943040
+  /*   0 */ 202, 206, 210, 210, 223, 227, 231, 235, 239, 243, 247, 251, 254, 319, 319, 321, 266, 292, 270, 273, 318,
+  /*  21 */ 319, 299, 287, 291, 414, 298, 257, 319, 319, 319, 320, 303, 309, 314, 317, 319, 319, 319, 260, 319, 319,
+  /*  42 */ 319, 319, 303, 327, 310, 319, 319, 319, 319, 319, 320, 325, 343, 332, 319, 319, 319, 336, 344, 332, 319,
+  /*  63 */ 342, 319, 328, 338, 282, 292, 262, 348, 279, 466, 469, 356, 360, 364, 368, 372, 376, 292, 292, 292, 292,
+  /*  84 */ 394, 292, 292, 420, 382, 292, 292, 305, 391, 456, 401, 292, 292, 292, 292, 387, 292, 292, 419, 405, 292,
+  /* 105 */ 292, 378, 397, 292, 292, 292, 387, 292, 292, 421, 292, 387, 409, 292, 292, 292, 292, 420, 292, 426, 418,
+  /* 126 */ 292, 292, 384, 426, 292, 385, 425, 386, 292, 292, 292, 292, 213, 454, 216, 430, 219, 434, 437, 441, 443,
+  /* 147 */ 292, 292, 292, 292, 292, 412, 292, 292, 294, 447, 413, 292, 292, 451, 292, 292, 292, 292, 292, 292, 412,
+  /* 168 */ 292, 292, 292, 460, 473, 276, 292, 292, 292, 292, 292, 412, 292, 292, 352, 475, 292, 292, 292, 283, 292,
+  /* 189 */ 292, 351, 481, 292, 292, 292, 292, 479, 292, 293, 463, 292, 292, 2056, 2304, 3072, 18432, 1050624, 2099200,
+  /* 208 */ 67110912, 1073743872, 2048, 2048, 2048, 2048, 4096, 0, 4096, 135168, 139263, 139263, 204799, 57344, 122880,
+  /* 223 */ 1050624, 1050624, 2099200, 268437504, 270534656, 268437504, 1051128, 1712331256, 1712331768, 1714428920,
+  /* 233 */ 1712331768, 1712331768, -269506560, 1712331772, 1980767224, 1980767224, -269506304, -3168256, 1712331768,
+  /* 242 */ -3168000, -3168256, -3168256, -3168000, -268457984, -22528, -2119680, -2119680, 1982864376, -2114568,
+  /* 252 */ -2114568, -2114568, -17416, 2048, 8, 8, -1073741440, 512, 8, 0, 0, 8, 16, 32, 1024, 16384, 67108864,
+  /* 269 */ 1073741824, 32, 16, 384, 448, 67109120, 1073742208, 512, 1024, 2048, 0, 1, 0, 32, 0, 0, 0, 2048, 65536,
+  /* 288 */ 786432, 25165824, 201326592, -1073741824, 0, 0, 0, 0, 1, 30, -1073741568, 8, 8, 8, 8192, 256, 1024, 0, 0, 4,
+  /* 308 */ 896, 32, 16, 16, 384, 512, 384, 64, 64, 64, 512, 8, 8, 8, 8, 256, 256, 256, 0, 32, 32, 16, 16, 8, 384, 8, 8,
+  /* 335 */ 8, 256, 256, 32, 32, 32, 32, 32, 16, 16, 16, 16, 384, 1024, 131072, 8388608, 0, 1, 16, 32, 64, -364642272,
+  /* 357 */ 3407830, -364642272, -364117984, -364642272, 3407830, 3407830, -289144800, 3407830, 3407838, 3932150,
+  /* 367 */ 3932150, 3669975, 4194263, 3669983, 4194295, -3407832, -361234442, -361234434, -361234433, -2, -1, 0, 0,
+  /* 380 */ 256, 32768, 134217728, -536870912, 0, 0, 33554432, 0, 0, 0, 8388608, 2048, 57344, 2097152, 0, 16, 131072,
+  /* 397 */ 8388608, 67108864, 25165824, 268435456, 58720256, 268435456, 0, 4, 33554432, 536870912, 1073741824,
+  /* 408 */ 0x80000000, 67108864, 16777216, 268435456, 0, 2048, 0, 0, 0, 201326848, 16777216, 0, 0, 0, 4194304,
+  /* 423 */ 33554432, 0, 67108864, 0, 0, 0, 67108864, 139263, 204799, 57344, 139263, 204799, 122880, 122880, 57344,
+  /* 438 */ 61440, 61440, 126976, 61440, 204799, 262143, 262143, 262143, 0, 32, 64, 128, 1792, 49152, 0, 0, 0, 65536, 0,
+  /* 457 */ 0, 41943040, 201326592, 1, 2, 4, 16, 0, 0, 0, 524288, 524320, 262144, -364642272, -364642272, -364117984,
+  /* 473 */ 32, 64, 128, 256, 512, 2048, 1, 16, 64, 128, 512, 2048
 ];
 
 MaiaScript.TOKEN =
@@ -14627,9 +15491,12 @@ MaiaScript.TOKEN =
   "'i32'",
   "'i64'",
   "'if'",
+  "'include'",
+  "'local'",
   "'return'",
   "'switch'",
   "'test'",
+  "'throw'",
   "'try'",
   "'while'",
   "'{'",

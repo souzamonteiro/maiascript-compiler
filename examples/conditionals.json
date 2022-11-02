@@ -1,0 +1,398 @@
+{
+    "Program": {
+        "Expression": [
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "a"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Integer": "1"
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "b"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Integer": "2"
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Comment": "// A C-like if statement."
+            },
+            {
+                "Statement": {
+                    "If": {
+                        "TOKEN": [
+                            "if",
+                            "(",
+                            ")"
+                        ],
+                        "Expression": [
+                            {
+                                "Operation": {
+                                    "Op": [
+                                        {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": "a"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": "b"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TOKEN": "<"
+                                }
+                            },
+                            {
+                                "Block": {
+                                    "TOKEN": [
+                                        "{",
+                                        "}"
+                                    ],
+                                    "Expression": {
+                                        "Operation": {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": [
+                                                        "system",
+                                                        "println"
+                                                    ],
+                                                    "TOKEN": [
+                                                        ".",
+                                                        "(",
+                                                        ")"
+                                                    ],
+                                                    "Arguments": {
+                                                        "Expression": {
+                                                            "Operation": {
+                                                                "Primary": {
+                                                                    "Value": {
+                                                                        "String": "\"a < b\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "Else": {
+                            "TOKEN": "else",
+                            "Expression": {
+                                "Statement": {
+                                    "If": {
+                                        "TOKEN": [
+                                            "if",
+                                            "(",
+                                            ")"
+                                        ],
+                                        "Expression": [
+                                            {
+                                                "Operation": {
+                                                    "Op": [
+                                                        {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "a"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "b"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "TOKEN": ">"
+                                                }
+                                            },
+                                            {
+                                                "Block": {
+                                                    "TOKEN": [
+                                                        "{",
+                                                        "}"
+                                                    ],
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": [
+                                                                        "system",
+                                                                        "println"
+                                                                    ],
+                                                                    "TOKEN": [
+                                                                        ".",
+                                                                        "(",
+                                                                        ")"
+                                                                    ],
+                                                                    "Arguments": {
+                                                                        "Expression": {
+                                                                            "Operation": {
+                                                                                "Primary": {
+                                                                                    "Value": {
+                                                                                        "String": "\"a > b\""
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Else": {
+                                            "TOKEN": "else",
+                                            "Expression": {
+                                                "Block": {
+                                                    "TOKEN": [
+                                                        "{",
+                                                        "}"
+                                                    ],
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": [
+                                                                        "system",
+                                                                        "println"
+                                                                    ],
+                                                                    "TOKEN": [
+                                                                        ".",
+                                                                        "(",
+                                                                        ")"
+                                                                    ],
+                                                                    "Arguments": {
+                                                                        "Expression": {
+                                                                            "Operation": {
+                                                                                "Primary": {
+                                                                                    "Value": {
+                                                                                        "String": "\"a == b\""
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Comment": "// A C-like switch statement."
+            },
+            {
+                "Statement": {
+                    "Switch": {
+                        "TOKEN": [
+                            "switch",
+                            "(",
+                            ")",
+                            "{",
+                            "}"
+                        ],
+                        "Expression": {
+                            "Operation": {
+                                "Primary": {
+                                    "Member": {
+                                        "Identifier": "a"
+                                    }
+                                }
+                            }
+                        },
+                        "Case": [
+                            {
+                                "TOKEN": [
+                                    "case",
+                                    ":"
+                                ],
+                                "Expression": [
+                                    {
+                                        "Operation": {
+                                            "Primary": {
+                                                "Value": {
+                                                    "Integer": "1"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Operation": {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": [
+                                                        "system",
+                                                        "println"
+                                                    ],
+                                                    "TOKEN": [
+                                                        ".",
+                                                        "(",
+                                                        ")"
+                                                    ],
+                                                    "Arguments": {
+                                                        "Expression": {
+                                                            "Operation": {
+                                                                "Primary": {
+                                                                    "Value": {
+                                                                        "String": "\"a == 1\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Statement": {
+                                            "Break": {
+                                                "TOKEN": "break"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "TOKEN": [
+                                    "case",
+                                    ":"
+                                ],
+                                "Expression": [
+                                    {
+                                        "Operation": {
+                                            "Primary": {
+                                                "Value": {
+                                                    "Integer": "2"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Operation": {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": [
+                                                        "system",
+                                                        "println"
+                                                    ],
+                                                    "TOKEN": [
+                                                        ".",
+                                                        "(",
+                                                        ")"
+                                                    ],
+                                                    "Arguments": {
+                                                        "Expression": {
+                                                            "Operation": {
+                                                                "Primary": {
+                                                                    "Value": {
+                                                                        "String": "\"a == 2\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Statement": {
+                                            "Break": {
+                                                "TOKEN": "break"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "Default": {
+                            "TOKEN": [
+                                "default",
+                                ":"
+                            ],
+                            "Expression": {
+                                "Operation": {
+                                    "Primary": {
+                                        "Member": {
+                                            "Identifier": [
+                                                "system",
+                                                "println"
+                                            ],
+                                            "TOKEN": [
+                                                ".",
+                                                "(",
+                                                ")"
+                                            ],
+                                            "Arguments": {
+                                                "Expression": {
+                                                    "Operation": {
+                                                        "Primary": {
+                                                            "Value": {
+                                                                "String": "\"a != 1 && a != 2\""
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -73,7 +73,7 @@ function MaiaVM() {
                                         var s = new MaiaScript.XmlSerializer(getXml, true);
                                         var maiaScriptParser = new MaiaScript(code, s);
                                         try {
-                                            maiaScriptParser.parse_maiascript();
+                                            maiaScriptParser.parse_Program();
                                         } catch (pe) {
                                             if (!(pe instanceof maiaScriptParser.ParseException)) {
                                                 throw pe;
@@ -114,7 +114,7 @@ function MaiaVM() {
                     var s = new MaiaScript.XmlSerializer(getXml, true);
                     var maiaScriptParser = new MaiaScript(code, s);
                     try {
-                        maiaScriptParser.parse_maiascript();
+                        maiaScriptParser.parse_Program();
                     } catch (pe) {
                         if (!(pe instanceof maiaScriptParser.ParseException)) {
                             throw pe;
@@ -172,36 +172,44 @@ function MaiaVM() {
 
             system.argv = argv.slice();
             system.argc = argv.length;
-            var justCompile = false;
             var inputFile;
             var outputFile;
+            var justCompile = false;
+            var indentCode = false;
             var outputFileType = 'js';
             var outputContents = '';
             if (argv.length > 2) {
                 var i = 2;
                 while (i < argv.length) {
-                    if (argv[i] == '-c') {
+                    if ((argv[i] == '-h') || (argv[i] == '--help')) {
+                        system.log('MaiaScript Command Line Interface (CLI)');
+                        system.log('Usage: maiascript [options] [script.maia] [--] [arguments]');
+                        system.log('Options:');
+                        system.log('-h     --help               Displays this help message.');
+                        system.log('-o     <script.js>          Output file name.');
+                        system.log('       --indent             Indent the output code.');
+                        system.log('-c                          Just compile to JS, don\'t run the script.');
+                        system.log('       --json               Just compile to JSON, don\'t run the script.');
+                        system.log('-m                          Just compile to MIL, don\'t run the script.');
+                        system.log('-x                          Just compile to XML, don\'t run the script.');
+                        system.log('       --                   End of compiler options.\n');
+                    } else if (argv[i] == '-o') {
+                        i++;
+                        outputFile = argv[i];
+                    } else if (argv[i] == '--indent') {
+                        indentCode = true;
+                    } else if (argv[i] == '-c') {
                         justCompile = true;
                         outputFileType = 'js';
+                    } else if (argv[i] == '--json') {
+                        justCompile = true;
+                        outputFileType = 'json';
                     } else if (argv[i] == '-m') {
                         justCompile = true;
                         outputFileType = 'mil';
                     } else if (argv[i] == '-x') {
                         justCompile = true;
                         outputFileType = 'xml';
-                    } else if ((argv[i] == '-h') || (argv[i] == '--help')) {
-                        system.log('MaiaScript Command Line Interface (CLI)');
-                        system.log('Usage: maiascript [options] [script.maia] [--] [arguments]');
-                        system.log('Options:');
-                        system.log('-c                          Just compile to JS, don\'t run the script;');
-                        system.log('-m                          Just compile to MIL, don\'t run the script;');
-                        system.log('-x                          Just compile to XML, don\'t run the script;');
-                        system.log('-h     --help               Displays this help message;');
-                        system.log('-o     <script.js>          Output file name;');
-                        system.log('       --                   End of compiler options.\n');
-                    } else if (argv[i] == '-o') {
-                        i++;
-                        outputFile = argv[i];
                     } else if (argv[i] == '--') {
                         break;
                     } else {
@@ -217,7 +225,7 @@ function MaiaVM() {
                     var s = new MaiaScript.XmlSerializer(getXml, false);
                     var maiaScriptParser = new MaiaScript(code, s);
                     try {
-                        maiaScriptParser.parse_maiascript();
+                        maiaScriptParser.parse_Program();
                     } catch (pe) {
                         if (!(pe instanceof maiaScriptParser.ParseException)) {
                             throw pe;
@@ -238,9 +246,20 @@ function MaiaVM() {
                             if (outputFileType == 'js') {
                                 outputFile = fileName + '.js';
                                 outputContents = compiledCode.js;
+                            } else if (outputFileType == 'json') {
+                                outputFile = fileName + '.json';
+                                if (indentCode) {
+                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                } else {
+                                    outputContents = JSON.stringify(compiledCode.mil);
+                                }
                             } else if (outputFileType == 'mil') {
                                 outputFile = fileName + '.mil';
-                                outputContents = JSON.stringify(compiledCode.mil);
+                                if (indentCode) {
+                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                } else {
+                                    outputContents = JSON.stringify(compiledCode.mil);
+                                }
                             } else if (outputFileType == 'xml') {
                                 outputFile = fileName + '.xml';
                                 outputContents = compiledCode.xml;

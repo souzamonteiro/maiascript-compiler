@@ -670,6 +670,19 @@ function Core() {
     }
 
     /**
+     * Returns a string filled with n spaces.
+     * @param {number}   n - The number of spaces.
+     * @return {string}  The string filled with n spaces.
+     */
+    this.space = function(n) {
+        var str = ""
+        for (var i = 1; i < n; i++) {
+            str += " ";
+        }
+        return str;
+    }
+    
+    /**
      * Removes or replaces an object from the specified position in an array.
      * @param {array}   mtx - The array to remove elements.
      * @param {number}  pos - Position from which objects will be removed.
@@ -833,7 +846,7 @@ function Core() {
      * Return a part of a string.
      * @param {string}   str - The string containing the other one.
      * @param {number}   start - The start position.
-     * @param {number}   size - The the size of the slice.
+     * @param {number}   size - The size of the slice.
      * @return {string}  The selected part of the string.
      */
     this.substr = function(str, start, size) {

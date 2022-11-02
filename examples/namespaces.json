@@ -1,0 +1,75 @@
+{
+    "Program": {
+        "Expression": [
+            {
+                "Comment": "// Creating a namespace (an object)"
+            },
+            {
+                "Statement": {
+                    "NamespaceDeclaration": {
+                        "Identifier": "a",
+                        "Block": {
+                            "TOKEN": [
+                                "{",
+                                "}"
+                            ],
+                            "Expression": {
+                                "Operation": {
+                                    "Op": [
+                                        {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": "b"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Primary": {
+                                                "Value": {
+                                                    "Integer": "1"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TOKEN": "="
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": [
+                                                    "a",
+                                                    "b"
+                                                ],
+                                                "TOKEN": "."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
