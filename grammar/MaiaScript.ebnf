@@ -69,11 +69,11 @@ Try                      ::= 'try' Expression Catch?
 Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Catch?
 Catch                    ::= 'catch' '(' Expression ')' Expression
 NamespaceDeclaration     ::= Identifier Block
-FunctionDeclaration      ::= Identifier '(' Arguments ')' Block
-                           | Identifier '(' Arguments ')' '=' Expression
+FunctionDeclaration      ::= Identifier '(' Arguments ')' '=' Expression
                            | Identifier '(' Arguments ')' '?=' Block
                            | Identifier '(' Arguments ')' '#=' Block
                            | Identifier '(' Arguments ')' ':=' Block
+                           | Type? Identifier '(' Arguments ')' Block
                            | Type? Identifier '(' Arguments ')' Script
 Return                   ::= 'return' Expression
 Include                  ::= 'include' '(' Expression ')'

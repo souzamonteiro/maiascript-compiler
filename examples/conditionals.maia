@@ -3,10 +3,16 @@ b = 2
 
 // A C-like if statement.
 if (a < b) {
+    system.println("a = " + a)
+    system.println("b = " + b)
     system.println("a < b")
 } else if (a > b) {
+    system.println("a = " + a)
+    system.println("b = " + b)
     system.println("a > b")
 } else {
+    system.println("a = " + a)
+    system.println("b = " + b)
     system.println("a == b")
 }
 
@@ -19,5 +25,6 @@ switch (a) {
         system.println("a == 2")
         break
     default:
+        system.println("a = " + a)
         system.println("a != 1 && a != 2")
 }

@@ -150,6 +150,96 @@
             },
             {
                 "Statement": {
+                    "Do": {
+                        "TOKEN": [
+                            "do",
+                            "while",
+                            "(",
+                            ")"
+                        ],
+                        "Expression": [
+                            {
+                                "Block": {
+                                    "TOKEN": [
+                                        "{",
+                                        "}"
+                                    ],
+                                    "Expression": [
+                                        {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": [
+                                                            "system",
+                                                            "println"
+                                                        ],
+                                                        "TOKEN": [
+                                                            ".",
+                                                            "(",
+                                                            ")"
+                                                        ],
+                                                        "Arguments": {
+                                                            "Expression": {
+                                                                "Operation": {
+                                                                    "Primary": {
+                                                                        "Member": {
+                                                                            "Identifier": "a"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": "a"
+                                                    }
+                                                },
+                                                "TOKEN": "++"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "Operation": {
+                                    "Op": [
+                                        {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": "a"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Primary": {
+                                                "Value": {
+                                                    "Integer": "10"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TOKEN": "<"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "Statement": {
+                    "EmptyStatement": {
+                        "TOKEN": ";"
+                    }
+                }
+            },
+            {
+                "Statement": {
                     "While": {
                         "TOKEN": [
                             "while",

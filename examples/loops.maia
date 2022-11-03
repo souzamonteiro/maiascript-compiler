@@ -2,6 +2,11 @@ a = 0
 b = [1, 2, 3]
 c = {a: 1, b: 2}
 
+do {
+    system.println(a)
+    a++
+} while (a < 10);
+
 while (a < 10) {
     system.println(a)
     a++

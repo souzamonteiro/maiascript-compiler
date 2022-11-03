@@ -342,6 +342,24 @@ function MaiaCompiler() {
                     }
                 }
             }
+        } else if ('Block' in mil) {
+            node = mil['Block'];
+            var nodeInfo = {
+                'parentNode': 'Block',
+                'childNode': '',
+                'terminalNode' : ''
+            };
+            parentNodeInfo.childNode = 'Block';
+
+            if (typeof node != 'undefined') {
+                if ('Expression' in node) {
+                    var nodeExpression = {
+                        'Expression': node['Expression']
+                    };
+                    var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                    js = body;
+                }
+            }
         } else if ('Statement' in mil) {
             node = mil['Statement'];
             var nodeInfo = {
@@ -372,13 +390,10 @@ function MaiaCompiler() {
                     var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
 
                     if ('Block' in node) {
-                        var nodeBlock = node['Block'];
-                        if ('Expression' in nodeBlock) {
-                            var nodeExpression = {
-                                'Expression': nodeBlock['Expression']
-                            };
-                            var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
-                        }
+                        var nodeBlock = {
+                            'Block': node['Block']
+                        };
+                        var body = this.parse(nodeBlock, nodeInfo, isKernelFunction);
                         js = 'function ' + name + '_' + '() {' + body + '};' + name + ' = new ' + name + '_()' ;
                     }
                 }
@@ -463,7 +478,7 @@ function MaiaCompiler() {
                         } else {
                             if ('Script' in node) {
                                 var nodeScript = node['Script'];
-                                var body = nodeScript.replace("/{", "{").replace("}/", "}")
+                                var body = nodeScript.replace("/{", "").replace("}/", "")
                                 js += ' {' + body + '}';
                             }
                         }
@@ -1167,6 +1182,19 @@ function MaiaCompiler() {
                 js = this.parse(node, nodeInfo, isKernelFunction);
                 parentNodeInfo.terminalNode = nodeInfo.terminalNode;
             }
+        } else if ('Integer' in mil) {
+            node = mil['Integer'];
+            var nodeInfo = {
+                'parentNode': 'Integer',
+                'childNode': '',
+                'terminalNode' : ''
+            };
+            parentNodeInfo.childNode = 'Integer';
+            parentNodeInfo.terminalNode = 'Integer';
+
+            if (typeof node == 'String') {
+                js = node;
+            }
         } else if ('Real' in mil) {
             node = mil['Real'];
             var nodeInfo = {
@@ -1192,6 +1220,19 @@ function MaiaCompiler() {
 
             if (typeof node == 'String') {
                 js = this.parseComplexNumber(node);
+            }
+        } else if ('Character' in mil) {
+            node = mil['Character'];
+            var nodeInfo = {
+                'parentNode': 'Character',
+                'childNode': '',
+                'terminalNode' : ''
+            };
+            parentNodeInfo.childNode = 'Character';
+            parentNodeInfo.terminalNode = 'Character';
+
+            if (typeof node == 'String') {
+                js += node.replace("'", "");
             }
         } else if ('String' in mil) {
             node = mil['String'];
@@ -1393,10 +1434,10 @@ function MaiaCompiler() {
             'terminalNode' : ''
         };
 
-        //var mil = {};
+        var mil = {};
         var js = "";
 
-        //mil = this.xmlToMil(xml);
+        mil = this.xmlToMil(xml);
         js = this.parse(mil, nodeInfo);
 
         return js;
