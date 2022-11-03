@@ -236,7 +236,7 @@ function MaiaCompiler() {
             }
         }
         var parser = new DOMParser();
-        var xml = parser.parseFromString(complexNumber.xml,"text/xml");
+        var xml = parser.parseFromString(complexNumber.xml, "text/xml");
         
         var json = this.xmlToJson(xml);
         if ('Number' in json) {
@@ -248,11 +248,11 @@ function MaiaCompiler() {
                     json.Number.Complex.Imaginary = json.Number.Complex.Imaginary.substring(0, json.Number.Complex.Imaginary.length - 2);
                 }
             }
-            if (typeof json.Number.Complex.real == 'undefined') {
-                json.Number.Complex.real = 0;
+            if (typeof json.Number.Complex.Real == 'undefined') {
+                json.Number.Complex.Real = 0;
             }
             maiaScriptComplexNumber = {
-                'real': core.toNumber(json.Number.Complex.real),
+                'real': core.toNumber(json.Number.Complex.Real),
                 'imaginary': core.toNumber(json.Number.Complex.Imaginary)
             }
         }
@@ -371,13 +371,16 @@ function MaiaCompiler() {
                     };
                     var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
 
-                    if ('Expression' in node) {
-                        var nodeExpression = {
-                            'Expression': node['Expression']
-                        };
-                        var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                    if ('Block' in node) {
+                        var nodeBlock = node['Block'];
+                        if ('Expression' in nodeBlock) {
+                            var nodeExpression = {
+                                'Expression': nodeBlock['Expression']
+                            };
+                            var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                        }
+                        js = 'function ' + name + '_' + '() {' + body + '};' + name + ' = new ' + name + '_()' ;
                     }
-                    js = 'function ' + name + '_' + '() {' + body + '};' + name + ' = new ' + name + '_()' ;
                 }
             }
         } else if ('FunctionDeclaration' in mil) {
@@ -397,13 +400,24 @@ function MaiaCompiler() {
                     var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
 
                     if ('TOKEN' in node) {
-                        var statement = node['TOKEN'][0];
-                        if (statement == '?=') {
-                            js += name + ' = async function ';
-                        } else if (statement == ':=') {
-                            nodeInfo.parentNode = 'NamespaceDeclaration';
-                            js += name + ' = function ';
+                        if (node['TOKEN'].length == 3) {
+                            var token = node['TOKEN'][2];
+                            if (token == '?=') {
+                                var statement = "AsyncFunction";
+                                js += name + ' = async function ';
+                            } else if (token == ':=') {
+                                var statement = "Constructor";
+                                nodeInfo.parentNode = 'NamespaceDeclaration';
+                                js += name + ' = function ';
+                            } else if (token == '#=') {
+                                var statement = "KernelFunction";
+                                js += name + ' = function ';
+                            } else {
+                                var statement = "FunctionDeclaration";
+                                js += name + ' = function ';
+                            }
                         } else {
+                            var statement = "FunctionDeclaration";
                             js += name + ' = function ';
                         }
                     } else {
@@ -424,14 +438,35 @@ function MaiaCompiler() {
                         var nodeExpression = {
                             'Expression': node['Expression']
                         };
-                        if (statement == 'Kernel') {
+                        if (statement == 'KernelFunction') {
                             var body = this.parse(nodeExpression, nodeInfo, true);
                         } else {
                             var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
                         }
                         js += ' {' + body + '}';
                     } else {
-                        js += ' {}';
+                        if ('Block' in node) {
+                            var nodeBlock = node['Block'];
+                            if ('Expression' in nodeBlock) {
+                                var nodeExpression = {
+                                    'Expression': nodeBlock['Expression']
+                                };
+                                if (statement == 'KernelFunction') {
+                                    var body = this.parse(nodeExpression, nodeInfo, true);
+                                } else {
+                                    var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                                }
+                                js += ' {' + body + '}';
+                            } else {
+                                js += ' {}';
+                            }
+                        } else {
+                            if ('Script' in node) {
+                                var nodeScript = node['Script'];
+                                var body = nodeScript.replace("/{", "{").replace("}/", "}")
+                                js += ' {' + body + '}';
+                            }
+                        }
                     }
                 }
             }
