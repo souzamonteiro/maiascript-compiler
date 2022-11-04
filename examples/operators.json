@@ -853,7 +853,8 @@
                                 "Member": {
                                     "Identifier": "a"
                                 }
-                            }
+                            },
+                            "TOKEN": "++"
                         }
                     ],
                     "TOKEN": "="
@@ -861,7 +862,6 @@
             },
             {
                 "Operation": {
-                    "TOKEN": "++",
                     "Primary": {
                         "Member": {
                             "Identifier": [
@@ -903,7 +903,8 @@
                                 "Member": {
                                     "Identifier": "b"
                                 }
-                            }
+                            },
+                            "TOKEN": "--"
                         }
                     ],
                     "TOKEN": "="
@@ -911,7 +912,6 @@
             },
             {
                 "Operation": {
-                    "TOKEN": "--",
                     "Primary": {
                         "Member": {
                             "Identifier": [

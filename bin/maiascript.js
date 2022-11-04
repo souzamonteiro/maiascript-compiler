@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// This file was generated on Fri Nov 4, 2022 13:54 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Fri Nov 4, 2022 19:28 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree
 
 function MaiaScript(string, parsingEventHandler)
@@ -5528,6 +5528,8 @@ function MaiaScript(string, parsingEventHandler)
         try
         {
           try_Primary();
+          lookahead1W(6);           // WhiteSpace^token | '++'
+          consumeT(26);             // '++'
           lk = -1;
         }
         catch (p1A)
@@ -5539,13 +5541,13 @@ function MaiaScript(string, parsingEventHandler)
             b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
             b3 = b3A; e3 = e3A; end = e3A; }}}
             try_Primary();
-            lookahead1W(6);         // WhiteSpace^token | '++'
-            consumeT(26);           // '++'
+            lookahead1W(7);         // WhiteSpace^token | '--'
+            consumeT(30);           // '--'
             lk = -2;
           }
           catch (p2A)
           {
-            lk = -3;
+            lk = -9;
           }
         }
         b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
@@ -5557,7 +5559,7 @@ function MaiaScript(string, parsingEventHandler)
     }
     switch (lk)
     {
-    case -2:
+    case -1:
     case 19715:                     // Identifier '++' END
     case 19716:                     // Character '++' END
     case 19717:                     // String '++' END
@@ -5964,7 +5966,7 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(6);               // WhiteSpace^token | '++'
       consume(26);                  // '++'
       break;
-    case -3:
+    case -2:
     case 20227:                     // Identifier '--' END
     case 20228:                     // Character '--' END
     case 20229:                     // String '--' END
@@ -8217,6 +8219,8 @@ function MaiaScript(string, parsingEventHandler)
         try
         {
           try_Primary();
+          lookahead1W(6);           // WhiteSpace^token | '++'
+          consumeT(26);             // '++'
           memoize(3, e0A, -1);
           lk = -10;
         }
@@ -8229,26 +8233,26 @@ function MaiaScript(string, parsingEventHandler)
             b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
             b3 = b3A; e3 = e3A; end = e3A; }}}
             try_Primary();
-            lookahead1W(6);         // WhiteSpace^token | '++'
-            consumeT(26);           // '++'
+            lookahead1W(7);         // WhiteSpace^token | '--'
+            consumeT(30);           // '--'
             memoize(3, e0A, -2);
             lk = -10;
           }
           catch (p2A)
           {
-            lk = -3;
+            lk = -9;
             b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
             b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
             b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
             b3 = b3A; e3 = e3A; end = e3A; }}}
-            memoize(3, e0A, -3);
+            memoize(3, e0A, -9);
           }
         }
       }
     }
     switch (lk)
     {
-    case -2:
+    case -1:
     case 19715:                     // Identifier '++' END
     case 19716:                     // Character '++' END
     case 19717:                     // String '++' END
@@ -8655,7 +8659,7 @@ function MaiaScript(string, parsingEventHandler)
       lookahead1W(6);               // WhiteSpace^token | '++'
       consumeT(26);                 // '++'
       break;
-    case -3:
+    case -2:
     case 20227:                     // Identifier '--' END
     case 20228:                     // Character '--' END
     case 20229:                     // String '--' END
@@ -15548,7 +15552,7 @@ MaiaScript.TOKEN =
 ];
 
 // End
-// This file was generated on Fri Nov 4, 2022 13:54 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Fri Nov 4, 2022 19:28 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
@@ -16367,7 +16371,7 @@ function MaiaCompiler() {
                                 if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                     js += 'this.' + text + ';';
                                 } else {
-                                    js += text + ';';
+                                    js += text + ';'
                                 }
                             } else {
                                 if (conditionalExpression.includes(parentNodeInfo.parentNode)) {
@@ -16602,7 +16606,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                         js += 'if (' + condition + ') {' + body + '}';
                     }
@@ -16618,13 +16623,15 @@ function MaiaCompiler() {
                                 var bodyExpression = {
                                     'Expression': commandLine
                                 };
-                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         } else {
                             var bodyExpression = {
                                 'Expression': nodeExpression
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                         js += ' else {' + body + '}';
                     }
@@ -16650,7 +16657,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
 
                         var nodeCondition = {
@@ -16686,7 +16694,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                     }
                     js += 'while (' + condition + ') {' + body + '}';
@@ -16728,7 +16737,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                     }
                     js += 'for (' + before + ';' + condition + ';' + after + ') {' + body + '}';
@@ -16769,7 +16779,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                     }
                     js += 'for (' + keyVarName + ' in ' + arrayName + ') {var ' + valueVarName + ' = ' + arrayName + '[' + keyVarName + '];' + body + '}';
@@ -16811,7 +16822,8 @@ function MaiaCompiler() {
                                 var bodyExpression = {
                                     'Expression': commandLine
                                 };
-                                _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                //_catch += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         }
                         js += ' catch (' + catchVar + ') {' + _catch + '}';
@@ -16853,7 +16865,8 @@ function MaiaCompiler() {
                             var bodyExpression = {
                                 'Expression': commandLine
                             };
-                            _script += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            //_script += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            _script += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                     }
                 }
@@ -16874,7 +16887,8 @@ function MaiaCompiler() {
                                 var bodyExpression = {
                                     'Expression': commandLine
                                 };
-                                _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                //_catch += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         }
                         js += 'core.testScript(' + '\'' + _script + '\',' + _times + ',' + _value + ',' + _tolerance + ',\'' + 'var ' + catchVar + ' = core.testResult.obtained;' + _catch + '\');';
@@ -16959,10 +16973,14 @@ function MaiaCompiler() {
                         var right = this.parse(primary, nodeInfo, isKernelFunction);
                         parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                         var operator = node['TOKEN'];
-                        if (isKernelFunction) {
-                            js += operator + right;
+                        if ((operator == '++') || (operator == '--')) {
+                            js += right + operator;
                         } else {
-                            js += operators[operator] + '(' + right + ')';
+                            if (isKernelFunction) {
+                                js += operator + right;
+                            } else {
+                                js += operators[operator] + '(' + right + ')';
+                            }
                         }
                     } else {
                         js += this.parse(node, nodeInfo, isKernelFunction);
@@ -17000,6 +17018,8 @@ function MaiaCompiler() {
                             } else {    
                                 var right = operators[operator] + '(' + this.parse(node[1], nodeInfo, isKernelFunction) + ')';
                             }
+                        } else if ((operator == '++') || (operator == '--')) {
+                            var right = this.parse(node[1], nodeInfo, isKernelFunction) + operator;
                         } else {
                             var right = this.parse(node[1], nodeInfo, isKernelFunction);
                         }
@@ -17214,7 +17234,8 @@ function MaiaCompiler() {
                     if (Array.isArray(nodeExpression)) {
                         for (var i = 0; i < nodeExpression.length; i++) {
                             if (i < (nodeExpression.length - 1)) {
-                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ';';
+                                //js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ';';
+                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction);
                                 parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                             } else {
                                 js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction);

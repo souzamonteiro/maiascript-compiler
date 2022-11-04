@@ -22,8 +22,7 @@ ShiftExpression          ::= AdditiveExpression (('<<' | '>>') AdditiveExpressio
 AdditiveExpression       ::= PowerExpression (('+' | '-') PowerExpression)*
 PowerExpression          ::= MultiplicativeExpression ('**' MultiplicativeExpression)*
 MultiplicativeExpression ::= UnaryExpression (('*' | '/' | '%') UnaryExpression)*
-UnaryExpression          ::= Primary
-                           | Primary '++'
+UnaryExpression          ::= Primary '++'
                            | Primary '--'
                            | '++' Primary
                            | '--' Primary
@@ -31,6 +30,7 @@ UnaryExpression          ::= Primary
                            | '-' Primary
                            | '~' Primary
                            | '!' Primary
+                           | Primary
 
 Primary                  ::= Member
                            | Value
