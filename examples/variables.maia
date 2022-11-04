@@ -1,7 +1,7 @@
 a = 1
 b = 2.0
 c = "Hello World!"
-d = [1, 2]
+d = [1, 2.0]
 
 // JavaScript-like arrays.
 e = [[1, 2],[3, 4]]
@@ -10,7 +10,7 @@ e = [[1, 2],[3, 4]]
 f = [5, 6; 7, 8]
 
 // JavaScript-like objects.
-g = {a: 1, b: 2.0, c: "Hello World!"}
+g = {a: 1, b: 2.0, "c": "Hello World!"}
 
 system.println(a)
 system.println(b)

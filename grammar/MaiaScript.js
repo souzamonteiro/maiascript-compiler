@@ -1,4 +1,4 @@
-// This file was generated on Thu Nov 3, 2022 17:11 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Fri Nov 4, 2022 13:54 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree -main
 
 function MaiaScript(string, parsingEventHandler)

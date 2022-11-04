@@ -1,4 +1,4 @@
-// This file was generated on Thu Nov 3, 2022 17:11 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Fri Nov 4, 2022 13:54 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree
 
 function MaiaScript(string, parsingEventHandler)
@@ -15547,7 +15547,7 @@ MaiaScript.TOKEN =
 ];
 
 // End
-// This file was generated on Thu Nov 3, 2022 17:11 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Fri Nov 4, 2022 13:54 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
@@ -16102,6 +16102,7 @@ function MaiaCompiler() {
                             'PowerExpression',
                             'MultiplicativeExpression'];
         codeBlockStatement = ['Program',
+                              'Block',
                               'NamespaceDeclaration',
                               'FunctionDeclaration',
                               'Do',
@@ -16116,7 +16117,7 @@ function MaiaCompiler() {
         conditionalExpression = ['Do',
                                  'While',
                                  'For',
-                                 'Foreach',
+                                 'ForEach',
                                  'If',
                                  'Switch',
                                  'Catch',
@@ -16405,7 +16406,7 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Block',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : 'Block'
             };
             parentNodeInfo.childNode = 'Block';
 
@@ -16480,7 +16481,7 @@ function MaiaCompiler() {
                                 js += name + ' = async function ';
                             } else if (token == ':=') {
                                 var statement = "Constructor";
-                                nodeInfo.parentNode = 'NamespaceDeclaration';
+                                nodeInfo.parentNode = 'Namespace';
                                 js += name + ' = function ';
                             } else if (token == '#=') {
                                 var statement = "KernelFunction";
@@ -16577,7 +16578,7 @@ function MaiaCompiler() {
                 }
             }
         } else if ('If' in mil) {
-            node = mil['if'];
+            node = mil['If'];
             var nodeInfo = {
                 'parentNode': 'If',
                 'childNode': '',
@@ -17114,7 +17115,7 @@ function MaiaCompiler() {
                 }
                 if ('Arguments' in node) {
                     var nodeArguments = {
-                        'matrixIndexes': node['Arguments']
+                        'MatrixIndexes': node['Arguments']
                     };
                     var args = this.parse(nodeArguments, nodeInfo, isKernelFunction);
                     parentNodeInfo.terminalNode = nodeInfo.terminalNode;
@@ -17250,7 +17251,7 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'Integer';
             parentNodeInfo.terminalNode = 'Integer';
 
-            if (typeof node == 'String') {
+            if (typeof node == 'string') {
                 js = node;
             }
         } else if ('Real' in mil) {
@@ -17263,7 +17264,7 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'Real';
             parentNodeInfo.terminalNode = 'Real';
 
-            if (typeof node == 'String') {
+            if (typeof node == 'string') {
                 js = node;
             }
         } else if ('Complex' in mil) {
@@ -17276,7 +17277,7 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'Complex';
             parentNodeInfo.terminalNode = 'Complex';
 
-            if (typeof node == 'String') {
+            if (typeof node == 'string') {
                 js = this.parseComplexNumber(node);
             }
         } else if ('Character' in mil) {
@@ -17289,7 +17290,7 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'Character';
             parentNodeInfo.terminalNode = 'Character';
 
-            if (typeof node == 'String') {
+            if (typeof node == 'string') {
                 js += node.replace("'", "");
             }
         } else if ('String' in mil) {
@@ -17302,7 +17303,7 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'String';
             parentNodeInfo.terminalNode = 'String';
 
-            if (typeof node == 'String') {
+            if (typeof node == 'string') {
                 js += node;
             }
         } else if ('Array' in mil) {
@@ -17354,7 +17355,11 @@ function MaiaCompiler() {
             if (typeof node != 'undefined') {
                 if ('Key' in node) {
                     var key = node['Key'];
-                    js += key['String'] + ': ';
+                    if ('String' in key) {
+                        js += key['String'] + ': ';
+                    } else if ('Identifier' in key) {
+                        js += key['Identifier'] + ': ';
+                    }
                 }
                 if ('Expression' in node) {
                     var nodeExpression = {

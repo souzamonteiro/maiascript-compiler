@@ -375,12 +375,12 @@
                             },
                             {
                                 "Operation": {
+                                    "TOKEN": "++",
                                     "Primary": {
                                         "Member": {
                                             "Identifier": "a"
                                         }
-                                    },
-                                    "TOKEN": "++"
+                                    }
                                 }
                             },
                             {
