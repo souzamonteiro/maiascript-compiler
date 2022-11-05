@@ -1,6 +1,8 @@
 a = 1
 b = 2
 
+c = a == 1 ? "Hello" : "World"
+
 // A C-like if statement.
 if (a < b) {
     system.println("a = " + a)

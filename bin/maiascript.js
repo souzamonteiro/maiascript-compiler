@@ -16371,13 +16371,17 @@ function MaiaCompiler() {
                                 if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                     js += 'this.' + text + ';';
                                 } else {
-                                    js += text + ';'
+                                    if (text.length > 0) {
+                                        js += text + ';';
+                                    }
                                 }
                             } else {
                                 if (conditionalExpression.includes(parentNodeInfo.parentNode)) {
                                     js += text;
                                 } else {
-                                    js += text + ';';
+                                    if (text.length > 0) {
+                                        js += text + ';';
+                                    }
                                 }
                             }
                         } else {
@@ -16392,13 +16396,17 @@ function MaiaCompiler() {
                             if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                 js += 'this.' + text + ';';
                             } else {
-                                js += text + ';';
+                                if (text.length > 0) {
+                                    js += text + ';';
+                                }
                             }
                         } else {
                             if (conditionalExpression.includes(parentNodeInfo.parentNode)) {
                                 js += text;
                             } else {
-                                js += text + ';';
+                                if (text.length > 0) {
+                                    js += text + ';';
+                                }
                             }
                         }
                     } else {
@@ -17040,6 +17048,9 @@ function MaiaCompiler() {
                             } else if (operator[j] == '?=') {
                                 parentNodeInfo.terminalNode = 'VariableAssignment';
                                 js += left + '= await ' + right;
+                            } else if (operator[j] == '?') {
+                                parentNodeInfo.terminalNode = 'Condition';
+                                js = this.parse(node[0], nodeInfo, isKernelFunction) + ' ? ' + this.parse(node[1], nodeInfo, isKernelFunction) + ' : ' + this.parse(node[2], nodeInfo, isKernelFunction);
                             } else {
                                 if (isKernelFunction) {
                                     js += left + operator[j] + right;
@@ -17060,6 +17071,9 @@ function MaiaCompiler() {
                                 } else if (operator[j] == '?=') {
                                     parentNodeInfo.terminalNode = 'VariableAssignment';
                                     js += '= await ' + right;
+                                } else if (operator[j] == '?') {
+                                    parentNodeInfo.terminalNode = 'Condition';
+                                    js = this.parse(node[0], nodeInfo, isKernelFunction) + ' ? ' + this.parse(node[1], nodeInfo, isKernelFunction) + ' : ' + this.parse(node[2], nodeInfo, isKernelFunction);
                                 } else {
                                     if (isKernelFunction) {
                                         js = js + operator[j] + right;

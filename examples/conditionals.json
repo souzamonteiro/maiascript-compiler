@@ -44,6 +44,61 @@
                 }
             },
             {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "c"
+                                }
+                            }
+                        },
+                        {
+                            "Op": [
+                                {
+                                    "Op": [
+                                        {
+                                            "Primary": {
+                                                "Member": {
+                                                    "Identifier": "a"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Primary": {
+                                                "Value": {
+                                                    "Integer": "1"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TOKEN": "=="
+                                },
+                                {
+                                    "Primary": {
+                                        "Value": {
+                                            "String": "\"Hello\""
+                                        }
+                                    }
+                                },
+                                {
+                                    "Primary": {
+                                        "Value": {
+                                            "String": "\"World\""
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": [
+                                "?",
+                                ":"
+                            ]
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
                 "Comment": "// A C-like if statement."
             },
             {

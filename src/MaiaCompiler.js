@@ -308,13 +308,17 @@ function MaiaCompiler() {
                                 if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                     js += 'this.' + text + ';';
                                 } else {
-                                    js += text + ';'
+                                    if (text.length > 0) {
+                                        js += text + ';';
+                                    }
                                 }
                             } else {
                                 if (conditionalExpression.includes(parentNodeInfo.parentNode)) {
                                     js += text;
                                 } else {
-                                    js += text + ';';
+                                    if (text.length > 0) {
+                                        js += text + ';';
+                                    }
                                 }
                             }
                         } else {
@@ -329,13 +333,17 @@ function MaiaCompiler() {
                             if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                 js += 'this.' + text + ';';
                             } else {
-                                js += text + ';';
+                                if (text.length > 0) {
+                                    js += text + ';';
+                                }
                             }
                         } else {
                             if (conditionalExpression.includes(parentNodeInfo.parentNode)) {
                                 js += text;
                             } else {
-                                js += text + ';';
+                                if (text.length > 0) {
+                                    js += text + ';';
+                                }
                             }
                         }
                     } else {
