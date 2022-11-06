@@ -16,4 +16,15 @@ if (core.LT(a, b)) {
         system.println("a == b");
     }
 };
+switch (a) {
+    case 0:
+    case 1:
+        system.println("a == 0 || a == 1 || a == 2");
+    case 2:
+        system.println("a == 2");
+        break;
+    default:
+        system.println(core.add("a = ", a));
+        system.println("a != 1 && a != 2");
+};
 system.println(core.equal(c, 1) ? "Maia" : "Script");

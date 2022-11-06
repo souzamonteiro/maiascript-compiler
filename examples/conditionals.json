@@ -557,6 +557,21 @@
                                     "case",
                                     ":"
                                 ],
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Value": {
+                                                "Integer": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "TOKEN": [
+                                    "case",
+                                    ":"
+                                ],
                                 "Expression": [
                                     {
                                         "Operation": {
@@ -585,20 +600,13 @@
                                                             "Operation": {
                                                                 "Primary": {
                                                                     "Value": {
-                                                                        "String": "\"a == 1\""
+                                                                        "String": "\"a == 0 || a == 1 || a == 2\""
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "Statement": {
-                                            "Break": {
-                                                "TOKEN": "break"
                                             }
                                         }
                                     }

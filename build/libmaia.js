@@ -16645,6 +16645,112 @@ function MaiaCompiler() {
                 }
             }
             parentNodeInfo.terminalNode = 'If';
+        } else if ('Switch' in mil) {
+            node = mil['Switch'];
+            var nodeInfo = {
+                'parentNode': 'Switch',
+                'childNode': '',
+                'terminalNode' : 'Switch'
+            };
+            parentNodeInfo.childNode = 'Switch';
+
+            if (typeof node != 'undefined') {
+                if ('Expression' in node) {
+                    var body = '';
+                    var nodeExpression = node['Expression'];
+                    var nodeCondition = {
+                        'Expression': nodeExpression
+                    };
+                    var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
+
+                    js += 'switch (' + condition + ') {';
+                }
+                if ('Case' in node) {
+                    var body = '';
+                    var nodeCase = node['Case'];
+                    if (Array.isArray(nodeCase)) {
+                        for (var i = 0; i < nodeCase.length; i++) {
+                            if ('Expression' in nodeCase[i]) {
+                                var body = '';
+                                var nodeCaseExpression = nodeCase[i]['Expression'];
+                                if (Array.isArray(nodeCaseExpression)) {
+                                    var nodeExpression = nodeCaseExpression[0];
+                                    var nodeCondition = {
+                                        'Expression': nodeExpression
+                                    };
+                                    var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
+                                    
+                                    for (var j = 1; j < nodeCaseExpression.length; j++) {
+                                        var commandLine = nodeCaseExpression[j];
+                                        var bodyExpression = {
+                                            'Expression': commandLine
+                                        };
+                                        body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                    }
+                                } else {
+                                    var nodeExpression = nodeCaseExpression;
+                                    var nodeCondition = {
+                                        'Expression': nodeExpression
+                                    };
+                                    var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
+                                }
+                                js += ' case ' + condition + ' : ' + body;
+                            }
+                        }
+                    } else {
+                        if ('Expression' in nodeCase) {
+                            var body = '';
+                            var nodeCaseExpression = nodeCase['Expression'];
+                            if (Array.isArray(nodeCaseExpression)) {
+                                var nodeExpression = nodeCaseExpression[0];
+                                var nodeCondition = {
+                                    'Expression': nodeExpression
+                                };
+                                var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
+                                
+                                for (var j = 1; j < nodeCaseExpression.length; j++) {
+                                    var commandLine = nodeCaseExpression[j];
+                                    var bodyExpression = {
+                                        'Expression': commandLine
+                                    };
+                                    body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                }
+                            } else {
+                                var nodeExpression = nodeCaseExpression;
+                                var nodeCondition = {
+                                    'Expression': nodeExpression
+                                };
+                                var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
+                            }
+                            js += ' case ' + condition + ' : ' + body;
+                        }
+                    }
+                }
+                if ('Default' in node) {
+                    var body = '';
+                    var nodeDefault = node['Default'];
+                    if ('Expression' in nodeDefault) {
+                        var nodeExpression = nodeDefault['Expression'];
+                        if (Array.isArray(nodeExpression)) {
+                            for (var i = 0; i < nodeExpression.length; i++) {
+                                var commandLine = nodeExpression[i];
+                                var bodyExpression = {
+                                    'Expression': commandLine
+                                };
+                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            }
+                        } else {
+                            var bodyExpression = {
+                                'Expression': nodeExpression
+                            };
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                        }
+                        js += ' default : ' + body;
+                    }
+                }
+                js += '}';
+            }
+            parentNodeInfo.terminalNode = 'Switch';
         } else if ('Do' in mil) {
             node = mil['Do'];
             var nodeInfo = {
