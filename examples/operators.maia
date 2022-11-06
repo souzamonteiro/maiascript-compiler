@@ -40,3 +40,11 @@ d = ++a
 system.println(d)
 d = --b
 system.println(d)
+
+/*
+ * Complex numbers support.
+ */
+e = 1.0+2.0*i
+f = 3.0+4.0*i
+g = e + f
+system.println(e)

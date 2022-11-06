@@ -226,7 +226,7 @@ function MaiaCompiler() {
         var s = new ComplexNumber.XmlSerializer(getXml, true);
         var complexNumberParser = new ComplexNumber(text, s);
         try {
-            complexNumberParser.parse_number();
+            complexNumberParser.parse_Number();
         } catch (pe) {
             if (!(pe instanceof complexNumberParser.ParseException)) {
                 throw pe;

@@ -1037,6 +1037,112 @@
                         }
                     }
                 }
+            },
+            {
+                "Comment": "/*\n * Complex numbers support.\n */"
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "e"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Complex": "1.0+2.0*i"
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Complex": "3.0+4.0*i"
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "g"
+                                }
+                            }
+                        },
+                        {
+                            "Op": [
+                                {
+                                    "Primary": {
+                                        "Member": {
+                                            "Identifier": "e"
+                                        }
+                                    }
+                                },
+                                {
+                                    "Primary": {
+                                        "Member": {
+                                            "Identifier": "f"
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": "+"
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "e"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         ]
     }

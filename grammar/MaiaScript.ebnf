@@ -111,8 +111,6 @@ Value                    ::= Integer
                            | Array
                            | Matrix
 
-Complex                  ::= Real? Imaginary
-
 WhiteSpace               ::= WhiteSpace^token
                          /* ws: definition */
 
@@ -192,6 +190,7 @@ Integer                  ::= '0'
                            | Digit+ ('u' | 'U')? ('l' | 'll' | 'L' | 'LL' | 'f' | 'F')?
                            | Octal
                            | Hexadecimal
+Complex                  ::= Real? Imaginary
 Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
 Imaginary                ::= (('+' | '-')? Real '*' 'i')
 
