@@ -1,0 +1,5 @@
+- [ ] Implement compiling switch statements
+- [ ] Implement compilation of typed arguments for functions in WebAssembly
+- [ ] Implement compilation of typed arguments for functions in MaiaC
+- [ ] Implement compilation of WebAssembly code
+- [ ] Implement compilation of MaiaC code
