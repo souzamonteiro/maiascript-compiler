@@ -16366,7 +16366,7 @@ function MaiaCompiler() {
                     for (var i = 0; i < node.length; i++) {
                         text = this.parse(node[i], nodeInfo, isKernelFunction);
                         parentNodeInfo.terminalNode = nodeInfo.terminalNode;
-                        if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment') && (nodeInfo.childNode != 'Condition')) {
+                        if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment')) {
                             if (parentNodeInfo.parentNode == 'NamespaceDeclaration') {
                                 if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                     js += 'this.' + text + ';';
@@ -16391,7 +16391,7 @@ function MaiaCompiler() {
                 } else {
                     text = this.parse(node, nodeInfo, isKernelFunction);
                     parentNodeInfo.terminalNode = nodeInfo.terminalNode;
-                    if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment') && (nodeInfo.childNode != 'Condition')) {
+                    if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment')) {
                         if (parentNodeInfo.parentNode == 'NamespaceDeclaration') {
                             if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
                                 js += 'this.' + text + ';';
@@ -16494,7 +16494,7 @@ function MaiaCompiler() {
                                 js += name + ' = async function ';
                             } else if (token == ':=') {
                                 var statement = "Constructor";
-                                nodeInfo.parentNode = 'Namespace';
+                                nodeInfo.parentNode = 'NamespaceDeclaration';
                                 js += name + ' = function ';
                             } else if (token == '#=') {
                                 var statement = "KernelFunction";
@@ -17039,54 +17039,142 @@ function MaiaCompiler() {
                         var operator = mil['TOKEN'];
                         var j = 0;
                         if (Array.isArray(operator)) {
-                            if (operator[j] == '=') {
-                                parentNodeInfo.terminalNode = 'VariableAssignment';
-                                js += left + '=' + right;
-                            } else if (operator[j] == ':=') {
-                                parentNodeInfo.terminalNode = 'VariableAssignment';
-                                js += left + '= new ' + right;
-                            } else if (operator[j] == '?=') {
-                                parentNodeInfo.terminalNode = 'VariableAssignment';
-                                js += left + '= await ' + right;
-                            } else if (operator[j] == '?') {
-                                parentNodeInfo.terminalNode = 'Condition';
-                                js = this.parse(node[0], nodeInfo, isKernelFunction) + ' ? ' + this.parse(node[1], nodeInfo, isKernelFunction) + ' : ' + this.parse(node[2], nodeInfo, isKernelFunction);
+                            if (operator[0] == '?') {
+                                js = left + ' ? ' + right + ' : ' + this.parse(node[2], nodeInfo, isKernelFunction);
                             } else {
-                                if (isKernelFunction) {
-                                    js += left + operator[j] + right;
-                                } else {    
-                                    js += operators[operator[j]] + '(' + left + ',' + right + ')';
-                                }
-                            }
-                            j++;
-                            for (var i = 2; i < node.length; i++) {
-                                var right = this.parse(node[i], nodeInfo, isKernelFunction);
-                                parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                                 if (operator[j] == '=') {
                                     parentNodeInfo.terminalNode = 'VariableAssignment';
-                                    js += '=' + right;
+                                    js += left + '=' + right;
+                                } else if (operator[j] == '*=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '*=' + right;
+                                } else if (operator[j] == '/=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '/=' + right;
+                                } else if (operator[j] == '%=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '%=' + right;
+                                } else if (operator[j] == '+=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '+=' + right;
+                                } else if (operator[j] == '-=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '-=' + right;
+                                } else if (operator[j] == '<<=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '<<=' + right;
+                                } else if (operator[j] == '>>=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '>>=' + right;
+                                } else if (operator[j] == '&=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '&=' + right;
+                                } else if (operator[j] == '^=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '^=' + right;
+                                } else if (operator[j] == '|=') {
+                                    parentNodeInfo.terminalNode = 'VariableAssignment';
+                                    js += left + '|=' + right;
                                 } else if (operator[j] == ':=') {
                                     parentNodeInfo.terminalNode = 'VariableAssignment';
-                                    js += '= new ' + right;
+                                    js += left + '= new ' + right;
                                 } else if (operator[j] == '?=') {
                                     parentNodeInfo.terminalNode = 'VariableAssignment';
-                                    js += '= await ' + right;
-                                } else if (operator[j] == '?') {
-                                    parentNodeInfo.terminalNode = 'Condition';
-                                    js = this.parse(node[0], nodeInfo, isKernelFunction) + ' ? ' + this.parse(node[1], nodeInfo, isKernelFunction) + ' : ' + this.parse(node[2], nodeInfo, isKernelFunction);
+                                    js += left + '= await ' + right;
                                 } else {
                                     if (isKernelFunction) {
-                                        js = js + operator[j] + right;
+                                        js += left + operator[j] + right;
                                     } else {    
-                                        js = operators[operator[j]] + '(' + js + ',' + right + ')';
+                                        js += operators[operator[j]] + '(' + left + ',' + right + ')';
                                     }
                                 }
                                 j++;
+                                for (var i = 2; i < node.length; i++) {
+                                    var right = this.parse(node[i], nodeInfo, isKernelFunction);
+                                    parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                                    if (operator[j] == '=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '=' + right;
+                                    } else if (operator[j] == '*=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '*=' + right;
+                                    } else if (operator[j] == '/=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '/=' + right;
+                                    } else if (operator[j] == '%=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '%=' + right;
+                                    } else if (operator[j] == '+=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '+=' + right;
+                                    } else if (operator[j] == '-=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '-=' + right;
+                                    } else if (operator[j] == '<<=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '<<=' + right;
+                                    } else if (operator[j] == '>>=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '>>=' + right;
+                                    } else if (operator[j] == '&=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '&=' + right;
+                                    } else if (operator[j] == '^=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '^=' + right;
+                                    } else if (operator[j] == '|=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '|=' + right;
+                                    } else if (operator[j] == ':=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '= new ' + right;
+                                    } else if (operator[j] == '?=') {
+                                        parentNodeInfo.terminalNode = 'VariableAssignment';
+                                        js += '= await ' + right;
+                                    } else {
+                                        if (isKernelFunction) {
+                                            js = js + operator[j] + right;
+                                        } else {    
+                                            js = operators[operator[j]] + '(' + js + ',' + right + ')';
+                                        }
+                                    }
+                                    j++;
+                                }
                             }
                         } else {
                             if (operator == '=') {
                                 parentNodeInfo.terminalNode = 'VariableAssignment';
                                 js += left + '=' + right;
+                            } else if (operator[j] == '*=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '*=' + right;
+                            } else if (operator[j] == '/=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '/=' + right;
+                            } else if (operator[j] == '%=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '%=' + right;
+                            } else if (operator[j] == '+=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '+=' + right;
+                            } else if (operator[j] == '-=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '-=' + right;
+                            } else if (operator[j] == '<<=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '<<=' + right;
+                            } else if (operator[j] == '>>=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '>>=' + right;
+                            } else if (operator[j] == '&=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '&=' + right;
+                            } else if (operator[j] == '^=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '^=' + right;
+                            } else if (operator[j] == '|=') {
+                                parentNodeInfo.terminalNode = 'VariableAssignment';
+                                js += left + '|=' + right;
                             } else if (operator == ':=') {
                                 parentNodeInfo.terminalNode = 'VariableAssignment';
                                 js += left + '= new ' + right;

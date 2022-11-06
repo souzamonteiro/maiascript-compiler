@@ -735,6 +735,68 @@
                         }
                     }
                 }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Op": [
+                                            {
+                                                "Op": [
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "c"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "Primary": {
+                                                            "Value": {
+                                                                "Integer": "1"
+                                                            }
+                                                        }
+                                                    }
+                                                ],
+                                                "TOKEN": "=="
+                                            },
+                                            {
+                                                "Primary": {
+                                                    "Value": {
+                                                        "String": "\"Maia\""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Primary": {
+                                                    "Value": {
+                                                        "String": "\"Script\""
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "TOKEN": [
+                                            "?",
+                                            ":"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         ]
     }

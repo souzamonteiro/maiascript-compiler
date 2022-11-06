@@ -30,3 +30,5 @@ switch (a) {
         system.println("a = " + a)
         system.println("a != 1 && a != 2")
 }
+
+system.println(c == 1 ? "Maia" : "Script")
