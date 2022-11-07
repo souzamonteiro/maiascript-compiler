@@ -15816,7 +15816,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Program',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Program';
 
@@ -15829,7 +15830,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Expression',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Expression';
 
@@ -15841,10 +15843,10 @@ function MaiaCompiler() {
                         if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment')) {
                             if (parentNodeInfo.parentNode == 'NamespaceDeclaration') {
                                 if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
-                                    js += 'this.' + text + ';';
+                                    js += core.space(nodeInfo.indentation) + 'this.' + text + ';\n';
                                 } else {
                                     if (text.length > 0) {
-                                        js += text + ';';
+                                        js += core.space(nodeInfo.indentation) + text + ';\n';
                                     }
                                 }
                             } else {
@@ -15852,7 +15854,7 @@ function MaiaCompiler() {
                                     js += text;
                                 } else {
                                     if (text.length > 0) {
-                                        js += text + ';';
+                                        js += core.space(nodeInfo.indentation) + text + ';\n';
                                     }
                                 }
                             }
@@ -15866,10 +15868,10 @@ function MaiaCompiler() {
                     if (codeBlockStatement.includes(parentNodeInfo.parentNode) && (nodeInfo.childNode != 'Comment')) {
                         if (parentNodeInfo.parentNode == 'NamespaceDeclaration') {
                             if ((parentNodeInfo.terminalNode == 'VariableAssignment') || (parentNodeInfo.terminalNode == 'FunctionDeclaration')) {
-                                js += 'this.' + text + ';';
+                                js += core.space(nodeInfo.indentation) + 'this.' + text + ';\n';
                             } else {
                                 if (text.length > 0) {
-                                    js += text + ';';
+                                    js += core.space(nodeInfo.indentation) + text + ';\n';
                                 }
                             }
                         } else {
@@ -15877,7 +15879,7 @@ function MaiaCompiler() {
                                 js += text;
                             } else {
                                 if (text.length > 0) {
-                                    js += text + ';';
+                                    js += core.space(nodeInfo.indentation) + text + ';\n';
                                 }
                             }
                         }
@@ -15891,10 +15893,12 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Block',
                 'childNode': '',
-                'terminalNode' : 'Block'
+                'terminalNode' : 'Block',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Block';
 
+            nodeInfo.indentation += 4;
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var nodeExpression = {
@@ -15904,12 +15908,14 @@ function MaiaCompiler() {
                     js = body;
                 }
             }
+            nodeInfo.indentation -= 4;
         } else if ('Statement' in mil) {
             node = mil['Statement'];
             var nodeInfo = {
                 'parentNode': 'Statement',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Statement';
 
@@ -15922,7 +15928,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'NamespaceDeclaration',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'NamespaceDeclaration';
 
@@ -15947,7 +15954,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'FunctionDeclaration',
                 'childNode': '',
-                'terminalNode' : 'FunctionDeclaration'
+                'terminalNode' : 'FunctionDeclaration',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'FunctionDeclaration';
 
@@ -16035,7 +16043,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Include',
                 'childNode': '',
-                'terminalNode' : 'Include'
+                'terminalNode' : 'Include',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Include';
 
@@ -16052,7 +16061,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Local';
 
@@ -16067,7 +16077,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'If',
                 'childNode': '',
-                'terminalNode' : 'If'
+                'terminalNode' : 'If',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'If';
 
@@ -16123,7 +16134,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Switch',
                 'childNode': '',
-                'terminalNode' : 'Switch'
+                'terminalNode' : 'Switch',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Switch';
 
@@ -16229,7 +16241,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Do',
                 'childNode': '',
-                'terminalNode' : 'Do'
+                'terminalNode' : 'Do',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Do';
 
@@ -16261,7 +16274,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'While',
                 'childNode': '',
-                'terminalNode' : 'While'
+                'terminalNode' : 'While',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'While';
 
@@ -16293,7 +16307,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'For',
                 'childNode': '',
-                'terminalNode' : 'For'
+                'terminalNode' : 'For',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'For';
 
@@ -16336,7 +16351,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'ForEach',
                 'childNode': '',
-                'terminalNode' : 'ForEach'
+                'terminalNode' : 'ForEach',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'ForEach';
 
@@ -16378,7 +16394,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Try',
                 'childNode': '',
-                'terminalNode' : 'Try'
+                'terminalNode' : 'Try',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Try';
 
@@ -16422,7 +16439,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Test',
                 'childNode': '',
-                'terminalNode' : 'Test'
+                'terminalNode' : 'Test',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Test';
 
@@ -16487,7 +16505,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Break',
                 'childNode': '',
-                'terminalNode' : 'Break'
+                'terminalNode' : 'Break',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Break';
 
@@ -16499,7 +16518,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Continue',
                 'childNode': '',
-                'terminalNode' : 'Continue'
+                'terminalNode' : 'Continue',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Continue';
 
@@ -16511,7 +16531,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Return',
                 'childNode': '',
-                'terminalNode' : 'Return'
+                'terminalNode' : 'Return',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Return';
 
@@ -16528,7 +16549,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Throw',
                 'childNode': '',
-                'terminalNode' : 'Throw'
+                'terminalNode' : 'Throw',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Throw';
 
@@ -16545,7 +16567,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Operation',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Operation';
             
@@ -16579,7 +16602,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Op',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Op';
             if (typeof node != 'undefined') {
@@ -16587,14 +16611,16 @@ function MaiaCompiler() {
                     var nodeInfo = {
                         'parentNode': 'Op',
                         'childNode': '',
-                        'terminalNode' : ''
+                        'terminalNode' : '',
+                        'indentation': parentNodeInfo.indentation
                     };
                     var left = this.parse(node[0], nodeInfo, isKernelFunction);
                     parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                     var nodeInfo = {
                         'parentNode': 'op',
                         'childNode': '',
-                        'terminalNode' : ''
+                        'terminalNode' : '',
+                        'indentation': parentNodeInfo.indentation
                     };
                     if ('TOKEN' in node[1]) {
                         var operator = node[1]['TOKEN'];
@@ -16772,7 +16798,8 @@ function MaiaCompiler() {
                     var nodeInfo = {
                         'parentNode': 'Op',
                         'childNode': '',
-                        'terminalNode' : ''
+                        'terminalNode' : '',
+                        'indentation': parentNodeInfo.indentation
                     };
                     js += this.parse(node, nodeInfo, isKernelFunction);
                     parentNodeInfo.terminalNode = nodeInfo.terminalNode;
@@ -16783,7 +16810,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': parentNodeInfo.childNode,
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Primary';
 
@@ -16805,7 +16833,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Member',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Member';
 
@@ -16851,7 +16880,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Identifier',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Identifier';
             parentNodeInfo.terminalNode = 'Identifier';
@@ -16874,7 +16904,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Arguments',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Arguments';
 
@@ -16904,7 +16935,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Arguments',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Arguments';
 
@@ -16935,7 +16967,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Value',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Value';
 
@@ -16948,7 +16981,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Integer',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Integer';
             parentNodeInfo.terminalNode = 'Integer';
@@ -16961,7 +16995,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Real',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Real';
             parentNodeInfo.terminalNode = 'Real';
@@ -16974,7 +17009,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Complex',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Complex';
             parentNodeInfo.terminalNode = 'Complex';
@@ -16987,7 +17023,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Character',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Character';
             parentNodeInfo.terminalNode = 'Character';
@@ -17000,7 +17037,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'String',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'String';
             parentNodeInfo.terminalNode = 'String';
@@ -17013,7 +17051,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Array',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Array';
 
@@ -17050,7 +17089,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Element',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Element';
 
@@ -17077,7 +17117,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Matrix',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Matrix';
 
@@ -17115,7 +17156,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Row',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Row';
 
@@ -17142,7 +17184,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'Column',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Column';
 
@@ -17167,7 +17210,8 @@ function MaiaCompiler() {
             var nodeInfo = {
                 'parentNode': 'ParenthesizedExpression',
                 'childNode': '',
-                'terminalNode' : ''
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'ParenthesizedExpression';
 
@@ -17196,7 +17240,8 @@ function MaiaCompiler() {
         var nodeInfo = {
             'parentNode': '',
             'childNode': 'Program',
-            'terminalNode' : ''
+            'terminalNode' : '',
+            'indentation': 0
         };
 
         var mil = {};
@@ -17885,9 +17930,9 @@ function Core() {
      * @return {string}  The string filled with n spaces.
      */
     this.space = function(n) {
-        var str = ""
+        var str = ''
         for (var i = 1; i < n; i++) {
-            str += " ";
+            str += ' ';
         }
         return str;
     }

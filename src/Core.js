@@ -675,9 +675,9 @@ function Core() {
      * @return {string}  The string filled with n spaces.
      */
     this.space = function(n) {
-        var str = ""
+        var str = ''
         for (var i = 1; i < n; i++) {
-            str += " ";
+            str += ' ';
         }
         return str;
     }

@@ -239,7 +239,7 @@ function MaiaVM() {
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
                     compiledCode.mil = compiler.xmlToMil(xml);
-                    compiledCode.js = compiler.compile(xml);
+                    compiledCode.js = compiler.compile(xml, indentCode);
                     if (justCompile) {
                         if (typeof outputFile == 'undefined') {
                             var fileName = inputFile.split('.').shift();
