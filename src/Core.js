@@ -676,7 +676,7 @@ function Core() {
      */
     this.space = function(n) {
         var str = ''
-        for (var i = 1; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             str += ' ';
         }
         return str;

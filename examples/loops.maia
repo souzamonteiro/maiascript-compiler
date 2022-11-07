@@ -8,6 +8,9 @@ do {
 } while (a < 10);
 
 while (a < 10) {
+    if (a % 2 == 0) {
+        continue
+    }
     system.println(a)
     a++
 }
