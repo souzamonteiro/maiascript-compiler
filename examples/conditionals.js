@@ -6,14 +6,14 @@ if (core.LT(a,b)) {
     system.println(core.add("b = ",b));
     system.println("a < b");
 } else {
-    if (core.GT(a,b)) {
-        system.println(core.add("a = ",a));
-        system.println(core.add("b = ",b));
-        system.println("a > b");
-    } else {
-                    system.println(core.add("a = ",a));
-            system.println(core.add("b = ",b));
-            system.println("a == b");
+if (core.GT(a,b)) {
+    system.println(core.add("a = ",a));
+    system.println(core.add("b = ",b));
+    system.println("a > b");
+} else {
+    system.println(core.add("a = ",a));
+    system.println(core.add("b = ",b));
+    system.println("a == b");
 }};
 switch (a) {
     case 0 : 

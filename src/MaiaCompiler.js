@@ -565,13 +565,12 @@ function MaiaCompiler() {
                             };
                             body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
-                        js += 'if (' + condition + ') {' + '\n' + body + '}';
+                        js += 'if (' + condition + ') {' + '\n' + body + core.space(nodeInfo.indentation) + '}';
                     }
                 }
                 if ('Else' in node) {
                     var body = '';
                     var nodeElse = node['Else'];
-                    nodeInfo.indentation += 4;
                     if ('Expression' in nodeElse) {
                         var nodeExpression = nodeElse['Expression'];
                         if (Array.isArray(nodeExpression)) {
@@ -590,7 +589,6 @@ function MaiaCompiler() {
                         }
                         js += ' else {' + '\n' + body + '}';
                     }
-                    nodeInfo.indentation -= 4;
                 }
             }
             parentNodeInfo.terminalNode = 'If';
