@@ -86,7 +86,7 @@ function MaiaVM() {
                                         var parser = new DOMParser();
                                         var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                                         var compiler = new MaiaCompiler();
-                                        compiledCode.js = compiler.compile(xml, indentCode);
+                                        compiledCode.js = compiler.compile(xml, false);
                                         try {
                                             var script = document.createElement('script');
                                             script.type = 'text/javascript';
@@ -127,7 +127,7 @@ function MaiaVM() {
                     var parser = new DOMParser();
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
-                    compiledCode.js = compiler.compile(xml, indentCode);
+                    compiledCode.js = compiler.compile(xml, false);
                     try {
                         var script = document.createElement('script');
                         script.type = 'text/javascript';

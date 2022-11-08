@@ -11,6 +11,10 @@ while (a < 10) {
     if (a % 2 == 0) {
         continue
     }
+    if (a >= 5) {
+        system.println("Break the loop.")
+        break
+    }
     system.println(a)
     a++
 }

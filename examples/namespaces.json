@@ -13,27 +13,196 @@
                                 "{",
                                 "}"
                             ],
-                            "Expression": {
-                                "Operation": {
-                                    "Op": [
-                                        {
-                                            "Primary": {
-                                                "Member": {
-                                                    "Identifier": "b"
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Op": [
+                                            {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": "b"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Primary": {
+                                                    "Value": {
+                                                        "Integer": "1"
+                                                    }
                                                 }
                                             }
-                                        },
-                                        {
-                                            "Primary": {
-                                                "Value": {
-                                                    "Integer": "1"
+                                        ],
+                                        "TOKEN": "="
+                                    }
+                                },
+                                {
+                                    "Statement": {
+                                        "FunctionDeclaration": {
+                                            "Identifier": "f",
+                                            "TOKEN": [
+                                                "(",
+                                                ")"
+                                            ],
+                                            "Arguments": {
+                                                "Expression": {
+                                                    "Operation": {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "n"
+                                                            }
+                                                        }
+                                                    }
                                                 }
+                                            },
+                                            "Block": {
+                                                "TOKEN": [
+                                                    "{",
+                                                    "}"
+                                                ],
+                                                "Expression": [
+                                                    {
+                                                        "Statement": {
+                                                            "If": {
+                                                                "TOKEN": [
+                                                                    "if",
+                                                                    "(",
+                                                                    ")"
+                                                                ],
+                                                                "Expression": [
+                                                                    {
+                                                                        "Operation": {
+                                                                            "Op": [
+                                                                                {
+                                                                                    "Op": [
+                                                                                        {
+                                                                                            "Primary": {
+                                                                                                "Member": {
+                                                                                                    "Identifier": "n"
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "Primary": {
+                                                                                                "Value": {
+                                                                                                    "Integer": "0"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    ],
+                                                                                    "TOKEN": "=="
+                                                                                },
+                                                                                {
+                                                                                    "Op": [
+                                                                                        {
+                                                                                            "Primary": {
+                                                                                                "Member": {
+                                                                                                    "Identifier": "n"
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "Primary": {
+                                                                                                "Value": {
+                                                                                                    "Integer": "1"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    ],
+                                                                                    "TOKEN": "=="
+                                                                                }
+                                                                            ],
+                                                                            "TOKEN": "||"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "Block": {
+                                                                            "TOKEN": [
+                                                                                "{",
+                                                                                "}"
+                                                                            ],
+                                                                            "Expression": {
+                                                                                "Statement": {
+                                                                                    "Return": {
+                                                                                        "TOKEN": "return",
+                                                                                        "Expression": {
+                                                                                            "Operation": {
+                                                                                                "Primary": {
+                                                                                                    "Value": {
+                                                                                                        "Integer": "1"
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "Statement": {
+                                                            "Return": {
+                                                                "TOKEN": "return",
+                                                                "Expression": {
+                                                                    "Operation": {
+                                                                        "Op": [
+                                                                            {
+                                                                                "Primary": {
+                                                                                    "Member": {
+                                                                                        "Identifier": "n"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "Primary": {
+                                                                                    "Member": {
+                                                                                        "Identifier": "g",
+                                                                                        "TOKEN": [
+                                                                                            "(",
+                                                                                            ")"
+                                                                                        ],
+                                                                                        "Arguments": {
+                                                                                            "Expression": {
+                                                                                                "Operation": {
+                                                                                                    "Op": [
+                                                                                                        {
+                                                                                                            "Primary": {
+                                                                                                                "Member": {
+                                                                                                                    "Identifier": "n"
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "Primary": {
+                                                                                                                "Value": {
+                                                                                                                    "Integer": "1"
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "TOKEN": "-"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "TOKEN": "*"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         }
-                                    ],
-                                    "TOKEN": "="
+                                    }
                                 }
-                            }
+                            ]
                         }
                     }
                 }
@@ -61,6 +230,53 @@
                                                     "b"
                                                 ],
                                                 "TOKEN": "."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": [
+                                                    "a",
+                                                    "f"
+                                                ],
+                                                "TOKEN": [
+                                                    ".",
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Value": {
+                                                                    "Integer": "5"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
