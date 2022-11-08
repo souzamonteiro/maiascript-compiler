@@ -15901,18 +15901,17 @@ function MaiaCompiler() {
                 'indentation': parentNodeInfo.indentation
             };
             parentNodeInfo.childNode = 'Block';
-
+            nodeInfo.indentation += 4;
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var nodeExpression = {
                         'Expression': node['Expression']
                     };
-                    nodeInfo.indentation += 4;
                     var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
-                    nodeInfo.indentation -= 4;
                     js = body;
                 }
             }
+            nodeInfo.indentation -= 4;
         } else if ('Statement' in mil) {
             node = mil['Statement'];
             var nodeInfo = {
@@ -16095,7 +16094,6 @@ function MaiaCompiler() {
                             'Expression': nodeExpression[0]
                         };
                         var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
-
                         for (var i = 1; i < nodeExpression.length; i++) {
                             var commandLine = nodeExpression[i];
                             var bodyExpression = {
@@ -16109,6 +16107,7 @@ function MaiaCompiler() {
                 if ('Else' in node) {
                     var body = '';
                     var nodeElse = node['Else'];
+                    nodeInfo.indentation += 4;
                     if ('Expression' in nodeElse) {
                         var nodeExpression = nodeElse['Expression'];
                         if (Array.isArray(nodeExpression)) {
@@ -16117,16 +16116,17 @@ function MaiaCompiler() {
                                 var bodyExpression = {
                                     'Expression': commandLine
                                 };
-                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                                body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         } else {
                             var bodyExpression = {
                                 'Expression': nodeExpression
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                            body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                         js += ' else {' + '\n' + body + '}';
                     }
+                    nodeInfo.indentation -= 4;
                 }
             }
             parentNodeInfo.terminalNode = 'If';
@@ -16140,6 +16140,7 @@ function MaiaCompiler() {
             };
             parentNodeInfo.childNode = 'Switch';
 
+            nodeInfo.indentation += 4;
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var body = '';
@@ -16165,14 +16166,15 @@ function MaiaCompiler() {
                                         'Expression': nodeExpression
                                     };
                                     var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
-                                    
+                                    nodeInfo.indentation += 4;
                                     for (var j = 1; j < nodeCaseExpression.length; j++) {
                                         var commandLine = nodeCaseExpression[j];
                                         var bodyExpression = {
                                             'Expression': commandLine
                                         };
-                                        body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                        body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';\n';
                                     }
+                                    nodeInfo.indentation -= 4;
                                 } else {
                                     var nodeExpression = nodeCaseExpression;
                                     var nodeCondition = {
@@ -16180,7 +16182,7 @@ function MaiaCompiler() {
                                     };
                                     var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
                                 }
-                                js += ' case ' + condition + ' : ' + '\n' + body;
+                                js += core.space(nodeInfo.indentation) + 'case ' + condition + ' : ' + '\n' + body;
                             }
                         }
                     } else {
@@ -16194,13 +16196,15 @@ function MaiaCompiler() {
                                 };
                                 var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
                                 
+                                nodeInfo.indentation += 4;
                                 for (var j = 1; j < nodeCaseExpression.length; j++) {
                                     var commandLine = nodeCaseExpression[j];
                                     var bodyExpression = {
                                         'Expression': commandLine
                                     };
-                                    body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                    body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';\n';
                                 }
+                                nodeInfo.indentation -= 4;
                             } else {
                                 var nodeExpression = nodeCaseExpression;
                                 var nodeCondition = {
@@ -16208,7 +16212,7 @@ function MaiaCompiler() {
                                 };
                                 var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
                             }
-                            js += ' case ' + condition + ' : ' + '\n' + body;
+                            js += core.space(nodeInfo.indentation) + 'case ' + condition + ' : ' + '\n' + body;
                         }
                     }
                 }
@@ -16218,24 +16222,29 @@ function MaiaCompiler() {
                     if ('Expression' in nodeDefault) {
                         var nodeExpression = nodeDefault['Expression'];
                         if (Array.isArray(nodeExpression)) {
+                            nodeInfo.indentation += 4;
                             for (var i = 0; i < nodeExpression.length; i++) {
                                 var commandLine = nodeExpression[i];
                                 var bodyExpression = {
                                     'Expression': commandLine
                                 };
-                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                                body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';\n';
                             }
+                            nodeInfo.indentation -= 4;
                         } else {
                             var bodyExpression = {
                                 'Expression': nodeExpression
                             };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';';
+                            nodeInfo.indentation += 4;
+                            body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';\n';
+                            nodeInfo.indentation -= 4;
                         }
-                        js += ' default : ' + '\n' + body;
+                        js += core.space(nodeInfo.indentation) + 'default : ' + '\n' + body;
                     }
                 }
                 js += '}';
             }
+            nodeInfo.indentation -= 4;
             parentNodeInfo.terminalNode = 'Switch';
         } else if ('Do' in mil) {
             node = mil['Do'];
