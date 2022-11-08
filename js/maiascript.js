@@ -16142,7 +16142,6 @@ function MaiaCompiler() {
                 if ('Else' in node) {
                     var body = '';
                     var nodeElse = node['Else'];
-
                     if ('Expression' in nodeElse) {
                         var nodeExpression = nodeElse['Expression'];
                         if (Array.isArray(nodeExpression)) {
@@ -16154,12 +16153,25 @@ function MaiaCompiler() {
                                 body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         } else {
-                            var bodyExpression = {
-                                'Expression': nodeExpression
-                            };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                            if ('Block' in nodeExpression) {
+                                var bodyExpression = {
+                                    'Expression': nodeExpression
+                                };
+                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                            } else {
+                                var bodyExpression = {
+                                    'Expression': nodeExpression
+                                };
+                                if (nodeInfo.indentCode) {
+                                    nodeInfo.indentation += nodeInfo.indentationLength;
+                                }
+                                body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + (nodeInfo.indentCode ? '\n' : '');
+                                if (nodeInfo.indentCode) {
+                                    nodeInfo.indentation -= nodeInfo.indentationLength;
+                                }
+                            }
                         }
-                        js += ' else {' + (nodeInfo.indentCode ? '\n' : '') + body + '}';
+                        js += ' else {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                     }
                 }
             }
@@ -17357,11 +17369,15 @@ function MaiaCompiler() {
      * Compiles the MaiaScript XML tree for JavaScript.
      * @param {xml}      xml - The XML data.
      * @param {boolean}  indentCode - Indent the output code.
+     * @param {number}   indentationLength - Number of spaces in the indentation.
      * @return {string}  XML data converted to JavaScript.
      */
-    this.compile = function(xml, indentCode) {
+    this.compile = function(xml, indentCode, indentationLength) {
         if (typeof indent == 'undefined') {
             indent = false;
+        }
+        if (typeof indentationLength == 'undefined') {
+            indentationLength = 4;
         }
 
         var nodeInfo = {
@@ -17369,7 +17385,7 @@ function MaiaCompiler() {
             'childNode': 'Program',
             'terminalNode' : '',
             'indentation': 0,
-            'indentationLength': 4,
+            'indentationLength': indentationLength,
             'indentCode': indentCode
         };
 
@@ -21959,7 +21975,7 @@ function MaiaVM() {
                                         var parser = new DOMParser();
                                         var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                                         var compiler = new MaiaCompiler();
-                                        compiledCode.js = compiler.compile(xml, false);
+                                        compiledCode.js = compiler.compile(xml, false, indentationLength);
                                         try {
                                             var script = document.createElement('script');
                                             script.type = 'text/javascript';
@@ -22000,7 +22016,7 @@ function MaiaVM() {
                     var parser = new DOMParser();
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
-                    compiledCode.js = compiler.compile(xml, false);
+                    compiledCode.js = compiler.compile(xml, false, indentationLength);
                     try {
                         var script = document.createElement('script');
                         script.type = 'text/javascript';
@@ -22049,6 +22065,7 @@ function MaiaVM() {
             var outputFile;
             var justCompile = false;
             var indentCode = false;
+            var indentationLength = 4;
             var outputFileType = 'js';
             var outputContents = '';
             if (argv.length > 2) {
@@ -22061,6 +22078,7 @@ function MaiaVM() {
                         system.log('-h     --help               Displays this help message.');
                         system.log('-o     <script.js>          Output file name.');
                         system.log('       --indent             Indent the output code.');
+                        system.log('       --spaces             Number of spaces in the indentation.');
                         system.log('-c                          Just compile to JS, don\'t run the script.');
                         system.log('       --json               Just compile to JSON, don\'t run the script.');
                         system.log('-m                          Just compile to MIL, don\'t run the script.');
@@ -22071,6 +22089,9 @@ function MaiaVM() {
                         outputFile = argv[i];
                     } else if (argv[i] == '--indent') {
                         indentCode = true;
+                    } else if (argv[i] == '--spaces') {
+                        i++;
+                        indentationLength = core.toNummber(argv[i]);
                     } else if (argv[i] == '-c') {
                         justCompile = true;
                         outputFileType = 'js';
@@ -22112,7 +22133,7 @@ function MaiaVM() {
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
                     compiledCode.mil = compiler.xmlToMil(xml);
-                    compiledCode.js = compiler.compile(xml, indentCode);
+                    compiledCode.js = compiler.compile(xml, indentCode, indentationLength);
                     if (justCompile) {
                         if (typeof outputFile == 'undefined') {
                             var fileName = inputFile.split('.').shift();

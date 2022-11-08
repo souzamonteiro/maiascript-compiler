@@ -245,6 +245,107 @@
                                                     }
                                                 }
                                             }
+                                        },
+                                        {
+                                            "Statement": {
+                                                "If": {
+                                                    "TOKEN": [
+                                                        "if",
+                                                        "(",
+                                                        ")"
+                                                    ],
+                                                    "Expression": [
+                                                        {
+                                                            "Operation": {
+                                                                "Op": [
+                                                                    {
+                                                                        "Primary": {
+                                                                            "Member": {
+                                                                                "Identifier": "a"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "Primary": {
+                                                                            "Value": {
+                                                                                "Integer": "1"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "TOKEN": "=="
+                                                            }
+                                                        },
+                                                        {
+                                                            "Block": {
+                                                                "TOKEN": [
+                                                                    "{",
+                                                                    "}"
+                                                                ],
+                                                                "Expression": {
+                                                                    "Operation": {
+                                                                        "Primary": {
+                                                                            "Member": {
+                                                                                "Identifier": [
+                                                                                    "system",
+                                                                                    "println"
+                                                                                ],
+                                                                                "TOKEN": [
+                                                                                    ".",
+                                                                                    "(",
+                                                                                    ")"
+                                                                                ],
+                                                                                "Arguments": {
+                                                                                    "Expression": {
+                                                                                        "Operation": {
+                                                                                            "Primary": {
+                                                                                                "Value": {
+                                                                                                    "String": "\"a == 1\""
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "Else": {
+                                                        "TOKEN": "else",
+                                                        "Expression": {
+                                                            "Operation": {
+                                                                "Primary": {
+                                                                    "Member": {
+                                                                        "Identifier": [
+                                                                            "system",
+                                                                            "println"
+                                                                        ],
+                                                                        "TOKEN": [
+                                                                            ".",
+                                                                            "(",
+                                                                            ")"
+                                                                        ],
+                                                                        "Arguments": {
+                                                                            "Expression": {
+                                                                                "Operation": {
+                                                                                    "Primary": {
+                                                                                        "Value": {
+                                                                                            "String": "\"a != 1\""
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     ]
                                 }

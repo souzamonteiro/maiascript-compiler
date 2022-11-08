@@ -86,7 +86,7 @@ function MaiaVM() {
                                         var parser = new DOMParser();
                                         var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                                         var compiler = new MaiaCompiler();
-                                        compiledCode.js = compiler.compile(xml, false);
+                                        compiledCode.js = compiler.compile(xml, false, indentationLength);
                                         try {
                                             var script = document.createElement('script');
                                             script.type = 'text/javascript';
@@ -127,7 +127,7 @@ function MaiaVM() {
                     var parser = new DOMParser();
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
-                    compiledCode.js = compiler.compile(xml, false);
+                    compiledCode.js = compiler.compile(xml, false, indentationLength);
                     try {
                         var script = document.createElement('script');
                         script.type = 'text/javascript';
@@ -176,6 +176,7 @@ function MaiaVM() {
             var outputFile;
             var justCompile = false;
             var indentCode = false;
+            var indentationLength = 4;
             var outputFileType = 'js';
             var outputContents = '';
             if (argv.length > 2) {
@@ -188,6 +189,7 @@ function MaiaVM() {
                         system.log('-h     --help               Displays this help message.');
                         system.log('-o     <script.js>          Output file name.');
                         system.log('       --indent             Indent the output code.');
+                        system.log('       --spaces             Number of spaces in the indentation.');
                         system.log('-c                          Just compile to JS, don\'t run the script.');
                         system.log('       --json               Just compile to JSON, don\'t run the script.');
                         system.log('-m                          Just compile to MIL, don\'t run the script.');
@@ -198,6 +200,9 @@ function MaiaVM() {
                         outputFile = argv[i];
                     } else if (argv[i] == '--indent') {
                         indentCode = true;
+                    } else if (argv[i] == '--spaces') {
+                        i++;
+                        indentationLength = core.toNummber(argv[i]);
                     } else if (argv[i] == '-c') {
                         justCompile = true;
                         outputFileType = 'js';
@@ -239,7 +244,7 @@ function MaiaVM() {
                     var xml = parser.parseFromString(compiledCode.xml, 'text/xml');
                     var compiler = new MaiaCompiler();
                     compiledCode.mil = compiler.xmlToMil(xml);
-                    compiledCode.js = compiler.compile(xml, indentCode);
+                    compiledCode.js = compiler.compile(xml, indentCode, indentationLength);
                     if (justCompile) {
                         if (typeof outputFile == 'undefined') {
                             var fileName = inputFile.split('.').shift();

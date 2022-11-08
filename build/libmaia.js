@@ -16141,7 +16141,6 @@ function MaiaCompiler() {
                 if ('Else' in node) {
                     var body = '';
                     var nodeElse = node['Else'];
-
                     if ('Expression' in nodeElse) {
                         var nodeExpression = nodeElse['Expression'];
                         if (Array.isArray(nodeExpression)) {
@@ -16153,12 +16152,25 @@ function MaiaCompiler() {
                                 body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                             }
                         } else {
-                            var bodyExpression = {
-                                'Expression': nodeExpression
-                            };
-                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                            if ('Block' in nodeExpression) {
+                                var bodyExpression = {
+                                    'Expression': nodeExpression
+                                };
+                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                            } else {
+                                var bodyExpression = {
+                                    'Expression': nodeExpression
+                                };
+                                if (nodeInfo.indentCode) {
+                                    nodeInfo.indentation += nodeInfo.indentationLength;
+                                }
+                                body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + (nodeInfo.indentCode ? '\n' : '');
+                                if (nodeInfo.indentCode) {
+                                    nodeInfo.indentation -= nodeInfo.indentationLength;
+                                }
+                            }
                         }
-                        js += ' else {' + (nodeInfo.indentCode ? '\n' : '') + body + '}';
+                        js += ' else {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                     }
                 }
             }
@@ -17356,11 +17368,15 @@ function MaiaCompiler() {
      * Compiles the MaiaScript XML tree for JavaScript.
      * @param {xml}      xml - The XML data.
      * @param {boolean}  indentCode - Indent the output code.
+     * @param {number}   indentationLength - Number of spaces in the indentation.
      * @return {string}  XML data converted to JavaScript.
      */
-    this.compile = function(xml, indentCode) {
+    this.compile = function(xml, indentCode, indentationLength) {
         if (typeof indent == 'undefined') {
             indent = false;
+        }
+        if (typeof indentationLength == 'undefined') {
+            indentationLength = 4;
         }
 
         var nodeInfo = {
@@ -17368,7 +17384,7 @@ function MaiaCompiler() {
             'childNode': 'Program',
             'terminalNode' : '',
             'indentation': 0,
-            'indentationLength': 4,
+            'indentationLength': indentationLength,
             'indentCode': indentCode
         };
 
