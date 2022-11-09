@@ -66,7 +66,7 @@ Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
 Case                     ::= 'case' Expression ':' Expression*
 Default                  ::= 'default' ':' Expression*
 Try                      ::= 'try' Expression Catch?
-Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Catch?
+Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Expression Catch?
 Catch                    ::= 'catch' '(' Expression ')' Expression
 NamespaceDeclaration     ::= Identifier Block
 FunctionDeclaration      ::= Identifier '(' Arguments ')' '=' Expression
@@ -76,9 +76,9 @@ FunctionDeclaration      ::= Identifier '(' Arguments ')' '=' Expression
                            | Type? Identifier '(' Arguments ')' Block
                            | Type? Identifier '(' Arguments ')' Script
 Return                   ::= 'return' Expression
-Include                  ::= 'include' '(' Expression ')'
+Include                  ::= 'include' Expression
 Local                    ::= 'local' Expression
-Throw                    ::= 'throw' '(' Expression? ')'
+Throw                    ::= 'throw' Expression
 EmptyStatement           ::= ';'
 
 Type                     ::= 'i32'

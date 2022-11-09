@@ -1,17 +1,21 @@
 #!/bin/sh
 
 ./bin/maiascript.js --json --indent examples/conditionals.maia
+./bin/maiascript.js --json --indent examples/exception.maia
 ./bin/maiascript.js --json --indent examples/functions.maia
 ./bin/maiascript.js --json --indent examples/loops.maia
 ./bin/maiascript.js --json --indent examples/namespaces.maia
 ./bin/maiascript.js --json --indent examples/operators.maia
+./bin/maiascript.js --json --indent examples/test.maia
 ./bin/maiascript.js --json --indent examples/variables.maia
 
 ./bin/maiascript.js -c --indent examples/conditionals.maia
+./bin/maiascript.js -c --indent examples/exception.maia
 ./bin/maiascript.js -c --indent examples/functions.maia
 ./bin/maiascript.js -c --indent examples/loops.maia
 ./bin/maiascript.js -c --indent examples/namespaces.maia
 ./bin/maiascript.js -c --indent examples/operators.maia
+./bin/maiascript.js -c --indent examples/test.maia
 ./bin/maiascript.js -c --indent examples/variables.maia
 
 # ./bin/maiacompiler.js test/array.maia 10

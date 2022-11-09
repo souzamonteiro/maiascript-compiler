@@ -1,0 +1,8 @@
+test (tries; -128; 0) {
+    a = 127
+    b = ~a
+} catch (v) {
+    system.print("TEST: Fail testing operator \"~\".")
+    system.print("      Expected result " + core.testResult.expected)
+    system.print("      But got " + v)
+}

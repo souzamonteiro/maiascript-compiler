@@ -1,0 +1,244 @@
+{
+    "Program": {
+        "Expression": {
+            "Statement": {
+                "Test": {
+                    "TOKEN": [
+                        "test",
+                        "(",
+                        ";",
+                        ";",
+                        ")"
+                    ],
+                    "Expression": [
+                        {
+                            "Operation": {
+                                "Primary": {
+                                    "Member": {
+                                        "Identifier": "tries"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "Operation": {
+                                "TOKEN": "-",
+                                "Primary": {
+                                    "Value": {
+                                        "Integer": "128"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "Operation": {
+                                "Primary": {
+                                    "Value": {
+                                        "Integer": "0"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "Block": {
+                                "TOKEN": [
+                                    "{",
+                                    "}"
+                                ],
+                                "Expression": [
+                                    {
+                                        "Operation": {
+                                            "Op": [
+                                                {
+                                                    "Primary": {
+                                                        "Member": {
+                                                            "Identifier": "a"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "127"
+                                                        }
+                                                    }
+                                                }
+                                            ],
+                                            "TOKEN": "="
+                                        }
+                                    },
+                                    {
+                                        "Operation": {
+                                            "Op": [
+                                                {
+                                                    "Primary": {
+                                                        "Member": {
+                                                            "Identifier": "b"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "TOKEN": "~",
+                                                    "Primary": {
+                                                        "Member": {
+                                                            "Identifier": "a"
+                                                        }
+                                                    }
+                                                }
+                                            ],
+                                            "TOKEN": "="
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "Catch": {
+                        "TOKEN": [
+                            "catch",
+                            "(",
+                            ")"
+                        ],
+                        "Expression": [
+                            {
+                                "Operation": {
+                                    "Primary": {
+                                        "Member": {
+                                            "Identifier": "v"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "Block": {
+                                    "TOKEN": [
+                                        "{",
+                                        "}"
+                                    ],
+                                    "Expression": [
+                                        {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": [
+                                                            "system",
+                                                            "print"
+                                                        ],
+                                                        "TOKEN": [
+                                                            ".",
+                                                            "(",
+                                                            ")"
+                                                        ],
+                                                        "Arguments": {
+                                                            "Expression": {
+                                                                "Operation": {
+                                                                    "Primary": {
+                                                                        "Value": {
+                                                                            "String": "\"TEST: Fail testing operator \\\"~\\\".\""
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": [
+                                                            "system",
+                                                            "print"
+                                                        ],
+                                                        "TOKEN": [
+                                                            ".",
+                                                            "(",
+                                                            ")"
+                                                        ],
+                                                        "Arguments": {
+                                                            "Expression": {
+                                                                "Operation": {
+                                                                    "Op": [
+                                                                        {
+                                                                            "Primary": {
+                                                                                "Value": {
+                                                                                    "String": "\"      Expected result \""
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "Primary": {
+                                                                                "Member": {
+                                                                                    "Identifier": [
+                                                                                        "core",
+                                                                                        "testResult",
+                                                                                        "expected"
+                                                                                    ],
+                                                                                    "TOKEN": [
+                                                                                        ".",
+                                                                                        "."
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "TOKEN": "+"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": [
+                                                            "system",
+                                                            "print"
+                                                        ],
+                                                        "TOKEN": [
+                                                            ".",
+                                                            "(",
+                                                            ")"
+                                                        ],
+                                                        "Arguments": {
+                                                            "Expression": {
+                                                                "Operation": {
+                                                                    "Op": [
+                                                                        {
+                                                                            "Primary": {
+                                                                                "Value": {
+                                                                                    "String": "\"      But got \""
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "Primary": {
+                                                                                "Member": {
+                                                                                    "Identifier": "v"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "TOKEN": "+"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
