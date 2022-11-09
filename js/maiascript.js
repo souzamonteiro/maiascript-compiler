@@ -16129,12 +16129,22 @@ function MaiaCompiler() {
                             'Expression': nodeExpression[0]
                         };
                         var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
-                        for (var i = 1; i < nodeExpression.length; i++) {
-                            var commandLine = nodeExpression[i];
+                        if ('Block' in nodeExpression[1]) {
                             var bodyExpression = {
-                                'Expression': commandLine
+                                'Expression': nodeExpression[1]
                             };
                             body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
+                        } else {
+                            var bodyExpression = {
+                                'Expression': nodeExpression[1]
+                            };
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation += nodeInfo.indentationLength;
+                            }
+                            body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';' + (nodeInfo.indentCode ? '\n' : '');
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation -= nodeInfo.indentationLength;
+                            }
                         }
                         js += 'if (' + condition + ') {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                     }
@@ -16144,31 +16154,21 @@ function MaiaCompiler() {
                     var nodeElse = node['Else'];
                     if ('Expression' in nodeElse) {
                         var nodeExpression = nodeElse['Expression'];
-                        if (Array.isArray(nodeExpression)) {
-                            for (var i = 0; i < nodeExpression.length; i++) {
-                                var commandLine = nodeExpression[i];
-                                var bodyExpression = {
-                                    'Expression': commandLine
-                                };
-                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
-                            }
+                        if ('Block' in nodeExpression) {
+                            var bodyExpression = {
+                                'Expression': nodeExpression
+                            };
+                            body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         } else {
-                            if ('Block' in nodeExpression) {
-                                var bodyExpression = {
-                                    'Expression': nodeExpression
-                                };
-                                body += this.parse(bodyExpression, nodeInfo, isKernelFunction);
-                            } else {
-                                var bodyExpression = {
-                                    'Expression': nodeExpression
-                                };
-                                if (nodeInfo.indentCode) {
-                                    nodeInfo.indentation += nodeInfo.indentationLength;
-                                }
-                                body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + (nodeInfo.indentCode ? '\n' : '');
-                                if (nodeInfo.indentCode) {
-                                    nodeInfo.indentation -= nodeInfo.indentationLength;
-                                }
+                            var bodyExpression = {
+                                'Expression': nodeExpression
+                            };
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation += nodeInfo.indentationLength;
+                            }
+                            body += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';' + (nodeInfo.indentCode ? '\n' : '');
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation -= nodeInfo.indentationLength;
                             }
                         }
                         js += ' else {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
@@ -22091,7 +22091,7 @@ function MaiaVM() {
                         indentCode = true;
                     } else if (argv[i] == '--spaces') {
                         i++;
-                        indentationLength = core.toNummber(argv[i]);
+                        indentationLength = core.toNumber(argv[i]);
                     } else if (argv[i] == '-c') {
                         justCompile = true;
                         outputFileType = 'js';
@@ -22143,14 +22143,14 @@ function MaiaVM() {
                             } else if (outputFileType == 'json') {
                                 outputFile = fileName + '.json';
                                 if (indentCode) {
-                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                    outputContents = JSON.stringify(compiledCode.mil, null, indentationLength);
                                 } else {
                                     outputContents = JSON.stringify(compiledCode.mil);
                                 }
                             } else if (outputFileType == 'mil') {
                                 outputFile = fileName + '.mil';
                                 if (indentCode) {
-                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                    outputContents = JSON.stringify(compiledCode.mil, null, indentationLength);
                                 } else {
                                     outputContents = JSON.stringify(compiledCode.mil);
                                 }

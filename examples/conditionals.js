@@ -8,7 +8,7 @@ if (core.LT(a,b)) {
     if (core.equal(a,1)) {
         system.println("a == 1");
     } else {
-        system.println("a != 1")
+        system.println("a != 1");
     };
 } else {
     if (core.GT(a,b)) {
@@ -19,7 +19,7 @@ if (core.LT(a,b)) {
         system.println(core.add("a = ",a));
         system.println(core.add("b = ",b));
         system.println("a == b");
-    }
+    };
 };
 switch (a) {
     case 0 : 

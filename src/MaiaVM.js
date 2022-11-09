@@ -202,7 +202,7 @@ function MaiaVM() {
                         indentCode = true;
                     } else if (argv[i] == '--spaces') {
                         i++;
-                        indentationLength = core.toNummber(argv[i]);
+                        indentationLength = core.toNumber(argv[i]);
                     } else if (argv[i] == '-c') {
                         justCompile = true;
                         outputFileType = 'js';
@@ -254,14 +254,14 @@ function MaiaVM() {
                             } else if (outputFileType == 'json') {
                                 outputFile = fileName + '.json';
                                 if (indentCode) {
-                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                    outputContents = JSON.stringify(compiledCode.mil, null, indentationLength);
                                 } else {
                                     outputContents = JSON.stringify(compiledCode.mil);
                                 }
                             } else if (outputFileType == 'mil') {
                                 outputFile = fileName + '.mil';
                                 if (indentCode) {
-                                    outputContents = JSON.stringify(compiledCode.mil, null, 4);
+                                    outputContents = JSON.stringify(compiledCode.mil, null, indentationLength);
                                 } else {
                                     outputContents = JSON.stringify(compiledCode.mil);
                                 }

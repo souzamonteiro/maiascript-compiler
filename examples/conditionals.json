@@ -277,32 +277,24 @@
                                                             }
                                                         },
                                                         {
-                                                            "Block": {
-                                                                "TOKEN": [
-                                                                    "{",
-                                                                    "}"
-                                                                ],
-                                                                "Expression": {
-                                                                    "Operation": {
-                                                                        "Primary": {
-                                                                            "Member": {
-                                                                                "Identifier": [
-                                                                                    "system",
-                                                                                    "println"
-                                                                                ],
-                                                                                "TOKEN": [
-                                                                                    ".",
-                                                                                    "(",
-                                                                                    ")"
-                                                                                ],
-                                                                                "Arguments": {
-                                                                                    "Expression": {
-                                                                                        "Operation": {
-                                                                                            "Primary": {
-                                                                                                "Value": {
-                                                                                                    "String": "\"a == 1\""
-                                                                                                }
-                                                                                            }
+                                                            "Operation": {
+                                                                "Primary": {
+                                                                    "Member": {
+                                                                        "Identifier": [
+                                                                            "system",
+                                                                            "println"
+                                                                        ],
+                                                                        "TOKEN": [
+                                                                            ".",
+                                                                            "(",
+                                                                            ")"
+                                                                        ],
+                                                                        "Arguments": {
+                                                                            "Expression": {
+                                                                                "Operation": {
+                                                                                    "Primary": {
+                                                                                        "Value": {
+                                                                                            "String": "\"a == 1\""
                                                                                         }
                                                                                     }
                                                                                 }
