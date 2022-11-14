@@ -20245,8 +20245,16 @@ function System() {
             }
 
             if (typeof inputFile != 'undefined') {
+                // Get the file name extension.
+                fileExtension = inputFile.split(".")
+                fileExtension = fileExtension.pop()
+                
                 var code = read(String(inputFile));
-                core.eval(code, global);
+                if (fileExtension == "maia") {
+                    core.eval(code, global);
+                } else {
+                    eval(global, code);
+                }
             } else {
                 throw new Error('Invalid argument for function source. Argument must be a string.');
             }
