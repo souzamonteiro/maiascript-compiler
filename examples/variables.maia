@@ -2,15 +2,17 @@ a = 1
 b = 2.0
 c = "Hello World!"
 d = [1, 2.0]
+e = []
 
 // JavaScript-like arrays.
-e = [[1, 2],[3, 4]]
+f = [[1, 2],[3, 4]]
 
 // Matlab-like arrays.
-f = [5, 6; 7, 8]
+g = [5, 6; 7, 8]
 
 // JavaScript-like objects.
-g = {a: 1, b: 2.0, "c": "Hello World!"}
+h = {a: 1, b: 2.0, "c": "Hello World!"}
+i = {}
 
 system.println(a)
 system.println(b)
@@ -19,3 +21,5 @@ system.println(d)
 system.println(e)
 system.println(f)
 system.println(g)
+system.println(JSON.stringify(h))
+system.println(JSON.stringify(i))

@@ -376,22 +376,49 @@
                                 "{",
                                 "}"
                             ],
-                            "Expression": {
-                                "Statement": {
-                                    "Return": {
-                                        "TOKEN": "return",
-                                        "Expression": {
-                                            "Operation": {
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Op": [
+                                            {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": "y"
+                                                    }
+                                                }
+                                            },
+                                            {
                                                 "Primary": {
                                                     "Member": {
                                                         "Identifier": "x"
                                                     }
                                                 }
                                             }
+                                        ],
+                                        "TOKEN": "="
+                                    }
+                                },
+                                {
+                                    "Statement": {
+                                        "Return": {
+                                            "TOKEN": "return",
+                                            "Expression": {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Member": {
+                                                            "Identifier": [
+                                                                "this",
+                                                                "y"
+                                                            ],
+                                                            "TOKEN": "."
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
-                            }
+                            ]
                         }
                     }
                 }
@@ -566,40 +593,7 @@
                 "Comment": "// A synchronous function call."
             },
             {
-                "Operation": {
-                    "Op": [
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "a"
-                                }
-                            }
-                        },
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f1",
-                                    "TOKEN": [
-                                        "(",
-                                        ")"
-                                    ],
-                                    "Arguments": {
-                                        "Expression": {
-                                            "Operation": {
-                                                "Primary": {
-                                                    "Value": {
-                                                        "Integer": "2"
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "TOKEN": "?="
-                }
+                "Comment": "//a ?= f1(2)"
             },
             {
                 "Comment": "// A parallel function runs synchronously if a thread is not created for it."
@@ -898,7 +892,7 @@
                                                         "Operation": {
                                                             "Primary": {
                                                                 "Value": {
-                                                                    "Integer": "2"
+                                                                    "Integer": "5"
                                                                 }
                                                             }
                                                         }
@@ -921,39 +915,7 @@
                 }
             },
             {
-                "Operation": {
-                    "Primary": {
-                        "Member": {
-                            "Identifier": [
-                                "system",
-                                "println"
-                            ],
-                            "TOKEN": [
-                                ".",
-                                "(",
-                                ")"
-                            ],
-                            "Arguments": {
-                                "Expression": {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "a"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
+                "Comment": "//system.println(a);"
             },
             {
                 "Operation": {
@@ -1008,7 +970,26 @@
                                     "Operation": {
                                         "Primary": {
                                             "Member": {
-                                                "Identifier": "c"
+                                                "Identifier": [
+                                                    "JSON",
+                                                    "stringify"
+                                                ],
+                                                "TOKEN": [
+                                                    ".",
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "c"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }

@@ -118,6 +118,32 @@
                 }
             },
             {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "e"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Matrix": {
+                                        "TOKEN": [
+                                            "[",
+                                            "]"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
                 "Comment": "// JavaScript-like arrays."
             },
             {
@@ -126,7 +152,7 @@
                         {
                             "Primary": {
                                 "Member": {
-                                    "Identifier": "e"
+                                    "Identifier": "f"
                                 }
                             }
                         },
@@ -246,7 +272,7 @@
                         {
                             "Primary": {
                                 "Member": {
-                                    "Identifier": "f"
+                                    "Identifier": "g"
                                 }
                             }
                         },
@@ -332,7 +358,7 @@
                         {
                             "Primary": {
                                 "Member": {
-                                    "Identifier": "g"
+                                    "Identifier": "h"
                                 }
                             }
                         },
@@ -392,6 +418,32 @@
                                                     }
                                                 }
                                             }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "i"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Value": {
+                                    "Array": {
+                                        "TOKEN": [
+                                            "{",
+                                            "}"
                                         ]
                                     }
                                 }
@@ -588,6 +640,100 @@
                                         "Primary": {
                                             "Member": {
                                                 "Identifier": "g"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": [
+                                                    "JSON",
+                                                    "stringify"
+                                                ],
+                                                "TOKEN": [
+                                                    ".",
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "h"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": [
+                                                    "JSON",
+                                                    "stringify"
+                                                ],
+                                                "TOKEN": [
+                                                    ".",
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "i"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }

@@ -5,7 +5,7 @@ a {
         if (n == 0 || n == 1) {
             return 1
         }
-        return n * g(n - 1)
+        return n * this.f(n - 1)
     }
 }
 

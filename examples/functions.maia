@@ -21,7 +21,8 @@ f2(x) #= {
 
 // An object constructor.
 f3(x) := {
-    return x
+    y = x
+    return this.y
 }
 
 // A function in MaiaC.
@@ -44,7 +45,7 @@ i32 f6(i32 $a, i32 $b) /{
 }/
 
 // A synchronous function call.
-a ?= f1(2)
+//a ?= f1(2)
 // A parallel function runs synchronously if a thread is not created for it.
 b = f2(2)
 // Creating an object.
@@ -57,10 +58,10 @@ e = f5(2)
 f = f6(1, 2)
 
 system.println(f(2));
-system.println(g(2));
-system.println(a);
+system.println(g(5));
+//system.println(a);
 system.println(b);
-system.println(c);
+system.println(JSON.stringify(c));
 system.println(d);
 system.println(e);
 system.println(f);

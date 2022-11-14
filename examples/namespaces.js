@@ -1,6 +1,6 @@
 function a_() {
-    b=1;
-    f = function (n) {
+    this.b=1;
+    this.f = function (n) {
         if (core.logicalOR(core.equal(n,0),core.equal(n,1))) {
             return (1);
         };

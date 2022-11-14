@@ -49,6 +49,7 @@ Statement                ::= Do
                            | NamespaceDeclaration
                            | FunctionDeclaration
                            | Return
+                           | Import
                            | Include
                            | Local
                            | Throw
@@ -68,14 +69,15 @@ Default                  ::= 'default' ':' Expression*
 Try                      ::= 'try' Expression Catch?
 Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Expression Catch?
 Catch                    ::= 'catch' '(' Expression ')' Expression
-NamespaceDeclaration     ::= Identifier Block
-FunctionDeclaration      ::= Identifier '(' Arguments ')' '=' Expression
-                           | Identifier '(' Arguments ')' '?=' Block
-                           | Identifier '(' Arguments ')' '#=' Block
-                           | Identifier '(' Arguments ')' ':=' Block
-                           | Type? Identifier '(' Arguments ')' Block
-                           | Type? Identifier '(' Arguments ')' Script
+NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
+FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments ')' '=' Expression
+                           | Identifier ('.' Identifier)* '(' Arguments ')' '?=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments ')' '#=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments ')' ':=' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments ')' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments ')' Script
 Return                   ::= 'return' Expression
+Import                   ::= 'import' Expression
 Include                  ::= 'include' Expression
 Local                    ::= 'local' Expression
 Throw                    ::= 'throw' Expression
@@ -91,7 +93,7 @@ Arguments                ::= (Type? Expression) (',' (Type? Expression))*
 Member                   ::= Identifier ('.' Identifier)* '(' Arguments? ')'
                            | Identifier ('.' Identifier)* ('[' Arguments? ']')*
 
-Array                    ::= '{' Element (',' Element)* '}'
+Array                    ::= '{' Element? (',' Element)* '}'
 Matrix                   ::= '[' Row? (';' Row)* ']'
 
 Element                  ::= (Key ':')? Expression
@@ -134,6 +136,7 @@ ReservedWord             ::= 'break'
                            | 'i32'
                            | 'i64'
                            | 'if'
+                           | 'import'
                            | 'include'
                            | 'local'
                            | 'return'
