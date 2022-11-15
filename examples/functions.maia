@@ -37,7 +37,7 @@ f5(x) /{
 }/
 
 // A function in WebAssembly.
-i32 f6(i32 $a, i32 $b) /{
+i32 f6(i32 a, i32 b) /{
     (i32.add
       (get_local $a)
       (get_local $b)

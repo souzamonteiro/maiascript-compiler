@@ -24,7 +24,7 @@ f5 = function (x) {
     y = x + 1;
     return y;
 };
-f6 = function ($a,$b) {
+f6 = function (a,b) {
     (i32.add
       (get_local $a)
       (get_local $b)

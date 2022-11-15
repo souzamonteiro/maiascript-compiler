@@ -70,12 +70,12 @@ Try                      ::= 'try' Expression Catch?
 Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Expression Catch?
 Catch                    ::= 'catch' '(' Expression ')' Expression
 NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
-FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments ')' '=' Expression
-                           | Identifier ('.' Identifier)* '(' Arguments ')' '?=' Block
-                           | Identifier ('.' Identifier)* '(' Arguments ')' '#=' Block
-                           | Identifier ('.' Identifier)* '(' Arguments ')' ':=' Block
-                           | Type? Identifier ('.' Identifier)* '(' Arguments ')' Block
-                           | Type? Identifier ('.' Identifier)* '(' Arguments ')' Script
+FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' '?=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' '#=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' ':=' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Script
 Return                   ::= 'return' Expression
 Import                   ::= 'import' Expression
 Include                  ::= 'include' Expression

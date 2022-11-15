@@ -159,8 +159,12 @@
                                                                             {
                                                                                 "Primary": {
                                                                                     "Member": {
-                                                                                        "Identifier": "g",
+                                                                                        "Identifier": [
+                                                                                            "this",
+                                                                                            "f"
+                                                                                        ],
                                                                                         "TOKEN": [
+                                                                                            ".",
                                                                                             "(",
                                                                                             ")"
                                                                                         ],

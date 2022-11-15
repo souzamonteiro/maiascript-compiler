@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// This file was generated on Mon Nov 14, 2022 12:30 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Mon Nov 14, 2022 22:25 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree
 
 function MaiaScript(string, parsingEventHandler)
@@ -495,7 +495,6 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 332493                // '{' ';' '('
      && lk != 334669                // '{' 'break' '('
      && lk != 335053                // '{' 'continue' '('
-     && lk != 346627                // Identifier '(' ')'
      && lk != 370893                // '{' '}' '*'
      && lk != 387277                // '{' '}' '**'
      && lk != 403661                // '{' '}' '*='
@@ -938,7 +937,6 @@ function MaiaScript(string, parsingEventHandler)
     case 288973:                    // '{' '}' '&'
     case 305357:                    // '{' '}' '&&'
     case 321741:                    // '{' '}' '&='
-    case 346627:                    // Identifier '(' ')'
     case 370893:                    // '{' '}' '*'
     case 387277:                    // '{' '}' '**'
     case 403661:                    // '{' '}' '*='
@@ -1335,7 +1333,6 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 332493                // '{' ';' '('
      && lk != 334669                // '{' 'break' '('
      && lk != 335053                // '{' 'continue' '('
-     && lk != 346627                // Identifier '(' ')'
      && lk != 370893                // '{' '}' '*'
      && lk != 387277                // '{' '}' '**'
      && lk != 403661                // '{' '}' '*='
@@ -1780,7 +1777,6 @@ function MaiaScript(string, parsingEventHandler)
     case 288973:                    // '{' '}' '&'
     case 305357:                    // '{' '}' '&&'
     case 321741:                    // '{' '}' '&='
-    case 346627:                    // Identifier '(' ')'
     case 370893:                    // '{' '}' '*'
     case 387277:                    // '{' '}' '**'
     case 403661:                    // '{' '}' '*='
@@ -11604,11 +11600,11 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 2563:                    // Identifier '('
-        lookahead3W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
+        lookahead3W(27);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -11655,12 +11651,15 @@ function MaiaScript(string, parsingEventHandler)
           consumeT(3);              // Identifier
         }
         consumeT(20);               // '('
-        lookahead1W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-        try_Arguments();
+        lookahead1W(27);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+        if (l1 != 21)               // ')'
+        {
+          try_Arguments();
+        }
         consumeT(21);               // ')'
         lookahead1W(10);            // WhiteSpace^token | '='
         consumeT(42);               // '='
@@ -11693,12 +11692,15 @@ function MaiaScript(string, parsingEventHandler)
             consumeT(3);            // Identifier
           }
           consumeT(20);             // '('
-          lookahead1W(24);          // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-          try_Arguments();
+          lookahead1W(27);          // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+          if (l1 != 21)             // ')'
+          {
+            try_Arguments();
+          }
           consumeT(21);             // ')'
           lookahead1W(11);          // WhiteSpace^token | '?='
           consumeT(49);             // '?='
@@ -11727,12 +11729,15 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(3);          // Identifier
             }
             consumeT(20);           // '('
-            lookahead1W(24);        // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-            try_Arguments();
+            lookahead1W(27);        // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+            if (l1 != 21)           // ')'
+            {
+              try_Arguments();
+            }
             consumeT(21);           // ')'
             lookahead1W(2);         // WhiteSpace^token | '#='
             consumeT(14);           // '#='
@@ -11761,12 +11766,15 @@ function MaiaScript(string, parsingEventHandler)
                 consumeT(3);        // Identifier
               }
               consumeT(20);         // '('
-              lookahead1W(24);      // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-              try_Arguments();
+              lookahead1W(27);      // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+              if (l1 != 21)         // ')'
+              {
+                try_Arguments();
+              }
               consumeT(21);         // ')'
               lookahead1W(8);       // WhiteSpace^token | ':='
               consumeT(36);         // ':='
@@ -11800,12 +11808,15 @@ function MaiaScript(string, parsingEventHandler)
                   consumeT(3);      // Identifier
                 }
                 consumeT(20);       // '('
-                lookahead1W(24);    // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-                try_Arguments();
+                lookahead1W(27);    // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+                if (l1 != 21)       // ')'
+                {
+                  try_Arguments();
+                }
                 consumeT(21);       // ')'
                 lookahead1W(14);    // WhiteSpace^token | '{'
                 try_Block();
@@ -11841,13 +11852,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(10);              // WhiteSpace^token | '='
       consume(42);                  // '='
@@ -11873,13 +11887,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(11);              // WhiteSpace^token | '?='
       consume(49);                  // '?='
@@ -11901,13 +11918,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(2);               // WhiteSpace^token | '#='
       consume(14);                  // '#='
@@ -11929,13 +11949,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(8);               // WhiteSpace^token | ':='
       consume(36);                  // ':='
@@ -11963,13 +11986,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(14);              // WhiteSpace^token | '{'
       whitespace();
@@ -11995,13 +12021,16 @@ function MaiaScript(string, parsingEventHandler)
         consume(3);                 // Identifier
       }
       consume(20);                  // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      whitespace();
-      parse_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        whitespace();
+        parse_Arguments();
+      }
       consume(21);                  // ')'
       lookahead1W(1);               // Script | WhiteSpace^token
       consume(10);                  // Script
@@ -12018,11 +12047,11 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 2563:                    // Identifier '('
-        lookahead3W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
+        lookahead3W(27);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
         break;
       case 4099:                    // Identifier '.'
         lookahead3W(0);             // Identifier | WhiteSpace^token
@@ -12069,12 +12098,15 @@ function MaiaScript(string, parsingEventHandler)
           consumeT(3);              // Identifier
         }
         consumeT(20);               // '('
-        lookahead1W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-        try_Arguments();
+        lookahead1W(27);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+        if (l1 != 21)               // ')'
+        {
+          try_Arguments();
+        }
         consumeT(21);               // ')'
         lookahead1W(10);            // WhiteSpace^token | '='
         consumeT(42);               // '='
@@ -12108,12 +12140,15 @@ function MaiaScript(string, parsingEventHandler)
             consumeT(3);            // Identifier
           }
           consumeT(20);             // '('
-          lookahead1W(24);          // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-          try_Arguments();
+          lookahead1W(27);          // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+          if (l1 != 21)             // ')'
+          {
+            try_Arguments();
+          }
           consumeT(21);             // ')'
           lookahead1W(11);          // WhiteSpace^token | '?='
           consumeT(49);             // '?='
@@ -12143,12 +12178,15 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(3);          // Identifier
             }
             consumeT(20);           // '('
-            lookahead1W(24);        // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-            try_Arguments();
+            lookahead1W(27);        // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+            if (l1 != 21)           // ')'
+            {
+              try_Arguments();
+            }
             consumeT(21);           // ')'
             lookahead1W(2);         // WhiteSpace^token | '#='
             consumeT(14);           // '#='
@@ -12178,12 +12216,15 @@ function MaiaScript(string, parsingEventHandler)
                 consumeT(3);        // Identifier
               }
               consumeT(20);         // '('
-              lookahead1W(24);      // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-              try_Arguments();
+              lookahead1W(27);      // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+              if (l1 != 21)         // ')'
+              {
+                try_Arguments();
+              }
               consumeT(21);         // ')'
               lookahead1W(8);       // WhiteSpace^token | ':='
               consumeT(36);         // ':='
@@ -12218,12 +12259,15 @@ function MaiaScript(string, parsingEventHandler)
                   consumeT(3);      // Identifier
                 }
                 consumeT(20);       // '('
-                lookahead1W(24);    // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-                try_Arguments();
+                lookahead1W(27);    // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+                if (l1 != 21)       // ')'
+                {
+                  try_Arguments();
+                }
                 consumeT(21);       // ')'
                 lookahead1W(14);    // WhiteSpace^token | '{'
                 try_Block();
@@ -12260,12 +12304,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(10);              // WhiteSpace^token | '='
       consumeT(42);                 // '='
@@ -12290,12 +12337,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(11);              // WhiteSpace^token | '?='
       consumeT(49);                 // '?='
@@ -12316,12 +12366,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(2);               // WhiteSpace^token | '#='
       consumeT(14);                 // '#='
@@ -12342,12 +12395,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(8);               // WhiteSpace^token | ':='
       consumeT(36);                 // ':='
@@ -12373,12 +12429,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(14);              // WhiteSpace^token | '{'
       try_Block();
@@ -12404,12 +12463,15 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(3);                // Identifier
       }
       consumeT(20);                 // '('
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      try_Arguments();
+      lookahead1W(27);              // Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | '-' | '--' | ';' | '[' |
+                                    // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
+                                    // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
+                                    // 'try' | 'while' | '{' | '~'
+      if (l1 != 21)                 // ')'
+      {
+        try_Arguments();
+      }
       consumeT(21);                 // ')'
       lookahead1W(1);               // Script | WhiteSpace^token
       consumeT(10);                 // Script
@@ -15878,7 +15940,7 @@ MaiaScript.TOKEN =
 ];
 
 // End
-// This file was generated on Mon Nov 14, 2022 12:30 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Mon Nov 14, 2022 22:25 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
@@ -18625,7 +18687,7 @@ function Core() {
         var s = new MaiaScript.XmlSerializer(getXml, true);
         var maiaScriptParser = new MaiaScript(script, s);
         try {
-            maiaScriptParser.parse_maiascript();
+            maiaScriptParser.parse_Program();
         } catch (pe) {
             if (!(pe instanceof maiaScriptParser.ParseException)) {
                 throw pe;
@@ -19370,15 +19432,15 @@ function Core() {
      */
     this.type = function(obj) {
         var classType;
-        if (typeof obj == 'boolean') {
+        if (typeof(obj) == 'boolean') {
             classType = 'boolean';
-        } else if (typeof obj == 'function') {
+        } else if (typeof(obj) == 'function') {
             classType = 'function';
-        } else if (typeof obj == 'number') {
+        } else if (typeof(obj) == 'number') {
             classType = 'number';
-        } else if (typeof obj == 'string') {
+        } else if (typeof(obj) == 'string') {
             classType = 'string';
-        } else if (typeof obj == 'object') {
+        } else if (typeof(obj) == 'object') {
             if (Array.isArray(obj)) {
                 classType = 'matrix';
             } else {
@@ -19388,7 +19450,7 @@ function Core() {
                     classType = 'object';
                 }
             }
-        } else if (typeof obj == 'undefined') {
+        } else if (typeof(obj) == 'undefined') {
             classType = 'undefined';
         }
         return classType;
@@ -20245,16 +20307,8 @@ function System() {
             }
 
             if (typeof inputFile != 'undefined') {
-                // Get the file name extension.
-                fileExtension = inputFile.split(".")
-                fileExtension = fileExtension.pop()
-                
                 var code = read(String(inputFile));
-                if (fileExtension == "maia") {
-                    core.eval(code, global);
-                } else {
-                    eval(global, code);
-                }
+                core.eval(code, global);
             } else {
                 throw new Error('Invalid argument for function source. Argument must be a string.');
             }

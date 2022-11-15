@@ -568,7 +568,7 @@
                                     "Operation": {
                                         "Primary": {
                                             "Member": {
-                                                "Identifier": "$a"
+                                                "Identifier": "a"
                                             }
                                         }
                                     }
@@ -577,7 +577,7 @@
                                     "Operation": {
                                         "Primary": {
                                             "Member": {
-                                                "Identifier": "$b"
+                                                "Identifier": "b"
                                             }
                                         }
                                     }

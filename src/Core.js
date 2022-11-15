@@ -285,7 +285,7 @@ function Core() {
         var s = new MaiaScript.XmlSerializer(getXml, true);
         var maiaScriptParser = new MaiaScript(script, s);
         try {
-            maiaScriptParser.parse_maiascript();
+            maiaScriptParser.parse_Program();
         } catch (pe) {
             if (!(pe instanceof maiaScriptParser.ParseException)) {
                 throw pe;
@@ -1030,15 +1030,15 @@ function Core() {
      */
     this.type = function(obj) {
         var classType;
-        if (typeof obj == 'boolean') {
+        if (typeof(obj) == 'boolean') {
             classType = 'boolean';
-        } else if (typeof obj == 'function') {
+        } else if (typeof(obj) == 'function') {
             classType = 'function';
-        } else if (typeof obj == 'number') {
+        } else if (typeof(obj) == 'number') {
             classType = 'number';
-        } else if (typeof obj == 'string') {
+        } else if (typeof(obj) == 'string') {
             classType = 'string';
-        } else if (typeof obj == 'object') {
+        } else if (typeof(obj) == 'object') {
             if (Array.isArray(obj)) {
                 classType = 'matrix';
             } else {
@@ -1048,7 +1048,7 @@ function Core() {
                     classType = 'object';
                 }
             }
-        } else if (typeof obj == 'undefined') {
+        } else if (typeof(obj) == 'undefined') {
             classType = 'undefined';
         }
         return classType;
