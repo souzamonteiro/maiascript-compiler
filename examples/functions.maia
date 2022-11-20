@@ -40,11 +40,12 @@ f3(x) := {
 c := f3(2)
 system.println(JSON.stringify(c));
 
-// A function in MaiaC.
-i32 f4(i32 a, i32 b) {
-    return a + b;
+// A function in MaiaAssembly.
+i32 f4(i32 a, i32 b, local i32 c) {
+    c = a + b;
+    return c;
 }
-// Calling an MaiaC function.
+// Calling an MaiaAssembly function.
 d = f4(1, 2)
 system.println(d);
 
@@ -58,7 +59,7 @@ e = f5(2)
 system.println(e);
 
 // A function in WebAssembly.
-i32 f6(i32 a, i32 b, local i32 c) /{
+i32 f6(i32 a, i32 b) /{
     (i32.add
       (get_local $a)
       (get_local $b)

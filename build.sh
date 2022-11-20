@@ -29,3 +29,4 @@ jsdoc -d ./docs ./package.json ./src
 mkdir docs/grammar
 cp -r grammar/MaiaScript.ebnf docs/grammar
 cp -r grammar/MaiaScript.xhtml docs/grammar
+cp -r md/maiascript-guide-pt_BR.md docs/

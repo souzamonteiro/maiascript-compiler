@@ -26,8 +26,9 @@ f3 = function (x) {
 };
 c= new f3(2);
 system.println(JSON.stringify(c));
-f4 = function (a,b) {
-    return (core.add(a,b));
+f4 = function (a,b,let c) {
+    c=core.add(a,b);
+    return (c);
 };
 d=f4(1,2);
 system.println(d);
@@ -37,7 +38,7 @@ f5 = function (x) {
 };
 e=f5(2);
 system.println(e);
-f6 = function (a,b,let c) {
+f6 = function (a,b) {
     (i32.add
       (get_local $a)
       (get_local $b)

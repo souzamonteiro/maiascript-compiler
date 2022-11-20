@@ -790,7 +790,7 @@
                 }
             },
             {
-                "Comment": "// A function in MaiaC."
+                "Comment": "// A function in MaiaAssembly."
             },
             {
                 "Statement": {
@@ -828,9 +828,31 @@
                                             }
                                         }
                                     }
+                                },
+                                {
+                                    "Statement": {
+                                        "Local": {
+                                            "TOKEN": "local",
+                                            "Expression": {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Type": {
+                                                            "TOKEN": "i32"
+                                                        },
+                                                        "Member": {
+                                                            "Identifier": "c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             ],
-                            "TOKEN": ","
+                            "TOKEN": [
+                                ",",
+                                ","
+                            ]
                         },
                         "Block": {
                             "TOKEN": [
@@ -839,28 +861,56 @@
                             ],
                             "Expression": [
                                 {
+                                    "Operation": {
+                                        "Op": [
+                                            {
+                                                "Primary": {
+                                                    "Member": {
+                                                        "Identifier": "c"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Op": [
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "a"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "b"
+                                                            }
+                                                        }
+                                                    }
+                                                ],
+                                                "TOKEN": "+"
+                                            }
+                                        ],
+                                        "TOKEN": "="
+                                    }
+                                },
+                                {
+                                    "Statement": {
+                                        "EmptyStatement": {
+                                            "TOKEN": ";"
+                                        }
+                                    }
+                                },
+                                {
                                     "Statement": {
                                         "Return": {
                                             "TOKEN": "return",
                                             "Expression": {
                                                 "Operation": {
-                                                    "Op": [
-                                                        {
-                                                            "Primary": {
-                                                                "Member": {
-                                                                    "Identifier": "a"
-                                                                }
-                                                            }
-                                                        },
-                                                        {
-                                                            "Primary": {
-                                                                "Member": {
-                                                                    "Identifier": "b"
-                                                                }
-                                                            }
+                                                    "Primary": {
+                                                        "Member": {
+                                                            "Identifier": "c"
                                                         }
-                                                    ],
-                                                    "TOKEN": "+"
+                                                    }
                                                 }
                                             }
                                         }
@@ -879,7 +929,7 @@
                 }
             },
             {
-                "Comment": "// Calling an MaiaC function."
+                "Comment": "// Calling an MaiaAssembly function."
             },
             {
                 "Operation": {
@@ -1103,31 +1153,9 @@
                                             }
                                         }
                                     }
-                                },
-                                {
-                                    "Statement": {
-                                        "Local": {
-                                            "TOKEN": "local",
-                                            "Expression": {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Type": {
-                                                            "TOKEN": "i32"
-                                                        },
-                                                        "Member": {
-                                                            "Identifier": "c"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                 }
                             ],
-                            "TOKEN": [
-                                ",",
-                                ","
-                            ]
+                            "TOKEN": ","
                         },
                         "Script": "/{\n    (i32.add\n      (get_local $a)\n      (get_local $b)\n    )\n}/"
                     }

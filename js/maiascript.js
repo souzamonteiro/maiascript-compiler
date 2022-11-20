@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// This file was generated on Sun Nov 20, 2022 17:22 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Sun Nov 20, 2022 18:50 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree
 
 function MaiaScript(string, parsingEventHandler)
@@ -16685,7 +16685,7 @@ MaiaScript.TOKEN =
 ];
 
 // End
-// This file was generated on Sun Nov 20, 2022 17:22 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Sun Nov 20, 2022 18:50 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
