@@ -83,6 +83,56 @@
                 }
             },
             {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "f",
+                                                "TOKEN": [
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Value": {
+                                                                    "Integer": "2"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Statement": {
+                    "EmptyStatement": {
+                        "TOKEN": ";"
+                    }
+                }
+            },
+            {
                 "Comment": "// A simple function."
             },
             {
@@ -253,6 +303,146 @@
                 }
             },
             {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "g",
+                                                "TOKEN": [
+                                                    "(",
+                                                    ")"
+                                                ],
+                                                "Arguments": {
+                                                    "Expression": {
+                                                        "Operation": {
+                                                            "Primary": {
+                                                                "Value": {
+                                                                    "Integer": "5"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Statement": {
+                    "EmptyStatement": {
+                        "TOKEN": ";"
+                    }
+                }
+            },
+            {
+                "Statement": {
+                    "FunctionDeclaration": {
+                        "Identifier": "h",
+                        "TOKEN": [
+                            "(",
+                            ")"
+                        ],
+                        "Arguments": {
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "x"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "y"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "z"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": [
+                                ",",
+                                ","
+                            ]
+                        },
+                        "Block": {
+                            "TOKEN": [
+                                "{",
+                                "}"
+                            ],
+                            "Expression": {
+                                "Statement": {
+                                    "Return": {
+                                        "TOKEN": "return",
+                                        "Expression": {
+                                            "Operation": {
+                                                "Op": [
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "x"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "y"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "Primary": {
+                                                            "Member": {
+                                                                "Identifier": "z"
+                                                            }
+                                                        }
+                                                    }
+                                                ],
+                                                "TOKEN": [
+                                                    "+",
+                                                    "+"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
                 "Comment": "// An asynchronous function."
             },
             {
@@ -301,6 +491,15 @@
                 }
             },
             {
+                "Comment": "// A synchronous function call."
+            },
+            {
+                "Comment": "//a ?= f1(2)"
+            },
+            {
+                "Comment": "//system.println(a);"
+            },
+            {
                 "Comment": "// A parallel function."
             },
             {
@@ -345,6 +544,80 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            {
+                "Comment": "// A parallel function runs synchronously if a thread is not created for it."
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "b"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f2",
+                                    "TOKEN": [
+                                        "(",
+                                        ")"
+                                    ],
+                                    "Arguments": {
+                                        "Expression": {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Value": {
+                                                        "Integer": "2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "b"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Statement": {
+                    "EmptyStatement": {
+                        "TOKEN": ";"
                     }
                 }
             },
@@ -424,217 +697,6 @@
                 }
             },
             {
-                "Comment": "// A function in MaiaC."
-            },
-            {
-                "Statement": {
-                    "FunctionDeclaration": {
-                        "Type": {
-                            "TOKEN": "i32"
-                        },
-                        "Identifier": "f4",
-                        "TOKEN": [
-                            "(",
-                            ")"
-                        ],
-                        "Arguments": {
-                            "Type": [
-                                {
-                                    "TOKEN": "i32"
-                                },
-                                {
-                                    "TOKEN": "i32"
-                                }
-                            ],
-                            "Expression": [
-                                {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "a"
-                                            }
-                                        }
-                                    }
-                                },
-                                {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "b"
-                                            }
-                                        }
-                                    }
-                                }
-                            ],
-                            "TOKEN": ","
-                        },
-                        "Block": {
-                            "TOKEN": [
-                                "{",
-                                "}"
-                            ],
-                            "Expression": [
-                                {
-                                    "Statement": {
-                                        "Return": {
-                                            "TOKEN": "return",
-                                            "Expression": {
-                                                "Operation": {
-                                                    "Op": [
-                                                        {
-                                                            "Primary": {
-                                                                "Member": {
-                                                                    "Identifier": "a"
-                                                                }
-                                                            }
-                                                        },
-                                                        {
-                                                            "Primary": {
-                                                                "Member": {
-                                                                    "Identifier": "b"
-                                                                }
-                                                            }
-                                                        }
-                                                    ],
-                                                    "TOKEN": "+"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                {
-                                    "Statement": {
-                                        "EmptyStatement": {
-                                            "TOKEN": ";"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            {
-                "Comment": "// A function in JavaScript."
-            },
-            {
-                "Statement": {
-                    "FunctionDeclaration": {
-                        "Identifier": "f5",
-                        "TOKEN": [
-                            "(",
-                            ")"
-                        ],
-                        "Arguments": {
-                            "Expression": {
-                                "Operation": {
-                                    "Primary": {
-                                        "Member": {
-                                            "Identifier": "x"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "Script": "/{\n    y = x + 1;\n    return y;\n}/"
-                    }
-                }
-            },
-            {
-                "Comment": "// A function in WebAssembly."
-            },
-            {
-                "Statement": {
-                    "FunctionDeclaration": {
-                        "Type": {
-                            "TOKEN": "i32"
-                        },
-                        "Identifier": "f6",
-                        "TOKEN": [
-                            "(",
-                            ")"
-                        ],
-                        "Arguments": {
-                            "Type": [
-                                {
-                                    "TOKEN": "i32"
-                                },
-                                {
-                                    "TOKEN": "i32"
-                                }
-                            ],
-                            "Expression": [
-                                {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "a"
-                                            }
-                                        }
-                                    }
-                                },
-                                {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "b"
-                                            }
-                                        }
-                                    }
-                                }
-                            ],
-                            "TOKEN": ","
-                        },
-                        "Script": "/{\n    (i32.add\n      (get_local $a)\n      (get_local $b)\n    )\n}/"
-                    }
-                }
-            },
-            {
-                "Comment": "// A synchronous function call."
-            },
-            {
-                "Comment": "//a ?= f1(2)"
-            },
-            {
-                "Comment": "// A parallel function runs synchronously if a thread is not created for it."
-            },
-            {
-                "Operation": {
-                    "Op": [
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "b"
-                                }
-                            }
-                        },
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f2",
-                                    "TOKEN": [
-                                        "(",
-                                        ")"
-                                    ],
-                                    "Arguments": {
-                                        "Expression": {
-                                            "Operation": {
-                                                "Primary": {
-                                                    "Value": {
-                                                        "Integer": "2"
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "TOKEN": "="
-                }
-            },
-            {
                 "Comment": "// Creating an object."
             },
             {
@@ -671,285 +733,6 @@
                         }
                     ],
                     "TOKEN": ":="
-                }
-            },
-            {
-                "Comment": "// Calling an MaiaC function."
-            },
-            {
-                "Operation": {
-                    "Op": [
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "d"
-                                }
-                            }
-                        },
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f4",
-                                    "TOKEN": [
-                                        "(",
-                                        ")"
-                                    ],
-                                    "Arguments": {
-                                        "Expression": [
-                                            {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Value": {
-                                                            "Integer": "1"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Value": {
-                                                            "Integer": "2"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "TOKEN": ","
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "TOKEN": "="
-                }
-            },
-            {
-                "Comment": "// Calling a JavaScript function."
-            },
-            {
-                "Operation": {
-                    "Op": [
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "e"
-                                }
-                            }
-                        },
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f5",
-                                    "TOKEN": [
-                                        "(",
-                                        ")"
-                                    ],
-                                    "Arguments": {
-                                        "Expression": {
-                                            "Operation": {
-                                                "Primary": {
-                                                    "Value": {
-                                                        "Integer": "2"
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "TOKEN": "="
-                }
-            },
-            {
-                "Comment": "// Calling an WebAssembly function."
-            },
-            {
-                "Operation": {
-                    "Op": [
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f"
-                                }
-                            }
-                        },
-                        {
-                            "Primary": {
-                                "Member": {
-                                    "Identifier": "f6",
-                                    "TOKEN": [
-                                        "(",
-                                        ")"
-                                    ],
-                                    "Arguments": {
-                                        "Expression": [
-                                            {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Value": {
-                                                            "Integer": "1"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Value": {
-                                                            "Integer": "2"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "TOKEN": ","
-                                    }
-                                }
-                            }
-                        }
-                    ],
-                    "TOKEN": "="
-                }
-            },
-            {
-                "Operation": {
-                    "Primary": {
-                        "Member": {
-                            "Identifier": [
-                                "system",
-                                "println"
-                            ],
-                            "TOKEN": [
-                                ".",
-                                "(",
-                                ")"
-                            ],
-                            "Arguments": {
-                                "Expression": {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "f",
-                                                "TOKEN": [
-                                                    "(",
-                                                    ")"
-                                                ],
-                                                "Arguments": {
-                                                    "Expression": {
-                                                        "Operation": {
-                                                            "Primary": {
-                                                                "Value": {
-                                                                    "Integer": "2"
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
-                "Operation": {
-                    "Primary": {
-                        "Member": {
-                            "Identifier": [
-                                "system",
-                                "println"
-                            ],
-                            "TOKEN": [
-                                ".",
-                                "(",
-                                ")"
-                            ],
-                            "Arguments": {
-                                "Expression": {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "g",
-                                                "TOKEN": [
-                                                    "(",
-                                                    ")"
-                                                ],
-                                                "Arguments": {
-                                                    "Expression": {
-                                                        "Operation": {
-                                                            "Primary": {
-                                                                "Value": {
-                                                                    "Integer": "5"
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
-                "Comment": "//system.println(a);"
-            },
-            {
-                "Operation": {
-                    "Primary": {
-                        "Member": {
-                            "Identifier": [
-                                "system",
-                                "println"
-                            ],
-                            "TOKEN": [
-                                ".",
-                                "(",
-                                ")"
-                            ],
-                            "Arguments": {
-                                "Expression": {
-                                    "Operation": {
-                                        "Primary": {
-                                            "Member": {
-                                                "Identifier": "b"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
                 }
             },
             {
@@ -1007,6 +790,146 @@
                 }
             },
             {
+                "Comment": "// A function in MaiaC."
+            },
+            {
+                "Statement": {
+                    "FunctionDeclaration": {
+                        "Type": {
+                            "TOKEN": "i32"
+                        },
+                        "Identifier": "f4",
+                        "TOKEN": [
+                            "(",
+                            ")"
+                        ],
+                        "Arguments": {
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "a"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "b"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": ","
+                        },
+                        "Block": {
+                            "TOKEN": [
+                                "{",
+                                "}"
+                            ],
+                            "Expression": [
+                                {
+                                    "Statement": {
+                                        "Return": {
+                                            "TOKEN": "return",
+                                            "Expression": {
+                                                "Operation": {
+                                                    "Op": [
+                                                        {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "a"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "Primary": {
+                                                                "Member": {
+                                                                    "Identifier": "b"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "TOKEN": "+"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Statement": {
+                                        "EmptyStatement": {
+                                            "TOKEN": ";"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "Comment": "// Calling an MaiaC function."
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "d"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f4",
+                                    "TOKEN": [
+                                        "(",
+                                        ")"
+                                    ],
+                                    "Arguments": {
+                                        "Expression": [
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "1"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "2"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "TOKEN": ","
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
                 "Operation": {
                     "Primary": {
                         "Member": {
@@ -1042,6 +965,71 @@
                 }
             },
             {
+                "Comment": "// A function in JavaScript."
+            },
+            {
+                "Statement": {
+                    "FunctionDeclaration": {
+                        "Identifier": "f5",
+                        "TOKEN": [
+                            "(",
+                            ")"
+                        ],
+                        "Arguments": {
+                            "Expression": {
+                                "Operation": {
+                                    "Primary": {
+                                        "Member": {
+                                            "Identifier": "x"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "Script": "/{\n    y = x + 1;\n    return y;\n}/"
+                    }
+                }
+            },
+            {
+                "Comment": "// Calling a JavaScript function."
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "e"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f5",
+                                    "TOKEN": [
+                                        "(",
+                                        ")"
+                                    ],
+                                    "Arguments": {
+                                        "Expression": {
+                                            "Operation": {
+                                                "Primary": {
+                                                    "Value": {
+                                                        "Integer": "2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
                 "Operation": {
                     "Primary": {
                         "Member": {
@@ -1074,6 +1062,126 @@
                     "EmptyStatement": {
                         "TOKEN": ";"
                     }
+                }
+            },
+            {
+                "Comment": "// A function in WebAssembly."
+            },
+            {
+                "Statement": {
+                    "FunctionDeclaration": {
+                        "Type": {
+                            "TOKEN": "i32"
+                        },
+                        "Identifier": "f6",
+                        "TOKEN": [
+                            "(",
+                            ")"
+                        ],
+                        "Arguments": {
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "a"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "b"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Statement": {
+                                        "Local": {
+                                            "TOKEN": "local",
+                                            "Expression": {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Type": {
+                                                            "TOKEN": "i32"
+                                                        },
+                                                        "Member": {
+                                                            "Identifier": "c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": [
+                                ",",
+                                ","
+                            ]
+                        },
+                        "Script": "/{\n    (i32.add\n      (get_local $a)\n      (get_local $b)\n    )\n}/"
+                    }
+                }
+            },
+            {
+                "Comment": "// Calling an WebAssembly function."
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f6",
+                                    "TOKEN": [
+                                        "(",
+                                        ")"
+                                    ],
+                                    "Arguments": {
+                                        "Expression": [
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "1"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "2"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "TOKEN": ","
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
                 }
             },
             {

@@ -32,7 +32,7 @@ UnaryExpression          ::= Primary '++'
                            | '!' Primary
                            | Primary
 
-Primary                  ::= Member
+Primary                  ::= Type? Member
                            | Value
                            | ParenthesizedExpression
 
@@ -88,7 +88,7 @@ Type                     ::= 'i32'
                            | 'f32'
                            | 'f64'
 
-Arguments                ::= (Type? Expression) (',' (Type? Expression))*
+Arguments                ::= (Expression) (',' Expression)*
 
 Member                   ::= Identifier ('.' Identifier)* '(' Arguments? ')'
                            | Identifier ('.' Identifier)* ('[' Arguments? ']')*

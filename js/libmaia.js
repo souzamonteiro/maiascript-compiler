@@ -1,4 +1,4 @@
-// This file was generated on Mon Nov 14, 2022 22:25 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Sun Nov 20, 2022 17:22 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: MaiaScript.ebnf -backtrack -javascript -tree
 
 function MaiaScript(string, parsingEventHandler)
@@ -149,7 +149,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -187,7 +187,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 461:                     // '{' Identifier
-        lookahead3W(44);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(43);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -197,7 +197,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // '|=' | '||' | '}' | '~'
         break;
       case 717:                     // '{' String
-        lookahead3W(43);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(42);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' |
                                     // ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
@@ -214,7 +214,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
         break;
       case 10445:                   // '{' '}'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -227,7 +227,7 @@ function MaiaScript(string, parsingEventHandler)
       case 845:                     // '{' Integer
       case 973:                     // '{' Complex
       case 1101:                    // '{' Real
-        lookahead3W(42);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(41);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
@@ -260,7 +260,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3917:                    // '{' '--'
       case 10573:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8141:                    // '{' 'for'
       case 8269:                    // '{' 'foreach'
@@ -286,6 +286,28 @@ function MaiaScript(string, parsingEventHandler)
         break;
       }
       break;
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      lookahead2W(0);               // Identifier | WhiteSpace^token
+      switch (lk)
+      {
+      case 445:                     // 'f32' Identifier
+      case 446:                     // 'f64' Identifier
+      case 449:                     // 'i32' Identifier
+      case 450:                     // 'i64' Identifier
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
+                                    // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
+                                    // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
+                                    // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
+                                    // 'i32' | 'i64' | 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      }
+      break;
     default:
       lk = l1;
     }
@@ -306,12 +328,8 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 54                    // 'break'
      && lk != 57                    // 'continue'
      && lk != 59                    // 'do'
-     && lk != 61                    // 'f32'
-     && lk != 62                    // 'f64'
      && lk != 63                    // 'for'
      && lk != 64                    // 'foreach'
-     && lk != 65                    // 'i32'
-     && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
      && lk != 68                    // 'import'
      && lk != 69                    // 'include'
@@ -399,6 +417,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 10243                 // Identifier '||'
      && lk != 10371                 // Identifier '}'
      && lk != 10499                 // Identifier '~'
+     && lk != 16829                 // 'f32' Identifier END
+     && lk != 16830                 // 'f64' Identifier END
+     && lk != 16833                 // 'i32' Identifier END
+     && lk != 16834                 // 'i64' Identifier END
+     && lk != 49597                 // 'f32' Identifier Identifier
+     && lk != 49598                 // 'f64' Identifier Identifier
+     && lk != 49601                 // 'i32' Identifier Identifier
+     && lk != 49602                 // 'i64' Identifier Identifier
      && lk != 49613                 // '{' Identifier Identifier
      && lk != 49741                 // '{' Character Identifier
      && lk != 49869                 // '{' String Identifier
@@ -409,6 +435,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 53965                 // '{' ';' Identifier
      && lk != 56141                 // '{' 'break' Identifier
      && lk != 56525                 // '{' 'continue' Identifier
+     && lk != 65981                 // 'f32' Identifier Character
+     && lk != 65982                 // 'f64' Identifier Character
+     && lk != 65985                 // 'i32' Identifier Character
+     && lk != 65986                 // 'i64' Identifier Character
      && lk != 65997                 // '{' Identifier Character
      && lk != 66125                 // '{' Character Character
      && lk != 66253                 // '{' String Character
@@ -419,6 +449,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 70349                 // '{' ';' Character
      && lk != 72525                 // '{' 'break' Character
      && lk != 72909                 // '{' 'continue' Character
+     && lk != 82365                 // 'f32' Identifier String
+     && lk != 82366                 // 'f64' Identifier String
+     && lk != 82369                 // 'i32' Identifier String
+     && lk != 82370                 // 'i64' Identifier String
      && lk != 82381                 // '{' Identifier String
      && lk != 82509                 // '{' Character String
      && lk != 82637                 // '{' String String
@@ -429,6 +463,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 86733                 // '{' ';' String
      && lk != 88909                 // '{' 'break' String
      && lk != 89293                 // '{' 'continue' String
+     && lk != 98749                 // 'f32' Identifier Integer
+     && lk != 98750                 // 'f64' Identifier Integer
+     && lk != 98753                 // 'i32' Identifier Integer
+     && lk != 98754                 // 'i64' Identifier Integer
      && lk != 98765                 // '{' Identifier Integer
      && lk != 98893                 // '{' Character Integer
      && lk != 99021                 // '{' String Integer
@@ -439,6 +477,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 103117                // '{' ';' Integer
      && lk != 105293                // '{' 'break' Integer
      && lk != 105677                // '{' 'continue' Integer
+     && lk != 115133                // 'f32' Identifier Complex
+     && lk != 115134                // 'f64' Identifier Complex
+     && lk != 115137                // 'i32' Identifier Complex
+     && lk != 115138                // 'i64' Identifier Complex
      && lk != 115149                // '{' Identifier Complex
      && lk != 115277                // '{' Character Complex
      && lk != 115405                // '{' String Complex
@@ -449,6 +491,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 119501                // '{' ';' Complex
      && lk != 121677                // '{' 'break' Complex
      && lk != 122061                // '{' 'continue' Complex
+     && lk != 131517                // 'f32' Identifier Real
+     && lk != 131518                // 'f64' Identifier Real
+     && lk != 131521                // 'i32' Identifier Real
+     && lk != 131522                // 'i64' Identifier Real
      && lk != 131533                // '{' Identifier Real
      && lk != 131661                // '{' Character Real
      && lk != 131789                // '{' String Real
@@ -459,6 +505,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 135885                // '{' ';' Real
      && lk != 138061                // '{' 'break' Real
      && lk != 138445                // '{' 'continue' Real
+     && lk != 147901                // 'f32' Identifier Comment
+     && lk != 147902                // 'f64' Identifier Comment
+     && lk != 147905                // 'i32' Identifier Comment
+     && lk != 147906                // 'i64' Identifier Comment
      && lk != 147917                // '{' Identifier Comment
      && lk != 148045                // '{' Character Comment
      && lk != 148173                // '{' String Comment
@@ -469,6 +519,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 152269                // '{' ';' Comment
      && lk != 154445                // '{' 'break' Comment
      && lk != 154829                // '{' 'continue' Comment
+     && lk != 197053                // 'f32' Identifier '!'
+     && lk != 197054                // 'f64' Identifier '!'
+     && lk != 197057                // 'i32' Identifier '!'
+     && lk != 197058                // 'i64' Identifier '!'
      && lk != 197069                // '{' Identifier '!'
      && lk != 197197                // '{' Character '!'
      && lk != 197325                // '{' String '!'
@@ -479,11 +533,35 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 201421                // '{' ';' '!'
      && lk != 203597                // '{' 'break' '!'
      && lk != 203981                // '{' 'continue' '!'
+     && lk != 213437                // 'f32' Identifier '!='
+     && lk != 213438                // 'f64' Identifier '!='
+     && lk != 213441                // 'i32' Identifier '!='
+     && lk != 213442                // 'i64' Identifier '!='
      && lk != 223437                // '{' '}' '!='
+     && lk != 246205                // 'f32' Identifier '%'
+     && lk != 246206                // 'f64' Identifier '%'
+     && lk != 246209                // 'i32' Identifier '%'
+     && lk != 246210                // 'i64' Identifier '%'
      && lk != 256205                // '{' '}' '%'
+     && lk != 262589                // 'f32' Identifier '%='
+     && lk != 262590                // 'f64' Identifier '%='
+     && lk != 262593                // 'i32' Identifier '%='
+     && lk != 262594                // 'i64' Identifier '%='
      && lk != 272589                // '{' '}' '%='
+     && lk != 278973                // 'f32' Identifier '&'
+     && lk != 278974                // 'f64' Identifier '&'
+     && lk != 278977                // 'i32' Identifier '&'
+     && lk != 278978                // 'i64' Identifier '&'
      && lk != 288973                // '{' '}' '&'
+     && lk != 295357                // 'f32' Identifier '&&'
+     && lk != 295358                // 'f64' Identifier '&&'
+     && lk != 295361                // 'i32' Identifier '&&'
+     && lk != 295362                // 'i64' Identifier '&&'
      && lk != 305357                // '{' '}' '&&'
+     && lk != 311741                // 'f32' Identifier '&='
+     && lk != 311742                // 'f64' Identifier '&='
+     && lk != 311745                // 'i32' Identifier '&='
+     && lk != 311746                // 'i64' Identifier '&='
      && lk != 321741                // '{' '}' '&='
      && lk != 328269                // '{' Character '('
      && lk != 328397                // '{' String '('
@@ -494,18 +572,50 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 332493                // '{' ';' '('
      && lk != 334669                // '{' 'break' '('
      && lk != 335053                // '{' 'continue' '('
+     && lk != 344509                // 'f32' Identifier ')'
+     && lk != 344510                // 'f64' Identifier ')'
+     && lk != 344513                // 'i32' Identifier ')'
+     && lk != 344514                // 'i64' Identifier ')'
+     && lk != 360893                // 'f32' Identifier '*'
+     && lk != 360894                // 'f64' Identifier '*'
+     && lk != 360897                // 'i32' Identifier '*'
+     && lk != 360898                // 'i64' Identifier '*'
      && lk != 370893                // '{' '}' '*'
+     && lk != 377277                // 'f32' Identifier '**'
+     && lk != 377278                // 'f64' Identifier '**'
+     && lk != 377281                // 'i32' Identifier '**'
+     && lk != 377282                // 'i64' Identifier '**'
      && lk != 387277                // '{' '}' '**'
+     && lk != 393661                // 'f32' Identifier '*='
+     && lk != 393662                // 'f64' Identifier '*='
+     && lk != 393665                // 'i32' Identifier '*='
+     && lk != 393666                // 'i64' Identifier '*='
      && lk != 403661                // '{' '}' '*='
+     && lk != 410045                // 'f32' Identifier '+'
+     && lk != 410046                // 'f64' Identifier '+'
+     && lk != 410049                // 'i32' Identifier '+'
+     && lk != 410050                // 'i64' Identifier '+'
      && lk != 410829                // '{' Comment '+'
      && lk != 414413                // '{' ';' '+'
      && lk != 416589                // '{' 'break' '+'
      && lk != 416973                // '{' 'continue' '+'
+     && lk != 426429                // 'f32' Identifier '++'
+     && lk != 426430                // 'f64' Identifier '++'
+     && lk != 426433                // 'i32' Identifier '++'
+     && lk != 426434                // 'i64' Identifier '++'
      && lk != 427213                // '{' Comment '++'
      && lk != 430797                // '{' ';' '++'
      && lk != 432973                // '{' 'break' '++'
      && lk != 433357                // '{' 'continue' '++'
+     && lk != 442813                // 'f32' Identifier '+='
+     && lk != 442814                // 'f64' Identifier '+='
+     && lk != 442817                // 'i32' Identifier '+='
+     && lk != 442818                // 'i64' Identifier '+='
      && lk != 452813                // '{' '}' '+='
+     && lk != 459197                // 'f32' Identifier ','
+     && lk != 459198                // 'f64' Identifier ','
+     && lk != 459201                // 'i32' Identifier ','
+     && lk != 459202                // 'i64' Identifier ','
      && lk != 459213                // '{' Identifier ','
      && lk != 459341                // '{' Character ','
      && lk != 459469                // '{' String ','
@@ -517,20 +627,52 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 465741                // '{' 'break' ','
      && lk != 466125                // '{' 'continue' ','
      && lk != 468611                // Identifier '{' ','
+     && lk != 475581                // 'f32' Identifier '-'
+     && lk != 475582                // 'f64' Identifier '-'
+     && lk != 475585                // 'i32' Identifier '-'
+     && lk != 475586                // 'i64' Identifier '-'
      && lk != 476365                // '{' Comment '-'
      && lk != 479949                // '{' ';' '-'
      && lk != 482125                // '{' 'break' '-'
      && lk != 482509                // '{' 'continue' '-'
+     && lk != 491965                // 'f32' Identifier '--'
+     && lk != 491966                // 'f64' Identifier '--'
+     && lk != 491969                // 'i32' Identifier '--'
+     && lk != 491970                // 'i64' Identifier '--'
      && lk != 492749                // '{' Comment '--'
      && lk != 496333                // '{' ';' '--'
      && lk != 498509                // '{' 'break' '--'
      && lk != 498893                // '{' 'continue' '--'
+     && lk != 508349                // 'f32' Identifier '-='
+     && lk != 508350                // 'f64' Identifier '-='
+     && lk != 508353                // 'i32' Identifier '-='
+     && lk != 508354                // 'i64' Identifier '-='
      && lk != 518349                // '{' '}' '-='
+     && lk != 541117                // 'f32' Identifier '/'
+     && lk != 541118                // 'f64' Identifier '/'
+     && lk != 541121                // 'i32' Identifier '/'
+     && lk != 541122                // 'i64' Identifier '/'
      && lk != 551117                // '{' '}' '/'
+     && lk != 557501                // 'f32' Identifier '/='
+     && lk != 557502                // 'f64' Identifier '/='
+     && lk != 557505                // 'i32' Identifier '/='
+     && lk != 557506                // 'i64' Identifier '/='
      && lk != 567501                // '{' '}' '/='
+     && lk != 573885                // 'f32' Identifier ':'
+     && lk != 573886                // 'f64' Identifier ':'
+     && lk != 573889                // 'i32' Identifier ':'
+     && lk != 573890                // 'i64' Identifier ':'
      && lk != 573901                // '{' Identifier ':'
      && lk != 574157                // '{' String ':'
+     && lk != 590269                // 'f32' Identifier ':='
+     && lk != 590270                // 'f64' Identifier ':='
+     && lk != 590273                // 'i32' Identifier ':='
+     && lk != 590274                // 'i64' Identifier ':='
      && lk != 600269                // '{' '}' ':='
+     && lk != 606653                // 'f32' Identifier ';'
+     && lk != 606654                // 'f64' Identifier ';'
+     && lk != 606657                // 'i32' Identifier ';'
+     && lk != 606658                // 'i64' Identifier ';'
      && lk != 606669                // '{' Identifier ';'
      && lk != 606797                // '{' Character ';'
      && lk != 606925                // '{' String ';'
@@ -541,18 +683,70 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 611021                // '{' ';' ';'
      && lk != 613197                // '{' 'break' ';'
      && lk != 613581                // '{' 'continue' ';'
+     && lk != 623037                // 'f32' Identifier '<'
+     && lk != 623038                // 'f64' Identifier '<'
+     && lk != 623041                // 'i32' Identifier '<'
+     && lk != 623042                // 'i64' Identifier '<'
      && lk != 633037                // '{' '}' '<'
+     && lk != 639421                // 'f32' Identifier '<<'
+     && lk != 639422                // 'f64' Identifier '<<'
+     && lk != 639425                // 'i32' Identifier '<<'
+     && lk != 639426                // 'i64' Identifier '<<'
      && lk != 649421                // '{' '}' '<<'
+     && lk != 655805                // 'f32' Identifier '<<='
+     && lk != 655806                // 'f64' Identifier '<<='
+     && lk != 655809                // 'i32' Identifier '<<='
+     && lk != 655810                // 'i64' Identifier '<<='
      && lk != 665805                // '{' '}' '<<='
+     && lk != 672189                // 'f32' Identifier '<='
+     && lk != 672190                // 'f64' Identifier '<='
+     && lk != 672193                // 'i32' Identifier '<='
+     && lk != 672194                // 'i64' Identifier '<='
      && lk != 682189                // '{' '}' '<='
+     && lk != 688573                // 'f32' Identifier '='
+     && lk != 688574                // 'f64' Identifier '='
+     && lk != 688577                // 'i32' Identifier '='
+     && lk != 688578                // 'i64' Identifier '='
      && lk != 698573                // '{' '}' '='
+     && lk != 704957                // 'f32' Identifier '=='
+     && lk != 704958                // 'f64' Identifier '=='
+     && lk != 704961                // 'i32' Identifier '=='
+     && lk != 704962                // 'i64' Identifier '=='
      && lk != 714957                // '{' '}' '=='
+     && lk != 721341                // 'f32' Identifier '>'
+     && lk != 721342                // 'f64' Identifier '>'
+     && lk != 721345                // 'i32' Identifier '>'
+     && lk != 721346                // 'i64' Identifier '>'
      && lk != 731341                // '{' '}' '>'
+     && lk != 737725                // 'f32' Identifier '>='
+     && lk != 737726                // 'f64' Identifier '>='
+     && lk != 737729                // 'i32' Identifier '>='
+     && lk != 737730                // 'i64' Identifier '>='
      && lk != 747725                // '{' '}' '>='
+     && lk != 754109                // 'f32' Identifier '>>'
+     && lk != 754110                // 'f64' Identifier '>>'
+     && lk != 754113                // 'i32' Identifier '>>'
+     && lk != 754114                // 'i64' Identifier '>>'
      && lk != 764109                // '{' '}' '>>'
+     && lk != 770493                // 'f32' Identifier '>>='
+     && lk != 770494                // 'f64' Identifier '>>='
+     && lk != 770497                // 'i32' Identifier '>>='
+     && lk != 770498                // 'i64' Identifier '>>='
      && lk != 780493                // '{' '}' '>>='
+     && lk != 786877                // 'f32' Identifier '?'
+     && lk != 786878                // 'f64' Identifier '?'
+     && lk != 786881                // 'i32' Identifier '?'
+     && lk != 786882                // 'i64' Identifier '?'
      && lk != 796877                // '{' '}' '?'
+     && lk != 803261                // 'f32' Identifier '?='
+     && lk != 803262                // 'f64' Identifier '?='
+     && lk != 803265                // 'i32' Identifier '?='
+     && lk != 803266                // 'i64' Identifier '?='
      && lk != 813261                // '{' '}' '?='
+     && lk != 819645                // 'f32' Identifier '['
+     && lk != 819646                // 'f64' Identifier '['
+     && lk != 819649                // 'i32' Identifier '['
+     && lk != 819650                // 'i64' Identifier '['
      && lk != 819789                // '{' Character '['
      && lk != 819917                // '{' String '['
      && lk != 820045                // '{' Integer '['
@@ -562,8 +756,24 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 824013                // '{' ';' '['
      && lk != 826189                // '{' 'break' '['
      && lk != 826573                // '{' 'continue' '['
+     && lk != 836029                // 'f32' Identifier ']'
+     && lk != 836030                // 'f64' Identifier ']'
+     && lk != 836033                // 'i32' Identifier ']'
+     && lk != 836034                // 'i64' Identifier ']'
+     && lk != 852413                // 'f32' Identifier '^'
+     && lk != 852414                // 'f64' Identifier '^'
+     && lk != 852417                // 'i32' Identifier '^'
+     && lk != 852418                // 'i64' Identifier '^'
      && lk != 862413                // '{' '}' '^'
+     && lk != 868797                // 'f32' Identifier '^='
+     && lk != 868798                // 'f64' Identifier '^='
+     && lk != 868801                // 'i32' Identifier '^='
+     && lk != 868802                // 'i64' Identifier '^='
      && lk != 878797                // '{' '}' '^='
+     && lk != 885181                // 'f32' Identifier 'break'
+     && lk != 885182                // 'f64' Identifier 'break'
+     && lk != 885185                // 'i32' Identifier 'break'
+     && lk != 885186                // 'i64' Identifier 'break'
      && lk != 885197                // '{' Identifier 'break'
      && lk != 885325                // '{' Character 'break'
      && lk != 885453                // '{' String 'break'
@@ -574,6 +784,18 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 889549                // '{' ';' 'break'
      && lk != 891725                // '{' 'break' 'break'
      && lk != 892109                // '{' 'continue' 'break'
+     && lk != 901565                // 'f32' Identifier 'case'
+     && lk != 901566                // 'f64' Identifier 'case'
+     && lk != 901569                // 'i32' Identifier 'case'
+     && lk != 901570                // 'i64' Identifier 'case'
+     && lk != 917949                // 'f32' Identifier 'catch'
+     && lk != 917950                // 'f64' Identifier 'catch'
+     && lk != 917953                // 'i32' Identifier 'catch'
+     && lk != 917954                // 'i64' Identifier 'catch'
+     && lk != 934333                // 'f32' Identifier 'continue'
+     && lk != 934334                // 'f64' Identifier 'continue'
+     && lk != 934337                // 'i32' Identifier 'continue'
+     && lk != 934338                // 'i64' Identifier 'continue'
      && lk != 934349                // '{' Identifier 'continue'
      && lk != 934477                // '{' Character 'continue'
      && lk != 934605                // '{' String 'continue'
@@ -584,6 +806,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 938701                // '{' ';' 'continue'
      && lk != 940877                // '{' 'break' 'continue'
      && lk != 941261                // '{' 'continue' 'continue'
+     && lk != 950717                // 'f32' Identifier 'default'
+     && lk != 950718                // 'f64' Identifier 'default'
+     && lk != 950721                // 'i32' Identifier 'default'
+     && lk != 950722                // 'i64' Identifier 'default'
+     && lk != 967101                // 'f32' Identifier 'do'
+     && lk != 967102                // 'f64' Identifier 'do'
+     && lk != 967105                // 'i32' Identifier 'do'
+     && lk != 967106                // 'i64' Identifier 'do'
      && lk != 967117                // '{' Identifier 'do'
      && lk != 967245                // '{' Character 'do'
      && lk != 967373                // '{' String 'do'
@@ -594,6 +824,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 971469                // '{' ';' 'do'
      && lk != 973645                // '{' 'break' 'do'
      && lk != 974029                // '{' 'continue' 'do'
+     && lk != 983485                // 'f32' Identifier 'else'
+     && lk != 983486                // 'f64' Identifier 'else'
+     && lk != 983489                // 'i32' Identifier 'else'
+     && lk != 983490                // 'i64' Identifier 'else'
+     && lk != 999869                // 'f32' Identifier 'f32'
+     && lk != 999870                // 'f64' Identifier 'f32'
+     && lk != 999873                // 'i32' Identifier 'f32'
+     && lk != 999874                // 'i64' Identifier 'f32'
      && lk != 999885                // '{' Identifier 'f32'
      && lk != 1000013               // '{' Character 'f32'
      && lk != 1000141               // '{' String 'f32'
@@ -604,6 +842,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1004237               // '{' ';' 'f32'
      && lk != 1006413               // '{' 'break' 'f32'
      && lk != 1006797               // '{' 'continue' 'f32'
+     && lk != 1016253               // 'f32' Identifier 'f64'
+     && lk != 1016254               // 'f64' Identifier 'f64'
+     && lk != 1016257               // 'i32' Identifier 'f64'
+     && lk != 1016258               // 'i64' Identifier 'f64'
      && lk != 1016269               // '{' Identifier 'f64'
      && lk != 1016397               // '{' Character 'f64'
      && lk != 1016525               // '{' String 'f64'
@@ -614,6 +856,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1020621               // '{' ';' 'f64'
      && lk != 1022797               // '{' 'break' 'f64'
      && lk != 1023181               // '{' 'continue' 'f64'
+     && lk != 1032637               // 'f32' Identifier 'for'
+     && lk != 1032638               // 'f64' Identifier 'for'
+     && lk != 1032641               // 'i32' Identifier 'for'
+     && lk != 1032642               // 'i64' Identifier 'for'
      && lk != 1032653               // '{' Identifier 'for'
      && lk != 1032781               // '{' Character 'for'
      && lk != 1032909               // '{' String 'for'
@@ -624,6 +870,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1037005               // '{' ';' 'for'
      && lk != 1039181               // '{' 'break' 'for'
      && lk != 1039565               // '{' 'continue' 'for'
+     && lk != 1049021               // 'f32' Identifier 'foreach'
+     && lk != 1049022               // 'f64' Identifier 'foreach'
+     && lk != 1049025               // 'i32' Identifier 'foreach'
+     && lk != 1049026               // 'i64' Identifier 'foreach'
      && lk != 1049037               // '{' Identifier 'foreach'
      && lk != 1049165               // '{' Character 'foreach'
      && lk != 1049293               // '{' String 'foreach'
@@ -634,6 +884,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1053389               // '{' ';' 'foreach'
      && lk != 1055565               // '{' 'break' 'foreach'
      && lk != 1055949               // '{' 'continue' 'foreach'
+     && lk != 1065405               // 'f32' Identifier 'i32'
+     && lk != 1065406               // 'f64' Identifier 'i32'
+     && lk != 1065409               // 'i32' Identifier 'i32'
+     && lk != 1065410               // 'i64' Identifier 'i32'
      && lk != 1065421               // '{' Identifier 'i32'
      && lk != 1065549               // '{' Character 'i32'
      && lk != 1065677               // '{' String 'i32'
@@ -644,6 +898,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1069773               // '{' ';' 'i32'
      && lk != 1071949               // '{' 'break' 'i32'
      && lk != 1072333               // '{' 'continue' 'i32'
+     && lk != 1081789               // 'f32' Identifier 'i64'
+     && lk != 1081790               // 'f64' Identifier 'i64'
+     && lk != 1081793               // 'i32' Identifier 'i64'
+     && lk != 1081794               // 'i64' Identifier 'i64'
      && lk != 1081805               // '{' Identifier 'i64'
      && lk != 1081933               // '{' Character 'i64'
      && lk != 1082061               // '{' String 'i64'
@@ -654,6 +912,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1086157               // '{' ';' 'i64'
      && lk != 1088333               // '{' 'break' 'i64'
      && lk != 1088717               // '{' 'continue' 'i64'
+     && lk != 1098173               // 'f32' Identifier 'if'
+     && lk != 1098174               // 'f64' Identifier 'if'
+     && lk != 1098177               // 'i32' Identifier 'if'
+     && lk != 1098178               // 'i64' Identifier 'if'
      && lk != 1098189               // '{' Identifier 'if'
      && lk != 1098317               // '{' Character 'if'
      && lk != 1098445               // '{' String 'if'
@@ -664,6 +926,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1102541               // '{' ';' 'if'
      && lk != 1104717               // '{' 'break' 'if'
      && lk != 1105101               // '{' 'continue' 'if'
+     && lk != 1114557               // 'f32' Identifier 'import'
+     && lk != 1114558               // 'f64' Identifier 'import'
+     && lk != 1114561               // 'i32' Identifier 'import'
+     && lk != 1114562               // 'i64' Identifier 'import'
      && lk != 1114573               // '{' Identifier 'import'
      && lk != 1114701               // '{' Character 'import'
      && lk != 1114829               // '{' String 'import'
@@ -674,6 +940,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1118925               // '{' ';' 'import'
      && lk != 1121101               // '{' 'break' 'import'
      && lk != 1121485               // '{' 'continue' 'import'
+     && lk != 1130941               // 'f32' Identifier 'include'
+     && lk != 1130942               // 'f64' Identifier 'include'
+     && lk != 1130945               // 'i32' Identifier 'include'
+     && lk != 1130946               // 'i64' Identifier 'include'
      && lk != 1130957               // '{' Identifier 'include'
      && lk != 1131085               // '{' Character 'include'
      && lk != 1131213               // '{' String 'include'
@@ -684,6 +954,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1135309               // '{' ';' 'include'
      && lk != 1137485               // '{' 'break' 'include'
      && lk != 1137869               // '{' 'continue' 'include'
+     && lk != 1147325               // 'f32' Identifier 'local'
+     && lk != 1147326               // 'f64' Identifier 'local'
+     && lk != 1147329               // 'i32' Identifier 'local'
+     && lk != 1147330               // 'i64' Identifier 'local'
      && lk != 1147341               // '{' Identifier 'local'
      && lk != 1147469               // '{' Character 'local'
      && lk != 1147597               // '{' String 'local'
@@ -694,6 +968,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1151693               // '{' ';' 'local'
      && lk != 1153869               // '{' 'break' 'local'
      && lk != 1154253               // '{' 'continue' 'local'
+     && lk != 1163709               // 'f32' Identifier 'return'
+     && lk != 1163710               // 'f64' Identifier 'return'
+     && lk != 1163713               // 'i32' Identifier 'return'
+     && lk != 1163714               // 'i64' Identifier 'return'
      && lk != 1163725               // '{' Identifier 'return'
      && lk != 1163853               // '{' Character 'return'
      && lk != 1163981               // '{' String 'return'
@@ -704,6 +982,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1168077               // '{' ';' 'return'
      && lk != 1170253               // '{' 'break' 'return'
      && lk != 1170637               // '{' 'continue' 'return'
+     && lk != 1180093               // 'f32' Identifier 'switch'
+     && lk != 1180094               // 'f64' Identifier 'switch'
+     && lk != 1180097               // 'i32' Identifier 'switch'
+     && lk != 1180098               // 'i64' Identifier 'switch'
      && lk != 1180109               // '{' Identifier 'switch'
      && lk != 1180237               // '{' Character 'switch'
      && lk != 1180365               // '{' String 'switch'
@@ -714,6 +996,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1184461               // '{' ';' 'switch'
      && lk != 1186637               // '{' 'break' 'switch'
      && lk != 1187021               // '{' 'continue' 'switch'
+     && lk != 1196477               // 'f32' Identifier 'test'
+     && lk != 1196478               // 'f64' Identifier 'test'
+     && lk != 1196481               // 'i32' Identifier 'test'
+     && lk != 1196482               // 'i64' Identifier 'test'
      && lk != 1196493               // '{' Identifier 'test'
      && lk != 1196621               // '{' Character 'test'
      && lk != 1196749               // '{' String 'test'
@@ -724,6 +1010,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1200845               // '{' ';' 'test'
      && lk != 1203021               // '{' 'break' 'test'
      && lk != 1203405               // '{' 'continue' 'test'
+     && lk != 1212861               // 'f32' Identifier 'throw'
+     && lk != 1212862               // 'f64' Identifier 'throw'
+     && lk != 1212865               // 'i32' Identifier 'throw'
+     && lk != 1212866               // 'i64' Identifier 'throw'
      && lk != 1212877               // '{' Identifier 'throw'
      && lk != 1213005               // '{' Character 'throw'
      && lk != 1213133               // '{' String 'throw'
@@ -734,6 +1024,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1217229               // '{' ';' 'throw'
      && lk != 1219405               // '{' 'break' 'throw'
      && lk != 1219789               // '{' 'continue' 'throw'
+     && lk != 1229245               // 'f32' Identifier 'try'
+     && lk != 1229246               // 'f64' Identifier 'try'
+     && lk != 1229249               // 'i32' Identifier 'try'
+     && lk != 1229250               // 'i64' Identifier 'try'
      && lk != 1229261               // '{' Identifier 'try'
      && lk != 1229389               // '{' Character 'try'
      && lk != 1229517               // '{' String 'try'
@@ -744,6 +1038,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1233613               // '{' ';' 'try'
      && lk != 1235789               // '{' 'break' 'try'
      && lk != 1236173               // '{' 'continue' 'try'
+     && lk != 1245629               // 'f32' Identifier 'while'
+     && lk != 1245630               // 'f64' Identifier 'while'
+     && lk != 1245633               // 'i32' Identifier 'while'
+     && lk != 1245634               // 'i64' Identifier 'while'
      && lk != 1245645               // '{' Identifier 'while'
      && lk != 1245773               // '{' Character 'while'
      && lk != 1245901               // '{' String 'while'
@@ -754,6 +1052,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1249997               // '{' ';' 'while'
      && lk != 1252173               // '{' 'break' 'while'
      && lk != 1252557               // '{' 'continue' 'while'
+     && lk != 1262013               // 'f32' Identifier '{'
+     && lk != 1262014               // 'f64' Identifier '{'
+     && lk != 1262017               // 'i32' Identifier '{'
+     && lk != 1262018               // 'i64' Identifier '{'
      && lk != 1262157               // '{' Character '{'
      && lk != 1262285               // '{' String '{'
      && lk != 1262413               // '{' Integer '{'
@@ -763,9 +1065,29 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1266381               // '{' ';' '{'
      && lk != 1268557               // '{' 'break' '{'
      && lk != 1268941               // '{' 'continue' '{'
+     && lk != 1278397               // 'f32' Identifier '|'
+     && lk != 1278398               // 'f64' Identifier '|'
+     && lk != 1278401               // 'i32' Identifier '|'
+     && lk != 1278402               // 'i64' Identifier '|'
      && lk != 1288397               // '{' '}' '|'
+     && lk != 1294781               // 'f32' Identifier '|='
+     && lk != 1294782               // 'f64' Identifier '|='
+     && lk != 1294785               // 'i32' Identifier '|='
+     && lk != 1294786               // 'i64' Identifier '|='
      && lk != 1304781               // '{' '}' '|='
+     && lk != 1311165               // 'f32' Identifier '||'
+     && lk != 1311166               // 'f64' Identifier '||'
+     && lk != 1311169               // 'i32' Identifier '||'
+     && lk != 1311170               // 'i64' Identifier '||'
      && lk != 1321165               // '{' '}' '||'
+     && lk != 1327549               // 'f32' Identifier '}'
+     && lk != 1327550               // 'f64' Identifier '}'
+     && lk != 1327553               // 'i32' Identifier '}'
+     && lk != 1327554               // 'i64' Identifier '}'
+     && lk != 1343933               // 'f32' Identifier '~'
+     && lk != 1343934               // 'f64' Identifier '~'
+     && lk != 1343937               // 'i32' Identifier '~'
+     && lk != 1343938               // 'i64' Identifier '~'
      && lk != 1343949               // '{' Identifier '~'
      && lk != 1344077               // '{' Character '~'
      && lk != 1344205               // '{' String '~'
@@ -817,17 +1139,349 @@ function MaiaScript(string, parsingEventHandler)
     case 9:                         // Comment
       consume(9);                   // Comment
       break;
+    case -2:
+    case 49613:                     // '{' Identifier Identifier
+    case 49741:                     // '{' Character Identifier
+    case 49869:                     // '{' String Identifier
+    case 49997:                     // '{' Integer Identifier
+    case 50125:                     // '{' Complex Identifier
+    case 50253:                     // '{' Real Identifier
+    case 50381:                     // '{' Comment Identifier
+    case 53965:                     // '{' ';' Identifier
+    case 56141:                     // '{' 'break' Identifier
+    case 56525:                     // '{' 'continue' Identifier
+    case 65997:                     // '{' Identifier Character
+    case 66125:                     // '{' Character Character
+    case 66253:                     // '{' String Character
+    case 66381:                     // '{' Integer Character
+    case 66509:                     // '{' Complex Character
+    case 66637:                     // '{' Real Character
+    case 66765:                     // '{' Comment Character
+    case 70349:                     // '{' ';' Character
+    case 72525:                     // '{' 'break' Character
+    case 72909:                     // '{' 'continue' Character
+    case 82381:                     // '{' Identifier String
+    case 82509:                     // '{' Character String
+    case 82637:                     // '{' String String
+    case 82765:                     // '{' Integer String
+    case 82893:                     // '{' Complex String
+    case 83021:                     // '{' Real String
+    case 83149:                     // '{' Comment String
+    case 86733:                     // '{' ';' String
+    case 88909:                     // '{' 'break' String
+    case 89293:                     // '{' 'continue' String
+    case 98765:                     // '{' Identifier Integer
+    case 98893:                     // '{' Character Integer
+    case 99021:                     // '{' String Integer
+    case 99149:                     // '{' Integer Integer
+    case 99277:                     // '{' Complex Integer
+    case 99405:                     // '{' Real Integer
+    case 99533:                     // '{' Comment Integer
+    case 103117:                    // '{' ';' Integer
+    case 105293:                    // '{' 'break' Integer
+    case 105677:                    // '{' 'continue' Integer
+    case 115149:                    // '{' Identifier Complex
+    case 115277:                    // '{' Character Complex
+    case 115405:                    // '{' String Complex
+    case 115533:                    // '{' Integer Complex
+    case 115661:                    // '{' Complex Complex
+    case 115789:                    // '{' Real Complex
+    case 115917:                    // '{' Comment Complex
+    case 119501:                    // '{' ';' Complex
+    case 121677:                    // '{' 'break' Complex
+    case 122061:                    // '{' 'continue' Complex
+    case 131533:                    // '{' Identifier Real
+    case 131661:                    // '{' Character Real
+    case 131789:                    // '{' String Real
+    case 131917:                    // '{' Integer Real
+    case 132045:                    // '{' Complex Real
+    case 132173:                    // '{' Real Real
+    case 132301:                    // '{' Comment Real
+    case 135885:                    // '{' ';' Real
+    case 138061:                    // '{' 'break' Real
+    case 138445:                    // '{' 'continue' Real
+    case 147917:                    // '{' Identifier Comment
+    case 148045:                    // '{' Character Comment
+    case 148173:                    // '{' String Comment
+    case 148301:                    // '{' Integer Comment
+    case 148429:                    // '{' Complex Comment
+    case 148557:                    // '{' Real Comment
+    case 148685:                    // '{' Comment Comment
+    case 152269:                    // '{' ';' Comment
+    case 154445:                    // '{' 'break' Comment
+    case 154829:                    // '{' 'continue' Comment
+    case 197069:                    // '{' Identifier '!'
+    case 197197:                    // '{' Character '!'
+    case 197325:                    // '{' String '!'
+    case 197453:                    // '{' Integer '!'
+    case 197581:                    // '{' Complex '!'
+    case 197709:                    // '{' Real '!'
+    case 197837:                    // '{' Comment '!'
+    case 201421:                    // '{' ';' '!'
+    case 203597:                    // '{' 'break' '!'
+    case 203981:                    // '{' 'continue' '!'
+    case 328269:                    // '{' Character '('
+    case 328397:                    // '{' String '('
+    case 328525:                    // '{' Integer '('
+    case 328653:                    // '{' Complex '('
+    case 328781:                    // '{' Real '('
+    case 328909:                    // '{' Comment '('
+    case 332493:                    // '{' ';' '('
+    case 334669:                    // '{' 'break' '('
+    case 335053:                    // '{' 'continue' '('
+    case 410829:                    // '{' Comment '+'
+    case 414413:                    // '{' ';' '+'
+    case 416589:                    // '{' 'break' '+'
+    case 416973:                    // '{' 'continue' '+'
+    case 427213:                    // '{' Comment '++'
+    case 430797:                    // '{' ';' '++'
+    case 432973:                    // '{' 'break' '++'
+    case 433357:                    // '{' 'continue' '++'
+    case 476365:                    // '{' Comment '-'
+    case 479949:                    // '{' ';' '-'
+    case 482125:                    // '{' 'break' '-'
+    case 482509:                    // '{' 'continue' '-'
+    case 492749:                    // '{' Comment '--'
+    case 496333:                    // '{' ';' '--'
+    case 498509:                    // '{' 'break' '--'
+    case 498893:                    // '{' 'continue' '--'
+    case 606669:                    // '{' Identifier ';'
+    case 606797:                    // '{' Character ';'
+    case 606925:                    // '{' String ';'
+    case 607053:                    // '{' Integer ';'
+    case 607181:                    // '{' Complex ';'
+    case 607309:                    // '{' Real ';'
+    case 607437:                    // '{' Comment ';'
+    case 611021:                    // '{' ';' ';'
+    case 613197:                    // '{' 'break' ';'
+    case 613581:                    // '{' 'continue' ';'
+    case 819789:                    // '{' Character '['
+    case 819917:                    // '{' String '['
+    case 820045:                    // '{' Integer '['
+    case 820173:                    // '{' Complex '['
+    case 820301:                    // '{' Real '['
+    case 820429:                    // '{' Comment '['
+    case 824013:                    // '{' ';' '['
+    case 826189:                    // '{' 'break' '['
+    case 826573:                    // '{' 'continue' '['
+    case 885197:                    // '{' Identifier 'break'
+    case 885325:                    // '{' Character 'break'
+    case 885453:                    // '{' String 'break'
+    case 885581:                    // '{' Integer 'break'
+    case 885709:                    // '{' Complex 'break'
+    case 885837:                    // '{' Real 'break'
+    case 885965:                    // '{' Comment 'break'
+    case 889549:                    // '{' ';' 'break'
+    case 891725:                    // '{' 'break' 'break'
+    case 892109:                    // '{' 'continue' 'break'
+    case 934349:                    // '{' Identifier 'continue'
+    case 934477:                    // '{' Character 'continue'
+    case 934605:                    // '{' String 'continue'
+    case 934733:                    // '{' Integer 'continue'
+    case 934861:                    // '{' Complex 'continue'
+    case 934989:                    // '{' Real 'continue'
+    case 935117:                    // '{' Comment 'continue'
+    case 938701:                    // '{' ';' 'continue'
+    case 940877:                    // '{' 'break' 'continue'
+    case 941261:                    // '{' 'continue' 'continue'
+    case 967117:                    // '{' Identifier 'do'
+    case 967245:                    // '{' Character 'do'
+    case 967373:                    // '{' String 'do'
+    case 967501:                    // '{' Integer 'do'
+    case 967629:                    // '{' Complex 'do'
+    case 967757:                    // '{' Real 'do'
+    case 967885:                    // '{' Comment 'do'
+    case 971469:                    // '{' ';' 'do'
+    case 973645:                    // '{' 'break' 'do'
+    case 974029:                    // '{' 'continue' 'do'
+    case 999885:                    // '{' Identifier 'f32'
+    case 1000013:                   // '{' Character 'f32'
+    case 1000141:                   // '{' String 'f32'
+    case 1000269:                   // '{' Integer 'f32'
+    case 1000397:                   // '{' Complex 'f32'
+    case 1000525:                   // '{' Real 'f32'
+    case 1000653:                   // '{' Comment 'f32'
+    case 1004237:                   // '{' ';' 'f32'
+    case 1006413:                   // '{' 'break' 'f32'
+    case 1006797:                   // '{' 'continue' 'f32'
+    case 1016269:                   // '{' Identifier 'f64'
+    case 1016397:                   // '{' Character 'f64'
+    case 1016525:                   // '{' String 'f64'
+    case 1016653:                   // '{' Integer 'f64'
+    case 1016781:                   // '{' Complex 'f64'
+    case 1016909:                   // '{' Real 'f64'
+    case 1017037:                   // '{' Comment 'f64'
+    case 1020621:                   // '{' ';' 'f64'
+    case 1022797:                   // '{' 'break' 'f64'
+    case 1023181:                   // '{' 'continue' 'f64'
+    case 1032653:                   // '{' Identifier 'for'
+    case 1032781:                   // '{' Character 'for'
+    case 1032909:                   // '{' String 'for'
+    case 1033037:                   // '{' Integer 'for'
+    case 1033165:                   // '{' Complex 'for'
+    case 1033293:                   // '{' Real 'for'
+    case 1033421:                   // '{' Comment 'for'
+    case 1037005:                   // '{' ';' 'for'
+    case 1039181:                   // '{' 'break' 'for'
+    case 1039565:                   // '{' 'continue' 'for'
+    case 1049037:                   // '{' Identifier 'foreach'
+    case 1049165:                   // '{' Character 'foreach'
+    case 1049293:                   // '{' String 'foreach'
+    case 1049421:                   // '{' Integer 'foreach'
+    case 1049549:                   // '{' Complex 'foreach'
+    case 1049677:                   // '{' Real 'foreach'
+    case 1049805:                   // '{' Comment 'foreach'
+    case 1053389:                   // '{' ';' 'foreach'
+    case 1055565:                   // '{' 'break' 'foreach'
+    case 1055949:                   // '{' 'continue' 'foreach'
+    case 1065421:                   // '{' Identifier 'i32'
+    case 1065549:                   // '{' Character 'i32'
+    case 1065677:                   // '{' String 'i32'
+    case 1065805:                   // '{' Integer 'i32'
+    case 1065933:                   // '{' Complex 'i32'
+    case 1066061:                   // '{' Real 'i32'
+    case 1066189:                   // '{' Comment 'i32'
+    case 1069773:                   // '{' ';' 'i32'
+    case 1071949:                   // '{' 'break' 'i32'
+    case 1072333:                   // '{' 'continue' 'i32'
+    case 1081805:                   // '{' Identifier 'i64'
+    case 1081933:                   // '{' Character 'i64'
+    case 1082061:                   // '{' String 'i64'
+    case 1082189:                   // '{' Integer 'i64'
+    case 1082317:                   // '{' Complex 'i64'
+    case 1082445:                   // '{' Real 'i64'
+    case 1082573:                   // '{' Comment 'i64'
+    case 1086157:                   // '{' ';' 'i64'
+    case 1088333:                   // '{' 'break' 'i64'
+    case 1088717:                   // '{' 'continue' 'i64'
+    case 1098189:                   // '{' Identifier 'if'
+    case 1098317:                   // '{' Character 'if'
+    case 1098445:                   // '{' String 'if'
+    case 1098573:                   // '{' Integer 'if'
+    case 1098701:                   // '{' Complex 'if'
+    case 1098829:                   // '{' Real 'if'
+    case 1098957:                   // '{' Comment 'if'
+    case 1102541:                   // '{' ';' 'if'
+    case 1104717:                   // '{' 'break' 'if'
+    case 1105101:                   // '{' 'continue' 'if'
+    case 1114573:                   // '{' Identifier 'import'
+    case 1114701:                   // '{' Character 'import'
+    case 1114829:                   // '{' String 'import'
+    case 1114957:                   // '{' Integer 'import'
+    case 1115085:                   // '{' Complex 'import'
+    case 1115213:                   // '{' Real 'import'
+    case 1115341:                   // '{' Comment 'import'
+    case 1118925:                   // '{' ';' 'import'
+    case 1121101:                   // '{' 'break' 'import'
+    case 1121485:                   // '{' 'continue' 'import'
+    case 1130957:                   // '{' Identifier 'include'
+    case 1131085:                   // '{' Character 'include'
+    case 1131213:                   // '{' String 'include'
+    case 1131341:                   // '{' Integer 'include'
+    case 1131469:                   // '{' Complex 'include'
+    case 1131597:                   // '{' Real 'include'
+    case 1131725:                   // '{' Comment 'include'
+    case 1135309:                   // '{' ';' 'include'
+    case 1137485:                   // '{' 'break' 'include'
+    case 1137869:                   // '{' 'continue' 'include'
+    case 1147341:                   // '{' Identifier 'local'
+    case 1147469:                   // '{' Character 'local'
+    case 1147597:                   // '{' String 'local'
+    case 1147725:                   // '{' Integer 'local'
+    case 1147853:                   // '{' Complex 'local'
+    case 1147981:                   // '{' Real 'local'
+    case 1148109:                   // '{' Comment 'local'
+    case 1151693:                   // '{' ';' 'local'
+    case 1153869:                   // '{' 'break' 'local'
+    case 1154253:                   // '{' 'continue' 'local'
+    case 1163725:                   // '{' Identifier 'return'
+    case 1163853:                   // '{' Character 'return'
+    case 1163981:                   // '{' String 'return'
+    case 1164109:                   // '{' Integer 'return'
+    case 1164237:                   // '{' Complex 'return'
+    case 1164365:                   // '{' Real 'return'
+    case 1164493:                   // '{' Comment 'return'
+    case 1168077:                   // '{' ';' 'return'
+    case 1170253:                   // '{' 'break' 'return'
+    case 1170637:                   // '{' 'continue' 'return'
+    case 1180109:                   // '{' Identifier 'switch'
+    case 1180237:                   // '{' Character 'switch'
+    case 1180365:                   // '{' String 'switch'
+    case 1180493:                   // '{' Integer 'switch'
+    case 1180621:                   // '{' Complex 'switch'
+    case 1180749:                   // '{' Real 'switch'
+    case 1180877:                   // '{' Comment 'switch'
+    case 1184461:                   // '{' ';' 'switch'
+    case 1186637:                   // '{' 'break' 'switch'
+    case 1187021:                   // '{' 'continue' 'switch'
+    case 1196493:                   // '{' Identifier 'test'
+    case 1196621:                   // '{' Character 'test'
+    case 1196749:                   // '{' String 'test'
+    case 1196877:                   // '{' Integer 'test'
+    case 1197005:                   // '{' Complex 'test'
+    case 1197133:                   // '{' Real 'test'
+    case 1197261:                   // '{' Comment 'test'
+    case 1200845:                   // '{' ';' 'test'
+    case 1203021:                   // '{' 'break' 'test'
+    case 1203405:                   // '{' 'continue' 'test'
+    case 1212877:                   // '{' Identifier 'throw'
+    case 1213005:                   // '{' Character 'throw'
+    case 1213133:                   // '{' String 'throw'
+    case 1213261:                   // '{' Integer 'throw'
+    case 1213389:                   // '{' Complex 'throw'
+    case 1213517:                   // '{' Real 'throw'
+    case 1213645:                   // '{' Comment 'throw'
+    case 1217229:                   // '{' ';' 'throw'
+    case 1219405:                   // '{' 'break' 'throw'
+    case 1219789:                   // '{' 'continue' 'throw'
+    case 1229261:                   // '{' Identifier 'try'
+    case 1229389:                   // '{' Character 'try'
+    case 1229517:                   // '{' String 'try'
+    case 1229645:                   // '{' Integer 'try'
+    case 1229773:                   // '{' Complex 'try'
+    case 1229901:                   // '{' Real 'try'
+    case 1230029:                   // '{' Comment 'try'
+    case 1233613:                   // '{' ';' 'try'
+    case 1235789:                   // '{' 'break' 'try'
+    case 1236173:                   // '{' 'continue' 'try'
+    case 1245645:                   // '{' Identifier 'while'
+    case 1245773:                   // '{' Character 'while'
+    case 1245901:                   // '{' String 'while'
+    case 1246029:                   // '{' Integer 'while'
+    case 1246157:                   // '{' Complex 'while'
+    case 1246285:                   // '{' Real 'while'
+    case 1246413:                   // '{' Comment 'while'
+    case 1249997:                   // '{' ';' 'while'
+    case 1252173:                   // '{' 'break' 'while'
+    case 1252557:                   // '{' 'continue' 'while'
+    case 1262157:                   // '{' Character '{'
+    case 1262285:                   // '{' String '{'
+    case 1262413:                   // '{' Integer '{'
+    case 1262541:                   // '{' Complex '{'
+    case 1262669:                   // '{' Real '{'
+    case 1262797:                   // '{' Comment '{'
+    case 1266381:                   // '{' ';' '{'
+    case 1268557:                   // '{' 'break' '{'
+    case 1268941:                   // '{' 'continue' '{'
+    case 1343949:                   // '{' Identifier '~'
+    case 1344077:                   // '{' Character '~'
+    case 1344205:                   // '{' String '~'
+    case 1344333:                   // '{' Integer '~'
+    case 1344461:                   // '{' Complex '~'
+    case 1344589:                   // '{' Real '~'
+    case 1344717:                   // '{' Comment '~'
+    case 1348301:                   // '{' ';' '~'
+    case 1350477:                   // '{' 'break' '~'
+    case 1350861:                   // '{' 'continue' '~'
+      parse_Block();
+      break;
     case -3:
     case 37:                        // ';'
     case 54:                        // 'break'
     case 57:                        // 'continue'
     case 59:                        // 'do'
-    case 61:                        // 'f32'
-    case 62:                        // 'f64'
     case 63:                        // 'for'
     case 64:                        // 'foreach'
-    case 65:                        // 'i32'
-    case 66:                        // 'i64'
     case 67:                        // 'if'
     case 68:                        // 'import'
     case 69:                        // 'include'
@@ -840,144 +1494,8 @@ function MaiaScript(string, parsingEventHandler)
     case 76:                        // 'while'
       parse_Statement();
       break;
-    case -4:
-    case 4:                         // Character
-    case 5:                         // String
-    case 6:                         // Integer
-    case 7:                         // Complex
-    case 8:                         // Real
-    case 12:                        // '!'
-    case 20:                        // '('
-    case 25:                        // '+'
-    case 26:                        // '++'
-    case 29:                        // '-'
-    case 30:                        // '--'
-    case 50:                        // '['
-    case 82:                        // '~'
-    case 131:                       // Identifier END
-    case 387:                       // Identifier Identifier
-    case 515:                       // Identifier Character
-    case 643:                       // Identifier String
-    case 771:                       // Identifier Integer
-    case 899:                       // Identifier Complex
-    case 1027:                      // Identifier Real
-    case 1155:                      // Identifier Comment
-    case 1539:                      // Identifier '!'
-    case 1667:                      // Identifier '!='
-    case 1923:                      // Identifier '%'
-    case 2051:                      // Identifier '%='
-    case 2179:                      // Identifier '&'
-    case 2307:                      // Identifier '&&'
-    case 2435:                      // Identifier '&='
-    case 2691:                      // Identifier ')'
-    case 2819:                      // Identifier '*'
-    case 2947:                      // Identifier '**'
-    case 3075:                      // Identifier '*='
-    case 3203:                      // Identifier '+'
-    case 3331:                      // Identifier '++'
-    case 3459:                      // Identifier '+='
-    case 3587:                      // Identifier ','
-    case 3661:                      // '{' ','
-    case 3715:                      // Identifier '-'
-    case 3843:                      // Identifier '--'
-    case 3971:                      // Identifier '-='
-    case 4227:                      // Identifier '/'
-    case 4355:                      // Identifier '/='
-    case 4483:                      // Identifier ':'
-    case 4611:                      // Identifier ':='
-    case 4739:                      // Identifier ';'
-    case 4867:                      // Identifier '<'
-    case 4995:                      // Identifier '<<'
-    case 5123:                      // Identifier '<<='
-    case 5251:                      // Identifier '<='
-    case 5379:                      // Identifier '='
-    case 5507:                      // Identifier '=='
-    case 5635:                      // Identifier '>'
-    case 5763:                      // Identifier '>='
-    case 5891:                      // Identifier '>>'
-    case 6019:                      // Identifier '>>='
-    case 6147:                      // Identifier '?'
-    case 6275:                      // Identifier '?='
-    case 6403:                      // Identifier '['
-    case 6531:                      // Identifier ']'
-    case 6659:                      // Identifier '^'
-    case 6787:                      // Identifier '^='
-    case 6915:                      // Identifier 'break'
-    case 7043:                      // Identifier 'case'
-    case 7171:                      // Identifier 'catch'
-    case 7299:                      // Identifier 'continue'
-    case 7427:                      // Identifier 'default'
-    case 7555:                      // Identifier 'do'
-    case 7683:                      // Identifier 'else'
-    case 7811:                      // Identifier 'f32'
-    case 7939:                      // Identifier 'f64'
-    case 8067:                      // Identifier 'for'
-    case 8195:                      // Identifier 'foreach'
-    case 8323:                      // Identifier 'i32'
-    case 8451:                      // Identifier 'i64'
-    case 8579:                      // Identifier 'if'
-    case 8707:                      // Identifier 'import'
-    case 8835:                      // Identifier 'include'
-    case 8963:                      // Identifier 'local'
-    case 9091:                      // Identifier 'return'
-    case 9219:                      // Identifier 'switch'
-    case 9347:                      // Identifier 'test'
-    case 9475:                      // Identifier 'throw'
-    case 9603:                      // Identifier 'try'
-    case 9731:                      // Identifier 'while'
-    case 9987:                      // Identifier '|'
-    case 10115:                     // Identifier '|='
-    case 10243:                     // Identifier '||'
-    case 10371:                     // Identifier '}'
-    case 10499:                     // Identifier '~'
-    case 223437:                    // '{' '}' '!='
-    case 256205:                    // '{' '}' '%'
-    case 272589:                    // '{' '}' '%='
-    case 288973:                    // '{' '}' '&'
-    case 305357:                    // '{' '}' '&&'
-    case 321741:                    // '{' '}' '&='
-    case 370893:                    // '{' '}' '*'
-    case 387277:                    // '{' '}' '**'
-    case 403661:                    // '{' '}' '*='
-    case 452813:                    // '{' '}' '+='
-    case 459213:                    // '{' Identifier ','
-    case 459341:                    // '{' Character ','
-    case 459469:                    // '{' String ','
-    case 459597:                    // '{' Integer ','
-    case 459725:                    // '{' Complex ','
-    case 459853:                    // '{' Real ','
-    case 459981:                    // '{' Comment ','
-    case 463565:                    // '{' ';' ','
-    case 465741:                    // '{' 'break' ','
-    case 466125:                    // '{' 'continue' ','
-    case 468611:                    // Identifier '{' ','
-    case 518349:                    // '{' '}' '-='
-    case 551117:                    // '{' '}' '/'
-    case 567501:                    // '{' '}' '/='
-    case 573901:                    // '{' Identifier ':'
-    case 574157:                    // '{' String ':'
-    case 600269:                    // '{' '}' ':='
-    case 633037:                    // '{' '}' '<'
-    case 649421:                    // '{' '}' '<<'
-    case 665805:                    // '{' '}' '<<='
-    case 682189:                    // '{' '}' '<='
-    case 698573:                    // '{' '}' '='
-    case 714957:                    // '{' '}' '=='
-    case 731341:                    // '{' '}' '>'
-    case 747725:                    // '{' '}' '>='
-    case 764109:                    // '{' '}' '>>'
-    case 780493:                    // '{' '}' '>>='
-    case 796877:                    // '{' '}' '?'
-    case 813261:                    // '{' '}' '?='
-    case 862413:                    // '{' '}' '^'
-    case 878797:                    // '{' '}' '^='
-    case 1288397:                   // '{' '}' '|'
-    case 1304781:                   // '{' '}' '|='
-    case 1321165:                   // '{' '}' '||'
-      parse_Operation();
-      break;
     default:
-      parse_Block();
+      parse_Operation();
     }
     eventHandler.endNonterminal("Expression", e0);
   }
@@ -987,7 +1505,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -1025,7 +1543,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 461:                     // '{' Identifier
-        lookahead3W(44);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(43);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -1035,7 +1553,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // '|=' | '||' | '}' | '~'
         break;
       case 717:                     // '{' String
-        lookahead3W(43);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(42);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':' |
                                     // ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
@@ -1052,7 +1570,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
         break;
       case 10445:                   // '{' '}'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -1065,7 +1583,7 @@ function MaiaScript(string, parsingEventHandler)
       case 845:                     // '{' Integer
       case 973:                     // '{' Complex
       case 1101:                    // '{' Real
-        lookahead3W(42);            // Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(41);            // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
                                     // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
@@ -1098,7 +1616,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3917:                    // '{' '--'
       case 10573:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8141:                    // '{' 'for'
       case 8269:                    // '{' 'foreach'
@@ -1124,6 +1642,28 @@ function MaiaScript(string, parsingEventHandler)
         break;
       }
       break;
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      lookahead2W(0);               // Identifier | WhiteSpace^token
+      switch (lk)
+      {
+      case 445:                     // 'f32' Identifier
+      case 446:                     // 'f64' Identifier
+      case 449:                     // 'i32' Identifier
+      case 450:                     // 'i64' Identifier
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
+                                    // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
+                                    // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
+                                    // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
+                                    // 'i32' | 'i64' | 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      }
+      break;
     default:
       lk = l1;
     }
@@ -1144,12 +1684,8 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 54                    // 'break'
      && lk != 57                    // 'continue'
      && lk != 59                    // 'do'
-     && lk != 61                    // 'f32'
-     && lk != 62                    // 'f64'
      && lk != 63                    // 'for'
      && lk != 64                    // 'foreach'
-     && lk != 65                    // 'i32'
-     && lk != 66                    // 'i64'
      && lk != 67                    // 'if'
      && lk != 68                    // 'import'
      && lk != 69                    // 'include'
@@ -1237,6 +1773,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 10243                 // Identifier '||'
      && lk != 10371                 // Identifier '}'
      && lk != 10499                 // Identifier '~'
+     && lk != 16829                 // 'f32' Identifier END
+     && lk != 16830                 // 'f64' Identifier END
+     && lk != 16833                 // 'i32' Identifier END
+     && lk != 16834                 // 'i64' Identifier END
+     && lk != 49597                 // 'f32' Identifier Identifier
+     && lk != 49598                 // 'f64' Identifier Identifier
+     && lk != 49601                 // 'i32' Identifier Identifier
+     && lk != 49602                 // 'i64' Identifier Identifier
      && lk != 49613                 // '{' Identifier Identifier
      && lk != 49741                 // '{' Character Identifier
      && lk != 49869                 // '{' String Identifier
@@ -1247,6 +1791,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 53965                 // '{' ';' Identifier
      && lk != 56141                 // '{' 'break' Identifier
      && lk != 56525                 // '{' 'continue' Identifier
+     && lk != 65981                 // 'f32' Identifier Character
+     && lk != 65982                 // 'f64' Identifier Character
+     && lk != 65985                 // 'i32' Identifier Character
+     && lk != 65986                 // 'i64' Identifier Character
      && lk != 65997                 // '{' Identifier Character
      && lk != 66125                 // '{' Character Character
      && lk != 66253                 // '{' String Character
@@ -1257,6 +1805,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 70349                 // '{' ';' Character
      && lk != 72525                 // '{' 'break' Character
      && lk != 72909                 // '{' 'continue' Character
+     && lk != 82365                 // 'f32' Identifier String
+     && lk != 82366                 // 'f64' Identifier String
+     && lk != 82369                 // 'i32' Identifier String
+     && lk != 82370                 // 'i64' Identifier String
      && lk != 82381                 // '{' Identifier String
      && lk != 82509                 // '{' Character String
      && lk != 82637                 // '{' String String
@@ -1267,6 +1819,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 86733                 // '{' ';' String
      && lk != 88909                 // '{' 'break' String
      && lk != 89293                 // '{' 'continue' String
+     && lk != 98749                 // 'f32' Identifier Integer
+     && lk != 98750                 // 'f64' Identifier Integer
+     && lk != 98753                 // 'i32' Identifier Integer
+     && lk != 98754                 // 'i64' Identifier Integer
      && lk != 98765                 // '{' Identifier Integer
      && lk != 98893                 // '{' Character Integer
      && lk != 99021                 // '{' String Integer
@@ -1277,6 +1833,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 103117                // '{' ';' Integer
      && lk != 105293                // '{' 'break' Integer
      && lk != 105677                // '{' 'continue' Integer
+     && lk != 115133                // 'f32' Identifier Complex
+     && lk != 115134                // 'f64' Identifier Complex
+     && lk != 115137                // 'i32' Identifier Complex
+     && lk != 115138                // 'i64' Identifier Complex
      && lk != 115149                // '{' Identifier Complex
      && lk != 115277                // '{' Character Complex
      && lk != 115405                // '{' String Complex
@@ -1287,6 +1847,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 119501                // '{' ';' Complex
      && lk != 121677                // '{' 'break' Complex
      && lk != 122061                // '{' 'continue' Complex
+     && lk != 131517                // 'f32' Identifier Real
+     && lk != 131518                // 'f64' Identifier Real
+     && lk != 131521                // 'i32' Identifier Real
+     && lk != 131522                // 'i64' Identifier Real
      && lk != 131533                // '{' Identifier Real
      && lk != 131661                // '{' Character Real
      && lk != 131789                // '{' String Real
@@ -1297,6 +1861,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 135885                // '{' ';' Real
      && lk != 138061                // '{' 'break' Real
      && lk != 138445                // '{' 'continue' Real
+     && lk != 147901                // 'f32' Identifier Comment
+     && lk != 147902                // 'f64' Identifier Comment
+     && lk != 147905                // 'i32' Identifier Comment
+     && lk != 147906                // 'i64' Identifier Comment
      && lk != 147917                // '{' Identifier Comment
      && lk != 148045                // '{' Character Comment
      && lk != 148173                // '{' String Comment
@@ -1307,6 +1875,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 152269                // '{' ';' Comment
      && lk != 154445                // '{' 'break' Comment
      && lk != 154829                // '{' 'continue' Comment
+     && lk != 197053                // 'f32' Identifier '!'
+     && lk != 197054                // 'f64' Identifier '!'
+     && lk != 197057                // 'i32' Identifier '!'
+     && lk != 197058                // 'i64' Identifier '!'
      && lk != 197069                // '{' Identifier '!'
      && lk != 197197                // '{' Character '!'
      && lk != 197325                // '{' String '!'
@@ -1317,11 +1889,35 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 201421                // '{' ';' '!'
      && lk != 203597                // '{' 'break' '!'
      && lk != 203981                // '{' 'continue' '!'
+     && lk != 213437                // 'f32' Identifier '!='
+     && lk != 213438                // 'f64' Identifier '!='
+     && lk != 213441                // 'i32' Identifier '!='
+     && lk != 213442                // 'i64' Identifier '!='
      && lk != 223437                // '{' '}' '!='
+     && lk != 246205                // 'f32' Identifier '%'
+     && lk != 246206                // 'f64' Identifier '%'
+     && lk != 246209                // 'i32' Identifier '%'
+     && lk != 246210                // 'i64' Identifier '%'
      && lk != 256205                // '{' '}' '%'
+     && lk != 262589                // 'f32' Identifier '%='
+     && lk != 262590                // 'f64' Identifier '%='
+     && lk != 262593                // 'i32' Identifier '%='
+     && lk != 262594                // 'i64' Identifier '%='
      && lk != 272589                // '{' '}' '%='
+     && lk != 278973                // 'f32' Identifier '&'
+     && lk != 278974                // 'f64' Identifier '&'
+     && lk != 278977                // 'i32' Identifier '&'
+     && lk != 278978                // 'i64' Identifier '&'
      && lk != 288973                // '{' '}' '&'
+     && lk != 295357                // 'f32' Identifier '&&'
+     && lk != 295358                // 'f64' Identifier '&&'
+     && lk != 295361                // 'i32' Identifier '&&'
+     && lk != 295362                // 'i64' Identifier '&&'
      && lk != 305357                // '{' '}' '&&'
+     && lk != 311741                // 'f32' Identifier '&='
+     && lk != 311742                // 'f64' Identifier '&='
+     && lk != 311745                // 'i32' Identifier '&='
+     && lk != 311746                // 'i64' Identifier '&='
      && lk != 321741                // '{' '}' '&='
      && lk != 328269                // '{' Character '('
      && lk != 328397                // '{' String '('
@@ -1332,18 +1928,50 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 332493                // '{' ';' '('
      && lk != 334669                // '{' 'break' '('
      && lk != 335053                // '{' 'continue' '('
+     && lk != 344509                // 'f32' Identifier ')'
+     && lk != 344510                // 'f64' Identifier ')'
+     && lk != 344513                // 'i32' Identifier ')'
+     && lk != 344514                // 'i64' Identifier ')'
+     && lk != 360893                // 'f32' Identifier '*'
+     && lk != 360894                // 'f64' Identifier '*'
+     && lk != 360897                // 'i32' Identifier '*'
+     && lk != 360898                // 'i64' Identifier '*'
      && lk != 370893                // '{' '}' '*'
+     && lk != 377277                // 'f32' Identifier '**'
+     && lk != 377278                // 'f64' Identifier '**'
+     && lk != 377281                // 'i32' Identifier '**'
+     && lk != 377282                // 'i64' Identifier '**'
      && lk != 387277                // '{' '}' '**'
+     && lk != 393661                // 'f32' Identifier '*='
+     && lk != 393662                // 'f64' Identifier '*='
+     && lk != 393665                // 'i32' Identifier '*='
+     && lk != 393666                // 'i64' Identifier '*='
      && lk != 403661                // '{' '}' '*='
+     && lk != 410045                // 'f32' Identifier '+'
+     && lk != 410046                // 'f64' Identifier '+'
+     && lk != 410049                // 'i32' Identifier '+'
+     && lk != 410050                // 'i64' Identifier '+'
      && lk != 410829                // '{' Comment '+'
      && lk != 414413                // '{' ';' '+'
      && lk != 416589                // '{' 'break' '+'
      && lk != 416973                // '{' 'continue' '+'
+     && lk != 426429                // 'f32' Identifier '++'
+     && lk != 426430                // 'f64' Identifier '++'
+     && lk != 426433                // 'i32' Identifier '++'
+     && lk != 426434                // 'i64' Identifier '++'
      && lk != 427213                // '{' Comment '++'
      && lk != 430797                // '{' ';' '++'
      && lk != 432973                // '{' 'break' '++'
      && lk != 433357                // '{' 'continue' '++'
+     && lk != 442813                // 'f32' Identifier '+='
+     && lk != 442814                // 'f64' Identifier '+='
+     && lk != 442817                // 'i32' Identifier '+='
+     && lk != 442818                // 'i64' Identifier '+='
      && lk != 452813                // '{' '}' '+='
+     && lk != 459197                // 'f32' Identifier ','
+     && lk != 459198                // 'f64' Identifier ','
+     && lk != 459201                // 'i32' Identifier ','
+     && lk != 459202                // 'i64' Identifier ','
      && lk != 459213                // '{' Identifier ','
      && lk != 459341                // '{' Character ','
      && lk != 459469                // '{' String ','
@@ -1355,20 +1983,52 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 465741                // '{' 'break' ','
      && lk != 466125                // '{' 'continue' ','
      && lk != 468611                // Identifier '{' ','
+     && lk != 475581                // 'f32' Identifier '-'
+     && lk != 475582                // 'f64' Identifier '-'
+     && lk != 475585                // 'i32' Identifier '-'
+     && lk != 475586                // 'i64' Identifier '-'
      && lk != 476365                // '{' Comment '-'
      && lk != 479949                // '{' ';' '-'
      && lk != 482125                // '{' 'break' '-'
      && lk != 482509                // '{' 'continue' '-'
+     && lk != 491965                // 'f32' Identifier '--'
+     && lk != 491966                // 'f64' Identifier '--'
+     && lk != 491969                // 'i32' Identifier '--'
+     && lk != 491970                // 'i64' Identifier '--'
      && lk != 492749                // '{' Comment '--'
      && lk != 496333                // '{' ';' '--'
      && lk != 498509                // '{' 'break' '--'
      && lk != 498893                // '{' 'continue' '--'
+     && lk != 508349                // 'f32' Identifier '-='
+     && lk != 508350                // 'f64' Identifier '-='
+     && lk != 508353                // 'i32' Identifier '-='
+     && lk != 508354                // 'i64' Identifier '-='
      && lk != 518349                // '{' '}' '-='
+     && lk != 541117                // 'f32' Identifier '/'
+     && lk != 541118                // 'f64' Identifier '/'
+     && lk != 541121                // 'i32' Identifier '/'
+     && lk != 541122                // 'i64' Identifier '/'
      && lk != 551117                // '{' '}' '/'
+     && lk != 557501                // 'f32' Identifier '/='
+     && lk != 557502                // 'f64' Identifier '/='
+     && lk != 557505                // 'i32' Identifier '/='
+     && lk != 557506                // 'i64' Identifier '/='
      && lk != 567501                // '{' '}' '/='
+     && lk != 573885                // 'f32' Identifier ':'
+     && lk != 573886                // 'f64' Identifier ':'
+     && lk != 573889                // 'i32' Identifier ':'
+     && lk != 573890                // 'i64' Identifier ':'
      && lk != 573901                // '{' Identifier ':'
      && lk != 574157                // '{' String ':'
+     && lk != 590269                // 'f32' Identifier ':='
+     && lk != 590270                // 'f64' Identifier ':='
+     && lk != 590273                // 'i32' Identifier ':='
+     && lk != 590274                // 'i64' Identifier ':='
      && lk != 600269                // '{' '}' ':='
+     && lk != 606653                // 'f32' Identifier ';'
+     && lk != 606654                // 'f64' Identifier ';'
+     && lk != 606657                // 'i32' Identifier ';'
+     && lk != 606658                // 'i64' Identifier ';'
      && lk != 606669                // '{' Identifier ';'
      && lk != 606797                // '{' Character ';'
      && lk != 606925                // '{' String ';'
@@ -1379,18 +2039,70 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 611021                // '{' ';' ';'
      && lk != 613197                // '{' 'break' ';'
      && lk != 613581                // '{' 'continue' ';'
+     && lk != 623037                // 'f32' Identifier '<'
+     && lk != 623038                // 'f64' Identifier '<'
+     && lk != 623041                // 'i32' Identifier '<'
+     && lk != 623042                // 'i64' Identifier '<'
      && lk != 633037                // '{' '}' '<'
+     && lk != 639421                // 'f32' Identifier '<<'
+     && lk != 639422                // 'f64' Identifier '<<'
+     && lk != 639425                // 'i32' Identifier '<<'
+     && lk != 639426                // 'i64' Identifier '<<'
      && lk != 649421                // '{' '}' '<<'
+     && lk != 655805                // 'f32' Identifier '<<='
+     && lk != 655806                // 'f64' Identifier '<<='
+     && lk != 655809                // 'i32' Identifier '<<='
+     && lk != 655810                // 'i64' Identifier '<<='
      && lk != 665805                // '{' '}' '<<='
+     && lk != 672189                // 'f32' Identifier '<='
+     && lk != 672190                // 'f64' Identifier '<='
+     && lk != 672193                // 'i32' Identifier '<='
+     && lk != 672194                // 'i64' Identifier '<='
      && lk != 682189                // '{' '}' '<='
+     && lk != 688573                // 'f32' Identifier '='
+     && lk != 688574                // 'f64' Identifier '='
+     && lk != 688577                // 'i32' Identifier '='
+     && lk != 688578                // 'i64' Identifier '='
      && lk != 698573                // '{' '}' '='
+     && lk != 704957                // 'f32' Identifier '=='
+     && lk != 704958                // 'f64' Identifier '=='
+     && lk != 704961                // 'i32' Identifier '=='
+     && lk != 704962                // 'i64' Identifier '=='
      && lk != 714957                // '{' '}' '=='
+     && lk != 721341                // 'f32' Identifier '>'
+     && lk != 721342                // 'f64' Identifier '>'
+     && lk != 721345                // 'i32' Identifier '>'
+     && lk != 721346                // 'i64' Identifier '>'
      && lk != 731341                // '{' '}' '>'
+     && lk != 737725                // 'f32' Identifier '>='
+     && lk != 737726                // 'f64' Identifier '>='
+     && lk != 737729                // 'i32' Identifier '>='
+     && lk != 737730                // 'i64' Identifier '>='
      && lk != 747725                // '{' '}' '>='
+     && lk != 754109                // 'f32' Identifier '>>'
+     && lk != 754110                // 'f64' Identifier '>>'
+     && lk != 754113                // 'i32' Identifier '>>'
+     && lk != 754114                // 'i64' Identifier '>>'
      && lk != 764109                // '{' '}' '>>'
+     && lk != 770493                // 'f32' Identifier '>>='
+     && lk != 770494                // 'f64' Identifier '>>='
+     && lk != 770497                // 'i32' Identifier '>>='
+     && lk != 770498                // 'i64' Identifier '>>='
      && lk != 780493                // '{' '}' '>>='
+     && lk != 786877                // 'f32' Identifier '?'
+     && lk != 786878                // 'f64' Identifier '?'
+     && lk != 786881                // 'i32' Identifier '?'
+     && lk != 786882                // 'i64' Identifier '?'
      && lk != 796877                // '{' '}' '?'
+     && lk != 803261                // 'f32' Identifier '?='
+     && lk != 803262                // 'f64' Identifier '?='
+     && lk != 803265                // 'i32' Identifier '?='
+     && lk != 803266                // 'i64' Identifier '?='
      && lk != 813261                // '{' '}' '?='
+     && lk != 819645                // 'f32' Identifier '['
+     && lk != 819646                // 'f64' Identifier '['
+     && lk != 819649                // 'i32' Identifier '['
+     && lk != 819650                // 'i64' Identifier '['
      && lk != 819789                // '{' Character '['
      && lk != 819917                // '{' String '['
      && lk != 820045                // '{' Integer '['
@@ -1400,8 +2112,24 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 824013                // '{' ';' '['
      && lk != 826189                // '{' 'break' '['
      && lk != 826573                // '{' 'continue' '['
+     && lk != 836029                // 'f32' Identifier ']'
+     && lk != 836030                // 'f64' Identifier ']'
+     && lk != 836033                // 'i32' Identifier ']'
+     && lk != 836034                // 'i64' Identifier ']'
+     && lk != 852413                // 'f32' Identifier '^'
+     && lk != 852414                // 'f64' Identifier '^'
+     && lk != 852417                // 'i32' Identifier '^'
+     && lk != 852418                // 'i64' Identifier '^'
      && lk != 862413                // '{' '}' '^'
+     && lk != 868797                // 'f32' Identifier '^='
+     && lk != 868798                // 'f64' Identifier '^='
+     && lk != 868801                // 'i32' Identifier '^='
+     && lk != 868802                // 'i64' Identifier '^='
      && lk != 878797                // '{' '}' '^='
+     && lk != 885181                // 'f32' Identifier 'break'
+     && lk != 885182                // 'f64' Identifier 'break'
+     && lk != 885185                // 'i32' Identifier 'break'
+     && lk != 885186                // 'i64' Identifier 'break'
      && lk != 885197                // '{' Identifier 'break'
      && lk != 885325                // '{' Character 'break'
      && lk != 885453                // '{' String 'break'
@@ -1412,6 +2140,18 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 889549                // '{' ';' 'break'
      && lk != 891725                // '{' 'break' 'break'
      && lk != 892109                // '{' 'continue' 'break'
+     && lk != 901565                // 'f32' Identifier 'case'
+     && lk != 901566                // 'f64' Identifier 'case'
+     && lk != 901569                // 'i32' Identifier 'case'
+     && lk != 901570                // 'i64' Identifier 'case'
+     && lk != 917949                // 'f32' Identifier 'catch'
+     && lk != 917950                // 'f64' Identifier 'catch'
+     && lk != 917953                // 'i32' Identifier 'catch'
+     && lk != 917954                // 'i64' Identifier 'catch'
+     && lk != 934333                // 'f32' Identifier 'continue'
+     && lk != 934334                // 'f64' Identifier 'continue'
+     && lk != 934337                // 'i32' Identifier 'continue'
+     && lk != 934338                // 'i64' Identifier 'continue'
      && lk != 934349                // '{' Identifier 'continue'
      && lk != 934477                // '{' Character 'continue'
      && lk != 934605                // '{' String 'continue'
@@ -1422,6 +2162,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 938701                // '{' ';' 'continue'
      && lk != 940877                // '{' 'break' 'continue'
      && lk != 941261                // '{' 'continue' 'continue'
+     && lk != 950717                // 'f32' Identifier 'default'
+     && lk != 950718                // 'f64' Identifier 'default'
+     && lk != 950721                // 'i32' Identifier 'default'
+     && lk != 950722                // 'i64' Identifier 'default'
+     && lk != 967101                // 'f32' Identifier 'do'
+     && lk != 967102                // 'f64' Identifier 'do'
+     && lk != 967105                // 'i32' Identifier 'do'
+     && lk != 967106                // 'i64' Identifier 'do'
      && lk != 967117                // '{' Identifier 'do'
      && lk != 967245                // '{' Character 'do'
      && lk != 967373                // '{' String 'do'
@@ -1432,6 +2180,14 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 971469                // '{' ';' 'do'
      && lk != 973645                // '{' 'break' 'do'
      && lk != 974029                // '{' 'continue' 'do'
+     && lk != 983485                // 'f32' Identifier 'else'
+     && lk != 983486                // 'f64' Identifier 'else'
+     && lk != 983489                // 'i32' Identifier 'else'
+     && lk != 983490                // 'i64' Identifier 'else'
+     && lk != 999869                // 'f32' Identifier 'f32'
+     && lk != 999870                // 'f64' Identifier 'f32'
+     && lk != 999873                // 'i32' Identifier 'f32'
+     && lk != 999874                // 'i64' Identifier 'f32'
      && lk != 999885                // '{' Identifier 'f32'
      && lk != 1000013               // '{' Character 'f32'
      && lk != 1000141               // '{' String 'f32'
@@ -1442,6 +2198,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1004237               // '{' ';' 'f32'
      && lk != 1006413               // '{' 'break' 'f32'
      && lk != 1006797               // '{' 'continue' 'f32'
+     && lk != 1016253               // 'f32' Identifier 'f64'
+     && lk != 1016254               // 'f64' Identifier 'f64'
+     && lk != 1016257               // 'i32' Identifier 'f64'
+     && lk != 1016258               // 'i64' Identifier 'f64'
      && lk != 1016269               // '{' Identifier 'f64'
      && lk != 1016397               // '{' Character 'f64'
      && lk != 1016525               // '{' String 'f64'
@@ -1452,6 +2212,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1020621               // '{' ';' 'f64'
      && lk != 1022797               // '{' 'break' 'f64'
      && lk != 1023181               // '{' 'continue' 'f64'
+     && lk != 1032637               // 'f32' Identifier 'for'
+     && lk != 1032638               // 'f64' Identifier 'for'
+     && lk != 1032641               // 'i32' Identifier 'for'
+     && lk != 1032642               // 'i64' Identifier 'for'
      && lk != 1032653               // '{' Identifier 'for'
      && lk != 1032781               // '{' Character 'for'
      && lk != 1032909               // '{' String 'for'
@@ -1462,6 +2226,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1037005               // '{' ';' 'for'
      && lk != 1039181               // '{' 'break' 'for'
      && lk != 1039565               // '{' 'continue' 'for'
+     && lk != 1049021               // 'f32' Identifier 'foreach'
+     && lk != 1049022               // 'f64' Identifier 'foreach'
+     && lk != 1049025               // 'i32' Identifier 'foreach'
+     && lk != 1049026               // 'i64' Identifier 'foreach'
      && lk != 1049037               // '{' Identifier 'foreach'
      && lk != 1049165               // '{' Character 'foreach'
      && lk != 1049293               // '{' String 'foreach'
@@ -1472,6 +2240,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1053389               // '{' ';' 'foreach'
      && lk != 1055565               // '{' 'break' 'foreach'
      && lk != 1055949               // '{' 'continue' 'foreach'
+     && lk != 1065405               // 'f32' Identifier 'i32'
+     && lk != 1065406               // 'f64' Identifier 'i32'
+     && lk != 1065409               // 'i32' Identifier 'i32'
+     && lk != 1065410               // 'i64' Identifier 'i32'
      && lk != 1065421               // '{' Identifier 'i32'
      && lk != 1065549               // '{' Character 'i32'
      && lk != 1065677               // '{' String 'i32'
@@ -1482,6 +2254,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1069773               // '{' ';' 'i32'
      && lk != 1071949               // '{' 'break' 'i32'
      && lk != 1072333               // '{' 'continue' 'i32'
+     && lk != 1081789               // 'f32' Identifier 'i64'
+     && lk != 1081790               // 'f64' Identifier 'i64'
+     && lk != 1081793               // 'i32' Identifier 'i64'
+     && lk != 1081794               // 'i64' Identifier 'i64'
      && lk != 1081805               // '{' Identifier 'i64'
      && lk != 1081933               // '{' Character 'i64'
      && lk != 1082061               // '{' String 'i64'
@@ -1492,6 +2268,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1086157               // '{' ';' 'i64'
      && lk != 1088333               // '{' 'break' 'i64'
      && lk != 1088717               // '{' 'continue' 'i64'
+     && lk != 1098173               // 'f32' Identifier 'if'
+     && lk != 1098174               // 'f64' Identifier 'if'
+     && lk != 1098177               // 'i32' Identifier 'if'
+     && lk != 1098178               // 'i64' Identifier 'if'
      && lk != 1098189               // '{' Identifier 'if'
      && lk != 1098317               // '{' Character 'if'
      && lk != 1098445               // '{' String 'if'
@@ -1502,6 +2282,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1102541               // '{' ';' 'if'
      && lk != 1104717               // '{' 'break' 'if'
      && lk != 1105101               // '{' 'continue' 'if'
+     && lk != 1114557               // 'f32' Identifier 'import'
+     && lk != 1114558               // 'f64' Identifier 'import'
+     && lk != 1114561               // 'i32' Identifier 'import'
+     && lk != 1114562               // 'i64' Identifier 'import'
      && lk != 1114573               // '{' Identifier 'import'
      && lk != 1114701               // '{' Character 'import'
      && lk != 1114829               // '{' String 'import'
@@ -1512,6 +2296,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1118925               // '{' ';' 'import'
      && lk != 1121101               // '{' 'break' 'import'
      && lk != 1121485               // '{' 'continue' 'import'
+     && lk != 1130941               // 'f32' Identifier 'include'
+     && lk != 1130942               // 'f64' Identifier 'include'
+     && lk != 1130945               // 'i32' Identifier 'include'
+     && lk != 1130946               // 'i64' Identifier 'include'
      && lk != 1130957               // '{' Identifier 'include'
      && lk != 1131085               // '{' Character 'include'
      && lk != 1131213               // '{' String 'include'
@@ -1522,6 +2310,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1135309               // '{' ';' 'include'
      && lk != 1137485               // '{' 'break' 'include'
      && lk != 1137869               // '{' 'continue' 'include'
+     && lk != 1147325               // 'f32' Identifier 'local'
+     && lk != 1147326               // 'f64' Identifier 'local'
+     && lk != 1147329               // 'i32' Identifier 'local'
+     && lk != 1147330               // 'i64' Identifier 'local'
      && lk != 1147341               // '{' Identifier 'local'
      && lk != 1147469               // '{' Character 'local'
      && lk != 1147597               // '{' String 'local'
@@ -1532,6 +2324,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1151693               // '{' ';' 'local'
      && lk != 1153869               // '{' 'break' 'local'
      && lk != 1154253               // '{' 'continue' 'local'
+     && lk != 1163709               // 'f32' Identifier 'return'
+     && lk != 1163710               // 'f64' Identifier 'return'
+     && lk != 1163713               // 'i32' Identifier 'return'
+     && lk != 1163714               // 'i64' Identifier 'return'
      && lk != 1163725               // '{' Identifier 'return'
      && lk != 1163853               // '{' Character 'return'
      && lk != 1163981               // '{' String 'return'
@@ -1542,6 +2338,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1168077               // '{' ';' 'return'
      && lk != 1170253               // '{' 'break' 'return'
      && lk != 1170637               // '{' 'continue' 'return'
+     && lk != 1180093               // 'f32' Identifier 'switch'
+     && lk != 1180094               // 'f64' Identifier 'switch'
+     && lk != 1180097               // 'i32' Identifier 'switch'
+     && lk != 1180098               // 'i64' Identifier 'switch'
      && lk != 1180109               // '{' Identifier 'switch'
      && lk != 1180237               // '{' Character 'switch'
      && lk != 1180365               // '{' String 'switch'
@@ -1552,6 +2352,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1184461               // '{' ';' 'switch'
      && lk != 1186637               // '{' 'break' 'switch'
      && lk != 1187021               // '{' 'continue' 'switch'
+     && lk != 1196477               // 'f32' Identifier 'test'
+     && lk != 1196478               // 'f64' Identifier 'test'
+     && lk != 1196481               // 'i32' Identifier 'test'
+     && lk != 1196482               // 'i64' Identifier 'test'
      && lk != 1196493               // '{' Identifier 'test'
      && lk != 1196621               // '{' Character 'test'
      && lk != 1196749               // '{' String 'test'
@@ -1562,6 +2366,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1200845               // '{' ';' 'test'
      && lk != 1203021               // '{' 'break' 'test'
      && lk != 1203405               // '{' 'continue' 'test'
+     && lk != 1212861               // 'f32' Identifier 'throw'
+     && lk != 1212862               // 'f64' Identifier 'throw'
+     && lk != 1212865               // 'i32' Identifier 'throw'
+     && lk != 1212866               // 'i64' Identifier 'throw'
      && lk != 1212877               // '{' Identifier 'throw'
      && lk != 1213005               // '{' Character 'throw'
      && lk != 1213133               // '{' String 'throw'
@@ -1572,6 +2380,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1217229               // '{' ';' 'throw'
      && lk != 1219405               // '{' 'break' 'throw'
      && lk != 1219789               // '{' 'continue' 'throw'
+     && lk != 1229245               // 'f32' Identifier 'try'
+     && lk != 1229246               // 'f64' Identifier 'try'
+     && lk != 1229249               // 'i32' Identifier 'try'
+     && lk != 1229250               // 'i64' Identifier 'try'
      && lk != 1229261               // '{' Identifier 'try'
      && lk != 1229389               // '{' Character 'try'
      && lk != 1229517               // '{' String 'try'
@@ -1582,6 +2394,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1233613               // '{' ';' 'try'
      && lk != 1235789               // '{' 'break' 'try'
      && lk != 1236173               // '{' 'continue' 'try'
+     && lk != 1245629               // 'f32' Identifier 'while'
+     && lk != 1245630               // 'f64' Identifier 'while'
+     && lk != 1245633               // 'i32' Identifier 'while'
+     && lk != 1245634               // 'i64' Identifier 'while'
      && lk != 1245645               // '{' Identifier 'while'
      && lk != 1245773               // '{' Character 'while'
      && lk != 1245901               // '{' String 'while'
@@ -1592,6 +2408,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1249997               // '{' ';' 'while'
      && lk != 1252173               // '{' 'break' 'while'
      && lk != 1252557               // '{' 'continue' 'while'
+     && lk != 1262013               // 'f32' Identifier '{'
+     && lk != 1262014               // 'f64' Identifier '{'
+     && lk != 1262017               // 'i32' Identifier '{'
+     && lk != 1262018               // 'i64' Identifier '{'
      && lk != 1262157               // '{' Character '{'
      && lk != 1262285               // '{' String '{'
      && lk != 1262413               // '{' Integer '{'
@@ -1601,9 +2421,29 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1266381               // '{' ';' '{'
      && lk != 1268557               // '{' 'break' '{'
      && lk != 1268941               // '{' 'continue' '{'
+     && lk != 1278397               // 'f32' Identifier '|'
+     && lk != 1278398               // 'f64' Identifier '|'
+     && lk != 1278401               // 'i32' Identifier '|'
+     && lk != 1278402               // 'i64' Identifier '|'
      && lk != 1288397               // '{' '}' '|'
+     && lk != 1294781               // 'f32' Identifier '|='
+     && lk != 1294782               // 'f64' Identifier '|='
+     && lk != 1294785               // 'i32' Identifier '|='
+     && lk != 1294786               // 'i64' Identifier '|='
      && lk != 1304781               // '{' '}' '|='
+     && lk != 1311165               // 'f32' Identifier '||'
+     && lk != 1311166               // 'f64' Identifier '||'
+     && lk != 1311169               // 'i32' Identifier '||'
+     && lk != 1311170               // 'i64' Identifier '||'
      && lk != 1321165               // '{' '}' '||'
+     && lk != 1327549               // 'f32' Identifier '}'
+     && lk != 1327550               // 'f64' Identifier '}'
+     && lk != 1327553               // 'i32' Identifier '}'
+     && lk != 1327554               // 'i64' Identifier '}'
+     && lk != 1343933               // 'f32' Identifier '~'
+     && lk != 1343934               // 'f64' Identifier '~'
+     && lk != 1343937               // 'i32' Identifier '~'
+     && lk != 1343938               // 'i64' Identifier '~'
      && lk != 1343949               // '{' Identifier '~'
      && lk != 1344077               // '{' Character '~'
      && lk != 1344205               // '{' String '~'
@@ -1657,17 +2497,349 @@ function MaiaScript(string, parsingEventHandler)
     case 9:                         // Comment
       consumeT(9);                  // Comment
       break;
+    case -2:
+    case 49613:                     // '{' Identifier Identifier
+    case 49741:                     // '{' Character Identifier
+    case 49869:                     // '{' String Identifier
+    case 49997:                     // '{' Integer Identifier
+    case 50125:                     // '{' Complex Identifier
+    case 50253:                     // '{' Real Identifier
+    case 50381:                     // '{' Comment Identifier
+    case 53965:                     // '{' ';' Identifier
+    case 56141:                     // '{' 'break' Identifier
+    case 56525:                     // '{' 'continue' Identifier
+    case 65997:                     // '{' Identifier Character
+    case 66125:                     // '{' Character Character
+    case 66253:                     // '{' String Character
+    case 66381:                     // '{' Integer Character
+    case 66509:                     // '{' Complex Character
+    case 66637:                     // '{' Real Character
+    case 66765:                     // '{' Comment Character
+    case 70349:                     // '{' ';' Character
+    case 72525:                     // '{' 'break' Character
+    case 72909:                     // '{' 'continue' Character
+    case 82381:                     // '{' Identifier String
+    case 82509:                     // '{' Character String
+    case 82637:                     // '{' String String
+    case 82765:                     // '{' Integer String
+    case 82893:                     // '{' Complex String
+    case 83021:                     // '{' Real String
+    case 83149:                     // '{' Comment String
+    case 86733:                     // '{' ';' String
+    case 88909:                     // '{' 'break' String
+    case 89293:                     // '{' 'continue' String
+    case 98765:                     // '{' Identifier Integer
+    case 98893:                     // '{' Character Integer
+    case 99021:                     // '{' String Integer
+    case 99149:                     // '{' Integer Integer
+    case 99277:                     // '{' Complex Integer
+    case 99405:                     // '{' Real Integer
+    case 99533:                     // '{' Comment Integer
+    case 103117:                    // '{' ';' Integer
+    case 105293:                    // '{' 'break' Integer
+    case 105677:                    // '{' 'continue' Integer
+    case 115149:                    // '{' Identifier Complex
+    case 115277:                    // '{' Character Complex
+    case 115405:                    // '{' String Complex
+    case 115533:                    // '{' Integer Complex
+    case 115661:                    // '{' Complex Complex
+    case 115789:                    // '{' Real Complex
+    case 115917:                    // '{' Comment Complex
+    case 119501:                    // '{' ';' Complex
+    case 121677:                    // '{' 'break' Complex
+    case 122061:                    // '{' 'continue' Complex
+    case 131533:                    // '{' Identifier Real
+    case 131661:                    // '{' Character Real
+    case 131789:                    // '{' String Real
+    case 131917:                    // '{' Integer Real
+    case 132045:                    // '{' Complex Real
+    case 132173:                    // '{' Real Real
+    case 132301:                    // '{' Comment Real
+    case 135885:                    // '{' ';' Real
+    case 138061:                    // '{' 'break' Real
+    case 138445:                    // '{' 'continue' Real
+    case 147917:                    // '{' Identifier Comment
+    case 148045:                    // '{' Character Comment
+    case 148173:                    // '{' String Comment
+    case 148301:                    // '{' Integer Comment
+    case 148429:                    // '{' Complex Comment
+    case 148557:                    // '{' Real Comment
+    case 148685:                    // '{' Comment Comment
+    case 152269:                    // '{' ';' Comment
+    case 154445:                    // '{' 'break' Comment
+    case 154829:                    // '{' 'continue' Comment
+    case 197069:                    // '{' Identifier '!'
+    case 197197:                    // '{' Character '!'
+    case 197325:                    // '{' String '!'
+    case 197453:                    // '{' Integer '!'
+    case 197581:                    // '{' Complex '!'
+    case 197709:                    // '{' Real '!'
+    case 197837:                    // '{' Comment '!'
+    case 201421:                    // '{' ';' '!'
+    case 203597:                    // '{' 'break' '!'
+    case 203981:                    // '{' 'continue' '!'
+    case 328269:                    // '{' Character '('
+    case 328397:                    // '{' String '('
+    case 328525:                    // '{' Integer '('
+    case 328653:                    // '{' Complex '('
+    case 328781:                    // '{' Real '('
+    case 328909:                    // '{' Comment '('
+    case 332493:                    // '{' ';' '('
+    case 334669:                    // '{' 'break' '('
+    case 335053:                    // '{' 'continue' '('
+    case 410829:                    // '{' Comment '+'
+    case 414413:                    // '{' ';' '+'
+    case 416589:                    // '{' 'break' '+'
+    case 416973:                    // '{' 'continue' '+'
+    case 427213:                    // '{' Comment '++'
+    case 430797:                    // '{' ';' '++'
+    case 432973:                    // '{' 'break' '++'
+    case 433357:                    // '{' 'continue' '++'
+    case 476365:                    // '{' Comment '-'
+    case 479949:                    // '{' ';' '-'
+    case 482125:                    // '{' 'break' '-'
+    case 482509:                    // '{' 'continue' '-'
+    case 492749:                    // '{' Comment '--'
+    case 496333:                    // '{' ';' '--'
+    case 498509:                    // '{' 'break' '--'
+    case 498893:                    // '{' 'continue' '--'
+    case 606669:                    // '{' Identifier ';'
+    case 606797:                    // '{' Character ';'
+    case 606925:                    // '{' String ';'
+    case 607053:                    // '{' Integer ';'
+    case 607181:                    // '{' Complex ';'
+    case 607309:                    // '{' Real ';'
+    case 607437:                    // '{' Comment ';'
+    case 611021:                    // '{' ';' ';'
+    case 613197:                    // '{' 'break' ';'
+    case 613581:                    // '{' 'continue' ';'
+    case 819789:                    // '{' Character '['
+    case 819917:                    // '{' String '['
+    case 820045:                    // '{' Integer '['
+    case 820173:                    // '{' Complex '['
+    case 820301:                    // '{' Real '['
+    case 820429:                    // '{' Comment '['
+    case 824013:                    // '{' ';' '['
+    case 826189:                    // '{' 'break' '['
+    case 826573:                    // '{' 'continue' '['
+    case 885197:                    // '{' Identifier 'break'
+    case 885325:                    // '{' Character 'break'
+    case 885453:                    // '{' String 'break'
+    case 885581:                    // '{' Integer 'break'
+    case 885709:                    // '{' Complex 'break'
+    case 885837:                    // '{' Real 'break'
+    case 885965:                    // '{' Comment 'break'
+    case 889549:                    // '{' ';' 'break'
+    case 891725:                    // '{' 'break' 'break'
+    case 892109:                    // '{' 'continue' 'break'
+    case 934349:                    // '{' Identifier 'continue'
+    case 934477:                    // '{' Character 'continue'
+    case 934605:                    // '{' String 'continue'
+    case 934733:                    // '{' Integer 'continue'
+    case 934861:                    // '{' Complex 'continue'
+    case 934989:                    // '{' Real 'continue'
+    case 935117:                    // '{' Comment 'continue'
+    case 938701:                    // '{' ';' 'continue'
+    case 940877:                    // '{' 'break' 'continue'
+    case 941261:                    // '{' 'continue' 'continue'
+    case 967117:                    // '{' Identifier 'do'
+    case 967245:                    // '{' Character 'do'
+    case 967373:                    // '{' String 'do'
+    case 967501:                    // '{' Integer 'do'
+    case 967629:                    // '{' Complex 'do'
+    case 967757:                    // '{' Real 'do'
+    case 967885:                    // '{' Comment 'do'
+    case 971469:                    // '{' ';' 'do'
+    case 973645:                    // '{' 'break' 'do'
+    case 974029:                    // '{' 'continue' 'do'
+    case 999885:                    // '{' Identifier 'f32'
+    case 1000013:                   // '{' Character 'f32'
+    case 1000141:                   // '{' String 'f32'
+    case 1000269:                   // '{' Integer 'f32'
+    case 1000397:                   // '{' Complex 'f32'
+    case 1000525:                   // '{' Real 'f32'
+    case 1000653:                   // '{' Comment 'f32'
+    case 1004237:                   // '{' ';' 'f32'
+    case 1006413:                   // '{' 'break' 'f32'
+    case 1006797:                   // '{' 'continue' 'f32'
+    case 1016269:                   // '{' Identifier 'f64'
+    case 1016397:                   // '{' Character 'f64'
+    case 1016525:                   // '{' String 'f64'
+    case 1016653:                   // '{' Integer 'f64'
+    case 1016781:                   // '{' Complex 'f64'
+    case 1016909:                   // '{' Real 'f64'
+    case 1017037:                   // '{' Comment 'f64'
+    case 1020621:                   // '{' ';' 'f64'
+    case 1022797:                   // '{' 'break' 'f64'
+    case 1023181:                   // '{' 'continue' 'f64'
+    case 1032653:                   // '{' Identifier 'for'
+    case 1032781:                   // '{' Character 'for'
+    case 1032909:                   // '{' String 'for'
+    case 1033037:                   // '{' Integer 'for'
+    case 1033165:                   // '{' Complex 'for'
+    case 1033293:                   // '{' Real 'for'
+    case 1033421:                   // '{' Comment 'for'
+    case 1037005:                   // '{' ';' 'for'
+    case 1039181:                   // '{' 'break' 'for'
+    case 1039565:                   // '{' 'continue' 'for'
+    case 1049037:                   // '{' Identifier 'foreach'
+    case 1049165:                   // '{' Character 'foreach'
+    case 1049293:                   // '{' String 'foreach'
+    case 1049421:                   // '{' Integer 'foreach'
+    case 1049549:                   // '{' Complex 'foreach'
+    case 1049677:                   // '{' Real 'foreach'
+    case 1049805:                   // '{' Comment 'foreach'
+    case 1053389:                   // '{' ';' 'foreach'
+    case 1055565:                   // '{' 'break' 'foreach'
+    case 1055949:                   // '{' 'continue' 'foreach'
+    case 1065421:                   // '{' Identifier 'i32'
+    case 1065549:                   // '{' Character 'i32'
+    case 1065677:                   // '{' String 'i32'
+    case 1065805:                   // '{' Integer 'i32'
+    case 1065933:                   // '{' Complex 'i32'
+    case 1066061:                   // '{' Real 'i32'
+    case 1066189:                   // '{' Comment 'i32'
+    case 1069773:                   // '{' ';' 'i32'
+    case 1071949:                   // '{' 'break' 'i32'
+    case 1072333:                   // '{' 'continue' 'i32'
+    case 1081805:                   // '{' Identifier 'i64'
+    case 1081933:                   // '{' Character 'i64'
+    case 1082061:                   // '{' String 'i64'
+    case 1082189:                   // '{' Integer 'i64'
+    case 1082317:                   // '{' Complex 'i64'
+    case 1082445:                   // '{' Real 'i64'
+    case 1082573:                   // '{' Comment 'i64'
+    case 1086157:                   // '{' ';' 'i64'
+    case 1088333:                   // '{' 'break' 'i64'
+    case 1088717:                   // '{' 'continue' 'i64'
+    case 1098189:                   // '{' Identifier 'if'
+    case 1098317:                   // '{' Character 'if'
+    case 1098445:                   // '{' String 'if'
+    case 1098573:                   // '{' Integer 'if'
+    case 1098701:                   // '{' Complex 'if'
+    case 1098829:                   // '{' Real 'if'
+    case 1098957:                   // '{' Comment 'if'
+    case 1102541:                   // '{' ';' 'if'
+    case 1104717:                   // '{' 'break' 'if'
+    case 1105101:                   // '{' 'continue' 'if'
+    case 1114573:                   // '{' Identifier 'import'
+    case 1114701:                   // '{' Character 'import'
+    case 1114829:                   // '{' String 'import'
+    case 1114957:                   // '{' Integer 'import'
+    case 1115085:                   // '{' Complex 'import'
+    case 1115213:                   // '{' Real 'import'
+    case 1115341:                   // '{' Comment 'import'
+    case 1118925:                   // '{' ';' 'import'
+    case 1121101:                   // '{' 'break' 'import'
+    case 1121485:                   // '{' 'continue' 'import'
+    case 1130957:                   // '{' Identifier 'include'
+    case 1131085:                   // '{' Character 'include'
+    case 1131213:                   // '{' String 'include'
+    case 1131341:                   // '{' Integer 'include'
+    case 1131469:                   // '{' Complex 'include'
+    case 1131597:                   // '{' Real 'include'
+    case 1131725:                   // '{' Comment 'include'
+    case 1135309:                   // '{' ';' 'include'
+    case 1137485:                   // '{' 'break' 'include'
+    case 1137869:                   // '{' 'continue' 'include'
+    case 1147341:                   // '{' Identifier 'local'
+    case 1147469:                   // '{' Character 'local'
+    case 1147597:                   // '{' String 'local'
+    case 1147725:                   // '{' Integer 'local'
+    case 1147853:                   // '{' Complex 'local'
+    case 1147981:                   // '{' Real 'local'
+    case 1148109:                   // '{' Comment 'local'
+    case 1151693:                   // '{' ';' 'local'
+    case 1153869:                   // '{' 'break' 'local'
+    case 1154253:                   // '{' 'continue' 'local'
+    case 1163725:                   // '{' Identifier 'return'
+    case 1163853:                   // '{' Character 'return'
+    case 1163981:                   // '{' String 'return'
+    case 1164109:                   // '{' Integer 'return'
+    case 1164237:                   // '{' Complex 'return'
+    case 1164365:                   // '{' Real 'return'
+    case 1164493:                   // '{' Comment 'return'
+    case 1168077:                   // '{' ';' 'return'
+    case 1170253:                   // '{' 'break' 'return'
+    case 1170637:                   // '{' 'continue' 'return'
+    case 1180109:                   // '{' Identifier 'switch'
+    case 1180237:                   // '{' Character 'switch'
+    case 1180365:                   // '{' String 'switch'
+    case 1180493:                   // '{' Integer 'switch'
+    case 1180621:                   // '{' Complex 'switch'
+    case 1180749:                   // '{' Real 'switch'
+    case 1180877:                   // '{' Comment 'switch'
+    case 1184461:                   // '{' ';' 'switch'
+    case 1186637:                   // '{' 'break' 'switch'
+    case 1187021:                   // '{' 'continue' 'switch'
+    case 1196493:                   // '{' Identifier 'test'
+    case 1196621:                   // '{' Character 'test'
+    case 1196749:                   // '{' String 'test'
+    case 1196877:                   // '{' Integer 'test'
+    case 1197005:                   // '{' Complex 'test'
+    case 1197133:                   // '{' Real 'test'
+    case 1197261:                   // '{' Comment 'test'
+    case 1200845:                   // '{' ';' 'test'
+    case 1203021:                   // '{' 'break' 'test'
+    case 1203405:                   // '{' 'continue' 'test'
+    case 1212877:                   // '{' Identifier 'throw'
+    case 1213005:                   // '{' Character 'throw'
+    case 1213133:                   // '{' String 'throw'
+    case 1213261:                   // '{' Integer 'throw'
+    case 1213389:                   // '{' Complex 'throw'
+    case 1213517:                   // '{' Real 'throw'
+    case 1213645:                   // '{' Comment 'throw'
+    case 1217229:                   // '{' ';' 'throw'
+    case 1219405:                   // '{' 'break' 'throw'
+    case 1219789:                   // '{' 'continue' 'throw'
+    case 1229261:                   // '{' Identifier 'try'
+    case 1229389:                   // '{' Character 'try'
+    case 1229517:                   // '{' String 'try'
+    case 1229645:                   // '{' Integer 'try'
+    case 1229773:                   // '{' Complex 'try'
+    case 1229901:                   // '{' Real 'try'
+    case 1230029:                   // '{' Comment 'try'
+    case 1233613:                   // '{' ';' 'try'
+    case 1235789:                   // '{' 'break' 'try'
+    case 1236173:                   // '{' 'continue' 'try'
+    case 1245645:                   // '{' Identifier 'while'
+    case 1245773:                   // '{' Character 'while'
+    case 1245901:                   // '{' String 'while'
+    case 1246029:                   // '{' Integer 'while'
+    case 1246157:                   // '{' Complex 'while'
+    case 1246285:                   // '{' Real 'while'
+    case 1246413:                   // '{' Comment 'while'
+    case 1249997:                   // '{' ';' 'while'
+    case 1252173:                   // '{' 'break' 'while'
+    case 1252557:                   // '{' 'continue' 'while'
+    case 1262157:                   // '{' Character '{'
+    case 1262285:                   // '{' String '{'
+    case 1262413:                   // '{' Integer '{'
+    case 1262541:                   // '{' Complex '{'
+    case 1262669:                   // '{' Real '{'
+    case 1262797:                   // '{' Comment '{'
+    case 1266381:                   // '{' ';' '{'
+    case 1268557:                   // '{' 'break' '{'
+    case 1268941:                   // '{' 'continue' '{'
+    case 1343949:                   // '{' Identifier '~'
+    case 1344077:                   // '{' Character '~'
+    case 1344205:                   // '{' String '~'
+    case 1344333:                   // '{' Integer '~'
+    case 1344461:                   // '{' Complex '~'
+    case 1344589:                   // '{' Real '~'
+    case 1344717:                   // '{' Comment '~'
+    case 1348301:                   // '{' ';' '~'
+    case 1350477:                   // '{' 'break' '~'
+    case 1350861:                   // '{' 'continue' '~'
+      try_Block();
+      break;
     case -3:
     case 37:                        // ';'
     case 54:                        // 'break'
     case 57:                        // 'continue'
     case 59:                        // 'do'
-    case 61:                        // 'f32'
-    case 62:                        // 'f64'
     case 63:                        // 'for'
     case 64:                        // 'foreach'
-    case 65:                        // 'i32'
-    case 66:                        // 'i64'
     case 67:                        // 'if'
     case 68:                        // 'import'
     case 69:                        // 'include'
@@ -1680,146 +2852,10 @@ function MaiaScript(string, parsingEventHandler)
     case 76:                        // 'while'
       try_Statement();
       break;
-    case -4:
-    case 4:                         // Character
-    case 5:                         // String
-    case 6:                         // Integer
-    case 7:                         // Complex
-    case 8:                         // Real
-    case 12:                        // '!'
-    case 20:                        // '('
-    case 25:                        // '+'
-    case 26:                        // '++'
-    case 29:                        // '-'
-    case 30:                        // '--'
-    case 50:                        // '['
-    case 82:                        // '~'
-    case 131:                       // Identifier END
-    case 387:                       // Identifier Identifier
-    case 515:                       // Identifier Character
-    case 643:                       // Identifier String
-    case 771:                       // Identifier Integer
-    case 899:                       // Identifier Complex
-    case 1027:                      // Identifier Real
-    case 1155:                      // Identifier Comment
-    case 1539:                      // Identifier '!'
-    case 1667:                      // Identifier '!='
-    case 1923:                      // Identifier '%'
-    case 2051:                      // Identifier '%='
-    case 2179:                      // Identifier '&'
-    case 2307:                      // Identifier '&&'
-    case 2435:                      // Identifier '&='
-    case 2691:                      // Identifier ')'
-    case 2819:                      // Identifier '*'
-    case 2947:                      // Identifier '**'
-    case 3075:                      // Identifier '*='
-    case 3203:                      // Identifier '+'
-    case 3331:                      // Identifier '++'
-    case 3459:                      // Identifier '+='
-    case 3587:                      // Identifier ','
-    case 3661:                      // '{' ','
-    case 3715:                      // Identifier '-'
-    case 3843:                      // Identifier '--'
-    case 3971:                      // Identifier '-='
-    case 4227:                      // Identifier '/'
-    case 4355:                      // Identifier '/='
-    case 4483:                      // Identifier ':'
-    case 4611:                      // Identifier ':='
-    case 4739:                      // Identifier ';'
-    case 4867:                      // Identifier '<'
-    case 4995:                      // Identifier '<<'
-    case 5123:                      // Identifier '<<='
-    case 5251:                      // Identifier '<='
-    case 5379:                      // Identifier '='
-    case 5507:                      // Identifier '=='
-    case 5635:                      // Identifier '>'
-    case 5763:                      // Identifier '>='
-    case 5891:                      // Identifier '>>'
-    case 6019:                      // Identifier '>>='
-    case 6147:                      // Identifier '?'
-    case 6275:                      // Identifier '?='
-    case 6403:                      // Identifier '['
-    case 6531:                      // Identifier ']'
-    case 6659:                      // Identifier '^'
-    case 6787:                      // Identifier '^='
-    case 6915:                      // Identifier 'break'
-    case 7043:                      // Identifier 'case'
-    case 7171:                      // Identifier 'catch'
-    case 7299:                      // Identifier 'continue'
-    case 7427:                      // Identifier 'default'
-    case 7555:                      // Identifier 'do'
-    case 7683:                      // Identifier 'else'
-    case 7811:                      // Identifier 'f32'
-    case 7939:                      // Identifier 'f64'
-    case 8067:                      // Identifier 'for'
-    case 8195:                      // Identifier 'foreach'
-    case 8323:                      // Identifier 'i32'
-    case 8451:                      // Identifier 'i64'
-    case 8579:                      // Identifier 'if'
-    case 8707:                      // Identifier 'import'
-    case 8835:                      // Identifier 'include'
-    case 8963:                      // Identifier 'local'
-    case 9091:                      // Identifier 'return'
-    case 9219:                      // Identifier 'switch'
-    case 9347:                      // Identifier 'test'
-    case 9475:                      // Identifier 'throw'
-    case 9603:                      // Identifier 'try'
-    case 9731:                      // Identifier 'while'
-    case 9987:                      // Identifier '|'
-    case 10115:                     // Identifier '|='
-    case 10243:                     // Identifier '||'
-    case 10371:                     // Identifier '}'
-    case 10499:                     // Identifier '~'
-    case 223437:                    // '{' '}' '!='
-    case 256205:                    // '{' '}' '%'
-    case 272589:                    // '{' '}' '%='
-    case 288973:                    // '{' '}' '&'
-    case 305357:                    // '{' '}' '&&'
-    case 321741:                    // '{' '}' '&='
-    case 370893:                    // '{' '}' '*'
-    case 387277:                    // '{' '}' '**'
-    case 403661:                    // '{' '}' '*='
-    case 452813:                    // '{' '}' '+='
-    case 459213:                    // '{' Identifier ','
-    case 459341:                    // '{' Character ','
-    case 459469:                    // '{' String ','
-    case 459597:                    // '{' Integer ','
-    case 459725:                    // '{' Complex ','
-    case 459853:                    // '{' Real ','
-    case 459981:                    // '{' Comment ','
-    case 463565:                    // '{' ';' ','
-    case 465741:                    // '{' 'break' ','
-    case 466125:                    // '{' 'continue' ','
-    case 468611:                    // Identifier '{' ','
-    case 518349:                    // '{' '}' '-='
-    case 551117:                    // '{' '}' '/'
-    case 567501:                    // '{' '}' '/='
-    case 573901:                    // '{' Identifier ':'
-    case 574157:                    // '{' String ':'
-    case 600269:                    // '{' '}' ':='
-    case 633037:                    // '{' '}' '<'
-    case 649421:                    // '{' '}' '<<'
-    case 665805:                    // '{' '}' '<<='
-    case 682189:                    // '{' '}' '<='
-    case 698573:                    // '{' '}' '='
-    case 714957:                    // '{' '}' '=='
-    case 731341:                    // '{' '}' '>'
-    case 747725:                    // '{' '}' '>='
-    case 764109:                    // '{' '}' '>>'
-    case 780493:                    // '{' '}' '>>='
-    case 796877:                    // '{' '}' '?'
-    case 813261:                    // '{' '}' '?='
-    case 862413:                    // '{' '}' '^'
-    case 878797:                    // '{' '}' '^='
-    case 1288397:                   // '{' '}' '|'
-    case 1304781:                   // '{' '}' '|='
-    case 1321165:                   // '{' '}' '||'
-      try_Operation();
-      break;
     case -5:
       break;
     default:
-      try_Block();
+      try_Operation();
     }
   }
 
@@ -1898,7 +2934,8 @@ function MaiaScript(string, parsingEventHandler)
       case 53:                      // '^='
       case 79:                      // '|='
         lookahead2W(23);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
         switch (lk)
         {
         case 400:                   // '%=' Identifier
@@ -1914,7 +2951,7 @@ function MaiaScript(string, parsingEventHandler)
         case 433:                   // '?=' Identifier
         case 437:                   // '^=' Identifier
         case 463:                   // '|=' Identifier
-          lookahead3W(46);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -1979,6 +3016,60 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
                                     // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
                                     // 'try' | 'while' | '{' | '}' | '~'
+          break;
+        case 7824:                  // '%=' 'f32'
+        case 7952:                  // '%=' 'f64'
+        case 8336:                  // '%=' 'i32'
+        case 8464:                  // '%=' 'i64'
+        case 7827:                  // '&=' 'f32'
+        case 7955:                  // '&=' 'f64'
+        case 8339:                  // '&=' 'i32'
+        case 8467:                  // '&=' 'i64'
+        case 7832:                  // '*=' 'f32'
+        case 7960:                  // '*=' 'f64'
+        case 8344:                  // '*=' 'i32'
+        case 8472:                  // '*=' 'i64'
+        case 7835:                  // '+=' 'f32'
+        case 7963:                  // '+=' 'f64'
+        case 8347:                  // '+=' 'i32'
+        case 8475:                  // '+=' 'i64'
+        case 7839:                  // '-=' 'f32'
+        case 7967:                  // '-=' 'f64'
+        case 8351:                  // '-=' 'i32'
+        case 8479:                  // '-=' 'i64'
+        case 7842:                  // '/=' 'f32'
+        case 7970:                  // '/=' 'f64'
+        case 8354:                  // '/=' 'i32'
+        case 8482:                  // '/=' 'i64'
+        case 7844:                  // ':=' 'f32'
+        case 7972:                  // ':=' 'f64'
+        case 8356:                  // ':=' 'i32'
+        case 8484:                  // ':=' 'i64'
+        case 7848:                  // '<<=' 'f32'
+        case 7976:                  // '<<=' 'f64'
+        case 8360:                  // '<<=' 'i32'
+        case 8488:                  // '<<=' 'i64'
+        case 7850:                  // '=' 'f32'
+        case 7978:                  // '=' 'f64'
+        case 8362:                  // '=' 'i32'
+        case 8490:                  // '=' 'i64'
+        case 7855:                  // '>>=' 'f32'
+        case 7983:                  // '>>=' 'f64'
+        case 8367:                  // '>>=' 'i32'
+        case 8495:                  // '>>=' 'i64'
+        case 7857:                  // '?=' 'f32'
+        case 7985:                  // '?=' 'f64'
+        case 8369:                  // '?=' 'i32'
+        case 8497:                  // '?=' 'i64'
+        case 7861:                  // '^=' 'f32'
+        case 7989:                  // '^=' 'f64'
+        case 8373:                  // '^=' 'i32'
+        case 8501:                  // '^=' 'i64'
+        case 7887:                  // '|=' 'f32'
+        case 8015:                  // '|=' 'f64'
+        case 8399:                  // '|=' 'i32'
+        case 8527:                  // '|=' 'i64'
+          lookahead3W(0);           // Identifier | WhiteSpace^token
           break;
         case 528:                   // '%=' Character
         case 656:                   // '%=' String
@@ -2045,7 +3136,7 @@ function MaiaScript(string, parsingEventHandler)
         case 847:                   // '|=' Integer
         case 975:                   // '|=' Complex
         case 1103:                  // '|=' Real
-          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -2133,7 +3224,7 @@ function MaiaScript(string, parsingEventHandler)
         case 3919:                  // '|=' '--'
         case 10575:                 // '|=' '~'
           lookahead3W(22);          // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
           break;
         }
         break;
@@ -2238,7 +3329,8 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(36);         // ':='
             }
             lookahead1W(23);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
             try_ConditionalExpression();
             lk = -1;
           }
@@ -2299,7 +3391,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(36);                // ':='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_ConditionalExpression();
     }
@@ -2327,7 +3420,8 @@ function MaiaScript(string, parsingEventHandler)
       case 53:                      // '^='
       case 79:                      // '|='
         lookahead2W(23);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
         switch (lk)
         {
         case 400:                   // '%=' Identifier
@@ -2343,7 +3437,7 @@ function MaiaScript(string, parsingEventHandler)
         case 433:                   // '?=' Identifier
         case 437:                   // '^=' Identifier
         case 463:                   // '|=' Identifier
-          lookahead3W(46);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -2408,6 +3502,60 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'break' | 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' |
                                     // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
                                     // 'try' | 'while' | '{' | '}' | '~'
+          break;
+        case 7824:                  // '%=' 'f32'
+        case 7952:                  // '%=' 'f64'
+        case 8336:                  // '%=' 'i32'
+        case 8464:                  // '%=' 'i64'
+        case 7827:                  // '&=' 'f32'
+        case 7955:                  // '&=' 'f64'
+        case 8339:                  // '&=' 'i32'
+        case 8467:                  // '&=' 'i64'
+        case 7832:                  // '*=' 'f32'
+        case 7960:                  // '*=' 'f64'
+        case 8344:                  // '*=' 'i32'
+        case 8472:                  // '*=' 'i64'
+        case 7835:                  // '+=' 'f32'
+        case 7963:                  // '+=' 'f64'
+        case 8347:                  // '+=' 'i32'
+        case 8475:                  // '+=' 'i64'
+        case 7839:                  // '-=' 'f32'
+        case 7967:                  // '-=' 'f64'
+        case 8351:                  // '-=' 'i32'
+        case 8479:                  // '-=' 'i64'
+        case 7842:                  // '/=' 'f32'
+        case 7970:                  // '/=' 'f64'
+        case 8354:                  // '/=' 'i32'
+        case 8482:                  // '/=' 'i64'
+        case 7844:                  // ':=' 'f32'
+        case 7972:                  // ':=' 'f64'
+        case 8356:                  // ':=' 'i32'
+        case 8484:                  // ':=' 'i64'
+        case 7848:                  // '<<=' 'f32'
+        case 7976:                  // '<<=' 'f64'
+        case 8360:                  // '<<=' 'i32'
+        case 8488:                  // '<<=' 'i64'
+        case 7850:                  // '=' 'f32'
+        case 7978:                  // '=' 'f64'
+        case 8362:                  // '=' 'i32'
+        case 8490:                  // '=' 'i64'
+        case 7855:                  // '>>=' 'f32'
+        case 7983:                  // '>>=' 'f64'
+        case 8367:                  // '>>=' 'i32'
+        case 8495:                  // '>>=' 'i64'
+        case 7857:                  // '?=' 'f32'
+        case 7985:                  // '?=' 'f64'
+        case 8369:                  // '?=' 'i32'
+        case 8497:                  // '?=' 'i64'
+        case 7861:                  // '^=' 'f32'
+        case 7989:                  // '^=' 'f64'
+        case 8373:                  // '^=' 'i32'
+        case 8501:                  // '^=' 'i64'
+        case 7887:                  // '|=' 'f32'
+        case 8015:                  // '|=' 'f64'
+        case 8399:                  // '|=' 'i32'
+        case 8527:                  // '|=' 'i64'
+          lookahead3W(0);           // Identifier | WhiteSpace^token
           break;
         case 528:                   // '%=' Character
         case 656:                   // '%=' String
@@ -2474,7 +3622,7 @@ function MaiaScript(string, parsingEventHandler)
         case 847:                   // '|=' Integer
         case 975:                   // '|=' Complex
         case 1103:                  // '|=' Real
-          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -2562,7 +3710,7 @@ function MaiaScript(string, parsingEventHandler)
         case 3919:                  // '|=' '--'
         case 10575:                 // '|=' '~'
           lookahead3W(22);          // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
           break;
         }
         break;
@@ -2667,7 +3815,8 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(36);         // ':='
             }
             lookahead1W(23);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
             try_ConditionalExpression();
             memoize(1, e0A, -1);
             continue;
@@ -2729,7 +3878,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(36);               // ':='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_ConditionalExpression();
     }
   }
@@ -2742,12 +3892,14 @@ function MaiaScript(string, parsingEventHandler)
     {
       consume(48);                  // '?'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_VariableAssignment();
       consume(35);                  // ':'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_VariableAssignment();
     }
@@ -2761,11 +3913,13 @@ function MaiaScript(string, parsingEventHandler)
     {
       consumeT(48);                 // '?'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_VariableAssignment();
       consumeT(35);                 // ':'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_VariableAssignment();
     }
   }
@@ -2782,7 +3936,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(80);                  // '||'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_LogicalANDExpression();
     }
@@ -2800,7 +3955,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(80);                 // '||'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_LogicalANDExpression();
     }
   }
@@ -2817,7 +3973,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(18);                  // '&&'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_BitwiseORExpression();
     }
@@ -2835,7 +3992,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(18);                 // '&&'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_BitwiseORExpression();
     }
   }
@@ -2852,7 +4010,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(78);                  // '|'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_BitwiseXORExpression();
     }
@@ -2870,7 +4029,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(78);                 // '|'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_BitwiseXORExpression();
     }
   }
@@ -2887,7 +4047,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(52);                  // '^'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_BitwiseANDExpression();
     }
@@ -2905,7 +4066,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(52);                 // '^'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_BitwiseANDExpression();
     }
   }
@@ -2922,7 +4084,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(17);                  // '&'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_EqualityExpression();
     }
@@ -2940,7 +4103,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(17);                 // '&'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_EqualityExpression();
     }
   }
@@ -2965,7 +4129,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(13);                // '!='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_RelationalExpression();
     }
@@ -2991,7 +4156,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(13);               // '!='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_RelationalExpression();
     }
   }
@@ -3024,7 +4190,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(45);                // '>='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_ShiftExpression();
     }
@@ -3058,7 +4225,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(45);               // '>='
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_ShiftExpression();
     }
   }
@@ -3083,7 +4251,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(46);                // '>>'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_AdditiveExpression();
     }
@@ -3109,7 +4278,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(46);               // '>>'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_AdditiveExpression();
     }
   }
@@ -3125,12 +4295,13 @@ function MaiaScript(string, parsingEventHandler)
       case 25:                      // '+'
       case 29:                      // '-'
         lookahead2W(23);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
         switch (lk)
         {
         case 409:                   // '+' Identifier
         case 413:                   // '-' Identifier
-          lookahead3W(46);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -3163,6 +4334,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
                                     // 'try' | 'while' | '{' | '}' | '~'
           break;
+        case 7833:                  // '+' 'f32'
+        case 7961:                  // '+' 'f64'
+        case 8345:                  // '+' 'i32'
+        case 8473:                  // '+' 'i64'
+        case 7837:                  // '-' 'f32'
+        case 7965:                  // '-' 'f64'
+        case 8349:                  // '-' 'i32'
+        case 8477:                  // '-' 'i64'
+          lookahead3W(0);           // Identifier | WhiteSpace^token
+          break;
         case 537:                   // '+' Character
         case 665:                   // '+' String
         case 793:                   // '+' Integer
@@ -3173,7 +4354,7 @@ function MaiaScript(string, parsingEventHandler)
         case 797:                   // '-' Integer
         case 925:                   // '-' Complex
         case 1053:                  // '-' Real
-          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -3361,7 +4542,8 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(29);         // '-'
             }
             lookahead1W(23);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
             try_PowerExpression();
             lk = -1;
           }
@@ -3460,7 +4642,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(29);                // '-'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_PowerExpression();
     }
@@ -3477,12 +4660,13 @@ function MaiaScript(string, parsingEventHandler)
       case 25:                      // '+'
       case 29:                      // '-'
         lookahead2W(23);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
         switch (lk)
         {
         case 409:                   // '+' Identifier
         case 413:                   // '-' Identifier
-          lookahead3W(46);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -3515,6 +4699,16 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' |
                                     // 'try' | 'while' | '{' | '}' | '~'
           break;
+        case 7833:                  // '+' 'f32'
+        case 7961:                  // '+' 'f64'
+        case 8345:                  // '+' 'i32'
+        case 8473:                  // '+' 'i64'
+        case 7837:                  // '-' 'f32'
+        case 7965:                  // '-' 'f64'
+        case 8349:                  // '-' 'i32'
+        case 8477:                  // '-' 'i64'
+          lookahead3W(0);           // Identifier | WhiteSpace^token
+          break;
         case 537:                   // '+' Character
         case 665:                   // '+' String
         case 793:                   // '+' Integer
@@ -3525,7 +4719,7 @@ function MaiaScript(string, parsingEventHandler)
         case 797:                   // '-' Integer
         case 925:                   // '-' Complex
         case 1053:                  // '-' Real
-          lookahead3W(45);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+          lookahead3W(44);          // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -3713,7 +4907,8 @@ function MaiaScript(string, parsingEventHandler)
               consumeT(29);         // '-'
             }
             lookahead1W(23);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
             try_PowerExpression();
             memoize(2, e0A, -1);
             continue;
@@ -3813,7 +5008,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(29);               // '-'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_PowerExpression();
     }
   }
@@ -3830,7 +5026,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consume(23);                  // '**'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_MultiplicativeExpression();
     }
@@ -3848,7 +5045,8 @@ function MaiaScript(string, parsingEventHandler)
       }
       consumeT(23);                 // '**'
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_MultiplicativeExpression();
     }
   }
@@ -3859,7 +5057,7 @@ function MaiaScript(string, parsingEventHandler)
     parse_UnaryExpression();
     for (;;)
     {
-      lookahead1W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead1W(44);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -3885,7 +5083,8 @@ function MaiaScript(string, parsingEventHandler)
         consume(15);                // '%'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       whitespace();
       parse_UnaryExpression();
     }
@@ -3897,7 +5096,7 @@ function MaiaScript(string, parsingEventHandler)
     try_UnaryExpression();
     for (;;)
     {
-      lookahead1W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead1W(44);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -3923,7 +5122,8 @@ function MaiaScript(string, parsingEventHandler)
         consumeT(15);               // '%'
       }
       lookahead1W(23);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | '{' | '~'
+                                    // '!' | '(' | '+' | '++' | '-' | '--' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{' |
+                                    // '~'
       try_UnaryExpression();
     }
   }
@@ -3934,7 +5134,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -3963,7 +5163,7 @@ function MaiaScript(string, parsingEventHandler)
         break;
       case 3331:                    // Identifier '++'
       case 3843:                    // Identifier '--'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -4031,7 +5231,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3860:                    // '(' '--'
       case 10516:                   // '(' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8084:                    // '(' 'for'
       case 8212:                    // '(' 'foreach'
@@ -4066,7 +5266,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 434:                     // '[' Identifier
-        lookahead3W(40);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(39);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -4086,7 +5286,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
         break;
       case 6578:                    // '[' ']'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -4130,7 +5330,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3890:                    // '[' '--'
       case 10546:                   // '[' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8114:                    // '[' 'for'
       case 8242:                    // '[' 'foreach'
@@ -4165,7 +5365,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 461:                     // '{' Identifier
-        lookahead3W(39);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(38);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -4191,7 +5391,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '}' | '~'
         break;
       case 10445:                   // '{' '}'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -4228,7 +5428,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3917:                    // '{' '--'
       case 10573:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8141:                    // '{' 'for'
       case 8269:                    // '{' 'foreach'
@@ -4255,12 +5455,34 @@ function MaiaScript(string, parsingEventHandler)
         break;
       }
       break;
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      lookahead2W(0);               // Identifier | WhiteSpace^token
+      switch (lk)
+      {
+      case 445:                     // 'f32' Identifier
+      case 446:                     // 'f64' Identifier
+      case 449:                     // 'i32' Identifier
+      case 450:                     // 'i64' Identifier
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
+                                    // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
+                                    // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
+                                    // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
+                                    // 'i32' | 'i64' | 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      }
+      break;
     case 4:                         // Character
     case 5:                         // String
     case 6:                         // Integer
     case 7:                         // Complex
     case 8:                         // Real
-      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(44);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -4280,7 +5502,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3847:                    // Complex '--'
       case 3336:                    // Real '++'
       case 3848:                    // Real '--'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -4748,6 +5970,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 10502                 // Integer '~'
      && lk != 10503                 // Complex '~'
      && lk != 10504                 // Real '~'
+     && lk != 16829                 // 'f32' Identifier END
+     && lk != 16830                 // 'f64' Identifier END
+     && lk != 16833                 // 'i32' Identifier END
+     && lk != 16834                 // 'i64' Identifier END
      && lk != 19715                 // Identifier '++' END
      && lk != 19716                 // Character '++' END
      && lk != 19717                 // String '++' END
@@ -4762,18 +5988,46 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 20232                 // Real '--' END
      && lk != 22962                 // '[' ']' END
      && lk != 26829                 // '{' '}' END
+     && lk != 49597                 // 'f32' Identifier Identifier
+     && lk != 49598                 // 'f64' Identifier Identifier
+     && lk != 49601                 // 'i32' Identifier Identifier
+     && lk != 49602                 // 'i64' Identifier Identifier
      && lk != 55730                 // '[' ']' Identifier
      && lk != 59597                 // '{' '}' Identifier
+     && lk != 65981                 // 'f32' Identifier Character
+     && lk != 65982                 // 'f64' Identifier Character
+     && lk != 65985                 // 'i32' Identifier Character
+     && lk != 65986                 // 'i64' Identifier Character
      && lk != 72114                 // '[' ']' Character
      && lk != 75981                 // '{' '}' Character
+     && lk != 82365                 // 'f32' Identifier String
+     && lk != 82366                 // 'f64' Identifier String
+     && lk != 82369                 // 'i32' Identifier String
+     && lk != 82370                 // 'i64' Identifier String
      && lk != 88498                 // '[' ']' String
      && lk != 92365                 // '{' '}' String
+     && lk != 98749                 // 'f32' Identifier Integer
+     && lk != 98750                 // 'f64' Identifier Integer
+     && lk != 98753                 // 'i32' Identifier Integer
+     && lk != 98754                 // 'i64' Identifier Integer
      && lk != 104882                // '[' ']' Integer
      && lk != 108749                // '{' '}' Integer
+     && lk != 115133                // 'f32' Identifier Complex
+     && lk != 115134                // 'f64' Identifier Complex
+     && lk != 115137                // 'i32' Identifier Complex
+     && lk != 115138                // 'i64' Identifier Complex
      && lk != 121266                // '[' ']' Complex
      && lk != 125133                // '{' '}' Complex
+     && lk != 131517                // 'f32' Identifier Real
+     && lk != 131518                // 'f64' Identifier Real
+     && lk != 131521                // 'i32' Identifier Real
+     && lk != 131522                // 'i64' Identifier Real
      && lk != 137650                // '[' ']' Real
      && lk != 141517                // '{' '}' Real
+     && lk != 147901                // 'f32' Identifier Comment
+     && lk != 147902                // 'f64' Identifier Comment
+     && lk != 147905                // 'i32' Identifier Comment
+     && lk != 147906                // 'i64' Identifier Comment
      && lk != 150787                // Identifier '++' Comment
      && lk != 150788                // Character '++' Comment
      && lk != 150789                // String '++' Comment
@@ -4788,6 +6042,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 151304                // Real '--' Comment
      && lk != 154034                // '[' ']' Comment
      && lk != 157901                // '{' '}' Comment
+     && lk != 197053                // 'f32' Identifier '!'
+     && lk != 197054                // 'f64' Identifier '!'
+     && lk != 197057                // 'i32' Identifier '!'
+     && lk != 197058                // 'i64' Identifier '!'
      && lk != 199939                // Identifier '++' '!'
      && lk != 199940                // Character '++' '!'
      && lk != 199941                // String '++' '!'
@@ -4802,6 +6060,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 200456                // Real '--' '!'
      && lk != 203186                // '[' ']' '!'
      && lk != 207053                // '{' '}' '!'
+     && lk != 213437                // 'f32' Identifier '!='
+     && lk != 213438                // 'f64' Identifier '!='
+     && lk != 213441                // 'i32' Identifier '!='
+     && lk != 213442                // 'i64' Identifier '!='
      && lk != 216323                // Identifier '++' '!='
      && lk != 216324                // Character '++' '!='
      && lk != 216325                // String '++' '!='
@@ -4816,6 +6078,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 216840                // Real '--' '!='
      && lk != 219570                // '[' ']' '!='
      && lk != 223437                // '{' '}' '!='
+     && lk != 246205                // 'f32' Identifier '%'
+     && lk != 246206                // 'f64' Identifier '%'
+     && lk != 246209                // 'i32' Identifier '%'
+     && lk != 246210                // 'i64' Identifier '%'
      && lk != 249091                // Identifier '++' '%'
      && lk != 249092                // Character '++' '%'
      && lk != 249093                // String '++' '%'
@@ -4830,6 +6096,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 249608                // Real '--' '%'
      && lk != 252338                // '[' ']' '%'
      && lk != 256205                // '{' '}' '%'
+     && lk != 262589                // 'f32' Identifier '%='
+     && lk != 262590                // 'f64' Identifier '%='
+     && lk != 262593                // 'i32' Identifier '%='
+     && lk != 262594                // 'i64' Identifier '%='
      && lk != 265475                // Identifier '++' '%='
      && lk != 265476                // Character '++' '%='
      && lk != 265477                // String '++' '%='
@@ -4844,6 +6114,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 265992                // Real '--' '%='
      && lk != 268722                // '[' ']' '%='
      && lk != 272589                // '{' '}' '%='
+     && lk != 278973                // 'f32' Identifier '&'
+     && lk != 278974                // 'f64' Identifier '&'
+     && lk != 278977                // 'i32' Identifier '&'
+     && lk != 278978                // 'i64' Identifier '&'
      && lk != 281859                // Identifier '++' '&'
      && lk != 281860                // Character '++' '&'
      && lk != 281861                // String '++' '&'
@@ -4858,6 +6132,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 282376                // Real '--' '&'
      && lk != 285106                // '[' ']' '&'
      && lk != 288973                // '{' '}' '&'
+     && lk != 295357                // 'f32' Identifier '&&'
+     && lk != 295358                // 'f64' Identifier '&&'
+     && lk != 295361                // 'i32' Identifier '&&'
+     && lk != 295362                // 'i64' Identifier '&&'
      && lk != 298243                // Identifier '++' '&&'
      && lk != 298244                // Character '++' '&&'
      && lk != 298245                // String '++' '&&'
@@ -4872,6 +6150,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 298760                // Real '--' '&&'
      && lk != 301490                // '[' ']' '&&'
      && lk != 305357                // '{' '}' '&&'
+     && lk != 311741                // 'f32' Identifier '&='
+     && lk != 311742                // 'f64' Identifier '&='
+     && lk != 311745                // 'i32' Identifier '&='
+     && lk != 311746                // 'i64' Identifier '&='
      && lk != 314627                // Identifier '++' '&='
      && lk != 314628                // Character '++' '&='
      && lk != 314629                // String '++' '&='
@@ -4888,6 +6170,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 321741                // '{' '}' '&='
      && lk != 334258                // '[' ']' '('
      && lk != 338125                // '{' '}' '('
+     && lk != 344509                // 'f32' Identifier ')'
+     && lk != 344510                // 'f64' Identifier ')'
+     && lk != 344513                // 'i32' Identifier ')'
+     && lk != 344514                // 'i64' Identifier ')'
      && lk != 347395                // Identifier '++' ')'
      && lk != 347396                // Character '++' ')'
      && lk != 347397                // String '++' ')'
@@ -4902,6 +6188,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 347912                // Real '--' ')'
      && lk != 350642                // '[' ']' ')'
      && lk != 354509                // '{' '}' ')'
+     && lk != 360893                // 'f32' Identifier '*'
+     && lk != 360894                // 'f64' Identifier '*'
+     && lk != 360897                // 'i32' Identifier '*'
+     && lk != 360898                // 'i64' Identifier '*'
      && lk != 363779                // Identifier '++' '*'
      && lk != 363780                // Character '++' '*'
      && lk != 363781                // String '++' '*'
@@ -4916,6 +6206,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 364296                // Real '--' '*'
      && lk != 367026                // '[' ']' '*'
      && lk != 370893                // '{' '}' '*'
+     && lk != 377277                // 'f32' Identifier '**'
+     && lk != 377278                // 'f64' Identifier '**'
+     && lk != 377281                // 'i32' Identifier '**'
+     && lk != 377282                // 'i64' Identifier '**'
      && lk != 380163                // Identifier '++' '**'
      && lk != 380164                // Character '++' '**'
      && lk != 380165                // String '++' '**'
@@ -4930,6 +6224,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 380680                // Real '--' '**'
      && lk != 383410                // '[' ']' '**'
      && lk != 387277                // '{' '}' '**'
+     && lk != 393661                // 'f32' Identifier '*='
+     && lk != 393662                // 'f64' Identifier '*='
+     && lk != 393665                // 'i32' Identifier '*='
+     && lk != 393666                // 'i64' Identifier '*='
      && lk != 396547                // Identifier '++' '*='
      && lk != 396548                // Character '++' '*='
      && lk != 396549                // String '++' '*='
@@ -4944,6 +6242,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 397064                // Real '--' '*='
      && lk != 399794                // '[' ']' '*='
      && lk != 403661                // '{' '}' '*='
+     && lk != 410045                // 'f32' Identifier '+'
+     && lk != 410046                // 'f64' Identifier '+'
+     && lk != 410049                // 'i32' Identifier '+'
+     && lk != 410050                // 'i64' Identifier '+'
      && lk != 412931                // Identifier '++' '+'
      && lk != 412932                // Character '++' '+'
      && lk != 412933                // String '++' '+'
@@ -4970,6 +6272,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 429830                // Integer '--' '++'
      && lk != 429831                // Complex '--' '++'
      && lk != 429832                // Real '--' '++'
+     && lk != 442813                // 'f32' Identifier '+='
+     && lk != 442814                // 'f64' Identifier '+='
+     && lk != 442817                // 'i32' Identifier '+='
+     && lk != 442818                // 'i64' Identifier '+='
      && lk != 445699                // Identifier '++' '+='
      && lk != 445700                // Character '++' '+='
      && lk != 445701                // String '++' '+='
@@ -4984,6 +6290,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 446216                // Real '--' '+='
      && lk != 448946                // '[' ']' '+='
      && lk != 452813                // '{' '}' '+='
+     && lk != 459197                // 'f32' Identifier ','
+     && lk != 459198                // 'f64' Identifier ','
+     && lk != 459201                // 'i32' Identifier ','
+     && lk != 459202                // 'i64' Identifier ','
      && lk != 462083                // Identifier '++' ','
      && lk != 462084                // Character '++' ','
      && lk != 462085                // String '++' ','
@@ -4998,6 +6308,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 462600                // Real '--' ','
      && lk != 465330                // '[' ']' ','
      && lk != 469197                // '{' '}' ','
+     && lk != 475581                // 'f32' Identifier '-'
+     && lk != 475582                // 'f64' Identifier '-'
+     && lk != 475585                // 'i32' Identifier '-'
+     && lk != 475586                // 'i64' Identifier '-'
      && lk != 478467                // Identifier '++' '-'
      && lk != 478468                // Character '++' '-'
      && lk != 478469                // String '++' '-'
@@ -5024,6 +6338,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 495366                // Integer '--' '--'
      && lk != 495367                // Complex '--' '--'
      && lk != 495368                // Real '--' '--'
+     && lk != 508349                // 'f32' Identifier '-='
+     && lk != 508350                // 'f64' Identifier '-='
+     && lk != 508353                // 'i32' Identifier '-='
+     && lk != 508354                // 'i64' Identifier '-='
      && lk != 511235                // Identifier '++' '-='
      && lk != 511236                // Character '++' '-='
      && lk != 511237                // String '++' '-='
@@ -5038,6 +6356,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 511752                // Real '--' '-='
      && lk != 514482                // '[' ']' '-='
      && lk != 518349                // '{' '}' '-='
+     && lk != 541117                // 'f32' Identifier '/'
+     && lk != 541118                // 'f64' Identifier '/'
+     && lk != 541121                // 'i32' Identifier '/'
+     && lk != 541122                // 'i64' Identifier '/'
      && lk != 544003                // Identifier '++' '/'
      && lk != 544004                // Character '++' '/'
      && lk != 544005                // String '++' '/'
@@ -5052,6 +6374,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 544520                // Real '--' '/'
      && lk != 547250                // '[' ']' '/'
      && lk != 551117                // '{' '}' '/'
+     && lk != 557501                // 'f32' Identifier '/='
+     && lk != 557502                // 'f64' Identifier '/='
+     && lk != 557505                // 'i32' Identifier '/='
+     && lk != 557506                // 'i64' Identifier '/='
      && lk != 560387                // Identifier '++' '/='
      && lk != 560388                // Character '++' '/='
      && lk != 560389                // String '++' '/='
@@ -5066,6 +6392,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 560904                // Real '--' '/='
      && lk != 563634                // '[' ']' '/='
      && lk != 567501                // '{' '}' '/='
+     && lk != 573885                // 'f32' Identifier ':'
+     && lk != 573886                // 'f64' Identifier ':'
+     && lk != 573889                // 'i32' Identifier ':'
+     && lk != 573890                // 'i64' Identifier ':'
      && lk != 576771                // Identifier '++' ':'
      && lk != 576772                // Character '++' ':'
      && lk != 576773                // String '++' ':'
@@ -5080,6 +6410,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 577288                // Real '--' ':'
      && lk != 580018                // '[' ']' ':'
      && lk != 583885                // '{' '}' ':'
+     && lk != 590269                // 'f32' Identifier ':='
+     && lk != 590270                // 'f64' Identifier ':='
+     && lk != 590273                // 'i32' Identifier ':='
+     && lk != 590274                // 'i64' Identifier ':='
      && lk != 593155                // Identifier '++' ':='
      && lk != 593156                // Character '++' ':='
      && lk != 593157                // String '++' ':='
@@ -5094,6 +6428,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 593672                // Real '--' ':='
      && lk != 596402                // '[' ']' ':='
      && lk != 600269                // '{' '}' ':='
+     && lk != 606653                // 'f32' Identifier ';'
+     && lk != 606654                // 'f64' Identifier ';'
+     && lk != 606657                // 'i32' Identifier ';'
+     && lk != 606658                // 'i64' Identifier ';'
      && lk != 609539                // Identifier '++' ';'
      && lk != 609540                // Character '++' ';'
      && lk != 609541                // String '++' ';'
@@ -5108,6 +6446,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 610056                // Real '--' ';'
      && lk != 612786                // '[' ']' ';'
      && lk != 616653                // '{' '}' ';'
+     && lk != 623037                // 'f32' Identifier '<'
+     && lk != 623038                // 'f64' Identifier '<'
+     && lk != 623041                // 'i32' Identifier '<'
+     && lk != 623042                // 'i64' Identifier '<'
      && lk != 625923                // Identifier '++' '<'
      && lk != 625924                // Character '++' '<'
      && lk != 625925                // String '++' '<'
@@ -5122,6 +6464,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 626440                // Real '--' '<'
      && lk != 629170                // '[' ']' '<'
      && lk != 633037                // '{' '}' '<'
+     && lk != 639421                // 'f32' Identifier '<<'
+     && lk != 639422                // 'f64' Identifier '<<'
+     && lk != 639425                // 'i32' Identifier '<<'
+     && lk != 639426                // 'i64' Identifier '<<'
      && lk != 642307                // Identifier '++' '<<'
      && lk != 642308                // Character '++' '<<'
      && lk != 642309                // String '++' '<<'
@@ -5136,6 +6482,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 642824                // Real '--' '<<'
      && lk != 645554                // '[' ']' '<<'
      && lk != 649421                // '{' '}' '<<'
+     && lk != 655805                // 'f32' Identifier '<<='
+     && lk != 655806                // 'f64' Identifier '<<='
+     && lk != 655809                // 'i32' Identifier '<<='
+     && lk != 655810                // 'i64' Identifier '<<='
      && lk != 658691                // Identifier '++' '<<='
      && lk != 658692                // Character '++' '<<='
      && lk != 658693                // String '++' '<<='
@@ -5150,6 +6500,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 659208                // Real '--' '<<='
      && lk != 661938                // '[' ']' '<<='
      && lk != 665805                // '{' '}' '<<='
+     && lk != 672189                // 'f32' Identifier '<='
+     && lk != 672190                // 'f64' Identifier '<='
+     && lk != 672193                // 'i32' Identifier '<='
+     && lk != 672194                // 'i64' Identifier '<='
      && lk != 675075                // Identifier '++' '<='
      && lk != 675076                // Character '++' '<='
      && lk != 675077                // String '++' '<='
@@ -5164,6 +6518,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 675592                // Real '--' '<='
      && lk != 678322                // '[' ']' '<='
      && lk != 682189                // '{' '}' '<='
+     && lk != 688573                // 'f32' Identifier '='
+     && lk != 688574                // 'f64' Identifier '='
+     && lk != 688577                // 'i32' Identifier '='
+     && lk != 688578                // 'i64' Identifier '='
      && lk != 691459                // Identifier '++' '='
      && lk != 691460                // Character '++' '='
      && lk != 691461                // String '++' '='
@@ -5178,6 +6536,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 691976                // Real '--' '='
      && lk != 694706                // '[' ']' '='
      && lk != 698573                // '{' '}' '='
+     && lk != 704957                // 'f32' Identifier '=='
+     && lk != 704958                // 'f64' Identifier '=='
+     && lk != 704961                // 'i32' Identifier '=='
+     && lk != 704962                // 'i64' Identifier '=='
      && lk != 707843                // Identifier '++' '=='
      && lk != 707844                // Character '++' '=='
      && lk != 707845                // String '++' '=='
@@ -5192,6 +6554,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 708360                // Real '--' '=='
      && lk != 711090                // '[' ']' '=='
      && lk != 714957                // '{' '}' '=='
+     && lk != 721341                // 'f32' Identifier '>'
+     && lk != 721342                // 'f64' Identifier '>'
+     && lk != 721345                // 'i32' Identifier '>'
+     && lk != 721346                // 'i64' Identifier '>'
      && lk != 724227                // Identifier '++' '>'
      && lk != 724228                // Character '++' '>'
      && lk != 724229                // String '++' '>'
@@ -5206,6 +6572,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 724744                // Real '--' '>'
      && lk != 727474                // '[' ']' '>'
      && lk != 731341                // '{' '}' '>'
+     && lk != 737725                // 'f32' Identifier '>='
+     && lk != 737726                // 'f64' Identifier '>='
+     && lk != 737729                // 'i32' Identifier '>='
+     && lk != 737730                // 'i64' Identifier '>='
      && lk != 740611                // Identifier '++' '>='
      && lk != 740612                // Character '++' '>='
      && lk != 740613                // String '++' '>='
@@ -5220,6 +6590,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 741128                // Real '--' '>='
      && lk != 743858                // '[' ']' '>='
      && lk != 747725                // '{' '}' '>='
+     && lk != 754109                // 'f32' Identifier '>>'
+     && lk != 754110                // 'f64' Identifier '>>'
+     && lk != 754113                // 'i32' Identifier '>>'
+     && lk != 754114                // 'i64' Identifier '>>'
      && lk != 756995                // Identifier '++' '>>'
      && lk != 756996                // Character '++' '>>'
      && lk != 756997                // String '++' '>>'
@@ -5234,6 +6608,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 757512                // Real '--' '>>'
      && lk != 760242                // '[' ']' '>>'
      && lk != 764109                // '{' '}' '>>'
+     && lk != 770493                // 'f32' Identifier '>>='
+     && lk != 770494                // 'f64' Identifier '>>='
+     && lk != 770497                // 'i32' Identifier '>>='
+     && lk != 770498                // 'i64' Identifier '>>='
      && lk != 773379                // Identifier '++' '>>='
      && lk != 773380                // Character '++' '>>='
      && lk != 773381                // String '++' '>>='
@@ -5248,6 +6626,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 773896                // Real '--' '>>='
      && lk != 776626                // '[' ']' '>>='
      && lk != 780493                // '{' '}' '>>='
+     && lk != 786877                // 'f32' Identifier '?'
+     && lk != 786878                // 'f64' Identifier '?'
+     && lk != 786881                // 'i32' Identifier '?'
+     && lk != 786882                // 'i64' Identifier '?'
      && lk != 789763                // Identifier '++' '?'
      && lk != 789764                // Character '++' '?'
      && lk != 789765                // String '++' '?'
@@ -5262,6 +6644,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 790280                // Real '--' '?'
      && lk != 793010                // '[' ']' '?'
      && lk != 796877                // '{' '}' '?'
+     && lk != 803261                // 'f32' Identifier '?='
+     && lk != 803262                // 'f64' Identifier '?='
+     && lk != 803265                // 'i32' Identifier '?='
+     && lk != 803266                // 'i64' Identifier '?='
      && lk != 806147                // Identifier '++' '?='
      && lk != 806148                // Character '++' '?='
      && lk != 806149                // String '++' '?='
@@ -5278,6 +6664,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 813261                // '{' '}' '?='
      && lk != 825778                // '[' ']' '['
      && lk != 829645                // '{' '}' '['
+     && lk != 836029                // 'f32' Identifier ']'
+     && lk != 836030                // 'f64' Identifier ']'
+     && lk != 836033                // 'i32' Identifier ']'
+     && lk != 836034                // 'i64' Identifier ']'
      && lk != 838915                // Identifier '++' ']'
      && lk != 838916                // Character '++' ']'
      && lk != 838917                // String '++' ']'
@@ -5292,6 +6682,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 839432                // Real '--' ']'
      && lk != 842162                // '[' ']' ']'
      && lk != 846029                // '{' '}' ']'
+     && lk != 852413                // 'f32' Identifier '^'
+     && lk != 852414                // 'f64' Identifier '^'
+     && lk != 852417                // 'i32' Identifier '^'
+     && lk != 852418                // 'i64' Identifier '^'
      && lk != 855299                // Identifier '++' '^'
      && lk != 855300                // Character '++' '^'
      && lk != 855301                // String '++' '^'
@@ -5306,6 +6700,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 855816                // Real '--' '^'
      && lk != 858546                // '[' ']' '^'
      && lk != 862413                // '{' '}' '^'
+     && lk != 868797                // 'f32' Identifier '^='
+     && lk != 868798                // 'f64' Identifier '^='
+     && lk != 868801                // 'i32' Identifier '^='
+     && lk != 868802                // 'i64' Identifier '^='
      && lk != 871683                // Identifier '++' '^='
      && lk != 871684                // Character '++' '^='
      && lk != 871685                // String '++' '^='
@@ -5320,6 +6718,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 872200                // Real '--' '^='
      && lk != 874930                // '[' ']' '^='
      && lk != 878797                // '{' '}' '^='
+     && lk != 885181                // 'f32' Identifier 'break'
+     && lk != 885182                // 'f64' Identifier 'break'
+     && lk != 885185                // 'i32' Identifier 'break'
+     && lk != 885186                // 'i64' Identifier 'break'
      && lk != 888067                // Identifier '++' 'break'
      && lk != 888068                // Character '++' 'break'
      && lk != 888069                // String '++' 'break'
@@ -5334,6 +6736,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 888584                // Real '--' 'break'
      && lk != 891314                // '[' ']' 'break'
      && lk != 895181                // '{' '}' 'break'
+     && lk != 901565                // 'f32' Identifier 'case'
+     && lk != 901566                // 'f64' Identifier 'case'
+     && lk != 901569                // 'i32' Identifier 'case'
+     && lk != 901570                // 'i64' Identifier 'case'
      && lk != 904451                // Identifier '++' 'case'
      && lk != 904452                // Character '++' 'case'
      && lk != 904453                // String '++' 'case'
@@ -5348,6 +6754,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 904968                // Real '--' 'case'
      && lk != 907698                // '[' ']' 'case'
      && lk != 911565                // '{' '}' 'case'
+     && lk != 917949                // 'f32' Identifier 'catch'
+     && lk != 917950                // 'f64' Identifier 'catch'
+     && lk != 917953                // 'i32' Identifier 'catch'
+     && lk != 917954                // 'i64' Identifier 'catch'
      && lk != 920835                // Identifier '++' 'catch'
      && lk != 920836                // Character '++' 'catch'
      && lk != 920837                // String '++' 'catch'
@@ -5362,6 +6772,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 921352                // Real '--' 'catch'
      && lk != 924082                // '[' ']' 'catch'
      && lk != 927949                // '{' '}' 'catch'
+     && lk != 934333                // 'f32' Identifier 'continue'
+     && lk != 934334                // 'f64' Identifier 'continue'
+     && lk != 934337                // 'i32' Identifier 'continue'
+     && lk != 934338                // 'i64' Identifier 'continue'
      && lk != 937219                // Identifier '++' 'continue'
      && lk != 937220                // Character '++' 'continue'
      && lk != 937221                // String '++' 'continue'
@@ -5376,6 +6790,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 937736                // Real '--' 'continue'
      && lk != 940466                // '[' ']' 'continue'
      && lk != 944333                // '{' '}' 'continue'
+     && lk != 950717                // 'f32' Identifier 'default'
+     && lk != 950718                // 'f64' Identifier 'default'
+     && lk != 950721                // 'i32' Identifier 'default'
+     && lk != 950722                // 'i64' Identifier 'default'
      && lk != 953603                // Identifier '++' 'default'
      && lk != 953604                // Character '++' 'default'
      && lk != 953605                // String '++' 'default'
@@ -5390,6 +6808,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 954120                // Real '--' 'default'
      && lk != 956850                // '[' ']' 'default'
      && lk != 960717                // '{' '}' 'default'
+     && lk != 967101                // 'f32' Identifier 'do'
+     && lk != 967102                // 'f64' Identifier 'do'
+     && lk != 967105                // 'i32' Identifier 'do'
+     && lk != 967106                // 'i64' Identifier 'do'
      && lk != 969987                // Identifier '++' 'do'
      && lk != 969988                // Character '++' 'do'
      && lk != 969989                // String '++' 'do'
@@ -5404,6 +6826,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 970504                // Real '--' 'do'
      && lk != 973234                // '[' ']' 'do'
      && lk != 977101                // '{' '}' 'do'
+     && lk != 983485                // 'f32' Identifier 'else'
+     && lk != 983486                // 'f64' Identifier 'else'
+     && lk != 983489                // 'i32' Identifier 'else'
+     && lk != 983490                // 'i64' Identifier 'else'
      && lk != 986371                // Identifier '++' 'else'
      && lk != 986372                // Character '++' 'else'
      && lk != 986373                // String '++' 'else'
@@ -5418,34 +6844,22 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 986888                // Real '--' 'else'
      && lk != 989618                // '[' ']' 'else'
      && lk != 993485                // '{' '}' 'else'
-     && lk != 1002755               // Identifier '++' 'f32'
-     && lk != 1002756               // Character '++' 'f32'
-     && lk != 1002757               // String '++' 'f32'
-     && lk != 1002758               // Integer '++' 'f32'
-     && lk != 1002759               // Complex '++' 'f32'
-     && lk != 1002760               // Real '++' 'f32'
-     && lk != 1003267               // Identifier '--' 'f32'
-     && lk != 1003268               // Character '--' 'f32'
-     && lk != 1003269               // String '--' 'f32'
-     && lk != 1003270               // Integer '--' 'f32'
-     && lk != 1003271               // Complex '--' 'f32'
-     && lk != 1003272               // Real '--' 'f32'
+     && lk != 999869                // 'f32' Identifier 'f32'
+     && lk != 999870                // 'f64' Identifier 'f32'
+     && lk != 999873                // 'i32' Identifier 'f32'
+     && lk != 999874                // 'i64' Identifier 'f32'
      && lk != 1006002               // '[' ']' 'f32'
      && lk != 1009869               // '{' '}' 'f32'
-     && lk != 1019139               // Identifier '++' 'f64'
-     && lk != 1019140               // Character '++' 'f64'
-     && lk != 1019141               // String '++' 'f64'
-     && lk != 1019142               // Integer '++' 'f64'
-     && lk != 1019143               // Complex '++' 'f64'
-     && lk != 1019144               // Real '++' 'f64'
-     && lk != 1019651               // Identifier '--' 'f64'
-     && lk != 1019652               // Character '--' 'f64'
-     && lk != 1019653               // String '--' 'f64'
-     && lk != 1019654               // Integer '--' 'f64'
-     && lk != 1019655               // Complex '--' 'f64'
-     && lk != 1019656               // Real '--' 'f64'
+     && lk != 1016253               // 'f32' Identifier 'f64'
+     && lk != 1016254               // 'f64' Identifier 'f64'
+     && lk != 1016257               // 'i32' Identifier 'f64'
+     && lk != 1016258               // 'i64' Identifier 'f64'
      && lk != 1022386               // '[' ']' 'f64'
      && lk != 1026253               // '{' '}' 'f64'
+     && lk != 1032637               // 'f32' Identifier 'for'
+     && lk != 1032638               // 'f64' Identifier 'for'
+     && lk != 1032641               // 'i32' Identifier 'for'
+     && lk != 1032642               // 'i64' Identifier 'for'
      && lk != 1035523               // Identifier '++' 'for'
      && lk != 1035524               // Character '++' 'for'
      && lk != 1035525               // String '++' 'for'
@@ -5460,6 +6874,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1036040               // Real '--' 'for'
      && lk != 1038770               // '[' ']' 'for'
      && lk != 1042637               // '{' '}' 'for'
+     && lk != 1049021               // 'f32' Identifier 'foreach'
+     && lk != 1049022               // 'f64' Identifier 'foreach'
+     && lk != 1049025               // 'i32' Identifier 'foreach'
+     && lk != 1049026               // 'i64' Identifier 'foreach'
      && lk != 1051907               // Identifier '++' 'foreach'
      && lk != 1051908               // Character '++' 'foreach'
      && lk != 1051909               // String '++' 'foreach'
@@ -5474,34 +6892,22 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1052424               // Real '--' 'foreach'
      && lk != 1055154               // '[' ']' 'foreach'
      && lk != 1059021               // '{' '}' 'foreach'
-     && lk != 1068291               // Identifier '++' 'i32'
-     && lk != 1068292               // Character '++' 'i32'
-     && lk != 1068293               // String '++' 'i32'
-     && lk != 1068294               // Integer '++' 'i32'
-     && lk != 1068295               // Complex '++' 'i32'
-     && lk != 1068296               // Real '++' 'i32'
-     && lk != 1068803               // Identifier '--' 'i32'
-     && lk != 1068804               // Character '--' 'i32'
-     && lk != 1068805               // String '--' 'i32'
-     && lk != 1068806               // Integer '--' 'i32'
-     && lk != 1068807               // Complex '--' 'i32'
-     && lk != 1068808               // Real '--' 'i32'
+     && lk != 1065405               // 'f32' Identifier 'i32'
+     && lk != 1065406               // 'f64' Identifier 'i32'
+     && lk != 1065409               // 'i32' Identifier 'i32'
+     && lk != 1065410               // 'i64' Identifier 'i32'
      && lk != 1071538               // '[' ']' 'i32'
      && lk != 1075405               // '{' '}' 'i32'
-     && lk != 1084675               // Identifier '++' 'i64'
-     && lk != 1084676               // Character '++' 'i64'
-     && lk != 1084677               // String '++' 'i64'
-     && lk != 1084678               // Integer '++' 'i64'
-     && lk != 1084679               // Complex '++' 'i64'
-     && lk != 1084680               // Real '++' 'i64'
-     && lk != 1085187               // Identifier '--' 'i64'
-     && lk != 1085188               // Character '--' 'i64'
-     && lk != 1085189               // String '--' 'i64'
-     && lk != 1085190               // Integer '--' 'i64'
-     && lk != 1085191               // Complex '--' 'i64'
-     && lk != 1085192               // Real '--' 'i64'
+     && lk != 1081789               // 'f32' Identifier 'i64'
+     && lk != 1081790               // 'f64' Identifier 'i64'
+     && lk != 1081793               // 'i32' Identifier 'i64'
+     && lk != 1081794               // 'i64' Identifier 'i64'
      && lk != 1087922               // '[' ']' 'i64'
      && lk != 1091789               // '{' '}' 'i64'
+     && lk != 1098173               // 'f32' Identifier 'if'
+     && lk != 1098174               // 'f64' Identifier 'if'
+     && lk != 1098177               // 'i32' Identifier 'if'
+     && lk != 1098178               // 'i64' Identifier 'if'
      && lk != 1101059               // Identifier '++' 'if'
      && lk != 1101060               // Character '++' 'if'
      && lk != 1101061               // String '++' 'if'
@@ -5516,6 +6922,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1101576               // Real '--' 'if'
      && lk != 1104306               // '[' ']' 'if'
      && lk != 1108173               // '{' '}' 'if'
+     && lk != 1114557               // 'f32' Identifier 'import'
+     && lk != 1114558               // 'f64' Identifier 'import'
+     && lk != 1114561               // 'i32' Identifier 'import'
+     && lk != 1114562               // 'i64' Identifier 'import'
      && lk != 1117443               // Identifier '++' 'import'
      && lk != 1117444               // Character '++' 'import'
      && lk != 1117445               // String '++' 'import'
@@ -5530,6 +6940,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1117960               // Real '--' 'import'
      && lk != 1120690               // '[' ']' 'import'
      && lk != 1124557               // '{' '}' 'import'
+     && lk != 1130941               // 'f32' Identifier 'include'
+     && lk != 1130942               // 'f64' Identifier 'include'
+     && lk != 1130945               // 'i32' Identifier 'include'
+     && lk != 1130946               // 'i64' Identifier 'include'
      && lk != 1133827               // Identifier '++' 'include'
      && lk != 1133828               // Character '++' 'include'
      && lk != 1133829               // String '++' 'include'
@@ -5544,6 +6958,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1134344               // Real '--' 'include'
      && lk != 1137074               // '[' ']' 'include'
      && lk != 1140941               // '{' '}' 'include'
+     && lk != 1147325               // 'f32' Identifier 'local'
+     && lk != 1147326               // 'f64' Identifier 'local'
+     && lk != 1147329               // 'i32' Identifier 'local'
+     && lk != 1147330               // 'i64' Identifier 'local'
      && lk != 1150211               // Identifier '++' 'local'
      && lk != 1150212               // Character '++' 'local'
      && lk != 1150213               // String '++' 'local'
@@ -5558,6 +6976,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1150728               // Real '--' 'local'
      && lk != 1153458               // '[' ']' 'local'
      && lk != 1157325               // '{' '}' 'local'
+     && lk != 1163709               // 'f32' Identifier 'return'
+     && lk != 1163710               // 'f64' Identifier 'return'
+     && lk != 1163713               // 'i32' Identifier 'return'
+     && lk != 1163714               // 'i64' Identifier 'return'
      && lk != 1166595               // Identifier '++' 'return'
      && lk != 1166596               // Character '++' 'return'
      && lk != 1166597               // String '++' 'return'
@@ -5572,6 +6994,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1167112               // Real '--' 'return'
      && lk != 1169842               // '[' ']' 'return'
      && lk != 1173709               // '{' '}' 'return'
+     && lk != 1180093               // 'f32' Identifier 'switch'
+     && lk != 1180094               // 'f64' Identifier 'switch'
+     && lk != 1180097               // 'i32' Identifier 'switch'
+     && lk != 1180098               // 'i64' Identifier 'switch'
      && lk != 1182979               // Identifier '++' 'switch'
      && lk != 1182980               // Character '++' 'switch'
      && lk != 1182981               // String '++' 'switch'
@@ -5586,6 +7012,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1183496               // Real '--' 'switch'
      && lk != 1186226               // '[' ']' 'switch'
      && lk != 1190093               // '{' '}' 'switch'
+     && lk != 1196477               // 'f32' Identifier 'test'
+     && lk != 1196478               // 'f64' Identifier 'test'
+     && lk != 1196481               // 'i32' Identifier 'test'
+     && lk != 1196482               // 'i64' Identifier 'test'
      && lk != 1199363               // Identifier '++' 'test'
      && lk != 1199364               // Character '++' 'test'
      && lk != 1199365               // String '++' 'test'
@@ -5600,6 +7030,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1199880               // Real '--' 'test'
      && lk != 1202610               // '[' ']' 'test'
      && lk != 1206477               // '{' '}' 'test'
+     && lk != 1212861               // 'f32' Identifier 'throw'
+     && lk != 1212862               // 'f64' Identifier 'throw'
+     && lk != 1212865               // 'i32' Identifier 'throw'
+     && lk != 1212866               // 'i64' Identifier 'throw'
      && lk != 1215747               // Identifier '++' 'throw'
      && lk != 1215748               // Character '++' 'throw'
      && lk != 1215749               // String '++' 'throw'
@@ -5614,6 +7048,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1216264               // Real '--' 'throw'
      && lk != 1218994               // '[' ']' 'throw'
      && lk != 1222861               // '{' '}' 'throw'
+     && lk != 1229245               // 'f32' Identifier 'try'
+     && lk != 1229246               // 'f64' Identifier 'try'
+     && lk != 1229249               // 'i32' Identifier 'try'
+     && lk != 1229250               // 'i64' Identifier 'try'
      && lk != 1232131               // Identifier '++' 'try'
      && lk != 1232132               // Character '++' 'try'
      && lk != 1232133               // String '++' 'try'
@@ -5628,6 +7066,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1232648               // Real '--' 'try'
      && lk != 1235378               // '[' ']' 'try'
      && lk != 1239245               // '{' '}' 'try'
+     && lk != 1245629               // 'f32' Identifier 'while'
+     && lk != 1245630               // 'f64' Identifier 'while'
+     && lk != 1245633               // 'i32' Identifier 'while'
+     && lk != 1245634               // 'i64' Identifier 'while'
      && lk != 1248515               // Identifier '++' 'while'
      && lk != 1248516               // Character '++' 'while'
      && lk != 1248517               // String '++' 'while'
@@ -5642,8 +7084,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1249032               // Real '--' 'while'
      && lk != 1251762               // '[' ']' 'while'
      && lk != 1255629               // '{' '}' 'while'
+     && lk != 1262013               // 'f32' Identifier '{'
+     && lk != 1262014               // 'f64' Identifier '{'
+     && lk != 1262017               // 'i32' Identifier '{'
+     && lk != 1262018               // 'i64' Identifier '{'
      && lk != 1268146               // '[' ']' '{'
      && lk != 1272013               // '{' '}' '{'
+     && lk != 1278397               // 'f32' Identifier '|'
+     && lk != 1278398               // 'f64' Identifier '|'
+     && lk != 1278401               // 'i32' Identifier '|'
+     && lk != 1278402               // 'i64' Identifier '|'
      && lk != 1281283               // Identifier '++' '|'
      && lk != 1281284               // Character '++' '|'
      && lk != 1281285               // String '++' '|'
@@ -5658,6 +7108,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1281800               // Real '--' '|'
      && lk != 1284530               // '[' ']' '|'
      && lk != 1288397               // '{' '}' '|'
+     && lk != 1294781               // 'f32' Identifier '|='
+     && lk != 1294782               // 'f64' Identifier '|='
+     && lk != 1294785               // 'i32' Identifier '|='
+     && lk != 1294786               // 'i64' Identifier '|='
      && lk != 1297667               // Identifier '++' '|='
      && lk != 1297668               // Character '++' '|='
      && lk != 1297669               // String '++' '|='
@@ -5672,6 +7126,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1298184               // Real '--' '|='
      && lk != 1300914               // '[' ']' '|='
      && lk != 1304781               // '{' '}' '|='
+     && lk != 1311165               // 'f32' Identifier '||'
+     && lk != 1311166               // 'f64' Identifier '||'
+     && lk != 1311169               // 'i32' Identifier '||'
+     && lk != 1311170               // 'i64' Identifier '||'
      && lk != 1314051               // Identifier '++' '||'
      && lk != 1314052               // Character '++' '||'
      && lk != 1314053               // String '++' '||'
@@ -5686,6 +7144,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1314568               // Real '--' '||'
      && lk != 1317298               // '[' ']' '||'
      && lk != 1321165               // '{' '}' '||'
+     && lk != 1327549               // 'f32' Identifier '}'
+     && lk != 1327550               // 'f64' Identifier '}'
+     && lk != 1327553               // 'i32' Identifier '}'
+     && lk != 1327554               // 'i64' Identifier '}'
      && lk != 1330435               // Identifier '++' '}'
      && lk != 1330436               // Character '++' '}'
      && lk != 1330437               // String '++' '}'
@@ -5700,6 +7162,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1330952               // Real '--' '}'
      && lk != 1333682               // '[' ']' '}'
      && lk != 1337549               // '{' '}' '}'
+     && lk != 1343933               // 'f32' Identifier '~'
+     && lk != 1343934               // 'f64' Identifier '~'
+     && lk != 1343937               // 'i32' Identifier '~'
+     && lk != 1343938               // 'i64' Identifier '~'
      && lk != 1346819               // Identifier '++' '~'
      && lk != 1346820               // Character '++' '~'
      && lk != 1346821               // String '++' '~'
@@ -6039,18 +7505,6 @@ function MaiaScript(string, parsingEventHandler)
     case 986374:                    // Integer '++' 'else'
     case 986375:                    // Complex '++' 'else'
     case 986376:                    // Real '++' 'else'
-    case 1002755:                   // Identifier '++' 'f32'
-    case 1002756:                   // Character '++' 'f32'
-    case 1002757:                   // String '++' 'f32'
-    case 1002758:                   // Integer '++' 'f32'
-    case 1002759:                   // Complex '++' 'f32'
-    case 1002760:                   // Real '++' 'f32'
-    case 1019139:                   // Identifier '++' 'f64'
-    case 1019140:                   // Character '++' 'f64'
-    case 1019141:                   // String '++' 'f64'
-    case 1019142:                   // Integer '++' 'f64'
-    case 1019143:                   // Complex '++' 'f64'
-    case 1019144:                   // Real '++' 'f64'
     case 1035523:                   // Identifier '++' 'for'
     case 1035524:                   // Character '++' 'for'
     case 1035525:                   // String '++' 'for'
@@ -6063,18 +7517,6 @@ function MaiaScript(string, parsingEventHandler)
     case 1051910:                   // Integer '++' 'foreach'
     case 1051911:                   // Complex '++' 'foreach'
     case 1051912:                   // Real '++' 'foreach'
-    case 1068291:                   // Identifier '++' 'i32'
-    case 1068292:                   // Character '++' 'i32'
-    case 1068293:                   // String '++' 'i32'
-    case 1068294:                   // Integer '++' 'i32'
-    case 1068295:                   // Complex '++' 'i32'
-    case 1068296:                   // Real '++' 'i32'
-    case 1084675:                   // Identifier '++' 'i64'
-    case 1084676:                   // Character '++' 'i64'
-    case 1084677:                   // String '++' 'i64'
-    case 1084678:                   // Integer '++' 'i64'
-    case 1084679:                   // Complex '++' 'i64'
-    case 1084680:                   // Real '++' 'i64'
     case 1101059:                   // Identifier '++' 'if'
     case 1101060:                   // Character '++' 'if'
     case 1101061:                   // String '++' 'if'
@@ -6452,18 +7894,6 @@ function MaiaScript(string, parsingEventHandler)
     case 986886:                    // Integer '--' 'else'
     case 986887:                    // Complex '--' 'else'
     case 986888:                    // Real '--' 'else'
-    case 1003267:                   // Identifier '--' 'f32'
-    case 1003268:                   // Character '--' 'f32'
-    case 1003269:                   // String '--' 'f32'
-    case 1003270:                   // Integer '--' 'f32'
-    case 1003271:                   // Complex '--' 'f32'
-    case 1003272:                   // Real '--' 'f32'
-    case 1019651:                   // Identifier '--' 'f64'
-    case 1019652:                   // Character '--' 'f64'
-    case 1019653:                   // String '--' 'f64'
-    case 1019654:                   // Integer '--' 'f64'
-    case 1019655:                   // Complex '--' 'f64'
-    case 1019656:                   // Real '--' 'f64'
     case 1036035:                   // Identifier '--' 'for'
     case 1036036:                   // Character '--' 'for'
     case 1036037:                   // String '--' 'for'
@@ -6476,18 +7906,6 @@ function MaiaScript(string, parsingEventHandler)
     case 1052422:                   // Integer '--' 'foreach'
     case 1052423:                   // Complex '--' 'foreach'
     case 1052424:                   // Real '--' 'foreach'
-    case 1068803:                   // Identifier '--' 'i32'
-    case 1068804:                   // Character '--' 'i32'
-    case 1068805:                   // String '--' 'i32'
-    case 1068806:                   // Integer '--' 'i32'
-    case 1068807:                   // Complex '--' 'i32'
-    case 1068808:                   // Real '--' 'i32'
-    case 1085187:                   // Identifier '--' 'i64'
-    case 1085188:                   // Character '--' 'i64'
-    case 1085189:                   // String '--' 'i64'
-    case 1085190:                   // Integer '--' 'i64'
-    case 1085191:                   // Complex '--' 'i64'
-    case 1085192:                   // Real '--' 'i64'
     case 1101571:                   // Identifier '--' 'if'
     case 1101572:                   // Character '--' 'if'
     case 1101573:                   // String '--' 'if'
@@ -6585,42 +8003,42 @@ function MaiaScript(string, parsingEventHandler)
     case 26:                        // '++'
       consume(26);                  // '++'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
     case 30:                        // '--'
       consume(30);                  // '--'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
     case 25:                        // '+'
       consume(25);                  // '+'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
     case 29:                        // '-'
       consume(29);                  // '-'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
     case 82:                        // '~'
       consume(82);                  // '~'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
     case 12:                        // '!'
       consume(12);                  // '!'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       whitespace();
       parse_Primary();
       break;
@@ -6635,7 +8053,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -6664,7 +8082,7 @@ function MaiaScript(string, parsingEventHandler)
         break;
       case 3331:                    // Identifier '++'
       case 3843:                    // Identifier '--'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -6732,7 +8150,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3860:                    // '(' '--'
       case 10516:                   // '(' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8084:                    // '(' 'for'
       case 8212:                    // '(' 'foreach'
@@ -6767,7 +8185,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 434:                     // '[' Identifier
-        lookahead3W(40);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(39);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -6787,7 +8205,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
         break;
       case 6578:                    // '[' ']'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -6831,7 +8249,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3890:                    // '[' '--'
       case 10546:                   // '[' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8114:                    // '[' 'for'
       case 8242:                    // '[' 'foreach'
@@ -6866,7 +8284,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 461:                     // '{' Identifier
-        lookahead3W(39);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+        lookahead3W(38);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -6892,7 +8310,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '}' | '~'
         break;
       case 10445:                   // '{' '}'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -6929,7 +8347,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3917:                    // '{' '--'
       case 10573:                   // '{' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8141:                    // '{' 'for'
       case 8269:                    // '{' 'foreach'
@@ -6956,12 +8374,34 @@ function MaiaScript(string, parsingEventHandler)
         break;
       }
       break;
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      lookahead2W(0);               // Identifier | WhiteSpace^token
+      switch (lk)
+      {
+      case 445:                     // 'f32' Identifier
+      case 446:                     // 'f64' Identifier
+      case 449:                     // 'i32' Identifier
+      case 450:                     // 'i64' Identifier
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+                                    // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
+                                    // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
+                                    // '>>' | '>>=' | '?' | '?=' | '[' | ']' | '^' | '^=' | 'break' | 'case' | 'catch' |
+                                    // 'continue' | 'default' | 'do' | 'else' | 'f32' | 'f64' | 'for' | 'foreach' |
+                                    // 'i32' | 'i64' | 'if' | 'import' | 'include' | 'local' | 'return' | 'switch' |
+                                    // 'test' | 'throw' | 'try' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        break;
+      }
+      break;
     case 4:                         // Character
     case 5:                         // String
     case 6:                         // Integer
     case 7:                         // Complex
     case 8:                         // Real
-      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(44);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -6981,7 +8421,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3847:                    // Complex '--'
       case 3336:                    // Real '++'
       case 3848:                    // Real '--'
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -7449,6 +8889,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 10502                 // Integer '~'
      && lk != 10503                 // Complex '~'
      && lk != 10504                 // Real '~'
+     && lk != 16829                 // 'f32' Identifier END
+     && lk != 16830                 // 'f64' Identifier END
+     && lk != 16833                 // 'i32' Identifier END
+     && lk != 16834                 // 'i64' Identifier END
      && lk != 19715                 // Identifier '++' END
      && lk != 19716                 // Character '++' END
      && lk != 19717                 // String '++' END
@@ -7463,18 +8907,46 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 20232                 // Real '--' END
      && lk != 22962                 // '[' ']' END
      && lk != 26829                 // '{' '}' END
+     && lk != 49597                 // 'f32' Identifier Identifier
+     && lk != 49598                 // 'f64' Identifier Identifier
+     && lk != 49601                 // 'i32' Identifier Identifier
+     && lk != 49602                 // 'i64' Identifier Identifier
      && lk != 55730                 // '[' ']' Identifier
      && lk != 59597                 // '{' '}' Identifier
+     && lk != 65981                 // 'f32' Identifier Character
+     && lk != 65982                 // 'f64' Identifier Character
+     && lk != 65985                 // 'i32' Identifier Character
+     && lk != 65986                 // 'i64' Identifier Character
      && lk != 72114                 // '[' ']' Character
      && lk != 75981                 // '{' '}' Character
+     && lk != 82365                 // 'f32' Identifier String
+     && lk != 82366                 // 'f64' Identifier String
+     && lk != 82369                 // 'i32' Identifier String
+     && lk != 82370                 // 'i64' Identifier String
      && lk != 88498                 // '[' ']' String
      && lk != 92365                 // '{' '}' String
+     && lk != 98749                 // 'f32' Identifier Integer
+     && lk != 98750                 // 'f64' Identifier Integer
+     && lk != 98753                 // 'i32' Identifier Integer
+     && lk != 98754                 // 'i64' Identifier Integer
      && lk != 104882                // '[' ']' Integer
      && lk != 108749                // '{' '}' Integer
+     && lk != 115133                // 'f32' Identifier Complex
+     && lk != 115134                // 'f64' Identifier Complex
+     && lk != 115137                // 'i32' Identifier Complex
+     && lk != 115138                // 'i64' Identifier Complex
      && lk != 121266                // '[' ']' Complex
      && lk != 125133                // '{' '}' Complex
+     && lk != 131517                // 'f32' Identifier Real
+     && lk != 131518                // 'f64' Identifier Real
+     && lk != 131521                // 'i32' Identifier Real
+     && lk != 131522                // 'i64' Identifier Real
      && lk != 137650                // '[' ']' Real
      && lk != 141517                // '{' '}' Real
+     && lk != 147901                // 'f32' Identifier Comment
+     && lk != 147902                // 'f64' Identifier Comment
+     && lk != 147905                // 'i32' Identifier Comment
+     && lk != 147906                // 'i64' Identifier Comment
      && lk != 150787                // Identifier '++' Comment
      && lk != 150788                // Character '++' Comment
      && lk != 150789                // String '++' Comment
@@ -7489,6 +8961,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 151304                // Real '--' Comment
      && lk != 154034                // '[' ']' Comment
      && lk != 157901                // '{' '}' Comment
+     && lk != 197053                // 'f32' Identifier '!'
+     && lk != 197054                // 'f64' Identifier '!'
+     && lk != 197057                // 'i32' Identifier '!'
+     && lk != 197058                // 'i64' Identifier '!'
      && lk != 199939                // Identifier '++' '!'
      && lk != 199940                // Character '++' '!'
      && lk != 199941                // String '++' '!'
@@ -7503,6 +8979,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 200456                // Real '--' '!'
      && lk != 203186                // '[' ']' '!'
      && lk != 207053                // '{' '}' '!'
+     && lk != 213437                // 'f32' Identifier '!='
+     && lk != 213438                // 'f64' Identifier '!='
+     && lk != 213441                // 'i32' Identifier '!='
+     && lk != 213442                // 'i64' Identifier '!='
      && lk != 216323                // Identifier '++' '!='
      && lk != 216324                // Character '++' '!='
      && lk != 216325                // String '++' '!='
@@ -7517,6 +8997,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 216840                // Real '--' '!='
      && lk != 219570                // '[' ']' '!='
      && lk != 223437                // '{' '}' '!='
+     && lk != 246205                // 'f32' Identifier '%'
+     && lk != 246206                // 'f64' Identifier '%'
+     && lk != 246209                // 'i32' Identifier '%'
+     && lk != 246210                // 'i64' Identifier '%'
      && lk != 249091                // Identifier '++' '%'
      && lk != 249092                // Character '++' '%'
      && lk != 249093                // String '++' '%'
@@ -7531,6 +9015,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 249608                // Real '--' '%'
      && lk != 252338                // '[' ']' '%'
      && lk != 256205                // '{' '}' '%'
+     && lk != 262589                // 'f32' Identifier '%='
+     && lk != 262590                // 'f64' Identifier '%='
+     && lk != 262593                // 'i32' Identifier '%='
+     && lk != 262594                // 'i64' Identifier '%='
      && lk != 265475                // Identifier '++' '%='
      && lk != 265476                // Character '++' '%='
      && lk != 265477                // String '++' '%='
@@ -7545,6 +9033,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 265992                // Real '--' '%='
      && lk != 268722                // '[' ']' '%='
      && lk != 272589                // '{' '}' '%='
+     && lk != 278973                // 'f32' Identifier '&'
+     && lk != 278974                // 'f64' Identifier '&'
+     && lk != 278977                // 'i32' Identifier '&'
+     && lk != 278978                // 'i64' Identifier '&'
      && lk != 281859                // Identifier '++' '&'
      && lk != 281860                // Character '++' '&'
      && lk != 281861                // String '++' '&'
@@ -7559,6 +9051,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 282376                // Real '--' '&'
      && lk != 285106                // '[' ']' '&'
      && lk != 288973                // '{' '}' '&'
+     && lk != 295357                // 'f32' Identifier '&&'
+     && lk != 295358                // 'f64' Identifier '&&'
+     && lk != 295361                // 'i32' Identifier '&&'
+     && lk != 295362                // 'i64' Identifier '&&'
      && lk != 298243                // Identifier '++' '&&'
      && lk != 298244                // Character '++' '&&'
      && lk != 298245                // String '++' '&&'
@@ -7573,6 +9069,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 298760                // Real '--' '&&'
      && lk != 301490                // '[' ']' '&&'
      && lk != 305357                // '{' '}' '&&'
+     && lk != 311741                // 'f32' Identifier '&='
+     && lk != 311742                // 'f64' Identifier '&='
+     && lk != 311745                // 'i32' Identifier '&='
+     && lk != 311746                // 'i64' Identifier '&='
      && lk != 314627                // Identifier '++' '&='
      && lk != 314628                // Character '++' '&='
      && lk != 314629                // String '++' '&='
@@ -7589,6 +9089,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 321741                // '{' '}' '&='
      && lk != 334258                // '[' ']' '('
      && lk != 338125                // '{' '}' '('
+     && lk != 344509                // 'f32' Identifier ')'
+     && lk != 344510                // 'f64' Identifier ')'
+     && lk != 344513                // 'i32' Identifier ')'
+     && lk != 344514                // 'i64' Identifier ')'
      && lk != 347395                // Identifier '++' ')'
      && lk != 347396                // Character '++' ')'
      && lk != 347397                // String '++' ')'
@@ -7603,6 +9107,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 347912                // Real '--' ')'
      && lk != 350642                // '[' ']' ')'
      && lk != 354509                // '{' '}' ')'
+     && lk != 360893                // 'f32' Identifier '*'
+     && lk != 360894                // 'f64' Identifier '*'
+     && lk != 360897                // 'i32' Identifier '*'
+     && lk != 360898                // 'i64' Identifier '*'
      && lk != 363779                // Identifier '++' '*'
      && lk != 363780                // Character '++' '*'
      && lk != 363781                // String '++' '*'
@@ -7617,6 +9125,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 364296                // Real '--' '*'
      && lk != 367026                // '[' ']' '*'
      && lk != 370893                // '{' '}' '*'
+     && lk != 377277                // 'f32' Identifier '**'
+     && lk != 377278                // 'f64' Identifier '**'
+     && lk != 377281                // 'i32' Identifier '**'
+     && lk != 377282                // 'i64' Identifier '**'
      && lk != 380163                // Identifier '++' '**'
      && lk != 380164                // Character '++' '**'
      && lk != 380165                // String '++' '**'
@@ -7631,6 +9143,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 380680                // Real '--' '**'
      && lk != 383410                // '[' ']' '**'
      && lk != 387277                // '{' '}' '**'
+     && lk != 393661                // 'f32' Identifier '*='
+     && lk != 393662                // 'f64' Identifier '*='
+     && lk != 393665                // 'i32' Identifier '*='
+     && lk != 393666                // 'i64' Identifier '*='
      && lk != 396547                // Identifier '++' '*='
      && lk != 396548                // Character '++' '*='
      && lk != 396549                // String '++' '*='
@@ -7645,6 +9161,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 397064                // Real '--' '*='
      && lk != 399794                // '[' ']' '*='
      && lk != 403661                // '{' '}' '*='
+     && lk != 410045                // 'f32' Identifier '+'
+     && lk != 410046                // 'f64' Identifier '+'
+     && lk != 410049                // 'i32' Identifier '+'
+     && lk != 410050                // 'i64' Identifier '+'
      && lk != 412931                // Identifier '++' '+'
      && lk != 412932                // Character '++' '+'
      && lk != 412933                // String '++' '+'
@@ -7671,6 +9191,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 429830                // Integer '--' '++'
      && lk != 429831                // Complex '--' '++'
      && lk != 429832                // Real '--' '++'
+     && lk != 442813                // 'f32' Identifier '+='
+     && lk != 442814                // 'f64' Identifier '+='
+     && lk != 442817                // 'i32' Identifier '+='
+     && lk != 442818                // 'i64' Identifier '+='
      && lk != 445699                // Identifier '++' '+='
      && lk != 445700                // Character '++' '+='
      && lk != 445701                // String '++' '+='
@@ -7685,6 +9209,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 446216                // Real '--' '+='
      && lk != 448946                // '[' ']' '+='
      && lk != 452813                // '{' '}' '+='
+     && lk != 459197                // 'f32' Identifier ','
+     && lk != 459198                // 'f64' Identifier ','
+     && lk != 459201                // 'i32' Identifier ','
+     && lk != 459202                // 'i64' Identifier ','
      && lk != 462083                // Identifier '++' ','
      && lk != 462084                // Character '++' ','
      && lk != 462085                // String '++' ','
@@ -7699,6 +9227,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 462600                // Real '--' ','
      && lk != 465330                // '[' ']' ','
      && lk != 469197                // '{' '}' ','
+     && lk != 475581                // 'f32' Identifier '-'
+     && lk != 475582                // 'f64' Identifier '-'
+     && lk != 475585                // 'i32' Identifier '-'
+     && lk != 475586                // 'i64' Identifier '-'
      && lk != 478467                // Identifier '++' '-'
      && lk != 478468                // Character '++' '-'
      && lk != 478469                // String '++' '-'
@@ -7725,6 +9257,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 495366                // Integer '--' '--'
      && lk != 495367                // Complex '--' '--'
      && lk != 495368                // Real '--' '--'
+     && lk != 508349                // 'f32' Identifier '-='
+     && lk != 508350                // 'f64' Identifier '-='
+     && lk != 508353                // 'i32' Identifier '-='
+     && lk != 508354                // 'i64' Identifier '-='
      && lk != 511235                // Identifier '++' '-='
      && lk != 511236                // Character '++' '-='
      && lk != 511237                // String '++' '-='
@@ -7739,6 +9275,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 511752                // Real '--' '-='
      && lk != 514482                // '[' ']' '-='
      && lk != 518349                // '{' '}' '-='
+     && lk != 541117                // 'f32' Identifier '/'
+     && lk != 541118                // 'f64' Identifier '/'
+     && lk != 541121                // 'i32' Identifier '/'
+     && lk != 541122                // 'i64' Identifier '/'
      && lk != 544003                // Identifier '++' '/'
      && lk != 544004                // Character '++' '/'
      && lk != 544005                // String '++' '/'
@@ -7753,6 +9293,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 544520                // Real '--' '/'
      && lk != 547250                // '[' ']' '/'
      && lk != 551117                // '{' '}' '/'
+     && lk != 557501                // 'f32' Identifier '/='
+     && lk != 557502                // 'f64' Identifier '/='
+     && lk != 557505                // 'i32' Identifier '/='
+     && lk != 557506                // 'i64' Identifier '/='
      && lk != 560387                // Identifier '++' '/='
      && lk != 560388                // Character '++' '/='
      && lk != 560389                // String '++' '/='
@@ -7767,6 +9311,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 560904                // Real '--' '/='
      && lk != 563634                // '[' ']' '/='
      && lk != 567501                // '{' '}' '/='
+     && lk != 573885                // 'f32' Identifier ':'
+     && lk != 573886                // 'f64' Identifier ':'
+     && lk != 573889                // 'i32' Identifier ':'
+     && lk != 573890                // 'i64' Identifier ':'
      && lk != 576771                // Identifier '++' ':'
      && lk != 576772                // Character '++' ':'
      && lk != 576773                // String '++' ':'
@@ -7781,6 +9329,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 577288                // Real '--' ':'
      && lk != 580018                // '[' ']' ':'
      && lk != 583885                // '{' '}' ':'
+     && lk != 590269                // 'f32' Identifier ':='
+     && lk != 590270                // 'f64' Identifier ':='
+     && lk != 590273                // 'i32' Identifier ':='
+     && lk != 590274                // 'i64' Identifier ':='
      && lk != 593155                // Identifier '++' ':='
      && lk != 593156                // Character '++' ':='
      && lk != 593157                // String '++' ':='
@@ -7795,6 +9347,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 593672                // Real '--' ':='
      && lk != 596402                // '[' ']' ':='
      && lk != 600269                // '{' '}' ':='
+     && lk != 606653                // 'f32' Identifier ';'
+     && lk != 606654                // 'f64' Identifier ';'
+     && lk != 606657                // 'i32' Identifier ';'
+     && lk != 606658                // 'i64' Identifier ';'
      && lk != 609539                // Identifier '++' ';'
      && lk != 609540                // Character '++' ';'
      && lk != 609541                // String '++' ';'
@@ -7809,6 +9365,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 610056                // Real '--' ';'
      && lk != 612786                // '[' ']' ';'
      && lk != 616653                // '{' '}' ';'
+     && lk != 623037                // 'f32' Identifier '<'
+     && lk != 623038                // 'f64' Identifier '<'
+     && lk != 623041                // 'i32' Identifier '<'
+     && lk != 623042                // 'i64' Identifier '<'
      && lk != 625923                // Identifier '++' '<'
      && lk != 625924                // Character '++' '<'
      && lk != 625925                // String '++' '<'
@@ -7823,6 +9383,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 626440                // Real '--' '<'
      && lk != 629170                // '[' ']' '<'
      && lk != 633037                // '{' '}' '<'
+     && lk != 639421                // 'f32' Identifier '<<'
+     && lk != 639422                // 'f64' Identifier '<<'
+     && lk != 639425                // 'i32' Identifier '<<'
+     && lk != 639426                // 'i64' Identifier '<<'
      && lk != 642307                // Identifier '++' '<<'
      && lk != 642308                // Character '++' '<<'
      && lk != 642309                // String '++' '<<'
@@ -7837,6 +9401,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 642824                // Real '--' '<<'
      && lk != 645554                // '[' ']' '<<'
      && lk != 649421                // '{' '}' '<<'
+     && lk != 655805                // 'f32' Identifier '<<='
+     && lk != 655806                // 'f64' Identifier '<<='
+     && lk != 655809                // 'i32' Identifier '<<='
+     && lk != 655810                // 'i64' Identifier '<<='
      && lk != 658691                // Identifier '++' '<<='
      && lk != 658692                // Character '++' '<<='
      && lk != 658693                // String '++' '<<='
@@ -7851,6 +9419,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 659208                // Real '--' '<<='
      && lk != 661938                // '[' ']' '<<='
      && lk != 665805                // '{' '}' '<<='
+     && lk != 672189                // 'f32' Identifier '<='
+     && lk != 672190                // 'f64' Identifier '<='
+     && lk != 672193                // 'i32' Identifier '<='
+     && lk != 672194                // 'i64' Identifier '<='
      && lk != 675075                // Identifier '++' '<='
      && lk != 675076                // Character '++' '<='
      && lk != 675077                // String '++' '<='
@@ -7865,6 +9437,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 675592                // Real '--' '<='
      && lk != 678322                // '[' ']' '<='
      && lk != 682189                // '{' '}' '<='
+     && lk != 688573                // 'f32' Identifier '='
+     && lk != 688574                // 'f64' Identifier '='
+     && lk != 688577                // 'i32' Identifier '='
+     && lk != 688578                // 'i64' Identifier '='
      && lk != 691459                // Identifier '++' '='
      && lk != 691460                // Character '++' '='
      && lk != 691461                // String '++' '='
@@ -7879,6 +9455,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 691976                // Real '--' '='
      && lk != 694706                // '[' ']' '='
      && lk != 698573                // '{' '}' '='
+     && lk != 704957                // 'f32' Identifier '=='
+     && lk != 704958                // 'f64' Identifier '=='
+     && lk != 704961                // 'i32' Identifier '=='
+     && lk != 704962                // 'i64' Identifier '=='
      && lk != 707843                // Identifier '++' '=='
      && lk != 707844                // Character '++' '=='
      && lk != 707845                // String '++' '=='
@@ -7893,6 +9473,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 708360                // Real '--' '=='
      && lk != 711090                // '[' ']' '=='
      && lk != 714957                // '{' '}' '=='
+     && lk != 721341                // 'f32' Identifier '>'
+     && lk != 721342                // 'f64' Identifier '>'
+     && lk != 721345                // 'i32' Identifier '>'
+     && lk != 721346                // 'i64' Identifier '>'
      && lk != 724227                // Identifier '++' '>'
      && lk != 724228                // Character '++' '>'
      && lk != 724229                // String '++' '>'
@@ -7907,6 +9491,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 724744                // Real '--' '>'
      && lk != 727474                // '[' ']' '>'
      && lk != 731341                // '{' '}' '>'
+     && lk != 737725                // 'f32' Identifier '>='
+     && lk != 737726                // 'f64' Identifier '>='
+     && lk != 737729                // 'i32' Identifier '>='
+     && lk != 737730                // 'i64' Identifier '>='
      && lk != 740611                // Identifier '++' '>='
      && lk != 740612                // Character '++' '>='
      && lk != 740613                // String '++' '>='
@@ -7921,6 +9509,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 741128                // Real '--' '>='
      && lk != 743858                // '[' ']' '>='
      && lk != 747725                // '{' '}' '>='
+     && lk != 754109                // 'f32' Identifier '>>'
+     && lk != 754110                // 'f64' Identifier '>>'
+     && lk != 754113                // 'i32' Identifier '>>'
+     && lk != 754114                // 'i64' Identifier '>>'
      && lk != 756995                // Identifier '++' '>>'
      && lk != 756996                // Character '++' '>>'
      && lk != 756997                // String '++' '>>'
@@ -7935,6 +9527,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 757512                // Real '--' '>>'
      && lk != 760242                // '[' ']' '>>'
      && lk != 764109                // '{' '}' '>>'
+     && lk != 770493                // 'f32' Identifier '>>='
+     && lk != 770494                // 'f64' Identifier '>>='
+     && lk != 770497                // 'i32' Identifier '>>='
+     && lk != 770498                // 'i64' Identifier '>>='
      && lk != 773379                // Identifier '++' '>>='
      && lk != 773380                // Character '++' '>>='
      && lk != 773381                // String '++' '>>='
@@ -7949,6 +9545,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 773896                // Real '--' '>>='
      && lk != 776626                // '[' ']' '>>='
      && lk != 780493                // '{' '}' '>>='
+     && lk != 786877                // 'f32' Identifier '?'
+     && lk != 786878                // 'f64' Identifier '?'
+     && lk != 786881                // 'i32' Identifier '?'
+     && lk != 786882                // 'i64' Identifier '?'
      && lk != 789763                // Identifier '++' '?'
      && lk != 789764                // Character '++' '?'
      && lk != 789765                // String '++' '?'
@@ -7963,6 +9563,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 790280                // Real '--' '?'
      && lk != 793010                // '[' ']' '?'
      && lk != 796877                // '{' '}' '?'
+     && lk != 803261                // 'f32' Identifier '?='
+     && lk != 803262                // 'f64' Identifier '?='
+     && lk != 803265                // 'i32' Identifier '?='
+     && lk != 803266                // 'i64' Identifier '?='
      && lk != 806147                // Identifier '++' '?='
      && lk != 806148                // Character '++' '?='
      && lk != 806149                // String '++' '?='
@@ -7979,6 +9583,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 813261                // '{' '}' '?='
      && lk != 825778                // '[' ']' '['
      && lk != 829645                // '{' '}' '['
+     && lk != 836029                // 'f32' Identifier ']'
+     && lk != 836030                // 'f64' Identifier ']'
+     && lk != 836033                // 'i32' Identifier ']'
+     && lk != 836034                // 'i64' Identifier ']'
      && lk != 838915                // Identifier '++' ']'
      && lk != 838916                // Character '++' ']'
      && lk != 838917                // String '++' ']'
@@ -7993,6 +9601,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 839432                // Real '--' ']'
      && lk != 842162                // '[' ']' ']'
      && lk != 846029                // '{' '}' ']'
+     && lk != 852413                // 'f32' Identifier '^'
+     && lk != 852414                // 'f64' Identifier '^'
+     && lk != 852417                // 'i32' Identifier '^'
+     && lk != 852418                // 'i64' Identifier '^'
      && lk != 855299                // Identifier '++' '^'
      && lk != 855300                // Character '++' '^'
      && lk != 855301                // String '++' '^'
@@ -8007,6 +9619,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 855816                // Real '--' '^'
      && lk != 858546                // '[' ']' '^'
      && lk != 862413                // '{' '}' '^'
+     && lk != 868797                // 'f32' Identifier '^='
+     && lk != 868798                // 'f64' Identifier '^='
+     && lk != 868801                // 'i32' Identifier '^='
+     && lk != 868802                // 'i64' Identifier '^='
      && lk != 871683                // Identifier '++' '^='
      && lk != 871684                // Character '++' '^='
      && lk != 871685                // String '++' '^='
@@ -8021,6 +9637,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 872200                // Real '--' '^='
      && lk != 874930                // '[' ']' '^='
      && lk != 878797                // '{' '}' '^='
+     && lk != 885181                // 'f32' Identifier 'break'
+     && lk != 885182                // 'f64' Identifier 'break'
+     && lk != 885185                // 'i32' Identifier 'break'
+     && lk != 885186                // 'i64' Identifier 'break'
      && lk != 888067                // Identifier '++' 'break'
      && lk != 888068                // Character '++' 'break'
      && lk != 888069                // String '++' 'break'
@@ -8035,6 +9655,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 888584                // Real '--' 'break'
      && lk != 891314                // '[' ']' 'break'
      && lk != 895181                // '{' '}' 'break'
+     && lk != 901565                // 'f32' Identifier 'case'
+     && lk != 901566                // 'f64' Identifier 'case'
+     && lk != 901569                // 'i32' Identifier 'case'
+     && lk != 901570                // 'i64' Identifier 'case'
      && lk != 904451                // Identifier '++' 'case'
      && lk != 904452                // Character '++' 'case'
      && lk != 904453                // String '++' 'case'
@@ -8049,6 +9673,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 904968                // Real '--' 'case'
      && lk != 907698                // '[' ']' 'case'
      && lk != 911565                // '{' '}' 'case'
+     && lk != 917949                // 'f32' Identifier 'catch'
+     && lk != 917950                // 'f64' Identifier 'catch'
+     && lk != 917953                // 'i32' Identifier 'catch'
+     && lk != 917954                // 'i64' Identifier 'catch'
      && lk != 920835                // Identifier '++' 'catch'
      && lk != 920836                // Character '++' 'catch'
      && lk != 920837                // String '++' 'catch'
@@ -8063,6 +9691,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 921352                // Real '--' 'catch'
      && lk != 924082                // '[' ']' 'catch'
      && lk != 927949                // '{' '}' 'catch'
+     && lk != 934333                // 'f32' Identifier 'continue'
+     && lk != 934334                // 'f64' Identifier 'continue'
+     && lk != 934337                // 'i32' Identifier 'continue'
+     && lk != 934338                // 'i64' Identifier 'continue'
      && lk != 937219                // Identifier '++' 'continue'
      && lk != 937220                // Character '++' 'continue'
      && lk != 937221                // String '++' 'continue'
@@ -8077,6 +9709,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 937736                // Real '--' 'continue'
      && lk != 940466                // '[' ']' 'continue'
      && lk != 944333                // '{' '}' 'continue'
+     && lk != 950717                // 'f32' Identifier 'default'
+     && lk != 950718                // 'f64' Identifier 'default'
+     && lk != 950721                // 'i32' Identifier 'default'
+     && lk != 950722                // 'i64' Identifier 'default'
      && lk != 953603                // Identifier '++' 'default'
      && lk != 953604                // Character '++' 'default'
      && lk != 953605                // String '++' 'default'
@@ -8091,6 +9727,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 954120                // Real '--' 'default'
      && lk != 956850                // '[' ']' 'default'
      && lk != 960717                // '{' '}' 'default'
+     && lk != 967101                // 'f32' Identifier 'do'
+     && lk != 967102                // 'f64' Identifier 'do'
+     && lk != 967105                // 'i32' Identifier 'do'
+     && lk != 967106                // 'i64' Identifier 'do'
      && lk != 969987                // Identifier '++' 'do'
      && lk != 969988                // Character '++' 'do'
      && lk != 969989                // String '++' 'do'
@@ -8105,6 +9745,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 970504                // Real '--' 'do'
      && lk != 973234                // '[' ']' 'do'
      && lk != 977101                // '{' '}' 'do'
+     && lk != 983485                // 'f32' Identifier 'else'
+     && lk != 983486                // 'f64' Identifier 'else'
+     && lk != 983489                // 'i32' Identifier 'else'
+     && lk != 983490                // 'i64' Identifier 'else'
      && lk != 986371                // Identifier '++' 'else'
      && lk != 986372                // Character '++' 'else'
      && lk != 986373                // String '++' 'else'
@@ -8119,34 +9763,22 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 986888                // Real '--' 'else'
      && lk != 989618                // '[' ']' 'else'
      && lk != 993485                // '{' '}' 'else'
-     && lk != 1002755               // Identifier '++' 'f32'
-     && lk != 1002756               // Character '++' 'f32'
-     && lk != 1002757               // String '++' 'f32'
-     && lk != 1002758               // Integer '++' 'f32'
-     && lk != 1002759               // Complex '++' 'f32'
-     && lk != 1002760               // Real '++' 'f32'
-     && lk != 1003267               // Identifier '--' 'f32'
-     && lk != 1003268               // Character '--' 'f32'
-     && lk != 1003269               // String '--' 'f32'
-     && lk != 1003270               // Integer '--' 'f32'
-     && lk != 1003271               // Complex '--' 'f32'
-     && lk != 1003272               // Real '--' 'f32'
+     && lk != 999869                // 'f32' Identifier 'f32'
+     && lk != 999870                // 'f64' Identifier 'f32'
+     && lk != 999873                // 'i32' Identifier 'f32'
+     && lk != 999874                // 'i64' Identifier 'f32'
      && lk != 1006002               // '[' ']' 'f32'
      && lk != 1009869               // '{' '}' 'f32'
-     && lk != 1019139               // Identifier '++' 'f64'
-     && lk != 1019140               // Character '++' 'f64'
-     && lk != 1019141               // String '++' 'f64'
-     && lk != 1019142               // Integer '++' 'f64'
-     && lk != 1019143               // Complex '++' 'f64'
-     && lk != 1019144               // Real '++' 'f64'
-     && lk != 1019651               // Identifier '--' 'f64'
-     && lk != 1019652               // Character '--' 'f64'
-     && lk != 1019653               // String '--' 'f64'
-     && lk != 1019654               // Integer '--' 'f64'
-     && lk != 1019655               // Complex '--' 'f64'
-     && lk != 1019656               // Real '--' 'f64'
+     && lk != 1016253               // 'f32' Identifier 'f64'
+     && lk != 1016254               // 'f64' Identifier 'f64'
+     && lk != 1016257               // 'i32' Identifier 'f64'
+     && lk != 1016258               // 'i64' Identifier 'f64'
      && lk != 1022386               // '[' ']' 'f64'
      && lk != 1026253               // '{' '}' 'f64'
+     && lk != 1032637               // 'f32' Identifier 'for'
+     && lk != 1032638               // 'f64' Identifier 'for'
+     && lk != 1032641               // 'i32' Identifier 'for'
+     && lk != 1032642               // 'i64' Identifier 'for'
      && lk != 1035523               // Identifier '++' 'for'
      && lk != 1035524               // Character '++' 'for'
      && lk != 1035525               // String '++' 'for'
@@ -8161,6 +9793,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1036040               // Real '--' 'for'
      && lk != 1038770               // '[' ']' 'for'
      && lk != 1042637               // '{' '}' 'for'
+     && lk != 1049021               // 'f32' Identifier 'foreach'
+     && lk != 1049022               // 'f64' Identifier 'foreach'
+     && lk != 1049025               // 'i32' Identifier 'foreach'
+     && lk != 1049026               // 'i64' Identifier 'foreach'
      && lk != 1051907               // Identifier '++' 'foreach'
      && lk != 1051908               // Character '++' 'foreach'
      && lk != 1051909               // String '++' 'foreach'
@@ -8175,34 +9811,22 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1052424               // Real '--' 'foreach'
      && lk != 1055154               // '[' ']' 'foreach'
      && lk != 1059021               // '{' '}' 'foreach'
-     && lk != 1068291               // Identifier '++' 'i32'
-     && lk != 1068292               // Character '++' 'i32'
-     && lk != 1068293               // String '++' 'i32'
-     && lk != 1068294               // Integer '++' 'i32'
-     && lk != 1068295               // Complex '++' 'i32'
-     && lk != 1068296               // Real '++' 'i32'
-     && lk != 1068803               // Identifier '--' 'i32'
-     && lk != 1068804               // Character '--' 'i32'
-     && lk != 1068805               // String '--' 'i32'
-     && lk != 1068806               // Integer '--' 'i32'
-     && lk != 1068807               // Complex '--' 'i32'
-     && lk != 1068808               // Real '--' 'i32'
+     && lk != 1065405               // 'f32' Identifier 'i32'
+     && lk != 1065406               // 'f64' Identifier 'i32'
+     && lk != 1065409               // 'i32' Identifier 'i32'
+     && lk != 1065410               // 'i64' Identifier 'i32'
      && lk != 1071538               // '[' ']' 'i32'
      && lk != 1075405               // '{' '}' 'i32'
-     && lk != 1084675               // Identifier '++' 'i64'
-     && lk != 1084676               // Character '++' 'i64'
-     && lk != 1084677               // String '++' 'i64'
-     && lk != 1084678               // Integer '++' 'i64'
-     && lk != 1084679               // Complex '++' 'i64'
-     && lk != 1084680               // Real '++' 'i64'
-     && lk != 1085187               // Identifier '--' 'i64'
-     && lk != 1085188               // Character '--' 'i64'
-     && lk != 1085189               // String '--' 'i64'
-     && lk != 1085190               // Integer '--' 'i64'
-     && lk != 1085191               // Complex '--' 'i64'
-     && lk != 1085192               // Real '--' 'i64'
+     && lk != 1081789               // 'f32' Identifier 'i64'
+     && lk != 1081790               // 'f64' Identifier 'i64'
+     && lk != 1081793               // 'i32' Identifier 'i64'
+     && lk != 1081794               // 'i64' Identifier 'i64'
      && lk != 1087922               // '[' ']' 'i64'
      && lk != 1091789               // '{' '}' 'i64'
+     && lk != 1098173               // 'f32' Identifier 'if'
+     && lk != 1098174               // 'f64' Identifier 'if'
+     && lk != 1098177               // 'i32' Identifier 'if'
+     && lk != 1098178               // 'i64' Identifier 'if'
      && lk != 1101059               // Identifier '++' 'if'
      && lk != 1101060               // Character '++' 'if'
      && lk != 1101061               // String '++' 'if'
@@ -8217,6 +9841,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1101576               // Real '--' 'if'
      && lk != 1104306               // '[' ']' 'if'
      && lk != 1108173               // '{' '}' 'if'
+     && lk != 1114557               // 'f32' Identifier 'import'
+     && lk != 1114558               // 'f64' Identifier 'import'
+     && lk != 1114561               // 'i32' Identifier 'import'
+     && lk != 1114562               // 'i64' Identifier 'import'
      && lk != 1117443               // Identifier '++' 'import'
      && lk != 1117444               // Character '++' 'import'
      && lk != 1117445               // String '++' 'import'
@@ -8231,6 +9859,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1117960               // Real '--' 'import'
      && lk != 1120690               // '[' ']' 'import'
      && lk != 1124557               // '{' '}' 'import'
+     && lk != 1130941               // 'f32' Identifier 'include'
+     && lk != 1130942               // 'f64' Identifier 'include'
+     && lk != 1130945               // 'i32' Identifier 'include'
+     && lk != 1130946               // 'i64' Identifier 'include'
      && lk != 1133827               // Identifier '++' 'include'
      && lk != 1133828               // Character '++' 'include'
      && lk != 1133829               // String '++' 'include'
@@ -8245,6 +9877,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1134344               // Real '--' 'include'
      && lk != 1137074               // '[' ']' 'include'
      && lk != 1140941               // '{' '}' 'include'
+     && lk != 1147325               // 'f32' Identifier 'local'
+     && lk != 1147326               // 'f64' Identifier 'local'
+     && lk != 1147329               // 'i32' Identifier 'local'
+     && lk != 1147330               // 'i64' Identifier 'local'
      && lk != 1150211               // Identifier '++' 'local'
      && lk != 1150212               // Character '++' 'local'
      && lk != 1150213               // String '++' 'local'
@@ -8259,6 +9895,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1150728               // Real '--' 'local'
      && lk != 1153458               // '[' ']' 'local'
      && lk != 1157325               // '{' '}' 'local'
+     && lk != 1163709               // 'f32' Identifier 'return'
+     && lk != 1163710               // 'f64' Identifier 'return'
+     && lk != 1163713               // 'i32' Identifier 'return'
+     && lk != 1163714               // 'i64' Identifier 'return'
      && lk != 1166595               // Identifier '++' 'return'
      && lk != 1166596               // Character '++' 'return'
      && lk != 1166597               // String '++' 'return'
@@ -8273,6 +9913,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1167112               // Real '--' 'return'
      && lk != 1169842               // '[' ']' 'return'
      && lk != 1173709               // '{' '}' 'return'
+     && lk != 1180093               // 'f32' Identifier 'switch'
+     && lk != 1180094               // 'f64' Identifier 'switch'
+     && lk != 1180097               // 'i32' Identifier 'switch'
+     && lk != 1180098               // 'i64' Identifier 'switch'
      && lk != 1182979               // Identifier '++' 'switch'
      && lk != 1182980               // Character '++' 'switch'
      && lk != 1182981               // String '++' 'switch'
@@ -8287,6 +9931,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1183496               // Real '--' 'switch'
      && lk != 1186226               // '[' ']' 'switch'
      && lk != 1190093               // '{' '}' 'switch'
+     && lk != 1196477               // 'f32' Identifier 'test'
+     && lk != 1196478               // 'f64' Identifier 'test'
+     && lk != 1196481               // 'i32' Identifier 'test'
+     && lk != 1196482               // 'i64' Identifier 'test'
      && lk != 1199363               // Identifier '++' 'test'
      && lk != 1199364               // Character '++' 'test'
      && lk != 1199365               // String '++' 'test'
@@ -8301,6 +9949,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1199880               // Real '--' 'test'
      && lk != 1202610               // '[' ']' 'test'
      && lk != 1206477               // '{' '}' 'test'
+     && lk != 1212861               // 'f32' Identifier 'throw'
+     && lk != 1212862               // 'f64' Identifier 'throw'
+     && lk != 1212865               // 'i32' Identifier 'throw'
+     && lk != 1212866               // 'i64' Identifier 'throw'
      && lk != 1215747               // Identifier '++' 'throw'
      && lk != 1215748               // Character '++' 'throw'
      && lk != 1215749               // String '++' 'throw'
@@ -8315,6 +9967,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1216264               // Real '--' 'throw'
      && lk != 1218994               // '[' ']' 'throw'
      && lk != 1222861               // '{' '}' 'throw'
+     && lk != 1229245               // 'f32' Identifier 'try'
+     && lk != 1229246               // 'f64' Identifier 'try'
+     && lk != 1229249               // 'i32' Identifier 'try'
+     && lk != 1229250               // 'i64' Identifier 'try'
      && lk != 1232131               // Identifier '++' 'try'
      && lk != 1232132               // Character '++' 'try'
      && lk != 1232133               // String '++' 'try'
@@ -8329,6 +9985,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1232648               // Real '--' 'try'
      && lk != 1235378               // '[' ']' 'try'
      && lk != 1239245               // '{' '}' 'try'
+     && lk != 1245629               // 'f32' Identifier 'while'
+     && lk != 1245630               // 'f64' Identifier 'while'
+     && lk != 1245633               // 'i32' Identifier 'while'
+     && lk != 1245634               // 'i64' Identifier 'while'
      && lk != 1248515               // Identifier '++' 'while'
      && lk != 1248516               // Character '++' 'while'
      && lk != 1248517               // String '++' 'while'
@@ -8343,8 +10003,16 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1249032               // Real '--' 'while'
      && lk != 1251762               // '[' ']' 'while'
      && lk != 1255629               // '{' '}' 'while'
+     && lk != 1262013               // 'f32' Identifier '{'
+     && lk != 1262014               // 'f64' Identifier '{'
+     && lk != 1262017               // 'i32' Identifier '{'
+     && lk != 1262018               // 'i64' Identifier '{'
      && lk != 1268146               // '[' ']' '{'
      && lk != 1272013               // '{' '}' '{'
+     && lk != 1278397               // 'f32' Identifier '|'
+     && lk != 1278398               // 'f64' Identifier '|'
+     && lk != 1278401               // 'i32' Identifier '|'
+     && lk != 1278402               // 'i64' Identifier '|'
      && lk != 1281283               // Identifier '++' '|'
      && lk != 1281284               // Character '++' '|'
      && lk != 1281285               // String '++' '|'
@@ -8359,6 +10027,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1281800               // Real '--' '|'
      && lk != 1284530               // '[' ']' '|'
      && lk != 1288397               // '{' '}' '|'
+     && lk != 1294781               // 'f32' Identifier '|='
+     && lk != 1294782               // 'f64' Identifier '|='
+     && lk != 1294785               // 'i32' Identifier '|='
+     && lk != 1294786               // 'i64' Identifier '|='
      && lk != 1297667               // Identifier '++' '|='
      && lk != 1297668               // Character '++' '|='
      && lk != 1297669               // String '++' '|='
@@ -8373,6 +10045,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1298184               // Real '--' '|='
      && lk != 1300914               // '[' ']' '|='
      && lk != 1304781               // '{' '}' '|='
+     && lk != 1311165               // 'f32' Identifier '||'
+     && lk != 1311166               // 'f64' Identifier '||'
+     && lk != 1311169               // 'i32' Identifier '||'
+     && lk != 1311170               // 'i64' Identifier '||'
      && lk != 1314051               // Identifier '++' '||'
      && lk != 1314052               // Character '++' '||'
      && lk != 1314053               // String '++' '||'
@@ -8387,6 +10063,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1314568               // Real '--' '||'
      && lk != 1317298               // '[' ']' '||'
      && lk != 1321165               // '{' '}' '||'
+     && lk != 1327549               // 'f32' Identifier '}'
+     && lk != 1327550               // 'f64' Identifier '}'
+     && lk != 1327553               // 'i32' Identifier '}'
+     && lk != 1327554               // 'i64' Identifier '}'
      && lk != 1330435               // Identifier '++' '}'
      && lk != 1330436               // Character '++' '}'
      && lk != 1330437               // String '++' '}'
@@ -8401,6 +10081,10 @@ function MaiaScript(string, parsingEventHandler)
      && lk != 1330952               // Real '--' '}'
      && lk != 1333682               // '[' ']' '}'
      && lk != 1337549               // '{' '}' '}'
+     && lk != 1343933               // 'f32' Identifier '~'
+     && lk != 1343934               // 'f64' Identifier '~'
+     && lk != 1343937               // 'i32' Identifier '~'
+     && lk != 1343938               // 'i64' Identifier '~'
      && lk != 1346819               // Identifier '++' '~'
      && lk != 1346820               // Character '++' '~'
      && lk != 1346821               // String '++' '~'
@@ -8742,18 +10426,6 @@ function MaiaScript(string, parsingEventHandler)
     case 986374:                    // Integer '++' 'else'
     case 986375:                    // Complex '++' 'else'
     case 986376:                    // Real '++' 'else'
-    case 1002755:                   // Identifier '++' 'f32'
-    case 1002756:                   // Character '++' 'f32'
-    case 1002757:                   // String '++' 'f32'
-    case 1002758:                   // Integer '++' 'f32'
-    case 1002759:                   // Complex '++' 'f32'
-    case 1002760:                   // Real '++' 'f32'
-    case 1019139:                   // Identifier '++' 'f64'
-    case 1019140:                   // Character '++' 'f64'
-    case 1019141:                   // String '++' 'f64'
-    case 1019142:                   // Integer '++' 'f64'
-    case 1019143:                   // Complex '++' 'f64'
-    case 1019144:                   // Real '++' 'f64'
     case 1035523:                   // Identifier '++' 'for'
     case 1035524:                   // Character '++' 'for'
     case 1035525:                   // String '++' 'for'
@@ -8766,18 +10438,6 @@ function MaiaScript(string, parsingEventHandler)
     case 1051910:                   // Integer '++' 'foreach'
     case 1051911:                   // Complex '++' 'foreach'
     case 1051912:                   // Real '++' 'foreach'
-    case 1068291:                   // Identifier '++' 'i32'
-    case 1068292:                   // Character '++' 'i32'
-    case 1068293:                   // String '++' 'i32'
-    case 1068294:                   // Integer '++' 'i32'
-    case 1068295:                   // Complex '++' 'i32'
-    case 1068296:                   // Real '++' 'i32'
-    case 1084675:                   // Identifier '++' 'i64'
-    case 1084676:                   // Character '++' 'i64'
-    case 1084677:                   // String '++' 'i64'
-    case 1084678:                   // Integer '++' 'i64'
-    case 1084679:                   // Complex '++' 'i64'
-    case 1084680:                   // Real '++' 'i64'
     case 1101059:                   // Identifier '++' 'if'
     case 1101060:                   // Character '++' 'if'
     case 1101061:                   // String '++' 'if'
@@ -9155,18 +10815,6 @@ function MaiaScript(string, parsingEventHandler)
     case 986886:                    // Integer '--' 'else'
     case 986887:                    // Complex '--' 'else'
     case 986888:                    // Real '--' 'else'
-    case 1003267:                   // Identifier '--' 'f32'
-    case 1003268:                   // Character '--' 'f32'
-    case 1003269:                   // String '--' 'f32'
-    case 1003270:                   // Integer '--' 'f32'
-    case 1003271:                   // Complex '--' 'f32'
-    case 1003272:                   // Real '--' 'f32'
-    case 1019651:                   // Identifier '--' 'f64'
-    case 1019652:                   // Character '--' 'f64'
-    case 1019653:                   // String '--' 'f64'
-    case 1019654:                   // Integer '--' 'f64'
-    case 1019655:                   // Complex '--' 'f64'
-    case 1019656:                   // Real '--' 'f64'
     case 1036035:                   // Identifier '--' 'for'
     case 1036036:                   // Character '--' 'for'
     case 1036037:                   // String '--' 'for'
@@ -9179,18 +10827,6 @@ function MaiaScript(string, parsingEventHandler)
     case 1052422:                   // Integer '--' 'foreach'
     case 1052423:                   // Complex '--' 'foreach'
     case 1052424:                   // Real '--' 'foreach'
-    case 1068803:                   // Identifier '--' 'i32'
-    case 1068804:                   // Character '--' 'i32'
-    case 1068805:                   // String '--' 'i32'
-    case 1068806:                   // Integer '--' 'i32'
-    case 1068807:                   // Complex '--' 'i32'
-    case 1068808:                   // Real '--' 'i32'
-    case 1085187:                   // Identifier '--' 'i64'
-    case 1085188:                   // Character '--' 'i64'
-    case 1085189:                   // String '--' 'i64'
-    case 1085190:                   // Integer '--' 'i64'
-    case 1085191:                   // Complex '--' 'i64'
-    case 1085192:                   // Real '--' 'i64'
     case 1101571:                   // Identifier '--' 'if'
     case 1101572:                   // Character '--' 'if'
     case 1101573:                   // String '--' 'if'
@@ -9288,37 +10924,37 @@ function MaiaScript(string, parsingEventHandler)
     case 26:                        // '++'
       consumeT(26);                 // '++'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case 30:                        // '--'
       consumeT(30);                 // '--'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case 25:                        // '+'
       consumeT(25);                 // '+'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case 29:                        // '-'
       consumeT(29);                 // '-'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case 82:                        // '~'
       consumeT(82);                 // '~'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case 12:                        // '!'
       consumeT(12);                 // '!'
       lookahead1W(22);              // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
       try_Primary();
       break;
     case -10:
@@ -9334,6 +10970,17 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      if (l1 != 3)                  // Identifier
+      {
+        whitespace();
+        parse_Type();
+      }
+      lookahead1W(0);               // Identifier | WhiteSpace^token
+      whitespace();
       parse_Member();
       break;
     case 20:                        // '('
@@ -9350,6 +10997,15 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
+    case 61:                        // 'f32'
+    case 62:                        // 'f64'
+    case 65:                        // 'i32'
+    case 66:                        // 'i64'
+      if (l1 != 3)                  // Identifier
+      {
+        try_Type();
+      }
+      lookahead1W(0);               // Identifier | WhiteSpace^token
       try_Member();
       break;
     case 20:                        // '('
@@ -9867,7 +11523,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'while' | '{' | '~'
     whitespace();
     parse_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -9884,7 +11540,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 444:                     // 'else' Identifier
-        lookahead3W(46);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -9911,7 +11567,7 @@ function MaiaScript(string, parsingEventHandler)
       case 4796:                    // 'else' ';'
       case 6972:                    // 'else' 'break'
       case 7356:                    // 'else' 'continue'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(40);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -9929,7 +11585,7 @@ function MaiaScript(string, parsingEventHandler)
       case 828:                     // 'else' Integer
       case 956:                     // 'else' Complex
       case 1084:                    // 'else' Real
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -9945,7 +11601,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3900:                    // 'else' '--'
       case 10556:                   // 'else' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8124:                    // 'else' 'for'
       case 8252:                    // 'else' 'foreach'
@@ -10070,7 +11726,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
                                     // 'while' | '{' | '~'
     try_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -10087,7 +11743,7 @@ function MaiaScript(string, parsingEventHandler)
       switch (lk)
       {
       case 444:                     // 'else' Identifier
-        lookahead3W(46);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -10114,7 +11770,7 @@ function MaiaScript(string, parsingEventHandler)
       case 4796:                    // 'else' ';'
       case 6972:                    // 'else' 'break'
       case 7356:                    // 'else' 'continue'
-        lookahead3W(41);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(40);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -10132,7 +11788,7 @@ function MaiaScript(string, parsingEventHandler)
       case 828:                     // 'else' Integer
       case 956:                     // 'else' Complex
       case 1084:                    // 'else' Real
-        lookahead3W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead3W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -10148,7 +11804,7 @@ function MaiaScript(string, parsingEventHandler)
       case 3900:                    // 'else' '--'
       case 10556:                   // 'else' '~'
         lookahead3W(22);            // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
         break;
       case 8124:                    // 'else' 'for'
       case 8252:                    // 'else' 'foreach'
@@ -10458,7 +12114,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'while' | '{' | '~'
     whitespace();
     parse_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -10559,7 +12215,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
                                     // 'while' | '{' | '~'
     try_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -10989,7 +12645,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'while' | '{' | '~'
     whitespace();
     parse_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -11416,7 +13072,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
                                     // 'while' | '{' | '~'
     try_Expression();
-    lookahead1W(41);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+    lookahead1W(40);                // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | ')' | '+' | '++' | ',' | '-' | '--' | ':' | ';' |
                                     // '[' | ']' | 'break' | 'case' | 'catch' | 'continue' | 'default' | 'do' | 'else' |
                                     // 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' | 'import' | 'include' |
@@ -12655,108 +14311,6 @@ function MaiaScript(string, parsingEventHandler)
   function parse_Arguments()
   {
     eventHandler.startNonterminal("Arguments", e0);
-    switch (l1)
-    {
-    case 61:                        // 'f32'
-    case 62:                        // 'f64'
-    case 65:                        // 'i32'
-    case 66:                        // 'i64'
-      lookahead2W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      switch (lk)
-      {
-      case 445:                     // 'f32' Identifier
-      case 446:                     // 'f64' Identifier
-      case 449:                     // 'i32' Identifier
-      case 450:                     // 'i64' Identifier
-        lookahead3W(38);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
-                                    // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
-                                    // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
-        break;
-      }
-      break;
-    default:
-      lk = l1;
-    }
-    if (lk == 328125                // 'f32' Identifier '('
-     || lk == 328126                // 'f64' Identifier '('
-     || lk == 328129                // 'i32' Identifier '('
-     || lk == 328130                // 'i64' Identifier '('
-     || lk == 524733                // 'f32' Identifier '.'
-     || lk == 524734                // 'f64' Identifier '.'
-     || lk == 524737                // 'i32' Identifier '.'
-     || lk == 524738)               // 'i64' Identifier '.'
-    {
-      lk = memoized(11, e0);
-      if (lk == 0)
-      {
-        var b0A = b0; var e0A = e0; var l1A = l1;
-        var b1A = b1; var e1A = e1; var l2A = l2;
-        var b2A = b2; var e2A = e2; var l3A = l3;
-        var b3A = b3; var e3A = e3;
-        try
-        {
-          try_Type();
-          lk = -1;
-        }
-        catch (p1A)
-        {
-          lk = -2;
-        }
-        b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
-        b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
-        b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
-        b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(11, e0, lk);
-      }
-    }
-    if (lk != -2
-     && lk != 3                     // Identifier
-     && lk != 4                     // Character
-     && lk != 5                     // String
-     && lk != 6                     // Integer
-     && lk != 7                     // Complex
-     && lk != 8                     // Real
-     && lk != 9                     // Comment
-     && lk != 12                    // '!'
-     && lk != 20                    // '('
-     && lk != 25                    // '+'
-     && lk != 26                    // '++'
-     && lk != 29                    // '-'
-     && lk != 30                    // '--'
-     && lk != 37                    // ';'
-     && lk != 50                    // '['
-     && lk != 54                    // 'break'
-     && lk != 57                    // 'continue'
-     && lk != 59                    // 'do'
-     && lk != 63                    // 'for'
-     && lk != 64                    // 'foreach'
-     && lk != 67                    // 'if'
-     && lk != 68                    // 'import'
-     && lk != 69                    // 'include'
-     && lk != 70                    // 'local'
-     && lk != 71                    // 'return'
-     && lk != 72                    // 'switch'
-     && lk != 73                    // 'test'
-     && lk != 74                    // 'throw'
-     && lk != 75                    // 'try'
-     && lk != 76                    // 'while'
-     && lk != 77                    // '{'
-     && lk != 82)                   // '~'
-    {
-      whitespace();
-      parse_Type();
-    }
-    lookahead1W(24);                // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-    whitespace();
     parse_Expression();
     for (;;)
     {
@@ -12771,111 +14325,6 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
                                     // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
                                     // 'while' | '{' | '~'
-      switch (l1)
-      {
-      case 61:                      // 'f32'
-      case 62:                      // 'f64'
-      case 65:                      // 'i32'
-      case 66:                      // 'i64'
-        lookahead2W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-        switch (lk)
-        {
-        case 445:                   // 'f32' Identifier
-        case 446:                   // 'f64' Identifier
-        case 449:                   // 'i32' Identifier
-        case 450:                   // 'i64' Identifier
-          lookahead3W(38);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
-                                    // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
-                                    // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
-          break;
-        }
-        break;
-      default:
-        lk = l1;
-      }
-      if (lk == 328125              // 'f32' Identifier '('
-       || lk == 328126              // 'f64' Identifier '('
-       || lk == 328129              // 'i32' Identifier '('
-       || lk == 328130              // 'i64' Identifier '('
-       || lk == 524733              // 'f32' Identifier '.'
-       || lk == 524734              // 'f64' Identifier '.'
-       || lk == 524737              // 'i32' Identifier '.'
-       || lk == 524738)             // 'i64' Identifier '.'
-      {
-        lk = memoized(12, e0);
-        if (lk == 0)
-        {
-          var b0A = b0; var e0A = e0; var l1A = l1;
-          var b1A = b1; var e1A = e1; var l2A = l2;
-          var b2A = b2; var e2A = e2; var l3A = l3;
-          var b3A = b3; var e3A = e3;
-          try
-          {
-            try_Type();
-            lk = -1;
-          }
-          catch (p1A)
-          {
-            lk = -2;
-          }
-          b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
-          b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
-          b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
-          b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(12, e0, lk);
-        }
-      }
-      if (lk != -2
-       && lk != 3                   // Identifier
-       && lk != 4                   // Character
-       && lk != 5                   // String
-       && lk != 6                   // Integer
-       && lk != 7                   // Complex
-       && lk != 8                   // Real
-       && lk != 9                   // Comment
-       && lk != 12                  // '!'
-       && lk != 20                  // '('
-       && lk != 25                  // '+'
-       && lk != 26                  // '++'
-       && lk != 29                  // '-'
-       && lk != 30                  // '--'
-       && lk != 37                  // ';'
-       && lk != 50                  // '['
-       && lk != 54                  // 'break'
-       && lk != 57                  // 'continue'
-       && lk != 59                  // 'do'
-       && lk != 63                  // 'for'
-       && lk != 64                  // 'foreach'
-       && lk != 67                  // 'if'
-       && lk != 68                  // 'import'
-       && lk != 69                  // 'include'
-       && lk != 70                  // 'local'
-       && lk != 71                  // 'return'
-       && lk != 72                  // 'switch'
-       && lk != 73                  // 'test'
-       && lk != 74                  // 'throw'
-       && lk != 75                  // 'try'
-       && lk != 76                  // 'while'
-       && lk != 77                  // '{'
-       && lk != 82                  // '~'
-       && lk != 459197              // 'f32' Identifier ','
-       && lk != 459198              // 'f64' Identifier ','
-       && lk != 459201              // 'i32' Identifier ','
-       && lk != 459202)             // 'i64' Identifier ','
-      {
-        whitespace();
-        parse_Type();
-      }
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
       whitespace();
       parse_Expression();
     }
@@ -12884,106 +14333,6 @@ function MaiaScript(string, parsingEventHandler)
 
   function try_Arguments()
   {
-    switch (l1)
-    {
-    case 61:                        // 'f32'
-    case 62:                        // 'f64'
-    case 65:                        // 'i32'
-    case 66:                        // 'i64'
-      lookahead2W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      switch (lk)
-      {
-      case 445:                     // 'f32' Identifier
-      case 446:                     // 'f64' Identifier
-      case 449:                     // 'i32' Identifier
-      case 450:                     // 'i64' Identifier
-        lookahead3W(38);            // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
-                                    // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
-                                    // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
-        break;
-      }
-      break;
-    default:
-      lk = l1;
-    }
-    if (lk == 328125                // 'f32' Identifier '('
-     || lk == 328126                // 'f64' Identifier '('
-     || lk == 328129                // 'i32' Identifier '('
-     || lk == 328130                // 'i64' Identifier '('
-     || lk == 524733                // 'f32' Identifier '.'
-     || lk == 524734                // 'f64' Identifier '.'
-     || lk == 524737                // 'i32' Identifier '.'
-     || lk == 524738)               // 'i64' Identifier '.'
-    {
-      lk = memoized(11, e0);
-      if (lk == 0)
-      {
-        var b0A = b0; var e0A = e0; var l1A = l1;
-        var b1A = b1; var e1A = e1; var l2A = l2;
-        var b2A = b2; var e2A = e2; var l3A = l3;
-        var b3A = b3; var e3A = e3;
-        try
-        {
-          try_Type();
-          memoize(11, e0A, -1);
-        }
-        catch (p1A)
-        {
-          b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
-          b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
-          b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
-          b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(11, e0A, -2);
-        }
-        lk = -2;
-      }
-    }
-    if (lk != -2
-     && lk != 3                     // Identifier
-     && lk != 4                     // Character
-     && lk != 5                     // String
-     && lk != 6                     // Integer
-     && lk != 7                     // Complex
-     && lk != 8                     // Real
-     && lk != 9                     // Comment
-     && lk != 12                    // '!'
-     && lk != 20                    // '('
-     && lk != 25                    // '+'
-     && lk != 26                    // '++'
-     && lk != 29                    // '-'
-     && lk != 30                    // '--'
-     && lk != 37                    // ';'
-     && lk != 50                    // '['
-     && lk != 54                    // 'break'
-     && lk != 57                    // 'continue'
-     && lk != 59                    // 'do'
-     && lk != 63                    // 'for'
-     && lk != 64                    // 'foreach'
-     && lk != 67                    // 'if'
-     && lk != 68                    // 'import'
-     && lk != 69                    // 'include'
-     && lk != 70                    // 'local'
-     && lk != 71                    // 'return'
-     && lk != 72                    // 'switch'
-     && lk != 73                    // 'test'
-     && lk != 74                    // 'throw'
-     && lk != 75                    // 'try'
-     && lk != 76                    // 'while'
-     && lk != 77                    // '{'
-     && lk != 82)                   // '~'
-    {
-      try_Type();
-    }
-    lookahead1W(24);                // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
     try_Expression();
     for (;;)
     {
@@ -12993,110 +14342,6 @@ function MaiaScript(string, parsingEventHandler)
         break;
       }
       consumeT(28);                 // ','
-      lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-      switch (l1)
-      {
-      case 61:                      // 'f32'
-      case 62:                      // 'f64'
-      case 65:                      // 'i32'
-      case 66:                      // 'i64'
-        lookahead2W(24);            // Identifier | Character | String | Integer | Complex | Real | Comment |
-                                    // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
-                                    // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
-                                    // 'import' | 'include' | 'local' | 'return' | 'switch' | 'test' | 'throw' | 'try' |
-                                    // 'while' | '{' | '~'
-        switch (lk)
-        {
-        case 445:                   // 'f32' Identifier
-        case 446:                   // 'f64' Identifier
-        case 449:                   // 'i32' Identifier
-        case 450:                   // 'i64' Identifier
-          lookahead3W(38);          // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' |
-                                    // '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' |
-                                    // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
-          break;
-        }
-        break;
-      default:
-        lk = l1;
-      }
-      if (lk == 328125              // 'f32' Identifier '('
-       || lk == 328126              // 'f64' Identifier '('
-       || lk == 328129              // 'i32' Identifier '('
-       || lk == 328130              // 'i64' Identifier '('
-       || lk == 524733              // 'f32' Identifier '.'
-       || lk == 524734              // 'f64' Identifier '.'
-       || lk == 524737              // 'i32' Identifier '.'
-       || lk == 524738)             // 'i64' Identifier '.'
-      {
-        lk = memoized(12, e0);
-        if (lk == 0)
-        {
-          var b0A = b0; var e0A = e0; var l1A = l1;
-          var b1A = b1; var e1A = e1; var l2A = l2;
-          var b2A = b2; var e2A = e2; var l3A = l3;
-          var b3A = b3; var e3A = e3;
-          try
-          {
-            try_Type();
-            memoize(12, e0A, -1);
-          }
-          catch (p1A)
-          {
-            b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
-            b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
-            b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
-            b3 = b3A; e3 = e3A; end = e3A; }}}
-            memoize(12, e0A, -2);
-          }
-          lk = -2;
-        }
-      }
-      if (lk != -2
-       && lk != 3                   // Identifier
-       && lk != 4                   // Character
-       && lk != 5                   // String
-       && lk != 6                   // Integer
-       && lk != 7                   // Complex
-       && lk != 8                   // Real
-       && lk != 9                   // Comment
-       && lk != 12                  // '!'
-       && lk != 20                  // '('
-       && lk != 25                  // '+'
-       && lk != 26                  // '++'
-       && lk != 29                  // '-'
-       && lk != 30                  // '--'
-       && lk != 37                  // ';'
-       && lk != 50                  // '['
-       && lk != 54                  // 'break'
-       && lk != 57                  // 'continue'
-       && lk != 59                  // 'do'
-       && lk != 63                  // 'for'
-       && lk != 64                  // 'foreach'
-       && lk != 67                  // 'if'
-       && lk != 68                  // 'import'
-       && lk != 69                  // 'include'
-       && lk != 70                  // 'local'
-       && lk != 71                  // 'return'
-       && lk != 72                  // 'switch'
-       && lk != 73                  // 'test'
-       && lk != 74                  // 'throw'
-       && lk != 75                  // 'try'
-       && lk != 76                  // 'while'
-       && lk != 77                  // '{'
-       && lk != 82                  // '~'
-       && lk != 459197              // 'f32' Identifier ','
-       && lk != 459198              // 'f64' Identifier ','
-       && lk != 459201              // 'i32' Identifier ','
-       && lk != 459202)             // 'i64' Identifier ','
-      {
-        try_Type();
-      }
       lookahead1W(24);              // Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '(' | '+' | '++' | '-' | '--' | ';' | '[' | 'break' |
                                     // 'continue' | 'do' | 'f32' | 'f64' | 'for' | 'foreach' | 'i32' | 'i64' | 'if' |
@@ -13112,7 +14357,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -13175,7 +14420,7 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1264131               // Identifier '(' '{'
      || lk == 1346051)              // Identifier '(' '~'
     {
-      lk = memoized(13, e0);
+      lk = memoized(11, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -13217,7 +14462,7 @@ function MaiaScript(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(13, e0, lk);
+        memoize(11, e0, lk);
       }
     }
     switch (lk)
@@ -13253,7 +14498,7 @@ function MaiaScript(string, parsingEventHandler)
       consume(3);                   // Identifier
       for (;;)
       {
-        lookahead1W(46);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead1W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -13271,7 +14516,7 @@ function MaiaScript(string, parsingEventHandler)
       }
       for (;;)
       {
-        lookahead1W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead1W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -13290,7 +14535,7 @@ function MaiaScript(string, parsingEventHandler)
           switch (lk)
           {
           case 434:                 // '[' Identifier
-            lookahead3W(40);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+            lookahead3W(39);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -13310,7 +14555,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
             break;
           case 6578:                // '[' ']'
-            lookahead3W(45);        // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+            lookahead3W(44);        // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -13331,6 +14576,12 @@ function MaiaScript(string, parsingEventHandler)
           case 7346:                // '[' 'continue'
             lookahead3W(21);        // WhiteSpace^token | ',' | ';' | ']'
             break;
+          case 7858:                // '[' 'f32'
+          case 7986:                // '[' 'f64'
+          case 8370:                // '[' 'i32'
+          case 8498:                // '[' 'i64'
+            lookahead3W(0);         // Identifier | WhiteSpace^token
+            break;
           case 562:                 // '[' Character
           case 690:                 // '[' String
           case 818:                 // '[' Integer
@@ -13348,7 +14599,7 @@ function MaiaScript(string, parsingEventHandler)
           case 3890:                // '[' '--'
           case 10546:               // '[' '~'
             lookahead3W(22);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
             break;
           case 8114:                // '[' 'for'
           case 8242:                // '[' 'foreach'
@@ -13360,10 +14611,6 @@ function MaiaScript(string, parsingEventHandler)
             break;
           case 2610:                // '[' '('
           case 7602:                // '[' 'do'
-          case 7858:                // '[' 'f32'
-          case 7986:                // '[' 'f64'
-          case 8370:                // '[' 'i32'
-          case 8498:                // '[' 'i64'
           case 8754:                // '[' 'import'
           case 8882:                // '[' 'include'
           case 9010:                // '[' 'local'
@@ -13459,67 +14706,19 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 82                // '~'
          && lk != 53938             // '[' ';' Identifier
          && lk != 70322             // '[' ';' Character
-         && lk != 73394             // '[' 'f32' Character
-         && lk != 73522             // '[' 'f64' Character
-         && lk != 73906             // '[' 'i32' Character
-         && lk != 74034             // '[' 'i64' Character
          && lk != 86706             // '[' ';' String
-         && lk != 89778             // '[' 'f32' String
-         && lk != 89906             // '[' 'f64' String
-         && lk != 90290             // '[' 'i32' String
-         && lk != 90418             // '[' 'i64' String
          && lk != 103090            // '[' ';' Integer
-         && lk != 106162            // '[' 'f32' Integer
-         && lk != 106290            // '[' 'f64' Integer
-         && lk != 106674            // '[' 'i32' Integer
-         && lk != 106802            // '[' 'i64' Integer
          && lk != 119474            // '[' ';' Complex
-         && lk != 122546            // '[' 'f32' Complex
-         && lk != 122674            // '[' 'f64' Complex
-         && lk != 123058            // '[' 'i32' Complex
-         && lk != 123186            // '[' 'i64' Complex
          && lk != 135858            // '[' ';' Real
-         && lk != 138930            // '[' 'f32' Real
-         && lk != 139058            // '[' 'f64' Real
-         && lk != 139442            // '[' 'i32' Real
-         && lk != 139570            // '[' 'i64' Real
          && lk != 152242            // '[' ';' Comment
-         && lk != 155314            // '[' 'f32' Comment
-         && lk != 155442            // '[' 'f64' Comment
-         && lk != 155826            // '[' 'i32' Comment
-         && lk != 155954            // '[' 'i64' Comment
          && lk != 201394            // '[' ';' '!'
-         && lk != 204466            // '[' 'f32' '!'
-         && lk != 204594            // '[' 'f64' '!'
-         && lk != 204978            // '[' 'i32' '!'
-         && lk != 205106            // '[' 'i64' '!'
          && lk != 332466            // '[' ';' '('
-         && lk != 335538            // '[' 'f32' '('
-         && lk != 335666            // '[' 'f64' '('
-         && lk != 336050            // '[' 'i32' '('
-         && lk != 336178            // '[' 'i64' '('
          && lk != 350642            // '[' ']' ')'
          && lk != 414386            // '[' ';' '+'
-         && lk != 417458            // '[' 'f32' '+'
-         && lk != 417586            // '[' 'f64' '+'
-         && lk != 417970            // '[' 'i32' '+'
-         && lk != 418098            // '[' 'i64' '+'
          && lk != 430770            // '[' ';' '++'
-         && lk != 433842            // '[' 'f32' '++'
-         && lk != 433970            // '[' 'f64' '++'
-         && lk != 434354            // '[' 'i32' '++'
-         && lk != 434482            // '[' 'i64' '++'
          && lk != 465330            // '[' ']' ','
          && lk != 479922            // '[' ';' '-'
-         && lk != 482994            // '[' 'f32' '-'
-         && lk != 483122            // '[' 'f64' '-'
-         && lk != 483506            // '[' 'i32' '-'
-         && lk != 483634            // '[' 'i64' '-'
          && lk != 496306            // '[' ';' '--'
-         && lk != 499378            // '[' 'f32' '--'
-         && lk != 499506            // '[' 'f64' '--'
-         && lk != 499890            // '[' 'i32' '--'
-         && lk != 500018            // '[' 'i64' '--'
          && lk != 580018            // '[' ']' ':'
          && lk != 606642            // '[' Identifier ';'
          && lk != 606770            // '[' Character ';'
@@ -13531,125 +14730,33 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 610994            // '[' ';' ';'
          && lk != 613170            // '[' 'break' ';'
          && lk != 613554            // '[' 'continue' ';'
-         && lk != 614066            // '[' 'f32' ';'
-         && lk != 614194            // '[' 'f64' ';'
-         && lk != 614578            // '[' 'i32' ';'
-         && lk != 614706            // '[' 'i64' ';'
          && lk != 823986            // '[' ';' '['
-         && lk != 827058            // '[' 'f32' '['
-         && lk != 827186            // '[' 'f64' '['
-         && lk != 827570            // '[' 'i32' '['
-         && lk != 827698            // '[' 'i64' '['
          && lk != 842162            // '[' ']' ']'
          && lk != 889522            // '[' ';' 'break'
-         && lk != 892594            // '[' 'f32' 'break'
-         && lk != 892722            // '[' 'f64' 'break'
-         && lk != 893106            // '[' 'i32' 'break'
-         && lk != 893234            // '[' 'i64' 'break'
          && lk != 924082            // '[' ']' 'catch'
          && lk != 938674            // '[' ';' 'continue'
-         && lk != 941746            // '[' 'f32' 'continue'
-         && lk != 941874            // '[' 'f64' 'continue'
-         && lk != 942258            // '[' 'i32' 'continue'
-         && lk != 942386            // '[' 'i64' 'continue'
          && lk != 971442            // '[' ';' 'do'
-         && lk != 974514            // '[' 'f32' 'do'
-         && lk != 974642            // '[' 'f64' 'do'
-         && lk != 975026            // '[' 'i32' 'do'
-         && lk != 975154            // '[' 'i64' 'do'
          && lk != 989618            // '[' ']' 'else'
          && lk != 1004210           // '[' ';' 'f32'
-         && lk != 1007282           // '[' 'f32' 'f32'
-         && lk != 1007410           // '[' 'f64' 'f32'
-         && lk != 1007794           // '[' 'i32' 'f32'
-         && lk != 1007922           // '[' 'i64' 'f32'
          && lk != 1020594           // '[' ';' 'f64'
-         && lk != 1023666           // '[' 'f32' 'f64'
-         && lk != 1023794           // '[' 'f64' 'f64'
-         && lk != 1024178           // '[' 'i32' 'f64'
-         && lk != 1024306           // '[' 'i64' 'f64'
          && lk != 1036978           // '[' ';' 'for'
-         && lk != 1040050           // '[' 'f32' 'for'
-         && lk != 1040178           // '[' 'f64' 'for'
-         && lk != 1040562           // '[' 'i32' 'for'
-         && lk != 1040690           // '[' 'i64' 'for'
          && lk != 1053362           // '[' ';' 'foreach'
-         && lk != 1056434           // '[' 'f32' 'foreach'
-         && lk != 1056562           // '[' 'f64' 'foreach'
-         && lk != 1056946           // '[' 'i32' 'foreach'
-         && lk != 1057074           // '[' 'i64' 'foreach'
          && lk != 1069746           // '[' ';' 'i32'
-         && lk != 1072818           // '[' 'f32' 'i32'
-         && lk != 1072946           // '[' 'f64' 'i32'
-         && lk != 1073330           // '[' 'i32' 'i32'
-         && lk != 1073458           // '[' 'i64' 'i32'
          && lk != 1086130           // '[' ';' 'i64'
-         && lk != 1089202           // '[' 'f32' 'i64'
-         && lk != 1089330           // '[' 'f64' 'i64'
-         && lk != 1089714           // '[' 'i32' 'i64'
-         && lk != 1089842           // '[' 'i64' 'i64'
          && lk != 1102514           // '[' ';' 'if'
-         && lk != 1105586           // '[' 'f32' 'if'
-         && lk != 1105714           // '[' 'f64' 'if'
-         && lk != 1106098           // '[' 'i32' 'if'
-         && lk != 1106226           // '[' 'i64' 'if'
          && lk != 1118898           // '[' ';' 'import'
-         && lk != 1121970           // '[' 'f32' 'import'
-         && lk != 1122098           // '[' 'f64' 'import'
-         && lk != 1122482           // '[' 'i32' 'import'
-         && lk != 1122610           // '[' 'i64' 'import'
          && lk != 1135282           // '[' ';' 'include'
-         && lk != 1138354           // '[' 'f32' 'include'
-         && lk != 1138482           // '[' 'f64' 'include'
-         && lk != 1138866           // '[' 'i32' 'include'
-         && lk != 1138994           // '[' 'i64' 'include'
          && lk != 1151666           // '[' ';' 'local'
-         && lk != 1154738           // '[' 'f32' 'local'
-         && lk != 1154866           // '[' 'f64' 'local'
-         && lk != 1155250           // '[' 'i32' 'local'
-         && lk != 1155378           // '[' 'i64' 'local'
          && lk != 1168050           // '[' ';' 'return'
-         && lk != 1171122           // '[' 'f32' 'return'
-         && lk != 1171250           // '[' 'f64' 'return'
-         && lk != 1171634           // '[' 'i32' 'return'
-         && lk != 1171762           // '[' 'i64' 'return'
          && lk != 1184434           // '[' ';' 'switch'
-         && lk != 1187506           // '[' 'f32' 'switch'
-         && lk != 1187634           // '[' 'f64' 'switch'
-         && lk != 1188018           // '[' 'i32' 'switch'
-         && lk != 1188146           // '[' 'i64' 'switch'
          && lk != 1200818           // '[' ';' 'test'
-         && lk != 1203890           // '[' 'f32' 'test'
-         && lk != 1204018           // '[' 'f64' 'test'
-         && lk != 1204402           // '[' 'i32' 'test'
-         && lk != 1204530           // '[' 'i64' 'test'
          && lk != 1217202           // '[' ';' 'throw'
-         && lk != 1220274           // '[' 'f32' 'throw'
-         && lk != 1220402           // '[' 'f64' 'throw'
-         && lk != 1220786           // '[' 'i32' 'throw'
-         && lk != 1220914           // '[' 'i64' 'throw'
          && lk != 1233586           // '[' ';' 'try'
-         && lk != 1236658           // '[' 'f32' 'try'
-         && lk != 1236786           // '[' 'f64' 'try'
-         && lk != 1237170           // '[' 'i32' 'try'
-         && lk != 1237298           // '[' 'i64' 'try'
          && lk != 1249970           // '[' ';' 'while'
-         && lk != 1253042           // '[' 'f32' 'while'
-         && lk != 1253170           // '[' 'f64' 'while'
-         && lk != 1253554           // '[' 'i32' 'while'
-         && lk != 1253682           // '[' 'i64' 'while'
          && lk != 1266354           // '[' ';' '{'
-         && lk != 1269426           // '[' 'f32' '{'
-         && lk != 1269554           // '[' 'f64' '{'
-         && lk != 1269938           // '[' 'i32' '{'
-         && lk != 1270066           // '[' 'i64' '{'
-         && lk != 1348274           // '[' ';' '~'
-         && lk != 1351346           // '[' 'f32' '~'
-         && lk != 1351474           // '[' 'f64' '~'
-         && lk != 1351858           // '[' 'i32' '~'
-         && lk != 1351986)          // '[' 'i64' '~'
+         && lk != 1348274)          // '[' ';' '~'
         {
-          lk = memoized(14, e0);
+          lk = memoized(12, e0);
           if (lk == 0)
           {
             var b0B = b0; var e0B = e0; var l1B = l1;
@@ -13679,131 +14786,16 @@ function MaiaScript(string, parsingEventHandler)
             b1 = b1B; e1 = e1B; l2 = l2B; if (l2 == 0) {end = e1B;} else {
             b2 = b2B; e2 = e2B; l3 = l3B; if (l3 == 0) {end = e2B;} else {
             b3 = b3B; e3 = e3B; end = e3B; }}}
-            memoize(14, e0, lk);
+            memoize(12, e0, lk);
           }
         }
-        if (lk == -2
-         || lk == 1                 // END
-         || lk == 3                 // Identifier
-         || lk == 4                 // Character
-         || lk == 5                 // String
-         || lk == 6                 // Integer
-         || lk == 7                 // Complex
-         || lk == 8                 // Real
-         || lk == 9                 // Comment
-         || lk == 12                // '!'
-         || lk == 13                // '!='
-         || lk == 15                // '%'
-         || lk == 16                // '%='
-         || lk == 17                // '&'
-         || lk == 18                // '&&'
-         || lk == 19                // '&='
-         || lk == 20                // '('
-         || lk == 21                // ')'
-         || lk == 22                // '*'
-         || lk == 23                // '**'
-         || lk == 24                // '*='
-         || lk == 25                // '+'
-         || lk == 26                // '++'
-         || lk == 27                // '+='
-         || lk == 28                // ','
-         || lk == 29                // '-'
-         || lk == 30                // '--'
-         || lk == 31                // '-='
-         || lk == 33                // '/'
-         || lk == 34                // '/='
-         || lk == 35                // ':'
-         || lk == 36                // ':='
-         || lk == 37                // ';'
-         || lk == 38                // '<'
-         || lk == 39                // '<<'
-         || lk == 40                // '<<='
-         || lk == 41                // '<='
-         || lk == 42                // '='
-         || lk == 43                // '=='
-         || lk == 44                // '>'
-         || lk == 45                // '>='
-         || lk == 46                // '>>'
-         || lk == 47                // '>>='
-         || lk == 48                // '?'
-         || lk == 49                // '?='
-         || lk == 51                // ']'
-         || lk == 52                // '^'
-         || lk == 53                // '^='
-         || lk == 54                // 'break'
-         || lk == 55                // 'case'
-         || lk == 56                // 'catch'
-         || lk == 57                // 'continue'
-         || lk == 58                // 'default'
-         || lk == 59                // 'do'
-         || lk == 60                // 'else'
-         || lk == 61                // 'f32'
-         || lk == 62                // 'f64'
-         || lk == 63                // 'for'
-         || lk == 64                // 'foreach'
-         || lk == 65                // 'i32'
-         || lk == 66                // 'i64'
-         || lk == 67                // 'if'
-         || lk == 68                // 'import'
-         || lk == 69                // 'include'
-         || lk == 70                // 'local'
-         || lk == 71                // 'return'
-         || lk == 72                // 'switch'
-         || lk == 73                // 'test'
-         || lk == 74                // 'throw'
-         || lk == 75                // 'try'
-         || lk == 76                // 'while'
-         || lk == 77                // '{'
-         || lk == 78                // '|'
-         || lk == 79                // '|='
-         || lk == 80                // '||'
-         || lk == 81                // '}'
-         || lk == 82                // '~'
-         || lk == 53938             // '[' ';' Identifier
-         || lk == 70322             // '[' ';' Character
-         || lk == 86706             // '[' ';' String
-         || lk == 103090            // '[' ';' Integer
-         || lk == 119474            // '[' ';' Complex
-         || lk == 135858            // '[' ';' Real
-         || lk == 152242            // '[' ';' Comment
-         || lk == 201394            // '[' ';' '!'
-         || lk == 332466            // '[' ';' '('
-         || lk == 414386            // '[' ';' '+'
-         || lk == 430770            // '[' ';' '++'
-         || lk == 479922            // '[' ';' '-'
-         || lk == 496306            // '[' ';' '--'
-         || lk == 606642            // '[' Identifier ';'
-         || lk == 606770            // '[' Character ';'
-         || lk == 606898            // '[' String ';'
-         || lk == 607026            // '[' Integer ';'
-         || lk == 607154            // '[' Complex ';'
-         || lk == 607282            // '[' Real ';'
-         || lk == 607410            // '[' Comment ';'
-         || lk == 610994            // '[' ';' ';'
-         || lk == 613170            // '[' 'break' ';'
-         || lk == 613554            // '[' 'continue' ';'
-         || lk == 823986            // '[' ';' '['
-         || lk == 889522            // '[' ';' 'break'
-         || lk == 938674            // '[' ';' 'continue'
-         || lk == 971442            // '[' ';' 'do'
-         || lk == 1004210           // '[' ';' 'f32'
-         || lk == 1020594           // '[' ';' 'f64'
-         || lk == 1036978           // '[' ';' 'for'
-         || lk == 1053362           // '[' ';' 'foreach'
-         || lk == 1069746           // '[' ';' 'i32'
-         || lk == 1086130           // '[' ';' 'i64'
-         || lk == 1102514           // '[' ';' 'if'
-         || lk == 1118898           // '[' ';' 'import'
-         || lk == 1135282           // '[' ';' 'include'
-         || lk == 1151666           // '[' ';' 'local'
-         || lk == 1168050           // '[' ';' 'return'
-         || lk == 1184434           // '[' ';' 'switch'
-         || lk == 1200818           // '[' ';' 'test'
-         || lk == 1217202           // '[' ';' 'throw'
-         || lk == 1233586           // '[' ';' 'try'
-         || lk == 1249970           // '[' ';' 'while'
-         || lk == 1266354           // '[' ';' '{'
-         || lk == 1348274)          // '[' ';' '~'
+        if (lk != -1
+         && lk != 350642            // '[' ']' ')'
+         && lk != 465330            // '[' ']' ','
+         && lk != 580018            // '[' ']' ':'
+         && lk != 842162            // '[' ']' ']'
+         && lk != 924082            // '[' ']' 'catch'
+         && lk != 989618)           // '[' ']' 'else'
         {
           break;
         }
@@ -13829,7 +14821,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(46);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+      lookahead2W(45);              // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -13892,7 +14884,7 @@ function MaiaScript(string, parsingEventHandler)
      || lk == 1264131               // Identifier '(' '{'
      || lk == 1346051)              // Identifier '(' '~'
     {
-      lk = memoized(13, e0);
+      lk = memoized(11, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -13924,7 +14916,7 @@ function MaiaScript(string, parsingEventHandler)
             try_Arguments();
           }
           consumeT(21);             // ')'
-          memoize(13, e0A, -1);
+          memoize(11, e0A, -1);
           lk = -3;
         }
         catch (p1A)
@@ -13934,7 +14926,7 @@ function MaiaScript(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(13, e0A, -2);
+          memoize(11, e0A, -2);
         }
       }
     }
@@ -13972,7 +14964,7 @@ function MaiaScript(string, parsingEventHandler)
       consumeT(3);                  // Identifier
       for (;;)
       {
-        lookahead1W(46);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead1W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' |
                                     // '/=' | ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
@@ -13990,7 +14982,7 @@ function MaiaScript(string, parsingEventHandler)
       }
       for (;;)
       {
-        lookahead1W(45);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+        lookahead1W(44);            // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -14009,7 +15001,7 @@ function MaiaScript(string, parsingEventHandler)
           switch (lk)
           {
           case 434:                 // '[' Identifier
-            lookahead3W(40);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+            lookahead3W(39);        // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':=' |
                                     // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | ']' | '^' | '^=' | '{' | '|' | '|=' | '||'
@@ -14029,7 +15021,7 @@ function MaiaScript(string, parsingEventHandler)
                                     // 'try' | 'while' | '{' | '~'
             break;
           case 6578:                // '[' ']'
-            lookahead3W(45);        // END | Identifier | Character | String | Integer | Complex | Real | Comment |
+            lookahead3W(44);        // END | Identifier | Character | String | Integer | Complex | Real | Comment |
                                     // WhiteSpace^token | '!' | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
                                     // '*' | '**' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '/' | '/=' |
                                     // ':' | ':=' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
@@ -14050,6 +15042,12 @@ function MaiaScript(string, parsingEventHandler)
           case 7346:                // '[' 'continue'
             lookahead3W(21);        // WhiteSpace^token | ',' | ';' | ']'
             break;
+          case 7858:                // '[' 'f32'
+          case 7986:                // '[' 'f64'
+          case 8370:                // '[' 'i32'
+          case 8498:                // '[' 'i64'
+            lookahead3W(0);         // Identifier | WhiteSpace^token
+            break;
           case 562:                 // '[' Character
           case 690:                 // '[' String
           case 818:                 // '[' Integer
@@ -14067,7 +15065,7 @@ function MaiaScript(string, parsingEventHandler)
           case 3890:                // '[' '--'
           case 10546:               // '[' '~'
             lookahead3W(22);        // Identifier | Character | String | Integer | Complex | Real | WhiteSpace^token |
-                                    // '(' | '[' | '{'
+                                    // '(' | '[' | 'f32' | 'f64' | 'i32' | 'i64' | '{'
             break;
           case 8114:                // '[' 'for'
           case 8242:                // '[' 'foreach'
@@ -14079,10 +15077,6 @@ function MaiaScript(string, parsingEventHandler)
             break;
           case 2610:                // '[' '('
           case 7602:                // '[' 'do'
-          case 7858:                // '[' 'f32'
-          case 7986:                // '[' 'f64'
-          case 8370:                // '[' 'i32'
-          case 8498:                // '[' 'i64'
           case 8754:                // '[' 'import'
           case 8882:                // '[' 'include'
           case 9010:                // '[' 'local'
@@ -14178,67 +15172,19 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 82                // '~'
          && lk != 53938             // '[' ';' Identifier
          && lk != 70322             // '[' ';' Character
-         && lk != 73394             // '[' 'f32' Character
-         && lk != 73522             // '[' 'f64' Character
-         && lk != 73906             // '[' 'i32' Character
-         && lk != 74034             // '[' 'i64' Character
          && lk != 86706             // '[' ';' String
-         && lk != 89778             // '[' 'f32' String
-         && lk != 89906             // '[' 'f64' String
-         && lk != 90290             // '[' 'i32' String
-         && lk != 90418             // '[' 'i64' String
          && lk != 103090            // '[' ';' Integer
-         && lk != 106162            // '[' 'f32' Integer
-         && lk != 106290            // '[' 'f64' Integer
-         && lk != 106674            // '[' 'i32' Integer
-         && lk != 106802            // '[' 'i64' Integer
          && lk != 119474            // '[' ';' Complex
-         && lk != 122546            // '[' 'f32' Complex
-         && lk != 122674            // '[' 'f64' Complex
-         && lk != 123058            // '[' 'i32' Complex
-         && lk != 123186            // '[' 'i64' Complex
          && lk != 135858            // '[' ';' Real
-         && lk != 138930            // '[' 'f32' Real
-         && lk != 139058            // '[' 'f64' Real
-         && lk != 139442            // '[' 'i32' Real
-         && lk != 139570            // '[' 'i64' Real
          && lk != 152242            // '[' ';' Comment
-         && lk != 155314            // '[' 'f32' Comment
-         && lk != 155442            // '[' 'f64' Comment
-         && lk != 155826            // '[' 'i32' Comment
-         && lk != 155954            // '[' 'i64' Comment
          && lk != 201394            // '[' ';' '!'
-         && lk != 204466            // '[' 'f32' '!'
-         && lk != 204594            // '[' 'f64' '!'
-         && lk != 204978            // '[' 'i32' '!'
-         && lk != 205106            // '[' 'i64' '!'
          && lk != 332466            // '[' ';' '('
-         && lk != 335538            // '[' 'f32' '('
-         && lk != 335666            // '[' 'f64' '('
-         && lk != 336050            // '[' 'i32' '('
-         && lk != 336178            // '[' 'i64' '('
          && lk != 350642            // '[' ']' ')'
          && lk != 414386            // '[' ';' '+'
-         && lk != 417458            // '[' 'f32' '+'
-         && lk != 417586            // '[' 'f64' '+'
-         && lk != 417970            // '[' 'i32' '+'
-         && lk != 418098            // '[' 'i64' '+'
          && lk != 430770            // '[' ';' '++'
-         && lk != 433842            // '[' 'f32' '++'
-         && lk != 433970            // '[' 'f64' '++'
-         && lk != 434354            // '[' 'i32' '++'
-         && lk != 434482            // '[' 'i64' '++'
          && lk != 465330            // '[' ']' ','
          && lk != 479922            // '[' ';' '-'
-         && lk != 482994            // '[' 'f32' '-'
-         && lk != 483122            // '[' 'f64' '-'
-         && lk != 483506            // '[' 'i32' '-'
-         && lk != 483634            // '[' 'i64' '-'
          && lk != 496306            // '[' ';' '--'
-         && lk != 499378            // '[' 'f32' '--'
-         && lk != 499506            // '[' 'f64' '--'
-         && lk != 499890            // '[' 'i32' '--'
-         && lk != 500018            // '[' 'i64' '--'
          && lk != 580018            // '[' ']' ':'
          && lk != 606642            // '[' Identifier ';'
          && lk != 606770            // '[' Character ';'
@@ -14250,125 +15196,33 @@ function MaiaScript(string, parsingEventHandler)
          && lk != 610994            // '[' ';' ';'
          && lk != 613170            // '[' 'break' ';'
          && lk != 613554            // '[' 'continue' ';'
-         && lk != 614066            // '[' 'f32' ';'
-         && lk != 614194            // '[' 'f64' ';'
-         && lk != 614578            // '[' 'i32' ';'
-         && lk != 614706            // '[' 'i64' ';'
          && lk != 823986            // '[' ';' '['
-         && lk != 827058            // '[' 'f32' '['
-         && lk != 827186            // '[' 'f64' '['
-         && lk != 827570            // '[' 'i32' '['
-         && lk != 827698            // '[' 'i64' '['
          && lk != 842162            // '[' ']' ']'
          && lk != 889522            // '[' ';' 'break'
-         && lk != 892594            // '[' 'f32' 'break'
-         && lk != 892722            // '[' 'f64' 'break'
-         && lk != 893106            // '[' 'i32' 'break'
-         && lk != 893234            // '[' 'i64' 'break'
          && lk != 924082            // '[' ']' 'catch'
          && lk != 938674            // '[' ';' 'continue'
-         && lk != 941746            // '[' 'f32' 'continue'
-         && lk != 941874            // '[' 'f64' 'continue'
-         && lk != 942258            // '[' 'i32' 'continue'
-         && lk != 942386            // '[' 'i64' 'continue'
          && lk != 971442            // '[' ';' 'do'
-         && lk != 974514            // '[' 'f32' 'do'
-         && lk != 974642            // '[' 'f64' 'do'
-         && lk != 975026            // '[' 'i32' 'do'
-         && lk != 975154            // '[' 'i64' 'do'
          && lk != 989618            // '[' ']' 'else'
          && lk != 1004210           // '[' ';' 'f32'
-         && lk != 1007282           // '[' 'f32' 'f32'
-         && lk != 1007410           // '[' 'f64' 'f32'
-         && lk != 1007794           // '[' 'i32' 'f32'
-         && lk != 1007922           // '[' 'i64' 'f32'
          && lk != 1020594           // '[' ';' 'f64'
-         && lk != 1023666           // '[' 'f32' 'f64'
-         && lk != 1023794           // '[' 'f64' 'f64'
-         && lk != 1024178           // '[' 'i32' 'f64'
-         && lk != 1024306           // '[' 'i64' 'f64'
          && lk != 1036978           // '[' ';' 'for'
-         && lk != 1040050           // '[' 'f32' 'for'
-         && lk != 1040178           // '[' 'f64' 'for'
-         && lk != 1040562           // '[' 'i32' 'for'
-         && lk != 1040690           // '[' 'i64' 'for'
          && lk != 1053362           // '[' ';' 'foreach'
-         && lk != 1056434           // '[' 'f32' 'foreach'
-         && lk != 1056562           // '[' 'f64' 'foreach'
-         && lk != 1056946           // '[' 'i32' 'foreach'
-         && lk != 1057074           // '[' 'i64' 'foreach'
          && lk != 1069746           // '[' ';' 'i32'
-         && lk != 1072818           // '[' 'f32' 'i32'
-         && lk != 1072946           // '[' 'f64' 'i32'
-         && lk != 1073330           // '[' 'i32' 'i32'
-         && lk != 1073458           // '[' 'i64' 'i32'
          && lk != 1086130           // '[' ';' 'i64'
-         && lk != 1089202           // '[' 'f32' 'i64'
-         && lk != 1089330           // '[' 'f64' 'i64'
-         && lk != 1089714           // '[' 'i32' 'i64'
-         && lk != 1089842           // '[' 'i64' 'i64'
          && lk != 1102514           // '[' ';' 'if'
-         && lk != 1105586           // '[' 'f32' 'if'
-         && lk != 1105714           // '[' 'f64' 'if'
-         && lk != 1106098           // '[' 'i32' 'if'
-         && lk != 1106226           // '[' 'i64' 'if'
          && lk != 1118898           // '[' ';' 'import'
-         && lk != 1121970           // '[' 'f32' 'import'
-         && lk != 1122098           // '[' 'f64' 'import'
-         && lk != 1122482           // '[' 'i32' 'import'
-         && lk != 1122610           // '[' 'i64' 'import'
          && lk != 1135282           // '[' ';' 'include'
-         && lk != 1138354           // '[' 'f32' 'include'
-         && lk != 1138482           // '[' 'f64' 'include'
-         && lk != 1138866           // '[' 'i32' 'include'
-         && lk != 1138994           // '[' 'i64' 'include'
          && lk != 1151666           // '[' ';' 'local'
-         && lk != 1154738           // '[' 'f32' 'local'
-         && lk != 1154866           // '[' 'f64' 'local'
-         && lk != 1155250           // '[' 'i32' 'local'
-         && lk != 1155378           // '[' 'i64' 'local'
          && lk != 1168050           // '[' ';' 'return'
-         && lk != 1171122           // '[' 'f32' 'return'
-         && lk != 1171250           // '[' 'f64' 'return'
-         && lk != 1171634           // '[' 'i32' 'return'
-         && lk != 1171762           // '[' 'i64' 'return'
          && lk != 1184434           // '[' ';' 'switch'
-         && lk != 1187506           // '[' 'f32' 'switch'
-         && lk != 1187634           // '[' 'f64' 'switch'
-         && lk != 1188018           // '[' 'i32' 'switch'
-         && lk != 1188146           // '[' 'i64' 'switch'
          && lk != 1200818           // '[' ';' 'test'
-         && lk != 1203890           // '[' 'f32' 'test'
-         && lk != 1204018           // '[' 'f64' 'test'
-         && lk != 1204402           // '[' 'i32' 'test'
-         && lk != 1204530           // '[' 'i64' 'test'
          && lk != 1217202           // '[' ';' 'throw'
-         && lk != 1220274           // '[' 'f32' 'throw'
-         && lk != 1220402           // '[' 'f64' 'throw'
-         && lk != 1220786           // '[' 'i32' 'throw'
-         && lk != 1220914           // '[' 'i64' 'throw'
          && lk != 1233586           // '[' ';' 'try'
-         && lk != 1236658           // '[' 'f32' 'try'
-         && lk != 1236786           // '[' 'f64' 'try'
-         && lk != 1237170           // '[' 'i32' 'try'
-         && lk != 1237298           // '[' 'i64' 'try'
          && lk != 1249970           // '[' ';' 'while'
-         && lk != 1253042           // '[' 'f32' 'while'
-         && lk != 1253170           // '[' 'f64' 'while'
-         && lk != 1253554           // '[' 'i32' 'while'
-         && lk != 1253682           // '[' 'i64' 'while'
          && lk != 1266354           // '[' ';' '{'
-         && lk != 1269426           // '[' 'f32' '{'
-         && lk != 1269554           // '[' 'f64' '{'
-         && lk != 1269938           // '[' 'i32' '{'
-         && lk != 1270066           // '[' 'i64' '{'
-         && lk != 1348274           // '[' ';' '~'
-         && lk != 1351346           // '[' 'f32' '~'
-         && lk != 1351474           // '[' 'f64' '~'
-         && lk != 1351858           // '[' 'i32' '~'
-         && lk != 1351986)          // '[' 'i64' '~'
+         && lk != 1348274)          // '[' ';' '~'
         {
-          lk = memoized(14, e0);
+          lk = memoized(12, e0);
           if (lk == 0)
           {
             var b0B = b0; var e0B = e0; var l1B = l1;
@@ -14388,7 +15242,7 @@ function MaiaScript(string, parsingEventHandler)
                 try_Arguments();
               }
               consumeT(51);         // ']'
-              memoize(14, e0B, -1);
+              memoize(12, e0B, -1);
               continue;
             }
             catch (p1B)
@@ -14397,133 +15251,18 @@ function MaiaScript(string, parsingEventHandler)
               b1 = b1B; e1 = e1B; l2 = l2B; if (l2 == 0) {end = e1B;} else {
               b2 = b2B; e2 = e2B; l3 = l3B; if (l3 == 0) {end = e2B;} else {
               b3 = b3B; e3 = e3B; end = e3B; }}}
-              memoize(14, e0B, -2);
+              memoize(12, e0B, -2);
               break;
             }
           }
         }
-        if (lk == -2
-         || lk == 1                 // END
-         || lk == 3                 // Identifier
-         || lk == 4                 // Character
-         || lk == 5                 // String
-         || lk == 6                 // Integer
-         || lk == 7                 // Complex
-         || lk == 8                 // Real
-         || lk == 9                 // Comment
-         || lk == 12                // '!'
-         || lk == 13                // '!='
-         || lk == 15                // '%'
-         || lk == 16                // '%='
-         || lk == 17                // '&'
-         || lk == 18                // '&&'
-         || lk == 19                // '&='
-         || lk == 20                // '('
-         || lk == 21                // ')'
-         || lk == 22                // '*'
-         || lk == 23                // '**'
-         || lk == 24                // '*='
-         || lk == 25                // '+'
-         || lk == 26                // '++'
-         || lk == 27                // '+='
-         || lk == 28                // ','
-         || lk == 29                // '-'
-         || lk == 30                // '--'
-         || lk == 31                // '-='
-         || lk == 33                // '/'
-         || lk == 34                // '/='
-         || lk == 35                // ':'
-         || lk == 36                // ':='
-         || lk == 37                // ';'
-         || lk == 38                // '<'
-         || lk == 39                // '<<'
-         || lk == 40                // '<<='
-         || lk == 41                // '<='
-         || lk == 42                // '='
-         || lk == 43                // '=='
-         || lk == 44                // '>'
-         || lk == 45                // '>='
-         || lk == 46                // '>>'
-         || lk == 47                // '>>='
-         || lk == 48                // '?'
-         || lk == 49                // '?='
-         || lk == 51                // ']'
-         || lk == 52                // '^'
-         || lk == 53                // '^='
-         || lk == 54                // 'break'
-         || lk == 55                // 'case'
-         || lk == 56                // 'catch'
-         || lk == 57                // 'continue'
-         || lk == 58                // 'default'
-         || lk == 59                // 'do'
-         || lk == 60                // 'else'
-         || lk == 61                // 'f32'
-         || lk == 62                // 'f64'
-         || lk == 63                // 'for'
-         || lk == 64                // 'foreach'
-         || lk == 65                // 'i32'
-         || lk == 66                // 'i64'
-         || lk == 67                // 'if'
-         || lk == 68                // 'import'
-         || lk == 69                // 'include'
-         || lk == 70                // 'local'
-         || lk == 71                // 'return'
-         || lk == 72                // 'switch'
-         || lk == 73                // 'test'
-         || lk == 74                // 'throw'
-         || lk == 75                // 'try'
-         || lk == 76                // 'while'
-         || lk == 77                // '{'
-         || lk == 78                // '|'
-         || lk == 79                // '|='
-         || lk == 80                // '||'
-         || lk == 81                // '}'
-         || lk == 82                // '~'
-         || lk == 53938             // '[' ';' Identifier
-         || lk == 70322             // '[' ';' Character
-         || lk == 86706             // '[' ';' String
-         || lk == 103090            // '[' ';' Integer
-         || lk == 119474            // '[' ';' Complex
-         || lk == 135858            // '[' ';' Real
-         || lk == 152242            // '[' ';' Comment
-         || lk == 201394            // '[' ';' '!'
-         || lk == 332466            // '[' ';' '('
-         || lk == 414386            // '[' ';' '+'
-         || lk == 430770            // '[' ';' '++'
-         || lk == 479922            // '[' ';' '-'
-         || lk == 496306            // '[' ';' '--'
-         || lk == 606642            // '[' Identifier ';'
-         || lk == 606770            // '[' Character ';'
-         || lk == 606898            // '[' String ';'
-         || lk == 607026            // '[' Integer ';'
-         || lk == 607154            // '[' Complex ';'
-         || lk == 607282            // '[' Real ';'
-         || lk == 607410            // '[' Comment ';'
-         || lk == 610994            // '[' ';' ';'
-         || lk == 613170            // '[' 'break' ';'
-         || lk == 613554            // '[' 'continue' ';'
-         || lk == 823986            // '[' ';' '['
-         || lk == 889522            // '[' ';' 'break'
-         || lk == 938674            // '[' ';' 'continue'
-         || lk == 971442            // '[' ';' 'do'
-         || lk == 1004210           // '[' ';' 'f32'
-         || lk == 1020594           // '[' ';' 'f64'
-         || lk == 1036978           // '[' ';' 'for'
-         || lk == 1053362           // '[' ';' 'foreach'
-         || lk == 1069746           // '[' ';' 'i32'
-         || lk == 1086130           // '[' ';' 'i64'
-         || lk == 1102514           // '[' ';' 'if'
-         || lk == 1118898           // '[' ';' 'import'
-         || lk == 1135282           // '[' ';' 'include'
-         || lk == 1151666           // '[' ';' 'local'
-         || lk == 1168050           // '[' ';' 'return'
-         || lk == 1184434           // '[' ';' 'switch'
-         || lk == 1200818           // '[' ';' 'test'
-         || lk == 1217202           // '[' ';' 'throw'
-         || lk == 1233586           // '[' ';' 'try'
-         || lk == 1249970           // '[' ';' 'while'
-         || lk == 1266354           // '[' ';' '{'
-         || lk == 1348274)          // '[' ';' '~'
+        if (lk != -1
+         && lk != 350642            // '[' ']' ')'
+         && lk != 465330            // '[' ']' ','
+         && lk != 580018            // '[' ']' ':'
+         && lk != 842162            // '[' ']' ']'
+         && lk != 924082            // '[' ']' 'catch'
+         && lk != 989618)           // '[' ']' 'else'
         {
           break;
         }
@@ -14641,7 +15380,7 @@ function MaiaScript(string, parsingEventHandler)
     }
     if (lk == 610981)               // ';' ';' ';'
     {
-      lk = memoized(15, e0);
+      lk = memoized(13, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -14661,7 +15400,7 @@ function MaiaScript(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(15, e0, lk);
+        memoize(13, e0, lk);
       }
     }
     if (lk != -2
@@ -14758,7 +15497,7 @@ function MaiaScript(string, parsingEventHandler)
     }
     if (lk == 610981)               // ';' ';' ';'
     {
-      lk = memoized(15, e0);
+      lk = memoized(13, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -14768,7 +15507,7 @@ function MaiaScript(string, parsingEventHandler)
         try
         {
           try_Row();
-          memoize(15, e0A, -1);
+          memoize(13, e0A, -1);
         }
         catch (p1A)
         {
@@ -14776,7 +15515,7 @@ function MaiaScript(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(15, e0A, -2);
+          memoize(13, e0A, -2);
         }
         lk = -2;
       }
@@ -14846,7 +15585,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(39);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      lookahead2W(38);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -14883,7 +15622,7 @@ function MaiaScript(string, parsingEventHandler)
     switch (l1)
     {
     case 3:                         // Identifier
-      lookahead2W(39);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
+      lookahead2W(38);              // WhiteSpace^token | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '**' |
                                     // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '.' | '/' | '/=' | ':' |
                                     // ':=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
                                     // '?=' | '[' | '^' | '^=' | '{' | '|' | '|=' | '||' | '}'
@@ -15377,7 +16116,7 @@ MaiaScript.getTokenSet = function(tokenSetId)
   for (var i = 0; i < 83; i += 32)
   {
     var j = i;
-    var i0 = (i >> 5) * 274 + s - 1;
+    var i0 = (i >> 5) * 275 + s - 1;
     var f = MaiaScript.EXPECTED[(i0 & 3) + MaiaScript.EXPECTED[i0 >> 2]];
     for ( ; f != 0; f >>>= 1, ++j)
     {
@@ -15500,355 +16239,361 @@ MaiaScript.MAP2 =
 MaiaScript.INITIAL =
 [
   /*  0 */ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 1049, 27, 28,
-  /* 29 */ 29, 30, 1055, 32, 33, 34, 35, 36, 37, 38, 39, 40, 1065, 42, 43, 44, 1069, 1070
+  /* 29 */ 29, 30, 1055, 32, 33, 34, 35, 36, 37, 38, 39, 1064, 41, 42, 43, 1068, 1069
 ];
 
 MaiaScript.TRANSITION =
 [
-  /*    0 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*   18 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*   36 */ 2272, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895,
-  /*   54 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2293, 2293, 2294, 3895, 2310, 3895, 3895, 3445,
-  /*   72 */ 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*   90 */ 3895, 3895, 3895, 3895, 3895, 3895, 2293, 2293, 2294, 3895, 3895, 3895, 3895, 3445, 5395, 3895, 3634, 5395,
-  /*  108 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  126 */ 3895, 3895, 3895, 2322, 2338, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895,
-  /*  144 */ 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4113,
-  /*  162 */ 3620, 3895, 2368, 3895, 3895, 5151, 3368, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 6151, 2396, 3895, 3895,
-  /*  180 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2414, 5718, 2435, 3895, 2310, 3895,
-  /*  198 */ 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  216 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5897, 4473,
-  /*  234 */ 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  252 */ 3895, 3895, 3895, 3895, 3895, 2604, 2494, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895,
-  /*  270 */ 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  288 */ 3895, 5933, 2524, 3895, 2310, 2870, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632,
-  /*  306 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4567, 2554, 3895,
-  /*  324 */ 2584, 3895, 3895, 5345, 3368, 3895, 3634, 2620, 3895, 6028, 3895, 3895, 5418, 3632, 3895, 3895, 3895, 3895,
-  /*  342 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2656, 2668, 2684, 3895, 2310, 3895, 3895, 3445,
-  /*  360 */ 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  378 */ 3895, 3895, 3895, 3895, 3895, 3895, 3440, 3817, 3804, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395,
-  /*  396 */ 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  414 */ 3895, 3895, 3895, 3378, 2714, 3895, 2744, 4225, 5395, 3445, 5859, 3895, 3634, 5234, 3895, 4676, 3895, 4670,
-  /*  432 */ 2786, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4219, 5975,
-  /*  450 */ 2819, 2417, 2849, 2419, 2596, 3445, 5395, 3895, 3634, 3828, 3895, 3015, 3895, 2886, 6537, 3632, 3895, 3895,
-  /*  468 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2908, 2923, 3895, 2310, 3895,
-  /*  486 */ 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  504 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3043, 5194, 2953, 4187, 2983, 4189, 5924, 3445, 5395, 3895,
-  /*  522 */ 3634, 3828, 3895, 3015, 3895, 2886, 6537, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  540 */ 3895, 3895, 3895, 3895, 3896, 3011, 4773, 3895, 3031, 3895, 3895, 3445, 3066, 3895, 3634, 5395, 3895, 4839,
-  /*  558 */ 3895, 3895, 6567, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  576 */ 3092, 4716, 3110, 3895, 3164, 3895, 6467, 3445, 5395, 3895, 3872, 5650, 3895, 3895, 3895, 3895, 5455, 3632,
-  /*  594 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3987, 3193, 6335,
-  /*  612 */ 3224, 6339, 3274, 5547, 3301, 4473, 6185, 3327, 3922, 2478, 4874, 3353, 3394, 3632, 3895, 3895, 3895, 3895,
-  /*  630 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4045, 3410, 6335, 3224, 6339, 3274, 5547,
-  /*  648 */ 3301, 4473, 6185, 3461, 3922, 4406, 4874, 3487, 3528, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  666 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4045, 3410, 6335, 3224, 6339, 3544, 5547, 3570, 4473, 6185, 3461,
-  /*  684 */ 3922, 4406, 4874, 3487, 3528, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  702 */ 3895, 3895, 3895, 4045, 3410, 5300, 3224, 3586, 3274, 5547, 3301, 4473, 6185, 3461, 3922, 4406, 4874, 3487,
-  /*  720 */ 3528, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4045,
-  /*  738 */ 3410, 6335, 3224, 6339, 3274, 3606, 3650, 3688, 6185, 3461, 3922, 4406, 4874, 3487, 3528, 3632, 3895, 3895,
-  /*  756 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4045, 3410, 6335, 3224, 6339,
-  /*  774 */ 3274, 5547, 3301, 4473, 6185, 3461, 3922, 4406, 3471, 3759, 3854, 3870, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  792 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4045, 3410, 5484, 3224, 3888, 3274, 5547, 3301, 4473,
-  /*  810 */ 6185, 3461, 3922, 4406, 4874, 3487, 3528, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  828 */ 3895, 3895, 3895, 3895, 3895, 4045, 3410, 6335, 3224, 6339, 3274, 6188, 3912, 4473, 6185, 3940, 3922, 4406,
-  /*  846 */ 4874, 3487, 3528, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  864 */ 2861, 3050, 3973, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632,
-  /*  882 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2630, 4003, 4015, 3895,
-  /*  900 */ 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895,
-  /*  918 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2640, 4031, 3895, 2310, 2803, 3895, 3445,
-  /*  936 */ 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  954 */ 3895, 3895, 3895, 3895, 3895, 3895, 5569, 5244, 4061, 5033, 4101, 2380, 4129, 3445, 5395, 2892, 3634, 5395,
-  /*  972 */ 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /*  990 */ 3895, 3895, 3895, 3838, 4155, 3895, 2310, 3895, 4185, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895,
-  /* 1008 */ 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2277, 3076,
-  /* 1026 */ 4205, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895,
-  /* 1044 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2310, 3895,
-  /* 1062 */ 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1080 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5089, 4473,
-  /* 1098 */ 6185, 4241, 3922, 3237, 4874, 4267, 5130, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1116 */ 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5089, 4473, 6185, 4241, 3922, 3237,
-  /* 1134 */ 4874, 4310, 4351, 2801, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1152 */ 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5089, 4473, 6185, 4367, 3922, 4435, 4874, 4267, 5130, 3632,
-  /* 1170 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335,
-  /* 1188 */ 4393, 6339, 3248, 6188, 3138, 4473, 6185, 4241, 3922, 3237, 4874, 4267, 5130, 3632, 3895, 3895, 3895, 3895,
-  /* 1206 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 4422, 6339, 3248, 6188,
-  /* 1224 */ 6497, 4473, 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1242 */ 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5897, 4473, 6185, 3733,
-  /* 1260 */ 3922, 5492, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1278 */ 3895, 3895, 3894, 5742, 2770, 6335, 4451, 6339, 3248, 3311, 4489, 4473, 6185, 4529, 3922, 6343, 3924, 6301,
-  /* 1296 */ 6005, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4169,
-  /* 1314 */ 4515, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895,
-  /* 1332 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4555, 3895,
-  /* 1350 */ 3895, 5151, 4583, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 6128, 4609, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1368 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4627, 4640, 3895, 2310, 3895, 3895, 3445, 5395, 3895,
-  /* 1386 */ 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1404 */ 3895, 3895, 3895, 3895, 3895, 4139, 4656, 3895, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895,
-  /* 1422 */ 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1440 */ 3894, 5742, 2770, 4705, 4692, 6339, 4732, 6188, 5089, 4473, 4758, 4803, 6369, 3237, 4819, 4267, 5130, 3632,
-  /* 1458 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4835, 2352, 4855, 6335,
-  /* 1476 */ 2465, 6339, 3248, 5547, 4325, 4473, 6185, 4241, 3922, 3237, 4874, 4267, 4890, 3632, 3895, 3895, 3895, 3895,
-  /* 1494 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 4906, 2449, 4935, 6335, 2465, 6339, 3248, 5963,
-  /* 1512 */ 5089, 5376, 5544, 4241, 5005, 3237, 6216, 4980, 4351, 2801, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1530 */ 3895, 3895, 3895, 3895, 3895, 3895, 5029, 2508, 5049, 6335, 2465, 6339, 3248, 6188, 5089, 4473, 6185, 4241,
-  /* 1548 */ 3922, 3237, 5099, 5115, 5130, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1566 */ 3895, 3895, 5146, 2538, 5167, 5223, 5210, 5448, 5260, 6188, 3711, 4473, 3208, 5287, 4464, 5064, 5676, 4267,
-  /* 1584 */ 5324, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 5340, 2568,
-  /* 1602 */ 5361, 3554, 4393, 5411, 5434, 5547, 4995, 3258, 6185, 4241, 3922, 3237, 4874, 4267, 4890, 3632, 3895, 3895,
-  /* 1620 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 3148, 5471, 5388,
-  /* 1638 */ 3248, 6188, 5897, 4473, 6185, 5897, 3284, 6343, 3743, 3177, 6414, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1656 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 5508, 2698, 5529, 6335, 2465, 6339, 3248, 4085, 5897, 6109,
-  /* 1674 */ 6185, 5897, 4251, 5308, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1692 */ 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 6188, 5897, 4473, 6185, 5897, 3285, 3590,
-  /* 1710 */ 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1728 */ 5563, 2728, 5585, 5078, 5630, 6339, 5666, 6188, 4075, 4473, 4335, 5692, 6330, 5734, 4950, 2757, 4964, 3632,
-  /* 1746 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 3722,
-  /* 1764 */ 2465, 5890, 3248, 6188, 5897, 4473, 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895,
-  /* 1782 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 3700, 2465, 6059, 5758, 5547,
-  /* 1800 */ 4282, 4473, 6185, 5897, 3922, 6343, 4377, 3124, 5614, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1818 */ 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 5707, 5787, 5803, 5826, 6188, 5897, 4473, 3512, 6066,
-  /* 1836 */ 4870, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1854 */ 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 5182, 5897, 6097, 6185, 3733, 3922, 5492, 3924, 6301,
-  /* 1872 */ 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 5852, 2833,
-  /* 1890 */ 5875, 5913, 5949, 6121, 3248, 3425, 3774, 4742, 6185, 5897, 3950, 6293, 5991, 6301, 5614, 3632, 3895, 3895,
-  /* 1908 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 6021, 2937, 6044, 6335, 2465, 6339,
-  /* 1926 */ 6082, 3957, 5897, 5836, 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1944 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 6144, 2967, 6167, 6335, 2465, 6339, 6204, 4294, 3502, 5771,
-  /* 1962 */ 3789, 5810, 6182, 6343, 3924, 4919, 6262, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 1980 */ 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 4451, 6339, 3248, 3311, 4489, 4473, 6507, 4529, 6232, 6343,
-  /* 1998 */ 5600, 3672, 6444, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2016 */ 6248, 4787, 6278, 4499, 2465, 5643, 3248, 6188, 5897, 4473, 6185, 5897, 3922, 3664, 5271, 6301, 4964, 3632,
-  /* 2034 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335,
-  /* 2052 */ 6317, 6339, 3248, 3337, 6359, 4473, 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895,
-  /* 2070 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3894, 5742, 2770, 6335, 2465, 6339, 3248, 5013,
-  /* 2088 */ 5897, 4539, 6185, 5897, 3922, 6343, 3924, 6301, 4964, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2106 */ 3895, 3895, 3895, 3895, 3895, 3895, 4611, 6385, 6400, 3445, 2310, 3895, 3895, 3445, 5395, 3895, 3634, 5395,
-  /* 2124 */ 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2142 */ 3895, 3895, 3895, 4593, 6430, 3895, 2310, 3895, 6460, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895,
-  /* 2160 */ 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 6483,
-  /* 2178 */ 6523, 3895, 2310, 3895, 3895, 5513, 5395, 3895, 2398, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895,
-  /* 2196 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 2995, 6553, 3895, 2310, 3895,
-  /* 2214 */ 3895, 3445, 5395, 3895, 3634, 5395, 3895, 3895, 3895, 3895, 5455, 3632, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2232 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3094, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2250 */ 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895, 3895,
-  /* 2268 */ 3895, 3895, 3895, 3895, 0, 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 6191, 6191,
-  /* 2295 */ 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 6191, 0, 0, 0, 0, 68, 128, 0,
-  /* 2316 */ 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 0, 6656, 6656, 88, 6656, 6656, 6656, 88, 6656, 6656, 6656, 88, 88,
-  /* 2341 */ 6656, 88, 88, 88, 88, 6656, 6744, 6744, 6744, 6744, 6744, 0, 0, 0, 0, 0, 0, 2097, 2097, 2126, 0, 2126,
-  /* 2363 */ 2126, 2126, 0, 2126, 2126, 0, 0, 0, 3072, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 0, 7168, 8704,
-  /* 2389 */ 10240, 12800, 14336, 16384, 17920, 21504, 22528, 3072, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175,
-  /* 2413 */ 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13824, 0, 0, 0, 0, 5196, 0, 0, 5196, 0, 0, 0, 0, 5196,
-  /* 2444 */ 5196, 5196, 5196, 5196, 5196, 0, 0, 0, 0, 0, 0, 2098, 2098, 2127, 0, 2127, 2127, 2127, 0, 2127, 2127, 0, 0,
-  /* 2467 */ 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 2096, 2096, 2096, 0, 239, 240, 241, 242, 243, 218, 219, 0, 4829,
-  /* 2491 */ 4854, 2096, 2096, 0, 8281, 8281, 0, 8281, 8281, 8281, 8281, 0, 8281, 8281, 8281, 8281, 8281, 0, 0, 0, 0, 0,
-  /* 2513 */ 0, 2099, 2099, 2128, 0, 2128, 2128, 2128, 0, 2128, 2128, 0, 9306, 9306, 0, 9306, 9306, 9306, 9306, 0, 9306,
-  /* 2534 */ 9306, 9306, 9306, 9306, 0, 0, 0, 0, 0, 0, 2100, 2100, 2100, 0, 2100, 2100, 2100, 0, 2100, 2100, 69, 0, 0,
-  /* 2557 */ 69, 0, 0, 0, 0, 69, 69, 69, 69, 69, 69, 0, 0, 0, 0, 0, 0, 2101, 2101, 2129, 0, 2129, 2129, 2129, 0, 2129,
-  /* 2583 */ 2129, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 0, 13824, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8281,
-  /* 2614 */ 0, 0, 0, 8281, 0, 0, 0, 0, 0, 2560, 0, 2560, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19456, 0, 0, 0, 0, 0,
-  /* 2645 */ 0, 0, 0, 0, 20063, 0, 0, 0, 20063, 0, 0, 0, 0, 0, 10752, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10752, 0, 0,
-  /* 2674 */ 10752, 10752, 10752, 0, 10752, 10752, 10752, 0, 10752, 10752, 10752, 0, 0, 10752, 10752, 10752, 10752,
-  /* 2691 */ 10752, 10752, 10752, 10752, 10752, 10752, 10752, 0, 0, 0, 0, 0, 0, 2102, 2102, 2130, 0, 2130, 2130, 2130,
-  /* 2711 */ 0, 2130, 2130, 0, 11867, 11867, 0, 11867, 11867, 11867, 11867, 0, 11867, 11867, 11867, 11867, 11867, 0, 0,
-  /* 2730 */ 0, 0, 0, 0, 2103, 2103, 2131, 0, 2131, 2131, 2131, 0, 2131, 2131, 0, 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196,
-  /* 2756 */ 138, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2313, 2096, 0, 0, 2096, 0, 0, 0, 0, 2096, 2096,
-  /* 2780 */ 2096, 2096, 2096, 2096, 0, 2096, 0, 0, 0, 220, 220, 0, 0, 0, 0, 68, 0, 0, 0, 68, 68, 68, 266, 0, 0, 0, 0,
-  /* 2807 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20635, 0, 13386, 13404, 13404, 13386, 13404, 13404, 13404, 13404, 13386,
-  /* 2828 */ 13416, 13416, 13416, 13416, 13416, 0, 0, 0, 0, 0, 0, 2104, 2104, 2132, 0, 2132, 2132, 2132, 0, 2132, 2132,
-  /* 2849 */ 0, 0, 0, 68, 128, 0, 0, 0, 0, 13824, 0, 5196, 0, 0, 0, 0, 0, 0, 0, 18432, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 2879 */ 9728, 0, 0, 0, 0, 0, 0, 0, 0, 0, 259, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20992, 24576, 0, 0, 0, 0, 0,
-  /* 2909 */ 14848, 0, 0, 14848, 14848, 0, 0, 0, 0, 0, 0, 0, 14848, 0, 14848, 14848, 14848, 0, 0, 14848, 14848, 14848,
-  /* 2931 */ 14848, 14848, 14848, 14848, 14848, 14848, 0, 0, 0, 0, 0, 0, 2105, 2105, 2133, 0, 2133, 2133, 2133, 0, 2133,
-  /* 2952 */ 2133, 15435, 15453, 15453, 15435, 15453, 15453, 15453, 15453, 15435, 15465, 15465, 15465, 15465, 15465, 0,
-  /* 2968 */ 0, 0, 0, 0, 0, 2106, 2106, 2134, 0, 2134, 2134, 2134, 0, 2134, 2134, 0, 0, 0, 68, 128, 130, 130, 0, 0, 130,
-  /* 2993 */ 16002, 5196, 0, 0, 0, 0, 0, 0, 0, 42496, 42496, 0, 42496, 42496, 42496, 0, 42496, 42496, 0, 0, 16896,
-  /* 3014 */ 16896, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 245, 0, 0, 0, 0, 0, 68, 128, 0, 0, 133, 133, 0, 0, 5196, 0,
-  /* 3044 */ 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0, 184, 133, 0, 0, 0, 0, 0, 138, 0,
-  /* 3077 */ 0, 0, 0, 0, 0, 0, 0, 0, 25153, 0, 0, 0, 25153, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1536,
-  /* 3109 */ 0, 77, 17502, 17502, 77, 17502, 17502, 17502, 17502, 77, 17514, 17514, 17514, 17514, 17514, 0, 0, 0, 0, 0,
-  /* 3129 */ 0, 2310, 2096, 2096, 2096, 36912, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 3584, 0, 3721, 138, 2096, 2096, 2096,
-  /* 3151 */ 2096, 2096, 2096, 2096, 2096, 2096, 2169, 2171, 0, 0, 0, 0, 0, 0, 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196,
-  /* 3176 */ 5196, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 37424, 2096, 2096, 0, 0, 3656, 0, 0, 3656, 0, 0, 0,
-  /* 3200 */ 0, 3656, 3656, 3656, 3656, 3656, 3656, 0, 2096, 48, 2096, 2096, 2096, 2254, 2096, 2096, 2096, 2096, 2096,
-  /* 3219 */ 2096, 2096, 2096, 124, 28672, 0, 0, 0, 68, 128, 131, 132, 3657, 3657, 131, 132, 5196, 0, 2096, 2096, 2096,
-  /* 3240 */ 0, 240, 240, 242, 242, 0, 218, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 0, 0, 0, 2096, 2096, 2096, 2096, 2096,
-  /* 3263 */ 2096, 2096, 2096, 2096, 2096, 0, 0, 2096, 2247, 2096, 2096, 0, 0, 0, 2096, 2096, 2096, 2096, 131, 132, 0,
-  /* 3284 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 48, 2096, 2096, 2096, 2096, 2096, 2096, 180,
-  /* 3302 */ 131, 131, 132, 4793, 0, 0, 0, 3721, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3322 */ 124, 0, 0, 178, 0, 0, 213, 68, 180, 215, 0, 218, 219, 4829, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3344 */ 2096, 2096, 2096, 2096, 124, 0, 0, 179, 0, 256, 256, 258, 260, 4854, 4869, 2096, 2096, 2096, 2096, 2096,
-  /* 3364 */ 2096, 2096, 2096, 68, 128, 0, 0, 0, 0, 0, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11867, 0, 0, 0, 11867,
-  /* 3392 */ 0, 0, 128, 0, 260, 260, 4869, 2096, 2096, 2096, 2096, 68, 0, 0, 2096, 68, 272, 273, 3657, 0, 0, 3657, 0, 0,
-  /* 3416 */ 0, 0, 3657, 3657, 3657, 3657, 3657, 3657, 0, 2096, 166, 2096, 2096, 2096, 2096, 2096, 2096, 2221, 2096,
-  /* 3435 */ 2096, 124, 0, 0, 68, 0, 0, 0, 0, 11264, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0, 0, 0, 0, 0, 214, 68, 180,
-  /* 3465 */ 216, 0, 218, 219, 4829, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3484 */ 2096, 255, 179, 256, 256, 0, 260, 4854, 4869, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 68, 128, 0,
-  /* 3504 */ 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2255, 2096, 2096, 2096, 2096, 2096, 2259,
-  /* 3525 */ 2096, 124, 0, 128, 0, 260, 260, 4869, 2096, 2096, 2096, 2096, 68, 0, 0, 2096, 68, 68, 68, 0, 0, 0, 2096,
-  /* 3548 */ 2096, 2096, 2096, 131, 132, 0, 2096, 2096, 2096, 2096, 2096, 48, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0,
-  /* 3569 */ 0, 180, 131, 131, 132, 4793, 0, 0, 0, 3721, 138, 2096, 2096, 31792, 2096, 2096, 33840, 2189, 2192, 2096,
-  /* 3589 */ 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28208, 2096, 48, 2096, 2096, 2096, 2096, 2096,
-  /* 3612 */ 2096, 2096, 2096, 2096, 2096, 124, 0, 0, 68, 0, 0, 68, 0, 0, 0, 0, 68, 68, 68, 68, 68, 68, 0, 0, 0, 0, 0,
-  /* 3639 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0, 180, 131, 131, 132, 4793, 0, 0, 0, 3721, 138, 2096, 2096, 2096, 32304,
-  /* 3664 */ 2096, 2096, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2210, 0, 0,
-  /* 3688 */ 34352, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 2096, 2096, 2096, 2096, 2096, 2164,
-  /* 3706 */ 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 3721, 138, 2235, 2096, 2096, 2096, 2096, 2096, 2163,
-  /* 3728 */ 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 222, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3750 */ 2096, 2096, 29232, 2096, 2096, 2096, 2096, 0, 0, 257, 256, 0, 260, 4854, 4869, 2096, 2096, 2096, 2096,
-  /* 3769 */ 2096, 2096, 2096, 2096, 68, 128, 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 32957, 2096, 2096,
-  /* 3791 */ 2096, 2252, 2096, 2096, 2096, 2096, 2096, 2096, 2211, 48, 2096, 2096, 124, 0, 0, 0, 0, 11264, 11264, 0, 0,
-  /* 3812 */ 11264, 0, 0, 0, 11264, 11264, 0, 0, 0, 11264, 0, 0, 0, 0, 11264, 11264, 0, 0, 0, 0, 0, 0, 0, 0, 70, 138, 0,
-  /* 3839 */ 0, 0, 0, 0, 0, 0, 0, 0, 23137, 0, 0, 0, 23137, 0, 0, 128, 268, 260, 260, 4869, 2096, 2096, 2096, 2096, 68,
-  /* 3864 */ 0, 0, 2096, 68, 68, 68, 274, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5632, 0, 2190, 2193, 2096, 2096,
-  /* 3892 */ 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16896, 0, 131, 131, 132, 4793, 0, 0, 0,
-  /* 3920 */ 3721, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3938 */ 0, 0, 0, 214, 68, 0, 216, 0, 218, 219, 4829, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 3959 */ 2096, 2096, 2096, 2096, 2096, 2220, 2096, 2096, 2096, 124, 176, 0, 0, 0, 0, 18496, 64, 0, 64, 64, 18496,
-  /* 3980 */ 64, 18432, 64, 18496, 18496, 18496, 18496, 0, 0, 0, 0, 0, 0, 3656, 3656, 3656, 0, 3656, 3656, 3656, 0,
-  /* 4001 */ 3656, 3656, 19456, 0, 0, 0, 0, 19456, 0, 0, 19456, 0, 19456, 19456, 19456, 0, 19456, 19456, 0, 0, 0, 19456,
-  /* 4023 */ 19456, 19456, 19456, 19456, 19456, 19456, 0, 0, 0, 20063, 20063, 0, 20063, 20063, 20063, 20063, 0, 20063,
-  /* 4041 */ 20063, 20063, 20063, 20063, 0, 0, 0, 0, 0, 0, 3657, 3657, 3657, 0, 3657, 3657, 3657, 0, 3657, 3657, 0,
-  /* 4062 */ 22112, 22112, 0, 22112, 22112, 22112, 22112, 0, 22112, 22112, 22112, 22112, 22112, 0, 0, 0, 0, 0, 0, 3720,
-  /* 4082 */ 3584, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2219, 2096, 2096, 2096, 2222, 124, 0, 177, 0, 0, 25600,
-  /* 4102 */ 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 68, 68, 68, 0, 68, 68, 68, 0, 68, 68, 23552,
-  /* 4130 */ 27648, 40960, 0, 0, 0, 0, 14336, 16384, 17920, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27234, 0, 0, 0, 27234, 0, 0, 0,
-  /* 4156 */ 23137, 23137, 0, 23137, 23137, 23137, 23137, 0, 23137, 23137, 23137, 23137, 23137, 0, 0, 0, 0, 0, 0, 26112,
-  /* 4176 */ 26112, 26112, 0, 26112, 26112, 26112, 0, 26112, 26112, 24220, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 4201 */ 15872, 0, 0, 0, 0, 25153, 25153, 0, 25153, 25153, 25153, 25153, 0, 25153, 25153, 25153, 25153, 25153, 0, 0,
-  /* 4221 */ 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12288, 0, 0, 0, 0, 0, 0, 214, 68, 0, 216, 0, 218, 0, 0, 138,
-  /* 4251 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2283, 2096, 2096, 2096, 2096, 256, 256,
-  /* 4269 */ 0, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 68, 128, 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096,
-  /* 4293 */ 2236, 2096, 2096, 2096, 2096, 2096, 2218, 2096, 2096, 2096, 2096, 2096, 124, 0, 0, 68, 0, 256, 256, 0, 0,
-  /* 4314 */ 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 266, 128, 0, 0, 0, 0, 0, 0, 0, 3721, 138, 2096, 2096,
-  /* 4337 */ 2096, 2096, 2096, 2096, 2096, 2256, 2096, 2096, 2096, 2096, 2096, 2210, 124, 0, 267, 0, 0, 0, 0, 2096,
-  /* 4357 */ 2096, 2096, 2096, 68, 0, 128, 2096, 68, 68, 68, 0, 214, 68, 0, 216, 0, 218, 0, 222, 138, 2096, 2096, 2096,
-  /* 4380 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2302, 2096, 2096, 48, 0, 0, 0, 0, 0, 68, 128, 0, 0, 3584, 3584,
-  /* 4402 */ 0, 0, 5196, 0, 2096, 2096, 2096, 0, 240, 240, 242, 242, 0, 218, 219, 0, 4829, 4854, 2096, 2096, 0, 0, 0,
-  /* 4425 */ 68, 128, 0, 0, 3718, 3718, 0, 0, 5196, 0, 2096, 2096, 2096, 0, 240, 240, 242, 242, 0, 218, 244, 0, 222, 0,
-  /* 4449 */ 2096, 2096, 0, 0, 0, 68, 128, 0, 0, 3719, 3719, 0, 0, 5196, 0, 2096, 2096, 2096, 2096, 2096, 28720, 2096,
-  /* 4471 */ 2096, 31280, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 2096, 2096, 2096, 2096, 181,
-  /* 4490 */ 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2167, 2096, 2096, 0, 0, 0, 0,
-  /* 4514 */ 0, 26112, 0, 0, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 0, 0, 0, 0, 0,
-  /* 4534 */ 217, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 38960, 2096, 0, 0, 2096, 2096, 2096,
-  /* 4554 */ 2096, 0, 0, 0, 127, 129, 0, 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 69, 69, 69, 0, 69, 69, 69, 0, 69, 69,
-  /* 4583 */ 182, 0, 0, 0, 0, 0, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40547, 0, 0, 0, 40547, 0, 0, 127, 127, 0, 0,
-  /* 4613 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39936, 0, 0, 0, 0, 0, 26624, 26624, 0, 0, 0, 0, 0, 26624, 0, 0, 0,
-  /* 4642 */ 26624, 0, 0, 26624, 0, 26624, 26624, 0, 0, 0, 26624, 26624, 0, 0, 0, 27234, 27234, 0, 27234, 27234, 27234,
-  /* 4663 */ 27234, 0, 27234, 27234, 27234, 27234, 27234, 0, 0, 0, 0, 0, 220, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 0, 220,
-  /* 4689 */ 0, 0, 0, 0, 125, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 2096, 2156, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 4713 */ 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 77, 17502, 77, 77, 77, 17502, 77, 77, 0, 0, 0, 2205, 2096, 2207,
-  /* 4738 */ 2096, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2244, 2096, 2096, 0, 0, 2096, 2096, 2096, 2096,
-  /* 4758 */ 2250, 2096, 2096, 2096, 2253, 2096, 2096, 2096, 2257, 2096, 2096, 2096, 2096, 2096, 124, 0, 0, 0, 0, 16896,
-  /* 4778 */ 16896, 16896, 16896, 0, 0, 0, 16896, 0, 16896, 0, 0, 0, 0, 0, 0, 2107, 2107, 2135, 0, 2135, 2135, 2135, 0,
-  /* 4801 */ 2135, 2135, 0, 214, 68, 0, 216, 0, 218, 0, 0, 138, 2271, 2096, 2096, 2096, 2096, 2276, 2296, 2096, 2096,
-  /* 4822 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 179, 179, 2097, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 4844 */ 0, 0, 0, 0, 0, 0, 0, 184, 0, 0, 0, 2126, 0, 0, 2126, 0, 0, 0, 0, 2126, 2126, 2126, 2126, 2126, 2126, 0,
-  /* 4870 */ 2096, 2096, 2096, 2279, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 4888 */ 179, 179, 128, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 68, 128, 0, 2096, 68, 68, 68, 2098, 0, 0, 0, 0, 0, 0, 0,
-  /* 4914 */ 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 2096, 2096, 35376, 2096, 2096, 2096, 2096, 2096, 0, 0, 2127, 0, 0, 2148,
-  /* 4939 */ 0, 0, 0, 0, 2150, 2127, 2127, 2127, 2150, 2150, 0, 2096, 2096, 2096, 36400, 2096, 2096, 2096, 2096, 2096,
-  /* 4959 */ 2096, 2096, 2220, 2096, 2096, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 68, 0, 0, 2096, 68, 68, 68, 256, 256,
-  /* 4982 */ 0, 0, 0, 0, 2096, 2311, 2096, 2096, 2096, 2096, 2096, 2096, 266, 128, 0, 0, 0, 0, 0, 3584, 0, 3721, 138,
-  /* 5005 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2282, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 48,
-  /* 5023 */ 2096, 124, 0, 0, 0, 0, 2099, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7680, 0, 0, 18944, 2128, 0, 0,
-  /* 5052 */ 2149, 0, 0, 0, 0, 2149, 2128, 2128, 2128, 2149, 2149, 0, 2096, 2096, 2096, 39424, 240, 240, 242, 242, 0,
-  /* 5073 */ 218, 244, 0, 222, 0, 2096, 2096, 2096, 2159, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0,
-  /* 5096 */ 0, 3721, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2210, 2096, 179, 179,
-  /* 5115 */ 256, 256, 0, 0, 0, 0, 2096, 2096, 2096, 2312, 2096, 2096, 2096, 2096, 68, 128, 0, 0, 0, 0, 2096, 2096,
-  /* 5137 */ 2096, 2096, 68, 0, 0, 2096, 68, 68, 68, 2100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0, 0, 68,
-  /* 5166 */ 0, 2100, 0, 0, 2100, 0, 0, 0, 0, 2151, 2100, 2100, 2100, 2151, 2151, 0, 2096, 2096, 2215, 2096, 2096, 2096,
-  /* 5188 */ 2096, 2096, 2096, 2096, 2096, 124, 0, 0, 0, 0, 0, 0, 71, 15435, 15435, 15453, 15435, 15435, 15435, 15453,
-  /* 5208 */ 15435, 15435, 0, 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 2096, 2096, 2158, 2096, 2096, 2096, 2096, 2166,
-  /* 5231 */ 2096, 2168, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 220, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22112, 0, 0, 0, 22112, 0, 0,
-  /* 5260 */ 0, 0, 0, 2096, 2206, 2096, 2096, 0, 0, 0, 2209, 2096, 2096, 2096, 2096, 2096, 2096, 38448, 2096, 2096,
-  /* 5280 */ 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 214, 68, 0, 216, 0, 218, 0, 222, 138, 2096, 2096, 2273, 2096, 2096,
-  /* 5302 */ 2096, 2096, 2160, 2160, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 4096, 0, 0, 2096, 2295, 128,
-  /* 5325 */ 0, 0, 0, 0, 2096, 2096, 35888, 2096, 68, 0, 0, 29744, 68, 68, 68, 2101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 5353 */ 0, 0, 0, 124, 0, 0, 68, 2560, 2129, 0, 0, 2129, 0, 0, 0, 0, 2129, 2129, 2129, 2129, 2129, 2129, 0, 2096,
-  /* 5377 */ 2096, 2239, 2240, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 2096, 2096, 2096, 2096, 2096, 2200, 2202, 0, 0,
-  /* 5397 */ 0, 0, 0, 0, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 2096, 34864, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0,
-  /* 5425 */ 0, 0, 68, 2688, 0, 0, 68, 68, 68, 0, 0, 0, 2096, 2096, 2096, 2096, 0, 0, 0, 2096, 2096, 2096, 2213, 2096,
-  /* 5449 */ 2096, 2096, 2197, 2096, 2199, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 68, 68, 68, 0, 0, 126, 68, 128,
-  /* 5476 */ 0, 0, 0, 0, 0, 0, 5196, 0, 2096, 2096, 2096, 2096, 2161, 2161, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0,
-  /* 5500 */ 0, 0, 244, 0, 222, 0, 2096, 2096, 2102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 0, 0, 0, 2130,
-  /* 5530 */ 0, 0, 2130, 0, 0, 0, 0, 2130, 2130, 2130, 2130, 2130, 2130, 0, 2096, 2096, 2251, 2096, 2096, 2096, 2096,
-  /* 5551 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 124, 0, 0, 68, 0, 2103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 5578 */ 0, 22016, 0, 0, 0, 0, 0, 2131, 0, 0, 2131, 0, 0, 0, 0, 2131, 2131, 2131, 2131, 2131, 2131, 0, 2096, 2096,
-  /* 5602 */ 2298, 2096, 2096, 2096, 2096, 2096, 2301, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 2096, 2096, 2096,
-  /* 5622 */ 2096, 68, 128, 0, 2096, 68, 68, 68, 0, 0, 0, 68, 128, 0, 0, 3720, 3720, 0, 0, 5196, 0, 2096, 2096, 2096,
-  /* 5646 */ 2096, 2198, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2208,
-  /* 5673 */ 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 39472, 2096, 2096, 2096, 2096, 2096, 2096, 179, 179,
-  /* 5692 */ 212, 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2275, 2096, 2157, 48, 2096, 2162, 2096, 2165,
-  /* 5714 */ 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 5196, 0, 5196, 5196, 5196, 0, 5196, 5196, 48, 2096, 2096,
-  /* 5737 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 0, 2096, 2096, 2096, 0, 2096, 2096, 0, 0, 0, 2096, 2096,
-  /* 5763 */ 2096, 2096, 0, 0, 0, 2096, 2096, 2212, 2096, 2096, 2096, 2096, 2241, 2096, 2096, 2096, 2096, 2096, 0, 0,
-  /* 5783 */ 2211, 2096, 2248, 2096, 0, 0, 0, 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 2096, 2188, 30768, 2191, 2096, 2196,
-  /* 5806 */ 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2272, 2096, 2096, 2096, 2096, 0, 0, 0, 2188,
-  /* 5830 */ 30768, 2188, 2096, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096, 2243, 2096, 2096, 2096, 0, 0, 2246, 2096,
-  /* 5850 */ 2246, 2249, 2104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 186, 0, 0, 0, 0, 0, 0, 2132, 0, 0, 2132, 0,
-  /* 5880 */ 0, 0, 0, 2132, 2132, 2132, 2132, 2132, 2132, 0, 2096, 2194, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0,
-  /* 5903 */ 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2155, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 5922 */ 2170, 2096, 0, 0, 0, 0, 0, 0, 0, 130, 16002, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9306, 0, 0, 0, 9306, 0, 0, 0, 0, 0,
-  /* 5952 */ 68, 128, 0, 0, 0, 0, 0, 0, 5196, 0, 2187, 2096, 2096, 2096, 2216, 2217, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 5974 */ 124, 0, 0, 0, 0, 0, 0, 70, 13386, 13386, 13404, 13386, 13386, 13386, 13404, 13386, 13386, 2096, 2297, 2096,
-  /* 5994 */ 2096, 2299, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096,
-  /* 6014 */ 68, 0, 0, 2096, 271, 68, 68, 2105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2560, 0, 0, 0, 0, 0, 0,
-  /* 6044 */ 2133, 0, 0, 2133, 0, 0, 0, 0, 2133, 2133, 2133, 2133, 2133, 2133, 0, 2096, 2195, 2096, 2096, 2096, 2096,
-  /* 6065 */ 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2274, 2096, 2096, 0, 0, 0, 2096, 2096, 2096, 2096,
-  /* 6089 */ 0, 0, 0, 2096, 2210, 2096, 2096, 2210, 2096, 2238, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0,
-  /* 6109 */ 2096, 2096, 2096, 2096, 2096, 2242, 2096, 2096, 2096, 2245, 0, 0, 2096, 2096, 2096, 2096, 2096, 2201, 2096,
-  /* 6128 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 270, 182, 0, 0, 270, 127, 127, 2106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 6159 */ 0, 3140, 128, 0, 0, 3140, 3072, 3072, 2134, 0, 0, 2134, 0, 0, 0, 0, 2134, 2134, 2134, 2134, 2134, 2134, 0,
-  /* 6182 */ 2096, 2278, 37936, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 124,
-  /* 6200 */ 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 0, 0, 0, 2096, 2211, 2096, 2096, 2096, 2096, 2096, 2300, 2096,
-  /* 6223 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 179, 179, 2277, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 6241 */ 2096, 2096, 2096, 2284, 2096, 2096, 2285, 2107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0,
-  /* 6267 */ 2096, 2096, 2096, 30256, 68, 128, 0, 2096, 68, 68, 68, 2135, 0, 0, 2135, 0, 0, 0, 0, 2135, 2135, 2135,
-  /* 6289 */ 2135, 2135, 2135, 0, 2096, 2286, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 6313 */ 2096, 2096, 0, 0, 0, 0, 0, 68, 128, 0, 0, 137, 0, 0, 0, 5196, 0, 2096, 2096, 2096, 2096, 2280, 2096, 2096,
-  /* 6337 */ 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2096, 2096, 183, 0,
-  /* 6361 */ 0, 0, 0, 0, 0, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2281, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 6382 */ 2211, 2096, 2096, 0, 0, 39936, 39936, 0, 0, 39936, 39936, 39936, 0, 39936, 39936, 39936, 0, 39936, 39936,
-  /* 6401 */ 0, 0, 39936, 39936, 39936, 39936, 39936, 39936, 39936, 39936, 39936, 39936, 39936, 0, 0, 0, 0, 0, 2096,
-  /* 6420 */ 33328, 2096, 2096, 68, 0, 0, 2096, 68, 68, 68, 0, 40547, 40547, 0, 40547, 40547, 40547, 40547, 0, 40547,
-  /* 6440 */ 40547, 40547, 40547, 40547, 0, 0, 0, 0, 0, 2317, 2096, 2096, 2096, 68, 0, 0, 2096, 271, 68, 68, 0, 0,
-  /* 6462 */ 41472, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5196, 0, 0, 0, 0, 0, 0, 0, 41984, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 6494 */ 0, 41984, 41984, 0, 0, 0, 0, 0, 3584, 3718, 0, 0, 138, 2096, 2096, 2096, 2096, 2096, 2096, 2096, 2096,
-  /* 6515 */ 2096, 2258, 2096, 2096, 2096, 2096, 124, 0, 41984, 41984, 0, 41984, 0, 0, 41984, 0, 41984, 41984, 41984,
-  /* 6534 */ 41984, 41984, 41984, 0, 0, 0, 0, 70, 0, 0, 0, 0, 68, 0, 0, 0, 68, 68, 68, 42496, 0, 0, 42496, 0, 0, 0, 0,
-  /* 6561 */ 42496, 42496, 42496, 42496, 42496, 42496, 0, 0, 0, 0, 184, 0, 0, 0, 0, 68, 0, 0, 0, 68, 68, 68
+  /*    0 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*   18 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*   36 */ 3437, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184,
+  /*   54 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2272, 2272, 2274, 5184, 2433, 5184, 5184, 3441,
+  /*   72 */ 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*   90 */ 5184, 5184, 5184, 5184, 5184, 5184, 2272, 2272, 2274, 5184, 5184, 5184, 5184, 3441, 3255, 5184, 5185, 2352,
+  /*  108 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  126 */ 5184, 5184, 5184, 2697, 2290, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184,
+  /*  144 */ 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3023,
+  /*  162 */ 2600, 5184, 2319, 5184, 5184, 3101, 2348, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 3778, 2368, 5184, 5184,
+  /*  180 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2387, 2303, 3320, 5184, 2433, 5184,
+  /*  198 */ 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  216 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 3221, 5584,
+  /*  234 */ 3390, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  252 */ 5184, 5184, 5184, 5184, 5184, 4765, 2472, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184,
+  /*  270 */ 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  288 */ 5184, 4901, 2512, 5184, 2433, 4338, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610,
+  /*  306 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3052, 2541, 5184,
+  /*  324 */ 3655, 5184, 5184, 3101, 2570, 5184, 5185, 2629, 5184, 4300, 5184, 5184, 6218, 2610, 5184, 5184, 5184, 5184,
+  /*  342 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2656, 2668, 2684, 5184, 2433, 5184, 5184, 3441,
+  /*  360 */ 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  378 */ 5184, 5184, 5184, 5184, 5184, 5184, 2713, 2746, 2734, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352,
+  /*  396 */ 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  414 */ 5184, 5184, 5184, 3709, 2773, 5184, 4381, 6011, 2352, 3441, 4124, 5184, 5185, 6161, 5184, 2830, 5184, 3284,
+  /*  432 */ 2811, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2846, 3081,
+  /*  450 */ 2868, 2975, 2897, 2975, 2979, 3441, 3255, 5184, 5185, 2456, 5184, 2613, 5184, 2933, 2956, 2610, 5184, 5184,
+  /*  468 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2995, 3010, 5184, 2433, 5184,
+  /*  486 */ 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  504 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2910, 3130, 3039, 2390, 3068, 2390, 2446, 3441, 3255, 5184,
+  /*  522 */ 5185, 2456, 5184, 2613, 5184, 2933, 2956, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  540 */ 5184, 5184, 5184, 5184, 5122, 3097, 3117, 5184, 3146, 5184, 5184, 3441, 3186, 5184, 5185, 2352, 5184, 2371,
+  /*  558 */ 5184, 5184, 3237, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  576 */ 3253, 4077, 3271, 5184, 3307, 5184, 5952, 3441, 3255, 5184, 5048, 3907, 5184, 5184, 5184, 5184, 2852, 2610,
+  /*  594 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4529, 4544, 5312,
+  /*  612 */ 3349, 5314, 3379, 6196, 3409, 5584, 3390, 3459, 3934, 5990, 3470, 3486, 3502, 3518, 5184, 5184, 5184, 5184,
+  /*  630 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3538, 3553, 5312, 3349, 5314, 3379, 6196,
+  /*  648 */ 3409, 5584, 3390, 3583, 3934, 2496, 3470, 3610, 3626, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  666 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3538, 3553, 5312, 3349, 5314, 3379, 3642, 3684, 5584, 3390, 3583,
+  /*  684 */ 3934, 2496, 3470, 3610, 3626, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  702 */ 5184, 5184, 5184, 3538, 3553, 5800, 3725, 6058, 3379, 6196, 3409, 5584, 3390, 3583, 3934, 2496, 3470, 3610,
+  /*  720 */ 3626, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3538,
+  /*  738 */ 3553, 5312, 3349, 5314, 3379, 3424, 3755, 5584, 3390, 3583, 3934, 2496, 3470, 3610, 3626, 2610, 5184, 5184,
+  /*  756 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3538, 3553, 5312, 3349, 5314,
+  /*  774 */ 3379, 6196, 3409, 5584, 3390, 3583, 3934, 2496, 3594, 3794, 3810, 2971, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  792 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 3538, 3553, 6151, 3826, 6497, 3379, 6196, 3409, 5584,
+  /*  810 */ 3390, 3583, 3934, 2496, 3470, 3610, 3626, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  828 */ 5184, 5184, 5184, 5184, 5184, 3538, 3553, 5312, 3349, 5314, 3379, 3393, 3884, 5584, 3390, 3923, 3934, 2496,
+  /*  846 */ 3470, 3610, 3626, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  864 */ 2786, 2795, 3951, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610,
+  /*  882 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5354, 3980, 3992, 5184,
+  /*  900 */ 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184,
+  /*  918 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5503, 4008, 5184, 2433, 5276, 5184, 3441,
+  /*  936 */ 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  954 */ 5184, 5184, 5184, 5184, 5184, 5184, 5160, 5912, 4037, 4589, 2433, 2332, 4066, 3441, 3255, 6121, 5185, 2352,
+  /*  972 */ 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /*  990 */ 5184, 5184, 5184, 5886, 4093, 5184, 2433, 5184, 4122, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184,
+  /* 1008 */ 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2718, 4568,
+  /* 1026 */ 4140, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184,
+  /* 1044 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2433, 5184,
+  /* 1062 */ 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1080 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 4684, 5584,
+  /* 1098 */ 3390, 4169, 3934, 5406, 3470, 4831, 4203, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1116 */ 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 4684, 5584, 3390, 4169, 3934, 5406,
+  /* 1134 */ 3470, 4219, 4235, 2825, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1152 */ 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 4684, 5584, 3390, 4251, 3934, 6466, 3470, 4831, 4203, 2610,
+  /* 1170 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312,
+  /* 1188 */ 4278, 5314, 5417, 3393, 2554, 5584, 3390, 4169, 3934, 5406, 3470, 4831, 4203, 2610, 5184, 5184, 5184, 5184,
+  /* 1206 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 4316, 5314, 5417, 3393,
+  /* 1224 */ 3201, 5584, 3390, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1242 */ 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 3221, 5584, 3390, 5364,
+  /* 1260 */ 3934, 5806, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1278 */ 5184, 5184, 5183, 3964, 3854, 5312, 4354, 5314, 5417, 4800, 4397, 5584, 3390, 3159, 3934, 6062, 3935, 4940,
+  /* 1296 */ 4050, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4441,
+  /* 1314 */ 4456, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184,
+  /* 1332 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4485, 5184,
+  /* 1350 */ 5184, 3101, 4514, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2917, 4584, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1368 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4605, 4614, 5184, 2433, 5184, 5184, 3441, 3255, 5184,
+  /* 1386 */ 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1404 */ 5184, 5184, 5184, 5184, 5184, 2640, 4630, 5184, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184,
+  /* 1422 */ 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1440 */ 5183, 3964, 3854, 4674, 4659, 5314, 4700, 3393, 4684, 5584, 4727, 4743, 4781, 5406, 4816, 4831, 4203, 2610,
+  /* 1458 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4847, 4498, 4864, 5312,
+  /* 1476 */ 2406, 5314, 5417, 6196, 4917, 5584, 3390, 4169, 3934, 5406, 3470, 4831, 4956, 2610, 5184, 5184, 5184, 5184,
+  /* 1494 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 4972, 4643, 5001, 5312, 2406, 5314, 5417, 5551,
+  /* 1512 */ 4684, 6320, 6425, 4169, 6091, 5406, 5015, 5031, 4235, 2825, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1530 */ 5184, 5184, 5184, 5184, 5184, 5184, 5047, 4985, 5064, 5312, 2406, 5314, 5417, 3393, 4684, 5584, 3390, 4169,
+  /* 1548 */ 3934, 5406, 4262, 5105, 4203, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1566 */ 5184, 5184, 5121, 5564, 5138, 5837, 2406, 5176, 5201, 3393, 5847, 5584, 3868, 5229, 5078, 5770, 6290, 4831,
+  /* 1584 */ 5259, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5275, 6395,
+  /* 1602 */ 5292, 4755, 5330, 5459, 5380, 6196, 5444, 5667, 3390, 4169, 3934, 5406, 3470, 4831, 4956, 2610, 5184, 5184,
+  /* 1620 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 4891, 5479, 4292,
+  /* 1638 */ 5417, 3393, 3221, 5584, 3390, 6596, 5088, 6062, 5979, 3333, 4469, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1656 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5519, 6626, 5537, 5312, 2406, 5314, 5417, 3363, 3221, 4878,
+  /* 1674 */ 3390, 6596, 3170, 5463, 5580, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1692 */ 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 3393, 3221, 5584, 3390, 6596, 5089, 6501,
+  /* 1710 */ 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1728 */ 5600, 6261, 5618, 3699, 5648, 5314, 5683, 3393, 3668, 5584, 4425, 5710, 5306, 3216, 5740, 6341, 4021, 2610,
+  /* 1746 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5344,
+  /* 1764 */ 5726, 3770, 5417, 3393, 3221, 5584, 3390, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184,
+  /* 1782 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5493, 5756, 3899, 5786, 6196,
+  /* 1800 */ 5822, 5863, 3390, 6596, 3934, 6062, 4711, 2525, 4106, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1818 */ 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5902, 5928, 5944, 5968, 3393, 3221, 5584, 3739, 3291,
+  /* 1836 */ 5662, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1854 */ 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 6248, 3221, 4412, 3390, 5364, 3934, 5806, 3935, 4940,
+  /* 1872 */ 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 6006, 6545,
+  /* 1890 */ 6027, 5876, 6043, 4330, 5417, 2420, 5822, 6078, 3390, 6596, 4180, 4932, 5395, 4940, 4106, 2610, 5184, 5184,
+  /* 1908 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 6116, 6574, 6137, 5312, 2406, 5314,
+  /* 1926 */ 6177, 4187, 3221, 3567, 6193, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1944 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 6212, 6655, 6234, 5312, 2406, 5314, 6277, 4368, 5822, 5243,
+  /* 1962 */ 5632, 2940, 4796, 6062, 3935, 2485, 4153, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 1980 */ 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 4354, 5314, 5417, 4800, 4397, 5584, 5694, 3159, 6306, 6357,
+  /* 1998 */ 6455, 6365, 2585, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2016 */ 6381, 6684, 6411, 4558, 2406, 5152, 5417, 3393, 3221, 5584, 3390, 6596, 3934, 6333, 3840, 4940, 4021, 2610,
+  /* 2034 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312,
+  /* 2052 */ 6441, 5314, 5417, 5428, 6482, 5584, 3390, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184,
+  /* 2070 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5183, 3964, 3854, 5312, 2406, 5314, 5417, 6100,
+  /* 2088 */ 3221, 5213, 3390, 6596, 3934, 6062, 3935, 4940, 4021, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2106 */ 5184, 5184, 5184, 5184, 5184, 5184, 5602, 6517, 6532, 3443, 2433, 5184, 5184, 3441, 3255, 5184, 5185, 2352,
+  /* 2124 */ 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2142 */ 5184, 5184, 5184, 2757, 6561, 5184, 2433, 5184, 6590, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184,
+  /* 2160 */ 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 6612,
+  /* 2178 */ 6642, 5184, 2433, 5184, 5184, 3522, 3255, 5184, 4848, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184,
+  /* 2196 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 2881, 6671, 5184, 2433, 5184,
+  /* 2214 */ 5184, 3441, 3255, 5184, 5185, 2352, 5184, 5184, 5184, 5184, 2852, 2610, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2232 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5521, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2250 */ 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184, 5184,
+  /* 2268 */ 5184, 5184, 5184, 5184, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190, 6190,
+  /* 2286 */ 6190, 6190, 0, 0, 6656, 89, 89, 6656, 89, 89, 89, 6656, 6745, 6745, 6745, 6745, 6745, 0, 0, 0, 0, 0, 0, 0,
+  /* 2310 */ 0, 5197, 0, 5197, 5197, 5197, 0, 5197, 5197, 0, 0, 3072, 129, 0, 0, 0, 0, 0, 0, 0, 0, 5197, 0, 0, 0, 0, 0,
+  /* 2337 */ 0, 0, 0, 7168, 8704, 10240, 12800, 14336, 16384, 17920, 21504, 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2362 */ 143, 0, 0, 0, 0, 0, 3072, 3072, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 185, 0, 0, 0, 0, 60, 0, 0, 0,
+  /* 2393 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15872, 0, 0, 0, 0, 67, 129, 0, 0, 0, 0, 2095, 2095, 0, 0, 5197, 0, 2095,
+  /* 2421 */ 2095, 167, 2095, 2095, 2095, 2095, 2095, 2095, 2222, 2095, 2095, 125, 0, 0, 67, 129, 0, 0, 0, 0, 0, 0, 0,
+  /* 2444 */ 0, 5197, 0, 0, 0, 0, 0, 0, 0, 0, 131, 16003, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 143, 0, 0, 0, 0, 0, 0, 8282,
+  /* 2474 */ 8282, 0, 8282, 8282, 8282, 0, 8282, 8282, 8282, 8282, 8282, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 35375, 2095,
+  /* 2496 */ 2095, 2095, 2095, 2095, 0, 241, 241, 243, 243, 0, 219, 220, 0, 4830, 4855, 2095, 0, 9307, 9307, 0, 9307,
+  /* 2517 */ 9307, 9307, 0, 9307, 9307, 9307, 9307, 9307, 0, 0, 0, 0, 0, 0, 0, 2311, 2095, 2095, 2095, 36911, 2095,
+  /* 2538 */ 2095, 2095, 0, 68, 0, 0, 68, 0, 0, 0, 68, 68, 68, 68, 68, 68, 0, 0, 0, 0, 0, 0, 0, 3584, 0, 3722, 2095,
+  /* 2565 */ 2095, 2095, 2095, 143, 2095, 2560, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 0, 0, 0, 0, 0, 0, 2318,
+  /* 2592 */ 2095, 2095, 2095, 67, 0, 0, 2095, 272, 67, 0, 0, 67, 0, 0, 0, 67, 67, 67, 67, 67, 67, 0, 0, 0, 0, 0, 0, 0,
+  /* 2620 */ 0, 0, 0, 0, 0, 0, 69, 246, 0, 0, 0, 0, 0, 2560, 0, 2560, 0, 0, 0, 143, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27235, 0,
+  /* 2651 */ 0, 0, 27235, 0, 0, 0, 0, 0, 10752, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10752, 0, 0, 10752, 10752, 10752, 0,
+  /* 2678 */ 10752, 10752, 10752, 0, 10752, 10752, 10752, 0, 0, 10752, 10752, 10752, 10752, 10752, 10752, 10752, 10752,
+  /* 2695 */ 10752, 10752, 0, 0, 0, 0, 0, 0, 0, 6656, 6656, 89, 6656, 6656, 6656, 89, 6656, 6656, 0, 0, 0, 0, 11264, 0,
+  /* 2719 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 11264, 0, 0, 11264, 0, 0, 0, 11264, 11264, 0, 0,
+  /* 2749 */ 0, 11264, 0, 0, 0, 0, 11264, 11264, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40548, 0, 0, 0, 40548, 0, 0, 0, 11868,
+  /* 2775 */ 11868, 0, 11868, 11868, 11868, 0, 11868, 11868, 11868, 11868, 11868, 0, 0, 0, 0, 0, 0, 0, 18432, 63, 0, 0,
+  /* 2797 */ 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 221, 221, 0, 0, 0, 0, 67, 0, 0, 0, 67, 67, 267, 0,
+  /* 2829 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 221, 0, 221, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67,
+  /* 2863 */ 0, 0, 0, 67, 67, 13387, 13405, 13405, 13387, 13405, 13405, 13405, 13387, 13417, 13417, 13417, 13417, 13417,
+  /* 2881 */ 0, 0, 0, 0, 0, 0, 0, 42496, 42496, 0, 42496, 42496, 42496, 0, 42496, 42496, 0, 0, 67, 129, 0, 0, 0, 0, 0,
+  /* 2906 */ 0, 13824, 0, 5197, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 271, 183, 0, 0, 271, 128, 0, 0, 0,
+  /* 2936 */ 0, 260, 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 2095, 2273, 2095, 2095, 2095, 0, 0, 0, 0, 0, 69, 0, 0, 0,
+  /* 2965 */ 0, 67, 0, 0, 0, 67, 67, 275, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13824, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 2996 */ 14848, 0, 0, 14848, 14848, 0, 0, 0, 0, 0, 0, 0, 14848, 0, 14848, 14848, 14848, 0, 0, 14848, 14848, 14848,
+  /* 3018 */ 14848, 14848, 14848, 14848, 14848, 0, 0, 0, 0, 0, 0, 67, 67, 67, 0, 67, 67, 67, 0, 67, 67, 15436, 15454,
+  /* 3041 */ 15454, 15436, 15454, 15454, 15454, 15436, 15466, 15466, 15466, 15466, 15466, 0, 0, 0, 0, 0, 0, 68, 68, 68,
+  /* 3061 */ 0, 68, 68, 68, 0, 68, 68, 0, 0, 67, 129, 131, 131, 0, 0, 0, 0, 131, 16003, 5197, 0, 0, 0, 0, 0, 0, 69,
+  /* 3088 */ 13387, 13387, 13405, 13387, 13387, 13387, 13405, 13387, 13387, 0, 0, 16896, 16896, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 3109 */ 0, 0, 0, 0, 125, 0, 0, 67, 0, 0, 0, 0, 16896, 16896, 16896, 0, 0, 0, 16896, 0, 16896, 0, 0, 0, 0, 0, 0, 70,
+  /* 3137 */ 15436, 15436, 15454, 15436, 15436, 15436, 15454, 15436, 15436, 0, 0, 67, 129, 0, 0, 134, 134, 0, 0, 0, 0,
+  /* 3158 */ 5197, 0, 0, 0, 0, 0, 0, 218, 0, 0, 0, 143, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 3180 */ 2095, 2095, 2284, 2095, 2095, 2095, 0, 0, 0, 185, 134, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 0, 0, 0, 0, 0, 0,
+  /* 3207 */ 3584, 3719, 0, 0, 2095, 2095, 2095, 2095, 143, 2095, 47, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2095,
+  /* 3232 */ 2095, 2095, 2095, 143, 2095, 0, 0, 0, 0, 0, 185, 0, 0, 0, 0, 67, 0, 0, 0, 67, 67, 0, 59, 0, 0, 0, 0, 0, 0,
+  /* 3261 */ 0, 0, 0, 0, 0, 0, 0, 0, 143, 0, 78, 17503, 17503, 78, 17503, 17503, 17503, 78, 17515, 17515, 17515, 17515,
+  /* 3283 */ 17515, 0, 0, 0, 0, 0, 0, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 2095, 2095, 2095, 2275, 2095, 0, 0, 67,
+  /* 3310 */ 129, 0, 0, 0, 0, 0, 0, 0, 0, 5197, 5197, 0, 0, 5197, 0, 0, 0, 5197, 5197, 5197, 5197, 5197, 5197, 0, 0, 0,
+  /* 3336 */ 0, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 37423, 2095, 2095, 0, 0, 0, 67, 129, 132, 133, 3656, 3656, 2095,
+  /* 3358 */ 2095, 132, 133, 5197, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2220, 2095, 2095, 2095, 2223, 125, 0,
+  /* 3377 */ 178, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 132, 133, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 3398 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 0, 0, 181, 132, 132, 133, 4794, 0, 0, 0, 3722, 2095,
+  /* 3420 */ 2095, 2095, 2095, 143, 2095, 47, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 67,
+  /* 3440 */ 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 214, 67, 181, 216, 0, 219, 220, 4830,
+  /* 3469 */ 143, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 180, 180,
+  /* 3487 */ 257, 257, 259, 261, 4855, 4870, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 67, 129, 129, 0, 261, 261,
+  /* 3507 */ 4870, 2095, 2095, 2095, 2095, 67, 0, 0, 2095, 67, 273, 274, 67, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 3534 */ 176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3656, 3656, 3656, 0, 3656, 3656, 3656, 0, 3656, 3656, 0, 0, 3656, 0, 0, 0,
+  /* 3560 */ 3656, 3656, 3656, 3656, 3656, 3656, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2244, 2095, 2095, 2095, 0,
+  /* 3579 */ 0, 2247, 2095, 2247, 0, 0, 215, 67, 181, 217, 0, 219, 220, 4830, 143, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 3600 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 256, 180, 257, 257, 0, 261, 4855, 4870, 2095, 2095,
+  /* 3619 */ 2095, 2095, 2095, 2095, 2095, 2095, 67, 129, 129, 0, 261, 261, 4870, 2095, 2095, 2095, 2095, 67, 0, 0,
+  /* 3639 */ 2095, 67, 67, 47, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 67, 0, 0, 0,
+  /* 3661 */ 0, 0, 0, 0, 0, 0, 5197, 0, 0, 0, 0, 0, 0, 0, 3721, 3584, 0, 2095, 2095, 2095, 2095, 143, 2095, 0, 181, 132,
+  /* 3687 */ 132, 133, 4794, 0, 0, 0, 3722, 31791, 2095, 33839, 2095, 143, 2095, 2095, 2160, 2095, 2095, 2095, 2095,
+  /* 3706 */ 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11868, 0, 0, 0, 11868, 0, 0, 0, 0, 67, 129, 132, 133, 3656,
+  /* 3732 */ 3656, 2187, 2189, 132, 133, 5197, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2256, 2095, 2095, 2095,
+  /* 3750 */ 2095, 2095, 2260, 2095, 125, 0, 181, 132, 132, 133, 4794, 0, 0, 0, 3722, 2095, 32303, 2095, 34351, 143,
+  /* 3770 */ 2095, 2095, 2195, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3139, 129, 0, 0, 3139, 3072,
+  /* 3794 */ 180, 258, 257, 0, 261, 4855, 4870, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 67, 129, 129, 269, 261,
+  /* 3814 */ 261, 4870, 2095, 2095, 2095, 2095, 67, 0, 0, 2095, 67, 67, 0, 0, 67, 129, 132, 133, 3656, 3656, 2188, 2190,
+  /* 3836 */ 132, 133, 5197, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 38447, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 3854 */ 2095, 0, 0, 2095, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 0, 2095, 2095, 47, 2095, 2095, 2095, 2255,
+  /* 3875 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 132, 132, 133, 4794, 0, 0, 0, 3722, 2095, 2095,
+  /* 3896 */ 2095, 2095, 143, 2095, 2095, 2196, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5120, 0, 0,
+  /* 3920 */ 0, 0, 0, 0, 0, 215, 67, 0, 217, 0, 219, 220, 4830, 143, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 3942 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 18495, 63, 0, 63, 18495, 63, 18432, 63, 18495, 18495,
+  /* 3962 */ 18495, 18495, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 0, 2095, 2095, 2095, 0, 2095, 2095, 19456, 0, 0, 0, 0,
+  /* 3985 */ 19456, 0, 0, 19456, 0, 19456, 19456, 19456, 0, 19456, 19456, 0, 0, 19456, 19456, 19456, 19456, 19456,
+  /* 4003 */ 19456, 19456, 0, 0, 0, 0, 20064, 20064, 0, 20064, 20064, 20064, 0, 20064, 20064, 20064, 20064, 20064, 0, 0,
+  /* 4023 */ 0, 0, 0, 0, 2095, 2095, 2095, 2095, 67, 0, 0, 2095, 67, 67, 0, 22113, 22113, 0, 22113, 22113, 22113, 0,
+  /* 4045 */ 22113, 22113, 22113, 22113, 22113, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 67, 0, 0, 2095, 272, 67,
+  /* 4066 */ 22528, 23552, 27648, 40960, 0, 0, 0, 0, 14336, 16384, 17920, 0, 0, 0, 0, 0, 0, 0, 0, 78, 17503, 78, 78, 78,
+  /* 4090 */ 17503, 78, 78, 0, 23138, 23138, 0, 23138, 23138, 23138, 0, 23138, 23138, 23138, 23138, 23138, 0, 0, 0, 0,
+  /* 4110 */ 0, 0, 2095, 2095, 2095, 2095, 67, 129, 0, 2095, 67, 67, 0, 24221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 4138 */ 187, 0, 0, 25152, 25152, 0, 25152, 25152, 25152, 0, 25152, 25152, 25152, 25152, 25152, 0, 0, 0, 0, 0, 0,
+  /* 4159 */ 2095, 2095, 2095, 30255, 67, 129, 0, 2095, 67, 67, 0, 0, 215, 67, 0, 217, 0, 219, 0, 0, 143, 2095, 2095,
+  /* 4182 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2221, 2095, 2095, 2095, 125,
+  /* 4200 */ 177, 0, 0, 129, 129, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 67, 0, 0, 2095, 67, 67, 180, 257, 257, 0, 0, 0, 0,
+  /* 4226 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 267, 129, 268, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 67, 0,
+  /* 4247 */ 129, 2095, 67, 67, 0, 0, 215, 67, 0, 217, 0, 219, 0, 223, 143, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 4269 */ 2095, 2095, 2095, 2095, 2095, 2095, 2211, 2095, 180, 0, 0, 67, 129, 0, 0, 3584, 3584, 2095, 2095, 0, 0,
+  /* 4290 */ 5197, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2201, 2203, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2560, 0, 0, 0, 0, 0,
+  /* 4316 */ 0, 0, 67, 129, 0, 0, 3719, 3719, 2095, 2095, 0, 0, 5197, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2202, 2095,
+  /* 4338 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9728, 0, 0, 0, 0, 0, 0, 0, 67, 129, 0, 0, 3720, 3720, 2095, 2095, 0, 0, 5197,
+  /* 4367 */ 0, 2095, 2095, 2095, 2095, 2095, 2095, 2219, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 67, 129, 0, 0, 0, 0,
+  /* 4389 */ 0, 0, 0, 0, 5197, 143, 0, 0, 0, 182, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 143, 2095, 2095, 2239,
+  /* 4415 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2257,
+  /* 4434 */ 2095, 2095, 2095, 2095, 2095, 2211, 125, 0, 0, 0, 0, 0, 0, 26112, 26112, 26112, 0, 26112, 26112, 26112, 0,
+  /* 4455 */ 26112, 26112, 0, 0, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 26112, 0, 0, 0, 0, 0, 0,
+  /* 4475 */ 2095, 33327, 2095, 2095, 67, 0, 0, 2095, 67, 67, 0, 0, 128, 130, 0, 0, 0, 0, 0, 0, 0, 0, 5197, 0, 0, 0, 0,
+  /* 4502 */ 0, 0, 2096, 2096, 2127, 0, 2127, 2127, 2127, 0, 2127, 2127, 0, 183, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 4528 */ 143, 0, 0, 0, 0, 0, 0, 3655, 3655, 3655, 0, 3655, 3655, 3655, 0, 3655, 3655, 0, 0, 3655, 0, 0, 0, 3655,
+  /* 4552 */ 3655, 3655, 3655, 3655, 3655, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2168, 2095, 2095, 0, 0, 0, 0, 0,
+  /* 4573 */ 0, 0, 0, 0, 25152, 0, 0, 0, 25152, 0, 0, 128, 128, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7680, 0, 0,
+  /* 4603 */ 18944, 25600, 0, 0, 0, 0, 26624, 26624, 0, 0, 0, 0, 0, 26624, 0, 0, 0, 26624, 26624, 0, 0, 0, 26624, 26624,
+  /* 4627 */ 0, 0, 0, 0, 27235, 27235, 0, 27235, 27235, 27235, 0, 27235, 27235, 27235, 27235, 27235, 0, 0, 0, 0, 0, 0,
+  /* 4649 */ 2097, 2097, 2128, 0, 2128, 2128, 2128, 0, 2128, 2128, 126, 0, 67, 129, 0, 0, 0, 0, 2095, 2095, 0, 0, 5197,
+  /* 4672 */ 0, 2095, 2157, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3722, 2095,
+  /* 4695 */ 2095, 2095, 2095, 143, 2095, 0, 0, 0, 0, 2206, 2095, 2208, 2095, 0, 0, 0, 2095, 2095, 2095, 2095, 2095,
+  /* 4716 */ 2095, 2095, 2095, 2095, 2095, 2095, 2303, 2095, 2095, 47, 0, 2095, 2251, 2095, 2095, 2095, 2254, 2095,
+  /* 4734 */ 2095, 2095, 2258, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 215, 67, 0, 217, 0, 219, 0, 0, 143, 2272, 2095,
+  /* 4756 */ 2095, 2095, 2095, 47, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8282, 0, 0, 0, 8282, 0, 0,
+  /* 4781 */ 2277, 2095, 2095, 2095, 2095, 2095, 2095, 2282, 2095, 2095, 2095, 2095, 2095, 2095, 2212, 2095, 2095, 2279,
+  /* 4799 */ 37935, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 179, 2095, 2297,
+  /* 4818 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 180, 257, 257, 0, 0, 0, 0,
+  /* 4838 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 67, 2096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 176,
+  /* 4864 */ 2127, 0, 0, 2127, 0, 0, 0, 2127, 2127, 2127, 2127, 2127, 2127, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2243,
+  /* 4885 */ 2095, 2095, 2095, 2246, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2170, 2172, 0, 0, 0, 0, 0, 0,
+  /* 4907 */ 0, 0, 0, 9307, 0, 0, 0, 9307, 0, 0, 0, 129, 0, 0, 0, 0, 0, 0, 0, 3722, 2095, 2095, 2095, 2095, 143, 2095,
+  /* 4933 */ 2095, 2287, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 129,
+  /* 4957 */ 129, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 67, 129, 0, 2095, 67, 67, 2097, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 4984 */ 65, 0, 0, 0, 0, 0, 0, 2098, 2098, 2129, 0, 2129, 2129, 2129, 0, 2129, 2129, 2128, 0, 0, 2149, 0, 0, 0,
+  /* 5008 */ 2151, 2128, 2128, 2128, 2151, 2151, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2301, 2095, 2095, 2095, 2095,
+  /* 5026 */ 2095, 2095, 2095, 2095, 180, 180, 257, 257, 0, 0, 0, 0, 2095, 2312, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 5046 */ 267, 2098, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5632, 2129, 0, 0, 2150, 0, 0, 0, 2150, 2129, 2129,
+  /* 5074 */ 2129, 2150, 2150, 0, 2095, 2095, 2095, 2095, 2095, 2095, 28719, 2095, 2095, 31279, 2095, 2095, 2095, 2095,
+  /* 5092 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 47, 2095, 2095, 2095, 2095, 2095, 180, 257, 257, 0, 0, 0, 0,
+  /* 5112 */ 2095, 2095, 2095, 2313, 2095, 2095, 2095, 2095, 67, 2099, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5137 */ 16896, 2099, 0, 0, 2099, 0, 0, 0, 2152, 2099, 2099, 2099, 2152, 2152, 0, 2095, 2095, 2095, 2095, 2095,
+  /* 5157 */ 2199, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22016, 0, 0, 0, 0, 0, 2159, 2095, 2095, 2095, 2198, 2095,
+  /* 5182 */ 2200, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 2095, 2207, 2095, 2095, 0, 0,
+  /* 5211 */ 0, 2210, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 38959, 2095, 0, 0, 2095, 2095, 2095, 28672,
+  /* 5230 */ 0, 215, 67, 0, 217, 0, 219, 0, 223, 143, 2095, 2095, 2274, 2095, 2095, 2095, 2095, 2095, 2242, 2095, 2095,
+  /* 5251 */ 2095, 2095, 2095, 0, 0, 2212, 2095, 2249, 129, 129, 0, 0, 0, 0, 2095, 2095, 35887, 2095, 67, 0, 0, 29743,
+  /* 5273 */ 67, 67, 2100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20636, 2130, 0, 0, 2130, 0, 0, 0, 2130, 2130,
+  /* 5301 */ 2130, 2130, 2130, 2130, 0, 2095, 2095, 2095, 2095, 2095, 2281, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 5319 */ 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 129, 0, 0, 3584, 3584, 2095, 47, 0, 0, 5197, 0, 2095,
+  /* 5345 */ 2095, 2095, 2095, 2164, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19456, 0, 0, 0, 0, 0, 0,
+  /* 5370 */ 0, 0, 0, 223, 143, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 0, 0, 0, 2095, 2095,
+  /* 5393 */ 2095, 2214, 2095, 2095, 2298, 2095, 2095, 2300, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0,
+  /* 5411 */ 241, 241, 243, 243, 0, 219, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 0, 0, 0, 2095, 2095, 2095, 2095, 2095,
+  /* 5433 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 180, 0, 129, 0, 0, 0, 0, 0, 3584, 0, 3722, 2095, 2095,
+  /* 5456 */ 2095, 2095, 143, 2095, 2095, 34863, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 4096, 0, 0, 2095,
+  /* 5479 */ 0, 127, 67, 129, 0, 0, 0, 0, 2095, 2095, 0, 0, 5197, 0, 2095, 2095, 2095, 2095, 2165, 2095, 2095, 2095,
+  /* 5501 */ 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20064, 0, 0, 0, 20064, 0, 0, 2101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 5531 */ 0, 0, 0, 0, 1536, 0, 2131, 0, 0, 2131, 0, 0, 0, 2131, 2131, 2131, 2131, 2131, 2131, 0, 2095, 2095, 2095,
+  /* 5554 */ 2095, 2217, 2218, 2095, 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 0, 0, 0, 0, 2099, 2099, 2099, 0, 2099,
+  /* 5575 */ 2099, 2099, 0, 2099, 2099, 2296, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 5593 */ 2095, 2095, 0, 0, 2095, 2095, 2095, 2102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39936, 0, 2132, 0,
+  /* 5620 */ 0, 2132, 0, 0, 0, 2132, 2132, 2132, 2132, 2132, 2132, 0, 2095, 2095, 2095, 2095, 2253, 2095, 2095, 2095,
+  /* 5640 */ 2095, 2095, 2095, 2212, 47, 2095, 2095, 125, 0, 0, 67, 129, 0, 0, 3721, 3721, 2095, 2095, 0, 0, 5197, 0,
+  /* 5662 */ 2095, 2095, 2095, 2095, 2280, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 2095,
+  /* 5681 */ 2248, 2095, 0, 0, 0, 0, 2095, 2095, 2095, 2209, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 5702 */ 2095, 2095, 2259, 2095, 2095, 2095, 2095, 125, 0, 213, 0, 0, 0, 0, 0, 0, 0, 0, 143, 2095, 2095, 2095, 2095,
+  /* 5725 */ 2276, 0, 0, 67, 129, 0, 0, 0, 0, 2095, 2164, 0, 0, 5197, 0, 2095, 2095, 2095, 2095, 36399, 2095, 2095,
+  /* 5747 */ 2095, 2095, 2095, 2095, 2095, 2221, 2095, 2095, 0, 0, 0, 67, 129, 0, 0, 0, 0, 2095, 2165, 0, 0, 5197, 0,
+  /* 5770 */ 2095, 2095, 2095, 2095, 39424, 241, 241, 243, 243, 0, 219, 245, 0, 223, 0, 2095, 0, 0, 0, 0, 2095, 2095,
+  /* 5792 */ 2095, 2095, 0, 0, 0, 2095, 2095, 2213, 2095, 2095, 2095, 2161, 2161, 2095, 2095, 2095, 2095, 2095, 0, 0, 0,
+  /* 5813 */ 0, 0, 0, 0, 245, 0, 223, 0, 2095, 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 143, 2095, 2159,
+  /* 5839 */ 2095, 2095, 2095, 2095, 2167, 2095, 2169, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3722, 2095, 2095, 2095, 2095,
+  /* 5861 */ 143, 2236, 2237, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 2095, 2095, 2095, 2095,
+  /* 5880 */ 2095, 2095, 2095, 2095, 2171, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23138, 0, 0, 0, 23138, 0, 0, 2158, 47, 2095,
+  /* 5905 */ 2163, 2095, 2166, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22113, 0, 0, 0, 22113, 0, 0, 0, 0, 67,
+  /* 5931 */ 129, 0, 0, 0, 0, 2163, 2095, 0, 0, 5197, 0, 2095, 2193, 30767, 2194, 2095, 2197, 2095, 2095, 2095, 2095, 0,
+  /* 5953 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 5197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2193, 30767, 2193, 2095, 0, 0, 0, 2095, 2095,
+  /* 5981 */ 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 29231, 2095, 2095, 2095, 2095, 0, 240, 241, 242, 243, 244,
+  /* 6000 */ 219, 220, 0, 4830, 4855, 2095, 2103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12288, 0, 0, 0, 0, 2133,
+  /* 6028 */ 0, 0, 2133, 0, 0, 0, 2133, 2133, 2133, 2133, 2133, 2133, 0, 2095, 2156, 0, 0, 67, 129, 0, 0, 0, 0, 2095,
+  /* 6052 */ 2095, 0, 0, 5197, 0, 2192, 2095, 2187, 2189, 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 6077 */ 2095, 2095, 32958, 2095, 2095, 2095, 2095, 2095, 2095, 2245, 2095, 2095, 0, 0, 2095, 2095, 2095, 2095,
+  /* 6095 */ 2095, 2095, 2095, 2095, 2283, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 47, 2095, 125, 0,
+  /* 6114 */ 0, 0, 2104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20992, 24576, 0, 0, 0, 2134, 0, 0, 2134, 0, 0, 0,
+  /* 6144 */ 2134, 2134, 2134, 2134, 2134, 2134, 0, 2095, 2095, 2095, 2162, 2162, 2095, 2095, 2095, 2095, 2095, 0, 0, 0,
+  /* 6164 */ 0, 0, 0, 0, 0, 0, 221, 187, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 0, 0, 0, 2095, 2211, 2095,
+  /* 6191 */ 2095, 2211, 2250, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 125,
+  /* 6209 */ 0, 0, 67, 2105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 2689, 0, 0, 67, 67, 2135, 0, 0, 2135, 0,
+  /* 6239 */ 0, 0, 2135, 2135, 2135, 2135, 2135, 2135, 0, 2095, 2095, 2095, 2216, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 6258 */ 2095, 2095, 125, 0, 0, 0, 0, 0, 0, 2102, 2102, 2132, 0, 2132, 2132, 2132, 0, 2132, 2132, 0, 0, 0, 0, 2095,
+  /* 6282 */ 2095, 2095, 2095, 0, 0, 0, 2095, 2212, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 39471, 2095, 2095,
+  /* 6301 */ 2095, 2095, 2095, 2095, 180, 2095, 2278, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 6319 */ 2285, 2095, 2095, 2095, 2240, 2241, 2095, 2095, 2095, 2095, 2095, 2095, 0, 0, 2095, 2095, 2095, 47, 0, 0,
+  /* 6339 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2314, 2095, 0, 2286, 2095, 2095, 2095, 0, 0,
+  /* 6363 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 2095, 2095, 2095, 2211, 0, 2106, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 6390 */ 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 2121, 2121, 2130, 0, 2130, 2130, 2130, 0, 2130, 2130, 2136, 0, 0, 2136,
+  /* 6415 */ 0, 0, 0, 2136, 2136, 2136, 2136, 2136, 2136, 0, 2095, 2095, 2095, 2252, 2095, 2095, 2095, 2095, 2095, 2095,
+  /* 6435 */ 2095, 2095, 2095, 2095, 2095, 125, 0, 0, 67, 129, 0, 0, 138, 0, 2095, 2095, 0, 0, 5197, 0, 2095, 2095,
+  /* 6457 */ 2095, 2299, 2095, 2095, 2095, 2095, 2095, 2302, 2095, 2095, 2095, 2095, 2095, 0, 241, 241, 243, 243, 0,
+  /* 6476 */ 219, 245, 0, 223, 0, 2095, 0, 184, 0, 0, 0, 0, 0, 0, 0, 0, 2095, 2095, 2095, 2095, 143, 2095, 2188, 2190,
+  /* 6500 */ 2095, 2095, 2095, 2095, 2095, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28207, 0, 0, 39936, 39936, 0, 0, 39936,
+  /* 6524 */ 39936, 39936, 0, 39936, 39936, 39936, 0, 39936, 39936, 0, 0, 39936, 39936, 39936, 39936, 39936, 39936,
+  /* 6541 */ 39936, 39936, 39936, 39936, 0, 0, 0, 0, 0, 0, 2103, 2103, 2133, 0, 2133, 2133, 2133, 0, 2133, 2133, 0,
+  /* 6562 */ 40548, 40548, 0, 40548, 40548, 40548, 0, 40548, 40548, 40548, 40548, 40548, 0, 0, 0, 0, 0, 0, 2104, 2104,
+  /* 6582 */ 2134, 0, 2134, 2134, 2134, 0, 2134, 2134, 0, 0, 0, 41472, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 2095,
+  /* 6608 */ 2095, 2095, 2095, 2095, 0, 41984, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41984, 41984, 0, 0, 0, 0, 0, 0, 2122, 2122,
+  /* 6634 */ 2131, 0, 2131, 2131, 2131, 0, 2131, 2131, 41984, 41984, 0, 41984, 0, 41984, 0, 41984, 41984, 41984, 41984,
+  /* 6653 */ 41984, 41984, 0, 0, 0, 0, 0, 0, 2105, 2105, 2135, 0, 2135, 2135, 2135, 0, 2135, 2135, 42496, 0, 0, 42496,
+  /* 6675 */ 0, 0, 0, 42496, 42496, 42496, 42496, 42496, 42496, 0, 0, 0, 0, 0, 0, 2106, 2106, 2136, 0, 2136, 2136, 2136,
+  /* 6697 */ 0, 2136, 2136
 ];
 
 MaiaScript.EXPECTED =
 [
-  /*   0 */ 206, 210, 213, 214, 218, 222, 226, 229, 232, 236, 240, 244, 280, 280, 314, 252, 330, 260, 263, 279, 280,
-  /*  21 */ 291, 267, 271, 410, 308, 278, 280, 280, 280, 314, 331, 302, 286, 289, 280, 280, 280, 282, 280, 280, 280,
-  /*  42 */ 280, 315, 295, 300, 306, 280, 280, 280, 280, 280, 281, 296, 301, 312, 280, 280, 280, 319, 300, 312, 280,
-  /*  63 */ 247, 301, 313, 248, 320, 324, 272, 465, 335, 339, 343, 347, 351, 355, 359, 363, 367, 272, 272, 272, 272,
-  /*  84 */ 371, 272, 272, 451, 375, 272, 272, 395, 382, 386, 404, 272, 272, 272, 272, 480, 272, 272, 272, 390, 394,
-  /* 105 */ 272, 272, 399, 403, 272, 272, 272, 481, 272, 272, 408, 272, 479, 425, 272, 272, 272, 272, 272, 408, 272,
-  /* 126 */ 423, 272, 272, 272, 409, 417, 272, 255, 417, 256, 272, 272, 272, 272, 414, 429, 378, 439, 436, 433, 443,
-  /* 147 */ 447, 449, 272, 272, 272, 272, 327, 272, 272, 272, 455, 462, 272, 272, 420, 272, 272, 272, 272, 272, 272,
-  /* 168 */ 328, 272, 272, 272, 274, 473, 469, 477, 272, 272, 272, 272, 272, 329, 272, 272, 485, 469, 329, 272, 272,
-  /* 189 */ 326, 272, 272, 272, 485, 458, 272, 272, 272, 273, 467, 272, 272, 338, 272, 272, 272, 2056, 3072, 18432,
-  /* 209 */ 1050624, 2099200, 67110912, 1073743872, 2048, 2048, 2048, 2048, 1050624, 2099200, 268437504, 2048, 1050624,
-  /* 222 */ 270534656, 268437504, 1051128, 1712331256, 1712331768, -269506560, 1714428920, 1712331768, -3168256,
-  /* 231 */ 1712331772, 1980767224, -3168256, -3168256, 1712331768, -268457984, -22528, -2119680, -2119680, 1982864376,
-  /* 241 */ -2114568, -2114568, -2114568, -17416, -17416, 2048, 8, 8, 32, 16, 16, 16384, 67108864, 1073741824, 0, 0, 0,
-  /* 258 */ 33554432, 0, 16, 128, 384, 448, 67108992, 1073742208, 512, 65536, 786432, 25165824, 201326592, -1073741824,
-  /* 272 */ 0, 0, 0, 0, 1, 2, -1073741440, 512, 8, 8, 8, 8, 0, 0, 384, 64, 64, 64, 512, 8, 8, 8, 8192, 0, 32, 32, 16,
-  /* 299 */ 16, 16, 16, 16, 128, 128, 384, 384, 512, 8, 8, 8, 201326720, 384, 384, 8, 8, 8, 1024, 0, 8, 8, 32, 32, 32,
-  /* 324 */ 32, 32, 0, 0, 0, 4096, 0, 0, 0, 32, 16, 1024, 131072, 8388608, 0, 0, 1, 32, 0, 1, 1, 524288, 524320, 262144,
-  /* 348 */ 262144, -364642272, 3407830, -364642272, -364117984, -364642272, 3407830, -364642272, -364117984,
-  /* 357 */ -364642272, 3407838, 3932150, -289144800, 3669975, 4194263, 3669983, 4194295, -3407832, -361234442,
-  /* 367 */ -361234434, -361234433, -2, -1, 0, 16, 131072, 8388608, 33554432, 134217728, -536870912, 0, 0, 8192, 270336,
-  /* 382 */ 896, 2048, 57344, 2097152, 0, 41943040, 201326592, 58720256, 4194304, 33554432, 536870912, 1073741824,
-  /* 394 */ 0x80000000, 0, 0, 0, 4, 256, 32768, 8388608, 67108864, 25165824, 268435456, 0, 0, 4, 4194304, 33554432, 0,
-  /* 411 */ 0, 0, 8, 0, 4096, 8192, 0, 0, 67108864, 0, 0, 98304, 0, 0, 67108864, 16777216, 268435456, 0, 0, 131072,
-  /* 431 */ 8192, 8192, 409599, 245760, 114688, 409599, 245760, 278527, 278527, 114688, 278527, 278527, 122880, 122880,
-  /* 445 */ 253952, 122880, 409599, 524287, 524287, 524287, 0, 0, 0, 4194304, 1, 62, 64, 128, 256, 1024, 4096, 256,
-  /* 463 */ 3584, 4096, 0, 8, 16, 32, 128, 256, 512, 1024, 4, 16, 32, 64, 2048, 4096, 0, 0, 0, 8388608, 0, 0, 1, 16, 32,
-  /* 488 */ 64
+  /*   0 */ 207, 211, 214, 215, 219, 223, 227, 230, 233, 237, 241, 244, 297, 297, 265, 251, 284, 258, 457, 262, 297,
+  /*  21 */ 297, 269, 273, 359, 297, 279, 297, 297, 297, 297, 283, 313, 288, 290, 292, 297, 297, 298, 296, 297, 297,
+  /*  42 */ 297, 264, 400, 311, 302, 297, 297, 297, 297, 297, 297, 401, 312, 306, 297, 297, 297, 246, 310, 306, 297,
+  /*  63 */ 246, 312, 455, 247, 317, 319, 359, 477, 323, 253, 468, 331, 335, 335, 339, 343, 347, 359, 359, 359, 359,
+  /*  84 */ 351, 359, 386, 359, 448, 358, 359, 359, 365, 369, 373, 475, 359, 359, 359, 359, 326, 359, 359, 380, 447,
+  /* 105 */ 390, 359, 407, 354, 359, 359, 359, 376, 359, 359, 447, 359, 359, 396, 375, 359, 359, 359, 359, 447, 359,
+  /* 126 */ 359, 398, 359, 359, 383, 359, 405, 359, 384, 405, 385, 359, 359, 359, 391, 412, 411, 416, 423, 423, 419,
+  /* 147 */ 427, 429, 359, 359, 359, 359, 391, 359, 327, 359, 360, 433, 440, 359, 359, 445, 359, 359, 359, 359, 359,
+  /* 168 */ 359, 441, 359, 359, 275, 360, 452, 436, 441, 359, 359, 359, 359, 391, 359, 359, 360, 452, 461, 359, 359,
+  /* 189 */ 359, 392, 359, 359, 360, 452, 465, 359, 359, 359, 361, 472, 359, 359, 254, 359, 359, 359, 2056, 3072, 18432,
+  /* 210 */ 1050624, 2099200, 67110912, 1073743872, 2048, 2048, 2048, 2048, 1050624, 2099200, 268437504, 2048, 1050624,
+  /* 223 */ 270534656, 268437504, 1051128, 1712331256, 1712331768, -269506560, 1714428920, 1712331768, -3168256,
+  /* 232 */ 1712331772, 1980767224, -3168256, -3168256, 1712331768, -268457984, -2119680, -2119680, 1982864376,
+  /* 241 */ -2114568, -2114568, -2114568, -17416, 2048, 8, 8, 8, 32, 16, 67108864, 1073741824, 0, 0, 1, 32, 0, 128, 384,
+  /* 260 */ 448, 448, 512, 512, 8, 8, 8, 1024, 16384, 8192, 65536, 786432, 25165824, 201326592, -1073741824, 0, 0, 2, 4,
+  /* 279 */ 201326720, -1073741440, 512, 8, 1024, 0, 0, 32, 16, 384, 384, 64, 64, 8, 8, 512, 8, 0, 8, 8, 8, 8, 0, 128,
+  /* 303 */ 384, 512, 8, 128, 384, 384, 8, 32, 16, 16, 16, 16, 128, 128, 16, 8, 32, 32, 32, 0, 32, 1024, 131072,
+  /* 326 */ 8388608, 0, 0, 0, 6, 524320, 1610874880, 1610874880, -364642272, 3407830, -364642272, -364117984,
+  /* 338 */ -364642272, 3407838, 3932150, -289144800, 3669975, 3669983, 4194295, -3407832, -361234442, -361234434,
+  /* 348 */ -361234433, -2, -1, 0, 16, 131072, 8388608, 67108864, 25165824, 268435456, -536870912, 0, 0, 0, 0, 1, 16, 0,
+  /* 366 */ 4, 896, 2048, 57344, 2097152, 0, 41943040, 201326592, 58720256, 268435456, 0, 0, 0, 8388608, 0, 536870912,
+  /* 382 */ 1073741824, 0, 0, 33554432, 0, 0, 0, 1610612736, 0x80000000, 0, 0, 0, 4096, 0, 0, 8388608, 67108864,
+  /* 399 */ 16777216, 0, 0, 32, 32, 16, 67108864, 0, 0, 0, 256, 32768, 8192, 8192, 0, 0, 131072, 8198, 270342, 278527,
+  /* 419 */ 114688, 409599, 122880, 253952, 278527, 278527, 409599, 245760, 122880, 409599, 524287, 524287, 524287, 0,
+  /* 433 */ 62, 64, 128, 256, 512, 1024, 2048, 3584, 4096, 0, 0, 0, 0, 98304, 0, 0, 4194304, 33554432, 134217728, 16,
+  /* 453 */ 32, 64, 128, 384, 8, 8, 67108992, 1073742208, 256, 512, 1024, 4096, 256, 1024, 4096, 0, 1, 1, 524288, 32,
+  /* 473 */ 128, 256, 0, 4, 0, 0, 8, 16
 ];
 
 MaiaScript.TOKEN =
@@ -15939,7 +16684,7 @@ MaiaScript.TOKEN =
 ];
 
 // End
-// This file was generated on Mon Nov 14, 2022 22:25 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Sun Nov 20, 2022 17:22 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
