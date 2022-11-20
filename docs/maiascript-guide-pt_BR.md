@@ -44,53 +44,53 @@ system.println(JSON.stringify(i))
 a = 1
 b = 2.0
 
-d = a + b
-system.println(d)
+c = a + b
+system.println(c)
 
-d = a - b
-system.println(d)
+c = a - b
+system.println(c)
 
-d = a * b
-system.println(d)
+c = a * b
+system.println(c)
 
-d = a / b
-system.println(d)
+c = a / b
+system.println(c)
 
-d = a % b
-system.println(d)
+c = a % b
+system.println(c)
 
 // Operador de potência semelhante ao Python.
-d = a ** b
-system.println(d)
+c = a ** b
+system.println(c)
 
 // Operadores de incremento e decremento semelhantes ao C.
-d = a++
-system.println(d)
-d = b--
-system.println(d)
-d = ++a
-system.println(d)
-d = --b
-system.println(d)
-d = a += b
-system.println(d)
-d = a -= b
-system.println(d)
+c = a++
+system.println(c)
+c = b--
+system.println(c)
+c = ++a
+system.println(c)
+c = --b
+system.println(c)
+c = a += b
+system.println(c)
+c = a -= b
+system.println(c)
 ```
 
 ### Operadores lógicos
 
 ```
-d = a & b
-system.println(d)
-d = a | b
-system.println(d)
-d = a ^ b
-system.println(d)
-d = a && b
-system.println(d)
-d = a || b
-system.println(d)
+c = a & b
+system.println(c)
+c = a | b
+system.println(c)
+c = a ^ b
+system.println(c)
+c = a && b
+system.println(c)
+c = a || b
+system.println(c)
 ```
 
 ### Números complexos.
@@ -101,6 +101,9 @@ f = 3.0+4.0*i
 g = e + f
 system.println(e)
 ```
+
+### Matrizes
+
 
 ## Estruturas de decisão
 
@@ -117,6 +120,9 @@ system.println(c)
 ### Declaração Se... Então...
 
 ```
+a = 1
+b = 2
+
 // Declaração if semelhante ao C.
 if (a < b) {
     system.println("a = " + a)
@@ -140,6 +146,8 @@ if (a < b) {
 ### Declaração Selecione... Caso...
 
 ```
+a = 1
+
 // Declaração switch semelhante ao C.
 switch (a) {
     case 0:
@@ -170,6 +178,8 @@ do {
 ### Declaração Enquanto...
 
 ```
+a = 0
+
 while (a < 10) {
     if (a % 2 == 0) {
         continue
@@ -270,7 +280,7 @@ onMessage1(m) {
 
 try {
     t1 = task.new(task1)
-    t1.onmessage = onMessage
+    t1.onmessage = onMessage1
 } catch (e) {
     system.log(e.message)
 }
@@ -336,15 +346,15 @@ system.println(a.b)
 system.println(a.f(5))
 ```
 
-### Construtores de objetos
+### Construtores de Objetos
 
 ```
 // Um construtor de objeto.
-Object1(x) := {
+A(x) := {
     y = x
 }
 
-obj1 := Object1(2)
+c := A(2)
 
-system.println(obj1.y);
+system.println(c.y);
 ```
