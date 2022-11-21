@@ -8,7 +8,7 @@ Para informações detalhadas sobre a gramática da linguagem MaiaScript consult
 
 ## Tipos de dados
 
-MaiaScript suporta três tipos de dados nativamente: `integer`, `real` e `string`. Esses tipos são automáticos, não sendo necessário defini-los quando da criação de variáveis e funções comuns. Para uso exclusivamente com funções em **WebAssembly** e **MaiaAssembly** são suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32`, `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>.
+MaiaScript suporta três tipos de dados nativamente: `integer`, `real` e `string`. Esses tipos são automáticos, não sendo necessário defini-los quando da criação de variáveis e funções comuns. Para uso exclusivamente com funções em **WebAssembly** e **MaiaAssembly** são suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>.
 
 ## Saída de dados
 
@@ -536,6 +536,8 @@ try {
 
 ### Funções em MaiaAssembly
 
+**MaiaAssembly** é uma linguagem de programação otimizada para compilação para **WebAssembly**. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em **MaiaAssembly** são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **MaiaAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Todos as estruturas de decisão e de repetição do **MaiaScript** são suportados em **MaiaAssembly**. Além disso são suportados `vetores` de dimensões arbitrárias dos `tipos` de dados suportados. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma `variável local` para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.
+
 ```
 // Uma função em MaiaAssembly.
 i32 f4(i32 a, i32 b, local i32 c) {
@@ -549,6 +551,8 @@ c = f(1, 2)
 
 ### Funções em JavaScript
 
+Funções em **JavaScript** podem ser declaradas precedendo as `chaves`, `/{ /}` dos `blocos de comandos` com o caractere `/`. **Funções em JavaScript não são compiladas**, sendo inseridas no código produzido pelo compilador da forma como tiverem sido escritas. O exemplo a seguir mostra como definir uma função em **JavaScript**:
+
 ```
 // Uma função em JavaScript.
 f(x) /{
@@ -561,6 +565,8 @@ c = f(2)
 ```
 
 ### Funções em WebAssembly
+
+Funções em **WebAssembly** são montadas pelo assembler e inseridas em forma binária no código resultante da compilação. Elas são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **WebAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. `Variáveis locais` devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos:
 
 ```
 // Uma função em WebAssembly.
