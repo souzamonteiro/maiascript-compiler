@@ -1,10 +1,18 @@
 # MaiaScript Guide
 
+MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, redes neurais artificiais, criação e análise de redes complexas e sociais, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.
+
+Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumente usados e orientações gerais sobre o uso desta linguagem.
+
+Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta `docs` da sua distribução do compilador MaiaScript.
 
 ## Tipos de dados
 
+MaiaScript suporta três tipos de dados nativamente: `integer`, `real` e `string`. Esses tipos são automáticos, não sendo necessário defini-los quando da criação de variáveis e funções comuns. Para uso exclusivamente com funções em **WebAssembly** e **MaiaAssembly** são suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>.
 
 ## Saída de dados
+
+MaiaScript permite a exibição de mensagens na tela do computador, ou na saída padrão, através de várias funções da biblioteca `system`, dentre elas as mais usadas são `print`, `println`, `printf` e `showMessageDialog`. O exemplo a seguir ilustra o uso dessas funções:
 
 ```
 system.println("Hello World!")
@@ -14,12 +22,16 @@ system.printf("%d, %.3f, %s", 1, 1.23456, "Hello World!")
 
 ## Entrada de dados
 
+É possível ler dados digitados pelo usuário através da função `showInputDialog` da biblioteca `system`. Esta função exibe uma caixa de diálogo com a mensagem passada como parâmetro e um botão de confirmação, que quando clicado, retorna o valor digitado na caixa de texto apresentada. O exemplo a seguir ilustra o uso desta função:
+
 ```
 a = system.showInputDialog("Type a number:")
 system.println(a)
 ```
 
 ## Variáveis
+
+Variáveis são contêineres onde armazenamos dados para processamento ou resultados de processamentos. Em MaiaScript variáveis podem armazenar valores de qualquer tipo, não sendo normalmente necessário especificar o tipo de dado que a variável ira armazenar, no momento de sua criação. Contudo, quando da criação de funções em **MaiaAssembly** ou **WebAssembly**, deve-se especificar o tipo de dado que a variável ira armazenar e esta variável só poderá armazenar valores deste tipo de dado por toda a sua existência. São suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32`, `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>. O exemplo a seguir mostra como criar variáveis de diversos tipos:
 
 ```
 a = 1
@@ -50,7 +62,7 @@ system.println(JSON.stringify(i))
 
 ## Operadores
 
-### Operadores matemáticos
+MaiaScript suporta operadores matemáticos, relacionais, lógicos, de deslocamento de bits, de operação e atribuição e o operador condicional ternário. A seguir apresentamos em notação EBNF todos os operadores suportados pela linguagem. A ordem de precedência é de cima para baixo.
 
 ```
 Operation                ::= VariableAssignment
@@ -81,6 +93,12 @@ Primary                  ::= Type? Member
                            | Value
                            | ParenthesizedExpression
 ```
+
+Nas próximas sessões abordaremos cada um desses operadores.
+
+### Operadores matemáticos
+
+MaiaScript suporta os operadores matemáticos **soma**, `+`, **subtração**, `-`, **potenciação**, `**`, **multiplicação**, `*`, **divisão**, `/` e **resto da divisão**, `%`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 1
@@ -118,6 +136,8 @@ system.println(c)
 
 ### Operadores relacionais
 
+MaiaScript suporta os operadores relacionais **igual**, `==`, **diferente**, `!=`, **menor**, `<`, **menor ou igual**, `<=`, **maior**, `>` e **maior ou igual**, `>=`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 1
 b = 2
@@ -138,6 +158,8 @@ system.println(c)
 
 ### Operadores lógicos
 
+MaiaScript suporta os operadores lógicos **e**, `&&`, **ou**, `||`, **e bit a bit**, `&`, **ou exclusivo bit a bit**, `^` e **ou bit a bit**, `|`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 1
 b = 0
@@ -156,6 +178,8 @@ system.println(c)
 
 ### Operadores de deslocamento de bits
 
+MaiaScript suporta os operadores de **deslocamento a esquerda**, `<<`, e **deslocamento a direita**, `>>`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 3
 
@@ -167,6 +191,8 @@ system.println(c)
 
 ### Operadores de operação e atribuição
 
+MaiaScript suporta os seguintes operadores especiais de operação seguida de atribuição: `*=` , `/=` , `%=` , `+=` , `-=` , `<<=` , `>>=` , `&=` , `^=` , `|=`. A seguir são apresentados exemplos dos usos mais comuns desses operadores:
+
 ```
 c = a += b
 system.println(c)
@@ -175,6 +201,8 @@ system.println(c)
 ```
 
 ### Operador condicional (ternário)
+
+A linguagem MaiaScript oferece um **operador condicional ternário**. Este operador recebe três operandos: uma `expressão condicional`, uma `expressão que será retornada caso a condição seja avaliada como verdadeira` e uma `expressão que será retornada caso a condição seja avaliada como falsa`. No exemplo a seguir, como a variável `a` contém o valor `1` a condição `a == 1` será avaliada como `verdadeira` e a expressão `"Hello"` será retornada.
 
 ```
 a = 1
@@ -185,11 +213,17 @@ system.println(c)
 
 ### Números complexos.
 
+MaiaScript suporta **números complexos** nativamente para os operadores `+`, `-`, `**`, `*` e `\` e para as funções matemáticas `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` e `tanh`. Também estão disponíveis diversas funções especializadas na biblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+
+A seguir é apresentada em notação EBNF a sintaxe de números complexos em MaiaScript:
+
 ```
 Complex                  ::= Real? Imaginary
 Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
 Imaginary                ::= (('+' | '-')? Real '*' 'i')
 ```
+
+O exemplo a seguir ilustra a operação de soma com dois números complexos:
 
 ```
 e = 1.0+2.0*i
@@ -199,6 +233,10 @@ system.println(e)
 ```
 
 ### Matrizes
+
+MaiaScript suporta matrizes nativamente para os operadores `+`, `-`, `**`, e `*` e oferece a biblioteca `matrix` para algebra linear. Também estão disponíveis diversas funções especializadas na biblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a matrizes, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+
+A seguir é apresentada em notação EBNF a sintaxe **vetores associativos** e **matrizes** em MaiaScript:
 
 ```
 Array                    ::= '{' Element? (',' Element)* '}'
@@ -211,6 +249,8 @@ Key                      ::= Identifier
 Row                      ::= Column (',' Column)*
 Column                   ::= Expression
 ```
+
+Em MaiaScript pode-se usar tanto a notação de matrizes do **Matlab** quanto do **JavaScript**. Na notação Matlab as colunas são separadas por `vírgulas`, `,`, e as linhas por `pontos e vírgulas`, `;`. Na notação JavaScript cada linha deve ser indicada entre colchetes `[]` e as linhas separadas por `vírgulas`, `,`. O exemplo a seguir apresenta exemplos de operações com matrizes usando as duas notações:
 
 ```
 a = [1, 2; 3, 4]
@@ -232,12 +272,20 @@ system.println(c)
 
 ## Estruturas de decisão
 
+MaiaScript oferece duas estruturas para controle de fluxo de execução: `if... else...` e `switch`. Ambas as estruturas estão disponíveis tanto no MaiaScript quanto no MaiaAssembly. Nas próximas sessões serão apresentadas essas declarações, assim como exemplos de suas utilizações.
+
 ### Declaração Se... Então...
+
+A declaração `if... else...` permite decidir, mediante a avaliação de uma `condição` pela execução de uma sessão de `código de programa` ou não. A `expressão condicional` deve ser apresentada imediatamente após a palavra `if` e entre `parênteses`. Caso essa expressão seja avaliada como `verdadeira` a `expressão` ou `bloco de comandos` imediatamente após os `parênteses` será executada, caso contrário a `expressão` ou `bloco de comandos` imediatamente após a palavra `else` será executada. A cláusula `else` é opcional.
+
+A seguir é apresentada a sintaxe da declaração `if... else...` em notação EBNF:
 
 ```
 If                       ::= 'if' '(' Expression ')' Expression Else?
 Else                     ::= 'else' Expression
 ```
+
+O exemplo a seguir ilustra o uso da declaração `if... else...`:
 
 ```
 a = 1
@@ -265,11 +313,17 @@ if (a < b) {
 
 ### Declaração Selecione... Caso...
 
+A declaração `switch... case... default...` permite decidir, mediante a comparação de uma `expressão` com diversos `casos` fornecidos, pela execução de uma sessão de `código de programa` ou não. A `expressão condicional` deve ser apresentada imediatamente após a palavra `switch` e entre `parênteses`. Essa `expressão` será comparada com cada `caso` fornecido e caso seja encontrada uma **equivalência** a `expressão` ou `bloco de comandos` imediatamente após os `dois pontos` do `caso` será executada. Caso nenhum dos casos corresponda à `expressão` dada, a `expressão` ou `bloco de comandos` imediatamente após os `dois pontos` do caso `default` será executada. A cláusula `default` é opcional.
+
+A seguir é apresentada a sintaxe da declaração `switch... case... default...` em notação EBNF:
+
 ```
 Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
 Case                     ::= 'case' Expression ':' Expression*
 Default                  ::= 'default' ':' Expression*
 ```
+
+O exemplo a seguir ilustra o uso da declaração `switch... case... default...`:
 
 ```
 a = 1
@@ -290,13 +344,21 @@ switch (a) {
 
 ## Estruturas de repetição
 
+Estruturas de repetição permitem executar uma sessão de programa um número de vezes ou até que uma condição seja satisfeita. MaiaScript oferece quatro estruturas de repetição: `do... while`, `while...`, `for` e `foreach`. Todas essas estruturas estão disponíveis tanto no MaiaScript quanto no MaiaAssembly. Nas próximas sessões serão apresentadas essas declarações, assim como exemplos de suas utilizações.
+
 ### Declaração Faça...
+
+A declaração `do... while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que esta declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+
+A seguir é apresentada a sintaxe da declaração `do... while...` em notação EBNF:
 
 ```
 Do                       ::= 'do' Expression 'while' '(' Expression ')'
 Break                    ::= 'break'
 Continue                 ::= 'continue'
 ```
+
+O exemplo a seguir ilustra o uso da declaração `do... while...`:
 
 ```
 a = 0
@@ -309,9 +371,15 @@ do {
 
 ### Declaração Enquanto...
 
+A declaração `while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `do... while...` é que aquela declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+
+A seguir é apresentada a sintaxe da declaração `while...` em notação EBNF:
+
 ```
 While                    ::= 'while' '(' Expression ')' Expression
 ```
+
+O exemplo a seguir ilustra o uso da declaração `while...`:
 
 ```
 a = 0
@@ -331,9 +399,15 @@ while (a < 10) {
 
 ### Declaração Para...
 
+A declaração `for...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que aquela declaração requer um controle interno da `condição` de execução para que em algum momento a `condição` se torne falsa e a execução do código seja interrompida. Esta declaração permite passar três argumentos: uma `expressão que será executado antes da primeira interação`, uma `expressão condicional` e uma `expressão que será avaliada ao final de cada iteração`. Pode-se usar o `primeiro parâmetro` para **inicializar uma variável de controle**, e o `último parâmetro` para **modificá-lo**. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+
+A seguir é apresentada a sintaxe da declaração `for...` em notação EBNF:
+
 ```
 For                      ::= 'for' '(' Expression ';' Expression ';' Expression ')' Expression
 ```
+
+O exemplo a seguir ilustra o uso da declaração `for...`:
 
 ```
 b = [1, 2, 3]
@@ -349,9 +423,15 @@ for (i = 0; i < b.length; i++) {
 
 ### Declaração Para cada...
 
+A declaração `foreach...` executa uma `expressão` ou `bloco de comandos` `para cada` elemento de um `vetor associativo` ou `objeto`. Esta declaração recebe três parâmetros: um `vetor associativo` ou `objeto`, uma `variável para conter a chave do vetor` ou `nome da propriedade do objeto` e uma `variável para conter o valor do elemento do vetor` ou objeto. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+
+A seguir é apresentada a sintaxe da declaração `foreach...` em notação EBNF:
+
 ```
 ForEach                  ::= 'foreach' '(' Expression ';' Expression ';' Expression ')' Expression
 ```
+
+O exemplo a seguir ilustra o uso da declaração `foreach...`:
 
 ```
 c = {a: 1, b: 2}
@@ -364,6 +444,10 @@ foreach(c; key; value) {
 
 ## Funções
 
+Funções e procedimentos são sub-rotinas de programa que podem ser executadas invocando-se seus nomes. MaiaScript suporta diversos tipos de funções. Nas próximas sessões discutiremos cada um deles.
+
+A seguir é apresentada a sintaxe para os diversos tipos de `funções` MaiaScript em notação EBNF:
+
 ```
 FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression
                            | Identifier ('.' Identifier)* '(' Arguments? ')' '?=' Block
@@ -375,6 +459,10 @@ Return                   ::= 'return' Expression
 ```
 
 ### Declaração de uma função
+
+Declaramos uma `função` escrevendo seu `nome`, seguido de `parênteses`, que podem ou não conter `argumentos` separados por `vírgulas`, `,`, e um `bloco de comandos` entre `chaves`, `{}`. Funções em MaiaScript podem ou não ter `tipos de retornos` declarados e utilizar ou não `operadores especiais de atribuição`, `=`, `?=`, `#=`, `:=`, em sua declaração.
+
+Caso um `tipo de retorno` seja indicado na declação da função, ela será interpretada como sendo uma função em **MaiaAssembly** ou em **WebAssembly**. Nos dois casos deve-se especificar os `tipos dos valores` dos argumentos da função caso ela possua `argumentos`. Se as `chaves`, `/{ /}` dos `blocos de comandos` forem precedidas do caractere `/` a função será interpretada como sendo em **WebAssembly**, caso contrário será considerada como sendo em **MaiaAssembly**. Funções MaiaScript podem ser **recursivas**, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função `factorial` inplementada usando um algoritmo recursivo:
 
 ```
 // Uma função recursiva.
@@ -390,6 +478,8 @@ system.println(factorial(5));
 
 ### Funções em linha
 
+Para funções mais simples, que podem ser implementadas em apenas uma linha, pode-se usar a forma simplificada de declaração de funções. Esta forma permite escrever uma função da forma como se costuma fazer na matemática, utilizando-se o operador `atribuição`, `=`, e omitindo-se as chaves do `bloco de comandos`. O exemplo a seguir mostra a declaração de uma função do segundo grau:
+
 ```
 // Uma função em linha.
 f(x) = 2 * x ** 2 + x - 1
@@ -398,6 +488,8 @@ system.println(f(2));
 ```
 
 ### Funções assíncronas
+
+Funções pode ser **executadas assincronamente**. Para tanto deve-se declarar a função utilizando-se o `operador de execução assíncrona`, `?=`. Para esperar a **função assíncrona** terminar sua execução, bloqueado o **fluxo de execução** do resto do programa, deve-se `atribuir` a função a uma `variável` utilizando-se o `operador de execução assíncrona`, `?=`.
 
 ```
 // Uma função assíncrona.
@@ -410,6 +502,8 @@ a ?= f(2)
 ```
 
 ### Funções paralelas
+
+MaiaScript permite criar funções paralelas usando **threads** ou **núcleos de GPU**. Nos dois casos as funções precisam ser do tipo `kernel`. Funções `kernel` devem ser criadas usando-se o `operador de declaração de função kernel`, `#=`. Uma função `kernel` é compilada de forma diferente das demais funções. Elas não suportam operações com números complexos nem com matrizes. Somente os tipos de dados e recursos básicos do JavaScript são suportados. O exemplo a seguir mostra como criar uma **thread** em MaiaScript. Para maiores detalhes consulte a documentação da biblioteca `task` disponível na pasta `docs` da sua distribuição do compilador MaiaScript.
 
 ```
 // Uma função paralela.
@@ -442,6 +536,8 @@ try {
 
 ### Funções em MaiaAssembly
 
+**MaiaAssembly** é uma linguagem de programação otimizada para compilação para **WebAssembly**. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em **MaiaAssembly** são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **MaiaAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Todos as estruturas de decisão e de repetição do **MaiaScript** são suportados em **MaiaAssembly**. Além disso são suportados `vetores` de dimensões arbitrárias dos `tipos` de dados suportados. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma `variável local` para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.
+
 ```
 // Uma função em MaiaAssembly.
 i32 f4(i32 a, i32 b, local i32 c) {
@@ -455,6 +551,8 @@ c = f(1, 2)
 
 ### Funções em JavaScript
 
+Funções em **JavaScript** podem ser declaradas precedendo as `chaves`, `/{ /}` dos `blocos de comandos` com o caractere `/`. **Funções em JavaScript não são compiladas**, sendo inseridas no código produzido pelo compilador da forma como tiverem sido escritas. O exemplo a seguir mostra como definir uma função em **JavaScript**:
+
 ```
 // Uma função em JavaScript.
 f(x) /{
@@ -467,6 +565,8 @@ c = f(2)
 ```
 
 ### Funções em WebAssembly
+
+Funções em **WebAssembly** são montadas pelo assembler e inseridas em forma binária no código resultante da compilação. Elas são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **WebAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. `Variáveis locais` devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos:
 
 ```
 // Uma função em WebAssembly.
@@ -483,11 +583,19 @@ f = f(1, 2)
 
 ## Criando namespaces e objetos
 
+**Namespaces** são uma forma de organizar funções e variáveis para constituir bibliotecas. O uso de `namespaces` não só torna mais organizado e reusável o código, mas também tornam o acesso aos recursos das bibliotecas mais eficiente. Todo `namespace` é um `objeto`, mas `namespaces` não são `construtores de objetos`. Para criar `objetos` devemos criar `construtores` para eles. Nas próximas sessões veremos como criar `namespaces` e `construtores de objetos`.
+
 ### Criando Namespaces
+
+Criamos um `namespace` definindo um `nome` para ele e um `bloco de código` contendo variáveis e funções.
+
+A seguir é apresentada a sintaxe para criação de `namespaces` em notação EBNF:
 
 ```
 NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
 ```
+
+O exemplo a seguir ilustra como criar um `namespace` contendo uma `variável`, `propriedade` e uma `função`, `método`:
 
 ```
 // Criando um namespace (um objeto)
@@ -506,6 +614,8 @@ system.println(a.f(5))
 ```
 
 ### Construtores de Objetos
+
+**Construtores de objetos** permitem criar `instancias de classes` definidas por eles. `Classes` são **moldes** para `objetos`. Elas definem suas `propriedades`, características mutáveis em tempo de execução, e seus `métodos`, funcionalidades dos objetos. Para criar um `construtor de objetos` definimos uma função utilizando o `operador para criação de objetos`, `:=`. Para **instanciar** um `objeto` atribuímos a uma variável o valor de retorno do `construtor de objetos`, utilizando o `operador para criação de objetos`, `:=`. O exemplo a seguir cria uma `objeto` que possui uma propriedade `y` e atribui a essa variável o valor passado para o construtor no momento de sua criação:
 
 ```
 // Um construtor de objeto.

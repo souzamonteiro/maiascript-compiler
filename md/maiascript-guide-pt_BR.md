@@ -2,7 +2,7 @@
 
 MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, redes neurais artificiais, criação e análise de redes complexas e sociais, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.
 
-Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumento usados e orientações gerais sobre o uso desta linguagem.
+Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumente usados e orientações gerais sobre o uso desta linguagem.
 
 Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta `docs` da sua distribução do compilador MaiaScript.
 
@@ -22,7 +22,7 @@ system.printf("%d, %.3f, %s", 1, 1.23456, "Hello World!")
 
 ## Entrada de dados
 
-É possível ler dados digitados pelo usuário através da função `showInputDialog` da biblioteca `system`. Esta função esibe uma caixa de diálogo com a mensagem passada como parâmetro e um botão de confirmação, que quando clicado, retorna o valor digitado na caixa de texto apresentada. O exemploca a seguir ilustra o uso desta função:
+É possível ler dados digitados pelo usuário através da função `showInputDialog` da biblioteca `system`. Esta função exibe uma caixa de diálogo com a mensagem passada como parâmetro e um botão de confirmação, que quando clicado, retorna o valor digitado na caixa de texto apresentada. O exemplo a seguir ilustra o uso desta função:
 
 ```
 a = system.showInputDialog("Type a number:")
@@ -62,7 +62,7 @@ system.println(JSON.stringify(i))
 
 ## Operadores
 
-MaiaScript suporta operadores matemáticos, relacionais, lógicos, de deslocamento de bits, de operação e atribuição e o perador condicional ternário. A seguir apresentamos em notação EBNF todos os operadores suportados pela linguagem. A órdem de precedência é de cima para baixo.
+MaiaScript suporta operadores matemáticos, relacionais, lógicos, de deslocamento de bits, de operação e atribuição e o operador condicional ternário. A seguir apresentamos em notação EBNF todos os operadores suportados pela linguagem. A ordem de precedência é de cima para baixo.
 
 ```
 Operation                ::= VariableAssignment
@@ -98,7 +98,7 @@ Nas próximas sessões abordaremos cada um desses operadores.
 
 ### Operadores matemáticos
 
-MaiaScript suporta os peradores matemáticos **soma**, `+`, **subtração**, `-`, **potenciação**, `**`, **multiplicação**, `*`, **divisão**, `/` e **resto da divisão**, `%`. Os exemplos a seguir mostram como utilizar esses operadores:
+MaiaScript suporta os operadores matemáticos **soma**, `+`, **subtração**, `-`, **potenciação**, `**`, **multiplicação**, `*`, **divisão**, `/` e **resto da divisão**, `%`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 1
@@ -136,7 +136,7 @@ system.println(c)
 
 ### Operadores relacionais
 
-MaiaScript suporta os peradores relacionais **igual**, `==`, **diferente**, `!=`, **menor**, `<`, **menor ou igual**, `<=`, **maior**, `>` e **maior ou igual**, `>=`. Os exemplos a seguir mostram como utilizar esses operadores:
+MaiaScript suporta os operadores relacionais **igual**, `==`, **diferente**, `!=`, **menor**, `<`, **menor ou igual**, `<=`, **maior**, `>` e **maior ou igual**, `>=`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 1
@@ -158,7 +158,7 @@ system.println(c)
 
 ### Operadores lógicos
 
-MaiaScript suporta os peradores lógicos **e**, `&&`, **ou**, `||`, **e bit a bit**, `&`, **ou exclusivo bit a bit**, `^` e **ou bit a bit**, `|`. Os exemplos a seguir mostram como utilizar esses operadores:
+MaiaScript suporta os operadores lógicos **e**, `&&`, **ou**, `||`, **e bit a bit**, `&`, **ou exclusivo bit a bit**, `^` e **ou bit a bit**, `|`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 1
@@ -178,7 +178,7 @@ system.println(c)
 
 ### Operadores de deslocamento de bits
 
-MaiaScript suporta os peradores de **deslocalemento a esquerda**, `<<`, e **deslocamento a direita**, `>>`. Os exemplos a seguir mostram como utilizar esses operadores:
+MaiaScript suporta os operadores de **deslocamento a esquerda**, `<<`, e **deslocamento a direita**, `>>`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 3
@@ -213,7 +213,7 @@ system.println(c)
 
 ### Números complexos.
 
-MaiaScript suporta **números complexos** nativamente para os operadores `+`, `-`, `**`, `*` e `\` e para as funções matemáticas `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` e `tanh`. Também estão disponíveis diversas funções especializadas na bliblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+MaiaScript suporta **números complexos** nativamente para os operadores `+`, `-`, `**`, `*` e `\` e para as funções matemáticas `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` e `tanh`. Também estão disponíveis diversas funções especializadas na biblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
 
 A seguir é apresentada em notação EBNF a sintaxe de números complexos em MaiaScript:
 
@@ -234,7 +234,7 @@ system.println(e)
 
 ### Matrizes
 
-MaiaScript suporta matrizes nativamente para os operadores `+`, `-`, `**`, e `*` e oferece a biblioteca `matrix` para algebra linear. Também estão disponíveis diversas funções especializadas na bliblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a matrizes, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+MaiaScript suporta matrizes nativamente para os operadores `+`, `-`, `**`, e `*` e oferece a biblioteca `matrix` para algebra linear. Também estão disponíveis diversas funções especializadas na biblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a matrizes, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
 
 A seguir é apresentada em notação EBNF a sintaxe **vetores associativos** e **matrizes** em MaiaScript:
 
@@ -250,7 +250,7 @@ Row                      ::= Column (',' Column)*
 Column                   ::= Expression
 ```
 
-Em MaiaScript pode-se usar tanto a notação de matrizes do **Matlab** quanto do **JavaScript**. Na notação Matlab as colunas são separadas por `vírgulas`, `,`, e as linhas por `pontos-e-vírgulas`, `;`. Na notação JavaScript cada linha deve ser indicada entre colchetes `[]` e as linhas separadas por `vírgulas`, `,`. O exemplo a seguir apresenta exemplos de operações com matrizes usando as duas notações:
+Em MaiaScript pode-se usar tanto a notação de matrizes do **Matlab** quanto do **JavaScript**. Na notação Matlab as colunas são separadas por `vírgulas`, `,`, e as linhas por `pontos e vírgulas`, `;`. Na notação JavaScript cada linha deve ser indicada entre colchetes `[]` e as linhas separadas por `vírgulas`, `,`. O exemplo a seguir apresenta exemplos de operações com matrizes usando as duas notações:
 
 ```
 a = [1, 2; 3, 4]
@@ -371,7 +371,7 @@ do {
 
 ### Declaração Enquanto...
 
-A declaração `while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `do... while...` é que aquela declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela.Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `do... while...` é que aquela declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `while...` em notação EBNF:
 
@@ -423,7 +423,7 @@ for (i = 0; i < b.length; i++) {
 
 ### Declaração Para cada...
 
-A declaração `foreach...` executa uma `expressão` ou `bloco de comandos` `para cada` elemento de um `vetor associativo` ou `objeto`. Esta declação recebe três parâmetros: um `vetor associativo` ou `objeto`, uma `variável para conter a chave do vetor` ou `nome da propriedade do objeto` e uma `variável para conter o valor do elemento do vetor` ou objeto. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `foreach...` executa uma `expressão` ou `bloco de comandos` `para cada` elemento de um `vetor associativo` ou `objeto`. Esta declaração recebe três parâmetros: um `vetor associativo` ou `objeto`, uma `variável para conter a chave do vetor` ou `nome da propriedade do objeto` e uma `variável para conter o valor do elemento do vetor` ou objeto. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `foreach...` em notação EBNF:
 
@@ -444,7 +444,7 @@ foreach(c; key; value) {
 
 ## Funções
 
-Funções e procedimentos são subrotinas de programa que podem ser executadas invocando-se seus nomes. MaiaScript suporta diversos tipos de funções. Nas próximas sessões discutiremos cada um deles.
+Funções e procedimentos são sub-rotinas de programa que podem ser executadas invocando-se seus nomes. MaiaScript suporta diversos tipos de funções. Nas próximas sessões discutiremos cada um deles.
 
 A seguir é apresentada a sintaxe para os diversos tipos de `funções` MaiaScript em notação EBNF:
 
@@ -478,7 +478,7 @@ system.println(factorial(5));
 
 ### Funções em linha
 
-Para funções mais simples, que podem ser implementadas em apenas uma linha, pode-se usar a forma simplificada de declaração de funções. Esta forma permite escrever uma função da forma como se costuma fazer na mateática, utilizando-se o operador `atribuição`, `=`, e omitindo-se as chaves do `bloco de comandos`. O exemplo a seguir mostra a declaração de uma função do segundo grau:
+Para funções mais simples, que podem ser implementadas em apenas uma linha, pode-se usar a forma simplificada de declaração de funções. Esta forma permite escrever uma função da forma como se costuma fazer na matemática, utilizando-se o operador `atribuição`, `=`, e omitindo-se as chaves do `bloco de comandos`. O exemplo a seguir mostra a declaração de uma função do segundo grau:
 
 ```
 // Uma função em linha.
@@ -503,7 +503,7 @@ a ?= f(2)
 
 ### Funções paralelas
 
-MaiaScript permite criar funções paralelas usando **threads** ou **núcleos de GPU**. Nos dois casos as funções precisam ser do tipo `kernel`. Funções `kernel` devem ser criadas usando-se o `operador de declação de função kernel`, `#=`. Uma função `kernel` é compilada de forma diferente das demais funções. Elas não suportam operações com números complexos nem com matrizes. Somente os tipos de dados e recursos básicos do JavaScript são suportados. O exemplo a seguir mostra como criar uma **thread** em MaiaScript. Para maiores detalhes consulte a documentação da biblioteca `task` disponível na pasta `docs` da sua distribuição do compilador MaiaScript.
+MaiaScript permite criar funções paralelas usando **threads** ou **núcleos de GPU**. Nos dois casos as funções precisam ser do tipo `kernel`. Funções `kernel` devem ser criadas usando-se o `operador de declaração de função kernel`, `#=`. Uma função `kernel` é compilada de forma diferente das demais funções. Elas não suportam operações com números complexos nem com matrizes. Somente os tipos de dados e recursos básicos do JavaScript são suportados. O exemplo a seguir mostra como criar uma **thread** em MaiaScript. Para maiores detalhes consulte a documentação da biblioteca `task` disponível na pasta `docs` da sua distribuição do compilador MaiaScript.
 
 ```
 // Uma função paralela.
