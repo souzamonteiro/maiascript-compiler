@@ -583,11 +583,19 @@ f = f(1, 2)
 
 ## Criando namespaces e objetos
 
+**Namespaces** são uma forma de organizar funções e variáveis para constituir bibliotecas. O uso de `namespaces` não só torna mais organizado e reusável o código, mas também tornam o acesso aos recursos das bibliotecas mais eficiente. Todo `namespace` é um `objeto`, mas `namespaces` não são `construtores de objetos`. Para criar `objetos` devemos criar `construtores` para eles. Nas próximas sessões veremos como criar `namespaces` e `construtores de objetos`.
+
 ### Criando Namespaces
+
+Criamos um `namespace` definindo um `nome` para ele e um `bloco de código` contendo variáveis e funções.
+
+A seguir é apresentada a sintaxe para criação de `namespaces` em notação EBNF:
 
 ```
 NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
 ```
+
+O exemplo a seguir ilustra como criar um `namespace` contendo uma `variável`, `propriedade` e uma `função`, `método`:
 
 ```
 // Criando um namespace (um objeto)
@@ -606,6 +614,8 @@ system.println(a.f(5))
 ```
 
 ### Construtores de Objetos
+
+**Construtores de objetos** permitem criar `instancias de classes` definidas por eles. `Classes` são **moldes** para `objetos`. Elas definem suas `propriedades`, características mutáveis em tempo de execução, e seus `métodos`, funcionalidades dos objetos. Para criar um `construtor de objetos` definimos uma função utilizando o `operador para criação de objetos`, `:=`. Para **instanciar** um `objeto` atribuímos a uma variável o valor de retorno do `construtor de objetos`, utilizando o `operador para criação de objetos`, `:=`. O exemplo a seguir cria uma `objeto` que possui uma propriedade `y` e atribui a essa variável o valor passado para o construtor no momento de sua criação:
 
 ```
 // Um construtor de objeto.
