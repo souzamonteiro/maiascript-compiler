@@ -1,10 +1,18 @@
 # MaiaScript Guide
 
+MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, redes neurais artificiais, criação e análise de redes complexas e sociais, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.
+
+Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumento usados e orientações gerais sobre o uso desta linguagem.
+
+Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta `docs` da sua distribução do compilador MaiaScript.
 
 ## Tipos de dados
 
+MaiaScript suporta três tipos de dados nativamente: `integer`, `real` e `string`. Esses tipos são automáticos, não sendo necessário defini-los quando da criação de variáveis e funções comuns. Para uso exclusivamente com funções em **WebAssembly** e **MaiaAssembly** são suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32`, `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>.
 
 ## Saída de dados
+
+MaiaScript permite a exibição de mensagens na tela do computador, ou na saída padrão, através de várias funções da biblioteca `system`, dentre elas as mais usadas são `print`, `println`, `printf` e `showMessageDialog`. O exemplo a seguir ilustra o uso dessas funções:
 
 ```
 system.println("Hello World!")
@@ -13,6 +21,8 @@ system.printf("%d, %.3f, %s", 1, 1.23456, "Hello World!")
 ```
 
 ## Entrada de dados
+
+É possível ler dados digitados pelo usuário através da função `showInputDialog` da biblioteca `system`. Esta função esibe uma caixa de diálogo com a mensagem passada como parâmetro e um botão de confirmação, que quando clicado, retorna o valor digitado na caixa de texto apresentada. O exemploca a seguir ilustra o uso desta função:
 
 ```
 a = system.showInputDialog("Type a number:")
