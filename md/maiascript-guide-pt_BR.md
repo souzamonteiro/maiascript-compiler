@@ -444,6 +444,10 @@ foreach(c; key; value) {
 
 ## Funções
 
+Funções e procedimentos são subrotinas de programa que podem ser executadas invocando-se seus nomes. MaiaScript suporta diversos tipos de funções. Nas próximas sessões discutiremos cada um deles.
+
+A seguir é apresentada a sintaxe para os diversos tipos de `funções` MaiaScript em notação EBNF:
+
 ```
 FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression
                            | Identifier ('.' Identifier)* '(' Arguments? ')' '?=' Block
@@ -455,6 +459,10 @@ Return                   ::= 'return' Expression
 ```
 
 ### Declaração de uma função
+
+Declaramos uma `função` escrevendo seu `nome`, seguido de `parênteses`, que podem ou não conter `argumentos` separados por `vírgulas`, `,`, e um `bloco de comandos` entre `chaves`, `{}`. Funções em MaiaScript podem ou não ter `tipos de retornos` declarados e utilizar ou não `operadores especiais de atribuição`, `=`, `?=`, `#=`, `:=`, em sua declaração.
+
+Caso um `tipo de retorno` seja indicado na declação da função, ela será interpretada como sendo uma função em **MaiaAssembly** ou em **WebAssembly**. Nos dois casos deve-se especificar os `tipos dos valores` dos argumentos da função caso ela possua `argumentos`. Se as `chaves`, `/{ /}` dos `blocos de comandos` forem precedidas do caractere `/` a função será interpretada como sendo em **WebAssembly**, caso contrário será considerada como sendo em **MaiaAssembly**. Funções MaiaScript podem ser **recursivas**, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função `factorial` inplementada usando um algoritmo recursivo:
 
 ```
 // Uma função recursiva.
@@ -470,6 +478,8 @@ system.println(factorial(5));
 
 ### Funções em linha
 
+Para funções mais simples, que podem ser implementadas em apenas uma linha, pode-se usar a forma simplificada de declaração de funções. Esta forma permite escrever uma função da forma como se costuma fazer na mateática, utilizando-se o operador `atribuição`, `=`, e omitindo-se as chaves do `bloco de comandos`. O exemplo a seguir mostra a declaração de uma função do segundo grau:
+
 ```
 // Uma função em linha.
 f(x) = 2 * x ** 2 + x - 1
@@ -478,6 +488,8 @@ system.println(f(2));
 ```
 
 ### Funções assíncronas
+
+Funções pode ser **executadas assincronamente**. Para tanto deve-se declarar a função utilizando-se o `operador de execução assíncrona`, `?=`. Para esperar a **função assíncrona** terminar sua execução, bloqueado o **fluxo de execução** do resto do programa, deve-se `atribuir` a função a uma `variável` utilizando-se o `operador de execução assíncrona`, `?=`.
 
 ```
 // Uma função assíncrona.
@@ -490,6 +502,8 @@ a ?= f(2)
 ```
 
 ### Funções paralelas
+
+MaiaScript permite criar funções paralelas usando **threads** ou **núcleos de GPU**. Nos dois casos as funções precisam ser do tipo `kernel`. Funções `kernel` devem ser criadas usando-se o `operador de declação de função kernel`, `#=`. Uma função `kernel` é compilada de forma diferente das demais funções. Elas não suportam operações com números complexos nem com matrizes. Somente os tipos de dados e recursos básicos do JavaScript são suportados. O exemplo a seguir mostra como criar uma **thread** em MaiaScript. Para maiores detalhes consulte a documentação da biblioteca `task` disponível na pasta `docs` da sua distribuição do compilador MaiaScript.
 
 ```
 // Uma função paralela.
