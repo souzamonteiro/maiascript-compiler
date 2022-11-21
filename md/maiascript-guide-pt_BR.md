@@ -31,6 +31,8 @@ system.println(a)
 
 ## Variáveis
 
+Variáveis são contêineres onde armazenamos dados para processamento ou resultados de processamentos. Em MaiaScript variáveis podem armazenar valores de qualquer tipo, não sendo normalmente necessário especificar o tipo de dado que a variável ira armazenar, no momento de sua criação. Contudo, quando da criação de funções em **MaiaAssembly** ou **WebAssembly**, deve-se especificar o tipo de dado que a variável ira armazenar e esta variável só poderá armazenar valores deste tipo de dado por toda a sua existência. São suportados os tipos `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32`, `real 64 bits`, `f64`. Funções em **MaiaAssembly** são tratadas no capítulo sobre funções. Funções em **WebAssembly** estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <https://webassembly.org>. O exemplo a seguir mostra como criar variáveis de diversos tipos:
+
 ```
 a = 1
 system.println(a)
@@ -60,7 +62,7 @@ system.println(JSON.stringify(i))
 
 ## Operadores
 
-### Operadores matemáticos
+MaiaScript suporta operadores matemáticos, relacionais, lógicos, de deslocamento de bits, de operação e atribuição e o perador condicional ternário. A seguir apresentamos em notação EBNF todos os operadores suportados pela linguagem. A órdem de precedência é de cima para baixo.
 
 ```
 Operation                ::= VariableAssignment
@@ -91,6 +93,12 @@ Primary                  ::= Type? Member
                            | Value
                            | ParenthesizedExpression
 ```
+
+Nas próximas sessões abordaremos cada um desses operadores.
+
+### Operadores matemáticos
+
+MaiaScript suporta os peradores matemáticos **soma**, `+`, **subtração**, `-`, **potenciação**, `**`, **multiplicação**, `*`, **divisão**, `/` e **resto da divisão**, `%`. Os exemplos a seguir mostram como utilizar esses operadores:
 
 ```
 a = 1
@@ -128,6 +136,8 @@ system.println(c)
 
 ### Operadores relacionais
 
+MaiaScript suporta os peradores relacionais **igual**, `==`, **diferente**, `!=`, **menor**, `<`, **menor ou igual**, `<=`, **maior**, `>` e **maior ou igual**, `>=`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 1
 b = 2
@@ -148,6 +158,8 @@ system.println(c)
 
 ### Operadores lógicos
 
+MaiaScript suporta os peradores lógicos **e**, `&&`, **ou**, `||`, **e bit a bit**, `&`, **ou exclusivo bit a bit**, `^` e **ou bit a bit**, `|`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 1
 b = 0
@@ -166,6 +178,8 @@ system.println(c)
 
 ### Operadores de deslocamento de bits
 
+MaiaScript suporta os peradores de **deslocalemento a esquerda**, `<<`, e **deslocamento a direita**, `>>`. Os exemplos a seguir mostram como utilizar esses operadores:
+
 ```
 a = 3
 
@@ -177,6 +191,8 @@ system.println(c)
 
 ### Operadores de operação e atribuição
 
+MaiaScript suporta os seguintes operadores especiais de operação seguida de atribuição: `*=` , `/=` , `%=` , `+=` , `-=` , `<<=` , `>>=` , `&=` , `^=` , `|=`. A seguir são apresentados exemplos dos usos mais comuns desses operadores:
+
 ```
 c = a += b
 system.println(c)
@@ -185,6 +201,8 @@ system.println(c)
 ```
 
 ### Operador condicional (ternário)
+
+A linguagem MaiaScript oferece um **operador condicional ternário**. Este operador recebe três operandos: uma `expressão condicional`, uma `expressão que será retornada caso a condição seja avaliada como verdadeira` e uma `expressão que será retornada caso a condição seja avaliada como falsa`. No exemplo a seguir, como a variável `a` contém o valor `1` a condição `a == 1` será avaliada como `verdadeira` e a expressão `"Hello"` será retornada.
 
 ```
 a = 1
@@ -195,11 +213,17 @@ system.println(c)
 
 ### Números complexos.
 
+MaiaScript suporta **números complexos** nativamente para os operadores `+`, `-`, `**`, `*` e `\` e para as funções matemáticas `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` e `tanh`. Também estão disponíveis diversas funções especializadas na bliblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+
+A seguir é apresentada em notação EBNF a sintaxe de números complexos em MaiaScript:
+
 ```
 Complex                  ::= Real? Imaginary
 Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
 Imaginary                ::= (('+' | '-')? Real '*' 'i')
 ```
+
+O exemplo a seguir ilustra a operação de soma com dois números complexos:
 
 ```
 e = 1.0+2.0*i
@@ -209,6 +233,10 @@ system.println(e)
 ```
 
 ### Matrizes
+
+MaiaScript suporta matrizes nativamente para os operadores `+`, `-`, `**`, e `*` e oferece a biblioteca `matrix` para algebra linear. Também estão disponíveis diversas funções especializadas na bliblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a matrizes, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
+
+A seguir é apresentada em notação EBNF a sintaxe **vetores associativos** e **matrizes** em MaiaScript:
 
 ```
 Array                    ::= '{' Element? (',' Element)* '}'
@@ -221,6 +249,8 @@ Key                      ::= Identifier
 Row                      ::= Column (',' Column)*
 Column                   ::= Expression
 ```
+
+Em MaiaScript pode-se usar tanto a notação de matrizes do **Matlab** quanto do **JavaScript**. Na notação Matlab as colunas são separadas por `vírgulas`, `,`, e as linhas por `pontos-e-vírgulas`, `;`. Na notação JavaScript cada linha deve ser indicada entre colchetes `[]` e as linhas separadas por `vírgulas`, `,`. O exemplo a seguir apresenta exemplos de operações com matrizes usando as duas notações:
 
 ```
 a = [1, 2; 3, 4]
@@ -242,12 +272,20 @@ system.println(c)
 
 ## Estruturas de decisão
 
+MaiaScript oferece duas estruturas para controle de fluxo de execução: `if... else...` e `switch`. Ambas as estruturas estão disponíveis tanto no MaiaScript quanto no MaiaAssembly. Nas próximas sessões serão apresentadas essas declarações, assim como exemplos de suas utilizações.
+
 ### Declaração Se... Então...
+
+A declaração `if... else...` permite decidir, mediante a avaliação de uma `condição` pela execução de uma sessão de `código de programa` ou não. A `expressão condicional` deve ser apresentada imediatamente após a palavra `if` e entre `parênteses`. Caso essa expressão seja avaliada como `verdadeira` a `expressão` ou `bloco de comandos` imediatamente após os `parênteses` será executada, caso contrário a `expressão` ou `bloco de comandos` imediatamente após a palavra `else` será executada. A cláusula `else` é opcional.
+
+A seguir é apresentada a sintaxe da declaração `if... else...` em notação EBNF:
 
 ```
 If                       ::= 'if' '(' Expression ')' Expression Else?
 Else                     ::= 'else' Expression
 ```
+
+O exemplo a seguir ilustra o uso da declaração `if... else...`:
 
 ```
 a = 1
@@ -275,11 +313,17 @@ if (a < b) {
 
 ### Declaração Selecione... Caso...
 
+A declaração `switch... case... default...` permite decidir, mediante a comparação de uma `expressão` com diversos `casos` fornecidos, pela execução de uma sessão de `código de programa` ou não. A `expressão condicional` deve ser apresentada imediatamente após a palavra `switch` e entre `parênteses`. Essa `expressão` será comparada com cada `caso` fornecido e caso seja encontrada uma **equivalência** a `expressão` ou `bloco de comandos` imediatamente após os `dois pontos` do `caso` será executada. Caso nenhum dos casos corresponda à `expressão` dada, a `expressão` ou `bloco de comandos` imediatamente após os `dois pontos` do caso `default` será executada. A cláusula `default` é opcional.
+
+A seguir é apresentada a sintaxe da declaração `switch... case... default...` em notação EBNF:
+
 ```
 Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
 Case                     ::= 'case' Expression ':' Expression*
 Default                  ::= 'default' ':' Expression*
 ```
+
+O exemplo a seguir ilustra o uso da declaração `switch... case... default...`:
 
 ```
 a = 1
