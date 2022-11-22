@@ -211,7 +211,7 @@ c = a == 1 ? "Hello" : "World"
 system.println(c)
 ```
 
-### Números complexos.
+### Números complexos
 
 MaiaScript suporta **números complexos** nativamente para os operadores `+`, `-`, `**`, `*` e `\` e para as funções matemáticas `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` e `tanh`. Também estão disponíveis diversas funções especializadas na biblioteca `core`. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta `docs` em sua distribuição do compilador MaiaScript.
 
@@ -348,7 +348,7 @@ Estruturas de repetição permitem executar uma sessão de programa um número d
 
 ### Declaração Faça...
 
-A declaração `do... while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que esta declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `do... while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que esta declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o **bloco de comandos** tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `do... while...` em notação EBNF:
 
@@ -371,7 +371,7 @@ do {
 
 ### Declaração Enquanto...
 
-A declaração `while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `do... while...` é que aquela declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `while...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `do... while...` é que aquela declaração **executa pelo menos uma vez** a sessão de código, mesmo que a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela, enquanto a declaração `while...` **não executará nenhuma vez** caso a `condição` já seja `falsa` quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o **bloco de comandos** tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `while...` em notação EBNF:
 
@@ -399,7 +399,7 @@ while (a < 10) {
 
 ### Declaração Para...
 
-A declaração `for...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que aquela declaração requer um controle interno da `condição` de execução para que em algum momento a `condição` se torne falsa e a execução do código seja interrompida. Esta declaração permite passar três argumentos: uma `expressão que será executado antes da primeira interação`, uma `expressão condicional` e uma `expressão que será avaliada ao final de cada iteração`. Pode-se usar o `primeiro parâmetro` para **inicializar uma variável de controle**, e o `último parâmetro` para **modificá-lo**. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `for...` executa uma `expressão` ou `bloco de comandos` `enquanto` uma dada `condição` for avaliada como `verdadeira`. A diferença desta declaração e da declaração `while...` é que aquela declaração requer um controle interno da `condição` de execução para que em algum momento a `condição` se torne falsa e a execução do código seja interrompida. Esta declaração permite passar três argumentos: uma `expressão que será executado antes da primeira interação`, uma `expressão condicional` e uma `expressão que será avaliada ao final de cada iteração`. Pode-se usar o `primeiro parâmetro` para **inicializar uma variável de controle**, e o `último parâmetro` para **modificá-lo**. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o **bloco de comandos** tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `for...` em notação EBNF:
 
@@ -423,7 +423,7 @@ for (i = 0; i < b.length; i++) {
 
 ### Declaração Para cada...
 
-A declaração `foreach...` executa uma `expressão` ou `bloco de comandos` `para cada` elemento de um `vetor associativo` ou `objeto`. Esta declaração recebe três parâmetros: um `vetor associativo` ou `objeto`, uma `variável para conter a chave do vetor` ou `nome da propriedade do objeto` e uma `variável para conter o valor do elemento do vetor` ou objeto. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
+A declaração `foreach...` executa uma `expressão` ou `bloco de comandos` `para cada` elemento de um `vetor associativo` ou `objeto`. Esta declaração recebe três parâmetros: um `vetor associativo` ou `objeto`, uma `variável para conter a chave do vetor` ou `nome da propriedade do objeto` e uma `variável para conter o valor do elemento do vetor` ou objeto. Caso se deseje interromper a execução do **laço** antes que a `condição` se torne `falsa`, pode-se utilizar a declaração `break`. Caso se deseje interromper a execução da iteração atual do **laço** antes que o **bloco de comandos** tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração `continue`.
 
 A seguir é apresentada a sintaxe da declaração `foreach...` em notação EBNF:
 
