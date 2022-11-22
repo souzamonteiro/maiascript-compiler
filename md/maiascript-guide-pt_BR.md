@@ -1,6 +1,6 @@
 # MaiaScript Guide
 
-MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, redes neurais artificiais, criação e análise de redes complexas e sociais, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.
+MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, criação e análise de redes complexas e sociais, redes neurais artificiais, acesso a bancos de dados SQL, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.
 
 Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumente usados e orientações gerais sobre o uso desta linguagem.
 
@@ -536,7 +536,7 @@ try {
 
 ### Funções em MaiaAssembly
 
-**MaiaAssembly** é uma linguagem de programação otimizada para compilação para **WebAssembly**. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em **MaiaAssembly** são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **MaiaAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Todos as estruturas de decisão e de repetição do **MaiaScript** são suportados em **MaiaAssembly**. Além disso são suportados `vetores` de dimensões arbitrárias dos `tipos` de dados suportados. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma `variável local` para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.
+**MaiaAssembly** é uma linguagem de programação otimizada para compilação para **WebAssembly**. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em **MaiaAssembly** são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em **MaiaAssembly** são `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` e `real 64 bits`, `f64`. Todos as estruturas de decisão e de repetição do **MaiaScript** são suportados em **MaiaAssembly**. Além disso são suportados `vetores` de dimensões arbitrárias dos `tipos` de dados suportados. Não é possível passar objetos ou mesmo vetores como argumentos de funções **MaiaAssembly**, mas é possível importá-los. Para tanto utiliza-se a declaração `import`. Ela permite importar propriedades de objetos para dentro da função e utilizá-las como se fossem variáveis locais. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma `variável local` para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.
 
 ```
 // Uma função em MaiaAssembly.
@@ -626,4 +626,332 @@ A(x) := {
 c := A(2)
 
 system.println(c.y);
+```
+
+
+## Redes complexas e sociais
+
+MaiaScript fornece diversas funções para criação e **análise de redes complexas e sociais**. Esses recursos estão disponíveis nas bibliotecas `cna`e `snet`. Os exemplos a seguir mostram as aplicações mais comuns para as funções dessas bibliotecas. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+
+```
+// Cria um arquivo de rede no formato Pajek.
+fileContents = ""
+fileContents = fileContents + "*Vertices 10" + "\r\n"
+fileContents = fileContents + "1 \"v1\" -13.53320569881955 15.024369378567805 1" + "\r\n"
+fileContents = fileContents + "2 \"v2\" 138.57890381783866 -149.73844730901712 1" + "\r\n"
+fileContents = fileContents + "3 \"v3\" -195.0525404708813 294.7061191626409 1" + "\r\n"
+fileContents = fileContents + "4 \"v4\" -4.710077309561689 -119.03537285786881 1" + "\r\n"
+fileContents = fileContents + "5 \"v5\" 276.72724773173434 -241.1655959044472 1" + "\r\n"
+fileContents = fileContents + "6 \"v6\" 218.72444256014836 -294.7061191626409 1" + "\r\n"
+fileContents = fileContents + "7 \"v7\" 119.53996984903722 -4.504246484231039 1" + "\r\n"
+fileContents = fileContents + "8 \"v8\" -276.72724773173434 219.58638008091668 1" + "\r\n"
+fileContents = fileContents + "9 \"v9\" -80.8765683805954 206.98274428233245 1" + "\r\n"
+fileContents = fileContents + "10 \"v10\" -198.91296298859544 98.42821322326704 1" + "\r\n"
+fileContents = fileContents + "*Arcs" + "\r\n"
+fileContents = fileContents + "1 2 1" + "\r\n"
+fileContents = fileContents + "1 4 1" + "\r\n"
+fileContents = fileContents + "1 7 1" + "\r\n"
+fileContents = fileContents + "1 9 1" + "\r\n"
+fileContents = fileContents + "1 10 1" + "\r\n"
+fileContents = fileContents + "2 1 1" + "\r\n"
+fileContents = fileContents + "2 4 1" + "\r\n"
+fileContents = fileContents + "2 5 1" + "\r\n"
+fileContents = fileContents + "2 6 1" + "\r\n"
+fileContents = fileContents + "2 7 1" + "\r\n"
+fileContents = fileContents + "3 8 1" + "\r\n"
+fileContents = fileContents + "3 9 1" + "\r\n"
+fileContents = fileContents + "4 1 1" + "\r\n"
+fileContents = fileContents + "4 2 1" + "\r\n"
+fileContents = fileContents + "5 2 1" + "\r\n"
+fileContents = fileContents + "5 6 1" + "\r\n"
+fileContents = fileContents + "6 2 1" + "\r\n"
+fileContents = fileContents + "6 5 1" + "\r\n"
+fileContents = fileContents + "7 1 1" + "\r\n"
+fileContents = fileContents + "7 2 1" + "\r\n"
+fileContents = fileContents + "8 3 1" + "\r\n"
+fileContents = fileContents + "8 10 1" + "\r\n"
+fileContents = fileContents + "9 1 1" + "\r\n"
+fileContents = fileContents + "9 3 1" + "\r\n"
+fileContents = fileContents + "10 1 1" + "\r\n"
+fileContents = fileContents + "10 8 1" + "\r\n"
+
+// Objeto para conter as propriedades da rede.
+property = {
+    "adj": [],
+    "n": 0,
+    "m": 0,
+    "directed": false,
+    "density": 0,
+    "networkLabel": [],
+    "networkDegree": [],
+    "networkAverageDegree": 0,
+    "networkDegreeDistribution": [],
+    "networkDensity": 0,
+    "networkClustering": [],
+    "networkAverageClustering": 0,
+    "networkShortestPath": [],
+    "networkAverageShortestPath": 0,
+    "networkDiameter": 0,
+    "networkCentrality": [],
+    "networkVertexEfficiency": [],
+    "networkGlobalEfficiency": 0
+}
+
+// Converte o arquivo em uma matriz de adjascência.
+property.adj = cna.parsePajekFile(fileContents, property)
+
+// Calcula a densidade da rede.
+property.networkDensity = cna.getDensity(property.adj, property.directed)
+
+// Calcula os graus dos vértices e o grau médio da rede.
+property.networkDegree = cna.getDegrees(property.adj, property.directed)
+property.networkAverageDegree = cna.getAverageDegree(property.networkDegree)
+
+// Calcula os coeficientes de aglomeração dos vértices e o coeficiente de aglomeração médio da rede.
+property.networkClustering = cna.getClustering(property.adj, property.directed)
+property.networkAverageClustering = cna.getAverageClustering(property.networkClustering)
+
+// Calcula os caminhos mínimos entre os vértices e o caminho mínimo médio da rede.
+property.networkShortestPath = cna.getShortestPath(property.adj)
+property.networkAverageShortestPath = cna.getAverageShortestPath(property.networkShortestPath)
+
+// Calcula o diâmetro da rede.
+property.networkDiameter = cna.getDiameter(property.networkShortestPath)
+
+// Calcula a eficiência global da rede.
+property.networkGlobalEfficiency = cna.getGlobalEfficiency(property.networkVertexEfficiency)
+```
+
+## Redes neurais artificiais
+
+MaiaScript fornece funções para criação e treinar **redes neurais artificiais** de diversas topologias. Esses recursos estão disponíveis na biblioteca `ann`. Os exemplos a seguir mostram as aplicações mais comuns para as funções dessa biblioteca. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+
+```
+// Callback.
+trainingCallback(epochs, RSS, correctness, ETL) {
+    system.println("Epochs: " + core.toString(epochs) + ", RSS: " + core.toString(RSS) + ", Correctness: " + core.toString(correctness) + ", ETL: " + core.toString(ETL))
+}
+
+// Dados para treinar.
+// O algoritmo de treinamento espera uma matriz com uma linha para cada dado e uma coluna para cada neurônio de entrada ou saída.
+dataX = [[0.00],[0.25],[0.50],[0.75],[1.00],[1.25],[1.50],[1.75],[2.00],[2.25],[2.50],[2.75],[3.00],[3.25],[3.50],[3.75],[4.00],[4.25],[4.50],[4.75],[5.00],[5.25],[5.50],[5.75],[6.00],[6.25],[6.50],[6.75],[7.00],[7.25],[7.50],[7.75],[8.00],[8.25],[8.50],[8.75],[9.00],[9.25],[9.50],[9.75],[10.00]]
+dataY = [[2.0000],[2.2197],[2.3811],[2.5136],[2.7310],[2.7827],[2.8327],[3.0351],[2.9551],[3.3973],[3.5117],[3.5909],[3.7345],[3.8419],[4.0952],[4.2879],[4.4000],[4.8764],[5.2843],[5.9241],[6.3302],[6.9608],[7.3044],[7.6791],[8.2819],[9.0139],[9.3387],[10.0420],[10.4000],[10.6437],[10.4786],[10.4928],[10.7082],[10.6233],[10.8862],[10.6830],[10.8393],[10.9186],[10.8814],[10.9779],[11.0000]]
+
+nData = core.length(dataX)
+
+// Cria uma rede neural Perceptron multicamadas.
+nn = ann.createANN("mlp", 0, 0, 0, 0, 1, 1, 1, 3)
+// Displays the untrained neural network.
+system.println("ANN before be prepared: " + core.toString(nn))
+system.println(core.toString(ann.getLabels(nn)))
+
+// Atribui pesos iniciais aleatórios às sinapses neurais.
+nn = ann.prepare(nn, true, true, true)
+system.println(core.toString("ANN after be prepared: " + core.toString(nn)))
+
+// Treina a rede neural.
+statistics = ann.training(nn, dataX, dataY, 0.005, "tanh", "linear", "none", [1, 0], 2000, 0.001, trainingCallback, 100)
+// Displays training statistics.
+// system.println("Statistics: " + core.toString(statistics))
+
+// Exibe a rede neural treinada.
+system.println("Trained ANN: " + core.toString(nn))
+
+// Usa a rede treinada para estimar o valor da função.
+
+// nn[1,2] = 1.52021
+// nn[2,2] = -9.55616
+// nn[1,3] = -1.26172
+// nn[3,3] = 5.93258
+// nn[1,4] = 0.146194
+// nn[4,4] = 0.686591
+// nn[2,5] = 1.47574
+// nn[3,5] = -1.47603
+// nn[4,5] = 8.08261
+// nn[5,5] = 0.10794
+
+system.println("The output must be f(0.50) = 2.3811")
+out = ann.think(nn, [0.50], 1, 1, "tanh", "linear", "none", [1, 0])
+system.println("ANN for f(0.50): " + core.toString(nn))
+system.println("f(0.50) = " + out[0])
+
+system.println("The output must be f(1.25) = 2.7827")
+out = ann.think(nn, [1.25], 1, 1, "tanh", "linear", "none", [1, 0])
+system.println("ANN for f(1.25): " + core.toString(nn))
+system.println("f(1.25) = " + out[0])
+
+system.println("The output must be f(5.00) = 6.3302")
+out = ann.think(nn, [5.00], 1, 1, "tanh", "linear", "none", [1, 0])
+system.println("ANN for f(5.00): " + core.toString(nn))
+system.println("f(5.00) = " + out[0])
+
+system.println("The output must be f(5.1267) = 6.65671")
+out = ann.think(nn, [5.1267], 1, 1, "tanh", "linear", "none", [1, 0])
+system.println("ANN for f(5.1267): " + core.toString(nn))
+system.println("f(5.1267) = " + out[0])
+```
+
+## Banco de dados SQL
+
+MaiaScript suporta nativamente o banco de dados **SQLite** mas pode utilizar qualquer banco de dados suportado pelo **Node.js**. Esses recursos estão disponíveis na biblioteca `core`. O exemplo a seguir cria um banco de dados, uma tabela e insere dados na tabela criada. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+
+```
+dataHandler(transaction, results) {
+}
+
+errorHandler(transaction, error) {
+}
+
+createTable(transaction) {
+    scheme = ""
+    scheme = scheme + "CREATE TABLE people(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+    scheme = scheme + "name TEXT NOT NULL DEFAULT 'John Doe',"
+    scheme = scheme + "shirt TEXT NOT NULL DEFAULT 'Purple');"
+    transaction.executeSql(scheme, [], dataHandler, errorHandler)
+    transaction.executeSql("insert into people (name, shirt) VALUES ('Joe', 'Green');", [], dataHandler, errorHandler)
+    transaction.executeSql("insert into people (name, shirt) VALUES ('Mark', 'Blue');", [], dataHandler, errorHandler)
+    transaction.executeSql("insert into people (name, shirt) VALUES ('Phil', 'Orange');", [], dataHandler, errorHandler)
+    transaction.executeSql("insert into people (name, shirt) VALUES ('jdoe', 'Purple');", [], dataHandler, errorHandler)
+}
+
+// Abre o banco de dados se ele existir ou cria um novo caso ele não exista.
+db = core.openSQLDatabase("Test", "1.0", "Test", 65536)
+
+// Cria uma tabela e insere dados nela.
+if (typeof(db) != "undefined") {
+    db.transaction(createTable)
+}
+```
+
+## Programação paralela usando GPU
+
+É possível acelerar o processamento em alguns problemas usando **programação paralela**. MaiaScript permite paralelismo real usando **núcleos de GPU** se este recurso estiver disponível na máquina hospedeira. Caso não esteja, o compilador MaiaScript compilará o programa para execução sequencial. Funções de computação em GPU são chamadas *shaders*. Essas funções são compiladas de modo diferente pelo compilador MaiaScript e não suportam números complexos ou cálculos com matrizes. Os recursos de programação com GPU estão dsiponíveis na biblioteca `gpu`. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+
+O exemplo a seguir mostra como criar uma função para multiplicação paralela de duas matrizes. Também é implementada uma versão sequencial do cálculo para comparação de desempenho.
+
+```
+// Crie duas matrizes de 512x512.
+a = core.zero(512, 512)
+b = core.zero(512, 512)
+
+// Preenche as matrizes.
+for (i = 0; i < 512; i = i + 1) {
+    for (j = 0; j < 512; j = j + 1) {
+        v = i * 512 + j
+        a[i, j] = v
+        b[i, j] = v
+    }
+}
+
+// Função paralela.
+shader #= (a, b) {
+    local sum = 0
+    for (local i = 0; i < 512; i = i + 1) {
+        sum = sum + a[this.thread.y, i] * b[i, this.thread.x]
+    }
+    return(sum)
+}
+
+// Função de computação usando a GPU.
+useGPU ?= () {
+    device = gpu.new()
+    multiplyMatrices = device.createKernel(shader)
+    multiplyMatrices.setOutput([512, 512])
+    
+    startTime := Date()
+    c = multiplyMatrices(a, b)
+    endTime := Date()
+    
+    elapsedTime = endTime - startTime
+    
+    system.log("GPU result:")
+    system.log("c[511,511]: " + c[511,511])
+    system.log("Elapsed time: " + elapsedTime + " ms\n")
+}
+
+// Função de computação usando a CPU.
+useCPU ?= () {
+    startTime := Date()
+    d = core.zero(512, 512)
+    for (i = 0; i < 512; i = i + 1) {
+        for (j = 0; j < 512; j = j + 1) {
+            s = 0
+            for (k = 0; k < 512; k = k + 1) {
+                s = s + a[i, k] * b[k, j]
+            }
+            d[i, j] = s
+        }
+    }
+    endTime := Date()
+    
+    elapsedTime = endTime - startTime
+    
+    system.log("CPU result:")
+    system.log("d[511,511]: " + d[511,511])
+    system.log("Elapsed time: " + elapsedTime + " ms\n")
+}
+
+// Iniciar cálculo.
+useGPU()
+useCPU()
+```
+
+## Estatística avançada
+
+MaiaScript oferece diversas funções estatísticas para operações com **matrizes** e arquivos **CSV**. Essas funções estão disponíveis nas bibliotecas `matrix`, `statistics` e `dfa`. A biblioteca `statistics` implementa funções para cálculos de **médias**, **desvios** e **erros padrões**, além de funções envolvendo **números aleatórios** e **distribuição normal**, incluído o cálculo da **inversa da distribuição normal**. A biblioteca `dfa` implementa cálculos de **DFA**, **DCCA** e **rhoDCCA**. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+
+Os exemplos a seguir mostram aplicações comuns para as funções da biblioteca estatística:
+
+```
+a = [1,0,0;0,1,0;0,0,1]
+b = [1,2,3;4,5,6;7,8,9]
+c = [2,3,-1;4,4,-3;2,-3,1]
+d = core.matrix(0, 1, 3)
+e = core.matrix(0, 3, 3)
+avg = matrix.avg(b)
+system.println("avg(b) = " + avg.avg + ", dev(b) = " + avg.dev)
+system.println("count(a) = " + matrix.count(a))
+system.println("max(b) = " + matrix.max(b))
+system.println("min(b) = " + matrix.min(b))
+system.println("trans(b) = " + core.toString(matrix.trans(b)))
+system.println("det(c) = " + core.det(c))
+system.println("diag(c) = " + core.toString(core.diag(c)))
+system.println("triang(c) = " + core.toString(matrix.triang(c)))
+system.println("cross([1,2,3], [4,5,6]) = " + core.toString(matrix.cross([1,2,3], [4,5,6])))
+system.println("dot([1,2,5], [2,-7,12]) = " + core.toString(matrix.dot([1,2,5], [2,-7,12])))
+system.println("dim([1,2,3]) = " + core.toString(core.dim([1,2,3])))
+system.println("d = " + core.toString(d))
+system.println("e = " + core.toString(e))
+```
+
+## Computação algébrica
+
+MaiaScript possui um **CAS (Computer Algebra System)** completo implementado na biblioteca `cas`. Esse CAS permite simplificar expressões, resolver equações e realizar operações complexas de álgebra linear e cálculo diferencial e integral. O CAS é baseado na biblioteca *open source* **Algebrite**. Para uma referência completa consulte a documentação oficial do projeto Algebrite em <http://algebrite.org>. A única excessão é que o Algebrite originalmente utiliza o operador `ˆ` para potenciação e em MaiaScript o operador de potenciação é `**`. Os exemplos a seguir mostram como realizar as operações mais comuns de cálculo com o CAS MaiaSCript:
+
+```
+// Resolve uma expressão algébrica.
+res = cas.eval("x + x")
+system.showMessageDialog("x + x:\n\n" + res)
+
+// Simplifica uma expressão.
+res = cas.eval("simplify(cos(x)**2 + sin(x)**2)\n" +
+               "simplify(a*b+a*c)\n" +
+               "simplify(n!/(n+1)!)")
+system.showMessageDialog("simplify(cos(x)**2 + sin(x)**2)\n" +
+                         "simplify(a*b+a*c)\n" +
+                         "simplify(n!/(n+1)!):\n\n" + res)
+
+// Calcula a integral de uma expressão.
+res = cas.eval("integral(x**2)\n" +
+               "integral(x*y,x,y)")
+system.showMessageDialog("integral(x**2)\n" +
+                         "integral(x*y,x,y):\n\n" + res)
+
+// Calcula a derivada de uma expressão.
+res = cas.eval("d(x**2)\n" +
+               "r=sqrt(x**2+y**2)\n" +
+               "d(r,[x,y])")
+system.showMessageDialog("d(x**2)\n" +
+                         "r=sqrt(x**2+y**2)\n" +
+                         "d(r,[x,y])\n\n" + res)
 ```
