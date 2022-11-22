@@ -473,7 +473,7 @@ factorial(n) {
     return n * factorial(n - 1)
 }
 
-system.println(factorial(5));
+system.println(factorial(5))
 ```
 
 ### Funções em linha
@@ -484,7 +484,7 @@ Para funções mais simples, que podem ser implementadas em apenas uma linha, po
 // Uma função em linha.
 f(x) = 2 * x ** 2 + x - 1
 
-system.println(f(2));
+system.println(f(2))
 ```
 
 ### Funções assíncronas
@@ -759,17 +759,6 @@ system.println("Trained ANN: " + core.toString(nn))
 
 // Usa a rede treinada para estimar o valor da função.
 
-// nn[1,2] = 1.52021
-// nn[2,2] = -9.55616
-// nn[1,3] = -1.26172
-// nn[3,3] = 5.93258
-// nn[1,4] = 0.146194
-// nn[4,4] = 0.686591
-// nn[2,5] = 1.47574
-// nn[3,5] = -1.47603
-// nn[4,5] = 8.08261
-// nn[5,5] = 0.10794
-
 system.println("The output must be f(0.50) = 2.3811")
 out = ann.think(nn, [0.50], 1, 1, "tanh", "linear", "none", [1, 0])
 system.println("ANN for f(0.50): " + core.toString(nn))
@@ -926,7 +915,7 @@ system.println("e = " + core.toString(e))
 
 ## Computação algébrica
 
-MaiaScript possui um **CAS (Computer Algebra System)** completo implementado na biblioteca `cas`. Esse CAS permite simplificar expressões, resolver equações e realizar operações complexas de álgebra linear e cálculo diferencial e integral. O CAS é baseado na biblioteca *open source* **Algebrite**. Para uma referência completa consulte a documentação oficial do projeto Algebrite em <http://algebrite.org>. A única excessão é que o Algebrite originalmente utiliza o operador `ˆ` para potenciação e em MaiaScript o operador de potenciação é `**`. Os exemplos a seguir mostram como realizar as operações mais comuns de cálculo com o CAS MaiaSCript:
+MaiaScript possui um **CAS (Computer Algebra System)** completo implementado na biblioteca `cas`. Esse CAS permite simplificar expressões, resolver equações e realizar operações complexas de álgebra linear e cálculo diferencial e integral. O CAS é baseado na biblioteca *open source* **Algebrite**. Para uma referência completa consulte a documentação oficial do projeto Algebrite em <http://algebrite.org>. A única excessão é que o Algebrite originalmente utiliza o operador `ˆ` para potenciação e em MaiaScript o operador de potenciação é `**`. Os exemplos a seguir mostram como realizar as operações mais comuns de cálculo com o CAS MaiaScript:
 
 ```
 // Resolve uma expressão algébrica.

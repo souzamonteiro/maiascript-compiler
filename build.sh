@@ -13,7 +13,7 @@ cp build/libmaia.js js/
 
 chmod 755 bin/*
 
-# BCompile the MaiaScript libraries.
+# Compile the MaiaScript libraries.
 #bin/maiascript.js -c -o build/cna.js ./maia/cna/cna.maia
 #cp build/cna.js js/
 #bin/maiascript.js -c -o build/snet.js ./maia/snet/snet.maia
@@ -29,4 +29,7 @@ jsdoc -d ./docs ./package.json ./src
 mkdir docs/grammar
 cp -r grammar/MaiaScript.ebnf docs/grammar
 cp -r grammar/MaiaScript.xhtml docs/grammar
+cp -r md/maiascript-guide-en_US.html docs/
+cp -r md/maiascript-guide-en_US.md docs/
+cp -r md/maiascript-guide-pt_BR.html docs/
 cp -r md/maiascript-guide-pt_BR.md docs/
