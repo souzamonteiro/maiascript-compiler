@@ -4,7 +4,7 @@ MaiaScript é uma linguagem de programação voltada a construção de aplicaç�
 
 Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumente usados e orientações gerais sobre o uso desta linguagem.
 
-Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta `docs` da sua distribução do compilador MaiaScript.
+Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta `docs` da sua distribuição do compilador MaiaScript.
 
 ## Tipos de dados
 
@@ -462,7 +462,7 @@ Return                   ::= 'return' Expression
 
 Declaramos uma `função` escrevendo seu `nome`, seguido de `parênteses`, que podem ou não conter `argumentos` separados por `vírgulas`, `,`, e um `bloco de comandos` entre `chaves`, `{}`. Funções em MaiaScript podem ou não ter `tipos de retornos` declarados e utilizar ou não `operadores especiais de atribuição`, `=`, `?=`, `#=`, `:=`, em sua declaração.
 
-Caso um `tipo de retorno` seja indicado na declação da função, ela será interpretada como sendo uma função em **MaiaAssembly** ou em **WebAssembly**. Nos dois casos deve-se especificar os `tipos dos valores` dos argumentos da função caso ela possua `argumentos`. Se as `chaves`, `/{ /}` dos `blocos de comandos` forem precedidas do caractere `/` a função será interpretada como sendo em **WebAssembly**, caso contrário será considerada como sendo em **MaiaAssembly**. Funções MaiaScript podem ser **recursivas**, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função `factorial` inplementada usando um algoritmo recursivo:
+Caso um `tipo de retorno` seja indicado na declaração da função, ela será interpretada como sendo uma função em **MaiaAssembly** ou em **WebAssembly**. Nos dois casos deve-se especificar os `tipos dos valores` dos argumentos da função caso ela possua `argumentos`. Se as `chaves`, `/{ /}` dos `blocos de comandos` forem precedidas do caractere `/` a função será interpretada como sendo em **WebAssembly**, caso contrário será considerada como sendo em **MaiaAssembly**. Funções MaiaScript podem ser **recursivas**, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função `factorial` implementada usando um algoritmo recursivo:
 
 ```
 // Uma função recursiva.
@@ -697,7 +697,7 @@ property = {
     "networkGlobalEfficiency": 0
 }
 
-// Converte o arquivo em uma matriz de adjascência.
+// Converte o arquivo em uma matriz de adjacência.
 property.adj = cna.parsePajekFile(fileContents, property)
 
 // Calcula a densidade da rede.
@@ -825,7 +825,7 @@ if (typeof(db) != "undefined") {
 
 ## Programação paralela usando GPU
 
-É possível acelerar o processamento em alguns problemas usando **programação paralela**. MaiaScript permite paralelismo real usando **núcleos de GPU** se este recurso estiver disponível na máquina hospedeira. Caso não esteja, o compilador MaiaScript compilará o programa para execução sequencial. Funções de computação em GPU são chamadas *shaders*. Essas funções são compiladas de modo diferente pelo compilador MaiaScript e não suportam números complexos ou cálculos com matrizes. Os recursos de programação com GPU estão dsiponíveis na biblioteca `gpu`. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
+É possível acelerar o processamento em alguns problemas usando **programação paralela**. MaiaScript permite paralelismo real usando **núcleos de GPU** se este recurso estiver disponível na máquina hospedeira. Caso não esteja, o compilador MaiaScript compilará o programa para execução sequencial. Funções de computação em GPU são chamadas *shaders*. Essas funções são compiladas de modo diferente pelo compilador MaiaScript e não suportam números complexos ou cálculos com matrizes. Os recursos de programação com GPU estão disponíveis na biblioteca `gpu`. Para uma referência completa consulte a documentação disponível na pasta `docs` de sua distribuição do compilador MaiaScript.
 
 O exemplo a seguir mostra como criar uma função para multiplicação paralela de duas matrizes. Também é implementada uma versão sequencial do cálculo para comparação de desempenho.
 
