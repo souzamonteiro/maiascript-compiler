@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"></head><body><h1 id="maiascript-guide">MaiaScript Guide</h1>
-<p>MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, redes neurais artificiais, criação e análise de redes complexas e sociais, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.</p>
+<p>MaiaScript é uma linguagem de programação voltada a construção de aplicações adaptáveis e inteligentes, com ênfase na facilidade de aprendizagem e elevada performance. São suportados nativamente, operações com números complexos e matrizes, criação e análise de redes complexas e sociais, redes neurais artificiais, acesso a bancos de dados SQL, programação paralela com threads e GPU, estatística avançada, computação algébrica, incluindo cálculo diferencial e integral e programação de aplicações desktop e web.</p>
 <p>Este manual cobre os fundamentos de programação em MaiaScript, apresentando exemplos práticos para os recursos mais comumente usados e orientações gerais sobre o uso desta linguagem.</p>
-<p>Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta <code>docs</code> da sua distribução do compilador MaiaScript.</p>
+<p>Para informações detalhadas sobre a gramática da linguagem MaiaScript consulte a descrição em EBNF e os diagramas de sintaxe disponíveis na pasta <code>docs</code> da sua distribuição do compilador MaiaScript.</p>
 <h2 id="tipos-de-dados">Tipos de dados</h2>
 <p>MaiaScript suporta três tipos de dados nativamente: <code>integer</code>, <code>real</code> e <code>string</code>. Esses tipos são automáticos, não sendo necessário defini-los quando da criação de variáveis e funções comuns. Para uso exclusivamente com funções em <strong>WebAssembly</strong> e <strong>MaiaAssembly</strong> são suportados os tipos <code>integer 32 bits</code>, <code>ì32</code>, <code>integer 64 bits</code>, <code>ì64</code>, <code>real 32 bits</code>, <code>f32</code> e <code>real 64 bits</code>, <code>f64</code>. Funções em <strong>MaiaAssembly</strong> são tratadas no capítulo sobre funções. Funções em <strong>WebAssembly</strong> estão além do escopo deste guia. Para maiores informações consulte o site oficial do projeto: <a href="https://webassembly.org">https://webassembly.org</a>.</p>
 <h2 id="saída-de-dados">Saída de dados</h2>
@@ -164,7 +164,7 @@ system.println(c)
 c = a == 1 ? &quot;Hello&quot; : &quot;World&quot;
 system.println(c)
 </code></pre>
-<h3 id="números-complexos">Números complexos.</h3>
+<h3 id="números-complexos">Números complexos</h3>
 <p>MaiaScript suporta <strong>números complexos</strong> nativamente para os operadores <code>+</code>, <code>-</code>, <code>**</code>, <code>*</code> e <code>\</code> e para as funções matemáticas <code>abs</code>, <code>arg</code>, <code>cos</code>, <code>cosh</code>, <code>exp</code>, <code>log</code>, <code>sin</code>, <code>sinh</code>, <code>sqrt</code>, <code>tan</code> e <code>tanh</code>. Também estão disponíveis diversas funções especializadas na biblioteca <code>core</code>. Para conhecer todas as funções MaiaScript com suporte a números complexos, consulte a documentação das bibliotecas na pasta <code>docs</code> em sua distribuição do compilador MaiaScript.</p>
 <p>A seguir é apresentada em notação EBNF a sintaxe de números complexos em MaiaScript:</p>
 <pre><code>Complex                  ::= Real? Imaginary
@@ -263,7 +263,7 @@ switch (a) {
 <h2 id="estruturas-de-repetição">Estruturas de repetição</h2>
 <p>Estruturas de repetição permitem executar uma sessão de programa um número de vezes ou até que uma condição seja satisfeita. MaiaScript oferece quatro estruturas de repetição: <code>do... while</code>, <code>while...</code>, <code>for</code> e <code>foreach</code>. Todas essas estruturas estão disponíveis tanto no MaiaScript quanto no MaiaAssembly. Nas próximas sessões serão apresentadas essas declarações, assim como exemplos de suas utilizações.</p>
 <h3 id="declaração-faça">Declaração Faça...</h3>
-<p>A declaração <code>do... while...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>while...</code> é que esta declaração <strong>executa pelo menos uma vez</strong> a sessão de código, mesmo que a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela, enquanto a declaração <code>while...</code> <strong>não executará nenhuma vez</strong> caso a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
+<p>A declaração <code>do... while...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>while...</code> é que esta declaração <strong>executa pelo menos uma vez</strong> a sessão de código, mesmo que a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela, enquanto a declaração <code>while...</code> <strong>não executará nenhuma vez</strong> caso a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o <strong>bloco de comandos</strong> tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
 <p>A seguir é apresentada a sintaxe da declaração <code>do... while...</code> em notação EBNF:</p>
 <pre><code>Do                       ::= &#39;do&#39; Expression &#39;while&#39; &#39;(&#39; Expression &#39;)&#39;
 Break                    ::= &#39;break&#39;
@@ -278,7 +278,7 @@ do {
 } while (a &lt; 10);
 </code></pre>
 <h3 id="declaração-enquanto">Declaração Enquanto...</h3>
-<p>A declaração <code>while...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>do... while...</code> é que aquela declaração <strong>executa pelo menos uma vez</strong> a sessão de código, mesmo que a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela, enquanto a declaração <code>while...</code> <strong>não executará nenhuma vez</strong> caso a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
+<p>A declaração <code>while...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>do... while...</code> é que aquela declaração <strong>executa pelo menos uma vez</strong> a sessão de código, mesmo que a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela, enquanto a declaração <code>while...</code> <strong>não executará nenhuma vez</strong> caso a <code>condição</code> já seja <code>falsa</code> quando o fluxo de execução do programa chegar a ela. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o <strong>bloco de comandos</strong> tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
 <p>A seguir é apresentada a sintaxe da declaração <code>while...</code> em notação EBNF:</p>
 <pre><code>While                    ::= &#39;while&#39; &#39;(&#39; Expression &#39;)&#39; Expression
 </code></pre>
@@ -298,7 +298,7 @@ while (a &lt; 10) {
 }
 </code></pre>
 <h3 id="declaração-para">Declaração Para...</h3>
-<p>A declaração <code>for...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>while...</code> é que aquela declaração requer um controle interno da <code>condição</code> de execução para que em algum momento a <code>condição</code> se torne falsa e a execução do código seja interrompida. Esta declaração permite passar três argumentos: uma <code>expressão que será executado antes da primeira interação</code>, uma <code>expressão condicional</code> e uma <code>expressão que será avaliada ao final de cada iteração</code>. Pode-se usar o <code>primeiro parâmetro</code> para <strong>inicializar uma variável de controle</strong>, e o <code>último parâmetro</code> para <strong>modificá-lo</strong>. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
+<p>A declaração <code>for...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>enquanto</code> uma dada <code>condição</code> for avaliada como <code>verdadeira</code>. A diferença desta declaração e da declaração <code>while...</code> é que aquela declaração requer um controle interno da <code>condição</code> de execução para que em algum momento a <code>condição</code> se torne falsa e a execução do código seja interrompida. Esta declaração permite passar três argumentos: uma <code>expressão que será executado antes da primeira interação</code>, uma <code>expressão condicional</code> e uma <code>expressão que será avaliada ao final de cada iteração</code>. Pode-se usar o <code>primeiro parâmetro</code> para <strong>inicializar uma variável de controle</strong>, e o <code>último parâmetro</code> para <strong>modificá-lo</strong>. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o <strong>bloco de comandos</strong> tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
 <p>A seguir é apresentada a sintaxe da declaração <code>for...</code> em notação EBNF:</p>
 <pre><code>For                      ::= &#39;for&#39; &#39;(&#39; Expression &#39;;&#39; Expression &#39;;&#39; Expression &#39;)&#39; Expression
 </code></pre>
@@ -314,7 +314,7 @@ for (i = 0; i &lt; b.length; i++) {
 }
 </code></pre>
 <h3 id="declaração-para-cada">Declaração Para cada...</h3>
-<p>A declaração <code>foreach...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>para cada</code> elemento de um <code>vetor associativo</code> ou <code>objeto</code>. Esta declaração recebe três parâmetros: um <code>vetor associativo</code> ou <code>objeto</code>, uma <code>variável para conter a chave do vetor</code> ou <code>nome da propriedade do objeto</code> e uma <code>variável para conter o valor do elemento do vetor</code> ou objeto. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o bloco de comandos tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
+<p>A declaração <code>foreach...</code> executa uma <code>expressão</code> ou <code>bloco de comandos</code> <code>para cada</code> elemento de um <code>vetor associativo</code> ou <code>objeto</code>. Esta declaração recebe três parâmetros: um <code>vetor associativo</code> ou <code>objeto</code>, uma <code>variável para conter a chave do vetor</code> ou <code>nome da propriedade do objeto</code> e uma <code>variável para conter o valor do elemento do vetor</code> ou objeto. Caso se deseje interromper a execução do <strong>laço</strong> antes que a <code>condição</code> se torne <code>falsa</code>, pode-se utilizar a declaração <code>break</code>. Caso se deseje interromper a execução da iteração atual do <strong>laço</strong> antes que o <strong>bloco de comandos</strong> tenha sido completamente executado e saltar para a próxima iteração, pode-se utilizar a declaração <code>continue</code>.</p>
 <p>A seguir é apresentada a sintaxe da declaração <code>foreach...</code> em notação EBNF:</p>
 <pre><code>ForEach                  ::= &#39;foreach&#39; &#39;(&#39; Expression &#39;;&#39; Expression &#39;;&#39; Expression &#39;)&#39; Expression
 </code></pre>
@@ -339,7 +339,7 @@ Return                   ::= &#39;return&#39; Expression
 </code></pre>
 <h3 id="declaração-de-uma-função">Declaração de uma função</h3>
 <p>Declaramos uma <code>função</code> escrevendo seu <code>nome</code>, seguido de <code>parênteses</code>, que podem ou não conter <code>argumentos</code> separados por <code>vírgulas</code>, <code>,</code>, e um <code>bloco de comandos</code> entre <code>chaves</code>, <code>{}</code>. Funções em MaiaScript podem ou não ter <code>tipos de retornos</code> declarados e utilizar ou não <code>operadores especiais de atribuição</code>, <code>=</code>, <code>?=</code>, <code>#=</code>, <code>:=</code>, em sua declaração.</p>
-<p>Caso um <code>tipo de retorno</code> seja indicado na declação da função, ela será interpretada como sendo uma função em <strong>MaiaAssembly</strong> ou em <strong>WebAssembly</strong>. Nos dois casos deve-se especificar os <code>tipos dos valores</code> dos argumentos da função caso ela possua <code>argumentos</code>. Se as <code>chaves</code>, <code>/{ /}</code> dos <code>blocos de comandos</code> forem precedidas do caractere <code>/</code> a função será interpretada como sendo em <strong>WebAssembly</strong>, caso contrário será considerada como sendo em <strong>MaiaAssembly</strong>. Funções MaiaScript podem ser <strong>recursivas</strong>, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função <code>factorial</code> inplementada usando um algoritmo recursivo:</p>
+<p>Caso um <code>tipo de retorno</code> seja indicado na declaração da função, ela será interpretada como sendo uma função em <strong>MaiaAssembly</strong> ou em <strong>WebAssembly</strong>. Nos dois casos deve-se especificar os <code>tipos dos valores</code> dos argumentos da função caso ela possua <code>argumentos</code>. Se as <code>chaves</code>, <code>/{ /}</code> dos <code>blocos de comandos</code> forem precedidas do caractere <code>/</code> a função será interpretada como sendo em <strong>WebAssembly</strong>, caso contrário será considerada como sendo em <strong>MaiaAssembly</strong>. Funções MaiaScript podem ser <strong>recursivas</strong>, ou seja chamar a si mesmas para executar tarefas complexas. O exemplo a seguir ilustra a função <code>factorial</code> implementada usando um algoritmo recursivo:</p>
 <pre><code>// Uma função recursiva.
 factorial(n) {
     if (n == 0 || n == 1) {
@@ -348,14 +348,14 @@ factorial(n) {
     return n * factorial(n - 1)
 }
 
-system.println(factorial(5));
+system.println(factorial(5))
 </code></pre>
 <h3 id="funções-em-linha">Funções em linha</h3>
 <p>Para funções mais simples, que podem ser implementadas em apenas uma linha, pode-se usar a forma simplificada de declaração de funções. Esta forma permite escrever uma função da forma como se costuma fazer na matemática, utilizando-se o operador <code>atribuição</code>, <code>=</code>, e omitindo-se as chaves do <code>bloco de comandos</code>. O exemplo a seguir mostra a declaração de uma função do segundo grau:</p>
 <pre><code>// Uma função em linha.
 f(x) = 2 * x ** 2 + x - 1
 
-system.println(f(2));
+system.println(f(2))
 </code></pre>
 <h3 id="funções-assíncronas">Funções assíncronas</h3>
 <p>Funções pode ser <strong>executadas assincronamente</strong>. Para tanto deve-se declarar a função utilizando-se o <code>operador de execução assíncrona</code>, <code>?=</code>. Para esperar a <strong>função assíncrona</strong> terminar sua execução, bloqueado o <strong>fluxo de execução</strong> do resto do programa, deve-se <code>atribuir</code> a função a uma <code>variável</code> utilizando-se o <code>operador de execução assíncrona</code>, <code>?=</code>.</p>
@@ -397,7 +397,7 @@ try {
 }
 </code></pre>
 <h3 id="funções-em-maiaassembly">Funções em MaiaAssembly</h3>
-<p><strong>MaiaAssembly</strong> é uma linguagem de programação otimizada para compilação para <strong>WebAssembly</strong>. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em <strong>MaiaAssembly</strong> são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em <strong>MaiaAssembly</strong> são <code>integer 32 bits</code>, <code>ì32</code>, <code>integer 64 bits</code>, <code>ì64</code>, <code>real 32 bits</code>, <code>f32</code> e <code>real 64 bits</code>, <code>f64</code>. Todos as estruturas de decisão e de repetição do <strong>MaiaScript</strong> são suportados em <strong>MaiaAssembly</strong>. Além disso são suportados <code>vetores</code> de dimensões arbitrárias dos <code>tipos</code> de dados suportados. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma <code>variável local</code> para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.</p>
+<p><strong>MaiaAssembly</strong> é uma linguagem de programação otimizada para compilação para <strong>WebAssembly</strong>. Ela permite criar algoritmos tão rápidos quanto programas escritos em linguagem C, embutidos em programas de alto nível em MaiaScript. Funções em <strong>MaiaAssembly</strong> são tipadas, o que significa que é preciso declarar os tipos das funções e variáveis no momento de suas criações. Os tipos suportados em <strong>MaiaAssembly</strong> são <code>integer 32 bits</code>, <code>ì32</code>, <code>integer 64 bits</code>, <code>ì64</code>, <code>real 32 bits</code>, <code>f32</code> e <code>real 64 bits</code>, <code>f64</code>. Todos as estruturas de decisão e de repetição do <strong>MaiaScript</strong> são suportados em <strong>MaiaAssembly</strong>. Além disso são suportados <code>vetores</code> de dimensões arbitrárias dos <code>tipos</code> de dados suportados. Não é possível passar objetos ou mesmo vetores como argumentos de funções <strong>MaiaAssembly</strong>, mas é possível importá-los. Para tanto utiliza-se a declaração <code>import</code>. Ela permite importar propriedades de objetos para dentro da função e utilizá-las como se fossem variáveis locais. Em <strong>MaiaAssembly</strong> é possível criar <strong>variáveis globais</strong> usando-se a declaração <code>global</code>. Variáveis globais são acessáceis de qualquer parte do programa. O exemplo a seguir mostra como criar uma função para somar dois valores passados para ela como argumentos. A função também cria uma <code>variável local</code> para armazenar o resultado da soma. Variáveis locais devem ser declaradas no cabeçalho da função e devem aparecer após os argumentos da função.</p>
 <pre><code>// Uma função em MaiaAssembly.
 i32 f4(i32 a, i32 b, local i32 c) {
     c = a + b;
@@ -463,5 +463,295 @@ A(x) := {
 c := A(2)
 
 system.println(c.y);
+</code></pre>
+<h2 id="redes-complexas-e-sociais">Redes complexas e sociais</h2>
+<p>MaiaScript fornece diversas funções para criação e <strong>análise de redes complexas e sociais</strong>. Esses recursos estão disponíveis nas bibliotecas <code>cna</code>e <code>snet</code>. Os exemplos a seguir mostram as aplicações mais comuns para as funções dessas bibliotecas. Para uma referência completa consulte a documentação disponível na pasta <code>docs</code> de sua distribuição do compilador MaiaScript.</p>
+<pre><code>// Cria um arquivo de rede no formato Pajek.
+fileContents = &quot;&quot;
+fileContents = fileContents + &quot;*Vertices 10&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 \&quot;v1\&quot; -13.53320569881955 15.024369378567805 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 \&quot;v2\&quot; 138.57890381783866 -149.73844730901712 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;3 \&quot;v3\&quot; -195.0525404708813 294.7061191626409 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;4 \&quot;v4\&quot; -4.710077309561689 -119.03537285786881 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;5 \&quot;v5\&quot; 276.72724773173434 -241.1655959044472 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;6 \&quot;v6\&quot; 218.72444256014836 -294.7061191626409 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;7 \&quot;v7\&quot; 119.53996984903722 -4.504246484231039 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;8 \&quot;v8\&quot; -276.72724773173434 219.58638008091668 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;9 \&quot;v9\&quot; -80.8765683805954 206.98274428233245 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;10 \&quot;v10\&quot; -198.91296298859544 98.42821322326704 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;*Arcs&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 2 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 4 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 7 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 9 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;1 10 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 1 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 4 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 5 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 6 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;2 7 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;3 8 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;3 9 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;4 1 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;4 2 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;5 2 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;5 6 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;6 2 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;6 5 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;7 1 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;7 2 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;8 3 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;8 10 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;9 1 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;9 3 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;10 1 1&quot; + &quot;\r\n&quot;
+fileContents = fileContents + &quot;10 8 1&quot; + &quot;\r\n&quot;
+
+// Objeto para conter as propriedades da rede.
+property = {
+    &quot;adj&quot;: [],
+    &quot;n&quot;: 0,
+    &quot;m&quot;: 0,
+    &quot;directed&quot;: false,
+    &quot;density&quot;: 0,
+    &quot;networkLabel&quot;: [],
+    &quot;networkDegree&quot;: [],
+    &quot;networkAverageDegree&quot;: 0,
+    &quot;networkDegreeDistribution&quot;: [],
+    &quot;networkDensity&quot;: 0,
+    &quot;networkClustering&quot;: [],
+    &quot;networkAverageClustering&quot;: 0,
+    &quot;networkShortestPath&quot;: [],
+    &quot;networkAverageShortestPath&quot;: 0,
+    &quot;networkDiameter&quot;: 0,
+    &quot;networkCentrality&quot;: [],
+    &quot;networkVertexEfficiency&quot;: [],
+    &quot;networkGlobalEfficiency&quot;: 0
+}
+
+// Converte o arquivo em uma matriz de adjacência.
+property.adj = cna.parsePajekFile(fileContents, property)
+
+// Calcula a densidade da rede.
+property.networkDensity = cna.getDensity(property.adj, property.directed)
+
+// Calcula os graus dos vértices e o grau médio da rede.
+property.networkDegree = cna.getDegrees(property.adj, property.directed)
+property.networkAverageDegree = cna.getAverageDegree(property.networkDegree)
+
+// Calcula os coeficientes de aglomeração dos vértices e o coeficiente de aglomeração médio da rede.
+property.networkClustering = cna.getClustering(property.adj, property.directed)
+property.networkAverageClustering = cna.getAverageClustering(property.networkClustering)
+
+// Calcula os caminhos mínimos entre os vértices e o caminho mínimo médio da rede.
+property.networkShortestPath = cna.getShortestPath(property.adj)
+property.networkAverageShortestPath = cna.getAverageShortestPath(property.networkShortestPath)
+
+// Calcula o diâmetro da rede.
+property.networkDiameter = cna.getDiameter(property.networkShortestPath)
+
+// Calcula a eficiência global da rede.
+property.networkGlobalEfficiency = cna.getGlobalEfficiency(property.networkVertexEfficiency)
+</code></pre>
+<h2 id="redes-neurais-artificiais">Redes neurais artificiais</h2>
+<p>MaiaScript fornece funções para criação e treinar <strong>redes neurais artificiais</strong> de diversas topologias. Esses recursos estão disponíveis na biblioteca <code>ann</code>. Os exemplos a seguir mostram as aplicações mais comuns para as funções dessa biblioteca. Para uma referência completa consulte a documentação disponível na pasta <code>docs</code> de sua distribuição do compilador MaiaScript.</p>
+<pre><code>// Callback.
+trainingCallback(epochs, RSS, correctness, ETL) {
+    system.println(&quot;Epochs: &quot; + core.toString(epochs) + &quot;, RSS: &quot; + core.toString(RSS) + &quot;, Correctness: &quot; + core.toString(correctness) + &quot;, ETL: &quot; + core.toString(ETL))
+}
+
+// Dados para treinar.
+// O algoritmo de treinamento espera uma matriz com uma linha para cada dado e uma coluna para cada neurônio de entrada ou saída.
+dataX = [[0.00],[0.25],[0.50],[0.75],[1.00],[1.25],[1.50],[1.75],[2.00],[2.25],[2.50],[2.75],[3.00],[3.25],[3.50],[3.75],[4.00],[4.25],[4.50],[4.75],[5.00],[5.25],[5.50],[5.75],[6.00],[6.25],[6.50],[6.75],[7.00],[7.25],[7.50],[7.75],[8.00],[8.25],[8.50],[8.75],[9.00],[9.25],[9.50],[9.75],[10.00]]
+dataY = [[2.0000],[2.2197],[2.3811],[2.5136],[2.7310],[2.7827],[2.8327],[3.0351],[2.9551],[3.3973],[3.5117],[3.5909],[3.7345],[3.8419],[4.0952],[4.2879],[4.4000],[4.8764],[5.2843],[5.9241],[6.3302],[6.9608],[7.3044],[7.6791],[8.2819],[9.0139],[9.3387],[10.0420],[10.4000],[10.6437],[10.4786],[10.4928],[10.7082],[10.6233],[10.8862],[10.6830],[10.8393],[10.9186],[10.8814],[10.9779],[11.0000]]
+
+nData = core.length(dataX)
+
+// Cria uma rede neural Perceptron multicamadas.
+nn = ann.createANN(&quot;mlp&quot;, 0, 0, 0, 0, 1, 1, 1, 3)
+// Displays the untrained neural network.
+system.println(&quot;ANN before be prepared: &quot; + core.toString(nn))
+system.println(core.toString(ann.getLabels(nn)))
+
+// Atribui pesos iniciais aleatórios às sinapses neurais.
+nn = ann.prepare(nn, true, true, true)
+system.println(core.toString(&quot;ANN after be prepared: &quot; + core.toString(nn)))
+
+// Treina a rede neural.
+statistics = ann.training(nn, dataX, dataY, 0.005, &quot;tanh&quot;, &quot;linear&quot;, &quot;none&quot;, [1, 0], 2000, 0.001, trainingCallback, 100)
+// Displays training statistics.
+// system.println(&quot;Statistics: &quot; + core.toString(statistics))
+
+// Exibe a rede neural treinada.
+system.println(&quot;Trained ANN: &quot; + core.toString(nn))
+
+// Usa a rede treinada para estimar o valor da função.
+
+system.println(&quot;The output must be f(0.50) = 2.3811&quot;)
+out = ann.think(nn, [0.50], 1, 1, &quot;tanh&quot;, &quot;linear&quot;, &quot;none&quot;, [1, 0])
+system.println(&quot;ANN for f(0.50): &quot; + core.toString(nn))
+system.println(&quot;f(0.50) = &quot; + out[0])
+
+system.println(&quot;The output must be f(1.25) = 2.7827&quot;)
+out = ann.think(nn, [1.25], 1, 1, &quot;tanh&quot;, &quot;linear&quot;, &quot;none&quot;, [1, 0])
+system.println(&quot;ANN for f(1.25): &quot; + core.toString(nn))
+system.println(&quot;f(1.25) = &quot; + out[0])
+
+system.println(&quot;The output must be f(5.00) = 6.3302&quot;)
+out = ann.think(nn, [5.00], 1, 1, &quot;tanh&quot;, &quot;linear&quot;, &quot;none&quot;, [1, 0])
+system.println(&quot;ANN for f(5.00): &quot; + core.toString(nn))
+system.println(&quot;f(5.00) = &quot; + out[0])
+
+system.println(&quot;The output must be f(5.1267) = 6.65671&quot;)
+out = ann.think(nn, [5.1267], 1, 1, &quot;tanh&quot;, &quot;linear&quot;, &quot;none&quot;, [1, 0])
+system.println(&quot;ANN for f(5.1267): &quot; + core.toString(nn))
+system.println(&quot;f(5.1267) = &quot; + out[0])
+</code></pre>
+<h2 id="banco-de-dados-sql">Banco de dados SQL</h2>
+<p>MaiaScript suporta nativamente o banco de dados <strong>SQLite</strong> mas pode utilizar qualquer banco de dados suportado pelo <strong>Node.js</strong>. Esses recursos estão disponíveis na biblioteca <code>core</code>. O exemplo a seguir cria um banco de dados, uma tabela e insere dados na tabela criada. Para uma referência completa consulte a documentação disponível na pasta <code>docs</code> de sua distribuição do compilador MaiaScript.</p>
+<pre><code>dataHandler(transaction, results) {
+}
+
+errorHandler(transaction, error) {
+}
+
+createTable(transaction) {
+    scheme = &quot;&quot;
+    scheme = scheme + &quot;CREATE TABLE people(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,&quot;
+    scheme = scheme + &quot;name TEXT NOT NULL DEFAULT &#39;John Doe&#39;,&quot;
+    scheme = scheme + &quot;shirt TEXT NOT NULL DEFAULT &#39;Purple&#39;);&quot;
+    transaction.executeSql(scheme, [], dataHandler, errorHandler)
+    transaction.executeSql(&quot;insert into people (name, shirt) VALUES (&#39;Joe&#39;, &#39;Green&#39;);&quot;, [], dataHandler, errorHandler)
+    transaction.executeSql(&quot;insert into people (name, shirt) VALUES (&#39;Mark&#39;, &#39;Blue&#39;);&quot;, [], dataHandler, errorHandler)
+    transaction.executeSql(&quot;insert into people (name, shirt) VALUES (&#39;Phil&#39;, &#39;Orange&#39;);&quot;, [], dataHandler, errorHandler)
+    transaction.executeSql(&quot;insert into people (name, shirt) VALUES (&#39;jdoe&#39;, &#39;Purple&#39;);&quot;, [], dataHandler, errorHandler)
+}
+
+// Abre o banco de dados se ele existir ou cria um novo caso ele não exista.
+db = core.openSQLDatabase(&quot;Test&quot;, &quot;1.0&quot;, &quot;Test&quot;, 65536)
+
+// Cria uma tabela e insere dados nela.
+if (typeof(db) != &quot;undefined&quot;) {
+    db.transaction(createTable)
+}
+</code></pre>
+<h2 id="programação-paralela-usando-gpu">Programação paralela usando GPU</h2>
+<p>É possível acelerar o processamento em alguns problemas usando <strong>programação paralela</strong>. MaiaScript permite paralelismo real usando <strong>núcleos de GPU</strong> se este recurso estiver disponível na máquina hospedeira. Caso não esteja, o compilador MaiaScript compilará o programa para execução sequencial. Funções de computação em GPU são chamadas <em>shaders</em>. Essas funções são compiladas de modo diferente pelo compilador MaiaScript e não suportam números complexos ou cálculos com matrizes. Os recursos de programação com GPU estão disponíveis na biblioteca <code>gpu</code>. Para uma referência completa consulte a documentação disponível na pasta <code>docs</code> de sua distribuição do compilador MaiaScript.</p>
+<p>O exemplo a seguir mostra como criar uma função para multiplicação paralela de duas matrizes. Também é implementada uma versão sequencial do cálculo para comparação de desempenho.</p>
+<pre><code>// Crie duas matrizes de 512x512.
+a = core.zero(512, 512)
+b = core.zero(512, 512)
+
+// Preenche as matrizes.
+for (i = 0; i &lt; 512; i = i + 1) {
+    for (j = 0; j &lt; 512; j = j + 1) {
+        v = i * 512 + j
+        a[i, j] = v
+        b[i, j] = v
+    }
+}
+
+// Função paralela.
+shader #= (a, b) {
+    local sum = 0
+    for (local i = 0; i &lt; 512; i = i + 1) {
+        sum = sum + a[this.thread.y, i] * b[i, this.thread.x]
+    }
+    return(sum)
+}
+
+// Função de computação usando a GPU.
+useGPU ?= () {
+    device = gpu.new()
+    multiplyMatrices = device.createKernel(shader)
+    multiplyMatrices.setOutput([512, 512])
+    
+    startTime := Date()
+    c = multiplyMatrices(a, b)
+    endTime := Date()
+    
+    elapsedTime = endTime - startTime
+    
+    system.log(&quot;GPU result:&quot;)
+    system.log(&quot;c[511,511]: &quot; + c[511,511])
+    system.log(&quot;Elapsed time: &quot; + elapsedTime + &quot; ms\n&quot;)
+}
+
+// Função de computação usando a CPU.
+useCPU ?= () {
+    startTime := Date()
+    d = core.zero(512, 512)
+    for (i = 0; i &lt; 512; i = i + 1) {
+        for (j = 0; j &lt; 512; j = j + 1) {
+            s = 0
+            for (k = 0; k &lt; 512; k = k + 1) {
+                s = s + a[i, k] * b[k, j]
+            }
+            d[i, j] = s
+        }
+    }
+    endTime := Date()
+    
+    elapsedTime = endTime - startTime
+    
+    system.log(&quot;CPU result:&quot;)
+    system.log(&quot;d[511,511]: &quot; + d[511,511])
+    system.log(&quot;Elapsed time: &quot; + elapsedTime + &quot; ms\n&quot;)
+}
+
+// Iniciar cálculo.
+useGPU()
+useCPU()
+</code></pre>
+<h2 id="estatística-avançada">Estatística avançada</h2>
+<p>MaiaScript oferece diversas funções estatísticas para operações com <strong>matrizes</strong> e arquivos <strong>CSV</strong>. Essas funções estão disponíveis nas bibliotecas <code>matrix</code>, <code>statistics</code> e <code>dfa</code>. A biblioteca <code>statistics</code> implementa funções para cálculos de <strong>médias</strong>, <strong>desvios</strong> e <strong>erros padrões</strong>, além de funções envolvendo <strong>números aleatórios</strong> e <strong>distribuição normal</strong>, incluído o cálculo da <strong>inversa da distribuição normal</strong>. A biblioteca <code>dfa</code> implementa cálculos de <strong>DFA</strong>, <strong>DCCA</strong> e <strong>rhoDCCA</strong>. Para uma referência completa consulte a documentação disponível na pasta <code>docs</code> de sua distribuição do compilador MaiaScript.</p>
+<p>Os exemplos a seguir mostram aplicações comuns para as funções da biblioteca estatística:</p>
+<pre><code>a = [1,0,0;0,1,0;0,0,1]
+b = [1,2,3;4,5,6;7,8,9]
+c = [2,3,-1;4,4,-3;2,-3,1]
+d = core.matrix(0, 1, 3)
+e = core.matrix(0, 3, 3)
+avg = matrix.avg(b)
+system.println(&quot;avg(b) = &quot; + avg.avg + &quot;, dev(b) = &quot; + avg.dev)
+system.println(&quot;count(a) = &quot; + matrix.count(a))
+system.println(&quot;max(b) = &quot; + matrix.max(b))
+system.println(&quot;min(b) = &quot; + matrix.min(b))
+system.println(&quot;trans(b) = &quot; + core.toString(matrix.trans(b)))
+system.println(&quot;det(c) = &quot; + core.det(c))
+system.println(&quot;diag(c) = &quot; + core.toString(core.diag(c)))
+system.println(&quot;triang(c) = &quot; + core.toString(matrix.triang(c)))
+system.println(&quot;cross([1,2,3], [4,5,6]) = &quot; + core.toString(matrix.cross([1,2,3], [4,5,6])))
+system.println(&quot;dot([1,2,5], [2,-7,12]) = &quot; + core.toString(matrix.dot([1,2,5], [2,-7,12])))
+system.println(&quot;dim([1,2,3]) = &quot; + core.toString(core.dim([1,2,3])))
+system.println(&quot;d = &quot; + core.toString(d))
+system.println(&quot;e = &quot; + core.toString(e))
+</code></pre>
+<h2 id="computação-algébrica">Computação algébrica</h2>
+<p>MaiaScript possui um <strong>CAS (Computer Algebra System)</strong> completo implementado na biblioteca <code>cas</code>. Esse CAS permite simplificar expressões, resolver equações e realizar operações complexas de álgebra linear e cálculo diferencial e integral. O CAS é baseado na biblioteca <em>open source</em> <strong>Algebrite</strong>. Para uma referência completa consulte a documentação oficial do projeto Algebrite em <a href="http://algebrite.org">http://algebrite.org</a>. A única excessão é que o Algebrite originalmente utiliza o operador <code>ˆ</code> para potenciação e em MaiaScript o operador de potenciação é <code>**</code>. Os exemplos a seguir mostram como realizar as operações mais comuns de cálculo com o CAS MaiaScript:</p>
+<pre><code>// Resolve uma expressão algébrica.
+res = cas.eval(&quot;x + x&quot;)
+system.showMessageDialog(&quot;x + x:\n\n&quot; + res)
+
+// Simplifica uma expressão.
+res = cas.eval(&quot;simplify(cos(x)**2 + sin(x)**2)\n&quot; +
+               &quot;simplify(a*b+a*c)\n&quot; +
+               &quot;simplify(n!/(n+1)!)&quot;)
+system.showMessageDialog(&quot;simplify(cos(x)**2 + sin(x)**2)\n&quot; +
+                         &quot;simplify(a*b+a*c)\n&quot; +
+                         &quot;simplify(n!/(n+1)!):\n\n&quot; + res)
+
+// Calcula a integral de uma expressão.
+res = cas.eval(&quot;integral(x**2)\n&quot; +
+               &quot;integral(x*y,x,y)&quot;)
+system.showMessageDialog(&quot;integral(x**2)\n&quot; +
+                         &quot;integral(x*y,x,y):\n\n&quot; + res)
+
+// Calcula a derivada de uma expressão.
+res = cas.eval(&quot;d(x**2)\n&quot; +
+               &quot;r=sqrt(x**2+y**2)\n&quot; +
+               &quot;d(r,[x,y])&quot;)
+system.showMessageDialog(&quot;d(x**2)\n&quot; +
+                         &quot;r=sqrt(x**2+y**2)\n&quot; +
+                         &quot;d(r,[x,y])\n\n&quot; + res)
 </code></pre>
 </body></html>

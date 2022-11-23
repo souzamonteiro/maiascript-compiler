@@ -576,8 +576,13 @@ function MaiaCompiler() {
 
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
-                    var expressionValue = this.parse(node, nodeInfo, isKernelFunction);
-                    js += 'let ' + expressionValue;
+                    if (parentNodeInfo.parentNode == "AssemblyArguments") {
+                        var expressionValue = this.parse(node, nodeInfo, isKernelFunction);
+                        js += 'local ' + expressionValue;
+                    } else {
+                        var expressionValue = this.parse(node, nodeInfo, isKernelFunction);
+                        js += 'let ' + expressionValue;
+                    }
                 }
             }
         } else if ('If' in mil) {
@@ -1478,7 +1483,16 @@ function MaiaCompiler() {
                         js = this.parse(node, nodeInfo, isKernelFunction);
                     }
                 } else {
-                    js = this.parse(node, nodeInfo, isKernelFunction);
+                    if (parentNodeInfo.parentNode == "AssemblyArguments") {
+                        if ('Type' in node) {
+                            var type = node['Type']
+                            js = this.parse(node, nodeInfo, isKernelFunction) + ' ' + type['TOKEN'];
+                        } else {
+                            js = this.parse(node, nodeInfo, isKernelFunction)  + ' f64';
+                        }
+                    } else {
+                        js = this.parse(node, nodeInfo, isKernelFunction);
+                    }
                 }
                 parentNodeInfo.terminalNode = nodeInfo.terminalNode;
             }
@@ -1584,6 +1598,34 @@ function MaiaCompiler() {
                         }
                     } else {
                         js += this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                        parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                    }
+                }
+            } else {
+                js = node;
+            }
+        } else if ('AssemblyArguments' in mil) {
+            node = mil['Arguments'];
+            var nodeInfo = {
+                'parentNode': 'AssemblyArguments',
+                'childNode': '',
+                'terminalNode' : '',
+                'indentation': parentNodeInfo.indentation,
+                'indentationLength': parentNodeInfo.indentationLength,
+                'indentCode': parentNodeInfo.indentCode
+            };
+            parentNodeInfo.childNode = 'AssemblyArguments';
+
+            if (typeof node != 'undefined') {
+                if ('Expression' in node) {
+                    var nodeExpression = node['Expression'];
+                    if (Array.isArray(nodeExpression)) {
+                        for (var i = 0; i < nodeExpression.length; i++) {
+                            js += ' (param ' + this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ')';
+                            parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                        }
+                    } else {
+                        js += ' (param ' + this.parse(nodeExpression, nodeInfo, isKernelFunction) + ')';
                         parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                     }
                 }

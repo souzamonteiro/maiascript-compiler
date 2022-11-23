@@ -51,6 +51,7 @@ Statement                ::= Do
                            | Return
                            | Import
                            | Include
+                           | Global
                            | Local
                            | Throw
                            | EmptyStatement
@@ -79,6 +80,7 @@ FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '='
 Return                   ::= 'return' Expression
 Import                   ::= 'import' Expression
 Include                  ::= 'include' Expression
+Global                   ::= 'global' Expression
 Local                    ::= 'local' Expression
 Throw                    ::= 'throw' Expression
 EmptyStatement           ::= ';'
@@ -138,6 +140,7 @@ ReservedWord             ::= 'break'
                            | 'if'
                            | 'import'
                            | 'include'
+                           | 'global'
                            | 'local'
                            | 'return'
                            | 'switch'

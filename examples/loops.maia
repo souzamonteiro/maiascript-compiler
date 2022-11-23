@@ -5,7 +5,7 @@ c = {a: 1, b: 2}
 do {
     system.println(a)
     a++
-} while (a < 10);
+} while (a < 10)
 
 while (a < 10) {
     if (a % 2 == 0) {
