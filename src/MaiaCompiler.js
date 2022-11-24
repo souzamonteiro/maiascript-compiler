@@ -475,7 +475,7 @@ function MaiaCompiler() {
 
                         wat += (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')';
 
-                        var wasmModule = WebAssemblyText.encode(wat);
+                        var wasmModule = wast.WebAssemblyText.encode(wat);
 
                         if (typeof btoa != 'undefined') {
                             var encodedBuffer = btoa(wasmModule);
