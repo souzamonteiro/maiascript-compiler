@@ -233,13 +233,6 @@
             },
             {
                 "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
-                "Statement": {
                     "While": {
                         "TOKEN": [
                             "while",

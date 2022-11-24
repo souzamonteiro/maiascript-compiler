@@ -126,13 +126,6 @@
                 }
             },
             {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
                 "Comment": "// A simple function."
             },
             {
@@ -347,13 +340,6 @@
             },
             {
                 "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
-                "Statement": {
                     "FunctionDeclaration": {
                         "Identifier": "h",
                         "TOKEN": [
@@ -497,7 +483,7 @@
                 "Comment": "//a ?= f1(2)"
             },
             {
-                "Comment": "//system.println(a);"
+                "Comment": "//system.println(a)"
             },
             {
                 "Comment": "// A parallel function."
@@ -611,13 +597,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
                     }
                 }
             },
@@ -783,13 +762,6 @@
                 }
             },
             {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
                 "Comment": "// A function in MaiaAssembly."
             },
             {
@@ -828,31 +800,9 @@
                                             }
                                         }
                                     }
-                                },
-                                {
-                                    "Statement": {
-                                        "Local": {
-                                            "TOKEN": "local",
-                                            "Expression": {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Type": {
-                                                            "TOKEN": "i32"
-                                                        },
-                                                        "Member": {
-                                                            "Identifier": "c"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                 }
                             ],
-                            "TOKEN": [
-                                ",",
-                                ","
-                            ]
+                            "TOKEN": ","
                         },
                         "Block": {
                             "TOKEN": [
@@ -1008,13 +958,6 @@
                 }
             },
             {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
                 "Comment": "// A function in JavaScript."
             },
             {
@@ -1108,13 +1051,6 @@
                 }
             },
             {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
-                    }
-                }
-            },
-            {
                 "Comment": "// A function in WebAssembly."
             },
             {
@@ -1153,9 +1089,31 @@
                                             }
                                         }
                                     }
+                                },
+                                {
+                                    "Statement": {
+                                        "Local": {
+                                            "TOKEN": "local",
+                                            "Expression": {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Type": {
+                                                            "TOKEN": "i32"
+                                                        },
+                                                        "Member": {
+                                                            "Identifier": "c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             ],
-                            "TOKEN": ","
+                            "TOKEN": [
+                                ",",
+                                ","
+                            ]
                         },
                         "Script": "/{\n    (i32.add\n      (get_local $a)\n      (get_local $b)\n    )\n}/"
                     }
@@ -1237,13 +1195,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            {
-                "Statement": {
-                    "EmptyStatement": {
-                        "TOKEN": ";"
                     }
                 }
             }

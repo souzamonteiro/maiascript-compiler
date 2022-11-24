@@ -326,7 +326,7 @@ function MaiaCompiler() {
         } else if ('Expression' in mil) {
             node = mil['Expression'];
             var nodeInfo = {
-                'parentNode': 'Expression',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -421,7 +421,7 @@ function MaiaCompiler() {
         } else if ('Statement' in mil) {
             node = mil['Statement'];
             var nodeInfo = {
-                'parentNode': 'Statement',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -475,80 +475,106 @@ function MaiaCompiler() {
             parentNodeInfo.childNode = 'FunctionDeclaration';
 
             if (typeof node != 'undefined') {
-                if ('Identifier' in node) {
-                    var nodeIdentifier = {
-                        'Identifier': node['Identifier']
-                    };
-                    var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
+                if ('Type' in node) {
+                    type = node['Type'];
+                    if ('Script' in node) {
+                        var wat = '(module ' + (nodeInfo.indentCode ? '\n' : '');
 
-                    if ('TOKEN' in node) {
-                        if (node['TOKEN'].length == 3) {
-                            var token = node['TOKEN'][2];
-                            if (token == '=') {
-                                var statement = "FunctionAssignment";
-                                js += name + ' = function ';
-                            } else if (token == '?=') {
-                                var statement = "AsyncFunction";
-                                js += name + ' = async function ';
-                            } else if (token == ':=') {
-                                var statement = "Constructor";
-                                nodeInfo.parentNode = 'NamespaceDeclaration';
-                                js += name + ' = function ';
-                            } else if (token == '#=') {
-                                var statement = "KernelFunction";
-                                js += name + ' = function ';
+                        var nodeIdentifier = {
+                            'Identifier': node['Identifier']
+                        };
+                        var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
+                        
+                        nodeInfo.parentNode = 'AssemblyFunction';
+
+                        wat += '(func (export "' + name + '")';
+
+                        if ('Arguments' in node) {
+                            var nodeArguments = {
+                                'Arguments': node['Arguments']
+                            };
+                            var args = this.parse(nodeArguments, nodeInfo, isKernelFunction);
+                            wat += args + ' (result ' + type['TOKEN'] + ')';
+                        }
+
+                        var nodeScript = node['Script'];
+                        var body = nodeScript.replace("/{", "").replace("}/", "")
+                        wat += body + core.space(nodeInfo.indentation) + ')';
+
+                        wat += (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')';
+
+                        var wasmModule = WebAssemblyText.encode(wat);
+
+                        if (typeof btoa != 'undefined') {
+                            var encodedBuffer = btoa(wasmModule);
+                        } else {
+                            var encodedBuffer = new Buffer.from(wasmModule, 'binary').toString('base64');
+                        }
+                        js += 'var encodedWasmModule = \'' + encodedBuffer + '\';';
+                        js += 'if (typeof atob != \'undefined\') {';
+                        js += '    var wasmModule = atob(encodedWasmModule);';
+                        js += '} else {';
+                        js += '    var wasmModule = new Buffer(encodedWasmModule, \'base64\').toString(\'binary\');';
+                        js += '}';
+                        js += 'var wasmInstance = new WebAssembly.Instance(wasmModule, {});';
+                        js += 'var {' + name + '} = wasmInstance.exports;';
+                    } else {
+                        if ('Identifier' in node) {
+                            var nodeIdentifier = {
+                                'Identifier': node['Identifier']
+                            };
+                            var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
+    
+                            if ('TOKEN' in node) {
+                                if (node['TOKEN'].length == 3) {
+                                    var token = node['TOKEN'][2];
+                                    if (token == '=') {
+                                        var statement = "FunctionAssignment";
+                                        js += name + ' = function ';
+                                    } else if (token == '?=') {
+                                        var statement = "AsyncFunction";
+                                        js += name + ' = async function ';
+                                    } else if (token == ':=') {
+                                        var statement = "Constructor";
+                                        nodeInfo.parentNode = 'NamespaceDeclaration';
+                                        js += name + ' = function ';
+                                    } else if (token == '#=') {
+                                        var statement = "KernelFunction";
+                                        js += name + ' = function ';
+                                    } else {
+                                        var statement = "FunctionDeclaration";
+                                        js += name + ' = function ';
+                                    }
+                                } else {
+                                    var statement = "FunctionDeclaration";
+                                    js += name + ' = function ';
+                                }
                             } else {
-                                var statement = "FunctionDeclaration";
+                                var statement = 'FunctionDeclaration';
                                 js += name + ' = function ';
                             }
-                        } else {
-                            var statement = "FunctionDeclaration";
-                            js += name + ' = function ';
-                        }
-                    } else {
-                        var statement = 'FunctionDeclaration';
-                        js += name + ' = function ';
-                    }
-                    
-                    if ('Arguments' in node) {
-                        var nodeArguments = {
-                            'Arguments': node['Arguments']
-                        };
-                        var args = this.parse(nodeArguments, nodeInfo, isKernelFunction);
-                        js += '(' + args + ')';
-                    } else {
-                        js += '()';
-                    }
-                    if ('Expression' in node) {
-                        var nodeExpression = {
-                            'Expression': node['Expression']
-                        };
-                        if (nodeInfo.indentCode) {
-                            nodeInfo.indentation += nodeInfo.indentationLength;
-                        }
-                        if (statement == 'FunctionAssignment') {
-                            var body = core.space(nodeInfo.indentation) + 'return ' + core.trim(this.parse(nodeExpression, nodeInfo, isKernelFunction)) + (nodeInfo.indentCode ? '\n' : '');
-                        } else if (statement == 'KernelFunction') {
-                                var body = this.parse(nodeExpression, nodeInfo, true);
-                        } else {
-                            var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
-                        }
-                        if (nodeInfo.indentCode) {
-                            nodeInfo.indentation -= nodeInfo.indentationLength;
-                        }
-                        js += ' {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
-                    } else {
-                        if ('Block' in node) {
-                            var nodeBlock = node['Block'];
-                            if ('Expression' in nodeBlock) {
+                            
+                            if ('Arguments' in node) {
+                                var nodeArguments = {
+                                    'Arguments': node['Arguments']
+                                };
+                                var args = this.parse(nodeArguments, nodeInfo, isKernelFunction);
+                                js += '(' + args + ')';
+                            } else {
+                                js += '()';
+                            }
+
+                            if ('Expression' in node) {
                                 var nodeExpression = {
-                                    'Expression': nodeBlock['Expression']
+                                    'Expression': node['Expression']
                                 };
                                 if (nodeInfo.indentCode) {
                                     nodeInfo.indentation += nodeInfo.indentationLength;
                                 }
-                                if (statement == 'KernelFunction') {
-                                    var body = this.parse(nodeExpression, nodeInfo, true);
+                                if (statement == 'FunctionAssignment') {
+                                    var body = core.space(nodeInfo.indentation) + 'return ' + core.trim(this.parse(nodeExpression, nodeInfo, isKernelFunction)) + (nodeInfo.indentCode ? '\n' : '');
+                                } else if (statement == 'KernelFunction') {
+                                        var body = this.parse(nodeExpression, nodeInfo, true);
                                 } else {
                                     var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
                                 }
@@ -557,13 +583,129 @@ function MaiaCompiler() {
                                 }
                                 js += ' {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                             } else {
-                                js += ' {}';
+                                if ('Block' in node) {
+                                    var nodeBlock = node['Block'];
+                                    if ('Expression' in nodeBlock) {
+                                        var nodeExpression = {
+                                            'Expression': nodeBlock['Expression']
+                                        };
+                                        if (nodeInfo.indentCode) {
+                                            nodeInfo.indentation += nodeInfo.indentationLength;
+                                        }
+                                        if (statement == 'KernelFunction') {
+                                            var body = this.parse(nodeExpression, nodeInfo, true);
+                                        } else {
+                                            var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                                        }
+                                        if (nodeInfo.indentCode) {
+                                            nodeInfo.indentation -= nodeInfo.indentationLength;
+                                        }
+                                        js += ' {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
+                                    } else {
+                                        js += ' {}';
+                                    }
+                                } else {
+                                    if ('Script' in node) {
+                                        var nodeScript = node['Script'];
+                                        var body = nodeScript.replace("/{", "").replace("}/", "")
+                                        js += ' {' + body + core.space(nodeInfo.indentation) + '}';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ('Identifier' in node) {
+                        var nodeIdentifier = {
+                            'Identifier': node['Identifier']
+                        };
+                        var name = this.parse(nodeIdentifier, nodeInfo, isKernelFunction);
+
+                        if ('TOKEN' in node) {
+                            if (node['TOKEN'].length == 3) {
+                                var token = node['TOKEN'][2];
+                                if (token == '=') {
+                                    var statement = "FunctionAssignment";
+                                    js += name + ' = function ';
+                                } else if (token == '?=') {
+                                    var statement = "AsyncFunction";
+                                    js += name + ' = async function ';
+                                } else if (token == ':=') {
+                                    var statement = "Constructor";
+                                    nodeInfo.parentNode = 'NamespaceDeclaration';
+                                    js += name + ' = function ';
+                                } else if (token == '#=') {
+                                    var statement = "KernelFunction";
+                                    js += name + ' = function ';
+                                } else {
+                                    var statement = "FunctionDeclaration";
+                                    js += name + ' = function ';
+                                }
+                            } else {
+                                var statement = "FunctionDeclaration";
+                                js += name + ' = function ';
                             }
                         } else {
-                            if ('Script' in node) {
-                                var nodeScript = node['Script'];
-                                var body = nodeScript.replace("/{", "").replace("}/", "")
-                                js += ' {' + body + core.space(nodeInfo.indentation) + '}';
+                            var statement = 'FunctionDeclaration';
+                            js += name + ' = function ';
+                        }
+                        
+                        if ('Arguments' in node) {
+                            var nodeArguments = {
+                                'Arguments': node['Arguments']
+                            };
+                            var args = this.parse(nodeArguments, nodeInfo, isKernelFunction);
+                            js += '(' + args + ')';
+                        } else {
+                            js += '()';
+                        }
+
+                        if ('Expression' in node) {
+                            var nodeExpression = {
+                                'Expression': node['Expression']
+                            };
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation += nodeInfo.indentationLength;
+                            }
+                            if (statement == 'FunctionAssignment') {
+                                var body = core.space(nodeInfo.indentation) + 'return ' + core.trim(this.parse(nodeExpression, nodeInfo, isKernelFunction)) + (nodeInfo.indentCode ? '\n' : '');
+                            } else if (statement == 'KernelFunction') {
+                                    var body = this.parse(nodeExpression, nodeInfo, true);
+                            } else {
+                                var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                            }
+                            if (nodeInfo.indentCode) {
+                                nodeInfo.indentation -= nodeInfo.indentationLength;
+                            }
+                            js += ' {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
+                        } else {
+                            if ('Block' in node) {
+                                var nodeBlock = node['Block'];
+                                if ('Expression' in nodeBlock) {
+                                    var nodeExpression = {
+                                        'Expression': nodeBlock['Expression']
+                                    };
+                                    if (nodeInfo.indentCode) {
+                                        nodeInfo.indentation += nodeInfo.indentationLength;
+                                    }
+                                    if (statement == 'KernelFunction') {
+                                        var body = this.parse(nodeExpression, nodeInfo, true);
+                                    } else {
+                                        var body = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                                    }
+                                    if (nodeInfo.indentCode) {
+                                        nodeInfo.indentation -= nodeInfo.indentationLength;
+                                    }
+                                    js += ' {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
+                                } else {
+                                    js += ' {}';
+                                }
+                            } else {
+                                if ('Script' in node) {
+                                    var nodeScript = node['Script'];
+                                    var body = nodeScript.replace("/{", "").replace("}/", "")
+                                    js += ' {' + body + core.space(nodeInfo.indentation) + '}';
+                                }
                             }
                         }
                     }
@@ -604,7 +746,7 @@ function MaiaCompiler() {
 
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
-                    if (parentNodeInfo.parentNode == "AssemblyArguments") {
+                    if (parentNodeInfo.parentNode == "AssemblyFunction") {
                         var expressionValue = this.parse(node, nodeInfo, isKernelFunction);
                         js += 'local ' + expressionValue;
                     } else {
@@ -1212,7 +1354,7 @@ function MaiaCompiler() {
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var returnValue = this.parse(node, nodeInfo, isKernelFunction);
-                    js += 'return (' + returnValue + ')';
+                    js += 'return ' + returnValue;
                 } else {
                     js += 'return';
                 }
@@ -1232,15 +1374,15 @@ function MaiaCompiler() {
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var returnValue = this.parse(node, nodeInfo, isKernelFunction);
-                    js += 'throw (' + returnValue + ')';
+                    js += 'throw ' + returnValue;
                 } else {
-                    js += 'throw ()';
+                    js += 'throw';
                 }
             }
         } else if ('Operation' in mil) {
             node = mil['Operation'];
             var nodeInfo = {
-                'parentNode': 'Operation',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -1277,7 +1419,7 @@ function MaiaCompiler() {
         } else if ('Op' in mil) {
             node = mil['Op'];
             var nodeInfo = {
-                'parentNode': 'Op',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -1493,7 +1635,7 @@ function MaiaCompiler() {
         } else if ('Primary' in mil) {
             node = mil['Primary'];
             var nodeInfo = {
-                'parentNode': parentNodeInfo.childNode,
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -1511,7 +1653,7 @@ function MaiaCompiler() {
                         js = this.parse(node, nodeInfo, isKernelFunction);
                     }
                 } else {
-                    if (parentNodeInfo.parentNode == "AssemblyArguments") {
+                    if (parentNodeInfo.parentNode == 'AssemblyFunction') {
                         if ('Type' in node) {
                             var type = node['Type']
                             js = this.parse(node, nodeInfo, isKernelFunction) + ' ' + type['TOKEN'];
@@ -1527,7 +1669,7 @@ function MaiaCompiler() {
         } else if ('Member' in mil) {
             node = mil['Member'];
             var nodeInfo = {
-                'parentNode': 'Member',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -1587,6 +1729,9 @@ function MaiaCompiler() {
             parentNodeInfo.terminalNode = 'Identifier';
 
             if (typeof node != 'undefined') {
+                if (parentNodeInfo.parentNode == 'AssemblyFunction') {
+                    js = '$';
+                }
                 if (Array.isArray(node)) {
                     for (var i = 0; i &lt; node.length; i++) {
                         if (i &lt; (node.length - 1)) {
@@ -1596,13 +1741,13 @@ function MaiaCompiler() {
                         }
                     }
                 } else {
-                    js = node;
+                    js += node;
                 }
             }
         } else if ('Arguments' in mil) {
             node = mil['Arguments'];
             var nodeInfo = {
-                'parentNode': 'Arguments',
+                'parentNode': parentNodeInfo.parentNode,
                 'childNode': '',
                 'terminalNode' : '',
                 'indentation': parentNodeInfo.indentation,
@@ -1614,47 +1759,34 @@ function MaiaCompiler() {
             if (typeof node != 'undefined') {
                 if ('Expression' in node) {
                     var nodeExpression = node['Expression'];
-                    if (Array.isArray(nodeExpression)) {
-                        for (var i = 0; i &lt; nodeExpression.length; i++) {
-                            if (i &lt; (nodeExpression.length - 1)) {
-                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ',';
-                                parentNodeInfo.terminalNode = nodeInfo.terminalNode;
-                            } else {
-                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction);
+
+                    if (parentNodeInfo.parentNode == 'AssemblyFunction') {
+                        if (Array.isArray(nodeExpression)) {
+                            for (var i = 0; i &lt; nodeExpression.length; i++) {
+                                var param = this.parse(nodeExpression[i], nodeInfo, isKernelFunction);
+                                js += (param.includes('local') ? '(' : ' (param ') + param + ')';
                                 parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                             }
-                        }
-                    } else {
-                        js += this.parse(nodeExpression, nodeInfo, isKernelFunction);
-                        parentNodeInfo.terminalNode = nodeInfo.terminalNode;
-                    }
-                }
-            } else {
-                js = node;
-            }
-        } else if ('AssemblyArguments' in mil) {
-            node = mil['Arguments'];
-            var nodeInfo = {
-                'parentNode': 'AssemblyArguments',
-                'childNode': '',
-                'terminalNode' : '',
-                'indentation': parentNodeInfo.indentation,
-                'indentationLength': parentNodeInfo.indentationLength,
-                'indentCode': parentNodeInfo.indentCode
-            };
-            parentNodeInfo.childNode = 'AssemblyArguments';
-
-            if (typeof node != 'undefined') {
-                if ('Expression' in node) {
-                    var nodeExpression = node['Expression'];
-                    if (Array.isArray(nodeExpression)) {
-                        for (var i = 0; i &lt; nodeExpression.length; i++) {
-                            js += ' (param ' + this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ')';
+                        } else {
+                            var param = this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                            js += (param.includes('local') ? ' (' : ' (param ') + param + ')';
                             parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                         }
                     } else {
-                        js += ' (param ' + this.parse(nodeExpression, nodeInfo, isKernelFunction) + ')';
-                        parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                        if (Array.isArray(nodeExpression)) {
+                            for (var i = 0; i &lt; nodeExpression.length; i++) {
+                                if (i &lt; (nodeExpression.length - 1)) {
+                                    js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ',';
+                                    parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                                } else {
+                                    js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction);
+                                    parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                                }
+                            }
+                        } else {
+                            js += this.parse(nodeExpression, nodeInfo, isKernelFunction);
+                            parentNodeInfo.terminalNode = nodeInfo.terminalNode;
+                        }
                     }
                 }
             } else {
@@ -2035,7 +2167,7 @@ function MaiaCompiler() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Nov 23 2022 13:37:25 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Nov 24 2022 16:21:56 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
