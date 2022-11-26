@@ -59,10 +59,10 @@ e = f5(2)
 system.println(e)
 
 // A function in WebAssembly.
-i32 f6(i32 a, i32 b, local i32 c) /{
+i32 f6(i32 a, i32 b) /{
     (i32.add
-      (get_local $a)
-      (get_local $b)
+      (local.get $a)
+      (local.get $b)
     )
 }/
 // Calling an WebAssembly function.

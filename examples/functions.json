@@ -1089,33 +1089,11 @@
                                             }
                                         }
                                     }
-                                },
-                                {
-                                    "Statement": {
-                                        "Local": {
-                                            "TOKEN": "local",
-                                            "Expression": {
-                                                "Operation": {
-                                                    "Primary": {
-                                                        "Type": {
-                                                            "TOKEN": "i32"
-                                                        },
-                                                        "Member": {
-                                                            "Identifier": "c"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                 }
                             ],
-                            "TOKEN": [
-                                ",",
-                                ","
-                            ]
+                            "TOKEN": ","
                         },
-                        "Script": "/{\n    (i32.add\n      (get_local $a)\n      (get_local $b)\n    )\n}/"
+                        "Script": "/{\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n}/"
                     }
                 }
             },

@@ -153,13 +153,9 @@ function MaiaVM() {
         if (typeof process !== 'undefined') {
             var command = 'node';
             var argv = process.argv.slice();
-            compiledCode.xml = '';
+            
             var fs = require('fs');
             var readTextFile = fs.readFileSync;
-
-            function getXml(data) {
-                compiledCode.xml += data;
-            }
 
             function read(input) {
                 if (/^{.*}$/.test(input)) {
@@ -168,6 +164,15 @@ function MaiaVM() {
                     var content = readTextFile(input, 'utf-8');
                     return content.length > 0 && content.charCodeAt(0) == 0xFEFF ? content.substring(1) : content;
                 }
+            }
+
+            var buffer = require("buffer");
+            var Buffer = buffer.Buffer;
+
+            compiledCode.xml = '';
+
+            function getXml(data) {
+                compiledCode.xml += data;
             }
 
             system.argv = argv.slice();
@@ -179,6 +184,7 @@ function MaiaVM() {
             var indentationLength = 4;
             var outputFileType = 'js';
             var outputContents = '';
+            
             if (argv.length > 2) {
                 var i = 2;
                 while (i < argv.length) {

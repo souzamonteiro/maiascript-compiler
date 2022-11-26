@@ -475,19 +475,9 @@ function MaiaCompiler() {
 
                         wat += (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')';
 
-                        var wasmModule = wast.WebAssemblyText.encode(wat);
-
-                        if (typeof btoa != 'undefined') {
-                            var encodedBuffer = btoa(wasmModule);
-                        } else {
-                            var encodedBuffer = new Buffer.from(wasmModule, 'binary').toString('base64');
-                        }
-                        js += 'var encodedWasmModule = \'' + encodedBuffer + '\';';
-                        js += 'if (typeof atob != \'undefined\') {';
-                        js += '    var wasmModule = atob(encodedWasmModule);';
-                        js += '} else {';
-                        js += '    var wasmModule = new Buffer(encodedWasmModule, \'base64\').toString(\'binary\');';
-                        js += '}';
+                        js += 'var textWat = ' + JSON.stringify(wat) + ';';
+                        js += 'var binaryWasm = system.wat2wasm(textWat);';
+                        js += 'var wasmModule = new WebAssembly.Module(binaryWasm);';
                         js += 'var wasmInstance = new WebAssembly.Instance(wasmModule, {});';
                         js += 'var {' + name + '} = wasmInstance.exports;';
                     } else {

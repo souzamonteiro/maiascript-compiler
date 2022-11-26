@@ -38,13 +38,6 @@ f5 = function (x) {
 };
 e=f5(2);
 system.println(e);
-(module 
-(func (export "f6") (param $a i32) (param $b i32)(local $c i32) (result i32)
-    (i32.add
-      (get_local $a)
-      (get_local $b)
-    )
-)
-);
+var textWat = "(module \n(func (export \"f6\") (param $a i32) (param $b i32) (result i32)\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n)\n)";var binaryWasm = system.wat2wasm(textWat);var wasmModule = new WebAssembly.Module(binaryWasm);var wasmInstance = new WebAssembly.Instance(wasmModule, {});var {f6} = wasmInstance.exports;;
 f=f6(1,2);
 system.println(f);
