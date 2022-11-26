@@ -17464,6 +17464,8 @@ function MaiaCompiler() {
      * Creates the attributes of the class.
      */
     function init() {
+        wasmFunctions = [];
+
         binaryExpression = ['Operation',
                             'VariableAssignment',
                             'ConditionalExpression',
@@ -17886,7 +17888,7 @@ function MaiaCompiler() {
                 if ('Type' in node) {
                     type = node['Type'];
                     if ('Script' in node) {
-                        var wat = '(module ' + (nodeInfo.indentCode ? '\n' : '');
+                        var wat = '';
 
                         var nodeIdentifier = {
                             'Identifier': node['Identifier']
@@ -17907,15 +17909,31 @@ function MaiaCompiler() {
 
                         var nodeScript = node['Script'];
                         var body = nodeScript.replace("/{", "").replace("}/", "")
-                        wat += body + core.space(nodeInfo.indentation) + ')';
+                        wat += body + (nodeInfo.indentCode ? '\n' : '');
 
                         wat += (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')';
 
-                        js += 'var textWat = ' + JSON.stringify(wat) + ';';
-                        js += 'var binaryWasm = system.wat2wasm(textWat);';
-                        js += 'var wasmModule = new WebAssembly.Module(binaryWasm);';
-                        js += 'var wasmInstance = new WebAssembly.Instance(wasmModule, {});';
-                        js += 'var {' + name + '} = wasmInstance.exports;';
+                        wasmFunction = {
+                            'functionName': name,
+                            'watCode': wat
+                        }
+
+                        wasmFunctions.push(wasmFunction);
+
+                        var serialNumber = Date.now();
+
+                        var textWasmVar = 'textWasm_' + serialNumber;
+                        var binaryWasmVar = 'binaryWasm_' + serialNumber;
+                        var wasmModuleVar = 'wasmModule_' + serialNumber;
+                        var wasmInstanceVar = 'wasmInstance_' + serialNumber;
+                        
+                        wat = '(module ' + (nodeInfo.indentCode ? '\n' : '') + wat + core.space(nodeInfo.indentation) + ')';
+
+                        js += 'var ' + textWasmVar + ' = ' + JSON.stringify(wat) + ';';
+                        js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');';
+                        js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');';
+                        js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});';
+                        js += 'var {' + name + '} = ' + wasmInstanceVar + '.exports;';
                     } else {
                         if ('Identifier' in node) {
                             var nodeIdentifier = {
@@ -21491,8 +21509,30 @@ function System() {
     }
 
     /**
+     * Disassemble a code in WebAssembly in binary format.
+     * @param {object}  wasm - WebAssembly in binary format.
+     * @return          WebAssembly module in text format.
+     */
+     this.wasm2wat = function(wasm) {
+        if (typeof process != 'undefined') {
+            var fs = require('fs');
+            var realPath = fs.realpathSync(process.argv[1]);
+            var filePath = realPath.split("/");
+            filePath = core.slice(filePath, 0, filePath.length - 2);
+            filePath = filePath.join("/");
+            var scriptPath = filePath;
+            var wasmLibrary = scriptPath + "/js/wast.js";
+            var wast = require(wasmLibrary);
+
+            return wast.WebAssemblyText.decode(wasm, wasm.length);
+        } else {
+            return WebAssemblyText.decode(wasm, wasm.length);
+        }
+    }
+
+    /**
      * Assemble a code in WebAssembly in text format.
-     * @param {object}  wat - WebAssembly in text format
+     * @param {object}  wat - WebAssembly in text format.
      * @return          WebAssembly module in binary format.
      */
     this.wat2wasm = function(wat) {
@@ -24095,7 +24135,9 @@ function MaiaVM() {
         compiledCode = {
             'xml': '',
             'mil': '',
-            'js': ''
+            'js': '',
+            'wat': '',
+            'wasm': ''
         }
     }
 
@@ -24248,6 +24290,9 @@ function MaiaVM() {
             var outputFileType = 'js';
             var outputContents = '';
             
+            var saveWasm = false;
+            var saveWat = false;
+            
             if (argv.length > 2) {
                 var i = 2;
                 while (i < argv.length) {
@@ -24263,6 +24308,8 @@ function MaiaVM() {
                         system.log('       --json               Just compile to JSON, don\'t run the script.');
                         system.log('-m                          Just compile to MIL, don\'t run the script.');
                         system.log('-x                          Just compile to XML, don\'t run the script.');
+                        system.log('       --wasm               Save the WebAssembly code in binary format.');
+                        system.log('       --wat                Save the WebAssembly code in text format.');
                         system.log('       --                   End of compiler options.\n');
                     } else if (argv[i] == '-o') {
                         i++;
@@ -24284,6 +24331,10 @@ function MaiaVM() {
                     } else if (argv[i] == '-x') {
                         justCompile = true;
                         outputFileType = 'xml';
+                    } else if (argv[i] == '--wasm') {
+                        saveWasm = true;
+                    } else if (argv[i] == '--wat') {
+                        saveWat = true;
                     } else if (argv[i] == '--') {
                         break;
                     } else {

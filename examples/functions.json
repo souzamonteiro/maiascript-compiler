@@ -1124,7 +1124,7 @@
                                                 "Operation": {
                                                     "Primary": {
                                                         "Value": {
-                                                            "Integer": "1"
+                                                            "Integer": "3"
                                                         }
                                                     }
                                                 }
@@ -1133,7 +1133,133 @@
                                                 "Operation": {
                                                     "Primary": {
                                                         "Value": {
-                                                            "Integer": "2"
+                                                            "Integer": "4"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "TOKEN": ","
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "TOKEN": "="
+                }
+            },
+            {
+                "Operation": {
+                    "Primary": {
+                        "Member": {
+                            "Identifier": [
+                                "system",
+                                "println"
+                            ],
+                            "TOKEN": [
+                                ".",
+                                "(",
+                                ")"
+                            ],
+                            "Arguments": {
+                                "Expression": {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Member": {
+                                                "Identifier": "f"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "Comment": "// A function in WebAssembly."
+            },
+            {
+                "Statement": {
+                    "FunctionDeclaration": {
+                        "Type": {
+                            "TOKEN": "i32"
+                        },
+                        "Identifier": "f7",
+                        "TOKEN": [
+                            "(",
+                            ")"
+                        ],
+                        "Arguments": {
+                            "Expression": [
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "a"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "Operation": {
+                                        "Primary": {
+                                            "Type": {
+                                                "TOKEN": "i32"
+                                            },
+                                            "Member": {
+                                                "Identifier": "b"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "TOKEN": ","
+                        },
+                        "Script": "/{\n    (i32.mul\n      (local.get $a)\n      (local.get $b)\n    )\n}/"
+                    }
+                }
+            },
+            {
+                "Comment": "// Calling an WebAssembly function."
+            },
+            {
+                "Operation": {
+                    "Op": [
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f"
+                                }
+                            }
+                        },
+                        {
+                            "Primary": {
+                                "Member": {
+                                    "Identifier": "f7",
+                                    "TOKEN": [
+                                        "(",
+                                        ")"
+                                    ],
+                                    "Arguments": {
+                                        "Expression": [
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "5"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "Operation": {
+                                                    "Primary": {
+                                                        "Value": {
+                                                            "Integer": "6"
                                                         }
                                                     }
                                                 }

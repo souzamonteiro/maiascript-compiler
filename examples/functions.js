@@ -38,6 +38,9 @@ f5 = function (x) {
 };
 e=f5(2);
 system.println(e);
-var textWat = "(module \n(func (export \"f6\") (param $a i32) (param $b i32) (result i32)\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n)\n)";var binaryWasm = system.wat2wasm(textWat);var wasmModule = new WebAssembly.Module(binaryWasm);var wasmInstance = new WebAssembly.Instance(wasmModule, {});var {f6} = wasmInstance.exports;;
-f=f6(1,2);
+var textWasm_1669478281218 = "(module \n(func (export \"f6\") (param $a i32) (param $b i32) (result i32)\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n\n\n))";var binaryWasm_1669478281218 = system.wat2wasm(textWasm_1669478281218);var wasmModule_1669478281218 = new WebAssembly.Module(binaryWasm_1669478281218);var wasmInstance_1669478281218 = new WebAssembly.Instance(wasmModule_1669478281218, {});var {f6} = wasmInstance_1669478281218.exports;;
+f=f6(3,4);
+system.println(f);
+var textWasm_1669478281218 = "(module \n(func (export \"f7\") (param $a i32) (param $b i32) (result i32)\n    (i32.mul\n      (local.get $a)\n      (local.get $b)\n    )\n\n\n))";var binaryWasm_1669478281218 = system.wat2wasm(textWasm_1669478281218);var wasmModule_1669478281218 = new WebAssembly.Module(binaryWasm_1669478281218);var wasmInstance_1669478281218 = new WebAssembly.Instance(wasmModule_1669478281218, {});var {f7} = wasmInstance_1669478281218.exports;;
+f=f7(5,6);
 system.println(f);

@@ -32,7 +32,9 @@ function MaiaVM() {
         compiledCode = {
             'xml': '',
             'mil': '',
-            'js': ''
+            'js': '',
+            'wat': '',
+            'wasm': ''
         }
     }
 
@@ -185,6 +187,9 @@ function MaiaVM() {
             var outputFileType = 'js';
             var outputContents = '';
             
+            var saveWasm = false;
+            var saveWat = false;
+            
             if (argv.length > 2) {
                 var i = 2;
                 while (i < argv.length) {
@@ -200,6 +205,8 @@ function MaiaVM() {
                         system.log('       --json               Just compile to JSON, don\'t run the script.');
                         system.log('-m                          Just compile to MIL, don\'t run the script.');
                         system.log('-x                          Just compile to XML, don\'t run the script.');
+                        system.log('       --wasm               Save the WebAssembly code in binary format.');
+                        system.log('       --wat                Save the WebAssembly code in text format.');
                         system.log('       --                   End of compiler options.\n');
                     } else if (argv[i] == '-o') {
                         i++;
@@ -221,6 +228,10 @@ function MaiaVM() {
                     } else if (argv[i] == '-x') {
                         justCompile = true;
                         outputFileType = 'xml';
+                    } else if (argv[i] == '--wasm') {
+                        saveWasm = true;
+                    } else if (argv[i] == '--wat') {
+                        saveWat = true;
                     } else if (argv[i] == '--') {
                         break;
                     } else {

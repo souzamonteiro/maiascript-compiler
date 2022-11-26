@@ -66,5 +66,16 @@ i32 f6(i32 a, i32 b) /{
     )
 }/
 // Calling an WebAssembly function.
-f = f6(1, 2)
+f = f6(3, 4)
+system.println(f)
+
+// A function in WebAssembly.
+i32 f7(i32 a, i32 b) /{
+    (i32.mul
+      (local.get $a)
+      (local.get $b)
+    )
+}/
+// Calling an WebAssembly function.
+f = f7(5, 6)
 system.println(f)
