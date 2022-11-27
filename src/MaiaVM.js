@@ -266,45 +266,15 @@ function MaiaVM() {
                     var js = '';
 
                     if (compiledCode.wat.length > 0) {
-                        if (!justCompile) {
-                            var serialNumber = Date.now();
-                            var textWasmVar = 'textWasm_' + serialNumber;
-                            var binaryWasmVar = 'binaryWasm_' + serialNumber;
-                            var wasmModuleVar = 'wasmModule_' + serialNumber;
-                            var wasmInstanceVar = 'wasmInstance_' + serialNumber;
-                            js += 'var ' + textWasmVar + ' = ' + JSON.stringify(compiledCode.wat) + ';' + (indentCode ? '\n' : '');
-                            js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');' + (indentCode ? '\n' : '');
-                            js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');' + (indentCode ? '\n' : '');
-                            js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});' + (indentCode ? '\n' : '');
-                        } else {
-                            if (saveWasm) {
-                                var fileName = inputFile.split('.').shift();
-                                var fileName = fileName.split('/').pop();
-                                var serialNumber = Date.now();
-                                var binaryWasmVar = 'binaryWasm_' + serialNumber;
-                                var wasmModuleVar = 'wasmModule_' + serialNumber;
-                                var wasmInstanceVar = 'wasmInstance_' + serialNumber;
-                                js += 'var fs = require(\'fs\');' + (indentCode ? '\n' : '');
-                                js += 'var realPath = fs.realpathSync(system.argv[0]);' + (indentCode ? '\n' : '');
-                                js += 'var filePath = realPath.split(\'/\');' + (indentCode ? '\n' : '');
-                                js += 'filePath = core.slice(filePath, 0, filePath.length - 2);' + (indentCode ? '\n' : '');
-                                js += 'filePath = filePath.join(\'/\');' + (indentCode ? '\n' : '');
-                                js += 'var scriptPath = filePath;' + (indentCode ? '\n' : '');
-                                js += 'var ' + binaryWasmVar + ' = fs.readFileSync(scriptPath + \'/' + fileName + '.wasm' + '\')' + (indentCode ? '\n' : '');
-                                js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');' + (indentCode ? '\n' : '');
-                                js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});' + (indentCode ? '\n' : '');
-                            } else {
-                                var serialNumber = Date.now();
-                                var textWasmVar = 'textWasm_' + serialNumber;
-                                var binaryWasmVar = 'binaryWasm_' + serialNumber;
-                                var wasmModuleVar = 'wasmModule_' + serialNumber;
-                                var wasmInstanceVar = 'wasmInstance_' + serialNumber;
-                                js += 'var ' + textWasmVar + ' = ' + JSON.stringify(compiledCode.wat) + ';' + (indentCode ? '\n' : '');
-                                js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');' + (indentCode ? '\n' : '');
-                                js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');' + (indentCode ? '\n' : '');
-                                js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});' + (indentCode ? '\n' : '');
-                            }
-                        }
+                        var serialNumber = Date.now();
+                        var textWasmVar = 'textWasm_' + serialNumber;
+                        var binaryWasmVar = 'binaryWasm_' + serialNumber;
+                        var wasmModuleVar = 'wasmModule_' + serialNumber;
+                        var wasmInstanceVar = 'wasmInstance_' + serialNumber;
+                        js += 'var ' + textWasmVar + ' = ' + JSON.stringify(compiledCode.wat) + ';' + (indentCode ? '\n' : '');
+                        js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');' + (indentCode ? '\n' : '');
+                        js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');' + (indentCode ? '\n' : '');
+                        js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});' + (indentCode ? '\n' : '');
                     }
                     if (compiledCode.exports.length > 0) {
                         var names = '';
@@ -349,16 +319,20 @@ function MaiaVM() {
                         fs.writeFileSync(outputFile, outputContents);
 
                         if (saveWat) {
-                            outputFile = fileName + '.wat';
-                            outputContents = compiledCode.wat;
-                            fs.writeFileSync(outputFile, outputContents);
+                            if (compiledCode.wat.length > 0) {
+                                outputFile = fileName + '.wat';
+                                outputContents = compiledCode.wat;
+                                fs.writeFileSync(outputFile, outputContents);
+                            }
                         }
                         if (saveWasm) {
-                            var wasmBinary = system.wat2wasm(compiledCode.wat);
-                            compiledCode.wasm = Buffer.from(wasmBinary);
-                            outputFile = fileName + '.wasm';
-                            outputContents = compiledCode.wasm
-                            fs.writeFileSync(outputFile, outputContents);
+                            if (compiledCode.wat.length > 0) {
+                                var wasmBinary = system.wat2wasm(compiledCode.wat);
+                                compiledCode.wasm = Buffer.from(wasmBinary);
+                                outputFile = fileName + '.wasm';
+                                outputContents = compiledCode.wasm
+                                fs.writeFileSync(outputFile, outputContents);
+                            }
                         }
                     } else {
                         try {
