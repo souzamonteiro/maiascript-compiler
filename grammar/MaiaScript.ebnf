@@ -49,6 +49,7 @@ Statement                ::= Do
                            | NamespaceDeclaration
                            | FunctionDeclaration
                            | Return
+                           | Export
                            | Import
                            | Include
                            | Global
@@ -78,6 +79,7 @@ FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '='
                            | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Block
                            | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Script
 Return                   ::= 'return' Expression
+Export                   ::= 'export' Expression
 Import                   ::= 'import' Expression
 Include                  ::= 'include' Expression
 Global                   ::= 'global' Expression
@@ -131,6 +133,7 @@ ReservedWord             ::= 'break'
                            | 'default'
                            | 'do'
                            | 'else'
+                           | 'export'
                            | 'f32'
                            | 'f64'
                            | 'for'

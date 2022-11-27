@@ -1,8 +1,10 @@
-test (tries; -128; 0) {
-    a = 127
-    b = ~a
+system.println("Testing add operator...")
+test (10; 4; 0) {
+    a = 1
+    b = 2
+    c = a + b
 } catch (v) {
-    system.print("TEST: Fail testing operator \"~\".")
+    system.print("TEST: Fail testing add operator.")
     system.print("      Expected result " + core.testResult.expected)
-    system.print("      But got " + v)
+    system.print("      But got " + core.testResult.obtained)
 }

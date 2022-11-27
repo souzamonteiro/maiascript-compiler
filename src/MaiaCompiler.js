@@ -28,7 +28,8 @@ function MaiaCompiler() {
      * Creates the attributes of the class.
      */
     function init() {
-        wasmFunctions = [];
+        watCode = '';
+        wasmExports = [];
 
         binaryExpression = ['Operation',
                             'VariableAssignment',
@@ -461,7 +462,7 @@ function MaiaCompiler() {
                         
                         nodeInfo.parentNode = 'AssemblyFunction';
 
-                        wat += '(func (export "' + name + '")';
+                        wat += '(func $' + name + '(export "' + name + '")';
 
                         if ('Arguments' in node) {
                             var nodeArguments = {
@@ -473,31 +474,15 @@ function MaiaCompiler() {
 
                         var nodeScript = node['Script'];
                         var body = nodeScript.replace("/{", "").replace("}/", "")
-                        wat += body + (nodeInfo.indentCode ? '\n' : '');
+                        wat += body + (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')' + (nodeInfo.indentCode ? '\n' : '');
 
-                        wat += (nodeInfo.indentCode ? '\n' : '') + core.space(nodeInfo.indentation) + ')';
+                        watCode += wat;
 
-                        wasmFunction = {
-                            'functionName': name,
-                            'watCode': wat
+                        wasmExport = {
+                            'source': '$' + name,
+                            'target': name
                         }
-
-                        wasmFunctions.push(wasmFunction);
-
-                        var serialNumber = Date.now();
-
-                        var textWasmVar = 'textWasm_' + serialNumber;
-                        var binaryWasmVar = 'binaryWasm_' + serialNumber;
-                        var wasmModuleVar = 'wasmModule_' + serialNumber;
-                        var wasmInstanceVar = 'wasmInstance_' + serialNumber;
-                        
-                        wat = '(module ' + (nodeInfo.indentCode ? '\n' : '') + wat + core.space(nodeInfo.indentation) + ')';
-
-                        js += 'var ' + textWasmVar + ' = ' + JSON.stringify(wat) + ';';
-                        js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');';
-                        js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');';
-                        js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});';
-                        js += 'var {' + name + '} = ' + wasmInstanceVar + '.exports;';
+                        wasmExports.push(wasmExport);
                     } else {
                         if ('Identifier' in node) {
                             var nodeIdentifier = {
@@ -1210,9 +1195,9 @@ function MaiaCompiler() {
                 'parentNode': 'Test',
                 'childNode': '',
                 'terminalNode' : 'Test',
-                'indentation': parentNodeInfo.indentation,
-                'indentationLength': parentNodeInfo.indentationLength,
-                'indentCode': parentNodeInfo.indentCode
+                'indentation': 0,
+                'indentationLength': 0,
+                'indentCode': false
             };
             parentNodeInfo.childNode = 'Test';
 
@@ -1236,23 +1221,10 @@ function MaiaCompiler() {
                         };
                         var _tolerance = this.parse(nodeTolerance, nodeInfo, isKernelFunction);
                         
-                        if ('Block' in nodeExpression[3]) {
-                            var bodyExpression = {
-                                'Expression': nodeExpression[3]
-                            };
-                            _script += this.parse(bodyExpression, nodeInfo, isKernelFunction);
-                        } else {
-                            var bodyExpression = {
-                                'Expression': nodeExpression[3]
-                            };
-                            if (nodeInfo.indentCode) {
-                                nodeInfo.indentation += nodeInfo.indentationLength;
-                            }
-                            _script += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';' + (nodeInfo.indentCode ? '\n' : '');
-                            if (nodeInfo.indentCode) {
-                                nodeInfo.indentation -= nodeInfo.indentationLength;
-                            }
-                        }
+                        var bodyExpression = {
+                            'Expression': nodeExpression[3]
+                        };
+                        _script += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                     }
                 }
                 if ('Catch' in node) {
@@ -1266,23 +1238,11 @@ function MaiaCompiler() {
                                 'Expression': nodeExpression[0]
                             };
                             var catchVar = this.parse(nodeVar, nodeInfo, isKernelFunction);
-                            if ('Block' in nodeExpression[1]) {
-                                var bodyExpression = {
-                                    'Expression': nodeExpression[1]
-                                };
-                                _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction);
-                            } else {
-                                var bodyExpression = {
-                                    'Expression': nodeExpression[1]
-                                };
-                                if (nodeInfo.indentCode) {
-                                    nodeInfo.indentation += nodeInfo.indentationLength;
-                                }
-                                _catch += core.space(nodeInfo.indentation) + this.parse(bodyExpression, nodeInfo, isKernelFunction) + ';' + (nodeInfo.indentCode ? '\n' : '');
-                                if (nodeInfo.indentCode) {
-                                    nodeInfo.indentation -= nodeInfo.indentationLength;
-                                }
-                            }
+
+                            var bodyExpression = {
+                                'Expression': nodeExpression[1]
+                            };
+                            _catch += this.parse(bodyExpression, nodeInfo, isKernelFunction);
                         }
                         js += 'core.testScript(' + '\'' + _script + '\',' + _times + ',' + _value + ',' + _tolerance + ',\'' + 'var ' + catchVar + ' = core.testResult.obtained;' + _catch + '\');';
                     }
@@ -2103,7 +2063,7 @@ function MaiaCompiler() {
      * @param {xml}      xml - The XML data.
      * @param {boolean}  indentCode - Indent the output code.
      * @param {number}   indentationLength - Number of spaces in the indentation.
-     * @return {string}  XML data converted to JavaScript.
+     * @return {object}  XML data converted to JavaScript and WebAssembly.
      */
     this.compile = function(xml, indentCode, indentationLength) {
         if (typeof indent == 'undefined') {
@@ -2122,12 +2082,23 @@ function MaiaCompiler() {
             'indentCode': indentCode
         };
 
-        var mil = {};
-        var js = "";
+        var mil = this.xmlToMil(xml);
+        var js = this.parse(mil, nodeInfo, false);
+        if (watCode.length > 0) {
+            var wat = '(module ' + (nodeInfo.indentCode ? '\n' : '') + watCode + core.space(nodeInfo.indentation) + ')';
+        } else {
+            var wat = '';
+        }
 
-        mil = this.xmlToMil(xml);
-        js = this.parse(mil, nodeInfo, false);
+        compiledCode = {
+            'xml': xml,
+            'mil': mil,
+            'js': js,
+            'wat': wat,
+            'wasm': '',
+            'exports': wasmExports
+        }
 
-        return js;
+        return compiledCode;
     }
 }

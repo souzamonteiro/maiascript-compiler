@@ -1,3 +1,8 @@
+var textWasm_1669507170808 = "(module \n(func $f6(export \"f6\") (param $a i32) (param $b i32) (result i32)\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n\n)\n(func $f7(export \"f7\") (param $a i32) (param $b i32) (result i32)\n    (i32.mul\n      (local.get $a)\n      (local.get $b)\n    )\n\n)\n)";
+var binaryWasm_1669507170808 = system.wat2wasm(textWasm_1669507170808);
+var wasmModule_1669507170808 = new WebAssembly.Module(binaryWasm_1669507170808);
+var wasmInstance_1669507170808 = new WebAssembly.Instance(wasmModule_1669507170808, {});
+var {f6, f7} = wasmInstance_1669507170808.exports;
 f = function (x) {
     return core.sub(core.add(core.power(core.mul(2,x),2),x),1);
 };
@@ -38,9 +43,7 @@ f5 = function (x) {
 };
 e=f5(2);
 system.println(e);
-var textWasm_1669478281218 = "(module \n(func (export \"f6\") (param $a i32) (param $b i32) (result i32)\n    (i32.add\n      (local.get $a)\n      (local.get $b)\n    )\n\n\n))";var binaryWasm_1669478281218 = system.wat2wasm(textWasm_1669478281218);var wasmModule_1669478281218 = new WebAssembly.Module(binaryWasm_1669478281218);var wasmInstance_1669478281218 = new WebAssembly.Instance(wasmModule_1669478281218, {});var {f6} = wasmInstance_1669478281218.exports;;
 f=f6(3,4);
 system.println(f);
-var textWasm_1669478281218 = "(module \n(func (export \"f7\") (param $a i32) (param $b i32) (result i32)\n    (i32.mul\n      (local.get $a)\n      (local.get $b)\n    )\n\n\n))";var binaryWasm_1669478281218 = system.wat2wasm(textWasm_1669478281218);var wasmModule_1669478281218 = new WebAssembly.Module(binaryWasm_1669478281218);var wasmInstance_1669478281218 = new WebAssembly.Instance(wasmModule_1669478281218, {});var {f7} = wasmInstance_1669478281218.exports;;
 f=f7(5,6);
 system.println(f);
