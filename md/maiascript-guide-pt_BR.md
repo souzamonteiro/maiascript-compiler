@@ -229,7 +229,7 @@ O exemplo a seguir ilustra a operação de soma com dois números complexos:
 e = 1.0+2.0*i
 f = 3.0+4.0*i
 g = e + f
-system.println(e)
+system.println(g)
 ```
 
 ### Matrizes
@@ -572,8 +572,8 @@ Funções em **WebAssembly** são montadas pelo assembler e inseridas em forma b
 // Uma função em WebAssembly.
 i32 f(i32 a, i32 b) /{
     (i32.add
-      (get_local $a)
-      (get_local $b)
+      (local.get $a)
+      (local.get $b)
     )
 }/
 

@@ -26,7 +26,7 @@ You can read data entered by the user using the `showInputDialog` function of th
 
 ```
 a = system.showInputDialog("Type a number:")
-system.println
+system.println(a)
 ```
 
 ## Variables
@@ -35,14 +35,14 @@ Variables are containers where we store data for processing or processing result
 
 ```
 a = 1
-system.println
+system.println(a)
 b = 2.0
 system.println(b)
 c = "Hello World!"
 system.println(c)
 d = [1, 2.0]
 system.println(d)
-and = []
+e = []
 system.println(e)
 
 // Vectors similar to JavaScript.
@@ -61,7 +61,7 @@ system.println(JSON.stringify(i))
 ```
 ## Operators
 
-MaiaScript supports mathematical, relational, logical, bit offset operatio, combined assignment operators and ternary conditional operator. The following is an EBNF notation for all operators supported by the language. The order of precedence is top-down.
+MaiaScript supports mathematical, relational, logical, bit offset operation, combined assignment operators and ternary conditional operator. The following is an EBNF notation for all operators supported by the language. The order of precedence is top-down.
 
 ```
 Operation                ::= VariableAssignment
@@ -228,7 +228,7 @@ The following example illustrates the sum operation with two complex numbers:
 e = 1.0+2.0*i
 f = 3.0+4.0*i
 g = e + f
-system.println(e)
+system.println(g)
 ```
 
 ### Matrices
@@ -311,7 +311,7 @@ if (a < b) {
 
 ### Switch... Case... statement
 
-The `switch... Case... default...` statement allows you to decide, by comparing an `expression` with several provided `cases`, by running a `program code` session or not. The `conditional expression` should be written immediately after the word `switch` and in `parentheses`. This `expression` will be compared with each provided `case` and if an **equivalence** is found the `expression` or `command block` immediately after the `colon` of the `case` is executed. If none of the cases matches the given `expression`, the `expression` or `command block` immediately after the `colon` of the `default` case is executed. The `default` clause is optional.
+The `switch... case... default...` statement allows you to decide, by comparing an `expression` with several provided `cases`, by running a `program code` session or not. The `conditional expression` should be written immediately after the word `switch` and in `parentheses`. This `expression` will be compared with each provided `case` and if an **equivalence** is found the `expression` or `command block` immediately after the `colon` of the `case` is executed. If none of the cases matches the given `expression`, the `expression` or `command block` immediately after the `colon` of the `default` case is executed. The `default` clause is optional.
 
 The following is the syntax of the `switch... Case... default...` statement in EBNF notation:
 
@@ -361,7 +361,7 @@ The following example illustrates the use of the `do... while...` statement:
 
 a = 0
 
-of {
+do {
     system.println
     a++
 } while (a < 10);
@@ -390,7 +390,7 @@ while (a < 10) {
         system.println("Break the loop.")
         Break
     }
-    system.println
+    system.println(a)
     a++
 }
 ```
@@ -568,8 +568,8 @@ Functions in **WebAssembly** are assembled by the assembler and inserted into bi
 // A function in WebAssembly.
 i32 f(i32 a, i32 b) /{
     (i32.add
-      (get_local $a)
-      (get_local $b)
+      (local.get $a)
+      (local.get $b)
     )
 }/
 
