@@ -503,11 +503,10 @@ a ?= f(2)
 MaiaScript allows you to create parallel functions using **threads** or **GPU cores**. In both cases the functions need to be of the `kernel` type. `Kernel` functions must be created using the `kernel function declaration operator`, `#=`. A `kernel` function is compiled differently from the other functions. They do not support operations with complex numbers or matrices. Only the basic data types and features of JavaScript are supported. The following example shows how to create a **thread** in MaiaScript. For more details see the documentation of the `task` library available in the `docs` folder of your MaiaScript compiler distribution.
 
 ```
-// A parallel function.
-task1(x) #= {
+task1() #= {
     i = 0
-    timedCount #= () {
-        i = i + 1
+    timedCount() #= {
+        i++
         postMessage(i)
         if (i < 10) {
             setTimeout(timedCount(), 500)

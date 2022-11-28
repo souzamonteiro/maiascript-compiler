@@ -175,7 +175,7 @@ Imaginary                ::= ((&#39;+&#39; | &#39;-&#39;)? Real &#39;*&#39; &#39
 <pre><code>e = 1.0+2.0*i
 f = 3.0+4.0*i
 g = e + f
-system.println(e)
+system.println(g)
 </code></pre>
 <h3 id="matrizes">Matrizes</h3>
 <p>MaiaScript suporta matrizes nativamente para os operadores <code>+</code>, <code>-</code>, <code>**</code>, e <code>*</code> e oferece a biblioteca <code>matrix</code> para algebra linear. Também estão disponíveis diversas funções especializadas na biblioteca <code>core</code>. Para conhecer todas as funções MaiaScript com suporte a matrizes, consulte a documentação das bibliotecas na pasta <code>docs</code> em sua distribuição do compilador MaiaScript.</p>
@@ -423,8 +423,8 @@ c = f(2)
 <pre><code>// Uma função em WebAssembly.
 i32 f(i32 a, i32 b) /{
     (i32.add
-      (get_local $a)
-      (get_local $b)
+      (local.get $a)
+      (local.get $b)
     )
 }/
 

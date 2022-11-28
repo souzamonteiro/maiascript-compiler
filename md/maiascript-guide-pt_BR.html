@@ -370,10 +370,10 @@ a ?= f(2)
 <h3 id="funções-paralelas">Funções paralelas</h3>
 <p>MaiaScript permite criar funções paralelas usando <strong>threads</strong> ou <strong>núcleos de GPU</strong>. Nos dois casos as funções precisam ser do tipo <code>kernel</code>. Funções <code>kernel</code> devem ser criadas usando-se o <code>operador de declaração de função kernel</code>, <code>#=</code>. Uma função <code>kernel</code> é compilada de forma diferente das demais funções. Elas não suportam operações com números complexos nem com matrizes. Somente os tipos de dados e recursos básicos do JavaScript são suportados. O exemplo a seguir mostra como criar uma <strong>thread</strong> em MaiaScript. Para maiores detalhes consulte a documentação da biblioteca <code>task</code> disponível na pasta <code>docs</code> da sua distribuição do compilador MaiaScript.</p>
 <pre><code>// Uma função paralela.
-task1(x) #= {
+task1() #= {
     i = 0
-    timedCount #= () {
-        i = i + 1
+    timedCount() #= {
+        i++
         postMessage(i)
         if (i &lt; 10) {
             setTimeout(timedCount(), 500)

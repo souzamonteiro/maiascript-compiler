@@ -507,10 +507,10 @@ MaiaScript permite criar funções paralelas usando **threads** ou **núcleos de
 
 ```
 // Uma função paralela.
-task1(x) #= {
+task1() #= {
     i = 0
-    timedCount #= () {
-        i = i + 1
+    timedCount() #= {
+        i++
         postMessage(i)
         if (i < 10) {
             setTimeout(timedCount(), 500)

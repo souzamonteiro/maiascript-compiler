@@ -116,6 +116,9 @@ Value                    ::= Integer
                            | String
                            | Array
                            | Matrix
+                           | Null
+                           | True
+                           | False
 
 WhiteSpace               ::= WhiteSpace^token
                          /* ws: definition */
@@ -136,21 +139,28 @@ ReservedWord             ::= 'break'
                            | 'export'
                            | 'f32'
                            | 'f64'
+                           | 'false'
                            | 'for'
                            | 'foreach'
+                           | 'global'
                            | 'i32'
                            | 'i64'
                            | 'if'
                            | 'import'
                            | 'include'
-                           | 'global'
                            | 'local'
                            | 'return'
+                           | 'null'
                            | 'switch'
                            | 'test'
                            | 'throw'
+                           | 'true'
                            | 'try'
                            | 'while'
+
+Null                     ::= 'null'
+True                     ::= 'true'
+False                    ::= 'false'
 
 FirstIdentifierChar      ::= '$' | '_' | [A-Za-z]
 IdentifierChar           ::= '$' | '_' | [0-9] | [A-Za-z]
