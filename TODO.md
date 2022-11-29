@@ -1,4 +1,4 @@
-- [ ] Implement compilation of typed arguments for functions in WebAssembly
-- [ ] Implement compilation of typed arguments for functions in MaiaC
+- [ ] Fix index compilation of multidimensional arrays
+- [ ] Fix block end brace indentation
 - [ ] Implement compilation of WebAssembly code
-- [ ] Implement compilation of MaiaC code
+- [ ] Implement compilation of MaiaAssembly code
