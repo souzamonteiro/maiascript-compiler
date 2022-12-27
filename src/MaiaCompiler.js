@@ -2072,7 +2072,7 @@ function MaiaCompiler() {
         if (typeof indentationLength == 'undefined') {
             indentationLength = 4;
         }
-
+        
         var nodeInfo = {
             'parentNode': '',
             'childNode': 'Program',

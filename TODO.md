@@ -1,4 +1,2 @@
-- [ ] Fix index compilation of multidimensional arrays
-- [ ] Fix block end brace indentation
-- [ ] Implement compilation of WebAssembly code
+- [ ] Fix compilation of WebAssembly code
 - [ ] Implement compilation of MaiaAssembly code

@@ -26,8 +26,8 @@ for (i=0;core.LT(i,b.length);i++) {
 dimC=core.dim(c);
 for (i=0;core.LT(i,dimC[0]);i++) {
     for (j=0;core.LT(j,dimC[1]);j++) {
-        system.println(core.add(c[i,j],(core.LT(j,core.sub(dimC[1],1)) ? \t' : \n')));
-};
+        system.println(core.add(c[i][j],(core.LT(j,core.sub(dimC[1],1)) ? \t' : \n')));
+    };
 };
 for (key in c) {
     var value = c[key];

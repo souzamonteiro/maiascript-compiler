@@ -21638,7 +21638,7 @@ function MaiaCompiler() {
                         };
                         var condition = this.parse(nodeCondition, nodeInfo, isKernelFunction);
                     }
-                    js += 'do {' + (nodeInfo.indentCode ? '\n' : '') + body + '} while (' + condition + ')';
+                    js += 'do {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '} while (' + condition + ')';
                 }
             }
             parentNodeInfo.terminalNode = 'Do';
@@ -21681,7 +21681,7 @@ function MaiaCompiler() {
                             }
                         }
                     }
-                    js += 'while (' + condition + ') {' + (nodeInfo.indentCode ? '\n' : '') + body + '}';
+                    js += 'while (' + condition + ') {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                 }
             }
             parentNodeInfo.terminalNode = 'While';
@@ -21737,7 +21737,7 @@ function MaiaCompiler() {
                             }
                         }
                     }
-                    js += 'for (' + before + ';' + condition + ';' + after + ') {' + (nodeInfo.indentCode ? '\n' : '') + body + '}';
+                    js += 'for (' + before + ';' + condition + ';' + after + ') {' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                 }
             }
             parentNodeInfo.terminalNode = 'For';
@@ -21791,7 +21791,7 @@ function MaiaCompiler() {
                             }
                         }
                     }
-                    js += 'for (' + keyVarName + ' in ' + arrayName + ') {' + (nodeInfo.indentCode ? '\n' : '') + (nodeInfo.indentCode ? core.space(nodeInfo.indentationLength) : '') + 'var ' + valueVarName + ' = ' + arrayName + '[' + keyVarName + '];' + (nodeInfo.indentCode ? '\n' : '') + body + '}';
+                    js += 'for (' + keyVarName + ' in ' + arrayName + ') {' + (nodeInfo.indentCode ? '\n' : '') + (nodeInfo.indentCode ? core.space(nodeInfo.indentationLength) : '') + 'var ' + valueVarName + ' = ' + arrayName + '[' + keyVarName + '];' + (nodeInfo.indentCode ? '\n' : '') + body + core.space(nodeInfo.indentation) + '}';
                 }
             }
             parentNodeInfo.terminalNode = 'ForEach';
@@ -22425,7 +22425,7 @@ function MaiaCompiler() {
                     if (Array.isArray(nodeExpression)) {
                         for (var i = 0; i < nodeExpression.length; i++) {
                             if (i < (nodeExpression.length - 1)) {
-                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ',';
+                                js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction) + ';';
                                 parentNodeInfo.terminalNode = nodeInfo.terminalNode;
                             } else {
                                 js += this.parse(nodeExpression[i], nodeInfo, isKernelFunction);
@@ -22747,7 +22747,7 @@ function MaiaCompiler() {
         if (typeof indentationLength == 'undefined') {
             indentationLength = 4;
         }
-
+        
         var nodeInfo = {
             'parentNode': '',
             'childNode': 'Program',
@@ -23078,7 +23078,30 @@ function Core() {
         var xml = parser.parseFromString(compiledCode.xml, "text/xml");
 
         var compiler = new MaiaCompiler();
-        compiledCode.js = compiler.compile(xml);
+        compiledCode = compiler.compile(xml);
+
+        var js = '';
+        if (compiledCode.wat.length > 0) {
+            var serialNumber = Date.now();
+            var textWasmVar = 'textWasm_' + serialNumber;
+            var binaryWasmVar = 'binaryWasm_' + serialNumber;
+            var wasmModuleVar = 'wasmModule_' + serialNumber;
+            var wasmInstanceVar = 'wasmInstance_' + serialNumber;
+            js += 'var ' + textWasmVar + ' = ' + JSON.stringify(compiledCode.wat) + ';' + (indentCode ? '\n' : '');
+            js += 'var ' + binaryWasmVar + ' = system.wat2wasm(' + textWasmVar + ');' + (indentCode ? '\n' : '');
+            js += 'var ' + wasmModuleVar + ' = new WebAssembly.Module(' + binaryWasmVar + ');' + (indentCode ? '\n' : '');
+            js += 'var ' + wasmInstanceVar + ' = new WebAssembly.Instance(' + wasmModuleVar + ', {});' + (indentCode ? '\n' : '');
+        }
+        if (compiledCode.exports.length > 0) {
+            var names = '';
+            for (j = 0; j < compiledCode.exports.length; j++) {
+                var wasmExport = compiledCode.exports[j];
+                names += wasmExport.target + (j < compiledCode.exports.length - 1 ? ', ' : '');
+            }
+            js += 'var {' + names + '} = ' + wasmInstanceVar + '.exports;' + (indentCode ? '\n' : '');
+        }
+        compiledCode.js = js + compiledCode.js;
+        
         try {
             if (typeof namespace != 'undefined') {
                 result = eval(namespace, compiledCode.js);
