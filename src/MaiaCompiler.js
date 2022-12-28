@@ -1319,6 +1319,24 @@ function MaiaCompiler() {
                     js += 'throw';
                 }
             }
+        } else if ('TypeOf' in mil) {
+            node = mil['TypeOf'];
+            var nodeInfo = {
+                'parentNode': 'TypeOf',
+                'childNode': '',
+                'terminalNode' : 'TypeOf',
+                'indentation': parentNodeInfo.indentation,
+                'indentationLength': parentNodeInfo.indentationLength,
+                'indentCode': parentNodeInfo.indentCode
+            };
+            parentNodeInfo.childNode = 'TypeOf';
+
+            if (typeof node != 'undefined') {
+                if ('Expression' in node) {
+                    var returnValue = this.parse(node, nodeInfo, isKernelFunction);
+                    js += 'typeof ' + returnValue;
+                }
+            }
         } else if ('Operation' in mil) {
             node = mil['Operation'];
             var nodeInfo = {
