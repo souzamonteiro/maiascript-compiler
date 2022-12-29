@@ -22805,7 +22805,7 @@ function MaiaCompiler() {
             parentNodeInfo.terminalNode = 'Character';
 
             if (typeof node == 'string') {
-                js += node.replace("'", "");
+                js += node;
             }
         } else if ('String' in mil) {
             node = mil['String'];
