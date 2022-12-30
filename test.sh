@@ -11,7 +11,7 @@
 
 ./bin/maiascript.js -c --indent examples/conditionals.maia
 ./bin/maiascript.js -c --indent examples/exception.maia
-./bin/maiascript.js -c --indent examples/functions.maia
+./bin/maiascript.js -c --wat --wasm --indent examples/functions.maia
 ./bin/maiascript.js -c --indent examples/loops.maia
 ./bin/maiascript.js -c --indent examples/namespaces.maia
 ./bin/maiascript.js -c --indent examples/operators.maia

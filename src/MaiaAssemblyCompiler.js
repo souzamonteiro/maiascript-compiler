@@ -1942,15 +1942,15 @@ function MaiaAssemblyCompiler() {
     }
 
     /**
-     * Compiles the MaiaScript XML tree for JavaScript.
-     * @param {xml}      xml - The XML data.
+     * Compiles the MaiaScript MIL tree to WebAssembly.
+     * @param {mil}      mil - The MIL data.
      * @param {boolean}  indentCode - Indent the output code.
      * @param {number}   indentationLength - Number of spaces in the indentation.
-     * @return {object}  XML data converted to JavaScript and WebAssembly.
+     * @return {object}  MIL data converted to WebAssembly.
      */
-    this.compile = function(xml, indentCode, indentationLength) {
-        if (typeof indent == 'undefined') {
-            indent = false;
+    this.compile = function(mil, indentCode, indentationLength) {
+        if (typeof indentCode == 'undefined') {
+            indentCode = false;
         }
         if (typeof indentationLength == 'undefined') {
             indentationLength = 4;
@@ -1965,7 +1965,6 @@ function MaiaAssemblyCompiler() {
             'indentCode': indentCode
         };
 
-        var mil = this.xmlToMil(xml);
         var js = this.parse(mil, nodeInfo, false);
         if (watCode.length > 0) {
             var wat = '(module ' + (nodeInfo.indentCode ? '\n' : '') + watCode + core.space(nodeInfo.indentation) + ')';
@@ -1974,7 +1973,6 @@ function MaiaAssemblyCompiler() {
         }
 
         compiledCode = {
-            'xml': xml,
             'mil': mil,
             'js': js,
             'wat': wat,
