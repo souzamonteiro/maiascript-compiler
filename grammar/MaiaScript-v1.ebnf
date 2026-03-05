@@ -12,9 +12,9 @@ Operation                ::= VariableAssignment
 VariableAssignment       ::= ConditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') ConditionalExpression)*
 ConditionalExpression    ::= LogicalORExpression ('?' VariableAssignment ':' VariableAssignment)?
 LogicalORExpression      ::= LogicalANDExpression ('||' LogicalANDExpression)*
-LogicalANDExpression     ::= BitwiseXORExpression ('&&' BitwiseXORExpression)*
-BitwiseXORExpression     ::= BitwiseORExpression ('^^' BitwiseORExpression)*
-BitwiseORExpression      ::= BitwiseANDExpression ('|' BitwiseANDExpression)*
+LogicalANDExpression     ::= BitwiseORExpression ('&&' BitwiseORExpression)*
+BitwiseORExpression      ::= BitwiseXORExpression ('|' BitwiseXORExpression)*
+BitwiseXORExpression     ::= BitwiseANDExpression ('^' BitwiseANDExpression)*
 BitwiseANDExpression     ::= EqualityExpression ('&' EqualityExpression)*
 EqualityExpression       ::= RelationalExpression (('==' | '!=') RelationalExpression)*
 RelationalExpression     ::= ShiftExpression (('<' | '>' | '<=' | '>=') ShiftExpression)*
@@ -73,8 +73,12 @@ Try                      ::= 'try' Expression Catch?
 Test                     ::= 'test' '(' Expression? (';' Expression? (';' Expression?)?)? ')' Expression Catch?
 Catch                    ::= 'catch' '(' Expression ')' Expression
 NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
-FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression  // Inline functions
-                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Block      // Normal and typed functions
+FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' '?=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' '#=' Block
+                           | Identifier ('.' Identifier)* '(' Arguments? ')' ':=' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Block
+                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Script
 Return                   ::= 'return' Expression
 Export                   ::= 'export' Expression
 Import                   ::= 'import' Expression
@@ -90,7 +94,7 @@ Type                     ::= 'i32'
                            | 'f32'
                            | 'f64'
 
-Arguments                ::= Expression (',' Expression)*
+Arguments                ::= (Expression) (',' Expression)*
 
 Member                   ::= Identifier ('.' Identifier)* '(' Arguments? ')'
                            | Identifier ('.' Identifier)* ('[' Arguments? ']')*
@@ -222,6 +226,8 @@ Comment                  ::= SingleLineComment
 SingleLineComment        ::= '//' (SourceCharacter - LineTerminator)*
                            | '#'  (SourceCharacter - LineTerminator)*
 MultiLineComment         ::= '/*' (SourceCharacter* - (SourceCharacter* '*/' SourceCharacter*)) '*/'
+
+Script                   ::= '/{' (SourceCharacter* - (SourceCharacter* '}/' SourceCharacter*)) '}/'
 
 SourceCharacter          ::= .
 
