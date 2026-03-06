@@ -1,5 +1,5 @@
 // This file was generated on Fri Mar 6, 2026 18:56 (UTC-03) by REx v6.1 which is Copyright (c) 1979-2025 by Gunther Rademacher <grd@gmx.net>
-// REx command line: MaiaScript.ebnf -ll 3 -backtrack -javascript
+// REx command line: MaiaScript.ebnf -ll 3 -backtrack -main -javascript
 
 function MaiaScript(string)
 {
@@ -20850,5 +20850,98 @@ MaiaScript.TOKEN =
   "'}'",
   "'~'"
 ];
+
+// main program for use with node.js, rhino, or jrunscript
+
+function main(args)
+{
+  if (typeof process !== "undefined")   // assume node.js
+  {
+    var command = "node";
+    var arguments = process.argv.slice(2);
+    var log = function(string) {process.stdout.write(string);};
+    var fs = require("fs");
+    var readTextFile = fs.readFileSync;
+  }
+  else                                  // assume rhino or jrunscript
+  {
+    var arguments = function()
+                    {
+                      var strings = [];
+                      for (var i = 0; i < args.length; ++i)
+                      {
+                        strings[i] = String(args[i]);
+                      }
+                      return strings;
+                    }();
+
+    if (typeof println == "undefined")  // assume rhino
+    {
+      var command = "java -jar js.jar";
+      var log = function(string) {java.lang.System.out.write(java.lang.String(string).getBytes("utf-8"));};
+      var readTextFile = readFile;
+    }
+    else                                // assume jrunscript
+    {
+      var command = "jrunscript";
+      var log = function(string) {java.lang.System.out.print(string);};
+      var readTextFile = function(filename, encoding)
+                         {
+                           var file = new java.io.File(filename);
+                           var buffer = javaByteArray(file.length());
+                           new java.io.FileInputStream(file).read(buffer);
+                           return String(new java.lang.String(buffer, encoding));
+                         };
+    }
+  }
+
+  function read(input)
+  {
+    if (/^{.*}$/.test(input))
+    {
+      return input.substring(1, input.length - 1);
+    }
+    else
+    {
+      var content = readTextFile(input, "utf-8");
+      return content.length > 0 && content.charCodeAt(0) == 0xFEFF
+           ? content.substring(1)
+           : content;
+    }
+  }
+
+  if (arguments.length == 0)
+  {
+    log("Usage: " + command + " MaiaScript.js INPUT...\n");
+    log("\n");
+    log("  parse INPUT, which is either a filename or literal text enclosed in curly braces\n");
+  }
+  else
+  {
+    var indent = false;
+    for (var i = 0; i < arguments.length; ++i)
+    {
+      var input = read(String(arguments[i]));
+      var parser = new MaiaScript(input);
+      try
+      {
+        parser.parse_Program();
+      }
+      catch (pe)
+      {
+        if (! (pe instanceof parser.ParseException))
+        {
+          throw pe;
+        }
+        else
+        {
+          throw parser.getErrorMessage(pe);
+        }
+      }
+    }
+  }
+}
+
+main(arguments);
 
 // End
