@@ -1,0 +1,359 @@
+// ============================================
+// EXEMPLOS PARA TESTAR O PARSER MAIASCRIPT
+// ============================================
+
+// ===== TIPOS DE DADOS =====
+// Saída de dados
+system.println("=== TESTE DE SAÍDA DE DADOS ===")
+system.println("Olá Mundo!")
+system.showMessageDialog("Diálogo de teste")
+
+// ===== VARIÁVEIS =====
+system.println("\n=== TESTE DE VARIÁVEIS ===")
+a = 1
+b = 2.0
+c = "String de teste"
+d = [1, 2, 3]
+e = {chave: "valor"}
+
+system.println("a = " + a)
+system.println("b = " + b)
+system.println("c = " + c)
+system.println("d = " + core.toString(d))
+system.println("e = " + JSON.stringify(e))
+
+// ===== OPERADORES MATEMÁTICOS =====
+system.println("\n=== TESTE DE OPERADORES MATEMÁTICOS ===")
+x = 10
+y = 3
+
+system.println("x + y = " + (x + y))
+system.println("x - y = " + (x - y))
+system.println("x * y = " + (x * y))
+system.println("x / y = " + (x / y))
+system.println("x % y = " + (x % y))
+system.println("x ** y = " + (x ** y))
+
+// Operadores de incremento
+system.println("x++ = " + x++)
+system.println("++x = " + ++x)
+system.println("y-- = " + y--)
+system.println("--y = " + --y)
+
+// ===== OPERADORES RELACIONAIS =====
+system.println("\n=== TESTE DE OPERADORES RELACIONAIS ===")
+system.println("x == y: " + (x == y))
+system.println("x != y: " + (x != y))
+system.println("x < y: " + (x < y))
+system.println("x <= y: " + (x <= y))
+system.println("x > y: " + (x > y))
+system.println("x >= y: " + (x >= y))
+
+// ===== OPERADORES LÓGICOS =====
+system.println("\n=== TESTE DE OPERADORES LÓGICOS ===")
+bool1 = true
+bool2 = false
+
+system.println("bool1 && bool2: " + (bool1 && bool2))
+system.println("bool1 || bool2: " + (bool1 || bool2))
+system.println("bool1 ^^ bool2: " + (bool1 ^^ bool2))
+system.println("bool1 & bool2: " + (bool1 & bool2))
+system.println("bool1 | bool2: " + (bool1 | bool2))
+system.println("bool1 ^ bool2: " + (bool1 ^ bool2))
+
+// ===== OPERADORES DE DESLOCAMENTO =====
+system.println("\n=== TESTE DE OPERADORES DE DESLOCAMENTO ===")
+num = 8
+system.println("num << 2: " + (num << 2))
+system.println("num >> 1: " + (num >> 1))
+
+// ===== OPERADORES DE ATRIBUIÇÃO =====
+system.println("\n=== TESTE DE OPERADORES DE ATRIBUIÇÃO ===")
+z = 5
+z += 3
+system.println("z += 3: " + z)
+
+z -= 2
+system.println("z -= 2: " + z)
+
+z *= 4
+system.println("z *= 4: " + z)
+
+// ===== OPERADOR CONDICIONAL TERNÁRIO =====
+system.println("\n=== TESTE DE OPERADOR TERNÁRIO ===")
+resultado = x > y ? "x é maior" : "y é maior"
+system.println(resultado)
+
+// ===== NÚMEROS COMPLEXOS =====
+system.println("\n=== TESTE DE NÚMEROS COMPLEXOS ===")
+comp1 = 3.0 + 4.0*i
+comp2 = 1.0 - 2.0*i
+compSoma = comp1 + comp2
+system.println("comp1 = " + comp1)
+system.println("comp2 = " + comp2)
+system.println("comp1 + comp2 = " + compSoma)
+
+// ===== MATRIZES =====
+system.println("\n=== TESTE DE MATRIZES ===")
+// Notação Matlab
+mat1 = [1, 2; 3, 4]
+// Notação JavaScript
+mat2 = [[5, 6], [7, 8]]
+
+system.println("mat1 = " + core.toString(mat1))
+system.println("mat2 = " + core.toString(mat2))
+system.println("mat1 + mat2 = " + core.toString(mat1 + mat2))
+
+// ===== ESTRUTURAS DE DECISÃO =====
+system.println("\n=== TESTE DE ESTRUTURAS IF ===")
+if (x > 5) {
+    system.println("x é maior que 5")
+} else {
+    system.println("x é menor ou igual a 5")
+}
+
+// Switch
+system.println("\n=== TESTE DE ESTRUTURA SWITCH ===")
+valor = 2
+switch (valor) {
+    case 1:
+        system.println("Caso 1")
+        break
+    case 2:
+        system.println("Caso 2")
+        break
+    default:
+        system.println("Caso padrão")
+}
+
+// ===== ESTRUTURAS DE REPETIÇÃO =====
+system.println("\n=== TESTE DE DO-WHILE ===")
+contador = 0
+do {
+    system.println("Contador: " + contador)
+    contador++
+} while (contador < 3)
+
+system.println("\n=== TESTE DE WHILE ===")
+contador = 0
+while (contador < 3) {
+    system.println("While - Contador: " + contador)
+    contador++
+}
+
+system.println("\n=== TESTE DE FOR ===")
+for (i = 0; i < 3; i++) {
+    system.println("For - i: " + i)
+}
+
+system.println("\n=== TESTE DE FOREACH ===")
+obj = {nome: "João", idade: 30}
+foreach(obj; chave; valor) {
+    system.println(chave + ": " + valor)
+}
+
+// ===== FUNÇÕES =====
+system.println("\n=== TESTE DE FUNÇÕES ===")
+// Função simples
+somar(a, b) {
+    return a + b
+}
+
+resultadoSoma = somar(5, 3)
+system.println("somar(5, 3) = " + resultadoSoma)
+
+// Função inline
+quadrado(x) = x ** 2
+system.println("quadrado(4) = " + quadrado(4))
+
+// ===== NAMESPACES =====
+system.println("\n=== TESTE DE NAMESPACES ===")
+namespace Matematica {
+    pi = 3.14159
+    
+    circunferencia(raio) {
+        return 2 * pi * raio
+    }
+}
+
+system.println("Matematica.pi = " + Matematica.pi)
+system.println("Matematica.circunferencia(5) = " + Matematica.circunferencia(5))
+
+// ===== CONSTRUTORES DE OBJETOS =====
+system.println("\n=== TESTE DE CONSTRUTORES ===")
+Pessoa(nome, idade) := {
+    this.nome = nome
+    this.idade = idade
+    
+    this.apresentar() {
+        return "Olá, sou " + this.nome + " e tenho " + this.idade + " anos"
+    }
+}
+
+p := Pessoa("Maria", 25)
+system.println(p.apresentar())
+
+// ===== TRATAMENTO DE ERROS =====
+system.println("\n=== TESTE DE TRATAMENTO DE ERROS ===")
+try {
+    resultado = 10 / 0
+    system.println("Resultado: " + resultado)
+} catch (erro) {
+    system.println("Erro capturado: " + erro.message)
+}
+
+// ===== IMPORT/EXPORT =====
+system.println("\n=== TESTE DE IMPORT/EXPORT ===")
+// Simulando um módulo
+namespace MeuModulo {
+    export funcaoModulo() {
+        return "Função do módulo executada"
+    }
+}
+
+system.println(MeuModulo.funcaoModulo())
+
+// ===== VARIÁVEIS LOCAIS/GLOBAIS =====
+system.println("\n=== TESTE DE VARIÁVEIS LOCAIS/GLOBAIS ===")
+global varGlobal = "Variável global"
+
+funcaoTeste() {
+    local varLocal = "Variável local"
+    return varGlobal + " - " + varLocal
+}
+
+system.println(funcaoTeste())
+
+// ===== TYPEOF =====
+system.println("\n=== TESTE DE TYPEOF ===")
+system.println("typeof(5): " + typeof(5))
+system.println("typeof('texto'): " + typeof("texto"))
+system.println("typeof([1,2,3]): " + typeof([1,2,3]))
+
+// ===== FUNÇÕES ASSÍNCRONAS =====
+system.println("\n=== TESTE DE FUNÇÕES ASSÍNCRONAS ===")
+async funcaoAsync() {
+    return "Função assíncrona concluída"
+}
+
+// Simulando await
+resultadoAsync = funcaoAsync()
+system.println("Resultado async: " + resultadoAsync)
+
+// ===== MAIAASSEMBLY =====
+system.println("\n=== TESTE DE MAIAASSEMBLY ===")
+i32 somarInteiros(i32 a, i32 b) {
+    i32 resultado = a + b
+    return resultado
+}
+
+resultadoAssembly = somarInteiros(10, 20)
+system.println("somarInteiros(10, 20) = " + resultadoAssembly)
+
+// ===== TESTES COMPLEXOS COMBINADOS =====
+system.println("\n=== TESTES COMPLEXOS COMBINADOS ===")
+
+// Matrizes com operações complexas
+matrizA = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+matrizB = [9, 8, 7; 6, 5, 4; 3, 2, 1]
+
+resultadoMatriz = matrizA + matrizB
+system.println("Soma de matrizes: " + core.toString(resultadoMatriz))
+
+// Expressão complexa com operadores
+expressao = (5 + 3 * 2) ** 2 - 10
+system.println("Expressão complexa: " + expressao)
+
+// Função recursiva
+fatorial(n) {
+    if (n <= 1) {
+        return 1
+    }
+    return n * fatorial(n - 1)
+}
+
+system.println("fatorial(5) = " + fatorial(5))
+
+// Estrutura aninhada
+system.println("\n=== TESTE DE ESTRUTURAS ANINHADAS ===")
+for (i = 0; i < 3; i++) {
+    system.println("Loop externo: " + i)
+    for (j = 0; j < 2; j++) {
+        if (i == j) {
+            system.println("  i == j: " + i)
+        } else {
+            system.println("  i != j: " + i + "," + j)
+        }
+    }
+}
+
+// ===== OPERADORES DE ATRIBUIÇÃO COMPOSTOS =====
+system.println("\n=== TESTE DE ATRIBUIÇÃO COMPOSTA ===")
+valorTeste = 10
+valorTeste += 5
+system.println("valorTeste += 5: " + valorTeste)
+
+valorTeste *= 2
+system.println("valorTeste *= 2: " + valorTeste)
+
+valorTeste %= 7
+system.println("valorTeste %= 7: " + valorTeste)
+
+// ===== EXPRESSÕES LÓGICAS COMPLEXAS =====
+system.println("\n=== TESTE DE EXPRESSÕES LÓGICAS ===")
+a = true
+b = false
+c = true
+
+resultadoLogico = (a && b) || (c && !b)
+system.println("(a && b) || (c && !b): " + resultadoLogico)
+
+// ===== ARRAYS ASSOCIATIVOS =====
+system.println("\n=== TESTE DE ARRAYS ASSOCIATIVOS ===")
+pessoa = {
+    nome: "Carlos",
+    idade: 30,
+    profissao: "Programador",
+    endereco: {
+        rua: "Rua A",
+        cidade: "São Paulo"
+    }
+}
+
+system.println("Nome: " + pessoa.nome)
+system.println("Idade: " + pessoa.idade)
+system.println("Cidade: " + pessoa.endereco.cidade)
+
+// ===== TESTE FINAL COMPREENSIVO =====
+system.println("\n=== TESTE FINAL COMPREENSIVO ===")
+
+namespace CalculadoraCientifica {
+    e = 2.71828
+    
+    exponencial(x) {
+        return e ** x
+    }
+    
+    logaritmoNatural(x) {
+        if (x <= 0) {
+            throw "Argumento deve ser positivo"
+        }
+        return core.log(x)
+    }
+}
+
+try {
+    resultadoExp = CalculadoraCientifica.exponencial(2)
+    system.println("e^2 = " + resultadoExp)
+    
+    resultadoLog = CalculadoraCientifica.logaritmoNatural(10)
+    system.println("ln(10) = " + resultadoLog)
+    
+    // Isso deve lançar erro
+    CalculadoraCientifica.logaritmoNatural(-1)
+} catch (erro) {
+    system.println("Erro esperado: " + erro)
+}
+
+system.println("\n=== TODOS OS TESTES CONCLUÍDOS ===")
+system.println("Parser MaiaScript funcionando corretamente!")

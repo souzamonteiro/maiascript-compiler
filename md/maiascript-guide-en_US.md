@@ -8,7 +8,7 @@ For detailed information about the grammar of the MaiaScript language see the de
 
 ## Data types
 
-MaiaScript supports three types of data natively: `integer`, `real` and `string`. These types are automatic, and you do not have to define them when creating common variables and functions. For use exclusively with functions in **WebAssembly** and **MaiaAssembly** are supported the types `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32` and `real 64 bits`, `f64`. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>.
+MaiaScript supports three types of data natively: `integer`, `real` and `string`. These types are automatic, and you do not have to define them when creating common variables and functions. For use exclusively with functions in **WebAssembly** and **MaiaAssembly** are supported the types `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32 bits`, `f32` and `real 64 bits`, `f64`. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>.
 
 ## Data output
 
@@ -31,7 +31,7 @@ system.println(a)
 
 ## Variables
 
-Variables are containers where we store data for processing or processing results. In MaiaScript variables can store values of any type, and it is not usually necessary to specify the type of data that the variable will store at the time of its creation. However, when creating functions in **MaiaAssembly** or **WebAssembly**, you must specify the type of data that the variable will store and this variable can only store values of this type of data throughout its existence. The types `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32 bits`, `f32`, `real 64 bits`, `f64` are supported. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>. The following example shows how to create variables of various types:
+Variables are containers where we store data for processing or processing results. In MaiaScript variables can store values of any type, and it is not usually necessary to specify the type of data that the variable will store at the time of its creation. However, when creating functions in **MaiaAssembly** or **WebAssembly**, you must specify the type of data that the variable will store and this variable can only store values of this type of data throughout its existence. The types `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32 bits`, `f32`, `real 64 bits`, `f64` are supported. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>. The following example shows how to create variables of various types:
 
 ```
 a = 1
@@ -59,38 +59,48 @@ system.println(JSON.stringify(h))
 i = {}
 system.println(JSON.stringify(i))
 ```
+
 ## Operators
 
 MaiaScript supports mathematical, relational, logical, bit offset operation, combined assignment operators and ternary conditional operator. The following is an EBNF notation for all operators supported by the language. The order of precedence is top-down.
 
 ```
-Operation                ::= VariableAssignment
-VariableAssignment       ::= ConditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') ConditionalExpression)*
-ConditionalExpression    ::= LogicalORExpression ('?' VariableAssignment ':' VariableAssignment)?
-LogicalORExpression      ::= LogicalANDExpression ('||' LogicalANDExpression)*
-LogicalANDExpression     ::= BitwiseORExpression ('&&' BitwiseORExpression)*
-BitwiseORExpression      ::= BitwiseXORExpression ('|' BitwiseXORExpression)*
-BitwiseXORExpression     ::= BitwiseANDExpression ('^' BitwiseANDExpression)*
-BitwiseANDExpression     ::= EqualityExpression ('&' EqualityExpression)*
-EqualityExpression       ::= RelationalExpression (('==' | '!=') RelationalExpression)*
-RelationalExpression     ::= ShiftExpression (('<' | '>' | '<=' | '>=') ShiftExpression)*
-ShiftExpression          ::= AdditiveExpression (('<<' | '>>') AdditiveExpression)*
-AdditiveExpression       ::= PowerExpression (('+' | '-') PowerExpression)*
-PowerExpression          ::= MultiplicativeExpression ('**' MultiplicativeExpression)*
-MultiplicativeExpression ::= UnaryExpression (('*' | '/' | '%') UnaryExpression)*
-UnaryExpression          ::= Primary '++'
-                           | Primary '--'
-                           | '++' Primary
-                           | '--' Primary
-                           | '+' Primary
-                           | '-' Primary
-                           | '~' Primary
-                           | '!' Primary
-                           | Primary
+maiascript               ::= expression*
+                           | eof
 
-Primary                  ::= Type? Member
-                           | Value
-                           | ParenthesizedExpression
+operation                ::= variableAssignment
+variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') conditionalExpression)*
+
+conditionalExpression    ::= logicalORExpression ('?' expression ':' expression)?
+
+logicalXORExpression     ::= logicalORExpression ('^^' logicalORExpression)*
+logicalORExpression      ::= logicalANDExpression ('||' logicalANDExpression)*
+logicalANDExpression     ::= bitwiseXORExpression ('&&' bitwiseXORExpression)*
+bitwiseXORExpression     ::= bitwiseORExpression ('^' bitwiseORExpression)*
+bitwiseORExpression      ::= bitwiseANDExpression ('|' bitwiseANDExpression)*
+bitwiseANDExpression     ::= equalityExpression ('&' equalityExpression)*
+
+equalityExpression       ::= relationalExpression (('==' | '!=') relationalExpression)*
+relationalExpression     ::= shiftExpression (('<' | '>' | '<=' | '>=') shiftExpression)*
+shiftExpression          ::= additiveExpression (('<<' | '>>') additiveExpression)*
+additiveExpression       ::= powerExpression (('+' | '-') powerExpression)*
+powerExpression          ::= multiplicativeExpression ('**' multiplicativeExpression)*
+multiplicativeExpression ::= unaryExpression (('*' | '/' | '%') unaryExpression)*
+
+unaryExpression          ::= '++' primary
+                           | '--' primary
+                           | primary '++'
+                           | primary '--'
+                           | '+' primary
+                           | '-' primary
+                           | '~' primary
+                           | '!' primary
+                           | primary
+
+primary                  ::= member
+                           | value
+                           | parenthesizedExpression
+                           | type identifier
 ```
 
 In the next sessions we will address each of these operators.
@@ -157,7 +167,7 @@ system.println(c)
 
 ### Logical operators
 
-MaiaScript supports the following logical operators: **and**, `&&`, **or**, `|| `, **and bitwise**, `&`, **exclusive or bitwise**, `^` and **or bitwise**, `|`. The following examples show how to use these operators:
+MaiaScript supports the following logical operators: **logical XOR**, `^^`, **logical OR**, `||`, **logical AND**, `&&`, **bitwise AND**, `&`, **bitwise XOR**, `^` and **bitwise OR**, `|`. The following examples show how to use these operators:
 
 ```
 a = 1
@@ -166,6 +176,8 @@ b = 0
 c = a && b
 system.println(c)
 c = a || b
+system.println(c)
+c = a ^^ b
 system.println(c)
 c = a & b
 system.println(c)
@@ -182,15 +194,15 @@ MaiaScript supports  the following shift operators: **left shift**, `<<`, and **
 ```
 a = 3
 
-c = << 2
+c = a << 2
 system.println(c)
-c = >> 2
+c = a >> 2
 system.println(c)
 ```
 
 ### Assignment operators
 
-MaiaScript supports the following special operators of operation followed by assignment: `*=` , `/=` , `%=` , `+=` , `-=` , `<<=` , `>>=` , `&=` , `^=` , `|=`. The following are examples of the most common uses of these operators:
+MaiaScript supports the following special operators of operation followed by assignment: `*=` , `/=` , `%=` , `+=` , `-=` , `<<=` , `>>=` , `&=` , `^=` , `|=`, `?=`, `:=`. The following are examples of the most common uses of these operators:
 
 ```
 c = a += b
@@ -212,14 +224,15 @@ system.println(c)
 
 ### Complex numbers
 
-MaiaScript supports **complex numbers** natively for the `+`, `-`, `**`, `*` and `\` and for the mathematical functions `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` and `tanh`. Several specialized functions are also available in the `core` library. For all MaiaScript functions that support complex numbers, see the library documentation in the `docs` folder in your MaiaScript compiler distribution.
+MaiaScript supports **complex numbers** natively for the `+`, `-`, `**`, `*` and `/` and for the mathematical functions `abs`, `arg`, `cos`, `cosh`, `exp`, `log`, `sin`, `sinh`, `sqrt`, `tan` and `tanh`. Several specialized functions are also available in the `core` library. For all MaiaScript functions that support complex numbers, see the library documentation in the `docs` folder in your MaiaScript compiler distribution.
 
 The following is presented in EBNF notation the syntax of complex numbers in MaiaScript:
 
 ```
-Complex                  ::= Real? Imaginary
-Real                     ::= '-'? Digit+ '.' Digit+ (('e' | 'E' | 'p' | 'P') ('+' | '-')? Digit+)?
-Imaginary                ::= (('+' | '-')? Real '*' 'i')
+complex                  ::= real? imaginary
+real                     ::= '-'? digit+ ('.' digit+)? (('e' | 'E') ('+' | '-')? digit+)?
+imaginary                ::= (('+' | '-')? real '*' 'i')
+digit                    ::= [0-9]
 ```
 
 The following example illustrates the sum operation with two complex numbers:
@@ -238,15 +251,14 @@ MaiaScript supports matrices natively for the `+`, `-`, `**`, and `*` operators 
 The following is presented in EBNF notation the syntax **associative vectors** and **matrices** in MaiaScript:
 
 ```
-Array                    ::= '{' Element? (',' Element)* '}'
-Matrix                   ::= '[' Row? (';' Row)* ']'
+array                    ::= '{' element? (',' element)* '}'
+matrix                   ::= '[' row? (';' row)* ']'
 
-Element                  ::= (Key ':')? Expression
-Key                      ::= Identifier
-                           | String
+element                  ::= (key ':')? expression
+key                      ::= string
 
-Row                      ::= Column (',' Column)*
-Column                   ::= Expression
+row                      ::= column (',' column)*
+column                   ::= expression
 ```
 
 In MaiaScript you can use both **Matlab** and **JavaScript** matrices notation. In Matlab notation the columns are separated by `commas`, `,`, and the lines by `semicolons`, `;`. In javascript notation each line must be indicated between brackets `[]` and lines separated by `commas`, `,`. The following example presents examples of operations with matrices using the two notations:
@@ -279,8 +291,9 @@ The `if... else...` statement allows you to decide, by evaluating a `condition` 
 The following is the syntax of the declaration `if... else...` in EBNF notation:
 
 ```
-If                       ::= 'if' '(' Expression ')' Expression Else?
-Else                     ::= 'else' Expression
+if                       ::= 'if' '(' expression ')' statement elseif* else?
+elseif                   ::= 'elseif' '(' expression ')' statement
+else                     ::= 'else' statement
 ```
 
 The following example illustrates the use of the `if... else...` statement:
@@ -301,7 +314,7 @@ if (a < b) {
 } else if (a > b) {
     system.println("a = " + a)
     system.println("b = " + b)
-    system.println("the > b")
+    system.println("a > b")
 } else {
     system.println("a = " + a)
     system.println("b = " + b)
@@ -313,15 +326,15 @@ if (a < b) {
 
 The `switch... case... default...` statement allows you to decide, by comparing an `expression` with several provided `cases`, by running a `program code` session or not. The `conditional expression` should be written immediately after the word `switch` and in `parentheses`. This `expression` will be compared with each provided `case` and if an **equivalence** is found the `expression` or `command block` immediately after the `colon` of the `case` is executed. If none of the cases matches the given `expression`, the `expression` or `command block` immediately after the `colon` of the `default` case is executed. The `default` clause is optional.
 
-The following is the syntax of the `switch... Case... default...` statement in EBNF notation:
+The following is the syntax of the `switch... case... default...` statement in EBNF notation:
 
 ```
-Switch                   ::= 'switch' '(' Expression ')' '{' Case+ Default? '}'
-Case                     ::= 'case' Expression ':' Expression*
-Default                  ::= 'default' ':' Expression*
+switch                   ::= 'switch' '(' expression ')' '{' case* default? '}'
+case                     ::= 'case' expression ':' (statement | expression)*
+default                  ::= 'default' ':' (statement | expression)*
 ```
 
-The following example illustrates the use of the `switch... Case... default...` statement:
+The following example illustrates the use of the `switch... case... default...` statement:
 
 ```
 a = 1
@@ -333,10 +346,10 @@ switch (a) {
         system.println("a == 0 || a == 1 || a == 2")
     case 2:
         system.println("a == 2")
-        Break
+        break
     default:
         system.println("a = " + a)
-        system.println("a != 1 &; a!= 2")
+        system.println("a != 1 && a != 2")
 }
 ```
 
@@ -350,21 +363,20 @@ The `do... while...` statements executes an `expression` or `command block` `whi
 The following is the syntax of the `do... while...` statement in EBNF notation:
 
 ```
-Do                       ::= 'do' Expression 'while' '(' Expression ')'
-Break                    ::= 'break'
-Continue                 ::= 'continue'
+do                       ::= 'do' statement 'while' '(' expression ')'
+break                    ::= 'break'
+continue                 ::= 'continue'
 ```
 
 The following example illustrates the use of the `do... while...` statement:
 
 ```
-
 a = 0
 
 do {
-    system.println
+    system.println(a)
     a++
-} while (a < 10);
+} while (a < 10)
 ```
 
 ### While... statement
@@ -374,7 +386,7 @@ The `while...` statement executes an `expression` or `command block` `while` a g
 The following is the syntax of the `while...` statement in EBNF notation:
 
 ```
-While                    ::= 'while' '(' Expression ')' Expression
+while                    ::= 'while' '(' expression ')' statement
 ```
 
 The following example illustrates the use of the `while...` statement:
@@ -384,11 +396,12 @@ a = 0
 
 while (a < 10) {
     if (a % 2 == 0) {
+        a++
         continue
     }
     if (a >= 5) {
         system.println("Break the loop.")
-        Break
+        break
     }
     system.println(a)
     a++
@@ -402,7 +415,8 @@ The `for...` statement executes an `expression` or `command block` while a given
 The following is the syntax of the `for...` statement in EBNF notation:
 
 ```
-For                      ::= 'for' '(' Expression ';' Expression ';' Expression ')' Expression
+for                      ::= 'for' '(' (expression? | variableDeclaration) ';' expression? ';' expression? ')' statement
+variableDeclaration      ::= type? identifier ('=' expression)?
 ```
 
 The following example illustrates the use of the `for...` statement:
@@ -417,6 +431,11 @@ for (a = 0; a < 10; ++a) {
 for (i = 0; i < b.length; i++) {
     system.println(b[i])
 }
+
+// With variable declaration
+for (i32 i = 0; i < 10; i++) {
+    system.println(i)
+}
 ```
 
 ### Foreach... statement
@@ -426,7 +445,7 @@ The `foreach...` statement executes an `expression` or `command block` `for each
 The following is the syntax of the `foreach...` statement in EBNF notation:
 
 ```
-ForEach                  ::= 'foreach' '(' Expression ';' Expression ';' Expression ')' Expression
+foreach                  ::= 'foreach' '(' expression ';' identifier ';' identifier ')' statement
 ```
 
 The following example illustrates the use of the `foreach...` statement:
@@ -447,18 +466,14 @@ Functions and procedures are program subroutines that can be performed by invoki
 The following is the syntax for the various types of MaiaScript `functions` in EBNF notation:
 
 ```
-FunctionDeclaration      ::= Identifier ('.' Identifier)* '(' Arguments? ')' '=' Expression
-                           | Identifier ('.' Identifier)* '(' Arguments? ')' '?=' Block
-                           | Identifier ('.' Identifier)* '(' Arguments? ')' '#=' Block
-                           | Identifier ('.' Identifier)* '(' Arguments? ')' ':=' Block
-                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Block
-                           | Type? Identifier ('.' Identifier)* '(' Arguments? ')' Script
-Return                   ::= 'return' Expression
+function                 ::= ('async' | 'function' | 'plain')? identifier ('.' identifier)* '(' arguments? ')' ( block | '=' expression )
+arguments                ::= expression (',' expression)*
+return                   ::= 'return' expression?
 ```
 
 ### Function declaration
 
-We declare a `function` by writing its `name`, followed by `parentheses`, which may or may not contain `arguments` separated by `commas`, `,`, and a `command block` between `curly braces`, `{}`. Functions in MaiaScript may or may not have declared `return types` and use or not `special assignment operators`, `=`, `?=`, `#=`, `:=`, in their declaration.
+We declare a `function` by writing its `name`, followed by `parentheses`, which may or may not contain `arguments` separated by `commas`, `,`, and a `command block` between `curly braces`, `{}`. Functions in MaiaScript may use modifiers like `async`, `function`, or `plain`, and use or not `special assignment operators`, `=` in their declaration.
 
 If a `return type` is indicated in the function declaration, it is interpreted as being a function in **MaiaAssembly** or in **WebAssembly**. In both cases you must specify the `value types` of the function arguments if it has `arguments`. If the `curly braces`, `/{ /}` of the `command blocks` are preceded by the character `/` the function is interpreted as being in **WebAssembly**, otherwise it is considered to be in **MaiaAssembly**. MaiaScript functions can be **recursive**, that is, call themselves to perform complex tasks. The following example illustrates the `factorial` function implemented using a recursive algorithm:
 
@@ -486,21 +501,21 @@ system.println(f(2))
 
 ### Asynchronous functions
 
-Functions can be **executed asynchronously**. To do so, you must declare the function using the `asynchronous execution operator`, `?=`. To wait for the **asynchronous function** to finish its execution, blocking the **execution stream** of the rest of the program, you must `assign` the function to a `variable` using the `asynchronous execution operator`, `?=`.
+Functions can be **executed asynchronously**. To do so, you must declare the function using the `async` modifier. To wait for the **asynchronous function** to finish its execution, blocking the **execution stream** of the rest of the program, you must use the `await` keyword.
 
 ```
 // An asynchronous function.
-f(x) ?= {
+async f(x) {
     return x
 }
 
 // An asynchronous function call.
-a ?= f(2)
+a = await f(2)
 ```
 
 ### Parallel functions
 
-MaiaScript allows you to create parallel functions using **threads** or **GPU cores**. In both cases the functions need to be of the `kernel` type. `Kernel` functions must be created using the `kernel function declaration operator`, `#=`. A `kernel` function is compiled differently from the other functions. They do not support operations with complex numbers or matrices. Only the basic data types and features of JavaScript are supported. The following example shows how to create a **thread** in MaiaScript. For more details see the documentation of the `task` library available in the `docs` folder of your MaiaScript compiler distribution.
+MaiaScript allows you to create parallel functions using **threads** or **GPU cores**. In both cases the functions need to be of the `kernel` type. `Kernel` functions must be created using the `#=` operator. A `kernel` function is compiled differently from the other functions. They do not support operations with complex numbers or matrices. Only the basic data types and features of JavaScript are supported. The following example shows how to create a **thread** in MaiaScript. For more details see the documentation of the `task` library available in the `docs` folder of your MaiaScript compiler distribution.
 
 ```
 task1() #= {
@@ -532,36 +547,22 @@ try {
 
 ### Functions in MaiaAssembly
 
-**MaiaAssembly** is a build-optimized programming language for **WebAssembly**. It allows you to create algorithms as fast as programs written in C language, embedded in high-level programs in MaiaScript. Functions in **MaiaAssembly** are typed, which means that you must declare the types of functions and variables at the time of their creations. The types supported in **MaiaAssembly** are `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. All **MaiaScript** decision and loop structures are supported in **MaiaAssembly**. In addition, arbitrary dimensions `matrices` of supported data `types` are supported. You cannot pass objects or even arrays as **MaiaAssembly** function arguments, but you can import them. The `import` declaration is used for this. It allows you to import properties of objects into the function and use them as if they were local variables. In **MaiaAssembly** it is possible to create **global variables** using the `global` declaration. Global variables are accessible from anywhere in the program. The following example shows how to create a function to sum two values passed to it as arguments. The function also creates a `local variable` to store the sum result. Local variables must be declared in the function header and should appear after the function arguments.
+**MaiaAssembly** is a build-optimized programming language for **WebAssembly**. It allows you to create algorithms as fast as programs written in C language, embedded in high-level programs in MaiaScript. Functions in **MaiaAssembly** are typed, which means that you must declare the types of functions and variables at the time of their creations. The types supported in **MaiaAssembly** are `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. All **MaiaScript** decision and loop structures are supported in **MaiaAssembly**. In addition, arbitrary dimensions `matrices` of supported data `types` are supported. You cannot pass objects or even arrays as **MaiaAssembly** function arguments, but you can import them. The `import` declaration is used for this. It allows you to import properties of objects into the function and use them as if they were local variables. In **MaiaAssembly** it is possible to create **global variables** using the `global` declaration. Global variables are accessible from anywhere in the program. The following example shows how to create a function to sum two values passed to it as arguments. The function also creates a `local variable` to store the sum result. Local variables must be declared in the function header and should appear after the function arguments.
 
 ```
 // A function in MaiaAssembly.
-i32 f4(i32 a, i32 b, site i32 c) {
-    c = a + b;
-    return c;
+i32 f(i32 a, i32 b) {
+    i32 c = a + b
+    return c
 }
 
 // Calling a function in MaiaAssembly.
 c = f(1, 2)
 ```
 
-### Functions in JavaScript
-
-Functions in **JavaScript** can be declared preceding the `curly braces`, `/{ /}` of the `command blocks` with the character `/`. **JavaScript functions are not compiled**, and are inserted into compiler-produced code as they were written. The following example shows how to define a function in **JavaScript**:
-
-```
-// A function in JavaScript.
-f(x) /{
-    y = x + 1;
-    return y;
-}/
-
-// Calling a function in JavaScript.
-c = f(2)
-```
-
 ### Functions in WebAssembly
-Functions in **WebAssembly** are assembled by the assembler and inserted into binary form into the code resulting from the build. They are typed, which means that you need to declare the types of functions and variables at the time of their creations. The types supported in **WebAssembly** are `integer 32 bits`, `ì32`, `integer 64 bits`, `ì64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. `Local variables` must be declared in the function header and should appear after the function arguments. The following example shows how to create a function to sum two values passed to it as arguments:
+
+Functions in **WebAssembly** are assembled by the assembler and inserted into binary form into the code resulting from the build. They are typed, which means that you need to declare the types of functions and variables at the time of their creations. The types supported in **WebAssembly** are `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. `Local variables` must be declared in the function header and should appear after the function arguments. The following example shows how to create a function to sum two values passed to it as arguments:
 
 ```
 // A function in WebAssembly.
@@ -573,7 +574,7 @@ i32 f(i32 a, i32 b) /{
 }/
 
 // Calling a function in WebAssembly.
-f = f(1, 2)
+c = f(1, 2)
 ```
 
 ## Creating namespaces and objects
@@ -587,14 +588,14 @@ We create a namespace by defining a `name` for it and a `block of code` containi
 The following is the syntax for creating `namespaces` in EBNF notation:
 
 ```
-NamespaceDeclaration     ::= Identifier ('.' Identifier)* Block
+namespace                ::= 'namespace' identifier ('.' identifier)* block
 ```
 
 The following example illustrates how to create a `namespace` containing a `variable`, `property` and a `function`, `method`:
 
 ```
 // Creating a namespace (an object)
-a {
+namespace a {
     b = 1
     f(n) {
         if (n == 0 || n == 1) {
@@ -613,14 +614,14 @@ system.println(a.f(5))
 **Object constructors** allow you to create `class instantiations` defined by them. `Classes` are **templates** for `objects`. They define their `properties`, changeable characteristics at runtime, and their `methods`, functionalities of objects. To create an `object constructor` we define a function using the `object creation operator`, `:=`. To **instantiate** an `object` we assign to a variable the return value of the `object constructor`, using the `object creation operator`, `:=`. The following example creates an `object` that has a `y` property and assigns to that variable the value passed to the constructor at the time of its creation:
 
 ```
-/// An object constructor.
+// An object constructor.
 A(x) := {
     y = x
 }
 
 c := A(2)
 
-system.println (c.y);
+system.println(c.y)
 ```
 
 ## Complex and social networks
@@ -692,7 +693,7 @@ property = {
 }
 
 // Converts the file into an adjacency array.
-property.adj = cna.parsePajekFile (fileContents, property)
+property.adj = cna.parsePajekFile(fileContents, property)
 
 // Calculates the density of the network.
 property.networkDensity = cna.getDensity(property.adj, property.directed)
@@ -703,7 +704,7 @@ property.networkAverageDegree = cna.getAverageDegree(property.networkDegree)
 
 // Calculates the clustering coefficients of the vertices and the average agglomeration coefficient of the network.
 property.networkClustering = cna.getClustering(property.adj, property.directed)
-property.networkAverageClustering = cna.getAverageClustering (property.networkClustering)
+property.networkAverageClustering = cna.getAverageClustering(property.networkClustering)
 
 // Calculates the shortest paths between the vertices and the network's average shortest path.
 property.networkShortestPath = cna.getShortestPath(property.adj)
@@ -713,7 +714,7 @@ property.networkAverageShortestPath = cna.getAverageShortestPath(property.networ
 property.networkDiameter = cna.getDiameter(property.networkShortestPath)
 
 // Calculates the global efficiency of the network.
-property.networkGlobalEfficiency = cna.getGlobalEfficiency (property.networkVertexEfficiency)
+property.networkGlobalEfficiency = cna.getGlobalEfficiency(property.networkVertexEfficiency)
 ```
 
 ## Artificial neural networks
@@ -721,26 +722,27 @@ property.networkGlobalEfficiency = cna.getGlobalEfficiency (property.networkVert
 MaiaScript provides functions for creating and training **artificial neural networks** of various topologies. These features are available in the `ann` library. The following examples show the most common applications for the functions of this library. For a complete reference see the documentation available in the `docs` folder of your MaiaScript compiler distribution.
 
 ```
-Callback.
-trainingCallback (epochs, RSS, correctness, ETL) {
+// Callback.
+trainingCallback(epochs, RSS, correctness, ETL) {
     system.println("Epochs: " + core.toString(epochs) + ", RSS: " + core.toString(RSS) + ", Correctness: " + core.toString(correctness) + ", ETL: " + core.toString(ETL))
 }
 
 // Data to train.
-The training algorithm expects an array with one row for each die and a column for each input or output neuron.
-dataX = [[0.00],[0.25],[0.50],[0.75],[1.00],[1.25],[1.50],[1.75],[2.00],[2.25],[2.25],[1.25],[1.25],[1.50],[1.75],[2.00],[2.00],[2.25],[2.25],[1.25],[1.50],[1.75],[2.00],[2.25],[2.25],[2.25],[2.25],[1.25],[1.25],[1.50],[1.75],[1.[2.50],[2.75],[3.00],[3.25],[3.50],[3.75],[4.00],[4.25],[4.50],[4.75],[5.5). 00],[5.25],[5.50],[5.75],[6.00],[6.25],[6.50],[6.75],[7.00],[7.25],[7.50],,[7.75],[8.00],[8.25],[8.50],[8.75],[9.00],[9.25],[9.50],[9.75],[10.00]]
-dataY = [[2.0000],[2.2197],[2.3811],[2.5136],[2.7310],[2.7827],[2.8327],[3.0351],[2.9551],[3.3973],[3.5 1117],[3,5909],[3.7345],[3.8419],[4.0952],[4.2879],[4.4000],[4.8764],[5.2843],[5.9241],[6.3302],[6.9608],[7.3044],[7.6791],[8.2819],[9.0139],[9.3387],[10.0420],[10.4000],[10.6437],[10.4786],[10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.[10.10.10.10.10.10.[10.10.10.[10.10.10.10.[10.10.10.[10.10.10.[10.10.10.10.10.10.10.10.10.[10.10.10.10.10.[10.10.10.10.[10.10.10.[10.10.10.[10.10.10.10.10 4928],[10.7082],[10.6233],[10.8862],[10.6830],[10.8393],[10.9186],[10.8814],[10.9779],[11.0000]]
+// The training algorithm expects an array with one row for each die and a column for each input or output neuron.
+dataX = [[0.00],[0.25],[0.50],[0.75],[1.00],[1.25],[1.50],[1.75],[2.00],[2.25],[2.50],[2.75],[3.00],[3.25],[3.50],[3.75],[4.00],[4.25],[4.50],[4.75],[5.00],[5.25],[5.50],[5.75],[6.00],[6.25],[6.50],[6.75],[7.00],[7.25],[7.50],[7.75],[8.00],[8.25],[8.50],[8.75],[9.00],[9.25],[9.50],[9.75],[10.00]]
+dataY = [[2.0000],[2.2197],[2.3811],[2.5136],[2.7310],[2.7827],[2.8327],[3.0351],[2.9551],[3.3973],[3.5117],[3.5909],[3.7345],[3.8419],[4.0952],[4.2879],[4.4000],[4.8764],[5.2843],[5.9241],[6.3302],[6.9608],[7.3044],[7.6791],[8.2819],[9.0139],[9.3387],[10.0420],[10.4000],[10.6437],[10.4786],[10.4928],[10.7082],[10.6233],[10.8862],[10.6830],[10.8393],[10.9186],[10.8814],[10.9779],[11.0000]]
 nData = core.length(dataX)
 
 // Creates a multilayerperceptron neural network.
 nn = ann.createANN("mlp", 0, 0, 0, 0, 1, 1, 1, 3)
-Displays the untrained neural network.
+
+// Displays the untrained neural network.
 system.println("ANN before be prepared: " + core.toString(nn))
 system.println(core.toString(ann.getLabels(nn)))
 
 // Assigns random starting weights to neural synapses.
 nn = ann.prepare(nn, true, true, true)
-system.println(core.toString("ANN after be prepared: " + core.toString(nn)))
+system.println("ANN after be prepared: " + core.toString(nn))
 
 // It trains the neural network.
 statistics = ann.training(nn, dataX, dataY, 0.005, "tanh", "linear", "none", [1, 0], 2000, 0.001, trainingCallback, 100)
@@ -782,7 +784,7 @@ MaiaScript natively supports the **SQLite** database but can use any database su
 dataHandler(transaction, results) {
 }
 
-errorHandler (transaction, error) {
+errorHandler(transaction, error) {
 }
 
 createTable(transaction) {
@@ -805,6 +807,7 @@ if (typeof(db) != "undefined") {
     db.transaction(createTable)
 }
 ```
+
 ## Parallel programming using GPU
 
 You can speed up processing on some issues by using **parallel programming**. MaiaScript allows for real parallelism using **GPU cores** if this feature is available on the host machine. If not, the MaiaScript compiler will compile the program for sequential execution. GPU computing functions are called *shaders*. These functions are compiled differently by the MaiaScript compiler and do not support complex numbers or calculations with matrices. GPU programming features are available in the `gpu` library. For a complete reference see the documentation available in the `docs` folder of your MaiaScript compiler distribution.
@@ -846,8 +849,8 @@ useGPU ?= () {
     
     elapsedTime = endTime - startTime
     
-    system.log ("GPU result:")
-    system.log ("c[511,511]: " + c[511,511])
+    system.log("GPU result:")
+    system.log("c[511,511]: " + c[511,511])
     system.log("Elapsed time: " + elapsedTime + " ms\n")
 }
 
@@ -868,7 +871,7 @@ useCPU ?= () {
     
     elapsedTime = endTime - startTime
     
-    system.log ("CPU result:")
+    system.log("CPU result:")
     system.log("d[511,511]: " + d[511,511])
     system.log("Elapsed time: " + elapsedTime + " ms\n")
 }
@@ -911,7 +914,7 @@ system.println("e = " + core.toString(e))
 MaiaScript has a complete **CAS (Computer Algebra System)** implemented in the `cas` library. This CAS allows you to simplify expressions, solve equations and perform complex operations of linear algebra and differential and integral calculation. The CAS is based on the *open source* **Algebrite** library. For a complete reference see the official Algebrite project documentation <http://algebrite.org>. The only exception is that Algebrite originally uses the `ˆ` operator for powering and in MaiaScript the `power operator` is `**`. The following examples show how to perform the most common calculation operations with CAS in MaiaScript:
 
 ```
-//Solves an algebraic expression.
+// Solves an algebraic expression.
 res = cas.eval("x + x")
 system.showMessageDialog("x + x:\n\n" + res)
 
@@ -919,9 +922,9 @@ system.showMessageDialog("x + x:\n\n" + res)
 res = cas.eval("simplify(cos(x)**2 + sin(x)**2)\n" +
                "simplify(a*b+a*c)\n" +
                "simplify(n!/(n+1)!)")
-system.showMessageDialog("simplify(cos(x)**2 + sin(x)**2)\n+
+system.showMessageDialog("simplify(cos(x)**2 + sin(x)**2)\n" +
                          "simplify(a*b+a*c)\n" +
-                         "simplify(n!/(n+1)!):\ n\n" + res)
+                         "simplify(n!/(n+1)!):\n\n" + res)
 
 // Calculates the integral of an expression.
 res = cas.eval("integral(x**2)\n" +
@@ -937,3 +940,90 @@ system.showMessageDialog("d(x**2)\n" +
                          "r=sqrt(x**2+y**2)\n" +
                          "d(r,[x,y])\n\n" + res)
 ```
+
+## Error handling
+
+MaiaScript supports error handling using `try... catch...` statements. This allows you to handle exceptions that may occur during program execution gracefully.
+
+The following is the syntax for error handling in EBNF notation:
+
+```
+try                      ::= 'try' block catch?
+catch                    ::= 'catch' '(' expression ')' block
+test                     ::= 'test' '(' expression? (';' expression? (';' expression?)?)? ')' block catch?
+```
+
+The following example illustrates the use of error handling:
+
+```
+try {
+    // Code that may throw an exception
+    a = 1 / 0
+} catch (e) {
+    system.println("Error: " + e.message)
+}
+
+// Test statement for unit testing
+test("Division test") {
+    a = 1 / 1
+    system.println("Test passed")
+} catch (e) {
+    system.println("Test failed: " + e.message)
+}
+```
+
+## Import and Export
+
+MaiaScript supports module system with `import` and `export` statements for better code organization and reusability.
+
+The following is the syntax for import and export in EBNF notation:
+
+```
+import                   ::= 'import' expression
+export                   ::= 'export' expression
+```
+
+The following example illustrates the use of import and export:
+
+```
+// Export a function
+export myFunction(x) {
+    return x * 2
+}
+
+// In another file
+import "./myModule.ms"
+result = myFunction(5)
+system.println(result)
+```
+
+## Additional statements
+
+MaiaScript includes several additional statements for various purposes:
+
+### Local and Global variables
+
+```
+local                    ::= 'local' expression
+global                   ::= 'global' expression
+```
+
+### Type checking
+
+```
+typeof                   ::= 'typeof' expression
+```
+
+### Empty statement
+
+```
+empty                    ::= ';'
+```
+
+### Include statement
+
+```
+include                  ::= 'include' '(' expression ')'
+```
+
+These statements provide additional functionality for variable scoping, type checking, and code organization.

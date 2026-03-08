@@ -1,0 +1,359 @@
+// ============================================
+// MAIASCRIPT PARSER TEST EXAMPLES
+// ============================================
+
+// ===== DATA TYPES =====
+// Data output
+system.println("=== DATA OUTPUT TEST ===")
+system.println("Hello World!")
+system.showMessageDialog("Test dialog")
+
+// ===== VARIABLES =====
+system.println("\n=== VARIABLE TEST ===")
+a = 1
+b = 2.0
+c = "Test string"
+d = [1, 2, 3]
+e = {key: "value"}
+
+system.println("a = " + a)
+system.println("b = " + b)
+system.println("c = " + c)
+system.println("d = " + core.toString(d))
+system.println("e = " + JSON.stringify(e))
+
+// ===== MATHEMATICAL OPERATORS =====
+system.println("\n=== MATHEMATICAL OPERATORS TEST ===")
+x = 10
+y = 3
+
+system.println("x + y = " + (x + y))
+system.println("x - y = " + (x - y))
+system.println("x * y = " + (x * y))
+system.println("x / y = " + (x / y))
+system.println("x % y = " + (x % y))
+system.println("x ** y = " + (x ** y))
+
+// Increment operators
+system.println("x++ = " + x++)
+system.println("++x = " + ++x)
+system.println("y-- = " + y--)
+system.println("--y = " + --y)
+
+// ===== RELATIONAL OPERATORS =====
+system.println("\n=== RELATIONAL OPERATORS TEST ===")
+system.println("x == y: " + (x == y))
+system.println("x != y: " + (x != y))
+system.println("x < y: " + (x < y))
+system.println("x <= y: " + (x <= y))
+system.println("x > y: " + (x > y))
+system.println("x >= y: " + (x >= y))
+
+// ===== LOGICAL OPERATORS =====
+system.println("\n=== LOGICAL OPERATORS TEST ===")
+bool1 = true
+bool2 = false
+
+system.println("bool1 && bool2: " + (bool1 && bool2))
+system.println("bool1 || bool2: " + (bool1 || bool2))
+system.println("bool1 ^^ bool2: " + (bool1 ^^ bool2))
+system.println("bool1 & bool2: " + (bool1 & bool2))
+system.println("bool1 | bool2: " + (bool1 | bool2))
+system.println("bool1 ^ bool2: " + (bool1 ^ bool2))
+
+// ===== BIT SHIFT OPERATORS =====
+system.println("\n=== BIT SHIFT OPERATORS TEST ===")
+num = 8
+system.println("num << 2: " + (num << 2))
+system.println("num >> 1: " + (num >> 1))
+
+// ===== ASSIGNMENT OPERATORS =====
+system.println("\n=== ASSIGNMENT OPERATORS TEST ===")
+z = 5
+z += 3
+system.println("z += 3: " + z)
+
+z -= 2
+system.println("z -= 2: " + z)
+
+z *= 4
+system.println("z *= 4: " + z)
+
+// ===== TERNARY CONDITIONAL OPERATOR =====
+system.println("\n=== TERNARY OPERATOR TEST ===")
+result = x > y ? "x is greater" : "y is greater"
+system.println(result)
+
+// ===== COMPLEX NUMBERS =====
+system.println("\n=== COMPLEX NUMBERS TEST ===")
+comp1 = 3.0 + 4.0*i
+comp2 = 1.0 - 2.0*i
+compSum = comp1 + comp2
+system.println("comp1 = " + comp1)
+system.println("comp2 = " + comp2)
+system.println("comp1 + comp2 = " + compSum)
+
+// ===== MATRICES =====
+system.println("\n=== MATRICES TEST ===")
+// Matlab notation
+mat1 = [1, 2; 3, 4]
+// JavaScript notation
+mat2 = [[5, 6], [7, 8]]
+
+system.println("mat1 = " + core.toString(mat1))
+system.println("mat2 = " + core.toString(mat2))
+system.println("mat1 + mat2 = " + core.toString(mat1 + mat2))
+
+// ===== DECISION STRUCTURES =====
+system.println("\n=== IF STRUCTURES TEST ===")
+if (x > 5) {
+    system.println("x is greater than 5")
+} else {
+    system.println("x is less than or equal to 5")
+}
+
+// Switch
+system.println("\n=== SWITCH STRUCTURE TEST ===")
+value = 2
+switch (value) {
+    case 1:
+        system.println("Case 1")
+        break
+    case 2:
+        system.println("Case 2")
+        break
+    default:
+        system.println("Default case")
+}
+
+// ===== LOOP STRUCTURES =====
+system.println("\n=== DO-WHILE TEST ===")
+counter = 0
+do {
+    system.println("Counter: " + counter)
+    counter++
+} while (counter < 3)
+
+system.println("\n=== WHILE TEST ===")
+counter = 0
+while (counter < 3) {
+    system.println("While - Counter: " + counter)
+    counter++
+}
+
+system.println("\n=== FOR TEST ===")
+for (i = 0; i < 3; i++) {
+    system.println("For - i: " + i)
+}
+
+system.println("\n=== FOREACH TEST ===")
+obj = {name: "John", age: 30}
+foreach(obj; key; value) {
+    system.println(key + ": " + value)
+}
+
+// ===== FUNCTIONS =====
+system.println("\n=== FUNCTIONS TEST ===")
+// Simple function
+add(a, b) {
+    return a + b
+}
+
+addResult = add(5, 3)
+system.println("add(5, 3) = " + addResult)
+
+// Inline function
+square(x) = x ** 2
+system.println("square(4) = " + square(4))
+
+// ===== NAMESPACES =====
+system.println("\n=== NAMESPACES TEST ===")
+namespace Math {
+    pi = 3.14159
+    
+    circumference(radius) {
+        return 2 * pi * radius
+    }
+}
+
+system.println("Math.pi = " + Math.pi)
+system.println("Math.circumference(5) = " + Math.circumference(5))
+
+// ===== OBJECT CONSTRUCTORS =====
+system.println("\n=== OBJECT CONSTRUCTORS TEST ===")
+Person(name, age) := {
+    this.name = name
+    this.age = age
+    
+    this.introduce() {
+        return "Hello, I'm " + this.name + " and I'm " + this.age + " years old"
+    }
+}
+
+p := Person("Mary", 25)
+system.println(p.introduce())
+
+// ===== ERROR HANDLING =====
+system.println("\n=== ERROR HANDLING TEST ===")
+try {
+    result = 10 / 0
+    system.println("Result: " + result)
+} catch (error) {
+    system.println("Error caught: " + error.message)
+}
+
+// ===== IMPORT/EXPORT =====
+system.println("\n=== IMPORT/EXPORT TEST ===")
+// Simulating a module
+namespace MyModule {
+    export moduleFunction() {
+        return "Module function executed"
+    }
+}
+
+system.println(MyModule.moduleFunction())
+
+// ===== LOCAL/GLOBAL VARIABLES =====
+system.println("\n=== LOCAL/GLOBAL VARIABLES TEST ===")
+global globalVar = "Global variable"
+
+testFunction() {
+    local localVar = "Local variable"
+    return globalVar + " - " + localVar
+}
+
+system.println(testFunction())
+
+// ===== TYPEOF =====
+system.println("\n=== TYPEOF TEST ===")
+system.println("typeof(5): " + typeof(5))
+system.println("typeof('text'): " + typeof("text"))
+system.println("typeof([1,2,3]): " + typeof([1,2,3]))
+
+// ===== ASYNC FUNCTIONS =====
+system.println("\n=== ASYNC FUNCTIONS TEST ===")
+async asyncFunction() {
+    return "Async function completed"
+}
+
+// Simulating await
+asyncResult = asyncFunction()
+system.println("Async result: " + asyncResult)
+
+// ===== MAIAASSEMBLY =====
+system.println("\n=== MAIAASSEMBLY TEST ===")
+i32 addIntegers(i32 a, i32 b) {
+    i32 result = a + b
+    return result
+}
+
+assemblyResult = addIntegers(10, 20)
+system.println("addIntegers(10, 20) = " + assemblyResult)
+
+// ===== COMPLEX COMBINED TESTS =====
+system.println("\n=== COMPLEX COMBINED TESTS ===")
+
+// Matrices with complex operations
+matrixA = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+matrixB = [9, 8, 7; 6, 5, 4; 3, 2, 1]
+
+matrixResult = matrixA + matrixB
+system.println("Matrix addition: " + core.toString(matrixResult))
+
+// Complex expression with operators
+expression = (5 + 3 * 2) ** 2 - 10
+system.println("Complex expression: " + expression)
+
+// Recursive function
+factorial(n) {
+    if (n <= 1) {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+system.println("factorial(5) = " + factorial(5))
+
+// Nested structure
+system.println("\n=== NESTED STRUCTURES TEST ===")
+for (i = 0; i < 3; i++) {
+    system.println("Outer loop: " + i)
+    for (j = 0; j < 2; j++) {
+        if (i == j) {
+            system.println("  i == j: " + i)
+        } else {
+            system.println("  i != j: " + i + "," + j)
+        }
+    }
+}
+
+// ===== COMPOUND ASSIGNMENT OPERATORS =====
+system.println("\n=== COMPOUND ASSIGNMENT TEST ===")
+testValue = 10
+testValue += 5
+system.println("testValue += 5: " + testValue)
+
+testValue *= 2
+system.println("testValue *= 2: " + testValue)
+
+testValue %= 7
+system.println("testValue %= 7: " + testValue)
+
+// ===== COMPLEX LOGICAL EXPRESSIONS =====
+system.println("\n=== LOGICAL EXPRESSIONS TEST ===")
+a = true
+b = false
+c = true
+
+logicalResult = (a && b) || (c && !b)
+system.println("(a && b) || (c && !b): " + logicalResult)
+
+// ===== ASSOCIATIVE ARRAYS =====
+system.println("\n=== ASSOCIATIVE ARRAYS TEST ===")
+person = {
+    name: "Carlos",
+    age: 30,
+    profession: "Programmer",
+    address: {
+        street: "Street A",
+        city: "São Paulo"
+    }
+}
+
+system.println("Name: " + person.name)
+system.println("Age: " + person.age)
+system.println("City: " + person.address.city)
+
+// ===== COMPREHENSIVE FINAL TEST =====
+system.println("\n=== COMPREHENSIVE FINAL TEST ===")
+
+namespace ScientificCalculator {
+    e = 2.71828
+    
+    exponential(x) {
+        return e ** x
+    }
+    
+    naturalLogarithm(x) {
+        if (x <= 0) {
+            throw "Argument must be positive"
+        }
+        return core.log(x)
+    }
+}
+
+try {
+    expResult = ScientificCalculator.exponential(2)
+    system.println("e^2 = " + expResult)
+    
+    logResult = ScientificCalculator.naturalLogarithm(10)
+    system.println("ln(10) = " + logResult)
+    
+    // This should throw an error
+    ScientificCalculator.naturalLogarithm(-1)
+} catch (error) {
+    system.println("Expected error: " + error)
+}
+
+system.println("\n=== ALL TESTS COMPLETED ===")
+system.println("MaiaScript parser working correctly!")
