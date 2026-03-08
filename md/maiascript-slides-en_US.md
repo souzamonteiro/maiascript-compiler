@@ -1,14 +1,26 @@
 ---
 marp: true
+theme: gaia
+class: lead
+paginate: true
 ---
-
-# Marp Slides: MaiaScript Complete Course
-
-<!-- theme: gaia -->
-<!-- class: lead -->
 
 # MaiaScript Programming Language
 ## Complete Course
+
+<!-- _class: lead -->
+
+---
+
+## Table of Contents
+
+1. Introduction to MaiaScript
+2. Basic Syntax and Variables
+3. Operators and Expressions
+4. Control Structures
+5. Functions and Modules
+6. Advanced Features
+7. Real-world Examples
 
 ---
 
@@ -20,6 +32,12 @@ marp: true
   - Complex numbers and matrices
   - Complex/social networks
   - Artificial neural networks
+
+---
+
+## What is MaiaScript?
+
+- **Native support** for:
   - SQL databases
   - Parallel programming (threads/GPU)
   - Advanced statistics
@@ -39,21 +57,43 @@ system.showMessageDialog("Welcome to MaiaScript!")
 - Semicolon optional
 - C-like syntax
 
+<!-- _class: two-columns -->
+
 ---
+<style>
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+</style>
 
 ## Variables and Data Types
 
+<div>
+
 ```typescript
+// Basic types
 a = 1                    // Integer
 b = 2.0                  // Real
 c = "Hello World!"       // String
-d = [1, 2, 3]           // Array
-e = {key: "value"}       // Object
-
-// WebAssembly/MaiaAssembly types
-i32 x = 10               // 32-bit integer
-f64 y = 3.14159          // 64-bit real
+d = [1, 2, 3]            // Array
+e = {"key": "value"}     // Object
 ```
+
+</div>
+
+<div>
+
+```typescript
+// Advanced types
+i32 x = 10              // 32-bit integer
+f64 y = 3.14159         // 64-bit real
+comp = 3.0 + 4.0*i      // Complex number
+mat = [1,2;3,4]         // Matrix
+```
+
+</div>
 
 ---
 
@@ -63,6 +103,7 @@ f64 y = 3.14159          // 64-bit real
 x = 10
 y = 3
 
+// Basic operations
 x + y    // Addition: 13
 x - y    // Subtraction: 7
 x * y    // Multiplication: 30
@@ -70,6 +111,7 @@ x / y    // Division: 3.333...
 x % y    // Modulus: 1
 x ** y   // Power: 1000
 
+// Increment/Decrement
 x++      // Post-increment
 ++x      // Pre-increment
 ```
@@ -79,7 +121,7 @@ x++      // Post-increment
 ## Relational and Logical Operators
 
 ```typescript
-// Relational
+// Relational operators
 x == y    // Equal
 x != y    // Not equal
 x < y     // Less than
@@ -87,7 +129,7 @@ x <= y    // Less than or equal
 x > y     // Greater than
 x >= y    // Greater than or equal
 
-// Logical
+// Logical operators
 a && b    // AND
 a || b    // OR
 a ^^ b    // XOR
@@ -99,14 +141,15 @@ a ^^ b    // XOR
 ## Bitwise Operators
 
 ```typescript
-a = 0b1010  // Binary 10
-b = 0b1100  // Binary 12
+a = 0b1010  // Binary 10 (decimal)
+b = 0b1100  // Binary 12 (decimal)
 
 a & b       // AND: 0b1000 (8)
 a | b       // OR: 0b1110 (14)
 a ^ b       // XOR: 0b0110 (6)
 a << 2      // Left shift: 0b101000 (40)
 a >> 1      // Right shift: 0b0101 (5)
+~a          // NOT: 0b0101 (5)
 ```
 
 ---
@@ -115,12 +158,12 @@ a >> 1      // Right shift: 0b0101 (5)
 
 ```typescript
 x = 5
-x += 3      // x = 8
-x -= 2      // x = 6
-x *= 4      // x = 24
-x /= 3      // x = 8
-x %= 5      // x = 3
-x **= 2     // x = 9
+x += 3      // x = 8 (add and assign)
+x -= 2      // x = 6 (subtract and assign)
+x *= 4      // x = 24 (multiply and assign)
+x /= 3      // x = 8 (divide and assign)
+x %= 5      // x = 3 (modulus and assign)
+x **= 2     // x = 9 (power and assign)
 ```
 
 ---
@@ -131,11 +174,15 @@ x **= 2     // x = 9
 age = 20
 status = age >= 18 ? "Adult" : "Minor"
 // Result: "Adult"
-```
 
-**Syntax:**
-```typescript
-condition ? value_if_true : value_if_false
+// Syntax:
+// condition ? value_if_true : value_if_false
+
+// Complex example
+grade = 85
+result = grade >= 90 ? "A" : 
+         grade >= 80 ? "B" : 
+         grade >= 70 ? "C" : "F"
 ```
 
 ---
@@ -143,12 +190,18 @@ condition ? value_if_true : value_if_false
 ## Complex Numbers
 
 ```typescript
+// Creating complex numbers
 z1 = 3.0 + 4.0*i
 z2 = 1.0 - 2.0*i
-z3 = z1 + z2  // 4.0 + 2.0*i
 
-// Supported operations: +, -, *, /, **
-// Supported functions: abs, arg, cos, exp, log, etc.
+// Operations
+z3 = z1 + z2      // Addition: 4.0 + 2.0*i
+z4 = z1 * z2      // Multiplication: 11.0 + 2.0*i
+z5 = z1 ** 2      // Power: -7.0 + 24.0*i
+
+// Built-in functions
+magnitude = abs(z1)    // Magnitude: 5.0
+argument = arg(z1)     // Argument: 0.927 rad
 ```
 
 ---
@@ -156,19 +209,24 @@ z3 = z1 + z2  // 4.0 + 2.0*i
 ## Matrices and Arrays
 
 ```typescript
-// Matlab notation
-mat1 = [1, 2; 3, 4]
+// Different matrix notations
+matlabStyle = [1, 2; 3, 4]          // Matlab
+jsStyle = [[1, 2], [3, 4]]          // JavaScript
 
-// JavaScript notation
-mat2 = [[1, 2], [3, 4]]
-
-// Operations
-result = mat1 + mat2
-result = mat1 * mat2
-result = mat1 ** 2
+// Matrix operations
+sum = matlabStyle + jsStyle          // Element-wise addition
+product = matlabStyle * jsStyle      // Matrix multiplication
+power = matlabStyle ** 2             // Matrix power
 
 // Associative arrays
-person = {name: "John", age: 30}
+person = {
+    "name": "John", 
+    "age": 30,
+    "address": {
+        "street": "123 Main St",
+        "city": "Boston"
+    }
+}
 ```
 
 ---
@@ -179,11 +237,13 @@ person = {name: "John", age: 30}
 temperature = 25
 
 if (temperature > 30) {
-    system.println("It's hot!")
-} else if (temperature > 20) {
-    system.println("Nice weather!")
+    system.println("It's hot! 🌞")
+} elseif (temperature > 20) {
+    system.println("Nice weather! 😊")
+} elseif (temperature > 10) {
+    system.println("A bit chilly 🧊")
 } else {
-    system.println("It's cold!")
+    system.println("It's cold! ❄️")
 }
 ```
 
@@ -192,17 +252,21 @@ if (temperature > 30) {
 ## Decision Structures: switch
 
 ```typescript
-day = 2
+dayOfWeek = 2
 
-switch (day) {
+switch (dayOfWeek) {
     case 1:
-        system.println("Monday")
+        system.println("Monday - Start of week")
         break
     case 2:
-        system.println("Tuesday")
+        system.println("Tuesday - Full steam ahead!")
         break
+    case 3:
+        system.println("Wednesday - Hump day")
+        break
+    // ... more cases
     default:
-        system.println("Other day")
+        system.println("Weekend! 🎉")
 }
 ```
 
@@ -211,34 +275,39 @@ switch (day) {
 ## Loop Structures: while/do-while
 
 ```typescript
-// While loop
-i = 0
-while (i < 5) {
-    system.println("Count: " + i)
-    i++
+// While loop - checks condition first
+counter = 0
+while (counter < 5) {
+    system.println("While count: " + counter)
+    counter++
 }
 
-// Do-while loop
-j = 0
+// Do-while loop - executes at least once
+counter = 10
 do {
-    system.println("Do-while: " + j)
-    j++
-} while (j < 3)
+    system.println("Do-while count: " + counter)
+    counter++
+} while (counter < 5)  // Still runs once!
 ```
 
 ---
 
-## Loop Structures: for
+## Loop Structures: for loops
 
 ```typescript
 // Traditional for loop
 for (i = 0; i < 5; i++) {
-    system.println("For loop: " + i)
+    system.println("Index: " + i)
 }
 
-// With variable declaration
-for (i32 i = 0; i < 10; i++) {
-    system.println("Typed: " + i)
+// With typed variables
+for (i32 i = 0; i < 10; i += 2) {
+    system.println("Even step: " + i)
+}
+
+// Reverse iteration
+for (i = 10; i > 0; i--) {
+    system.println("Countdown: " + i)
 }
 ```
 
@@ -247,15 +316,23 @@ for (i32 i = 0; i < 10; i++) {
 ## Loop Structures: foreach
 
 ```typescript
-person = {name: "John", age: 30, city: "NY"}
-
-foreach(person; key; value) {
-    system.println(key + ": " + value)
+// Iterating over objects
+student = {
+    "name": "Alice",
+    "age": 22,
+    "major": "Computer Science",
+    "gpa": 3.8
 }
+
+foreach(student; property; value) {
+    system.println(property + ": " + value)
+}
+
 // Output:
-// name: John
-// age: 30
-// city: NY
+// name: Alice
+// age: 22
+// major: Computer Science
+// gpa: 3.8
 ```
 
 ---
@@ -263,17 +340,23 @@ foreach(person; key; value) {
 ## Function Basics
 
 ```typescript
-// Simple function
-greet(name) {
-    return "Hello, " + name + "!"
+// Simple function declaration
+calculateArea(width, height) {
+    return width * height
 }
 
-// Inline function
+// Inline function (single expression)
 square(x) = x ** 2
 
-// Usage
-message = greet("Alice")
-area = square(5)
+// Function with multiple parameters
+createFullName(firstName, lastName) {
+    return firstName + " " + lastName
+}
+
+// Usage examples
+area = calculateArea(10, 5)
+squared = square(4)
+name = createFullName("John", "Doe")
 ```
 
 ---
@@ -281,20 +364,24 @@ area = square(5)
 ## Advanced Functions
 
 ```typescript
-// Recursive function
+// Recursive function (factorial)
 factorial(n) {
     if (n <= 1) return 1
     return n * factorial(n - 1)
 }
 
-// Async function
-async fetchData(url) {
-    return await http.get(url)
+// Function with default parameters
+greet(name, greeting = "Hello") {
+    return greeting + ", " + name + "!"
 }
 
-// Default parameters
-power(base, exponent = 2) {
-    return base ** exponent
+// Variable arguments
+sumAll(...numbers) {
+    total = 0
+    foreach(numbers; index; number) {
+        total += number
+    }
+    return total
 }
 ```
 
@@ -303,20 +390,21 @@ power(base, exponent = 2) {
 ## Function Modifiers
 
 ```typescript
-// Async function
-async processData(data) {
-    // Async operations
-    return result
+// Async function (non-blocking)
+async fetchUserData(userId) {
+    userData = await database.getUser(userId)
+    return processUserData(userData)
 }
 
 // Plain function (no special handling)
-plain utilityFunction() {
+plain utilityHelper() {
     return "Utility result"
 }
 
-// Kernel function (parallel)
-processImage() #= {
-    // GPU/parallel code
+// Kernel function (GPU/parallel processing)
+imageProcessing() #= {
+    // GPU-accelerated image processing
+    return processOnGPU(this.data)
 }
 ```
 
@@ -325,17 +413,20 @@ processImage() #= {
 ## MaiaAssembly Functions
 
 ```typescript
-// Typed function (compiles to WebAssembly)
-i32 addIntegers(i32 a, i32 b) {
-    i32 result = a + b
-    return result
+// Strongly typed function (compiles to WebAssembly)
+i32 calculateSum(i32[] numbers) {
+    i32 total = 0
+    for (i32 i = 0; i < numbers.length; i++) {
+        total += numbers[i]
+    }
+    return total
 }
 
-// With local variables
-f64 calculateArea(f64 radius) {
-    f64 pi = 3.14159
-    f64 area = pi * radius ** 2
-    return area
+// Multiple return types
+f64[] calculateStats(f64[] data) {
+    f64 mean = statistics.mean(data)
+    f64 stdDev = statistics.standardDeviation(data)
+    return [mean, stdDev]
 }
 ```
 
@@ -344,22 +435,23 @@ f64 calculateArea(f64 radius) {
 ## Error Handling
 
 ```typescript
+// Basic try-catch
 try {
-    // Potentially problematic code
-    result = 10 / 0
-    system.println("Result: " + result)
+    riskyOperation()
+    system.println("Operation successful!")
 } catch (error) {
-    system.println("Error occurred: " + error.message)
-} finally {
-    system.println("Cleanup code")
+    system.println("Error: " + error.message)
 }
 
-// Throwing exceptions
-validateAge(age) {
-    if (age < 0) {
-        throw "Age cannot be negative"
+// Custom error throwing
+validateInput(input) {
+    if (input == null || input == "") {
+        throw "Input cannot be empty"
     }
-    return age
+    if (input.length < 3) {
+        throw "Input too short (min 3 characters)"
+    }
+    return input.trim()
 }
 ```
 
@@ -368,22 +460,29 @@ validateAge(age) {
 ## Namespaces
 
 ```typescript
-namespace MathUtils {
-    pi = 3.14159
+namespace MathUtilities {
+    // Constants
+    pi = 3.14159265359
+    e = 2.71828182846
     
+    // Functions
     circleArea(radius) {
         return pi * radius ** 2
     }
     
-    factorial(n) {
-        if (n <= 1) return 1
-        return n * factorial(n - 1)
+    circleCircumference(radius) {
+        return 2 * pi * radius
+    }
+    
+    exponential(x) {
+        return e ** x
     }
 }
 
 // Usage
-area = MathUtils.circleArea(5)
-fact = MathUtils.factorial(5)
+area = MathUtilities.circleArea(5)
+circumference = MathUtilities.circleCircumference(5)
+exp = MathUtilities.exponential(2)
 ```
 
 ---
@@ -391,35 +490,56 @@ fact = MathUtils.factorial(5)
 ## Object Constructors
 
 ```typescript
-// Constructor function
-Person(name, age) := {
+// Class-like constructor
+Student(name, id, major) := {
     this.name = name
-    this.age = age
+    this.id = id
+    this.major = major
+    this.grades = []
     
-    this.introduce() {
-        return "I'm " + this.name + ", age " + this.age
+    this.addGrade(grade) {
+        this.grades.push(grade)
+    }
+    
+    this.getGPA() {
+        if (this.grades.length == 0) return 0
+        sum = this.grades.reduce((a, b) => a + b, 0)
+        return sum / this.grades.length
     }
 }
 
-// Object instantiation
-john := Person("John Doe", 30)
-message = john.introduce()
+// Creating instances
+john := Student("John Smith", "S12345", "Computer Science")
+john.addGrade(85)
+john.addGrade(92)
+gpa = john.getGPA()
 ```
 
 ---
 
-## Complex and Social Networks
+## Complex Network Analysis
 
 ```typescript
-// Create network analysis
-network = {
-    nodes: ["A", "B", "C", "D"],
-    edges: [["A", "B"], ["B", "C"], ["C", "D"]]
+// Social network analysis example
+analyzeSocialNetwork(networkData) {
+    results = {}
+    
+    // Calculate basic metrics
+    results.nodeCount = networkData.nodes.length
+    results.edgeCount = networkData.edges.length
+    results.density = cna.getDensity(networkData)
+    
+    // Advanced metrics
+    results.centrality = cna.getDegreeCentrality(networkData)
+    results.clustering = cna.getClusteringCoefficient(networkData)
+    results.communities = cna.detectCommunities(networkData)
+    
+    return results
 }
 
-// Network analysis functions
-density = cna.getDensity(network.adjacencyMatrix)
-centrality = cna.getCentrality(network.nodes)
+// Usage
+network = loadNetwork("social_network.json")
+analysis = analyzeSocialNetwork(network)
 ```
 
 ---
@@ -427,18 +547,30 @@ centrality = cna.getCentrality(network.nodes)
 ## Artificial Neural Networks
 
 ```typescript
-// Create and train ANN
-nn = ann.createANN("mlp", 2, 1, 10, 1)
+// ANN creation and training
+createAndTrainANN() {
+    // Create multilayer perceptron
+    ann = ann.createANN("mlp", 
+                        inputNeurons = 2,
+                        hiddenLayers = 1,
+                        hiddenNeurons = 4,
+                        outputNeurons = 1)
+    
+    // Training data (XOR problem)
+    inputs = [[0,0], [0,1], [1,0], [1,1]]
+    outputs = [[0], [1], [1], [0]]
+    
+    // Train the network
+    trainedANN = ann.training(ann, inputs, outputs, 
+                             learningRate = 0.1,
+                             maxEpochs = 1000)
+    
+    return trainedANN
+}
 
-// Training data
-inputs = [[0,0], [0,1], [1,0], [1,1]]
-outputs = [[0], [1], [1], [0]]
-
-// Train network
-trainedNN = ann.training(nn, inputs, outputs, 0.1)
-
-// Use network
-prediction = ann.think(trainedNN, [1,0])
+// Test the trained network
+ann = createAndTrainANN()
+prediction = ann.think(ann, [1,0])  // Should be close to 1
 ```
 
 ---
@@ -446,39 +578,67 @@ prediction = ann.think(trainedNN, [1,0])
 ## Database Operations
 
 ```typescript
-// Open SQLite database
-db = core.openSQLDatabase("MyApp", "1.0", "App Data", 1024)
+// Complete database example
+setupStudentDatabase() {
+    // Open database
+    db = core.openSQLDatabase("University", "1.0", 
+                             "Student Records", 2048)
+    
+    // Create tables
+    db.executeSql(
+        `CREATE TABLE students (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE,
+            enrollment_date DATE
+        )`
+    )
+    
+    db.executeSql(
+        `CREATE TABLE courses (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            credits INTEGER
+        )`
+    )
+    
+    return db
+}
 
-// Create table
-db.executeSql(
-    "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)"
-)
-
-// Insert data
-db.executeSql("INSERT INTO users (name) VALUES ('John')")
-
-// Query data
-results = db.executeSql("SELECT * FROM users")
+// Usage
+database = setupStudentDatabase()
 ```
 
 ---
 
-## Parallel Programming with GPU
+## GPU Parallel Programming
 
 ```typescript
-// GPU kernel function
-matrixMultiply(a, b) #= {
-    local sum = 0
-    for (local i = 0; i < 512; i++) {
-        sum += a[this.thread.y, i] * b[i, this.thread.x]
-    }
-    return sum
+// Matrix multiplication on GPU
+parallelMatrixMultiply() {
+    // Create large matrices
+    size = 1024
+    matrixA = core.randomMatrix(size, size)
+    matrixB = core.randomMatrix(size, size)
+    
+    // GPU kernel for multiplication
+    kernel = gpu.createKernel(function(a, b) #= {
+        local sum = 0.0
+        for (local i = 0; i < this.constants.size; i++) {
+            sum += a[this.thread.y][i] * b[i][this.thread.x]
+        }
+        return sum
+    })
+    
+    kernel.setConstants({size: size})
+    kernel.setOutput([size, size])
+    
+    // Execute on GPU
+    return kernel(matrixA, matrixB)
 }
 
-// Execute on GPU
-gpu = gpu.new()
-kernel = gpu.createKernel(matrixMultiply)
-result = kernel(matrixA, matrixB)
+// Compare with CPU version
+gpuResult = parallelMatrixMultiply()
 ```
 
 ---
@@ -486,17 +646,33 @@ result = kernel(matrixA, matrixB)
 ## Advanced Statistics
 
 ```typescript
-data = [1.2, 2.5, 3.7, 4.1, 5.8]
+// Comprehensive statistical analysis
+analyzeDataset(data) {
+    results = {}
+    
+    // Descriptive statistics
+    results.mean = statistics.mean(data)
+    results.median = statistics.median(data)
+    results.mode = statistics.mode(data)
+    results.stdDev = statistics.standardDeviation(data)
+    results.variance = statistics.variance(data)
+    
+    // Advanced analysis
+    results.skewness = statistics.skewness(data)
+    results.kurtosis = statistics.kurtosis(data)
+    results.confidenceInterval = statistics.confidenceInterval(data, 0.95)
+    
+    // Correlation if multidimensional
+    if (data[0] instanceof Array) {
+        results.correlationMatrix = statistics.correlation(data)
+    }
+    
+    return results
+}
 
-// Statistical functions
-mean = statistics.mean(data)
-stdDev = statistics.standardDeviation(data)
-variance = statistics.variance(data)
-
-// Matrix operations
-matrix = [[1,2,3], [4,5,6]]
-determinant = matrix.det(matrix)
-inverse = matrix.inv(matrix)
+// Usage
+dataset = loadCSV("data.csv")
+analysis = analyzeDataset(dataset)
 ```
 
 ---
@@ -504,142 +680,225 @@ inverse = matrix.inv(matrix)
 ## Algebraic Computing
 
 ```typescript
-// Computer Algebra System
-result = cas.eval("expand((x+1)**3)")
-// Result: x³ + 3x² + 3x + 1
-
-// Derivative
-derivative = cas.eval("d(x**2 + 3*x + 1)")
-// Result: 2x + 3
-
-// Integral
-integral = cas.eval("integral(x**2)")
-// Result: x³/3
-```
-
----
-
-## Module System
-
-```typescript
-// Export from module
-namespace MyLibrary {
-    export usefulFunction() {
-        return "Useful result"
-    }
-    
-    export constant = 42
-}
-
-// Import and use
-import "./mylibrary.ms"
-result = MyLibrary.usefulFunction()
-value = MyLibrary.constant
-```
-
----
-
-## Local and Global Variables
-
-```typescript
-global appName = "MyApplication"
-
-function testScope() {
-    local localVar = "I'm local"
-    global globalVar = "I'm global"
-    
-    system.println(localVar)
-    system.println(globalVar)
-    system.println(appName)  // Access global
-}
-
-testScope()
-```
-
----
-
-## Type Checking
-
-```typescript
-// Type checking examples
-value1 = 42
-value2 = "Hello"
-value3 = [1, 2, 3]
-
-system.println(typeof(value1))  // "number"
-system.println(typeof(value2))  // "string"
-system.println(typeof(value3))  // "array"
-system.println(typeof(null))    // "null"
-```
-
----
-
-## Real-world Example: Calculator App
-
-```typescript
-namespace Calculator {
-    add(a, b) = a + b
-    subtract(a, b) = a - b
-    multiply(a, b) = a * b
-    divide(a, b) {
-        if (b == 0) throw "Division by zero"
-        return a / b
-    }
-    
-    power(base, exp) = base ** exp
-    sqrt(x) = x ** 0.5
-}
-
-// Usage
-result = Calculator.add(10, 5)
-area = Calculator.power(5, 2)
-```
-
----
-
-## Real-world Example: Data Processing
-
-```typescript
-// Process dataset
-processData(dataset) {
+// Symbolic mathematics examples
+symbolicMathDemo() {
     results = {}
     
-    foreach(dataset; index; item) {
-        // Clean data
-        cleaned = cleanData(item)
-        
-        // Analyze
-        analysis = analyzeItem(cleaned)
-        
-        results[index] = analysis
-    }
+    // Equation solving
+    results.equation = cas.eval("solve(x^2 - 5*x + 6 = 0, x)")
+    // Result: x = 2, x = 3
+    
+    // Simplification
+    results.simplified = cas.eval("simplify((x+1)^3 - x^3 - 3*x^2 - 3*x - 1)")
+    // Result: 0
+    
+    // Differentiation
+    results.derivative = cas.eval("d(sin(x)*cos(x), x)")
+    // Result: cos²(x) - sin²(x)
+    
+    // Integration
+    results.integral = cas.eval("integral(x*sin(x))")
+    // Result: sin(x) - x*cos(x)
     
     return results
 }
 
-cleanData(item) {
-    // Data cleaning logic
-    return item.trim().toLowerCase()
+mathResults = symbolicMathDemo()
+```
+
+---
+
+## Module System and Imports
+
+```typescript
+// Library module (mylib.ms)
+namespace MyLibrary {
+    export version = "1.0.0"
+    
+    export formatCurrency(amount, currency = "USD") {
+        switch (currency) {
+            case "USD": return "$" + amount.toFixed(2)
+            case "EUR": return "€" + amount.toFixed(2)
+            case "GBP": return "£" + amount.toFixed(2)
+            default: return amount.toFixed(2) + " " + currency
+        }
+    }
+    
+    export validateEmail(email) {
+        pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return pattern.test(email)
+    }
+}
+
+// Main application
+import "./mylib.ms"
+
+// Use the library
+price = MyLibrary.formatCurrency(19.99, "USD")
+isValid = MyLibrary.validateEmail("test@example.com")
+```
+
+---
+
+## Real-world Calculator Application
+
+```typescript
+namespace ScientificCalculator {
+    // Basic operations
+    add(a, b) = a + b
+    subtract(a, b) = a - b
+    multiply(a, b) = a * b
+    divide(a, b) {
+        if (b == 0) throw "Division by zero error"
+        return a / b
+    }
+    
+    // Scientific functions
+    power(base, exponent) = base ** exponent
+    squareRoot(x) = x ** 0.5
+    logarithm(x, base = 10) = core.log(x) / core.log(base)
+    
+    // Trigonometric functions (radians)
+    sine(x) = core.sin(x)
+    cosine(x) = core.cos(x)
+    tangent(x) = core.tan(x)
+    
+    // Memory function
+    memory = 0
+    memoryStore(value) { this.memory = value }
+    memoryRecall() = this.memory
+    memoryAdd(value) { this.memory += value }
 }
 ```
 
 ---
 
-## Testing and Debugging
+## Data Processing Pipeline
 
 ```typescript
-// Unit tests
-test("Addition test") {
-    result = Calculator.add(2, 3)
-    assert(result == 5, "Addition failed")
+// Complete data processing example
+processSalesData(rawData) {
+    results = {}
+    
+    // Step 1: Data cleaning
+    cleanedData = rawData.map(item => ({
+        date: parseDate(item.date),
+        product: item.product.trim(),
+        sales: parseFloat(item.sales),
+        region: item.region.toUpperCase()
+    })).filter(item => item.sales > 0)  // Remove invalid entries
+    
+    // Step 2: Group by region
+    regionalSales = {}
+    foreach(cleanedData; index; sale) {
+        if (!regionalSales[sale.region]) {
+            regionalSales[sale.region] = []
+        }
+        regionalSales[sale.region].push(sale)
+    }
+    
+    // Step 3: Calculate statistics
+    results.totalSales = cleanedData.reduce((sum, sale) => sum + sale.sales, 0)
+    results.averageSale = results.totalSales / cleanedData.length
+    results.regionalBreakdown = {}
+    
+    foreach(regionalSales; region; sales) {
+        results.regionalBreakdown[region] = {
+            total: sales.reduce((sum, s) => sum + s.sales, 0),
+            count: sales.length,
+            average: sales.reduce((sum, s) => sum + s.sales, 0) / sales.length
+        }
+    }
+    
+    return results
+}
+```
+
+---
+
+## Testing Framework
+
+```typescript
+namespace TestFramework {
+    tests = []
+    passed = 0
+    failed = 0
+    
+    test(name, testFunction) {
+        try {
+            testFunction()
+            system.println("✓ PASS: " + name)
+            this.passed++
+        } catch (error) {
+            system.println("✗ FAIL: " + name + " - " + error)
+            this.failed++
+        }
+    }
+    
+    assert(condition, message = "Assertion failed") {
+        if (!condition) {
+            throw message
+        }
+    }
+    
+    assertEquals(actual, expected, message = "Values not equal") {
+        if (actual != expected) {
+            throw message + " (Expected: " + expected + ", Got: " + actual + ")"
+        }
+    }
+    
+    getResults() {
+        return {
+            total: this.passed + this.failed,
+            passed: this.passed,
+            failed: this.failed,
+            successRate: (this.passed / (this.passed + this.failed)) * 100
+        }
+    }
 }
 
-test("Division test") {
+// Usage
+TestFramework.test("Addition", () => {
+    TestFramework.assertEquals(2 + 3, 5, "Basic addition failed")
+})
+
+TestFramework.test("Division by zero", () => {
+    TestFramework.assertThrows(() => 1 / 0, "Should throw error")
+})
+
+results = TestFramework.getResults()
+```
+
+---
+
+## Best Practices and Patterns
+
+**Code Organization:**
+```typescript
+// Use namespaces for logical grouping
+namespace DataProcessing {
+    namespace Validation {
+        export validateEmail(email) { /* ... */ }
+        export validatePhone(phone) { /* ... */ }
+    }
+    
+    namespace Transformation {
+        export normalizeData(data) { /* ... */ }
+        export filterData(data, criteria) { /* ... */ }
+    }
+}
+```
+
+**Error Handling Pattern:**
+```typescript
+// Use Result pattern for predictable error handling
+processDataSafely(input) {
     try {
-        result = Calculator.divide(10, 0)
-        assert(false, "Should have thrown error")
-    } catch (e) {
-        assert(e.contains("zero"), "Wrong error message")
+        validated = validateInput(input)
+        processed = processValidated(validated)
+        return {success: true, data: processed}
+    } catch (error) {
+        return {success: false, error: error.message}
     }
 }
 ```
@@ -648,53 +907,183 @@ test("Division test") {
 
 ## Performance Optimization
 
+**Memory Management:**
 ```typescript
-// Use MaiaAssembly for performance-critical code
-i32 fastCalculation(i32[] data) {
-    i32 sum = 0
-    for (i32 i = 0; i < data.length; i++) {
-        sum += data[i]
+// Use streaming for large datasets
+processLargeFile(filename) {
+    stream = file.openStream(filename)
+    results = []
+    
+    while (!stream.eof()) {
+        chunk = stream.readChunk(1024)  // Process in chunks
+        processedChunk = processChunk(chunk)
+        results.push(processedChunk)
     }
-    return sum
+    
+    stream.close()
+    return results
 }
+```
 
-// Parallel processing for large datasets
-processLargeDataset(data) #= {
-    // GPU-accelerated processing
-    return parallelProcess(data)
+**Algorithm Optimization:**
+```typescript
+// Use efficient algorithms
+quickSort(arr) {
+    if (arr.length <= 1) return arr
+    
+    pivot = arr[Math.floor(arr.length / 2)]
+    left = arr.filter(x => x < pivot)
+    middle = arr.filter(x => x == pivot)
+    right = arr.filter(x => x > pivot)
+    
+    return quickSort(left).concat(middle).concat(quickSort(right))
 }
 ```
 
 ---
 
-## Best Practices
+## Integration Examples
 
-1. **Use descriptive variable names**
-2. **Modularize code with namespaces**
-3. **Handle errors properly**
-4. **Use appropriate data types**
-5. **Document your code**
-6. **Test thoroughly**
-7. **Optimize critical sections**
+**Web API Integration:**
+```typescript
+namespace WebIntegration {
+    async fetchJSON(url, options = {}) {
+        response = await http.request(url, {
+            method: options.method || "GET",
+            headers: options.headers || {},
+            body: options.body
+        })
+        return JSON.parse(response.body)
+    }
+    
+    async getWeatherData(city) {
+        data = await this.fetchJSON(
+            "https://api.weather.com/" + city
+        )
+        return {
+            temperature: data.main.temp,
+            description: data.weather[0].description,
+            humidity: data.main.humidity
+        }
+    }
+}
+```
+
+**File System Operations:**
+```typescript
+namespace FileSystem {
+    readTextFile(filename) {
+        return file.read(filename)
+    }
+    
+    writeTextFile(filename, content) {
+        file.write(filename, content)
+    }
+    
+    fileExists(filename) {
+        return file.exists(filename)
+    }
+    
+    listDirectory(path) {
+        return file.list(path)
+    }
+}
+```
 
 ---
 
-## Resources and Next Steps
+## Deployment and Distribution
 
-**Official Resources:**
-- MaiaScript documentation
-- EBNF grammar specification
-- Library references
-- Example projects
+**Application Packaging:**
+```typescript
+// Main application entry point
+namespace MyApplication {
+    export version = "1.0.0"
+    export author = "Your Name"
+    
+    main() {
+        system.println("MyApplication v" + this.version)
+        system.println("Starting...")
+        
+        // Application logic here
+        runApplicationLogic()
+        
+        system.println("Application finished")
+    }
+}
 
-**Learning Path:**
-1. Master basic syntax
-2. Practice with small projects
-3. Explore advanced features
-4. Build complete applications
+// Start the application
+if (typeof(require) == 'undefined') {
+    // Running as main script
+    MyApplication.main()
+}
+```
+
+**Configuration Management:**
+```typescript
+namespace Config {
+    settings = {
+        app: {
+            name: "MyApp",
+            version: "1.0.0",
+            debug: false
+        },
+        database: {
+            host: "localhost",
+            port: 5432,
+            name: "myapp_db"
+        },
+        api: {
+            baseUrl: "https://api.example.com",
+            timeout: 5000
+        }
+    }
+    
+    get(key) {
+        keys = key.split('.')
+        value = this.settings
+        foreach(keys; index; k) {
+            value = value[k]
+        }
+        return value
+    }
+    
+    set(key, value) {
+        keys = key.split('.')
+        obj = this.settings
+        for (i = 0; i < keys.length - 1; i++) {
+            if (!obj[keys[i]]) obj[keys[i]] = {}
+            obj = obj[keys[i]]
+        }
+        obj[keys[keys.length - 1]] = value
+    }
+}
+```
 
 ---
 
-## Q&A Session
+## Q&A and Next Steps
 
 **Questions?**
+- Basic syntax and concepts
+- Advanced features
+- Specific use cases
+- Best practices
+
+**Next Learning Steps:**
+1. Practice with small projects
+2. Explore the standard library
+3. Join the community
+4. Contribute to open source projects
+
+**Resources:**
+- Official documentation
+- Example projects
+- Community forums
+- GitHub repository
+
+---
+
+# Thank You!
+
+## MaiaScript - Build Intelligent Applications with Ease
