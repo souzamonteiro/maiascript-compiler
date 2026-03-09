@@ -2,7 +2,7 @@ maiascript               ::= expression*
                            | eof
 
 operation                ::= variableAssignment
-variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') conditionalExpression)*
+variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | '**=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') conditionalExpression)*
 
 conditionalExpression    ::= logicalORExpression ('?' expression ':' expression)?
 
@@ -88,7 +88,7 @@ block                    ::= '{' (statement | expression | comment)* '}'
 
 variableDeclaration      ::= type? identifier ('=' expression)?
 
-type                     ::= 'i32' | 'i64' | 'f32' | 'f64'
+type                     ::= ('i32' | 'i64' | 'f32' | 'f64') matrix?
 
 arguments                ::= expression (',' expression)*
 

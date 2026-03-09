@@ -78,7 +78,7 @@ a = 1                    // Integer
 b = 2.0                  // Real
 c = "Hello World!"       // String
 d = [1, 2, 3]            // Array
-e = {"key": "value"}     // Object
+e = {"key": "value"}     // Associative Array
 ```
 
 </div>
@@ -341,7 +341,7 @@ foreach(student; property; value) {
 
 ```typescript
 // Simple function declaration
-calculateArea(width, height) {
+function calculateArea(width, height) {
     return width * height
 }
 
@@ -374,15 +374,6 @@ factorial(n) {
 greet(name, greeting = "Hello") {
     return greeting + ", " + name + "!"
 }
-
-// Variable arguments
-sumAll(...numbers) {
-    total = 0
-    foreach(numbers; index; number) {
-        total += number
-    }
-    return total
-}
 ```
 
 ---
@@ -399,12 +390,6 @@ async fetchUserData(userId) {
 // Plain function (no special handling)
 plain utilityHelper() {
     return "Utility result"
-}
-
-// Kernel function (GPU/parallel processing)
-imageProcessing() #= {
-    // GPU-accelerated image processing
-    return processOnGPU(this.data)
 }
 ```
 
@@ -483,36 +468,6 @@ namespace MathUtilities {
 area = MathUtilities.circleArea(5)
 circumference = MathUtilities.circleCircumference(5)
 exp = MathUtilities.exponential(2)
-```
-
----
-
-## Object Constructors
-
-```typescript
-// Class-like constructor
-Student(name, id, major) := {
-    this.name = name
-    this.id = id
-    this.major = major
-    this.grades = []
-    
-    this.addGrade(grade) {
-        this.grades.push(grade)
-    }
-    
-    this.getGPA() {
-        if (this.grades.length == 0) return 0
-        sum = this.grades.reduce((a, b) => a + b, 0)
-        return sum / this.grades.length
-    }
-}
-
-// Creating instances
-john := Student("John Smith", "S12345", "Computer Science")
-john.addGrade(85)
-john.addGrade(92)
-gpa = john.getGPA()
 ```
 
 ---
@@ -614,31 +569,47 @@ database = setupStudentDatabase()
 ## GPU Parallel Programming
 
 ```typescript
-// Matrix multiplication on GPU
-parallelMatrixMultiply() {
-    // Create large matrices
-    size = 1024
-    matrixA = core.randomMatrix(size, size)
-    matrixB = core.randomMatrix(size, size)
-    
-    // GPU kernel for multiplication
-    kernel = gpu.createKernel(function(a, b) #= {
-        local sum = 0.0
-        for (local i = 0; i < this.constants.size; i++) {
-            sum += a[this.thread.y][i] * b[i][this.thread.x]
-        }
-        return sum
-    })
-    
-    kernel.setConstants({size: size})
-    kernel.setOutput([size, size])
-    
-    // Execute on GPU
-    return kernel(matrixA, matrixB)
+// Create two 512x512 matrices.
+a = core.zero(512, 512)
+b = core.zero(512, 512)
+
+// Fill the matrices.
+for (i = 0; i < 512; i++) {
+    for (j = 0; j < 512; j++) {
+        v = i * 512 + j
+        a[i, j] = v
+        b[i, j] = v
+    }
 }
 
-// Compare with CPU version
-gpuResult = parallelMatrixMultiply()
+// Compute shader.
+plain shader(a, b) {
+    local sum = 0
+    for (local i = 0; i < 512; i++) {
+        sum = sum + a[this.thread.y, i] * b[i, this.thread.x]
+    }
+    return(sum)
+}
+
+// Computation function using the GPU.
+async useGPU() {
+    device = gpu.new()
+    multiplyMatrices = device.createKernel(shader)
+    multiplyMatrices.setOutput([512, 512])
+    
+    startTime := Date()
+    c = multiplyMatrices(a, b)
+    endTime := Date()
+    
+    elapsedTime = endTime - startTime
+    
+    system.log("GPU result:")
+    system.log("c[511,511]: " + c[511,511])
+    system.log("Elapsed time: " + elapsedTime + " ms\n")
+}
+
+// Start computation.
+useGPU()
 ```
 
 ---
@@ -711,11 +682,11 @@ mathResults = symbolicMathDemo()
 ## Module System and Imports
 
 ```typescript
-// Library module (mylib.ms)
+// Library module (mylib.maia)
 namespace MyLibrary {
-    export version = "1.0.0"
+    version = "1.0.0"
     
-    export formatCurrency(amount, currency = "USD") {
+    formatCurrency(amount, currency = "USD") {
         switch (currency) {
             case "USD": return "$" + amount.toFixed(2)
             case "EUR": return "€" + amount.toFixed(2)
@@ -724,14 +695,14 @@ namespace MyLibrary {
         }
     }
     
-    export validateEmail(email) {
+    validateEmail(email) {
         pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         return pattern.test(email)
     }
 }
 
 // Main application
-import "./mylib.ms"
+import "./mylib.maia"
 
 // Use the library
 price = MyLibrary.formatCurrency(19.99, "USD")
@@ -819,54 +790,16 @@ processSalesData(rawData) {
 ## Testing Framework
 
 ```typescript
-namespace TestFramework {
-    tests = []
-    passed = 0
-    failed = 0
-    
-    test(name, testFunction) {
-        try {
-            testFunction()
-            system.println("✓ PASS: " + name)
-            this.passed++
-        } catch (error) {
-            system.println("✗ FAIL: " + name + " - " + error)
-            this.failed++
-        }
-    }
-    
-    assert(condition, message = "Assertion failed") {
-        if (!condition) {
-            throw message
-        }
-    }
-    
-    assertEquals(actual, expected, message = "Values not equal") {
-        if (actual != expected) {
-            throw message + " (Expected: " + expected + ", Got: " + actual + ")"
-        }
-    }
-    
-    getResults() {
-        return {
-            total: this.passed + this.failed,
-            passed: this.passed,
-            failed: this.failed,
-            successRate: (this.passed / (this.passed + this.failed)) * 100
-        }
-    }
+system.println("Testing add operator...")
+test (10; 4; 0) {
+    a = 1
+    b = 2
+    c = a + b
+} catch (v) {
+    system.print("TEST: Fail testing add operator.")
+    system.print("      Expected result " + core.testResult.expected)
+    system.print("      But got " + core.testResult.obtained)
 }
-
-// Usage
-TestFramework.test("Addition", () => {
-    TestFramework.assertEquals(2 + 3, 5, "Basic addition failed")
-})
-
-TestFramework.test("Division by zero", () => {
-    TestFramework.assertThrows(() => 1 / 0, "Should throw error")
-})
-
-results = TestFramework.getResults()
 ```
 
 ---
@@ -1023,19 +956,19 @@ if (typeof(require) == 'undefined') {
 ```typescript
 namespace Config {
     settings = {
-        app: {
-            name: "MyApp",
-            version: "1.0.0",
-            debug: false
+        "app": {
+            "name": "MyApp",
+            "version": "1.0.0",
+            "debug": false
         },
-        database: {
-            host: "localhost",
-            port: 5432,
-            name: "myapp_db"
+        "database": {
+            "host": "localhost",
+            "port": 5432,
+            "name": "myapp_db"
         },
-        api: {
-            baseUrl: "https://api.example.com",
-            timeout: 5000
+        "api": {
+            "baseUrl": "https://api.example.com",
+            "timeout": 5000
         }
     }
     
