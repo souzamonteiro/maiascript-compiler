@@ -1,8 +1,8 @@
 ---
 marp: true
 theme: gaia
-class: lead
 paginate: true
+html: true
 ---
 
 # MaiaScript Programming Language
@@ -57,9 +57,8 @@ system.showMessageDialog("Welcome to MaiaScript!")
 - Semicolon optional
 - C-like syntax
 
-<!-- _class: two-columns -->
-
 ---
+<!-- _class: two-columns -->
 <style>
 .two-columns {
   display: grid;
@@ -141,15 +140,15 @@ a ^^ b    // XOR
 ## Bitwise Operators
 
 ```typescript
-a = 0b1010  // Binary 10 (decimal)
-b = 0b1100  // Binary 12 (decimal)
+a = 10      // Decimal 10
+b = 12      // Decimal 12
 
-a & b       // AND: 0b1000 (8)
-a | b       // OR: 0b1110 (14)
-a ^ b       // XOR: 0b0110 (6)
-a << 2      // Left shift: 0b101000 (40)
-a >> 1      // Right shift: 0b0101 (5)
-~a          // NOT: 0b0101 (5)
+a & b       // Bitwise AND: 8
+a | b       // Bitwise OR: 14
+a ^ b       // Bitwise XOR: 6
+a << 2      // Left shift: 40
+a >> 1      // Right shift: 5
+~a          // Bitwise NOT
 ```
 
 ---
@@ -158,12 +157,17 @@ a >> 1      // Right shift: 0b0101 (5)
 
 ```typescript
 x = 5
-x += 3      // x = 8 (add and assign)
-x -= 2      // x = 6 (subtract and assign)
+x += 3      // x = 8  (add and assign)
+x -= 2      // x = 6  (subtract and assign)
 x *= 4      // x = 24 (multiply and assign)
-x /= 3      // x = 8 (divide and assign)
-x %= 5      // x = 3 (modulus and assign)
-x **= 2     // x = 9 (power and assign)
+x /= 3      // x = 8  (divide and assign)
+x %= 5      // x = 3  (modulus and assign)
+x **= 2     // x = 9  (power and assign)
+x <<= 1     // left shift and assign
+x >>= 1     // right shift and assign
+x &= 7      // bitwise AND and assign
+x ^= 3      // bitwise XOR and assign
+x |= 4      // bitwise OR and assign
 ```
 
 ---
@@ -217,7 +221,11 @@ jsStyle = [[1, 2], [3, 4]]          // JavaScript
 sum = matlabStyle + jsStyle          // Element-wise addition
 product = matlabStyle * jsStyle      // Matrix multiplication
 power = matlabStyle ** 2             // Matrix power
+```
 
+---
+
+```typescript
 // Associative arrays
 person = {
     "name": "John", 
@@ -261,6 +269,11 @@ switch (dayOfWeek) {
     case 2:
         system.println("Tuesday - Full steam ahead!")
         break
+```
+
+---
+
+```typescript
     case 3:
         system.println("Wednesday - Hump day")
         break
@@ -370,10 +383,14 @@ factorial(n) {
     return n * factorial(n - 1)
 }
 
-// Function with default parameters
-greet(name, greeting = "Hello") {
+// Function calling another function
+greet(firstName, lastName, greeting) {
+    name = createFullName(firstName, lastName)
     return greeting + ", " + name + "!"
 }
+
+// Usage
+message = greet("John", "Doe", "Hello")
 ```
 
 ---
@@ -399,20 +416,22 @@ plain utilityHelper() {
 
 ```typescript
 // Strongly typed function (compiles to WebAssembly)
-i32 calculateSum(i32[] numbers) {
-    i32 total = 0
-    for (i32 i = 0; i < numbers.length; i++) {
-        total += numbers[i]
-    }
+i32 calculateSum(i32 a, i32 b, i32 c) {
+    i32 total = a + b + c
     return total
 }
 
-// Multiple return types
-f64[] calculateStats(f64[] data) {
-    f64 mean = statistics.mean(data)
-    f64 stdDev = statistics.standardDeviation(data)
-    return [mean, stdDev]
+// Typed matrix parameter: i32[rows;cols]
+f64 dotProduct(f64[3] u, f64[3] v) {
+    f64 result = 0.0
+    for (i32 i = 0; i < 3; i++) {
+        result += u[i] * v[i]
+    }
+    return result
 }
+
+// Usage
+sum = calculateSum(1, 2, 3)   // 6
 ```
 
 ---
@@ -427,7 +446,11 @@ try {
 } catch (error) {
     system.println("Error: " + error.message)
 }
+```
 
+---
+
+```typescript
 // Custom error throwing
 validateInput(input) {
     if (input == null || input == "") {
@@ -463,7 +486,11 @@ namespace MathUtilities {
         return e ** x
     }
 }
+```
 
+---
+
+```typescript
 // Usage
 area = MathUtilities.circleArea(5)
 circumference = MathUtilities.circleCircumference(5)
@@ -491,7 +518,11 @@ analyzeSocialNetwork(networkData) {
     
     return results
 }
+```
 
+---
+
+```typescript
 // Usage
 network = loadNetwork("social_network.json")
 analysis = analyzeSocialNetwork(network)
@@ -522,7 +553,11 @@ createAndTrainANN() {
     
     return trainedANN
 }
+```
 
+---
+
+```typescript
 // Test the trained network
 ann = createAndTrainANN()
 prediction = ann.think(ann, [1,0])  // Should be close to 1
@@ -548,7 +583,11 @@ setupStudentDatabase() {
             enrollment_date DATE
         )`
     )
-    
+```
+
+---
+
+```typescript
     db.executeSql(
         `CREATE TABLE courses (
             id INTEGER PRIMARY KEY,
@@ -581,7 +620,11 @@ for (i = 0; i < 512; i++) {
         b[i, j] = v
     }
 }
+```
 
+---
+
+```typescript
 // Compute shader.
 plain shader(a, b) {
     local sum = 0
@@ -590,7 +633,11 @@ plain shader(a, b) {
     }
     return(sum)
 }
+```
 
+---
+
+```typescript
 // Computation function using the GPU.
 async useGPU() {
     device = gpu.new()
@@ -627,7 +674,11 @@ analyzeDataset(data) {
     results.mode = statistics.mode(data)
     results.stdDev = statistics.standardDeviation(data)
     results.variance = statistics.variance(data)
-    
+```
+
+---
+
+```typescript
     // Advanced analysis
     results.skewness = statistics.skewness(data)
     results.kurtosis = statistics.kurtosis(data)
@@ -656,13 +707,17 @@ symbolicMathDemo() {
     results = {}
     
     // Equation solving
-    results.equation = cas.eval("solve(x^2 - 5*x + 6 = 0, x)")
+    results.equation = cas.eval("solve(x**2 - 5*x + 6 = 0, x)")
     // Result: x = 2, x = 3
     
     // Simplification
-    results.simplified = cas.eval("simplify((x+1)^3 - x^3 - 3*x^2 - 3*x - 1)")
+    results.simplified = cas.eval("simplify((x+1)**3 - x**3 - 3*x**2 - 3*x - 1)")
     // Result: 0
-    
+```
+
+---
+
+```typescript
     // Differentiation
     results.derivative = cas.eval("d(sin(x)*cos(x), x)")
     // Result: cos²(x) - sin²(x)
@@ -686,27 +741,38 @@ mathResults = symbolicMathDemo()
 namespace MyLibrary {
     version = "1.0.0"
     
-    formatCurrency(amount, currency = "USD") {
+    formatCurrency(amount, currency) {
         switch (currency) {
-            case "USD": return "$" + amount.toFixed(2)
-            case "EUR": return "€" + amount.toFixed(2)
-            case "GBP": return "£" + amount.toFixed(2)
-            default: return amount.toFixed(2) + " " + currency
+            case "USD":
+                return "$" + amount
+            case "EUR":
+                return "\u20ac" + amount
+            case "GBP":
+                return "\u00a3" + amount
+            default:
+                return amount + " " + currency
         }
     }
-    
-    validateEmail(email) {
-        pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return pattern.test(email)
+```
+
+---
+
+```typescript
+    isValidLength(text, minLen) {
+        return text.length >= minLen
     }
 }
+```
 
+---
+
+```typescript
 // Main application
 import "./mylib.maia"
 
 // Use the library
 price = MyLibrary.formatCurrency(19.99, "USD")
-isValid = MyLibrary.validateEmail("test@example.com")
+valid = MyLibrary.isValidLength("hello", 3)
 ```
 
 ---
@@ -723,7 +789,12 @@ namespace ScientificCalculator {
         if (b == 0) throw "Division by zero error"
         return a / b
     }
-    
+
+```
+
+---
+
+```typescript
     // Scientific functions
     power(base, exponent) = base ** exponent
     squareRoot(x) = x ** 0.5
@@ -758,7 +829,11 @@ processSalesData(rawData) {
         sales: parseFloat(item.sales),
         region: item.region.toUpperCase()
     })).filter(item => item.sales > 0)  // Remove invalid entries
-    
+```
+
+---
+
+```typescript
     // Step 2: Group by region
     regionalSales = {}
     foreach(cleanedData; index; sale) {
@@ -772,7 +847,11 @@ processSalesData(rawData) {
     results.totalSales = cleanedData.reduce((sum, sale) => sum + sale.sales, 0)
     results.averageSale = results.totalSales / cleanedData.length
     results.regionalBreakdown = {}
-    
+```
+
+---
+
+```typescript
     foreach(regionalSales; region; sales) {
         results.regionalBreakdown[region] = {
             total: sales.reduce((sum, s) => sum + s.sales, 0),
@@ -811,16 +890,30 @@ test (10; 4; 0) {
 // Use namespaces for logical grouping
 namespace DataProcessing {
     namespace Validation {
-        export validateEmail(email) { /* ... */ }
-        export validatePhone(phone) { /* ... */ }
+        validateEmail(email) {
+            // email validation logic
+        }
+        validatePhone(phone) {
+            // phone validation logic
+        }
     }
-    
+```
+
+---
+
+```typescript
     namespace Transformation {
-        export normalizeData(data) { /* ... */ }
-        export filterData(data, criteria) { /* ... */ }
+        normalizeData(data) {
+            // normalization logic
+        }
+        filterData(data, criteria) {
+            // filtering logic
+        }
     }
 }
 ```
+
+---
 
 **Error Handling Pattern:**
 ```typescript
@@ -888,7 +981,11 @@ namespace WebIntegration {
         })
         return JSON.parse(response.body)
     }
-    
+```
+
+---
+
+```typescript
     async getWeatherData(city) {
         data = await this.fetchJSON(
             "https://api.weather.com/" + city
@@ -912,7 +1009,11 @@ namespace FileSystem {
     writeTextFile(filename, content) {
         file.write(filename, content)
     }
-    
+```
+
+---
+
+```typescript
     fileExists(filename) {
         return file.exists(filename)
     }
@@ -944,9 +1045,13 @@ namespace MyApplication {
         system.println("Application finished")
     }
 }
+```
 
+---
+
+```typescript
 // Start the application
-if (typeof(require) == 'undefined') {
+if (typeof require == "undefined") {
     // Running as main script
     MyApplication.main()
 }
@@ -971,7 +1076,11 @@ namespace Config {
             "timeout": 5000
         }
     }
-    
+```
+
+---
+
+```typescript
     get(key) {
         keys = key.split('.')
         value = this.settings
@@ -980,7 +1089,11 @@ namespace Config {
         }
         return value
     }
-    
+```
+
+---
+
+```typescript
     set(key, value) {
         keys = key.split('.')
         obj = this.settings
