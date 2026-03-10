@@ -1,2 +1,12 @@
-- [ ] Fix compilation of WebAssembly code
-- [ ] Implement compilation of MaiaAssembly code
+- [ ] Update MaiaScript VSCode extension to the new grammar
+- [ ] Change all local variables in all MaiaScript compiler and libraries from var to let
+- [ ] Implement MaiaScript compiler to JavaScript
+- [ ] Implement MaiaScript compiler to MaiaAssembly
+- [ ] Implement compilation of MaiaAssembly code to WAT
+- [ ] Implement compilation of MaiaAssembly embedded code to WAT
+- [ ] Implement WAT assembler to WASM
+- [ ] Update MaiaStudio to the new MaiaScript grammar
+- [ ] Add support for editing multiple files simultaneously, in tabs, in MaiaStudio
+- [ ] Add source tree view and VFS to MaiaStudio
+- [ ] Add Zip file export for multiple files in MaiaStudio
+- [ ] Release MaiaStudio PWA

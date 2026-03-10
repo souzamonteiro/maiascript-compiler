@@ -1,4 +1,4 @@
-// This file was generated on Wed Dec 28, 2022 14:22 (UTC) by REx v5.55 which is Copyright (c) 1979-2022 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Tue Mar 10, 2026 18:48 (UTC-03) by REx v6.1 which is Copyright (c) 1979-2025 by Gunther Rademacher <grd@gmx.net>
 // REx command line: ComplexNumber.ebnf -backtrack -javascript -tree
 
 function ComplexNumber(string, parsingEventHandler)
@@ -110,7 +110,7 @@ function ComplexNumber(string, parsingEventHandler)
   this.parse_Number = function()
   {
     eventHandler.startNonterminal("Number", e0);
-    lookahead1W(2);                 // END | EOF | Real | Imaginary | WhiteSpace^token
+    lookahead1W(2);                 // %OTHER | EOF | Real | Imaginary | WhiteSpace^token
     switch (l1)
     {
     case 2:                         // EOF
@@ -119,8 +119,8 @@ function ComplexNumber(string, parsingEventHandler)
     default:
       for (;;)
       {
-        lookahead1W(1);             // END | Real | Imaginary | WhiteSpace^token
-        if (l1 == 1)                // END
+        lookahead1W(1);             // %OTHER | Real | Imaginary | WhiteSpace^token
+        if (l1 == 1)                // %OTHER
         {
           break;
         }
@@ -498,8 +498,8 @@ ComplexNumber.EXPECTED =
 
 ComplexNumber.TOKEN =
 [
-  "(0)",
-  "END",
+  "%ERROR",
+  "%OTHER",
   "EOF",
   "Real",
   "Imaginary",

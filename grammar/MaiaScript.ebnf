@@ -6,11 +6,11 @@ variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | 
 
 conditionalExpression    ::= logicalORExpression ('?' expression ':' expression)?
 
-logicalXORExpression     ::= logicalORExpression ('^^' logicalORExpression)*
-logicalORExpression      ::= logicalANDExpression ('||' logicalANDExpression)*
-logicalANDExpression     ::= bitwiseXORExpression ('&&' bitwiseXORExpression)*
-bitwiseXORExpression     ::= bitwiseORExpression ('^' bitwiseORExpression)*
-bitwiseORExpression      ::= bitwiseANDExpression ('|' bitwiseANDExpression)*
+logicalORExpression      ::= logicalXORExpression ('||' logicalXORExpression)*
+logicalXORExpression     ::= logicalANDExpression ('^^' logicalANDExpression)*
+logicalANDExpression     ::= bitwiseORExpression ('&&' bitwiseORExpression)*
+bitwiseORExpression      ::= bitwiseXORExpression ('|' bitwiseXORExpression)*
+bitwiseXORExpression     ::= bitwiseANDExpression ('^' bitwiseANDExpression)*
 bitwiseANDExpression     ::= equalityExpression ('&' equalityExpression)*
 
 equalityExpression       ::= relationalExpression (('==' | '!=') relationalExpression)*
@@ -38,6 +38,7 @@ primary                  ::= member
 statement                ::= namespace
                            | function
                            | include
+                           | global
                            | local
                            | if
                            | do
@@ -53,28 +54,32 @@ statement                ::= namespace
                            | throw
                            | export
                            | import
-                           | global
                            | typeof
                            | empty
                            
 namespace                ::= 'namespace' identifier ('.' identifier)* block
-function                 ::= ('async' | 'function' | 'plain')? identifier ('.' identifier)* '(' arguments? ')' ( block | '=' expression )
+function                 ::= 'async' identifier ('.' identifier)* '(' arguments? ')' block
+                           | 'function' identifier ('.' identifier)* '(' arguments? ')' block
+                           | 'plain' identifier ('.' identifier)* '(' arguments? ')' block
+                           | type identifier ('.' identifier)* '(' formalArguments? ')' block
+                           | identifier ('.' identifier)* '(' arguments? ')' block
+                           | identifier ('.' identifier)* '(' arguments? ')' '=' expression
 include                  ::= 'include' '(' expression ')'
 global                   ::= 'global' expression
 local                    ::= 'local' expression
-if                       ::= 'if' '(' expression ')' statement elseif* else?
-elseif                   ::= 'elseif' '(' expression ')' statement
-else                     ::= 'else' statement
-do                       ::= 'do' statement 'while' '(' expression ')'
-while                    ::= 'while' '(' expression ')' statement
-for                      ::= 'for' '(' (expression? | variableDeclaration) ';' expression? ';' expression? ')' statement
-foreach                  ::= 'foreach' '(' expression ';' identifier ';' identifier ')' statement
+if                       ::= 'if' '(' expression ')' block elseif* else?
+elseif                   ::= 'elseif' '(' expression ')' block
+else                     ::= 'else' block
+do                       ::= 'do' block 'while' '(' expression ')'
+while                    ::= 'while' '(' expression ')' block
+for                      ::= 'for' '(' (expression? | variableDeclaration) ';' expression? ';' expression? ')' block
+foreach                  ::= 'foreach' '(' expression ';' identifier ';' identifier ')' block
 try                      ::= 'try' block catch?
 test                     ::= 'test' '(' expression? (';' expression? (';' expression?)?)? ')' block catch?
 catch                    ::= 'catch' '(' expression ')' block
 switch                   ::= 'switch' '(' expression ')' '{' case* default? '}'
-case                     ::= 'case' expression ':' (statement | expression)*
-default                  ::= 'default' ':' (statement | expression)*
+case                     ::= 'case' expression ':' expression*
+default                  ::= 'default' ':' expression*
 break                    ::= 'break'
 continue                 ::= 'continue'
 return                   ::= 'return' expression?
@@ -84,11 +89,13 @@ import                   ::= 'import' expression
 typeof                   ::= 'typeof' expression
 empty                    ::= ';'
 
-block                    ::= '{' (statement | expression | comment)* '}'
+block                    ::= '{' expression* '}'
 
 variableDeclaration      ::= type? identifier ('=' expression)?
 
 type                     ::= ('i32' | 'i64' | 'f32' | 'f64') matrix?
+
+formalArguments           ::= type? identifier (',' type? identifier)*
 
 arguments                ::= expression (',' expression)*
 
@@ -121,10 +128,6 @@ expression               ::= statement
 
 whitespace               ::= whitespace^token
                           /* ws: definition */
-
-/* ===============================
-          LEXICAL RULES
-   =============================== */
 
 <?TOKENS?>
 
@@ -179,15 +182,11 @@ false                    ::= 'false'
 firstIdentifierChar      ::= '$' | '_' | [A-Za-z]
 identifierChar           ::= '$' | '_' | [0-9] | [A-Za-z]
 
-/* Numbers */
-
-/* Complex Numbers */
 complex                  ::= real? imaginary
 real                     ::= '-'? digit+ ('.' digit+)? (('e' | 'E') ('+' | '-')? digit+)?
 imaginary                ::= (('+' | '-')? real '*' 'i')
 digit                    ::= [0-9]
 
-/* Strings */
 string                   ::= '"' (unicode | '\"' | '\\' | '\/' | '\b' | '\f' | '\n' | '\r' | '\t')* '"'
 
 unicode                  ::= alphabet - ["#x005C]
@@ -198,7 +197,6 @@ alphabet                 ::= #x0009
                            | [#xE000-#xFFFD]
                            | [#x10000-#x10FFFF]
 
-/* Comments */
 comment                  ::= singleLineComment
 
 singleLineComment        ::= '//' (sourceCharacter - lineTerminator)*
@@ -211,5 +209,4 @@ lineTerminator           ::= #x000A
                            | #x2028
                            | #x2029
 
-/* Whitespace */
 whitespace               ::= [#x0009#x000A#x000D#x0020]+

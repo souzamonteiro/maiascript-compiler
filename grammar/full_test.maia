@@ -14,7 +14,7 @@ a = 1
 b = 2.0
 c = "Test string"
 d = [1, 2, 3]
-e = {key: "value"}
+e = {"key": "value"}
 
 system.println("a = " + a)
 system.println("b = " + b)
@@ -54,12 +54,12 @@ system.println("\n=== LOGICAL OPERATORS TEST ===")
 bool1 = true
 bool2 = false
 
-system.println("bool1 && bool2: " + (bool1 && bool2))
 system.println("bool1 || bool2: " + (bool1 || bool2))
 system.println("bool1 ^^ bool2: " + (bool1 ^^ bool2))
-system.println("bool1 & bool2: " + (bool1 & bool2))
+system.println("bool1 && bool2: " + (bool1 && bool2))
 system.println("bool1 | bool2: " + (bool1 | bool2))
 system.println("bool1 ^ bool2: " + (bool1 ^ bool2))
+system.println("bool1 & bool2: " + (bool1 & bool2))
 
 // ===== BIT SHIFT OPERATORS =====
 system.println("\n=== BIT SHIFT OPERATORS TEST ===")
@@ -147,7 +147,7 @@ for (i = 0; i < 3; i++) {
 }
 
 system.println("\n=== FOREACH TEST ===")
-obj = {name: "John", age: 30}
+obj = {"name": "John", "age": 30}
 foreach(obj; key; value) {
     system.println(key + ": " + value)
 }
@@ -179,20 +179,6 @@ namespace Math {
 system.println("Math.pi = " + Math.pi)
 system.println("Math.circumference(5) = " + Math.circumference(5))
 
-// ===== OBJECT CONSTRUCTORS =====
-system.println("\n=== OBJECT CONSTRUCTORS TEST ===")
-Person(name, age) := {
-    this.name = name
-    this.age = age
-    
-    this.introduce() {
-        return "Hello, I'm " + this.name + " and I'm " + this.age + " years old"
-    }
-}
-
-p := Person("Mary", 25)
-system.println(p.introduce())
-
 // ===== ERROR HANDLING =====
 system.println("\n=== ERROR HANDLING TEST ===")
 try {
@@ -201,17 +187,6 @@ try {
 } catch (error) {
     system.println("Error caught: " + error.message)
 }
-
-// ===== IMPORT/EXPORT =====
-system.println("\n=== IMPORT/EXPORT TEST ===")
-// Simulating a module
-namespace MyModule {
-    export moduleFunction() {
-        return "Module function executed"
-    }
-}
-
-system.println(MyModule.moduleFunction())
 
 // ===== LOCAL/GLOBAL VARIABLES =====
 system.println("\n=== LOCAL/GLOBAL VARIABLES TEST ===")
@@ -237,7 +212,7 @@ async asyncFunction() {
 }
 
 // Simulating await
-asyncResult = asyncFunction()
+asyncResult ?= asyncFunction()
 system.println("Async result: " + asyncResult)
 
 // ===== MAIAASSEMBLY =====
@@ -311,12 +286,12 @@ system.println("(a && b) || (c && !b): " + logicalResult)
 // ===== ASSOCIATIVE ARRAYS =====
 system.println("\n=== ASSOCIATIVE ARRAYS TEST ===")
 person = {
-    name: "Carlos",
-    age: 30,
-    profession: "Programmer",
-    address: {
-        street: "Street A",
-        city: "São Paulo"
+    "name": "Carlos",
+    "age": 30,
+    "profession": "Programmer",
+    "address": {
+        "street": "Street A",
+        "city": "São Paulo"
     }
 }
 
