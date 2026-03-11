@@ -8,13 +8,13 @@ For detailed information about the grammar of the MaiaScript language see the de
 
 ## Data types
 
-MaiaScript supports three types of data natively: `integer`, `real` and `string`. These types are automatic, and you do not have to define them when creating common variables and functions. For use exclusively with functions in **WebAssembly** and **MaiaAssembly** are supported the types `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32 bits`, `f32` and `real 64 bits`, `f64`. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>.
+MaiaScript supports three types of data natively: `integer`, `real` and `string`. These types are automatic, and you do not have to define them when creating common variables and functions. For use exclusively with functions in **WebAssembly** and **MaiaAssembly** are supported the types `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32 bits`, `f32` and `real 64 bits`, `f64`. Functions in **MaiaAssembly** are handled in the chapter on functions. Programming in **WebAssembly** is beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>.
 
 ## Data output
 
 MaiaScript allows the display of messages on the computer screen, or in the standard output, through various functions of the `system` library, among them the most used are `print`, `println`, `printf` and `showMessageDialog`. The following example illustrates the use of these functions:
 
-```
+```typescript
 system.println("Hello World!")
 system.showMessageDialog("Hello World!")
 system.printf("%d, %.3f, %s", 1, 1.23456, "Hello World!")
@@ -24,7 +24,7 @@ system.printf("%d, %.3f, %s", 1, 1.23456, "Hello World!")
 
 You can read data entered by the user using the `showInputDialog` function of the `system` library. This function displays a dialog box with the message passed as a parameter and a confirmation button, which when clicked, returns the value entered in the displayed text box. The following example illustrates the use of this function:
 
-```
+```typescript
 a = system.showInputDialog("Type a number:")
 system.println(a)
 ```
@@ -33,7 +33,7 @@ system.println(a)
 
 Variables are containers where we store data for processing or processing results. In MaiaScript variables can store values of any type, and it is not usually necessary to specify the type of data that the variable will store at the time of its creation. However, when creating functions in **MaiaAssembly** or **WebAssembly**, you must specify the type of data that the variable will store and this variable can only store values of this type of data throughout its existence. The types `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32 bits`, `f32`, `real 64 bits`, `f64` are supported. Functions in **MaiaAssembly** are handled in the chapter on functions. Functions in **WebAssembly** are beyond the scope of this guide. For more information see the official project website: <https://webassembly.org>. The following example shows how to create variables of various types:
 
-```
+```typescript
 a = 1
 system.println(a)
 b = 2.0
@@ -54,7 +54,7 @@ g = [5, 6; 7, 8]
 system.println(g)
 
 // JavaScript-like objects.
-h = {a: 1, b: 2.0, "c": "Hello World!"}
+h = {"a": 1, "b": 2.0, "c": "Hello World!"}
 system.println(JSON.stringify(h))
 i = {}
 system.println(JSON.stringify(i))
@@ -69,15 +69,15 @@ maiascript               ::= expression*
                            | eof
 
 operation                ::= variableAssignment
-variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') conditionalExpression)*
+variableAssignment       ::= conditionalExpression (('=' | '*=' | '/=' | '%=' | '**=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' | '?=' | ':=') conditionalExpression)*
 
 conditionalExpression    ::= logicalORExpression ('?' expression ':' expression)?
 
-logicalXORExpression     ::= logicalORExpression ('^^' logicalORExpression)*
-logicalORExpression      ::= logicalANDExpression ('||' logicalANDExpression)*
-logicalANDExpression     ::= bitwiseXORExpression ('&&' bitwiseXORExpression)*
-bitwiseXORExpression     ::= bitwiseORExpression ('^' bitwiseORExpression)*
-bitwiseORExpression      ::= bitwiseANDExpression ('|' bitwiseANDExpression)*
+logicalORExpression      ::= logicalXORExpression ('||' logicalXORExpression)*
+logicalXORExpression     ::= logicalANDExpression ('^^' logicalANDExpression)*
+logicalANDExpression     ::= bitwiseORExpression ('&&' bitwiseORExpression)*
+bitwiseORExpression      ::= bitwiseXORExpression ('|' bitwiseXORExpression)*
+bitwiseXORExpression     ::= bitwiseANDExpression ('^' bitwiseANDExpression)*
 bitwiseANDExpression     ::= equalityExpression ('&' equalityExpression)*
 
 equalityExpression       ::= relationalExpression (('==' | '!=') relationalExpression)*
@@ -96,7 +96,7 @@ unaryExpression          ::= '++' primary
                            | '~' primary
                            | '!' primary
                            | primary
-
+                           
 primary                  ::= member
                            | value
                            | parenthesizedExpression
@@ -109,7 +109,7 @@ In the next sessions we will address each of these operators.
 
 MaiaScript supports the following mathematical operators: **add**, `+`, **subtraction**, `-`, **potentiation**, `**`, **multiplication**, `*`, **division**, `/` and **rest of division**, `%`. The following examples show how to use these operators:
 
-```
+```typescript
 a = 1
 b = 2
 
@@ -147,7 +147,7 @@ system.println(c)
 
 MaiaScript supports the following relational operators: **equal**, `==`, **different**, `!=`, **minor**, `<`, **less or equal**, `<=`, **major**, `>` and **greater or equal**, `>=`. The following examples show how to use these operators:
 
-```
+```typescript
 a = 1
 b = 2
 
@@ -169,21 +169,21 @@ system.println(c)
 
 MaiaScript supports the following logical operators: **logical XOR**, `^^`, **logical OR**, `||`, **logical AND**, `&&`, **bitwise AND**, `&`, **bitwise XOR**, `^` and **bitwise OR**, `|`. The following examples show how to use these operators:
 
-```
+```typescript
 a = 1
 b = 0
 
-c = a && b
-system.println(c)
 c = a || b
 system.println(c)
 c = a ^^ b
 system.println(c)
-c = a & b
+c = a && b
 system.println(c)
 c = a | b
 system.println(c)
 c = a ^ b
+system.println(c)
+c = a & b
 system.println(c)
 ```
 
@@ -191,7 +191,7 @@ system.println(c)
 
 MaiaScript supports  the following shift operators: **left shift**, `<<`, and **right shift**, `>>`. The following examples show how to use these operators:
 
-```
+```typescript
 a = 3
 
 c = a << 2
@@ -204,7 +204,7 @@ system.println(c)
 
 MaiaScript supports the following special operators of operation followed by assignment: `*=` , `/=` , `%=` , `+=` , `-=` , `<<=` , `>>=` , `&=` , `^=` , `|=`, `?=`, `:=`. The following are examples of the most common uses of these operators:
 
-```
+```typescript
 c = a += b
 system.println(c)
 c = a -= b
@@ -215,7 +215,7 @@ system.println(c)
 
 The MaiaScript language offers a **ternary conditional operator**. This operator receives three operands: a `conditional expression`, an `expression that is returned if the condition is evaluated to true` and an `expression that is returned if the condition is evaluated as false`. In the following example, as the variable `a` contains the value `1` the condition `a == 1` will be evaluated as `true` and the expression `Hello` will be returned.
 
-```
+```typescript
 a = 1
 
 c = a == 1 ? "Hello" : "World"
@@ -237,9 +237,9 @@ digit                    ::= [0-9]
 
 The following example illustrates the sum operation with two complex numbers:
 
-```
-e = 1.0+2.0*i
-f = 3.0+4.0*i
+```typescript
+e = 1.0 + 2.0*i
+f = 3.0 + 4.0*i
 g = e + f
 system.println(g)
 ```
@@ -251,7 +251,7 @@ MaiaScript supports matrices natively for the `+`, `-`, `**`, and `*` operators 
 The following is presented in EBNF notation the syntax **associative vectors** and **matrices** in MaiaScript:
 
 ```
-array                    ::= '{' element? (',' element)* '}'
+array                    ::= '{' element (',' element)* '}'
 matrix                   ::= '[' row? (';' row)* ']'
 
 element                  ::= (key ':')? expression
@@ -263,7 +263,7 @@ column                   ::= expression
 
 In MaiaScript you can use both **Matlab** and **JavaScript** matrices notation. In Matlab notation the columns are separated by `commas`, `,`, and the lines by `semicolons`, `;`. In javascript notation each line must be indicated between brackets `[]` and lines separated by `commas`, `,`. The following example presents examples of operations with matrices using the two notations:
 
-```
+```typescript
 a = [1, 2; 3, 4]
 b = [[5, 6], [7, 8]]
 
@@ -286,19 +286,20 @@ MaiaScript offers two statements for flow control: `if... else...` and `switch`.
 
 ### If... So... Statement
 
-The `if... else...` statement allows you to decide, by evaluating a `condition` by running a `program code` session or not. The `conditional expression` should be written immediately after the word `if` and in `parentheses`. If this expression is evaluated as `true` the `expression` or `command block` immediately after the `parentheses` is executed, otherwise the `expression` or `command block` immediately after the word `else` is executed. The `else` clause is optional.
+The `if... else...` statement allows you to decide, by evaluating a `condition` by running a `program code` session or not. The `conditional expression` should be written immediately after the word `if` and in `parentheses`. If this expression is evaluated as `true` the `command block` immediately after the `parentheses` is executed, otherwise the `command block` immediately after the word `else` is executed. The `else` clause is optional.
 
 The following is the syntax of the declaration `if... else...` in EBNF notation:
 
 ```
-if                       ::= 'if' '(' expression ')' statement elseif* else?
-elseif                   ::= 'elseif' '(' expression ')' statement
-else                     ::= 'else' statement
+if                       ::= 'if' '(' expression ')' block elseif* else?
+elseif                   ::= 'elseif' '(' expression ')' block
+else                     ::= 'else' block
+block                    ::= '{' expression* '}'
 ```
 
 The following example illustrates the use of the `if... else...` statement:
 
-```
+```typescript
 a = 1
 b = 2
 
@@ -307,11 +308,12 @@ if (a < b) {
     system.println("a = " + a)
     system.println("b = " + b)
     system.println("a < b")
-    if (a == 1)
+    if (a == 1) {
         system.println("a == 1")
-    else
+    } else {
         system.println("a != 1")
-} else if (a > b) {
+    }
+} elseif (a > b) {
     system.println("a = " + a)
     system.println("b = " + b)
     system.println("a > b")
@@ -336,7 +338,7 @@ default                  ::= 'default' ':' (statement | expression)*
 
 The following example illustrates the use of the `switch... case... default...` statement:
 
-```
+```typescript
 a = 1
 
 // Switch statement similar to C.
@@ -363,14 +365,14 @@ The `do... while...` statements executes an `expression` or `command block` `whi
 The following is the syntax of the `do... while...` statement in EBNF notation:
 
 ```
-do                       ::= 'do' statement 'while' '(' expression ')'
+do                       ::= 'do' block 'while' '(' expression ')'
 break                    ::= 'break'
 continue                 ::= 'continue'
 ```
 
 The following example illustrates the use of the `do... while...` statement:
 
-```
+```typescript
 a = 0
 
 do {
@@ -386,12 +388,12 @@ The `while...` statement executes an `expression` or `command block` `while` a g
 The following is the syntax of the `while...` statement in EBNF notation:
 
 ```
-while                    ::= 'while' '(' expression ')' statement
+while                    ::= 'while' '(' expression ')' block
 ```
 
 The following example illustrates the use of the `while...` statement:
 
-```
+```typescript
 a = 0
 
 while (a < 10) {
@@ -415,13 +417,13 @@ The `for...` statement executes an `expression` or `command block` while a given
 The following is the syntax of the `for...` statement in EBNF notation:
 
 ```
-for                      ::= 'for' '(' (expression? | variableDeclaration) ';' expression? ';' expression? ')' statement
+for                      ::= 'for' '(' (expression? | variableDeclaration) ';' expression? ';' expression? ')' block
 variableDeclaration      ::= type? identifier ('=' expression)?
 ```
 
 The following example illustrates the use of the `for...` statement:
 
-```
+```typescript
 b = [1, 2, 3]
 
 for (a = 0; a < 10; ++a) {
@@ -445,13 +447,13 @@ The `foreach...` statement executes an `expression` or `command block` `for each
 The following is the syntax of the `foreach...` statement in EBNF notation:
 
 ```
-foreach                  ::= 'foreach' '(' expression ';' identifier ';' identifier ')' statement
+foreach                  ::= 'foreach' '(' expression ';' identifier ';' identifier ')' block
 ```
 
 The following example illustrates the use of the `foreach...` statement:
 
-```
-c = {a: 1, b: 2}
+```typescript
+c = {"a": 1, "b": 2}
 
 // Foreach statement similar to Tcl.
 foreach(c; key; value) {
@@ -466,7 +468,14 @@ Functions and procedures are program subroutines that can be performed by invoki
 The following is the syntax for the various types of MaiaScript `functions` in EBNF notation:
 
 ```
-function                 ::= ('async' | 'function' | 'plain')? identifier ('.' identifier)* '(' arguments? ')' ( block | '=' expression )
+function                 ::= 'async' identifier ('.' identifier)* '(' arguments? ')' block
+                           | 'function' identifier ('.' identifier)* '(' arguments? ')' block
+                           | 'plain' identifier ('.' identifier)* '(' arguments? ')' block
+                           | type identifier ('.' identifier)* '(' formalArguments? ')' block
+                           | identifier ('.' identifier)* '(' arguments? ')' block
+                           | identifier ('.' identifier)* '(' arguments? ')' '=' expression
+type                     ::= ('i32' | 'i64' | 'f32' | 'f64') matrix?
+formalArguments          ::= type? identifier (',' type? identifier)*
 arguments                ::= expression (',' expression)*
 return                   ::= 'return' expression?
 ```
@@ -477,7 +486,7 @@ We declare a `function` by writing its `name`, followed by `parentheses`, which 
 
 If a `return type` is indicated in the function declaration, it is interpreted as being a function in **MaiaAssembly** or in **WebAssembly**. In both cases you must specify the `value types` of the function arguments if it has `arguments`. If the `curly braces`, `/{ /}` of the `command blocks` are preceded by the character `/` the function is interpreted as being in **WebAssembly**, otherwise it is considered to be in **MaiaAssembly**. MaiaScript functions can be **recursive**, that is, call themselves to perform complex tasks. The following example illustrates the `factorial` function implemented using a recursive algorithm:
 
-```
+```typescript
 // A recursive function.
 factorial(n) {
     if (n == 0 || n == 1) {
@@ -492,7 +501,7 @@ system.println(factorial(5))
 
 For simpler functions, which can be implemented in only one line, you can use the simplified form of function declaration. This way allows you to write a function as it usually is done in mathematics, using the `assignment`, `=`, operator and omitting the `curly braces` of the `command block`. The following example shows the declaration of a second-degree function:
 
-```
+```typescript
 // An inline function.
 f(x) = 2 * x ** 2 + x - 1
 
@@ -503,24 +512,24 @@ system.println(f(2))
 
 Functions can be **executed asynchronously**. To do so, you must declare the function using the `async` modifier. To wait for the **asynchronous function** to finish its execution, blocking the **execution stream** of the rest of the program, you must use the `await` keyword.
 
-```
+```typescript
 // An asynchronous function.
 async f(x) {
     return x
 }
 
 // An asynchronous function call.
-a = await f(2)
+a ?= f(2)
 ```
 
 ### Parallel functions
 
 MaiaScript allows you to create parallel functions using **threads** or **GPU cores**. In both cases the functions need to be of the `kernel` type. `Kernel` functions must be created using the `#=` operator. A `kernel` function is compiled differently from the other functions. They do not support operations with complex numbers or matrices. Only the basic data types and features of JavaScript are supported. The following example shows how to create a **thread** in MaiaScript. For more details see the documentation of the `task` library available in the `docs` folder of your MaiaScript compiler distribution.
 
-```
-task1() #= {
+```typescript
+plain task1() {
     i = 0
-    timedCount() #= {
+    plain timedCount() {
         i++
         postMessage(i)
         if (i < 10) {
@@ -549,7 +558,7 @@ try {
 
 **MaiaAssembly** is a build-optimized programming language for **WebAssembly**. It allows you to create algorithms as fast as programs written in C language, embedded in high-level programs in MaiaScript. Functions in **MaiaAssembly** are typed, which means that you must declare the types of functions and variables at the time of their creations. The types supported in **MaiaAssembly** are `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. All **MaiaScript** decision and loop structures are supported in **MaiaAssembly**. In addition, arbitrary dimensions `matrices` of supported data `types` are supported. You cannot pass objects or even arrays as **MaiaAssembly** function arguments, but you can import them. The `import` declaration is used for this. It allows you to import properties of objects into the function and use them as if they were local variables. In **MaiaAssembly** it is possible to create **global variables** using the `global` declaration. Global variables are accessible from anywhere in the program. The following example shows how to create a function to sum two values passed to it as arguments. The function also creates a `local variable` to store the sum result. Local variables must be declared in the function header and should appear after the function arguments.
 
-```
+```typescript
 // A function in MaiaAssembly.
 i32 f(i32 a, i32 b) {
     i32 c = a + b
@@ -557,23 +566,6 @@ i32 f(i32 a, i32 b) {
 }
 
 // Calling a function in MaiaAssembly.
-c = f(1, 2)
-```
-
-### Functions in WebAssembly
-
-Functions in **WebAssembly** are assembled by the assembler and inserted into binary form into the code resulting from the build. They are typed, which means that you need to declare the types of functions and variables at the time of their creations. The types supported in **WebAssembly** are `integer 32 bits`, `i32`, `integer 64 bits`, `i64`, `real 32-bit`, `f32` and `real 64-bit`, `f64`. `Local variables` must be declared in the function header and should appear after the function arguments. The following example shows how to create a function to sum two values passed to it as arguments:
-
-```
-// A function in WebAssembly.
-i32 f(i32 a, i32 b) /{
-    (i32.add
-      (local.get $a)
-      (local.get $b)
-    )
-}/
-
-// Calling a function in WebAssembly.
 c = f(1, 2)
 ```
 
@@ -593,7 +585,7 @@ namespace                ::= 'namespace' identifier ('.' identifier)* block
 
 The following example illustrates how to create a `namespace` containing a `variable`, `property` and a `function`, `method`:
 
-```
+```typescript
 // Creating a namespace (an object)
 namespace a {
     b = 1
@@ -611,12 +603,15 @@ system.println(a.f(5))
 
 ### Object constructors
 
-**Object constructors** allow you to create `class instantiations` defined by them. `Classes` are **templates** for `objects`. They define their `properties`, changeable characteristics at runtime, and their `methods`, functionalities of objects. To create an `object constructor` we define a function using the `object creation operator`, `:=`. To **instantiate** an `object` we assign to a variable the return value of the `object constructor`, using the `object creation operator`, `:=`. The following example creates an `object` that has a `y` property and assigns to that variable the value passed to the constructor at the time of its creation:
+**Object constructors** allow you to create `class instantiations` defined by them. `Classes` are **templates** for `objects`. They define their `properties`, changeable characteristics at runtime, and their `methods`, functionalities of objects. To create an `object constructor` we define a namespace with the `object initialization function`, `init`. To **instantiate** an `object` we assign to a variable the new instance of the namespace, using the `object creation operator`, `:=`. The following example creates an `object` that has a `y` property and assigns to that variable the value passed to the initializator at the time of its creation:
 
-```
+```typescript
 // An object constructor.
-A(x) := {
-    y = x
+namespace A {
+    y = 0
+    init(x) {
+        y = x
+    }
 }
 
 c := A(2)
@@ -628,7 +623,7 @@ system.println(c.y)
 
 MaiaScript provides several functions for creating and **analyzing complex and social networks**. These features are available in the `cna` and `snet` libraries. The following examples show the most common applications for the functions of these libraries. For a complete reference see the documentation available in the `docs` folder of your MaiaScript compiler distribution.
 
-```
+```typescript
 // Creates a network file in Pajek format.
 fileContents = ""
 fileContents = fileContents + "*Vertices 10" + "\r\n"
@@ -721,7 +716,7 @@ property.networkGlobalEfficiency = cna.getGlobalEfficiency(property.networkVerte
 
 MaiaScript provides functions for creating and training **artificial neural networks** of various topologies. These features are available in the `ann` library. The following examples show the most common applications for the functions of this library. For a complete reference see the documentation available in the `docs` folder of your MaiaScript compiler distribution.
 
-```
+```typescript
 // Callback.
 trainingCallback(epochs, RSS, correctness, ETL) {
     system.println("Epochs: " + core.toString(epochs) + ", RSS: " + core.toString(RSS) + ", Correctness: " + core.toString(correctness) + ", ETL: " + core.toString(ETL))
@@ -780,7 +775,7 @@ system.println("f(5.1267) = " + out[0])
 
 MaiaScript natively supports the **SQLite** database but can use any database supported by **Node.js**. These features are available in the `core` library. The following example creates a database, a table, and inserts data into the created table. For a complete reference see the documentation available in the `docs` folder of your MaiaScript compiler distribution.
 
-```
+```typescript
 dataHandler(transaction, results) {
 }
 
@@ -814,7 +809,7 @@ You can speed up processing on some issues by using **parallel programming**. Ma
 
 The following example shows how to create a function for parallel multiplication of two matrices. A sequential version of the calculation for performance comparison is also implemented.
 
-```
+```typescript
 // Create two 512x512 matrices.
 a = core.zero(512, 512)
 b = core.zero(512, 512)
@@ -829,7 +824,7 @@ for (i = 0; i < 512; i = i + 1) {
 }
 
 // Parallel function.
-shader #= (a, b) {
+plain shader(a, b) {
     local sum = 0
     for (local i = 0; i < 512; i = i + 1) {
         sum = sum + a[this.thread.y, i] * b[i, this.thread.x]
@@ -838,7 +833,7 @@ shader #= (a, b) {
 }
 
 // Compute function using gpu.
-useGPU ?= () {
+async useGPU() {
     device = gpu.new()
     multiplyMatrices = device.createKernel(shader)
     multiplyMatrices.setOutput([512, 512])
@@ -855,7 +850,7 @@ useGPU ?= () {
 }
 
 // Compute function using the CPU.
-useCPU ?= () {
+async useCPU() {
     startTime := Date()
     d = core.zero(512, 512)
     for (i = 0; i < 512; i = i + 1) {
@@ -887,7 +882,7 @@ MaiaScript offers several statistical functions for operations with **matrices**
 
 The following examples show common applications for statistical library functions:
 
-```
+```typescript
 a = [1.0,0;0,1,0;0,0,1]
 b = [1,2,3;4,5,6;7,8,9]
 c = [2.3,-1;4,4,-3;2,-3,1]
@@ -913,7 +908,7 @@ system.println("e = " + core.toString(e))
 
 MaiaScript has a complete **CAS (Computer Algebra System)** implemented in the `cas` library. This CAS allows you to simplify expressions, solve equations and perform complex operations of linear algebra and differential and integral calculation. The CAS is based on the *open source* **Algebrite** library. For a complete reference see the official Algebrite project documentation <http://algebrite.org>. The only exception is that Algebrite originally uses the `ˆ` operator for powering and in MaiaScript the `power operator` is `**`. The following examples show how to perform the most common calculation operations with CAS in MaiaScript:
 
-```
+```typescript
 // Solves an algebraic expression.
 res = cas.eval("x + x")
 system.showMessageDialog("x + x:\n\n" + res)
@@ -949,13 +944,13 @@ The following is the syntax for error handling in EBNF notation:
 
 ```
 try                      ::= 'try' block catch?
-catch                    ::= 'catch' '(' expression ')' block
 test                     ::= 'test' '(' expression? (';' expression? (';' expression?)?)? ')' block catch?
+catch                    ::= 'catch' '(' expression ')' block
 ```
 
 The following example illustrates the use of error handling:
 
-```
+```typescript
 try {
     // Code that may throw an exception
     a = 1 / 0
@@ -964,7 +959,7 @@ try {
 }
 
 // Test statement for unit testing
-test("Division test") {
+test ("Division test") {
     a = 1 / 1
     system.println("Test passed")
 } catch (e) {
@@ -979,20 +974,20 @@ MaiaScript supports module system with `import` and `export` statements for bett
 The following is the syntax for import and export in EBNF notation:
 
 ```
-import                   ::= 'import' expression
 export                   ::= 'export' expression
+import                   ::= 'import' expression
 ```
 
 The following example illustrates the use of import and export:
 
-```
-// Export a function
-export myFunction(x) {
+```typescript
+// Export a MaiaAssembly function
+export f64 myFunction(f64 x) {
     return x * 2
 }
 
 // In another file
-import "./myModule.ms"
+import "./myModule.maia"
 result = myFunction(5)
 system.println(result)
 ```
@@ -1004,8 +999,8 @@ MaiaScript includes several additional statements for various purposes:
 ### Local and Global variables
 
 ```
-local                    ::= 'local' expression
 global                   ::= 'global' expression
+local                    ::= 'local' expression
 ```
 
 ### Type checking

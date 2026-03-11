@@ -1,6 +1,6 @@
 - [x] Update MaiaScript VSCode extension to the new grammar
 - [x] Update slides to the new grammar
-- [ ] Update manuals to the new grammar
+- [x] Update manuals to the new grammar
 - [ ] Change all local variables in all MaiaScript compiler and libraries from var to let
 - [ ] Implement MaiaScript compiler to JavaScript
 - [ ] Implement MaiaScript compiler to MaiaAssembly
