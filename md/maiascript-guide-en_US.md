@@ -606,7 +606,7 @@ system.println(a.f(5))
 **Object constructors** allow you to create `class instantiations` defined by them. `Classes` are **templates** for `objects`. They define their `properties`, changeable characteristics at runtime, and their `methods`, functionalities of objects. To create an `object constructor` we define a namespace with the `object initialization function`, `init`. To **instantiate** an `object` we assign to a variable the new instance of the namespace, using the `object creation operator`, `:=`. The following example creates an `object` that has a `y` property and assigns to that variable the value passed to the initializator at the time of its creation:
 
 ```typescript
-// An object constructor.
+// An object constructor (class).
 namespace A {
     y = 0
     init(x) {

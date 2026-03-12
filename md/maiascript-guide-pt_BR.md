@@ -606,7 +606,7 @@ system.println(a.f(5))
 **Construtores de objetos** permitem criar `instanciações de classe` definidas por eles. `Classes` são **modelos** para `objetos`. Elas definem suas `propriedades`, características modificáveis em tempo de execução, e seus `métodos`, funcionalidades dos objetos. Para criar um `construtor de objeto`, definimos um namespace com a `função de inicialização do objeto`, `init`. Para **instanciar** um `objeto`, atribuímos a uma variável a nova instância do namespace, usando o `operador de criação de objeto`, `:=`. O exemplo a seguir cria um `objeto` que tem uma propriedade `y` e atribui a essa variável o valor passado ao inicializador no momento de sua criação:
 
 ```typescript
-// Um construtor de objeto.
+// Um construtor de objeto (classe).
 namespace A {
     y = 0
     init(x) {

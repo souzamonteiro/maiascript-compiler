@@ -12,18 +12,6 @@ html: true
 
 ---
 
-## Table of Contents
-
-1. Introduction to MaiaScript
-2. Basic Syntax and Variables
-3. Operators and Expressions
-4. Control Structures
-5. Functions and Modules
-6. Advanced Features
-7. Real-world Examples
-
----
-
 ## What is MaiaScript?
 
 - **Adaptable and intelligent applications**
@@ -495,6 +483,24 @@ namespace MathUtilities {
 area = MathUtilities.circleArea(5)
 circumference = MathUtilities.circleCircumference(5)
 exp = MathUtilities.exponential(2)
+```
+
+---
+
+### Object constructors
+
+```typescript
+// An object constructor (class).
+namespace A {
+    y = 0
+    init(x) {
+        y = x
+    }
+}
+
+c := A(2)
+
+system.println(c.y)
 ```
 
 ---
