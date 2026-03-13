@@ -1,0 +1,229 @@
+wat                      ::= whitespace* watBody
+
+watBody                  ::= module whitespace*
+                           | eof
+
+module                   ::= '(' 'module' moduleField* ')'
+
+moduleField              ::= typeDef
+                           | importDef
+                           | funcDef
+                           | tableDef
+                           | memoryDef
+                           | globalDef
+                           | exportDef
+                           | startDef
+                           | elemDef
+                           | dataDef
+
+typeDef                  ::= '(' 'type' identifier? funcType ')'
+funcType                 ::= '(' 'func' funcSig* ')'
+funcSig                  ::= paramDecl
+                           | resultDecl
+
+importDef                ::= '(' 'import' string string importDesc ')'
+importDesc               ::= '(' 'func' identifier? funcSig* ')'
+                           | '(' 'table' identifier? limits referenceType ')'
+                           | '(' 'memory' identifier? limits ')'
+                           | '(' 'global' identifier? globalTypeInline ')'
+
+funcDef                  ::= '(' 'func' funcAtom* ')'
+tableDef                 ::= '(' 'table' identifier? limits referenceType ')'
+memoryDef                ::= '(' 'memory' identifier? limits ')'
+
+globalDef                ::= '(' 'global' identifier? globalTypeInline funcAtom+ ')'
+globalTypeInline         ::= valueType
+                           | '(' 'mut' valueType ')'
+
+exportDef                ::= '(' 'export' string exportDesc ')'
+exportDesc               ::= '(' 'func' index ')'
+                           | '(' 'table' index ')'
+                           | '(' 'memory' index ')'
+                           | '(' 'global' index ')'
+
+startDef                 ::= '(' 'start' index ')'
+
+elemDef                  ::= '(' 'elem' funcAtom+ ')'
+dataDef                  ::= '(' 'data' funcAtom+ ')'
+
+paramDecl                ::= '(' 'param' identifier? valueType+ ')'
+resultDecl               ::= '(' 'result' valueType+ ')'
+
+funcAtom                 ::= funcSexpr
+                           | atom
+
+funcSexpr                ::= '(' sHead funcAtom* ')'
+
+sHead                    ::= dottedName
+                           | identifier
+                           | sKeyword
+                           | name
+
+sKeyword                 ::= 'type'
+                           | 'param'
+                           | 'result'
+                           | 'local'
+                           | 'func'
+                           | 'table'
+                           | 'memory'
+                           | 'global'
+                           | 'import'
+                           | 'export'
+                           | 'start'
+                           | 'elem'
+                           | 'data'
+                           | 'mut'
+                           | 'if'
+                           | 'then'
+                           | 'else'
+                           | 'end'
+                           | 'block'
+                           | 'loop'
+                           | 'br'
+                           | 'br_if'
+                           | 'br_table'
+                           | 'return'
+                           | 'call'
+                           | 'call_indirect'
+                           | 'drop'
+                           | 'select'
+                           | 'nop'
+                           | 'unreachable'
+                           | 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+                           | 'v128'
+                           | 'funcref'
+                           | 'externref'
+
+atom                     ::= memArg
+                           | index
+                           | float
+                           | string
+                           | valueType
+                           | flatKeyword
+                           | dottedName
+                           | name
+
+memArg                   ::= 'offset=' memArgValue
+                           | 'align=' memArgValue
+memArgValue              ::= nat
+                           | name
+
+flatKeyword              ::= 'if'
+                           | 'then'
+                           | 'else'
+                           | 'end'
+                           | 'block'
+                           | 'loop'
+                           | 'br'
+                           | 'br_if'
+                           | 'br_table'
+                           | 'return'
+                           | 'call'
+                           | 'call_indirect'
+                           | 'drop'
+                           | 'select'
+                           | 'nop'
+                           | 'unreachable'
+                           | 'func'
+                           | 'mut'
+
+limits                   ::= nat nat?
+index                    ::= identifier
+                           | integer
+
+valueType                ::= 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+                           | 'v128'
+                           | referenceType
+
+referenceType            ::= 'funcref'
+                           | 'externref'
+
+whitespace               ::= whitespace^token
+                          /* ws: definition */
+
+<?TOKENS?>
+
+eof                      ::= $
+
+identifier               ::= '$' idChar+
+idChar                   ::= '_'
+                           | [0-9]
+                           | [A-Za-z]
+                           | '.'
+                           | '-'
+
+dottedName               ::= namePart ('.' namePart)+
+name                     ::= namePart - watKeyword
+namePart                 ::= [A-Za-z_][A-Za-z0-9_]*
+
+watKeyword               ::= 'module'
+                           | 'type'
+                           | 'param'
+                           | 'result'
+                           | 'local'
+                           | 'func'
+                           | 'table'
+                           | 'memory'
+                           | 'global'
+                           | 'import'
+                           | 'export'
+                           | 'start'
+                           | 'elem'
+                           | 'data'
+                           | 'mut'
+                           | 'if'
+                           | 'then'
+                           | 'else'
+                           | 'end'
+                           | 'block'
+                           | 'loop'
+                           | 'br'
+                           | 'br_if'
+                           | 'br_table'
+                           | 'return'
+                           | 'call'
+                           | 'call_indirect'
+                           | 'drop'
+                           | 'select'
+                           | 'nop'
+                           | 'unreachable'
+                           | 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+                           | 'v128'
+                           | 'funcref'
+                           | 'externref'
+
+nat                      ::= digit+
+integer                  ::= '-'? digit+
+float                    ::= '-'? digit+ (('.' digit+) (('e' | 'E') ('+' | '-')? digit+)?)
+                           | '-'? digit+ (('e' | 'E') ('+' | '-')? digit+)
+digit                    ::= [0-9]
+
+string                   ::= '"' stringChar* '"'
+stringChar               ::= unicodeNoQuoteBackslash
+                           | escapeSequence
+escapeSequence           ::= [#x5C] [#x0000-#xD7FF#xE000-#xFFFD]
+unicodeNoQuoteBackslash  ::= [#x0009]
+                           | [#x000A]
+                           | [#x000D]
+                           | [#x0020-#x0021]
+                           | [#x0023-#x005B]
+                           | [#x005D-#xD7FF]
+                           | [#xE000-#xFFFD]
+                           | [#x10000-#x10FFFF]
+
+sourceCharacter          ::= .
+lineTerminator           ::= #x000A
+                           | #x000D
+                           | #x2028
+                           | #x2029
+
+whitespace               ::= ([#x0009#x000A#x000D#x0020]+ | ';;' (sourceCharacter - lineTerminator)*)+

@@ -189,11 +189,42 @@ This section tracks what is still required for the MaiaAssembly emitter target d
 - [ ] Add execution tests (not only binary validity): instantiate and assert results
 - [ ] Add "guide parity" tests that mirror examples from the implementation guide
 
+### 12.11 Alignment backlog: MaiaAssembly EBNF -> Guide WAT -> Assembler
+
+Goal: guarantee a deterministic pipeline where valid MaiaAssembly input is lowered to a WAT subset that both
+[Wat.ebnf](grammar/Wat.ebnf) and `wat-assembler.js` accept.
+
+- [ ] Define and version a **lowering contract** document:
+  - [ ] MaiaAssembly construct -> canonical WAT pattern mapping
+  - [ ] which guide snippets are templates vs standalone module fragments
+  - [ ] required runtime prelude/imports (`math.pow`, system I/O, etc.)
+- [ ] Add a normalization pass in emitter output (before assembly):
+  - [ ] normalize folded/flat instruction forms to one canonical form supported by assembler
+  - [ ] normalize assignment shapes (`local.set`/`global.set`) to accepted parser forms
+  - [ ] normalize boolean patterns (`eqz`/comparisons) and sign-extension usage policy
+- [ ] Close known Guide vs assembler gaps (observed validation failures):
+  - [ ] implement/sign off `i32.extend8_s` and related sign-extension ops in parser+codegen
+  - [ ] complete folded-expression parsing for nested forms used in guide (`local.set (...)`, deep arithmetic trees)
+  - [ ] complete `call_indirect` typed forms used by guide templates
+  - [ ] support/stabilize symbol resolution expectations for guide-style runtime calls/globals
+- [ ] Add an emitter-side dependency declaration step:
+  - [ ] auto-insert/import required runtime symbols referenced by lowering templates
+  - [ ] fail fast with actionable diagnostics when required symbols are missing
+- [ ] Add **end-to-end MaiaAssembly pipeline tests**:
+  - [ ] `maiaasm -> wat` golden tests (text output parity)
+  - [ ] `maiaasm -> wat -> wasm` build tests (assembler acceptance)
+  - [ ] `maiaasm -> wat -> wasm -> run` semantic tests (runtime parity)
+  - [ ] one test group per guide chapter (expressions, control flow, functions, arrays/matrices, runtime)
+- [ ] Add acceptance gates specific to this alignment:
+  - [ ] 100% of guide parity fixtures parse in [Wat.ebnf](grammar/Wat.ebnf)
+  - [ ] 100% of required guide parity fixtures assemble in `wat-assembler.js`
+  - [ ] 100% of mandatory MaiaAssembly lowering fixtures pass semantic runtime assertions
+
 ## 13) Current practical answer for MaiaAssembly objective
 
 - [ ] Not yet guaranteed for all possible MaiaAssembly-emitted WAT modules
-- [ ] Required next milestone: pass a dedicated MaiaAssembly conformance pack (Section 12.10)
-- [ ] Required acceptance gate: semantic parity with expected Maia runtime behavior
+- [ ] Required next milestone: pass dedicated MaiaAssembly conformance + alignment pack (Sections 12.10 and 12.11)
+- [ ] Required acceptance gate: semantic parity with expected Maia runtime behavior and guide-parity assembly success
 
 ## 14) Progress scoring model (weighted)
 
@@ -241,3 +272,33 @@ Whenever a milestone lands, update:
 3. overall percentage sum
 
 Recommended cadence: update after each merged feature group (parser family, opcode family, conformance batch, Maia fixture pack).
+
+## 15) Priority roadmap (easiest -> hardest)
+
+Use this ordering to sequence implementation work with the highest chance of early progress and low rework.
+
+| Priority | Work item | Why this order | Depends on | Estimated difficulty |
+|---|---|---|---|---|
+| P1 | Freeze MaiaAssembly->WAT lowering contract (Section 12.11) | Removes ambiguity and prevents downstream churn | None | Easy |
+| P2 | Add guide parity fixture inventory and chapter mapping | Creates measurable scope for all later tasks | P1 | Easy |
+| P3 | Add emitter output normalization rules (folded/flat canonicalization policy) | Reduces parser/codegen surface before adding features | P1 | Easy-Medium |
+| P4 | Improve diagnostics categories/messages (lex/parse/semantic/codegen) | Speeds iteration and debugging for all subsequent milestones | None | Easy-Medium |
+| P5 | Add missing sign-extension instruction support (`i32.extend8_s` family) | Unblocks known guide failures with limited blast radius | P3 | Medium |
+| P6 | Complete nested folded-expression parsing used by guide templates | Needed for assignment/control-flow forms that currently fail | P3 | Medium |
+| P7 | Stabilize runtime symbol dependency handling (auto-import or fail-fast) | Resolves many Unknown function/global guide failures | P1, P2 | Medium |
+| P8 | Complete `call_indirect` typed forms and validation paths | Core requirement for function model and switch/dispatch templates | P6, P7 | Medium-Hard |
+| P9 | Expand numeric/conversion operator coverage to full Maia needs | Required for language semantics parity and runtime correctness | P5 | Medium-Hard |
+| P10 | Add end-to-end pipeline tests (`maiaasm -> wat -> wasm -> run`) | Converts feature work into enforceable acceptance gates | P2, P6, P7, P8 | Hard |
+| P11 | Enforce guide parity gates in CI (parse + assemble + semantic runtime pass) | Prevents regressions and validates delivery target continuously | P10 | Hard |
+| P12 | Conformance hardening against external corpora/toolchains | Final confidence layer after internal parity is stable | P10, P11 | Hard |
+
+### 15.1 Suggested milestone grouping
+
+- **Milestone A (Foundation):** P1-P4  
+  Output: stable contract, test inventory, normalization policy, better diagnostics.
+- **Milestone B (Known guide blockers):** P5-P8  
+  Output: current guide-template blockers addressed in parser/codegen/resolution.
+- **Milestone C (Proof of pipeline):** P9-P10  
+  Output: MaiaAssembly to WAT to WASM to runtime semantic checks.
+- **Milestone D (Release confidence):** P11-P12  
+  Output: CI-enforced parity + broader conformance confidence.
