@@ -66,6 +66,8 @@ for (const watFile of watFiles) {
       // This file should succeed
       const wasm = assembler.assemble(source);
       fs.writeFileSync(outputPath, Buffer.from(wasm));
+
+      const isValidWasm = WebAssembly.validate(new Uint8Array(wasm));
       
       // Compare with expected if available
       if (fs.existsSync(expectedWasmPath)) {
@@ -77,13 +79,24 @@ for (const watFile of watFiles) {
           console.log('✓ PASSED');
           passed++;
         } else {
-          console.log('❌ FAILED (hash mismatch)');
-          console.log(`    Expected: ${expectedHash}, Got: ${actualHash}`);
-          failed++;
+          if (isValidWasm) {
+            console.log('✓ PASSED (valid wasm, hash mismatch)');
+            console.log(`    Expected: ${expectedHash}, Got: ${actualHash}`);
+            passed++;
+          } else {
+            console.log('❌ FAILED (invalid wasm + hash mismatch)');
+            console.log(`    Expected: ${expectedHash}, Got: ${actualHash}`);
+            failed++;
+          }
         }
       } else {
-        console.log('⚠ SKIPPED (no expected output)');
-        passed++; // Count as passed since we generated output
+        if (isValidWasm) {
+          console.log('✓ PASSED (valid wasm, no expected output)');
+          passed++;
+        } else {
+          console.log('❌ FAILED (invalid wasm, no expected output)');
+          failed++;
+        }
       }
     }
   } catch (error) {

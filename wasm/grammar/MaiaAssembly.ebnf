@@ -1,0 +1,209 @@
+maiaassembly             ::= module
+                           | eof
+
+module                   ::= 'module' identifier? '{' moduleField* '}'
+
+moduleField              ::= typeDeclaration
+                           | importDeclaration
+                           | memoryDeclaration
+                           | tableDeclaration
+                           | globalDeclaration
+                           | dataDeclaration
+                           | elemDeclaration
+                           | functionDeclaration
+                           | exportDeclaration
+                           | startDeclaration
+                           | comment
+
+typeDeclaration          ::= 'type' identifier '=' functionType ';'
+functionType             ::= '(' typeList? ')' '->' returnType
+returnType               ::= 'void'
+                           | valueType
+                           | '(' typeList ')'
+typeList                 ::= valueType (',' valueType)*
+
+importDeclaration        ::= 'import' 'func' identifier 'from' string functionType ';'
+                           | 'import' 'memory' identifier 'from' string memoryType ';'
+                           | 'import' 'table' identifier 'from' string tableType ';'
+                           | 'import' 'global' identifier 'from' string globalType ';'
+
+exportDeclaration        ::= 'export' exportKind reference 'as' string ';'
+exportKind               ::= 'func'
+                           | 'memory'
+                           | 'table'
+                           | 'global'
+
+startDeclaration         ::= 'start' reference ';'
+
+memoryDeclaration        ::= 'memory' identifier? memoryType ('export' string)? ';'
+memoryType               ::= 'min' integer ('max' integer)?
+
+tableDeclaration         ::= 'table' identifier? tableType ('export' string)? ';'
+tableType                ::= 'min' integer ('max' integer)? referenceType
+
+globalDeclaration        ::= 'global' identifier globalType '=' constExpression ('export' string)? ';'
+globalType               ::= 'mut' valueType
+                           | valueType
+
+dataDeclaration          ::= 'data' identifier? 'at' constExpression string ';'
+elemDeclaration          ::= 'elem' identifier? ('table' reference)? 'at' constExpression 'func' '[' referenceList? ']' ';'
+referenceList            ::= reference (',' reference)*
+
+functionDeclaration      ::= 'func' identifier?
+                             parameterSection?
+                             resultSection?
+                             typeUse?
+                             inlineExport?
+                             '{'
+                               localDeclaration*
+                               instruction*
+                             '}'
+
+parameterSection         ::= 'params' '(' parameterDeclaration (',' parameterDeclaration)* ')'
+parameterDeclaration     ::= identifier ':' valueType
+
+resultSection            ::= 'result' returnType
+typeUse                  ::= 'type' reference
+inlineExport             ::= 'export' string
+
+localDeclaration         ::= 'local' identifier ':' valueType ';'
+
+instruction              ::= controlInstruction
+                           | operationInstruction
+                           | comment
+
+controlInstruction       ::= blockInstruction
+                           | loopInstruction
+                           | ifInstruction
+
+blockInstruction         ::= 'block' label? resultAnnotation? '{' instruction* '}'
+loopInstruction          ::= 'loop' label? resultAnnotation? '{' instruction* '}'
+ifInstruction            ::= 'if' resultAnnotation? '{' instruction* '}' ('else' '{' instruction* '}')?
+resultAnnotation         ::= 'result' valueType
+label                    ::= identifier
+
+operationInstruction     ::= opcode operand* ';'
+opcode                   ::= identifier
+
+operand                  ::= reference
+                           | integer
+                           | float
+                           | string
+                           | 'default'
+                           | '[' operandList? ']'
+                           | '(' operandList? ')'
+                           | memoryArgument
+memoryArgument           ::= 'offset' '=' integer
+                           | 'align' '=' integer
+operandList              ::= operand (',' operand)*
+
+constExpression          ::= '(' constExpressionCore ')'
+constExpressionCore      ::= 'i32.const' integer
+                           | 'i64.const' integer
+                           | 'f32.const' float
+                           | 'f64.const' float
+                           | 'i32_const' integer
+                           | 'i64_const' integer
+                           | 'f32_const' float
+                           | 'f64_const' float
+                           | 'global.get' reference
+                           | 'global_get' reference
+
+reference                ::= identifier
+
+literalValue             ::= integer
+                           | float
+
+whitespace               ::= whitespace^token
+                          /* ws: definition */
+
+<?TOKENS?>
+
+eof                      ::= $
+
+valueType                ::= 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+                           | 'v128'
+                           | referenceType
+
+referenceType            ::= 'funcref'
+                           | 'externref'
+
+identifier               ::= (firstIdentifierChar identifierChar*) - reservedWord
+
+reservedWord             ::= keyword
+
+keyword                  ::= 'module'
+                           | 'type'
+                           | 'import'
+                           | 'from'
+                           | 'memory'
+                           | 'table'
+                           | 'global'
+                           | 'data'
+                           | 'elem'
+                           | 'func'
+                           | 'export'
+                           | 'start'
+                           | 'params'
+                           | 'param'
+                           | 'result'
+                           | 'local'
+                           | 'block'
+                           | 'loop'
+                           | 'if'
+                           | 'else'
+                           | 'default'
+                           | 'offset'
+                           | 'align'
+                           | 'min'
+                           | 'max'
+                           | 'mut'
+                           | 'void'
+                           | 'as'
+                           | 'at'
+                           | 'i32'
+                           | 'i64'
+                           | 'f32'
+                           | 'f64'
+                           | 'v128'
+                           | 'funcref'
+                           | 'externref'
+
+firstIdentifierChar      ::= '$'
+                           | '_'
+                           | [A-Za-z]
+identifierChar           ::= '$'
+                           | '_'
+                           | '.'
+                           | [0-9]
+                           | [A-Za-z]
+
+integer                  ::= '-'? digit+
+float                    ::= '-'? digit+ (('.' digit+) (('e' | 'E') ('+' | '-')? digit+)?)
+                           | '-'? digit+ (('e' | 'E') ('+' | '-')? digit+)
+digit                    ::= [0-9]
+
+string                   ::= '"' (unicode | '\\' | '\/' | '\b' | '\f' | '\n' | '\r' | '\t')* '"'
+
+unicode                  ::= alphabet - ["#x005C]
+alphabet                 ::= #x0009
+                           | #x000A
+                           | #x000D
+                           | [#x0020-#xD7FF]
+                           | [#xE000-#xFFFD]
+                           | [#x10000-#x10FFFF]
+
+comment                  ::= singleLineComment
+singleLineComment        ::= '//' (sourceCharacter - lineTerminator)*
+                           | '#'  (sourceCharacter - lineTerminator)*
+
+sourceCharacter          ::= .
+lineTerminator           ::= #x000A
+                           | #x000D
+                           | #x2028
+                           | #x2029
+
+whitespace               ::= [#x0009#x000A#x000D#x0020]+

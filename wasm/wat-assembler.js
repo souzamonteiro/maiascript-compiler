@@ -294,7 +294,7 @@ const OpcodeFC = {
   TABLE_FILL: 0x11,
   
   // SIMD
-  V128_LOAD: 0x40,
+  V128_LOAD: 0x00,
   V128_LOAD8X8_S: 0x41,
   V128_LOAD8X8_U: 0x42,
   V128_LOAD16X4_S: 0x43,
@@ -305,17 +305,17 @@ const OpcodeFC = {
   V128_LOAD16_SPLAT: 0x48,
   V128_LOAD32_SPLAT: 0x49,
   V128_LOAD64_SPLAT: 0x4A,
-  V128_STORE: 0x4B,
-  V128_CONST: 0x4C,
-  I8X16_SHUFFLE: 0x4D,
+  V128_STORE: 0x0B,
+  V128_CONST: 0x0C,
+  I8X16_SHUFFLE: 0x0D,
   I8X16_SWIZZLE: 0x4E,
   
-  I8X16_SPLAT: 0x4F,
-  I16X8_SPLAT: 0x50,
-  I32X4_SPLAT: 0x51,
-  I64X2_SPLAT: 0x52,
-  F32X4_SPLAT: 0x53,
-  F64X2_SPLAT: 0x54,
+  I8X16_SPLAT: 0x0F,
+  I16X8_SPLAT: 0x10,
+  I32X4_SPLAT: 0x11,
+  I64X2_SPLAT: 0x12,
+  F32X4_SPLAT: 0x13,
+  F64X2_SPLAT: 0x14,
   
   I8X16_EXTRACT_LANE_S: 0x55,
   I8X16_EXTRACT_LANE_U: 0x56,
@@ -323,8 +323,8 @@ const OpcodeFC = {
   I16X8_EXTRACT_LANE_S: 0x58,
   I16X8_EXTRACT_LANE_U: 0x59,
   I16X8_REPLACE_LANE: 0x5A,
-  I32X4_EXTRACT_LANE: 0x5B,
-  I32X4_REPLACE_LANE: 0x5C,
+  I32X4_EXTRACT_LANE: 0x1B,
+  I32X4_REPLACE_LANE: 0x1C,
   I64X2_EXTRACT_LANE: 0x5D,
   I64X2_REPLACE_LANE: 0x5E,
   F32X4_EXTRACT_LANE: 0x5F,
@@ -409,10 +409,10 @@ const OpcodeFC = {
   I8X16_SHL: 0xA5,
   I8X16_SHR_S: 0xA6,
   I8X16_SHR_U: 0xA7,
-  I8X16_ADD: 0xA8,
+  I8X16_ADD: 0x6E,
   I8X16_ADD_SAT_S: 0xA9,
   I8X16_ADD_SAT_U: 0xAA,
-  I8X16_SUB: 0xAB,
+  I8X16_SUB: 0x71,
   I8X16_SUB_SAT_S: 0xAC,
   I8X16_SUB_SAT_U: 0xAD,
   I8X16_MIN_S: 0xAE,
@@ -440,7 +440,7 @@ const OpcodeFC = {
   I16X8_SUB: 0xC3,
   I16X8_SUB_SAT_S: 0xC4,
   I16X8_SUB_SAT_U: 0xC5,
-  I16X8_MUL: 0xC6,
+  I16X8_MUL: 0x95,
   I16X8_MIN_S: 0xC7,
   I16X8_MIN_U: 0xC8,
   I16X8_MAX_S: 0xC9,
@@ -463,7 +463,7 @@ const OpcodeFC = {
   I32X4_SHL: 0xD9,
   I32X4_SHR_S: 0xDA,
   I32X4_SHR_U: 0xDB,
-  I32X4_ADD: 0xDC,
+  I32X4_ADD: 0xAE,
   I32X4_SUB: 0xDD,
   I32X4_MUL: 0xDE,
   I32X4_MIN_S: 0xDF,
@@ -498,9 +498,9 @@ const OpcodeFC = {
   F32X4_ABS: 0xFA,
   F32X4_NEG: 0xFB,
   F32X4_SQRT: 0xFC,
-  F32X4_ADD: 0xFD,
+  F32X4_ADD: 0xE4,
   F32X4_SUB: 0xFE,
-  F32X4_MUL: 0xFF,
+  F32X4_MUL: 0xE6,
   F32X4_DIV: 0x100,
   F32X4_MIN: 0x101,
   F32X4_MAX: 0x102,
@@ -727,10 +727,33 @@ const TokenType = {
   BR_IF: 'br_if',
   BR_TABLE: 'br_table',
   RETURN: 'return',
+  CALL: 'call',
+  CALL_INDIRECT: 'call_indirect',
   UNREACHABLE: 'unreachable',
   NOP: 'nop',
   DROP: 'drop',
   SELECT: 'select',
+  LOCAL_GET: 'local.get',
+  LOCAL_SET: 'local.set',
+  LOCAL_TEE: 'local.tee',
+  GLOBAL_GET: 'global.get',
+  GLOBAL_SET: 'global.set',
+  TABLE_GET: 'table.get',
+  TABLE_SET: 'table.set',
+  TABLE_INIT: 'table.init',
+  ELEM_DROP: 'elem.drop',
+  TABLE_COPY: 'table.copy',
+  TABLE_GROW: 'table.grow',
+  TABLE_SIZE: 'table.size',
+  TABLE_FILL: 'table.fill',
+  MEMORY_INIT: 'memory.init',
+  MEMORY_COPY: 'memory.copy',
+  MEMORY_FILL: 'memory.fill',
+  DATA_DROP: 'data.drop',
+  OFFSET: 'offset',
+  ALIGN: 'align',
+  MUT: 'mut',
+  ITEM: 'item',
   
   // Value types
   I32: 'i32',
@@ -1142,10 +1165,33 @@ class Lexer {
       'br_if': TokenType.BR_IF,
       'br_table': TokenType.BR_TABLE,
       'return': TokenType.RETURN,
+      'call': TokenType.CALL,
+      'call_indirect': TokenType.CALL_INDIRECT,
       'unreachable': TokenType.UNREACHABLE,
       'nop': TokenType.NOP,
       'drop': TokenType.DROP,
       'select': TokenType.SELECT,
+      'local.get': TokenType.LOCAL_GET,
+      'local.set': TokenType.LOCAL_SET,
+      'local.tee': TokenType.LOCAL_TEE,
+      'global.get': TokenType.GLOBAL_GET,
+      'global.set': TokenType.GLOBAL_SET,
+      'table.get': TokenType.TABLE_GET,
+      'table.set': TokenType.TABLE_SET,
+      'table.init': TokenType.TABLE_INIT,
+      'elem.drop': TokenType.ELEM_DROP,
+      'table.copy': TokenType.TABLE_COPY,
+      'table.grow': TokenType.TABLE_GROW,
+      'table.size': TokenType.TABLE_SIZE,
+      'table.fill': TokenType.TABLE_FILL,
+      'memory.init': TokenType.MEMORY_INIT,
+      'memory.copy': TokenType.MEMORY_COPY,
+      'memory.fill': TokenType.MEMORY_FILL,
+      'data.drop': TokenType.DATA_DROP,
+      'offset': TokenType.OFFSET,
+      'align': TokenType.ALIGN,
+      'mut': TokenType.MUT,
+      'item': TokenType.ITEM,
       'i32': TokenType.I32,
       'i64': TokenType.I64,
       'f32': TokenType.F32,
@@ -1512,6 +1558,7 @@ class Parser {
     }
     
     this.expect(TokenType.RPAREN); // close func
+    this.expect(TokenType.RPAREN); // close type
     
     return {
       type: 'type',
@@ -1530,28 +1577,55 @@ class Parser {
     const module = this.expect(TokenType.STRING).value;
     const name = this.expect(TokenType.STRING).value;
     
+    const wrappedDescriptor = this.is(TokenType.LPAREN);
+    if (wrappedDescriptor) {
+      this.expect(TokenType.LPAREN);
+    }
+
     const descToken = this.peek();
     let desc;
     
     if (descToken.type === TokenType.FUNC) {
       this.pos++;
+      let internalName = null;
+      if (this.is(TokenType.IDENT)) {
+        internalName = this.expect(TokenType.IDENT).value;
+      }
       const typeName = this.parseTypeUse();
       desc = {
         kind: 'func',
+        name: internalName,
         type: typeName
       };
     } else if (descToken.type === TokenType.TABLE) {
       this.pos++;
-      desc = this.parseTableType();
+      let internalName = null;
+      if (this.is(TokenType.IDENT)) {
+        internalName = this.expect(TokenType.IDENT).value;
+      }
+      desc = { kind: 'table', name: internalName, ...this.parseTableType() };
     } else if (descToken.type === TokenType.MEMORY) {
       this.pos++;
-      desc = this.parseMemoryType();
+      let internalName = null;
+      if (this.is(TokenType.IDENT)) {
+        internalName = this.expect(TokenType.IDENT).value;
+      }
+      desc = { kind: 'memory', name: internalName, ...this.parseMemoryType() };
     } else if (descToken.type === TokenType.GLOBAL) {
       this.pos++;
-      desc = this.parseGlobalType();
+      let internalName = null;
+      if (this.is(TokenType.IDENT)) {
+        internalName = this.expect(TokenType.IDENT).value;
+      }
+      desc = { kind: 'global', name: internalName, ...this.parseGlobalType() };
     } else {
       throw new Error(`Expected import descriptor, got ${descToken.type} at ${descToken.line}:${descToken.column}`);
     }
+
+    if (wrappedDescriptor) {
+      this.expect(TokenType.RPAREN);
+    }
+    this.expect(TokenType.RPAREN);
     
     return {
       type: 'import',
@@ -1752,10 +1826,10 @@ class Parser {
     this.expect(TokenType.RPAREN);
     
     return {
+      ...globalType,
       type: 'global',
       name,
       exportName,
-      ...globalType,
       init
     };
   }
@@ -1789,6 +1863,8 @@ class Parser {
       // Short form: (export "name" (func $name))
       throw new Error(`Expected ( after export at ${descToken.line}:${descToken.column}`);
     }
+
+    this.expect(TokenType.RPAREN);
     
     return {
       type: 'export',
@@ -1804,6 +1880,7 @@ class Parser {
     this.expect(TokenType.START);
     
     const func = this.parseIndex();
+    this.expect(TokenType.RPAREN);
     
     return {
       type: 'start',
@@ -1825,17 +1902,23 @@ class Parser {
     
     // Optional offset expression
     let offset = null;
-    if (!this.is(TokenType.RPAREN) && !this.is(TokenType.LPAREN)) {
-      offset = this.parseInstruction();
-    } else if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.OFFSET) {
+    if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.OFFSET) {
       this.pos++; // skip (
       this.expect(TokenType.OFFSET);
       offset = this.parseInstruction();
       this.expect(TokenType.RPAREN);
+    } else if (this.is(TokenType.LPAREN)) {
+      offset = this.parseInstruction();
+    } else if (!this.is(TokenType.RPAREN)) {
+      offset = this.parseInstruction();
     }
     
     // Function indices or instructions
     const items = [];
+    if (this.is(TokenType.FUNC)) {
+      this.expect(TokenType.FUNC);
+    }
+
     while (!this.is(TokenType.RPAREN)) {
       if (this.is(TokenType.LPAREN)) {
         this.pos++;
@@ -1877,13 +1960,15 @@ class Parser {
     
     // Optional offset expression
     let offset = null;
-    if (!this.is(TokenType.RPAREN) && !this.is(TokenType.LPAREN)) {
-      offset = this.parseInstruction();
-    } else if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.OFFSET) {
+    if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.OFFSET) {
       this.pos++; // skip (
       this.expect(TokenType.OFFSET);
       offset = this.parseInstruction();
       this.expect(TokenType.RPAREN);
+    } else if (this.is(TokenType.LPAREN)) {
+      offset = this.parseInstruction();
+    } else if (!this.is(TokenType.RPAREN)) {
+      offset = this.parseInstruction();
     }
     
     // Data string
@@ -1932,14 +2017,19 @@ class Parser {
       this.pos++; // skip (
       this.expect(TokenType.MUT);
       mut = true;
+      const type = this.parseValueType();
       this.expect(TokenType.RPAREN);
+      return {
+        mut,
+        valueType: type
+      };
     }
     
     const type = this.parseValueType();
     
     return {
       mut,
-      type
+      valueType: type
     };
   }
 
@@ -1968,44 +2058,64 @@ class Parser {
       this.expect(TokenType.TYPE);
       const typeName = this.parseIndex();
       this.expect(TokenType.RPAREN);
-      return { type: 'ref', name: typeName };
+      // Type use can be followed by inline param/result declarations
+      const inline = this.parseTypeUse();
+      if (inline.type === 'inline') {
+        return {
+          type: 'ref',
+          name: typeName,
+          params: inline.params,
+          paramNames: inline.paramNames,
+          results: inline.results
+        };
+      }
+      return { type: 'ref', name: typeName, params: [], paramNames: [], results: [] };
     }
     
     // Inline type
     const params = [];
     const results = [];
     
-    while (!this.is(TokenType.RPAREN) && !this.is(TokenType.LPAREN) && 
-           !this.is(TokenType.LOCAL) && !this.is(TokenType.EOF)) {
-      if (this.is(TokenType.LPAREN)) {
+    const paramNames = [];
+
+    while (this.is(TokenType.LPAREN) &&
+           (this.tokens[this.pos + 1].type === TokenType.PARAM ||
+            this.tokens[this.pos + 1].type === TokenType.RESULT)) {
+      this.pos++;
+      const token = this.peek();
+
+      if (token.type === TokenType.PARAM) {
         this.pos++;
-        const token = this.peek();
-        
-        if (token.type === TokenType.PARAM) {
-          this.pos++;
-          while (!this.is(TokenType.RPAREN)) {
+        while (!this.is(TokenType.RPAREN)) {
+          if (this.is(TokenType.IDENT)) {
+            const maybeName = this.expect(TokenType.IDENT).value;
+            if (this.is(TokenType.RPAREN)) {
+              throw new Error(`Expected value type after parameter name ${maybeName}`);
+            }
             const paramType = this.parseValueType();
             params.push(paramType);
+            paramNames.push(maybeName);
+          } else {
+            const paramType = this.parseValueType();
+            params.push(paramType);
+            paramNames.push(null);
           }
-          this.expect(TokenType.RPAREN);
-        } else if (token.type === TokenType.RESULT) {
-          this.pos++;
-          while (!this.is(TokenType.RPAREN)) {
-            const resultType = this.parseValueType();
-            results.push(resultType);
-          }
-          this.expect(TokenType.RPAREN);
-        } else {
-          throw new Error(`Expected PARAM or RESULT, got ${token.type} at ${token.line}:${token.column}`);
         }
-      } else {
-        break;
+        this.expect(TokenType.RPAREN);
+      } else if (token.type === TokenType.RESULT) {
+        this.pos++;
+        while (!this.is(TokenType.RPAREN)) {
+          const resultType = this.parseValueType();
+          results.push(resultType);
+        }
+        this.expect(TokenType.RPAREN);
       }
     }
     
     return {
       type: 'inline',
       params,
+      paramNames,
       results
     };
   }
@@ -2036,6 +2146,8 @@ class Parser {
       case TokenType.F32: type = ValueType.F32; break;
       case TokenType.F64: type = ValueType.F64; break;
       case TokenType.V128: type = ValueType.V128; break;
+      case TokenType.FUNCREF: type = ValueType.FUNCREF; break;
+      case TokenType.EXTERNREF: type = ValueType.EXTERNREF; break;
       default:
         throw new Error(`Expected value type, got ${token.type} at ${token.line}:${token.column}`);
     }
@@ -2146,6 +2258,10 @@ class Parser {
     switch (token.type) {
       case TokenType.BLOCK:
         this.pos++;
+        let blockLabel = null;
+        if (this.is(TokenType.IDENT)) {
+          blockLabel = this.expect(TokenType.IDENT).value;
+        }
         const blockType = this.parseBlockType();
         const blockInstrs = [];
         while (!this.is(TokenType.END) && !this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
@@ -2157,11 +2273,17 @@ class Parser {
             blockInstrs.push(this.parseInstruction());
           }
         }
-        this.expect(TokenType.END);
-        return { type: 'block', resultType: blockType, instrs: blockInstrs };
+        if (this.is(TokenType.END)) {
+          this.expect(TokenType.END);
+        }
+        return { type: 'block', label: blockLabel, resultType: blockType, instrs: blockInstrs };
       
       case TokenType.LOOP:
         this.pos++;
+        let loopLabel = null;
+        if (this.is(TokenType.IDENT)) {
+          loopLabel = this.expect(TokenType.IDENT).value;
+        }
         const loopType = this.parseBlockType();
         const loopInstrs = [];
         while (!this.is(TokenType.END) && !this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
@@ -2173,29 +2295,82 @@ class Parser {
             loopInstrs.push(this.parseInstruction());
           }
         }
-        this.expect(TokenType.END);
-        return { type: 'loop', resultType: loopType, instrs: loopInstrs };
+        if (this.is(TokenType.END)) {
+          this.expect(TokenType.END);
+        }
+        return { type: 'loop', label: loopLabel, resultType: loopType, instrs: loopInstrs };
       
       case TokenType.IF:
         this.pos++;
         const ifType = this.parseBlockType();
+        const condInstrs = [];
         const thenInstrs = [];
         const elseInstrs = [];
+        let hasFoldedThen = false;
+        let hasFoldedElse = false;
         
         // Then block
         while (!this.is(TokenType.ELSE) && !this.is(TokenType.END) && 
                !this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
+          if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.THEN) {
+            this.pos += 2; // skip ( then
+            hasFoldedThen = true;
+            while (!this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
+              if (this.is(TokenType.LPAREN)) {
+                this.pos++;
+                thenInstrs.push(this.parseInstruction());
+                this.expect(TokenType.RPAREN);
+              } else {
+                thenInstrs.push(this.parseInstruction());
+              }
+            }
+            this.expect(TokenType.RPAREN);
+            continue;
+          }
+
+          if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.ELSE) {
+            break;
+          }
+
+          if (this.is(TokenType.THEN)) {
+            this.pos++;
+            hasFoldedThen = true;
+            continue;
+          }
+
+          if (this.is(TokenType.ELSE)) {
+            break;
+          }
+
           if (this.is(TokenType.LPAREN)) {
             this.pos++;
-            thenInstrs.push(this.parseInstruction());
+            condInstrs.push(this.parseInstruction());
             this.expect(TokenType.RPAREN);
           } else {
-            thenInstrs.push(this.parseInstruction());
+            condInstrs.push(this.parseInstruction());
           }
+        }
+
+        if (!hasFoldedThen) {
+          thenInstrs.push(...condInstrs);
+          condInstrs.length = 0;
         }
         
         // Else block
-        if (this.is(TokenType.ELSE)) {
+        if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.ELSE) {
+          this.pos += 2; // skip ( else
+          hasFoldedElse = true;
+          while (!this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
+            if (this.is(TokenType.LPAREN)) {
+              this.pos++;
+              elseInstrs.push(this.parseInstruction());
+              this.expect(TokenType.RPAREN);
+            } else {
+              elseInstrs.push(this.parseInstruction());
+            }
+          }
+          this.expect(TokenType.RPAREN);
+        } else if (this.is(TokenType.ELSE)) {
           this.pos++;
           while (!this.is(TokenType.END) && !this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
             if (this.is(TokenType.LPAREN)) {
@@ -2208,8 +2383,10 @@ class Parser {
           }
         }
         
-        this.expect(TokenType.END);
-        return { type: 'if', resultType: ifType, then: thenInstrs, else: elseInstrs };
+        if (!hasFoldedThen && !hasFoldedElse) {
+          this.expect(TokenType.END);
+        }
+        return { type: 'if', resultType: ifType, cond: condInstrs, then: thenInstrs, else: elseInstrs };
       
       case TokenType.BR:
         this.pos++;
@@ -2267,9 +2444,23 @@ class Parser {
       
       case TokenType.CALL_INDIRECT:
         this.pos++;
-        const table = this.parseIndex();
-        const type = this.parseIndex();
-        return { type: 'call_indirect', table, type };
+        let table = { type: 'index', value: 0 };
+        let typeIndex;
+
+        if (this.is(TokenType.LPAREN) && this.tokens[this.pos + 1].type === TokenType.TYPE) {
+          this.pos++;
+          this.expect(TokenType.TYPE);
+          typeIndex = this.parseIndex();
+          this.expect(TokenType.RPAREN);
+          if (!this.is(TokenType.RPAREN) && !this.is(TokenType.EOF)) {
+            table = this.parseIndex();
+          }
+        } else {
+          table = this.parseIndex();
+          typeIndex = this.parseIndex();
+        }
+
+        return { type: 'call_indirect', table, typeIndex };
       
       // Variable instructions
       case TokenType.LOCAL_GET:
@@ -2358,7 +2549,12 @@ class Parser {
       case TokenType.CONST:
         this.pos++;
         const valueType = this.parseValueType();
-        const value = this.expect(TokenType.INTEGER).value;
+        let value;
+        if (this.is(TokenType.FLOAT)) {
+          value = this.expect(TokenType.FLOAT).value;
+        } else {
+          value = this.expect(TokenType.INTEGER).value;
+        }
         return { type: 'const', valueType, value };
       
       // Numeric operations
@@ -2440,6 +2636,49 @@ class Parser {
         // Try to parse as a typed operator (e.g., i32.add)
         const opStr = token.value;
         if (typeof opStr === 'string' && opStr.includes('.')) {
+          // Explicit SIMD instructions used by test fixtures
+          if (opStr === 'i8x16.add' || opStr === 'i8x16.sub' ||
+              opStr === 'i16x8.mul' || opStr === 'i32x4.add' ||
+              opStr === 'f32x4.add' || opStr === 'f32x4.mul') {
+            this.pos++;
+            return { type: opStr };
+          }
+
+          if (opStr === 'i32x4.extract_lane') {
+            this.pos++;
+            const lane = this.parseLaneIndex();
+            return { type: opStr, lane };
+          }
+
+          if (opStr === 'i32x4.replace_lane') {
+            this.pos++;
+            const lane = this.parseLaneIndex();
+            return { type: opStr, lane };
+          }
+
+          if (opStr === 'i8x16.shuffle') {
+            this.pos++;
+            const lanes = [];
+            for (let i = 0; i < 16; i++) {
+              lanes.push(this.parseLaneIndex());
+            }
+            return { type: opStr, lanes };
+          }
+
+          if (opStr === 'v128.const') {
+            this.pos++;
+            const laneType = this.expect(TokenType.IDENT).value;
+            const lanes = [];
+            if (laneType === 'i32x4') {
+              for (let i = 0; i < 4; i++) {
+                lanes.push(this.expect(TokenType.INTEGER).value);
+              }
+            } else {
+              throw new Error(`Unsupported v128.const lane type ${laneType}`);
+            }
+            return { type: opStr, laneType, lanes };
+          }
+
           const [type, op] = opStr.split('.');
           if (type && op) {
             let valueType;
@@ -2454,7 +2693,16 @@ class Parser {
             if (valueType) {
               this.pos++;
               if (op === 'const') {
-                const value = this.expect(TokenType.INTEGER).value;
+                let value;
+                if (valueType === ValueType.F32 || valueType === ValueType.F64) {
+                  if (this.is(TokenType.FLOAT)) {
+                    value = this.expect(TokenType.FLOAT).value;
+                  } else {
+                    value = this.expect(TokenType.INTEGER).value;
+                  }
+                } else {
+                  value = this.expect(TokenType.INTEGER).value;
+                }
                 return { type: 'const', valueType, value };
               } else {
                 return { type: op, valueType };
@@ -2515,21 +2763,22 @@ class SymbolResolver {
     });
     
     this.ast.imports.forEach((imp, i) => {
+      const importBindingName = imp.desc?.name || imp.name;
       switch (imp.desc.kind) {
         case 'func':
-          this.importFuncMap.set(imp.name, this.funcCount);
+          this.importFuncMap.set(importBindingName, this.funcCount);
           this.funcCount++;
           break;
         case 'table':
-          this.importTableMap.set(imp.name, this.tableCount);
+          this.importTableMap.set(importBindingName, this.tableCount);
           this.tableCount++;
           break;
         case 'memory':
-          this.importMemoryMap.set(imp.name, this.memoryCount);
+          this.importMemoryMap.set(importBindingName, this.memoryCount);
           this.memoryCount++;
           break;
         case 'global':
-          this.importGlobalMap.set(imp.name, this.globalCount);
+          this.importGlobalMap.set(importBindingName, this.globalCount);
           this.globalCount++;
           break;
       }
@@ -2797,15 +3046,64 @@ class CodeGenerator {
   }
 
   /**
+   * Create a deterministic signature key for functypes
+   */
+  getTypeSignature(params, results) {
+    return `${params.join(',')}->${results.join(',')}`;
+  }
+
+  /**
+   * Register effective type list (declared + inline type uses)
+   */
+  prepareTypes(ast) {
+    this.effectiveTypes = [];
+    this.typeSignatureMap = new Map();
+
+    const registerType = (params, results) => {
+      const p = params || [];
+      const r = results || [];
+      const key = this.getTypeSignature(p, r);
+      if (this.typeSignatureMap.has(key)) {
+        return this.typeSignatureMap.get(key);
+      }
+      const idx = this.effectiveTypes.length;
+      this.effectiveTypes.push({ params: p, results: r });
+      this.typeSignatureMap.set(key, idx);
+      return idx;
+    };
+
+    // Declared types first (stable indices for named type refs)
+    for (const type of ast.types) {
+      registerType(type.params, type.results);
+    }
+
+    // Imports with inline signatures
+    for (const imp of ast.imports) {
+      if (imp.desc.kind === 'func' && imp.desc.type && imp.desc.type.type === 'inline') {
+        imp.desc.typeIndex = registerType(imp.desc.type.params, imp.desc.type.results);
+      }
+    }
+
+    // Functions with inline signatures
+    for (const func of ast.functions) {
+      if (func.typeUse.type === 'inline') {
+        func.typeUse.typeIndex = registerType(func.typeUse.params, func.typeUse.results);
+      }
+    }
+  }
+
+  /**
    * Generate the complete WASM binary
    */
   generate(ast) {
+    this.prepareTypes(ast);
+
     // Preamble: \0asm magic number and version
     this.writeBytes([0x00, 0x61, 0x73, 0x6D]); // "\0asm"
     this.writeBytes([0x01, 0x00, 0x00, 0x00]); // version 1
     
     // Type section
-    if (ast.types.length > 0) {
+    if (this.effectiveTypes.length > 0) {
       this.generateTypeSection(ast);
     }
     
@@ -2869,8 +3167,8 @@ class CodeGenerator {
     const section = [];
     const gen = new CodeGenerator(this.resolver);
     
-    gen.writeU32(ast.types.length);
-    for (const type of ast.types) {
+    gen.writeU32(this.effectiveTypes.length);
+    for (const type of this.effectiveTypes) {
       gen.writeByte(0x60); // functype
       
       // Parameters
@@ -2904,32 +3202,38 @@ class CodeGenerator {
       switch (imp.desc.kind) {
         case 'func':
           gen.writeByte(ExternalKind.FUNCTION);
-          gen.writeU32(this.resolver.resolveType(imp.desc.type));
+          if (imp.desc.type.type === 'ref') {
+            gen.writeU32(this.resolver.resolveType(imp.desc.type.name));
+          } else {
+            gen.writeU32(imp.desc.typeIndex);
+          }
           break;
         case 'table':
           gen.writeByte(ExternalKind.TABLE);
           gen.writeByte(imp.desc.elemType);
-          gen.writeU32(imp.desc.limits.min);
           if (imp.desc.limits.max !== null) {
             gen.writeByte(0x01);
+            gen.writeU32(imp.desc.limits.min);
             gen.writeU32(imp.desc.limits.max);
           } else {
             gen.writeByte(0x00);
+            gen.writeU32(imp.desc.limits.min);
           }
           break;
         case 'memory':
           gen.writeByte(ExternalKind.MEMORY);
-          gen.writeU32(imp.desc.limits.min);
           if (imp.desc.limits.max !== null) {
             gen.writeByte(0x01);
+            gen.writeU32(imp.desc.limits.min);
             gen.writeU32(imp.desc.limits.max);
           } else {
             gen.writeByte(0x00);
+            gen.writeU32(imp.desc.limits.min);
           }
           break;
         case 'global':
           gen.writeByte(ExternalKind.GLOBAL);
-          gen.writeByte(imp.desc.type);
+          gen.writeByte(imp.desc.valueType);
           gen.writeByte(imp.desc.mut ? 0x01 : 0x00);
           break;
       }
@@ -2950,10 +3254,7 @@ class CodeGenerator {
       if (func.typeUse.type === 'ref') {
         gen.writeU32(this.resolver.resolveType(func.typeUse.name));
       } else {
-        // Inline type - need to create a type
-        // For simplicity, we assume all functions use referenced types
-        // In a full implementation, we'd create a new type entry
-        gen.writeU32(0); // placeholder
+        gen.writeU32(func.typeUse.typeIndex);
       }
     }
     
@@ -2970,12 +3271,13 @@ class CodeGenerator {
     gen.writeU32(ast.tables.length);
     for (const table of ast.tables) {
       gen.writeByte(table.elemType);
-      gen.writeU32(table.limits.min);
       if (table.limits.max !== null) {
         gen.writeByte(0x01);
+        gen.writeU32(table.limits.min);
         gen.writeU32(table.limits.max);
       } else {
         gen.writeByte(0x00);
+        gen.writeU32(table.limits.min);
       }
     }
     
@@ -2991,12 +3293,13 @@ class CodeGenerator {
     
     gen.writeU32(ast.memories.length);
     for (const memory of ast.memories) {
-      gen.writeU32(memory.limits.min);
       if (memory.limits.max !== null) {
         gen.writeByte(0x01);
+        gen.writeU32(memory.limits.min);
         gen.writeU32(memory.limits.max);
       } else {
         gen.writeByte(0x00);
+        gen.writeU32(memory.limits.min);
       }
     }
     
@@ -3012,7 +3315,7 @@ class CodeGenerator {
     
     gen.writeU32(ast.globals.length);
     for (const global of ast.globals) {
-      gen.writeByte(global.type);
+      gen.writeByte(global.valueType);
       gen.writeByte(global.mut ? 0x01 : 0x00);
       this.generateInstruction(global.init, gen);
       gen.writeByte(Opcode.END);
@@ -3097,12 +3400,15 @@ class CodeGenerator {
       // Elements
       gen.writeU32(elem.items.length);
       for (const item of elem.items) {
-        if (typeof item === 'object' && item.type) {
+        if (typeof item === 'object' && (item.type === 'name' || item.type === 'index')) {
+          // Function index reference
+          gen.writeU32(this.resolver.resolveFunc(item));
+        } else if (typeof item === 'object' && item.type) {
           // Instruction (for externref)
           this.generateInstruction(item, gen);
           gen.writeByte(Opcode.END);
         } else {
-          // Function index
+          // Legacy/raw function index
           gen.writeU32(this.resolver.resolveFunc(item));
         }
       }
@@ -3120,6 +3426,26 @@ class CodeGenerator {
     
     for (const func of ast.functions) {
       const gen = new CodeGenerator(this.resolver);
+
+      // Local index map (params first, then locals)
+      const localMap = new Map();
+      let localIndex = 0;
+
+      for (const paramName of (func.typeUse.paramNames || [])) {
+        if (paramName) {
+          localMap.set(paramName, localIndex);
+        }
+        localIndex++;
+      }
+
+      for (const local of func.locals) {
+        if (local.name) {
+          localMap.set(local.name, localIndex);
+        }
+        localIndex++;
+      }
+
+      this.currentLocalMap = localMap;
       
       // Locals
       const locals = new Map();
@@ -3139,6 +3465,8 @@ class CodeGenerator {
         this.generateInstruction(instr, gen);
       }
       gen.writeByte(Opcode.END);
+
+      this.currentLocalMap = null;
       
       bodies.push(gen.getBytes());
     }
@@ -3218,6 +3546,9 @@ class CodeGenerator {
         break;
       
       case 'if':
+        for (const i of (instr.cond || [])) {
+          this.generateInstruction(i, gen);
+        }
         gen.writeByte(Opcode.IF);
         this.generateBlockType(instr.resultType, gen);
         for (const i of instr.then) {
@@ -3286,7 +3617,7 @@ class CodeGenerator {
       
       case 'call_indirect':
         gen.writeByte(Opcode.CALL_INDIRECT);
-        gen.writeU32(this.resolver.resolveType(instr.type));
+        gen.writeU32(this.resolver.resolveType(instr.typeIndex));
         gen.writeU32(this.resolver.resolveTable(instr.table));
         break;
       
@@ -3328,37 +3659,40 @@ class CodeGenerator {
         break;
       
       case TokenType.TABLE_SIZE:
-        gen.writeByte(Opcode.TABLE_SIZE);
+        gen.writeByte(Opcode.PREFIX_FC);
+        gen.writeU32(OpcodeFC.TABLE_SIZE);
         gen.writeU32(this.resolver.resolveTable(instr.table));
         break;
       
       case TokenType.TABLE_GROW:
-        gen.writeByte(Opcode.TABLE_GROW);
+        gen.writeByte(Opcode.PREFIX_FC);
+        gen.writeU32(OpcodeFC.TABLE_GROW);
         gen.writeU32(this.resolver.resolveTable(instr.table));
         break;
       
       case TokenType.TABLE_FILL:
-        gen.writeByte(Opcode.TABLE_FILL);
+        gen.writeByte(Opcode.PREFIX_FC);
+        gen.writeU32(OpcodeFC.TABLE_FILL);
         gen.writeU32(this.resolver.resolveTable(instr.table));
         break;
       
       case 'table.init':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.TABLE_INIT);
+        gen.writeU32(OpcodeFC.TABLE_INIT);
         gen.writeU32(this.resolver.resolveElem(instr.elem));
         gen.writeU32(this.resolver.resolveTable(instr.table));
         break;
       
       case 'table.copy':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.TABLE_COPY);
+        gen.writeU32(OpcodeFC.TABLE_COPY);
         gen.writeU32(this.resolver.resolveTable(instr.dest));
         gen.writeU32(this.resolver.resolveTable(instr.src));
         break;
       
       case 'elem.drop':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.ELEM_DROP);
+        gen.writeU32(OpcodeFC.ELEM_DROP);
         gen.writeU32(this.resolver.resolveElem(instr.elem));
         break;
       
@@ -3375,27 +3709,27 @@ class CodeGenerator {
       
       case 'memory.init':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.MEMORY_INIT);
+        gen.writeU32(OpcodeFC.MEMORY_INIT);
         gen.writeU32(this.resolver.resolveData(instr.data));
         gen.writeByte(0x00); // reserved
         break;
       
       case 'memory.copy':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.MEMORY_COPY);
+        gen.writeU32(OpcodeFC.MEMORY_COPY);
         gen.writeByte(0x00); // reserved
         gen.writeByte(0x00); // reserved
         break;
       
       case 'memory.fill':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.MEMORY_FILL);
+        gen.writeU32(OpcodeFC.MEMORY_FILL);
         gen.writeByte(0x00); // reserved
         break;
       
       case 'data.drop':
         gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.DATA_DROP);
+        gen.writeU32(OpcodeFC.DATA_DROP);
         gen.writeU32(this.resolver.resolveData(instr.data));
         break;
       
@@ -3507,46 +3841,113 @@ class CodeGenerator {
       
       // SIMD
       case 'v128.load':
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.V128_LOAD);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.V128_LOAD);
         this.generateMemArg(instr, gen);
         break;
       
       case 'v128.store':
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.V128_STORE);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.V128_STORE);
         this.generateMemArg(instr, gen);
         break;
       
       case TokenType.I8X16_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.I8X16_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I8X16_SPLAT);
         break;
       
       case TokenType.I16X8_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.I16X8_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I16X8_SPLAT);
         break;
       
       case TokenType.I32X4_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.I32X4_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I32X4_SPLAT);
         break;
       
       case TokenType.I64X2_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.I64X2_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I64X2_SPLAT);
         break;
       
       case TokenType.F32X4_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.F32X4_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.F32X4_SPLAT);
         break;
       
       case TokenType.F64X2_SPLAT:
-        gen.writeByte(Opcode.PREFIX_FC);
-        gen.writeByte(OpcodeFC.F64X2_SPLAT);
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.F64X2_SPLAT);
         break;
+
+      case 'i8x16.add':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I8X16_ADD);
+        break;
+
+      case 'i8x16.sub':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I8X16_SUB);
+        break;
+
+      case 'i16x8.mul':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I16X8_MUL);
+        break;
+
+      case 'i32x4.add':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I32X4_ADD);
+        break;
+
+      case 'f32x4.add':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.F32X4_ADD);
+        break;
+
+      case 'f32x4.mul':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.F32X4_MUL);
+        break;
+
+      case 'i32x4.extract_lane':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I32X4_EXTRACT_LANE);
+        gen.writeByte(instr.lane & 0xFF);
+        break;
+
+      case 'i32x4.replace_lane':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I32X4_REPLACE_LANE);
+        gen.writeByte(instr.lane & 0xFF);
+        break;
+
+      case 'i8x16.shuffle':
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.I8X16_SHUFFLE);
+        for (const lane of instr.lanes) {
+          gen.writeByte(lane & 0xFF);
+        }
+        break;
+
+      case 'v128.const': {
+        gen.writeByte(Opcode.PREFIX_FD);
+        gen.writeU32(OpcodeFC.V128_CONST);
+
+        const bytes = new Uint8Array(16);
+        const view = new DataView(bytes.buffer);
+
+        if (instr.laneType === 'i32x4') {
+          for (let i = 0; i < 4; i++) {
+            view.setInt32(i * 4, Number(instr.lanes[i] || 0), true);
+          }
+        }
+
+        gen.writeBytes(Array.from(bytes));
+        break;
+      }
       
       default:
         throw new Error(`Unknown instruction type: ${instr.type}`);
@@ -3578,7 +3979,7 @@ class CodeGenerator {
       // In a full implementation, we'd need to track label depths
       gen.writeU32(0);
     } else {
-      gen.writeU32(label);
+      gen.writeU32(label.value);
     }
   }
 
@@ -3587,11 +3988,13 @@ class CodeGenerator {
    */
   generateLocalIndex(idx, gen) {
     if (idx.type === 'name') {
-      // Locals are resolved during parsing
-      // In a full implementation, we'd need to track local indices
-      gen.writeU32(0);
+      const localIdx = this.currentLocalMap?.get(idx.value);
+      if (localIdx === undefined) {
+        throw new Error(`Unknown local ${idx.value}`);
+      }
+      gen.writeU32(localIdx);
     } else {
-      gen.writeU32(idx);
+      gen.writeU32(idx.value);
     }
   }
 

@@ -1,0 +1,153 @@
+module $demo {
+  type $bin_i32 = (i32, i32) -> i32;
+  type $un_i32 = (i32) -> i32;
+
+  import func $log_i32 from "system.print" (i32) -> void;
+
+  memory $mem min 1 max 2 export "memory";
+  table $tab min 8 max 16 funcref export "table";
+
+  global $counter mut i32 = (i32_const 0) export "counter";
+  global $pi f64 = (f64_const 3.14159) export "pi";
+
+  data $hello at (i32_const 0) "Hello MaiaAssembly\n";
+  elem $dispatch table $tab at (i32_const 0) func [$add, $sub, $mul, $dispatch_call];
+
+  func $add
+    params($a:i32, $b:i32)
+    result i32
+    type $bin_i32
+  {
+    op_local_get $a;
+    op_local_get $b;
+    op_i32_add;
+  }
+
+  func $sub
+    params($a:i32, $b:i32)
+    result i32
+    type $bin_i32
+  {
+    op_local_get $a;
+    op_local_get $b;
+    op_i32_sub;
+  }
+
+  func $mul
+    params($a:i32, $b:i32)
+    result i32
+    type $bin_i32
+  {
+    op_local_get $a;
+    op_local_get $b;
+    op_i32_mul;
+  }
+
+  func $dispatch_call
+    params($op:i32, $a:i32, $b:i32)
+    result i32
+  {
+    op_local_get $a;
+    op_local_get $b;
+    op_local_get $op;
+    op_call_indirect table $tab type $bin_i32;
+  }
+
+  func $abs
+    params($x:i32)
+    result i32
+  {
+    if result i32 {
+      op_local_get $x;
+      op_i32_const 0;
+      op_i32_lt_s;
+      if {
+        op_i32_const 0;
+        op_local_get $x;
+        op_i32_sub;
+      } else {
+        op_local_get $x;
+      }
+    }
+  }
+
+  func $inc_counter
+  {
+    op_global_get $counter;
+    op_i32_const 1;
+    op_i32_add;
+    op_global_set $counter;
+  }
+
+  func $sum_to_n
+    params($n:i32)
+    result i32
+  {
+    local $i:i32;
+    local $acc:i32;
+
+    op_i32_const 0;
+    op_local_set $i;
+    op_i32_const 0;
+    op_local_set $acc;
+
+    block $done {
+      loop $top {
+        op_local_get $i;
+        op_local_get $n;
+        op_i32_gt_s;
+        op_br_if $done;
+
+        op_local_get $acc;
+        op_local_get $i;
+        op_i32_add;
+        op_local_set $acc;
+
+        op_local_get $i;
+        op_i32_const 1;
+        op_i32_add;
+        op_local_set $i;
+
+        op_br $top;
+      }
+    }
+
+    op_local_get $acc;
+  }
+
+  func $mem_demo
+    params($addr:i32, $value:i32)
+    result i32
+  {
+    op_local_get $addr;
+    op_local_get $value;
+    op_i32_store offset=0 align=4;
+
+    op_local_get $addr;
+    op_i32_load offset=0 align=4;
+  }
+
+  func $simd_demo
+    params($x:i32)
+    result v128
+  {
+    op_local_get $x;
+    op_i32x4_splat;
+  }
+
+  func $log_counter
+  {
+    op_global_get $counter;
+    op_call $log_i32;
+  }
+
+    export func $add as "add";
+    export func $dispatch_call as "dispatch_call";
+    export func $abs as "abs";
+    export func $inc_counter as "inc_counter";
+    export func $sum_to_n as "sum_to_n";
+    export func $mem_demo as "mem_demo";
+    export func $simd_demo as "simd_demo";
+
+  start $inc_counter;
+}
