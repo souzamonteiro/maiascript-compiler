@@ -23434,6 +23434,14 @@ function main(args)
   }
 }
 
-main(arguments);
+// Export for Node.js
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = MaiaScript;
+}
+
+// Only run main if called from command line (not imported as module)
+if (typeof arguments !== 'undefined' && arguments.length > 0) {
+  main(arguments);
+}
 
 // End

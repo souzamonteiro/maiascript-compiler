@@ -1,0 +1,244 @@
+MaiaScript Parser XML Output Test Suite
+
+============================================================
+
+Testing test.maia ... ✗ FAIL (XML mismatch)
+Testing variables.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/variables.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting ':='
+after successfully scanning 1 characters beginning at line 25, column 7:
+...: 1, b: 2.0, "c": "Hello World!"}
+system.println(JSON.stringify(...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing operators.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/operators.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [identifier, 'null', 'true', 'false', complex, real, string, whitespace, '!', '(', '+', '++', '-', '--', '[', 'f32', 'f64', 'i32', 'i64', '{', '~']
+at line 44, column 2:
+...*
+ * Complex numbers support.
+ */
+e = 1.0+2.0*i
+f = 3.0+4.0*i
+g ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing conditionals.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/conditionals.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [whitespace, '{']
+at line 12, column 9:
+...system.println("a == 1")
+    else
+        system.println("a != 1...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing loops.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/loops.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting ':='
+after successfully scanning 1 characters beginning at line 3, column 7:
+...: 1, b: 2}
+d = [1, 2, 3; 4, 5, 6]
+
+do {
+    system.println(a)
+  ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing functions.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/functions.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+syntax error, found '}'
+while expecting 'false'
+at line 29, column 1:
+...}
+// A parallel function runs synchronously if a thread is not c...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing exception.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/exception.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [whitespace, '{']
+at line 4, column 9:
+...throw ("empty")
+    if (isNaN(x)) {
+        throw ("not a number...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+Testing namespaces.maia ... ✗ FAIL (Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/namespaces.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+syntax error, found identifier
+while expecting '}'
+at line 4, column 5:
+...f(n) {
+        if (n == 0 || n == 1) {
+            return 1
+    ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+)
+
+============================================================
+
+Results: 0 passed, 8 failed
+
+Failures:
+
+1. test: XML output mismatch
+   Expected hash: 1e144835f69ca0e533a598eb47011650
+   Generated hash: 4da75bc38a9be916dc7a5d852803f2f2
+   Expected length: 14134, Generated length: 14870
+
+2. variables: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/variables.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting ':='
+after successfully scanning 1 characters beginning at line 25, column 7:
+...: 1, b: 2.0, "c": "Hello World!"}
+system.println(JSON.stringify(...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+3. operators: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/operators.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [identifier, 'null', 'true', 'false', complex, real, string, whitespace, '!', '(', '+', '++', '-', '--', '[', 'f32', 'f64', 'i32', 'i64', '{', '~']
+at line 44, column 2:
+...*
+ * Complex numbers support.
+ */
+e = 1.0+2.0*i
+f = 3.0+4.0*i
+g ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+4. conditionals: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/conditionals.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [whitespace, '{']
+at line 12, column 9:
+...system.println("a == 1")
+    else
+        system.println("a != 1...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+5. loops: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/loops.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting ':='
+after successfully scanning 1 characters beginning at line 3, column 7:
+...: 1, b: 2}
+d = [1, 2, 3; 4, 5, 6]
+
+do {
+    system.println(a)
+  ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+6. functions: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/functions.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+syntax error, found '}'
+while expecting 'false'
+at line 29, column 1:
+...}
+// A parallel function runs synchronously if a thread is not c...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+7. exception: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/exception.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+lexical analysis failed
+while expecting [whitespace, '{']
+at line 4, column 9:
+...throw ("empty")
+    if (isNaN(x)) {
+        throw ("not a number...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
+8. namespaces: Command failed: node "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js" "/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/examples/namespaces.maia"
+
+/Volumes/External_SSD/Documentos/Projects/maiascript-compiler/grammar/MaiaScript-main.js:23430
+          throw parser.getErrorMessage(pe);
+          ^
+syntax error, found identifier
+while expecting '}'
+at line 4, column 5:
+...f(n) {
+        if (n == 0 || n == 1) {
+            return 1
+    ...
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v24.13.1
+
+
