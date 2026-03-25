@@ -1,0 +1,24 @@
+{
+  "positive": [
+    { "file": "positive/01-int-declaration.c", "expectTags": ["translationUnit", "declaration", "builtinTypeSpecifier", "Identifier"] },
+    { "file": "positive/02-pointer-declaration.c", "expectTags": ["translationUnit", "pointer", "declarator"] },
+    { "file": "positive/03-int-initializer.c", "expectTags": ["translationUnit", "initializer", "IntegerConstant"] },
+    { "file": "positive/04-qualified-declaration.c", "expectTags": ["translationUnit", "typeQualifier", "declaration"] },
+    { "file": "positive/05-typedef.c", "expectTags": ["translationUnit", "storageClassSpecifier", "declaration"] },
+    { "file": "positive/06-enum.c", "expectTags": ["translationUnit", "enumSpecifier", "enumeratorList"] },
+    { "file": "positive/07-struct.c", "expectTags": ["translationUnit", "structOrUnionSpecifier", "structDeclarationList"] },
+    { "file": "positive/08-union.c", "expectTags": ["translationUnit", "structOrUnionSpecifier", "structDeclarationList"] },
+    { "file": "positive/09-char-constant.c", "expectTags": ["translationUnit", "CharacterConstant", "initializer"] },
+    { "file": "positive/10-float-constant.c", "expectTags": ["translationUnit", "FloatingConstant", "initializer"] },
+    { "file": "positive/11-expression-init.c", "expectTags": ["translationUnit", "additiveExpression", "multiplicativeExpression"] },
+    { "file": "positive/12-sizeof-init.c", "expectTags": ["translationUnit", "unaryExpression", "initializer"] },
+    { "file": "positive/13-complete-program-with-preprocessor.c", "expectTags": ["translationUnit", "functionDefinition", "selectionStatement", "iterationStatement", "jumpStatement", "enumSpecifier", "structOrUnionSpecifier"] }
+  ],
+  "negative": [
+    { "file": "negative/01-missing-semicolon.c", "expectError": "lexical analysis failed" },
+    { "file": "negative/02-invalid-enum.c", "expectError": "lexical analysis failed" },
+    { "file": "negative/03-bad-char-literal.c", "expectError": "lexical analysis failed" },
+    { "file": "negative/04-invalid-cast.c", "expectError": "lexical analysis failed" },
+    { "file": "negative/05-preprocessing-directive.c", "expectError": "lexical analysis failed" }
+  ]
+}
