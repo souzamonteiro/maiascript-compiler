@@ -1,0 +1,13 @@
+{
+  "name": "ebnf-parser-generator",
+  "version": "1.0.0",
+  "description": "Generate JavaScript parsers from EBNF grammars",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}

@@ -1,0 +1,11 @@
+/* Gramática simples para expressões aritméticas */
+Expression ::= Term ( '+' Term )*
+Term       ::= Factor ( '*' Factor )*
+Factor     ::= Number
+            | '(' Expression ')'
+Number     ::= [0-9]+
+
+<?TOKENS?>
+
+Whitespace ::= [ \t\n\r]+ /* ws: definition */
+Number     ::= [0-9]+
