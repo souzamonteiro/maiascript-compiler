@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translationUnit>
   <translationUnitItem>
+    <PreprocessingDirective>#define SUM(a, b) ((a) + (b))
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
     <externalDeclaration>
       <declaration>
         <declarationSpecifiers>
@@ -38,7 +42,7 @@
                                           <postfixExpression>
                                             <primaryExpression>
                                               <constant>
-                                                <IntegerConstant>10</IntegerConstant>
+                                                <IntegerConstant>0</IntegerConstant>
                                               </constant>
                                             </primaryExpression>
                                           </postfixExpression>

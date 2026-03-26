@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translationUnit>
   <translationUnitItem>
+    <PreprocessingDirective>#define VALUE 42
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
+    <PreprocessingDirective>#undef VALUE
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
     <externalDeclaration>
       <declaration>
         <declarationSpecifiers>
@@ -15,7 +23,7 @@
             <declarator>
               <directDeclarator>
                 <directDeclaratorBase>
-                  <Identifier>x</Identifier>
+                  <Identifier>y</Identifier>
                 </directDeclaratorBase>
               </directDeclarator>
             </declarator> 
@@ -38,7 +46,7 @@
                                           <postfixExpression>
                                             <primaryExpression>
                                               <constant>
-                                                <IntegerConstant>10</IntegerConstant>
+                                                <IntegerConstant>1</IntegerConstant>
                                               </constant>
                                             </primaryExpression>
                                           </postfixExpression>

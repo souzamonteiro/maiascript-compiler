@@ -1,4 +1,8 @@
-translationUnit ::= externalDeclaration+
+translationUnit ::= translationUnitItem+
+
+translationUnitItem ::= externalDeclaration
+                      | PreprocessingDirective
+                      | Comment
 
 externalDeclaration ::= functionDefinition
                       | declaration
@@ -113,6 +117,7 @@ statement ::= labeledStatement
             | selectionStatement
             | iterationStatement
             | jumpStatement
+            | Comment
             
 labeledStatement ::= Identifier ':' statement
                    | 'case' constantExpression ':' statement
@@ -177,6 +182,7 @@ castExpression ::= unaryExpression
                  | '(' typeName ')' castExpression
                  
 unaryExpression ::= postfixExpression
+                  | Comment unaryExpression
                   | '++' unaryExpression
                   | '--' unaryExpression
                   | unaryOperator castExpression
@@ -207,8 +213,6 @@ constant ::= IntegerConstant
            | Identifier
            
 Ignore ::= WhiteSpace
-         | Comment
-         | PreprocessingDirective
         /* ws: definition */
 
 <?TOKENS?>
@@ -358,4 +362,50 @@ MultiLineComment ::= '/*' ( .* - ( .* '*/' .* ) ) '*/'
 
 SingleLineComment ::= '//' [^\n\r]* ( NewLine | EOF )
 
-PreprocessingDirective ::= '#' [^\n\r]* ( NewLine | EOF )
+PreprocessingDirective ::= PpControlLine
+                         | PpIfLine
+                         | PpElifLine
+                         | PpElseLine
+                         | PpEndifLine
+                         | PpEmptyLine
+
+PpControlLine ::= '#' Space* 'define' Space+ IdentifierName PpDefineTail
+                | '#' Space* 'undef' Space+ IdentifierName Space* ( NewLine | EOF )
+                | '#' Space* 'include' Space+ PpHeaderName Space* ( NewLine | EOF )
+                | '#' Space* 'line' Space+ IntegerConstant ( Space+ PpHeaderName )? Space* ( NewLine | EOF )
+                | '#' Space* 'error' ( Space+ PpTokenSequence )? Space* ( NewLine | EOF )
+                | '#' Space* 'pragma' ( Space+ PpTokenSequence )? Space* ( NewLine | EOF )
+
+PpDefineTail ::= ( Space+ PpTokenSequence )? Space* ( NewLine | EOF )
+               | '(' Space* PpParameterList? Space* ')' ( Space+ PpTokenSequence )? Space* ( NewLine | EOF )
+
+PpParameterList ::= IdentifierName ( Space* ',' Space* IdentifierName )* ( Space* ',' Space* '...' )?
+                  | '...'
+
+PpIfLine ::= '#' Space* 'if' Space+ PpTokenSequence? Space* ( NewLine | EOF )
+           | '#' Space* 'ifdef' Space+ IdentifierName Space* ( NewLine | EOF )
+           | '#' Space* 'ifndef' Space+ IdentifierName Space* ( NewLine | EOF )
+
+PpElifLine ::= '#' Space* 'elif' Space+ PpTokenSequence? Space* ( NewLine | EOF )
+
+PpElseLine ::= '#' Space* 'else' Space* ( NewLine | EOF )
+
+PpEndifLine ::= '#' Space* 'endif' Space* ( NewLine | EOF )
+
+PpEmptyLine ::= '#' Space* ( NewLine | EOF )
+
+PpHeaderName ::= '<' PpAngleHeaderChar+ '>'
+               | '"' PpQuoteHeaderChar* '"'
+
+PpAngleHeaderChar ::= [#x20-#x3D]
+                    | [#x3F-#x7E]
+                    | #x9
+
+PpQuoteHeaderChar ::= [#x20-#x21]
+                    | [#x23-#x7E]
+                    | #x9
+
+PpTokenSequence ::= PpTokenChar+
+
+PpTokenChar ::= [#x20-#x7E]
+              | #x9

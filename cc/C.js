@@ -1,4 +1,4 @@
-// This file was generated on Wed Mar 25, 2026 18:24 (UTC-03) by REx v6.1 which is Copyright (c) 1979-2025 by Gunther Rademacher <grd@gmx.net>
+// This file was generated on Thu Mar 26, 2026 10:35 (UTC-03) by REx v6.1 which is Copyright (c) 1979-2025 by Gunther Rademacher <grd@gmx.net>
 // REx command line: C.ebnf -backtrack -javascript -tree
 
 function C(string, parsingEventHandler)
@@ -116,13 +116,13 @@ function C(string, parsingEventHandler)
     eventHandler.startNonterminal("translationUnit", e0);
     for (;;)
     {
-      lookahead1W(57);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | 'auto' |
+      lookahead1W(60);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | 'auto' |
                                     // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
                                     // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
                                     // 'unsigned' | 'void' | 'volatile'
       whitespace();
-      parse_externalDeclaration();
-      lookahead1W(58);              // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
+      parse_translationUnitItem();
+      lookahead1W(63);              // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
                                     // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
                                     // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
                                     // 'union' | 'unsigned' | 'void' | 'volatile'
@@ -137,9 +137,8 @@ function C(string, parsingEventHandler)
   this.parse_typeSpecifier = function()
   {
     eventHandler.startNonterminal("typeSpecifier", e0);
-    lookahead1W(36);                // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'double' |
-                                    // 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void'
+    lookahead1W(36);                // Identifier | WhiteSpace | 'char' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void'
     switch (l1)
     {
     case 2:                         // Identifier
@@ -159,18 +158,16 @@ function C(string, parsingEventHandler)
     eventHandler.startNonterminal("statementList", e0);
     for (;;)
     {
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
-      lookahead1W(68);              // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(69);              // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       if (l1 == 1)                  // %OTHER
       {
         break;
@@ -179,71 +176,85 @@ function C(string, parsingEventHandler)
     eventHandler.endNonterminal("statementList", e0);
   };
 
+  function parse_translationUnitItem()
+  {
+    eventHandler.startNonterminal("translationUnitItem", e0);
+    switch (l1)
+    {
+    case 9:                         // PreprocessingDirective
+      consume(9);                   // PreprocessingDirective
+      break;
+    case 8:                         // Comment
+      consume(8);                   // Comment
+      break;
+    default:
+      parse_externalDeclaration();
+    }
+    eventHandler.endNonterminal("translationUnitItem", e0);
+  }
+
   function parse_externalDeclaration()
   {
     eventHandler.startNonterminal("externalDeclaration", e0);
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(63);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+      lookahead2W(64);              // Identifier | WhiteSpace | '(' | '*' | ';' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '{'
       switch (lk)
       {
       case 258:                     // Identifier Identifier
-        lookahead3W(65);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ',' |
-                                    // ';' | '=' | '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' |
-                                    // 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' |
-                                    // 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+        lookahead3W(66);            // Identifier | WhiteSpace | '(' | '*' | ',' | ';' | '=' | '[' | 'auto' | 'char' |
+                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
+                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
+                                    // 'void' | 'volatile' | '{'
         break;
       case 2178:                    // Identifier '('
-        lookahead3W(59);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(58);            // Identifier | WhiteSpace | '(' | ')' | '*' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 2434:                    // Identifier '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(60);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(59);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(28);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'const' | 'volatile' | '{'
+        lookahead3W(28);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'const' | 'volatile' | '{'
         break;
       case 10556:                   // 'enum' '{'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       }
       break;
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(28);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'const' | 'volatile' | '{'
+        lookahead3W(28);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'const' | 'volatile' | '{'
         break;
       case 10570:                   // 'struct' '{'
       case 10573:                   // 'union' '{'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -254,10 +265,9 @@ function C(string, parsingEventHandler)
     case 73:                        // 'static'
     case 76:                        // 'typedef'
     case 80:                        // 'volatile'
-      lookahead2W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead2W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 7730:                    // 'auto' 'enum'
@@ -281,7 +291,7 @@ function C(string, parsingEventHandler)
       case 7760:                    // 'volatile' 'enum'
       case 9552:                    // 'volatile' 'struct'
       case 9936:                    // 'volatile' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 6450:                    // 'auto' 'auto'
       case 6962:                    // 'auto' 'const'
@@ -332,10 +342,9 @@ function C(string, parsingEventHandler)
       case 9424:                    // 'volatile' 'static'
       case 9808:                    // 'volatile' 'typedef'
       case 10320:                   // 'volatile' 'volatile'
-        lookahead3W(53);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(53);            // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 306:                     // 'auto' Identifier
       case 6834:                    // 'auto' 'char'
@@ -407,9 +416,9 @@ function C(string, parsingEventHandler)
       case 9168:                    // 'volatile' 'signed'
       case 10064:                   // 'volatile' 'unsigned'
       case 10192:                   // 'volatile' 'void'
-        lookahead3W(50);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'struct' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(49);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'char' | 'const' | 'double' |
+                                    // 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' |
+                                    // 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -422,9 +431,8 @@ function C(string, parsingEventHandler)
     case 71:                        // 'signed'
     case 78:                        // 'unsigned'
     case 79:                        // 'void'
-      lookahead2W(38);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' |
-                                    // 'unsigned' | 'void' | 'volatile'
+      lookahead2W(37);              // Identifier | WhiteSpace | '(' | '*' | ';' | 'char' | 'const' | 'double' |
+                                    // 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 309:                     // 'char' Identifier
@@ -436,10 +444,10 @@ function C(string, parsingEventHandler)
       case 327:                     // 'signed' Identifier
       case 334:                     // 'unsigned' Identifier
       case 335:                     // 'void' Identifier
-        lookahead3W(64);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ';' |
-                                    // '=' | '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+        lookahead3W(65);            // Identifier | WhiteSpace | '(' | ',' | ';' | '=' | '[' | 'auto' | 'char' |
+                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
+                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
+                                    // 'void' | 'volatile' | '{'
         break;
       case 2229:                    // 'char' '('
       case 2234:                    // 'double' '('
@@ -450,7 +458,7 @@ function C(string, parsingEventHandler)
       case 2247:                    // 'signed' '('
       case 2254:                    // 'unsigned' '('
       case 2255:                    // 'void' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2485:                    // 'char' '*'
       case 2490:                    // 'double' '*'
@@ -461,8 +469,7 @@ function C(string, parsingEventHandler)
       case 2503:                    // 'signed' '*'
       case 2510:                    // 'unsigned' '*'
       case 2511:                    // 'void' '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       case 6965:                    // 'char' 'const'
       case 10293:                   // 'char' 'volatile'
@@ -482,8 +489,7 @@ function C(string, parsingEventHandler)
       case 10318:                   // 'unsigned' 'volatile'
       case 6991:                    // 'void' 'const'
       case 10319:                   // 'void' 'volatile'
-        lookahead3W(26);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'const' | 'volatile'
+        lookahead3W(26);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'const' | 'volatile'
         break;
       case 6837:                    // 'char' 'char'
       case 7477:                    // 'char' 'double'
@@ -566,9 +572,8 @@ function C(string, parsingEventHandler)
       case 9167:                    // 'void' 'signed'
       case 10063:                   // 'void' 'unsigned'
       case 10191:                   // 'void' 'void'
-        lookahead3W(38);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(37);            // Identifier | WhiteSpace | '(' | '*' | ';' | 'char' | 'const' | 'double' |
+                                    // 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -1328,30 +1333,29 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(62);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | '[' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+      lookahead2W(62);              // Identifier | WhiteSpace | '(' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '{'
       switch (lk)
       {
       case 258:                     // Identifier Identifier
-        lookahead3W(63);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+        lookahead3W(64);            // Identifier | WhiteSpace | '(' | '*' | ';' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '{'
         break;
       case 2178:                    // Identifier '('
-        lookahead3W(59);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(58);            // Identifier | WhiteSpace | '(' | ')' | '*' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(57);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(57);            // Identifier | WhiteSpace | '(' | '*' | 'auto' | 'char' | 'const' | 'double' |
+                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -1460,30 +1464,29 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(62);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | '[' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+      lookahead2W(62);              // Identifier | WhiteSpace | '(' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '{'
       switch (lk)
       {
       case 258:                     // Identifier Identifier
-        lookahead3W(63);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ';' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '{'
+        lookahead3W(64);            // Identifier | WhiteSpace | '(' | '*' | ';' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '{'
         break;
       case 2178:                    // Identifier '('
-        lookahead3W(59);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' |
-                                    // 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(58);            // Identifier | WhiteSpace | '(' | ')' | '*' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(57);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(57);            // Identifier | WhiteSpace | '(' | '*' | 'auto' | 'char' | 'const' | 'double' |
+                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -1612,10 +1615,10 @@ function C(string, parsingEventHandler)
     {
       whitespace();
       parse_declaration();
-      lookahead1W(56);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile' | '{'
+      lookahead1W(56);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
+                                    // '{'
       if (l1 == 82)                 // '{'
       {
         break;
@@ -1629,10 +1632,10 @@ function C(string, parsingEventHandler)
     for (;;)
     {
       try_declaration();
-      lookahead1W(56);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile' | '{'
+      lookahead1W(56);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
+                                    // '{'
       if (l1 == 82)                 // '{'
       {
         break;
@@ -1645,10 +1648,9 @@ function C(string, parsingEventHandler)
     eventHandler.startNonterminal("declarationSpecifiers", e0);
     for (;;)
     {
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       if (l1 != 50                  // 'auto'
        && l1 != 54                  // 'const'
        && l1 != 61                  // 'extern'
@@ -1666,8 +1668,8 @@ function C(string, parsingEventHandler)
     parse_typeSpecifierSequence();
     for (;;)
     {
-      lookahead1W(32);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | ';' | '[' | 'const' | 'volatile'
+      lookahead1W(32);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ';' | '[' | 'const' |
+                                    // 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -1683,10 +1685,9 @@ function C(string, parsingEventHandler)
   {
     for (;;)
     {
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       if (l1 != 50                  // 'auto'
        && l1 != 54                  // 'const'
        && l1 != 61                  // 'extern'
@@ -1702,8 +1703,8 @@ function C(string, parsingEventHandler)
     try_typeSpecifierSequence();
     for (;;)
     {
-      lookahead1W(32);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | ';' | '[' | 'const' | 'volatile'
+      lookahead1W(32);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ';' | '[' | 'const' |
+                                    // 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -1813,9 +1814,9 @@ function C(string, parsingEventHandler)
       {
         whitespace();
         parse_builtinTypeSpecifier();
-        lookahead1W(51);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | ':' | ';' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead1W(51);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' | 'char' |
+                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
+                                    // 'void' | 'volatile'
         if (l1 != 53                // 'char'
          && l1 != 58                // 'double'
          && l1 != 62                // 'float'
@@ -1847,9 +1848,9 @@ function C(string, parsingEventHandler)
       for (;;)
       {
         try_builtinTypeSpecifier();
-        lookahead1W(51);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | ':' | ';' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead1W(51);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' | 'char' |
+                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
+                                    // 'void' | 'volatile'
         if (l1 != 53                // 'char'
          && l1 != 58                // 'double'
          && l1 != 62                // 'float'
@@ -1999,13 +2000,13 @@ function C(string, parsingEventHandler)
     {
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '{'
         break;
       }
       break;
@@ -2019,23 +2020,23 @@ function C(string, parsingEventHandler)
     case 1343818:                   // 'struct' Identifier '{'
     case 1343821:                   // 'union' Identifier '{'
       parse_structOrUnion();
-      lookahead1W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(12);              // Identifier | WhiteSpace | '{'
       if (l1 == 2)                  // Identifier
       {
         consume(2);                 // Identifier
       }
-      lookahead1W(9);               // WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(9);               // WhiteSpace | '{'
       consume(82);                  // '{'
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       whitespace();
       parse_structDeclarationList();
       consume(86);                  // '}'
       break;
     default:
       parse_structOrUnion();
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
     }
     eventHandler.endNonterminal("structOrUnionSpecifier", e0);
@@ -2047,13 +2048,13 @@ function C(string, parsingEventHandler)
     {
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '{'
         break;
       }
       break;
@@ -2067,22 +2068,22 @@ function C(string, parsingEventHandler)
     case 1343818:                   // 'struct' Identifier '{'
     case 1343821:                   // 'union' Identifier '{'
       try_structOrUnion();
-      lookahead1W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(12);              // Identifier | WhiteSpace | '{'
       if (l1 == 2)                  // Identifier
       {
         consumeT(2);                // Identifier
       }
-      lookahead1W(9);               // WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(9);               // WhiteSpace | '{'
       consumeT(82);                 // '{'
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       try_structDeclarationList();
       consumeT(86);                 // '}'
       break;
     default:
       try_structOrUnion();
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
     }
   }
@@ -2120,9 +2121,9 @@ function C(string, parsingEventHandler)
     {
       whitespace();
       parse_structDeclaration();
-      lookahead1W(45);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | '}'
+      lookahead1W(41);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '}'
       if (l1 == 86)                 // '}'
       {
         break;
@@ -2136,9 +2137,9 @@ function C(string, parsingEventHandler)
     for (;;)
     {
       try_structDeclaration();
-      lookahead1W(45);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | '}'
+      lookahead1W(41);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '}'
       if (l1 == 86)                 // '}'
       {
         break;
@@ -2152,13 +2153,13 @@ function C(string, parsingEventHandler)
     parse_initDeclarator();
     for (;;)
     {
-      lookahead1W(14);              // WhiteSpace | Comment | PreprocessingDirective | ',' | ';'
+      lookahead1W(14);              // WhiteSpace | ',' | ';'
       if (l1 != 24)                 // ','
       {
         break;
       }
       consume(24);                  // ','
-      lookahead1W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead1W(16);              // Identifier | WhiteSpace | '(' | '*'
       whitespace();
       parse_initDeclarator();
     }
@@ -2170,13 +2171,13 @@ function C(string, parsingEventHandler)
     try_initDeclarator();
     for (;;)
     {
-      lookahead1W(14);              // WhiteSpace | Comment | PreprocessingDirective | ',' | ';'
+      lookahead1W(14);              // WhiteSpace | ',' | ';'
       if (l1 != 24)                 // ','
       {
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead1W(16);              // Identifier | WhiteSpace | '(' | '*'
       try_initDeclarator();
     }
   }
@@ -2187,54 +2188,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(25);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ';' | '=' | '['
+      lookahead2W(25);              // WhiteSpace | '(' | ',' | ';' | '=' | '['
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(54);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(54);            // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       }
       break;
     case 17:                        // '('
-      lookahead2W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead2W(16);              // Identifier | WhiteSpace | '(' | '*'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(17);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '['
+        lookahead3W(17);            // WhiteSpace | '(' | ')' | '['
         break;
       case 2193:                    // '(' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2449:                    // '(' '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
     case 19:                        // '*'
-      lookahead2W(23);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+      lookahead2W(23);              // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
       switch (lk)
       {
       case 275:                     // '*' Identifier
-        lookahead3W(25);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ';' | '=' | '['
+        lookahead3W(25);            // WhiteSpace | '(' | ',' | ';' | '=' | '['
         break;
       case 2195:                    // '*' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
@@ -2259,9 +2256,9 @@ function C(string, parsingEventHandler)
         {
           try_declarator();
           consumeT(39);             // '='
-          lookahead1W(44);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+          lookahead1W(45);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
           try_initializer();
           lk = -1;
         }
@@ -2283,9 +2280,9 @@ function C(string, parsingEventHandler)
     case 639251:                    // '*' Identifier '='
       parse_declarator();
       consume(39);                  // '='
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       whitespace();
       parse_initializer();
       break;
@@ -2300,54 +2297,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(25);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ';' | '=' | '['
+      lookahead2W(25);              // WhiteSpace | '(' | ',' | ';' | '=' | '['
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(54);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(54);            // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       }
       break;
     case 17:                        // '('
-      lookahead2W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead2W(16);              // Identifier | WhiteSpace | '(' | '*'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(17);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '['
+        lookahead3W(17);            // WhiteSpace | '(' | ')' | '['
         break;
       case 2193:                    // '(' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2449:                    // '(' '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
     case 19:                        // '*'
-      lookahead2W(23);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+      lookahead2W(23);              // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
       switch (lk)
       {
       case 275:                     // '*' Identifier
-        lookahead3W(25);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ';' | '=' | '['
+        lookahead3W(25);            // WhiteSpace | '(' | ',' | ';' | '=' | '['
         break;
       case 2195:                    // '*' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
@@ -2372,9 +2365,9 @@ function C(string, parsingEventHandler)
         {
           try_declarator();
           consumeT(39);             // '='
-          lookahead1W(44);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+          lookahead1W(45);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
           try_initializer();
           memoize(2, e0A, -1);
           lk = -3;
@@ -2397,9 +2390,9 @@ function C(string, parsingEventHandler)
     case 639251:                    // '*' Identifier '='
       try_declarator();
       consumeT(39);                 // '='
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       try_initializer();
       break;
     case -3:
@@ -2431,9 +2424,9 @@ function C(string, parsingEventHandler)
     eventHandler.startNonterminal("specifierQualifierList", e0);
     for (;;)
     {
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -2446,8 +2439,7 @@ function C(string, parsingEventHandler)
     parse_typeSpecifierSequence();
     for (;;)
     {
-      lookahead1W(31);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ':' | '[' | 'const' | 'volatile'
+      lookahead1W(31);              // Identifier | WhiteSpace | '(' | ')' | '*' | ':' | '[' | 'const' | 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -2463,9 +2455,9 @@ function C(string, parsingEventHandler)
   {
     for (;;)
     {
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -2476,8 +2468,7 @@ function C(string, parsingEventHandler)
     try_typeSpecifierSequence();
     for (;;)
     {
-      lookahead1W(31);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ':' | '[' | 'const' | 'volatile'
+      lookahead1W(31);              // Identifier | WhiteSpace | '(' | ')' | '*' | ':' | '[' | 'const' | 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -2498,7 +2489,7 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(24);                  // ','
-      lookahead1W(21);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ':'
+      lookahead1W(21);              // Identifier | WhiteSpace | '(' | '*' | ':'
       whitespace();
       parse_structDeclarator();
     }
@@ -2515,7 +2506,7 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(21);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | ':'
+      lookahead1W(21);              // Identifier | WhiteSpace | '(' | '*' | ':'
       try_structDeclarator();
     }
   }
@@ -2526,54 +2517,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(24);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ':' | ';' | '['
+      lookahead2W(24);              // WhiteSpace | '(' | ',' | ':' | ';' | '['
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(54);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(54);            // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       }
       break;
     case 17:                        // '('
-      lookahead2W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead2W(16);              // Identifier | WhiteSpace | '(' | '*'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(17);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '['
+        lookahead3W(17);            // WhiteSpace | '(' | ')' | '['
         break;
       case 2193:                    // '(' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2449:                    // '(' '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
     case 19:                        // '*'
-      lookahead2W(23);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+      lookahead2W(23);              // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
       switch (lk)
       {
       case 275:                     // '*' Identifier
-        lookahead3W(24);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ':' | ';' | '['
+        lookahead3W(24);            // WhiteSpace | '(' | ',' | ':' | ';' | '['
         break;
       case 2195:                    // '*' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
@@ -2623,9 +2610,9 @@ function C(string, parsingEventHandler)
         parse_declarator();
       }
       consume(33);                  // ':'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_constantExpression();
       break;
@@ -2640,54 +2627,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(24);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ':' | ';' | '['
+      lookahead2W(24);              // WhiteSpace | '(' | ',' | ':' | ';' | '['
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(54);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(54);            // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       }
       break;
     case 17:                        // '('
-      lookahead2W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead2W(16);              // Identifier | WhiteSpace | '(' | '*'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(17);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '['
+        lookahead3W(17);            // WhiteSpace | '(' | ')' | '['
         break;
       case 2193:                    // '(' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2449:                    // '(' '*'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
     case 19:                        // '*'
-      lookahead2W(23);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+      lookahead2W(23);              // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
       switch (lk)
       {
       case 275:                     // '*' Identifier
-        lookahead3W(24);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ',' | ':' | ';' | '['
+        lookahead3W(24);            // WhiteSpace | '(' | ',' | ':' | ';' | '['
         break;
       case 2195:                    // '*' '('
-        lookahead3W(16);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+        lookahead3W(16);            // Identifier | WhiteSpace | '(' | '*'
         break;
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(23);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*' |
-                                    // 'const' | 'volatile'
+        lookahead3W(23);            // Identifier | WhiteSpace | '(' | '*' | 'const' | 'volatile'
         break;
       }
       break;
@@ -2737,9 +2720,9 @@ function C(string, parsingEventHandler)
         try_declarator();
       }
       consumeT(33);                 // ':'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_constantExpression();
       break;
     case -3:
@@ -2755,12 +2738,12 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '{'
         break;
       }
       break;
@@ -2772,21 +2755,21 @@ function C(string, parsingEventHandler)
     case 10556:                     // 'enum' '{'
     case 1343804:                   // 'enum' Identifier '{'
       consume(60);                  // 'enum'
-      lookahead1W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(12);              // Identifier | WhiteSpace | '{'
       if (l1 == 2)                  // Identifier
       {
         consume(2);                 // Identifier
       }
-      lookahead1W(9);               // WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(9);               // WhiteSpace | '{'
       consume(82);                  // '{'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       whitespace();
       parse_enumeratorList();
       consume(86);                  // '}'
       break;
     default:
       consume(60);                  // 'enum'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
     }
     eventHandler.endNonterminal("enumSpecifier", e0);
@@ -2797,12 +2780,12 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(34);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '{'
         break;
       }
       break;
@@ -2814,20 +2797,20 @@ function C(string, parsingEventHandler)
     case 10556:                     // 'enum' '{'
     case 1343804:                   // 'enum' Identifier '{'
       consumeT(60);                 // 'enum'
-      lookahead1W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(12);              // Identifier | WhiteSpace | '{'
       if (l1 == 2)                  // Identifier
       {
         consumeT(2);                // Identifier
       }
-      lookahead1W(9);               // WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead1W(9);               // WhiteSpace | '{'
       consumeT(82);                 // '{'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       try_enumeratorList();
       consumeT(86);                 // '}'
       break;
     default:
       consumeT(60);                 // 'enum'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
     }
   }
@@ -2838,13 +2821,13 @@ function C(string, parsingEventHandler)
     parse_enumerator();
     for (;;)
     {
-      lookahead1W(15);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '}'
+      lookahead1W(15);              // WhiteSpace | ',' | '}'
       if (l1 != 24)                 // ','
       {
         break;
       }
       consume(24);                  // ','
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       whitespace();
       parse_enumerator();
     }
@@ -2856,13 +2839,13 @@ function C(string, parsingEventHandler)
     try_enumerator();
     for (;;)
     {
-      lookahead1W(15);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '}'
+      lookahead1W(15);              // WhiteSpace | ',' | '}'
       if (l1 != 24)                 // ','
       {
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       try_enumerator();
     }
   }
@@ -2873,7 +2856,7 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(20);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '=' | '}'
+      lookahead2W(20);              // WhiteSpace | ',' | '=' | '}'
       break;
     default:
       lk = l1;
@@ -2882,11 +2865,11 @@ function C(string, parsingEventHandler)
     {
     case 4994:                      // Identifier '='
       consume(2);                   // Identifier
-      lookahead1W(6);               // WhiteSpace | Comment | PreprocessingDirective | '='
+      lookahead1W(6);               // WhiteSpace | '='
       consume(39);                  // '='
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_constantExpression();
       break;
@@ -2901,7 +2884,7 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(20);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '=' | '}'
+      lookahead2W(20);              // WhiteSpace | ',' | '=' | '}'
       break;
     default:
       lk = l1;
@@ -2910,11 +2893,11 @@ function C(string, parsingEventHandler)
     {
     case 4994:                      // Identifier '='
       consumeT(2);                  // Identifier
-      lookahead1W(6);               // WhiteSpace | Comment | PreprocessingDirective | '='
+      lookahead1W(6);               // WhiteSpace | '='
       consumeT(39);                 // '='
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_constantExpression();
       break;
     default:
@@ -2950,11 +2933,10 @@ function C(string, parsingEventHandler)
     parse_directDeclaratorBase();
     for (;;)
     {
-      lookahead1W(67);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // ':' | ';' | '=' | '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
-                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
-                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
-                                    // '{'
+      lookahead1W(67);              // Identifier | WhiteSpace | '(' | ')' | ',' | ':' | ';' | '=' | '[' | 'auto' |
+                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
+                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
+                                    // 'unsigned' | 'void' | 'volatile' | '{'
       if (l1 != 17                  // '('
        && l1 != 46)                 // '['
       {
@@ -2971,11 +2953,10 @@ function C(string, parsingEventHandler)
     try_directDeclaratorBase();
     for (;;)
     {
-      lookahead1W(67);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // ':' | ';' | '=' | '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
-                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
-                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
-                                    // '{'
+      lookahead1W(67);              // Identifier | WhiteSpace | '(' | ')' | ',' | ':' | ';' | '=' | '[' | 'auto' |
+                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
+                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
+                                    // 'unsigned' | 'void' | 'volatile' | '{'
       if (l1 != 17                  // '('
        && l1 != 46)                 // '['
       {
@@ -2995,7 +2976,7 @@ function C(string, parsingEventHandler)
       break;
     default:
       consume(17);                  // '('
-      lookahead1W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead1W(16);              // Identifier | WhiteSpace | '(' | '*'
       whitespace();
       parse_declarator();
       consume(18);                  // ')'
@@ -3012,7 +2993,7 @@ function C(string, parsingEventHandler)
       break;
     default:
       consumeT(17);                 // '('
-      lookahead1W(16);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | '*'
+      lookahead1W(16);              // Identifier | WhiteSpace | '(' | '*'
       try_declarator();
       consumeT(18);                 // ')'
     }
@@ -3024,15 +3005,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(54);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+      lookahead2W(54);              // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -3052,12 +3031,11 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(17);             // '('
-          lookahead1W(53);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+          lookahead1W(53);          // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
           try_parameterTypeList();
-          lookahead1W(2);           // WhiteSpace | Comment | PreprocessingDirective | ')'
+          lookahead1W(2);           // WhiteSpace | ')'
           consumeT(18);             // ')'
           lk = -2;
         }
@@ -3076,9 +3054,9 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consume(46);                  // '['
-      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
       if (l1 != 47)                 // ']'
       {
         whitespace();
@@ -3089,7 +3067,7 @@ function C(string, parsingEventHandler)
     case -3:
     case 2321:                      // '(' ')'
       consume(17);                  // '('
-      lookahead1W(11);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(11);              // Identifier | WhiteSpace | ')'
       if (l1 == 2)                  // Identifier
       {
         whitespace();
@@ -3099,13 +3077,12 @@ function C(string, parsingEventHandler)
       break;
     default:
       consume(17);                  // '('
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       whitespace();
       parse_parameterTypeList();
-      lookahead1W(2);               // WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(2);               // WhiteSpace | ')'
       consume(18);                  // ')'
     }
     eventHandler.endNonterminal("directDeclaratorSuffix", e0);
@@ -3116,15 +3093,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(54);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+      lookahead2W(54);              // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -3144,12 +3119,11 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(17);             // '('
-          lookahead1W(53);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+          lookahead1W(53);          // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
           try_parameterTypeList();
-          lookahead1W(2);           // WhiteSpace | Comment | PreprocessingDirective | ')'
+          lookahead1W(2);           // WhiteSpace | ')'
           consumeT(18);             // ')'
           memoize(4, e0A, -2);
           lk = -4;
@@ -3169,9 +3143,9 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consumeT(46);                 // '['
-      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
       if (l1 != 47)                 // ']'
       {
         try_constantExpression();
@@ -3181,7 +3155,7 @@ function C(string, parsingEventHandler)
     case -3:
     case 2321:                      // '(' ')'
       consumeT(17);                 // '('
-      lookahead1W(11);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(11);              // Identifier | WhiteSpace | ')'
       if (l1 == 2)                  // Identifier
       {
         try_identifierList();
@@ -3192,12 +3166,11 @@ function C(string, parsingEventHandler)
       break;
     default:
       consumeT(17);                 // '('
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       try_parameterTypeList();
-      lookahead1W(2);               // WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(2);               // WhiteSpace | ')'
       consumeT(18);                 // ')'
     }
   }
@@ -3208,14 +3181,12 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 19:                        // '*'
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -3237,8 +3208,7 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(19);             // '*'
-          lookahead1W(27);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // '[' | 'const' | 'volatile'
+          lookahead1W(27);          // Identifier | WhiteSpace | '(' | ')' | ',' | '[' | 'const' | 'volatile'
           if (l1 == 54              // 'const'
            || l1 == 80)             // 'volatile'
           {
@@ -3264,7 +3234,7 @@ function C(string, parsingEventHandler)
     case 318227:                    // '*' 'const' '*'
     case 321555:                    // '*' 'volatile' '*'
       consume(19);                  // '*'
-      lookahead1W(19);              // WhiteSpace | Comment | PreprocessingDirective | '*' | 'const' | 'volatile'
+      lookahead1W(19);              // WhiteSpace | '*' | 'const' | 'volatile'
       if (l1 != 19)                 // '*'
       {
         whitespace();
@@ -3275,8 +3245,7 @@ function C(string, parsingEventHandler)
       break;
     default:
       consume(19);                  // '*'
-      lookahead1W(27);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // '[' | 'const' | 'volatile'
+      lookahead1W(27);              // Identifier | WhiteSpace | '(' | ')' | ',' | '[' | 'const' | 'volatile'
       if (l1 == 54                  // 'const'
        || l1 == 80)                 // 'volatile'
       {
@@ -3292,14 +3261,12 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 19:                        // '*'
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -3321,8 +3288,7 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(19);             // '*'
-          lookahead1W(27);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // '[' | 'const' | 'volatile'
+          lookahead1W(27);          // Identifier | WhiteSpace | '(' | ')' | ',' | '[' | 'const' | 'volatile'
           if (l1 == 54              // 'const'
            || l1 == 80)             // 'volatile'
           {
@@ -3349,7 +3315,7 @@ function C(string, parsingEventHandler)
     case 318227:                    // '*' 'const' '*'
     case 321555:                    // '*' 'volatile' '*'
       consumeT(19);                 // '*'
-      lookahead1W(19);              // WhiteSpace | Comment | PreprocessingDirective | '*' | 'const' | 'volatile'
+      lookahead1W(19);              // WhiteSpace | '*' | 'const' | 'volatile'
       if (l1 != 19)                 // '*'
       {
         try_typeQualifierList();
@@ -3360,8 +3326,7 @@ function C(string, parsingEventHandler)
       break;
     default:
       consumeT(19);                 // '*'
-      lookahead1W(27);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' |
-                                    // '[' | 'const' | 'volatile'
+      lookahead1W(27);              // Identifier | WhiteSpace | '(' | ')' | ',' | '[' | 'const' | 'volatile'
       if (l1 == 54                  // 'const'
        || l1 == 80)                 // 'volatile'
       {
@@ -3377,8 +3342,7 @@ function C(string, parsingEventHandler)
     {
       whitespace();
       parse_typeQualifier();
-      lookahead1W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead1W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -3393,8 +3357,7 @@ function C(string, parsingEventHandler)
     for (;;)
     {
       try_typeQualifier();
-      lookahead1W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead1W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       if (l1 != 54                  // 'const'
        && l1 != 80)                 // 'volatile'
       {
@@ -3409,66 +3372,63 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 258:                     // Identifier Identifier
-        lookahead3W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead3W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         break;
       case 2178:                    // Identifier '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 3074:                    // Identifier ','
-        lookahead3W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       case 2434:                    // Identifier '*'
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10556:                   // 'enum' '{'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       }
       break;
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10570:                   // 'struct' '{'
       case 10573:                   // 'union' '{'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -3479,10 +3439,9 @@ function C(string, parsingEventHandler)
     case 73:                        // 'static'
     case 76:                        // 'typedef'
     case 80:                        // 'volatile'
-      lookahead2W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead2W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 7730:                    // 'auto' 'enum'
@@ -3506,7 +3465,7 @@ function C(string, parsingEventHandler)
       case 7760:                    // 'volatile' 'enum'
       case 9552:                    // 'volatile' 'struct'
       case 9936:                    // 'volatile' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 6450:                    // 'auto' 'auto'
       case 6962:                    // 'auto' 'const'
@@ -3557,10 +3516,9 @@ function C(string, parsingEventHandler)
       case 9424:                    // 'volatile' 'static'
       case 9808:                    // 'volatile' 'typedef'
       case 10320:                   // 'volatile' 'volatile'
-        lookahead3W(53);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(53);            // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 306:                     // 'auto' Identifier
       case 6834:                    // 'auto' 'char'
@@ -3632,9 +3590,9 @@ function C(string, parsingEventHandler)
       case 9168:                    // 'volatile' 'signed'
       case 10064:                   // 'volatile' 'unsigned'
       case 10192:                   // 'volatile' 'void'
-        lookahead3W(52);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(52);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
+                                    // 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -3647,9 +3605,9 @@ function C(string, parsingEventHandler)
     case 71:                        // 'signed'
     case 78:                        // 'unsigned'
     case 79:                        // 'void'
-      lookahead2W(48);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(46);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
       switch (lk)
       {
       case 309:                     // 'char' Identifier
@@ -3661,7 +3619,7 @@ function C(string, parsingEventHandler)
       case 327:                     // 'signed' Identifier
       case 334:                     // 'unsigned' Identifier
       case 335:                     // 'void' Identifier
-        lookahead3W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead3W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         break;
       case 2229:                    // 'char' '('
       case 2234:                    // 'double' '('
@@ -3672,10 +3630,10 @@ function C(string, parsingEventHandler)
       case 2247:                    // 'signed' '('
       case 2254:                    // 'unsigned' '('
       case 2255:                    // 'void' '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 3125:                    // 'char' ','
       case 3130:                    // 'double' ','
@@ -3686,10 +3644,9 @@ function C(string, parsingEventHandler)
       case 3143:                    // 'signed' ','
       case 3150:                    // 'unsigned' ','
       case 3151:                    // 'void' ','
-        lookahead3W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5941:                    // 'char' '['
       case 5946:                    // 'double' '['
@@ -3700,9 +3657,9 @@ function C(string, parsingEventHandler)
       case 5959:                    // 'signed' '['
       case 5966:                    // 'unsigned' '['
       case 5967:                    // 'void' '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       case 2485:                    // 'char' '*'
       case 6965:                    // 'char' 'const'
@@ -3731,8 +3688,7 @@ function C(string, parsingEventHandler)
       case 2511:                    // 'void' '*'
       case 6991:                    // 'void' 'const'
       case 10319:                   // 'void' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       case 6837:                    // 'char' 'char'
       case 7477:                    // 'char' 'double'
@@ -3815,9 +3771,9 @@ function C(string, parsingEventHandler)
       case 9167:                    // 'void' 'signed'
       case 10063:                   // 'void' 'unsigned'
       case 10191:                   // 'void' 'void'
-        lookahead3W(48);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(46);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -4077,7 +4033,7 @@ function C(string, parsingEventHandler)
     case 494671:                    // 'void' ',' '...'
       parse_parameterList();
       consume(24);                  // ','
-      lookahead1W(3);               // WhiteSpace | Comment | PreprocessingDirective | '...'
+      lookahead1W(3);               // WhiteSpace | '...'
       consume(30);                  // '...'
       break;
     default:
@@ -4091,66 +4047,63 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 258:                     // Identifier Identifier
-        lookahead3W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead3W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         break;
       case 2178:                    // Identifier '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 3074:                    // Identifier ','
-        lookahead3W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5890:                    // Identifier '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       case 2434:                    // Identifier '*'
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10556:                   // 'enum' '{'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       }
       break;
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10570:                   // 'struct' '{'
       case 10573:                   // 'union' '{'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -4161,10 +4114,9 @@ function C(string, parsingEventHandler)
     case 73:                        // 'static'
     case 76:                        // 'typedef'
     case 80:                        // 'volatile'
-      lookahead2W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead2W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 7730:                    // 'auto' 'enum'
@@ -4188,7 +4140,7 @@ function C(string, parsingEventHandler)
       case 7760:                    // 'volatile' 'enum'
       case 9552:                    // 'volatile' 'struct'
       case 9936:                    // 'volatile' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 6450:                    // 'auto' 'auto'
       case 6962:                    // 'auto' 'const'
@@ -4239,10 +4191,9 @@ function C(string, parsingEventHandler)
       case 9424:                    // 'volatile' 'static'
       case 9808:                    // 'volatile' 'typedef'
       case 10320:                   // 'volatile' 'volatile'
-        lookahead3W(53);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(53);            // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 306:                     // 'auto' Identifier
       case 6834:                    // 'auto' 'char'
@@ -4314,9 +4265,9 @@ function C(string, parsingEventHandler)
       case 9168:                    // 'volatile' 'signed'
       case 10064:                   // 'volatile' 'unsigned'
       case 10192:                   // 'volatile' 'void'
-        lookahead3W(52);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(52);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
+                                    // 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -4329,9 +4280,9 @@ function C(string, parsingEventHandler)
     case 71:                        // 'signed'
     case 78:                        // 'unsigned'
     case 79:                        // 'void'
-      lookahead2W(48);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(46);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
       switch (lk)
       {
       case 309:                     // 'char' Identifier
@@ -4343,7 +4294,7 @@ function C(string, parsingEventHandler)
       case 327:                     // 'signed' Identifier
       case 334:                     // 'unsigned' Identifier
       case 335:                     // 'void' Identifier
-        lookahead3W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead3W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         break;
       case 2229:                    // 'char' '('
       case 2234:                    // 'double' '('
@@ -4354,10 +4305,10 @@ function C(string, parsingEventHandler)
       case 2247:                    // 'signed' '('
       case 2254:                    // 'unsigned' '('
       case 2255:                    // 'void' '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 3125:                    // 'char' ','
       case 3130:                    // 'double' ','
@@ -4368,10 +4319,9 @@ function C(string, parsingEventHandler)
       case 3143:                    // 'signed' ','
       case 3150:                    // 'unsigned' ','
       case 3151:                    // 'void' ','
-        lookahead3W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead3W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 5941:                    // 'char' '['
       case 5946:                    // 'double' '['
@@ -4382,9 +4332,9 @@ function C(string, parsingEventHandler)
       case 5959:                    // 'signed' '['
       case 5966:                    // 'unsigned' '['
       case 5967:                    // 'void' '['
-        lookahead3W(43);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
         break;
       case 2485:                    // 'char' '*'
       case 6965:                    // 'char' 'const'
@@ -4413,8 +4363,7 @@ function C(string, parsingEventHandler)
       case 2511:                    // 'void' '*'
       case 6991:                    // 'void' 'const'
       case 10319:                   // 'void' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       case 6837:                    // 'char' 'char'
       case 7477:                    // 'char' 'double'
@@ -4497,9 +4446,9 @@ function C(string, parsingEventHandler)
       case 9167:                    // 'void' 'signed'
       case 10063:                   // 'void' 'unsigned'
       case 10191:                   // 'void' 'void'
-        lookahead3W(48);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(46);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -4760,7 +4709,7 @@ function C(string, parsingEventHandler)
     case 494671:                    // 'void' ',' '...'
       try_parameterList();
       consumeT(24);                 // ','
-      lookahead1W(3);               // WhiteSpace | Comment | PreprocessingDirective | '...'
+      lookahead1W(3);               // WhiteSpace | '...'
       consumeT(30);                 // '...'
       break;
     case -3:
@@ -4779,10 +4728,9 @@ function C(string, parsingEventHandler)
       switch (l1)
       {
       case 24:                      // ','
-        lookahead2W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead2W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       default:
         lk = l1;
@@ -4793,10 +4741,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(24);                  // ','
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       whitespace();
       parse_parameterDeclaration();
     }
@@ -4811,10 +4758,9 @@ function C(string, parsingEventHandler)
       switch (l1)
       {
       case 24:                      // ','
-        lookahead2W(55);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '...' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+        lookahead2W(55);            // Identifier | WhiteSpace | '...' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       default:
         lk = l1;
@@ -4825,10 +4771,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       try_parameterDeclaration();
     }
   }
@@ -4839,52 +4784,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 2434:                    // Identifier '*'
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10556:                   // 'enum' '{'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       }
       break;
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10570:                   // 'struct' '{'
       case 10573:                   // 'union' '{'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -4895,10 +4838,9 @@ function C(string, parsingEventHandler)
     case 73:                        // 'static'
     case 76:                        // 'typedef'
     case 80:                        // 'volatile'
-      lookahead2W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead2W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 7730:                    // 'auto' 'enum'
@@ -4922,7 +4864,7 @@ function C(string, parsingEventHandler)
       case 7760:                    // 'volatile' 'enum'
       case 9552:                    // 'volatile' 'struct'
       case 9936:                    // 'volatile' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 6450:                    // 'auto' 'auto'
       case 6962:                    // 'auto' 'const'
@@ -4973,10 +4915,9 @@ function C(string, parsingEventHandler)
       case 9424:                    // 'volatile' 'static'
       case 9808:                    // 'volatile' 'typedef'
       case 10320:                   // 'volatile' 'volatile'
-        lookahead3W(53);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(53);            // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 306:                     // 'auto' Identifier
       case 6834:                    // 'auto' 'char'
@@ -5048,9 +4989,9 @@ function C(string, parsingEventHandler)
       case 9168:                    // 'volatile' 'signed'
       case 10064:                   // 'volatile' 'unsigned'
       case 10192:                   // 'volatile' 'void'
-        lookahead3W(52);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(52);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
+                                    // 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -5063,9 +5004,9 @@ function C(string, parsingEventHandler)
     case 71:                        // 'signed'
     case 78:                        // 'unsigned'
     case 79:                        // 'void'
-      lookahead2W(48);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(46);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
       switch (lk)
       {
       case 2229:                    // 'char' '('
@@ -5077,10 +5018,10 @@ function C(string, parsingEventHandler)
       case 2247:                    // 'signed' '('
       case 2254:                    // 'unsigned' '('
       case 2255:                    // 'void' '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 2485:                    // 'char' '*'
       case 6965:                    // 'char' 'const'
@@ -5109,8 +5050,7 @@ function C(string, parsingEventHandler)
       case 2511:                    // 'void' '*'
       case 6991:                    // 'void' 'const'
       case 10319:                   // 'void' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       case 6837:                    // 'char' 'char'
       case 7477:                    // 'char' 'double'
@@ -5193,9 +5133,9 @@ function C(string, parsingEventHandler)
       case 9167:                    // 'void' 'signed'
       case 10063:                   // 'void' 'unsigned'
       case 10191:                   // 'void' 'void'
-        lookahead3W(48);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(46);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -6291,52 +6231,50 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(30);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+      lookahead2W(30);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 2434:                    // Identifier '*'
       case 6914:                    // Identifier 'const'
       case 10242:                   // Identifier 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
     case 60:                        // 'enum'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 316:                     // 'enum' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10556:                   // 'enum' '{'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       }
       break;
     case 74:                        // 'struct'
     case 77:                        // 'union'
-      lookahead2W(12);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+      lookahead2W(12);              // Identifier | WhiteSpace | '{'
       switch (lk)
       {
       case 330:                     // 'struct' Identifier
       case 333:                     // 'union' Identifier
-        lookahead3W(33);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile' | '{'
+        lookahead3W(33);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile' |
+                                    // '{'
         break;
       case 10570:                   // 'struct' '{'
       case 10573:                   // 'union' '{'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -6347,10 +6285,9 @@ function C(string, parsingEventHandler)
     case 73:                        // 'static'
     case 76:                        // 'typedef'
     case 80:                        // 'volatile'
-      lookahead2W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead2W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       switch (lk)
       {
       case 7730:                    // 'auto' 'enum'
@@ -6374,7 +6311,7 @@ function C(string, parsingEventHandler)
       case 7760:                    // 'volatile' 'enum'
       case 9552:                    // 'volatile' 'struct'
       case 9936:                    // 'volatile' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 6450:                    // 'auto' 'auto'
       case 6962:                    // 'auto' 'const'
@@ -6425,10 +6362,9 @@ function C(string, parsingEventHandler)
       case 9424:                    // 'volatile' 'static'
       case 9808:                    // 'volatile' 'typedef'
       case 10320:                   // 'volatile' 'volatile'
-        lookahead3W(53);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(53);            // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       case 306:                     // 'auto' Identifier
       case 6834:                    // 'auto' 'char'
@@ -6500,9 +6436,9 @@ function C(string, parsingEventHandler)
       case 9168:                    // 'volatile' 'signed'
       case 10064:                   // 'volatile' 'unsigned'
       case 10192:                   // 'volatile' 'void'
-        lookahead3W(52);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
-                                    // 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(52);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
+                                    // 'union' | 'unsigned' | 'void' | 'volatile'
         break;
       }
       break;
@@ -6515,9 +6451,9 @@ function C(string, parsingEventHandler)
     case 71:                        // 'signed'
     case 78:                        // 'unsigned'
     case 79:                        // 'void'
-      lookahead2W(48);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(46);              // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
       switch (lk)
       {
       case 2229:                    // 'char' '('
@@ -6529,10 +6465,10 @@ function C(string, parsingEventHandler)
       case 2247:                    // 'signed' '('
       case 2254:                    // 'unsigned' '('
       case 2255:                    // 'void' '('
-        lookahead3W(61);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(61);            // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 2485:                    // 'char' '*'
       case 6965:                    // 'char' 'const'
@@ -6561,8 +6497,7 @@ function C(string, parsingEventHandler)
       case 2511:                    // 'void' '*'
       case 6991:                    // 'void' 'const'
       case 10319:                   // 'void' 'volatile'
-        lookahead3W(30);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'const' | 'volatile'
+        lookahead3W(30);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       case 6837:                    // 'char' 'char'
       case 7477:                    // 'char' 'double'
@@ -6645,9 +6580,9 @@ function C(string, parsingEventHandler)
       case 9167:                    // 'void' 'signed'
       case 10063:                   // 'void' 'unsigned'
       case 10191:                   // 'void' 'void'
-        lookahead3W(48);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // ',' | '[' | 'char' | 'const' | 'double' | 'float' | 'int' | 'long' | 'short' |
-                                    // 'signed' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(46);            // Identifier | WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'char' | 'const' |
+                                    // 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       }
       break;
@@ -7744,13 +7679,13 @@ function C(string, parsingEventHandler)
     consume(2);                     // Identifier
     for (;;)
     {
-      lookahead1W(13);              // WhiteSpace | Comment | PreprocessingDirective | ')' | ','
+      lookahead1W(13);              // WhiteSpace | ')' | ','
       if (l1 != 24)                 // ','
       {
         break;
       }
       consume(24);                  // ','
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
     }
     eventHandler.endNonterminal("identifierList", e0);
@@ -7761,13 +7696,13 @@ function C(string, parsingEventHandler)
     consumeT(2);                    // Identifier
     for (;;)
     {
-      lookahead1W(13);              // WhiteSpace | Comment | PreprocessingDirective | ')' | ','
+      lookahead1W(13);              // WhiteSpace | ')' | ','
       if (l1 != 24)                 // ','
       {
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
     }
   }
@@ -7778,33 +7713,34 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 82:                        // '{'
-      lookahead2W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead2W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       switch (lk)
       {
       case 2258:                    // '{' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 10578:                   // '{' '{'
-        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+        lookahead3W(45);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
         break;
       case 338:                     // '{' Identifier
       case 466:                     // '{' IntegerConstant
       case 594:                     // '{' FloatingConstant
       case 722:                     // '{' CharacterConstant
       case 850:                     // '{' StringLiteral
-        lookahead3W(73);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' |
-                                    // '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
-                                    // '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||' | '}'
+        lookahead3W(75);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' | '<<' |
+                                    // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' |
+                                    // '|' | '|=' | '||' | '}'
         break;
+      case 1106:                    // '{' Comment
       case 1362:                    // '{' '!'
       case 1874:                    // '{' '&'
       case 2514:                    // '{' '*'
@@ -7814,9 +7750,9 @@ function C(string, parsingEventHandler)
       case 3410:                    // '{' '--'
       case 9298:                    // '{' 'sizeof'
       case 11218:                   // '{' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -7828,6 +7764,7 @@ function C(string, parsingEventHandler)
      && lk != 4                     // FloatingConstant
      && lk != 5                     // CharacterConstant
      && lk != 6                     // StringLiteral
+     && lk != 8                     // Comment
      && lk != 10                    // '!'
      && lk != 14                    // '&'
      && lk != 17                    // '('
@@ -7854,9 +7791,9 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(82);             // '{'
-          lookahead1W(44);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+          lookahead1W(45);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
           try_initializerList();
           consumeT(86);             // '}'
           lk = -2;
@@ -7881,22 +7818,22 @@ function C(string, parsingEventHandler)
     case 1409746:                   // '{' CharacterConstant '}'
     case 1409874:                   // '{' StringLiteral '}'
       consume(82);                  // '{'
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       whitespace();
       parse_initializerList();
       consume(86);                  // '}'
       break;
     case -3:
       consume(82);                  // '{'
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       whitespace();
       parse_initializerList();
       consume(24);                  // ','
-      lookahead1W(10);              // WhiteSpace | Comment | PreprocessingDirective | '}'
+      lookahead1W(10);              // WhiteSpace | '}'
       consume(86);                  // '}'
       break;
     default:
@@ -7910,33 +7847,34 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 82:                        // '{'
-      lookahead2W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead2W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       switch (lk)
       {
       case 2258:                    // '{' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 10578:                   // '{' '{'
-        lookahead3W(44);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+        lookahead3W(45);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
         break;
       case 338:                     // '{' Identifier
       case 466:                     // '{' IntegerConstant
       case 594:                     // '{' FloatingConstant
       case 722:                     // '{' CharacterConstant
       case 850:                     // '{' StringLiteral
-        lookahead3W(73);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' |
-                                    // '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
-                                    // '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||' | '}'
+        lookahead3W(75);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' | '<<' |
+                                    // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' |
+                                    // '|' | '|=' | '||' | '}'
         break;
+      case 1106:                    // '{' Comment
       case 1362:                    // '{' '!'
       case 1874:                    // '{' '&'
       case 2514:                    // '{' '*'
@@ -7946,9 +7884,9 @@ function C(string, parsingEventHandler)
       case 3410:                    // '{' '--'
       case 9298:                    // '{' 'sizeof'
       case 11218:                   // '{' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -7960,6 +7898,7 @@ function C(string, parsingEventHandler)
      && lk != 4                     // FloatingConstant
      && lk != 5                     // CharacterConstant
      && lk != 6                     // StringLiteral
+     && lk != 8                     // Comment
      && lk != 10                    // '!'
      && lk != 14                    // '&'
      && lk != 17                    // '('
@@ -7986,9 +7925,9 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(82);             // '{'
-          lookahead1W(44);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+          lookahead1W(45);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
           try_initializerList();
           consumeT(86);             // '}'
           memoize(8, e0A, -2);
@@ -8014,20 +7953,20 @@ function C(string, parsingEventHandler)
     case 1409746:                   // '{' CharacterConstant '}'
     case 1409874:                   // '{' StringLiteral '}'
       consumeT(82);                 // '{'
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       try_initializerList();
       consumeT(86);                 // '}'
       break;
     case -3:
       consumeT(82);                 // '{'
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       try_initializerList();
       consumeT(24);                 // ','
-      lookahead1W(10);              // WhiteSpace | Comment | PreprocessingDirective | '}'
+      lookahead1W(10);              // WhiteSpace | '}'
       consumeT(86);                 // '}'
       break;
     case -4:
@@ -8043,13 +7982,13 @@ function C(string, parsingEventHandler)
     parse_initializer();
     for (;;)
     {
-      lookahead1W(15);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '}'
+      lookahead1W(15);              // WhiteSpace | ',' | '}'
       switch (l1)
       {
       case 24:                      // ','
-        lookahead2W(47);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '}' | '~'
+        lookahead2W(48);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '}' | '~'
         break;
       default:
         lk = l1;
@@ -8060,9 +7999,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(24);                  // ','
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       whitespace();
       parse_initializer();
     }
@@ -8074,13 +8013,13 @@ function C(string, parsingEventHandler)
     try_initializer();
     for (;;)
     {
-      lookahead1W(15);              // WhiteSpace | Comment | PreprocessingDirective | ',' | '}'
+      lookahead1W(15);              // WhiteSpace | ',' | '}'
       switch (l1)
       {
       case 24:                      // ','
-        lookahead2W(47);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '}' | '~'
+        lookahead2W(48);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '}' | '~'
         break;
       default:
         lk = l1;
@@ -8091,9 +8030,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '{' | '~'
+      lookahead1W(45);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '{' | '~'
       try_initializer();
     }
   }
@@ -8125,15 +8064,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 19:                        // '*'
-      lookahead2W(29);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | ',' | '[' |
-                                    // 'const' | 'volatile'
+      lookahead2W(29);              // WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(29);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | ',' | '[' |
-                                    // 'const' | 'volatile'
+        lookahead3W(29);            // WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -8203,15 +8140,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 19:                        // '*'
-      lookahead2W(29);              // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | ',' | '[' |
-                                    // 'const' | 'volatile'
+      lookahead2W(29);              // WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
       switch (lk)
       {
       case 2451:                    // '*' '*'
       case 6931:                    // '*' 'const'
       case 10259:                   // '*' 'volatile'
-        lookahead3W(29);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | ',' | '[' |
-                                    // 'const' | 'volatile'
+        lookahead3W(29);            // WhiteSpace | '(' | ')' | '*' | ',' | '[' | 'const' | 'volatile'
         break;
       }
       break;
@@ -8282,10 +8217,10 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(61);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(61);              // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       break;
     default:
       lk = l1;
@@ -8296,13 +8231,13 @@ function C(string, parsingEventHandler)
     case 2449:                      // '(' '*'
     case 5905:                      // '(' '['
       consume(17);                  // '('
-      lookahead1W(18);              // WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | '['
+      lookahead1W(18);              // WhiteSpace | '(' | '*' | '['
       whitespace();
       parse_abstractDeclarator();
       consume(18);                  // ')'
       for (;;)
       {
-        lookahead1W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead1W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         if (l1 != 17                // '('
          && l1 != 46)               // '['
         {
@@ -8317,7 +8252,7 @@ function C(string, parsingEventHandler)
       {
         whitespace();
         parse_directAbstractDeclaratorSuffix();
-        lookahead1W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead1W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         if (l1 != 17                // '('
          && l1 != 46)               // '['
         {
@@ -8333,10 +8268,10 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(61);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' |
-                                    // '[' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
-                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'static' | 'struct' |
-                                    // 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead2W(61);              // Identifier | WhiteSpace | '(' | ')' | '*' | '[' | 'auto' | 'char' | 'const' |
+                                    // 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' |
+                                    // 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       break;
     default:
       lk = l1;
@@ -8347,12 +8282,12 @@ function C(string, parsingEventHandler)
     case 2449:                      // '(' '*'
     case 5905:                      // '(' '['
       consumeT(17);                 // '('
-      lookahead1W(18);              // WhiteSpace | Comment | PreprocessingDirective | '(' | '*' | '['
+      lookahead1W(18);              // WhiteSpace | '(' | '*' | '['
       try_abstractDeclarator();
       consumeT(18);                 // ')'
       for (;;)
       {
-        lookahead1W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead1W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         if (l1 != 17                // '('
          && l1 != 46)               // '['
         {
@@ -8365,7 +8300,7 @@ function C(string, parsingEventHandler)
       for (;;)
       {
         try_directAbstractDeclaratorSuffix();
-        lookahead1W(22);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | ',' | '['
+        lookahead1W(22);            // WhiteSpace | '(' | ')' | ',' | '['
         if (l1 != 17                // '('
          && l1 != 46)               // '['
         {
@@ -8382,9 +8317,9 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consume(46);                  // '['
-      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
       if (l1 != 47)                 // ']'
       {
         whitespace();
@@ -8394,16 +8329,15 @@ function C(string, parsingEventHandler)
       break;
     default:
       consume(17);                  // '('
-      lookahead1W(54);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+      lookahead1W(54);              // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       if (l1 != 18)                 // ')'
       {
         whitespace();
         parse_parameterTypeList();
       }
-      lookahead1W(2);               // WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(2);               // WhiteSpace | ')'
       consume(18);                  // ')'
     }
     eventHandler.endNonterminal("directAbstractDeclaratorSuffix", e0);
@@ -8415,9 +8349,9 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consumeT(46);                 // '['
-      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ']' | 'sizeof' | '~'
+      lookahead1W(44);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ']' | 'sizeof' | '~'
       if (l1 != 47)                 // ']'
       {
         try_constantExpression();
@@ -8426,15 +8360,14 @@ function C(string, parsingEventHandler)
       break;
     default:
       consumeT(17);                 // '('
-      lookahead1W(54);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | ')' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile'
+      lookahead1W(54);              // Identifier | WhiteSpace | ')' | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       if (l1 != 18)                 // ')'
       {
         try_parameterTypeList();
       }
-      lookahead1W(2);               // WhiteSpace | Comment | PreprocessingDirective | ')'
+      lookahead1W(2);               // WhiteSpace | ')'
       consumeT(18);                 // ')'
     }
   }
@@ -8457,13 +8390,246 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(74);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' |
-                                    // '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' |
-                                    // '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
+      lookahead2W(76);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' |
+                                    // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' |
+                                    // '^' | '^=' | '|' | '|=' | '||'
+      break;
+    case 8:                         // Comment
+      lookahead2W(82);              // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'else' | 'enum' | 'extern' | 'float' | 'for' |
+                                    // 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' |
+                                    // 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' |
+                                    // 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+      switch (lk)
+      {
+      case 264:                     // Comment Identifier
+        lookahead3W(78);            // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
+                                    // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' |
+                                    // ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
+                                    // '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        break;
+      case 1032:                    // Comment Comment
+        lookahead3W(81);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
+        break;
+      case 2184:                    // Comment '('
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
+        break;
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
+        lookahead3W(74);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ';' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
+        break;
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+        break;
+      }
       break;
     default:
       lk = l1;
+    }
+    if (lk != 3                     // IntegerConstant
+     && lk != 4                     // FloatingConstant
+     && lk != 5                     // CharacterConstant
+     && lk != 6                     // StringLiteral
+     && lk != 10                    // '!'
+     && lk != 14                    // '&'
+     && lk != 17                    // '('
+     && lk != 19                    // '*'
+     && lk != 21                    // '+'
+     && lk != 22                    // '++'
+     && lk != 25                    // '-'
+     && lk != 26                    // '--'
+     && lk != 34                    // ';'
+     && lk != 51                    // 'break'
+     && lk != 52                    // 'case'
+     && lk != 55                    // 'continue'
+     && lk != 56                    // 'default'
+     && lk != 57                    // 'do'
+     && lk != 63                    // 'for'
+     && lk != 64                    // 'goto'
+     && lk != 65                    // 'if'
+     && lk != 69                    // 'return'
+     && lk != 72                    // 'sizeof'
+     && lk != 75                    // 'switch'
+     && lk != 81                    // 'while'
+     && lk != 82                    // '{'
+     && lk != 87                    // '~'
+     && lk != 136                   // Comment %OTHER
+     && lk != 1410                  // Identifier '!='
+     && lk != 1538                  // Identifier '%'
+     && lk != 1666                  // Identifier '%='
+     && lk != 1794                  // Identifier '&'
+     && lk != 1922                  // Identifier '&&'
+     && lk != 2050                  // Identifier '&='
+     && lk != 2178                  // Identifier '('
+     && lk != 2434                  // Identifier '*'
+     && lk != 2562                  // Identifier '*='
+     && lk != 2690                  // Identifier '+'
+     && lk != 2818                  // Identifier '++'
+     && lk != 2946                  // Identifier '+='
+     && lk != 3074                  // Identifier ','
+     && lk != 3202                  // Identifier '-'
+     && lk != 3330                  // Identifier '--'
+     && lk != 3458                  // Identifier '-='
+     && lk != 3586                  // Identifier '->'
+     && lk != 3714                  // Identifier '.'
+     && lk != 3970                  // Identifier '/'
+     && lk != 4098                  // Identifier '/='
+     && lk != 4226                  // Identifier ':'
+     && lk != 4354                  // Identifier ';'
+     && lk != 4360                  // Comment ';'
+     && lk != 4482                  // Identifier '<'
+     && lk != 4610                  // Identifier '<<'
+     && lk != 4738                  // Identifier '<<='
+     && lk != 4866                  // Identifier '<='
+     && lk != 4994                  // Identifier '='
+     && lk != 5122                  // Identifier '=='
+     && lk != 5250                  // Identifier '>'
+     && lk != 5378                  // Identifier '>='
+     && lk != 5506                  // Identifier '>>'
+     && lk != 5634                  // Identifier '>>='
+     && lk != 5762                  // Identifier '?'
+     && lk != 5890                  // Identifier '['
+     && lk != 6146                  // Identifier '^'
+     && lk != 6274                  // Identifier '^='
+     && lk != 6408                  // Comment 'auto'
+     && lk != 6536                  // Comment 'break'
+     && lk != 6664                  // Comment 'case'
+     && lk != 6792                  // Comment 'char'
+     && lk != 6920                  // Comment 'const'
+     && lk != 7048                  // Comment 'continue'
+     && lk != 7176                  // Comment 'default'
+     && lk != 7304                  // Comment 'do'
+     && lk != 7432                  // Comment 'double'
+     && lk != 7560                  // Comment 'else'
+     && lk != 7688                  // Comment 'enum'
+     && lk != 7816                  // Comment 'extern'
+     && lk != 7944                  // Comment 'float'
+     && lk != 8072                  // Comment 'for'
+     && lk != 8200                  // Comment 'goto'
+     && lk != 8328                  // Comment 'if'
+     && lk != 8456                  // Comment 'int'
+     && lk != 8584                  // Comment 'long'
+     && lk != 8712                  // Comment 'register'
+     && lk != 8840                  // Comment 'return'
+     && lk != 8968                  // Comment 'short'
+     && lk != 9096                  // Comment 'signed'
+     && lk != 9352                  // Comment 'static'
+     && lk != 9480                  // Comment 'struct'
+     && lk != 9608                  // Comment 'switch'
+     && lk != 9736                  // Comment 'typedef'
+     && lk != 9864                  // Comment 'union'
+     && lk != 9992                  // Comment 'unsigned'
+     && lk != 10120                 // Comment 'void'
+     && lk != 10248                 // Comment 'volatile'
+     && lk != 10376                 // Comment 'while'
+     && lk != 10504                 // Comment '{'
+     && lk != 10626                 // Identifier '|'
+     && lk != 10754                 // Identifier '|='
+     && lk != 10882                 // Identifier '||'
+     && lk != 11016                 // Comment '}'
+     && lk != 17416                 // Comment Comment %OTHER
+     && lk != 33032                 // Comment Identifier Identifier
+     && lk != 540936                // Comment Identifier ':'
+     && lk != 558088                // Comment Comment ';'
+     && lk != 820232                // Comment Comment 'auto'
+     && lk != 836616                // Comment Comment 'break'
+     && lk != 853000                // Comment Comment 'case'
+     && lk != 869384                // Comment Comment 'char'
+     && lk != 870536                // Comment '(' 'char'
+     && lk != 885000                // Comment Identifier 'const'
+     && lk != 885768                // Comment Comment 'const'
+     && lk != 886920                // Comment '(' 'const'
+     && lk != 902152                // Comment Comment 'continue'
+     && lk != 918536                // Comment Comment 'default'
+     && lk != 934920                // Comment Comment 'do'
+     && lk != 951304                // Comment Comment 'double'
+     && lk != 952456                // Comment '(' 'double'
+     && lk != 984072                // Comment Comment 'enum'
+     && lk != 985224                // Comment '(' 'enum'
+     && lk != 1000456               // Comment Comment 'extern'
+     && lk != 1016840               // Comment Comment 'float'
+     && lk != 1017992               // Comment '(' 'float'
+     && lk != 1033224               // Comment Comment 'for'
+     && lk != 1049608               // Comment Comment 'goto'
+     && lk != 1065992               // Comment Comment 'if'
+     && lk != 1082376               // Comment Comment 'int'
+     && lk != 1083528               // Comment '(' 'int'
+     && lk != 1098760               // Comment Comment 'long'
+     && lk != 1099912               // Comment '(' 'long'
+     && lk != 1115144               // Comment Comment 'register'
+     && lk != 1131528               // Comment Comment 'return'
+     && lk != 1147912               // Comment Comment 'short'
+     && lk != 1149064               // Comment '(' 'short'
+     && lk != 1164296               // Comment Comment 'signed'
+     && lk != 1165448               // Comment '(' 'signed'
+     && lk != 1197064               // Comment Comment 'static'
+     && lk != 1213448               // Comment Comment 'struct'
+     && lk != 1214600               // Comment '(' 'struct'
+     && lk != 1229832               // Comment Comment 'switch'
+     && lk != 1246216               // Comment Comment 'typedef'
+     && lk != 1262600               // Comment Comment 'union'
+     && lk != 1263752               // Comment '(' 'union'
+     && lk != 1278984               // Comment Comment 'unsigned'
+     && lk != 1280136               // Comment '(' 'unsigned'
+     && lk != 1295368               // Comment Comment 'void'
+     && lk != 1296520               // Comment '(' 'void'
+     && lk != 1310984               // Comment Identifier 'volatile'
+     && lk != 1311752               // Comment Comment 'volatile'
+     && lk != 1312904               // Comment '(' 'volatile'
+     && lk != 1328136               // Comment Comment 'while'
+     && lk != 1344520               // Comment Comment '{'
+     && lk != 1410056)              // Comment Comment '}'
+    {
+      lk = memoized(10, e0);
+      if (lk == 0)
+      {
+        var b0A = b0; var e0A = e0; var l1A = l1;
+        var b1A = b1; var e1A = e1; var l2A = l2;
+        var b2A = b2; var e2A = e2; var l3A = l3;
+        var b3A = b3; var e3A = e3;
+        try
+        {
+          try_expressionStatement();
+          lk = -2;
+        }
+        catch (p2A)
+        {
+          lk = -7;
+        }
+        b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
+        b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
+        b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
+        b3 = b3A; e3 = e3A; end = e3A; }}}
+        memoize(10, e0, lk);
+      }
     }
     switch (lk)
     {
@@ -8471,6 +8637,62 @@ function C(string, parsingEventHandler)
     case 56:                        // 'default'
     case 4226:                      // Identifier ':'
       parse_labeledStatement();
+      break;
+    case -2:
+    case 3:                         // IntegerConstant
+    case 4:                         // FloatingConstant
+    case 5:                         // CharacterConstant
+    case 6:                         // StringLiteral
+    case 10:                        // '!'
+    case 14:                        // '&'
+    case 17:                        // '('
+    case 19:                        // '*'
+    case 21:                        // '+'
+    case 22:                        // '++'
+    case 25:                        // '-'
+    case 26:                        // '--'
+    case 34:                        // ';'
+    case 72:                        // 'sizeof'
+    case 87:                        // '~'
+    case 1410:                      // Identifier '!='
+    case 1538:                      // Identifier '%'
+    case 1666:                      // Identifier '%='
+    case 1794:                      // Identifier '&'
+    case 1922:                      // Identifier '&&'
+    case 2050:                      // Identifier '&='
+    case 2178:                      // Identifier '('
+    case 2434:                      // Identifier '*'
+    case 2562:                      // Identifier '*='
+    case 2690:                      // Identifier '+'
+    case 2818:                      // Identifier '++'
+    case 2946:                      // Identifier '+='
+    case 3074:                      // Identifier ','
+    case 3202:                      // Identifier '-'
+    case 3330:                      // Identifier '--'
+    case 3458:                      // Identifier '-='
+    case 3586:                      // Identifier '->'
+    case 3714:                      // Identifier '.'
+    case 3970:                      // Identifier '/'
+    case 4098:                      // Identifier '/='
+    case 4354:                      // Identifier ';'
+    case 4482:                      // Identifier '<'
+    case 4610:                      // Identifier '<<'
+    case 4738:                      // Identifier '<<='
+    case 4866:                      // Identifier '<='
+    case 4994:                      // Identifier '='
+    case 5122:                      // Identifier '=='
+    case 5250:                      // Identifier '>'
+    case 5378:                      // Identifier '>='
+    case 5506:                      // Identifier '>>'
+    case 5634:                      // Identifier '>>='
+    case 5762:                      // Identifier '?'
+    case 5890:                      // Identifier '['
+    case 6146:                      // Identifier '^'
+    case 6274:                      // Identifier '^='
+    case 10626:                     // Identifier '|'
+    case 10754:                     // Identifier '|='
+    case 10882:                     // Identifier '||'
+      parse_expressionStatement();
       break;
     case 82:                        // '{'
       parse_compoundStatement();
@@ -8491,7 +8713,7 @@ function C(string, parsingEventHandler)
       parse_jumpStatement();
       break;
     default:
-      parse_expressionStatement();
+      consume(8);                   // Comment
     }
     eventHandler.endNonterminal("statement", e0);
   }
@@ -8501,13 +8723,247 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(74);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' |
-                                    // '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' |
-                                    // '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
+      lookahead2W(76);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' |
+                                    // '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' |
+                                    // '^' | '^=' | '|' | '|=' | '||'
+      break;
+    case 8:                         // Comment
+      lookahead2W(82);              // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'else' | 'enum' | 'extern' | 'float' | 'for' |
+                                    // 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' |
+                                    // 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' |
+                                    // 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+      switch (lk)
+      {
+      case 264:                     // Comment Identifier
+        lookahead3W(78);            // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
+                                    // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' |
+                                    // ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
+                                    // '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        break;
+      case 1032:                    // Comment Comment
+        lookahead3W(81);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
+        break;
+      case 2184:                    // Comment '('
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
+        break;
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
+        lookahead3W(74);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' |
+                                    // '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ';' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
+        break;
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+        break;
+      }
       break;
     default:
       lk = l1;
+    }
+    if (lk != 3                     // IntegerConstant
+     && lk != 4                     // FloatingConstant
+     && lk != 5                     // CharacterConstant
+     && lk != 6                     // StringLiteral
+     && lk != 10                    // '!'
+     && lk != 14                    // '&'
+     && lk != 17                    // '('
+     && lk != 19                    // '*'
+     && lk != 21                    // '+'
+     && lk != 22                    // '++'
+     && lk != 25                    // '-'
+     && lk != 26                    // '--'
+     && lk != 34                    // ';'
+     && lk != 51                    // 'break'
+     && lk != 52                    // 'case'
+     && lk != 55                    // 'continue'
+     && lk != 56                    // 'default'
+     && lk != 57                    // 'do'
+     && lk != 63                    // 'for'
+     && lk != 64                    // 'goto'
+     && lk != 65                    // 'if'
+     && lk != 69                    // 'return'
+     && lk != 72                    // 'sizeof'
+     && lk != 75                    // 'switch'
+     && lk != 81                    // 'while'
+     && lk != 82                    // '{'
+     && lk != 87                    // '~'
+     && lk != 136                   // Comment %OTHER
+     && lk != 1410                  // Identifier '!='
+     && lk != 1538                  // Identifier '%'
+     && lk != 1666                  // Identifier '%='
+     && lk != 1794                  // Identifier '&'
+     && lk != 1922                  // Identifier '&&'
+     && lk != 2050                  // Identifier '&='
+     && lk != 2178                  // Identifier '('
+     && lk != 2434                  // Identifier '*'
+     && lk != 2562                  // Identifier '*='
+     && lk != 2690                  // Identifier '+'
+     && lk != 2818                  // Identifier '++'
+     && lk != 2946                  // Identifier '+='
+     && lk != 3074                  // Identifier ','
+     && lk != 3202                  // Identifier '-'
+     && lk != 3330                  // Identifier '--'
+     && lk != 3458                  // Identifier '-='
+     && lk != 3586                  // Identifier '->'
+     && lk != 3714                  // Identifier '.'
+     && lk != 3970                  // Identifier '/'
+     && lk != 4098                  // Identifier '/='
+     && lk != 4226                  // Identifier ':'
+     && lk != 4354                  // Identifier ';'
+     && lk != 4360                  // Comment ';'
+     && lk != 4482                  // Identifier '<'
+     && lk != 4610                  // Identifier '<<'
+     && lk != 4738                  // Identifier '<<='
+     && lk != 4866                  // Identifier '<='
+     && lk != 4994                  // Identifier '='
+     && lk != 5122                  // Identifier '=='
+     && lk != 5250                  // Identifier '>'
+     && lk != 5378                  // Identifier '>='
+     && lk != 5506                  // Identifier '>>'
+     && lk != 5634                  // Identifier '>>='
+     && lk != 5762                  // Identifier '?'
+     && lk != 5890                  // Identifier '['
+     && lk != 6146                  // Identifier '^'
+     && lk != 6274                  // Identifier '^='
+     && lk != 6408                  // Comment 'auto'
+     && lk != 6536                  // Comment 'break'
+     && lk != 6664                  // Comment 'case'
+     && lk != 6792                  // Comment 'char'
+     && lk != 6920                  // Comment 'const'
+     && lk != 7048                  // Comment 'continue'
+     && lk != 7176                  // Comment 'default'
+     && lk != 7304                  // Comment 'do'
+     && lk != 7432                  // Comment 'double'
+     && lk != 7560                  // Comment 'else'
+     && lk != 7688                  // Comment 'enum'
+     && lk != 7816                  // Comment 'extern'
+     && lk != 7944                  // Comment 'float'
+     && lk != 8072                  // Comment 'for'
+     && lk != 8200                  // Comment 'goto'
+     && lk != 8328                  // Comment 'if'
+     && lk != 8456                  // Comment 'int'
+     && lk != 8584                  // Comment 'long'
+     && lk != 8712                  // Comment 'register'
+     && lk != 8840                  // Comment 'return'
+     && lk != 8968                  // Comment 'short'
+     && lk != 9096                  // Comment 'signed'
+     && lk != 9352                  // Comment 'static'
+     && lk != 9480                  // Comment 'struct'
+     && lk != 9608                  // Comment 'switch'
+     && lk != 9736                  // Comment 'typedef'
+     && lk != 9864                  // Comment 'union'
+     && lk != 9992                  // Comment 'unsigned'
+     && lk != 10120                 // Comment 'void'
+     && lk != 10248                 // Comment 'volatile'
+     && lk != 10376                 // Comment 'while'
+     && lk != 10504                 // Comment '{'
+     && lk != 10626                 // Identifier '|'
+     && lk != 10754                 // Identifier '|='
+     && lk != 10882                 // Identifier '||'
+     && lk != 11016                 // Comment '}'
+     && lk != 17416                 // Comment Comment %OTHER
+     && lk != 33032                 // Comment Identifier Identifier
+     && lk != 540936                // Comment Identifier ':'
+     && lk != 558088                // Comment Comment ';'
+     && lk != 820232                // Comment Comment 'auto'
+     && lk != 836616                // Comment Comment 'break'
+     && lk != 853000                // Comment Comment 'case'
+     && lk != 869384                // Comment Comment 'char'
+     && lk != 870536                // Comment '(' 'char'
+     && lk != 885000                // Comment Identifier 'const'
+     && lk != 885768                // Comment Comment 'const'
+     && lk != 886920                // Comment '(' 'const'
+     && lk != 902152                // Comment Comment 'continue'
+     && lk != 918536                // Comment Comment 'default'
+     && lk != 934920                // Comment Comment 'do'
+     && lk != 951304                // Comment Comment 'double'
+     && lk != 952456                // Comment '(' 'double'
+     && lk != 984072                // Comment Comment 'enum'
+     && lk != 985224                // Comment '(' 'enum'
+     && lk != 1000456               // Comment Comment 'extern'
+     && lk != 1016840               // Comment Comment 'float'
+     && lk != 1017992               // Comment '(' 'float'
+     && lk != 1033224               // Comment Comment 'for'
+     && lk != 1049608               // Comment Comment 'goto'
+     && lk != 1065992               // Comment Comment 'if'
+     && lk != 1082376               // Comment Comment 'int'
+     && lk != 1083528               // Comment '(' 'int'
+     && lk != 1098760               // Comment Comment 'long'
+     && lk != 1099912               // Comment '(' 'long'
+     && lk != 1115144               // Comment Comment 'register'
+     && lk != 1131528               // Comment Comment 'return'
+     && lk != 1147912               // Comment Comment 'short'
+     && lk != 1149064               // Comment '(' 'short'
+     && lk != 1164296               // Comment Comment 'signed'
+     && lk != 1165448               // Comment '(' 'signed'
+     && lk != 1197064               // Comment Comment 'static'
+     && lk != 1213448               // Comment Comment 'struct'
+     && lk != 1214600               // Comment '(' 'struct'
+     && lk != 1229832               // Comment Comment 'switch'
+     && lk != 1246216               // Comment Comment 'typedef'
+     && lk != 1262600               // Comment Comment 'union'
+     && lk != 1263752               // Comment '(' 'union'
+     && lk != 1278984               // Comment Comment 'unsigned'
+     && lk != 1280136               // Comment '(' 'unsigned'
+     && lk != 1295368               // Comment Comment 'void'
+     && lk != 1296520               // Comment '(' 'void'
+     && lk != 1310984               // Comment Identifier 'volatile'
+     && lk != 1311752               // Comment Comment 'volatile'
+     && lk != 1312904               // Comment '(' 'volatile'
+     && lk != 1328136               // Comment Comment 'while'
+     && lk != 1344520               // Comment Comment '{'
+     && lk != 1410056)              // Comment Comment '}'
+    {
+      lk = memoized(10, e0);
+      if (lk == 0)
+      {
+        var b0A = b0; var e0A = e0; var l1A = l1;
+        var b1A = b1; var e1A = e1; var l2A = l2;
+        var b2A = b2; var e2A = e2; var l3A = l3;
+        var b3A = b3; var e3A = e3;
+        try
+        {
+          try_expressionStatement();
+          memoize(10, e0A, -2);
+          lk = -8;
+        }
+        catch (p2A)
+        {
+          lk = -7;
+          b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
+          b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
+          b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
+          b3 = b3A; e3 = e3A; end = e3A; }}}
+          memoize(10, e0A, -7);
+        }
+      }
     }
     switch (lk)
     {
@@ -8515,6 +8971,62 @@ function C(string, parsingEventHandler)
     case 56:                        // 'default'
     case 4226:                      // Identifier ':'
       try_labeledStatement();
+      break;
+    case -2:
+    case 3:                         // IntegerConstant
+    case 4:                         // FloatingConstant
+    case 5:                         // CharacterConstant
+    case 6:                         // StringLiteral
+    case 10:                        // '!'
+    case 14:                        // '&'
+    case 17:                        // '('
+    case 19:                        // '*'
+    case 21:                        // '+'
+    case 22:                        // '++'
+    case 25:                        // '-'
+    case 26:                        // '--'
+    case 34:                        // ';'
+    case 72:                        // 'sizeof'
+    case 87:                        // '~'
+    case 1410:                      // Identifier '!='
+    case 1538:                      // Identifier '%'
+    case 1666:                      // Identifier '%='
+    case 1794:                      // Identifier '&'
+    case 1922:                      // Identifier '&&'
+    case 2050:                      // Identifier '&='
+    case 2178:                      // Identifier '('
+    case 2434:                      // Identifier '*'
+    case 2562:                      // Identifier '*='
+    case 2690:                      // Identifier '+'
+    case 2818:                      // Identifier '++'
+    case 2946:                      // Identifier '+='
+    case 3074:                      // Identifier ','
+    case 3202:                      // Identifier '-'
+    case 3330:                      // Identifier '--'
+    case 3458:                      // Identifier '-='
+    case 3586:                      // Identifier '->'
+    case 3714:                      // Identifier '.'
+    case 3970:                      // Identifier '/'
+    case 4098:                      // Identifier '/='
+    case 4354:                      // Identifier ';'
+    case 4482:                      // Identifier '<'
+    case 4610:                      // Identifier '<<'
+    case 4738:                      // Identifier '<<='
+    case 4866:                      // Identifier '<='
+    case 4994:                      // Identifier '='
+    case 5122:                      // Identifier '=='
+    case 5250:                      // Identifier '>'
+    case 5378:                      // Identifier '>='
+    case 5506:                      // Identifier '>>'
+    case 5634:                      // Identifier '>>='
+    case 5762:                      // Identifier '?'
+    case 5890:                      // Identifier '['
+    case 6146:                      // Identifier '^'
+    case 6274:                      // Identifier '^='
+    case 10626:                     // Identifier '|'
+    case 10754:                     // Identifier '|='
+    case 10882:                     // Identifier '||'
+      try_expressionStatement();
       break;
     case 82:                        // '{'
       try_compoundStatement();
@@ -8534,8 +9046,10 @@ function C(string, parsingEventHandler)
     case 69:                        // 'return'
       try_jumpStatement();
       break;
+    case -8:
+      break;
     default:
-      try_expressionStatement();
+      consumeT(8);                  // Comment
     }
   }
 
@@ -8546,41 +9060,38 @@ function C(string, parsingEventHandler)
     {
     case 2:                         // Identifier
       consume(2);                   // Identifier
-      lookahead1W(4);               // WhiteSpace | Comment | PreprocessingDirective | ':'
+      lookahead1W(4);               // WhiteSpace | ':'
       consume(33);                  // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     case 52:                        // 'case'
       consume(52);                  // 'case'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_constantExpression();
       consume(33);                  // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     default:
       consume(56);                  // 'default'
-      lookahead1W(4);               // WhiteSpace | Comment | PreprocessingDirective | ':'
+      lookahead1W(4);               // WhiteSpace | ':'
       consume(33);                  // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
     }
@@ -8593,38 +9104,35 @@ function C(string, parsingEventHandler)
     {
     case 2:                         // Identifier
       consumeT(2);                  // Identifier
-      lookahead1W(4);               // WhiteSpace | Comment | PreprocessingDirective | ':'
+      lookahead1W(4);               // WhiteSpace | ':'
       consumeT(33);                 // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
       break;
     case 52:                        // 'case'
       consumeT(52);                 // 'case'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_constantExpression();
       consumeT(33);                 // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
       break;
     default:
       consumeT(56);                 // 'default'
-      lookahead1W(4);               // WhiteSpace | Comment | PreprocessingDirective | ':'
+      lookahead1W(4);               // WhiteSpace | ':'
       consumeT(33);                 // ':'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
     }
   }
@@ -8656,13 +9164,13 @@ function C(string, parsingEventHandler)
     consume(82);                    // '{'
     for (;;)
     {
-      lookahead1W(78);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
-                                    // 'const' | 'continue' | 'default' | 'do' | 'double' | 'enum' | 'extern' |
-                                    // 'float' | 'for' | 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' |
-                                    // 'short' | 'signed' | 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+      lookahead1W(80);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
       if (l1 == 86)                 // '}'
       {
         break;
@@ -8679,13 +9187,13 @@ function C(string, parsingEventHandler)
     consumeT(82);                   // '{'
     for (;;)
     {
-      lookahead1W(78);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
-                                    // 'const' | 'continue' | 'default' | 'do' | 'double' | 'enum' | 'extern' |
-                                    // 'float' | 'for' | 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' |
-                                    // 'short' | 'signed' | 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+      lookahead1W(80);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
       if (l1 == 86)                 // '}'
       {
         break;
@@ -8701,31 +9209,30 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(76);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' |
-                                    // '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' |
-                                    // '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' |
-                                    // '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' |
-                                    // 'volatile' | '|' | '|=' | '||'
+      lookahead2W(78);              // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
+                                    // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' |
+                                    // ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
+                                    // '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2434:                    // Identifier '*'
-        lookahead3W(46);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'const' | 'sizeof' | 'volatile' | '~'
+        lookahead3W(47);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'const' | 'sizeof' | 'volatile' | '~'
         break;
       case 4354:                    // Identifier ';'
-        lookahead3W(78);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
-                                    // 'const' | 'continue' | 'default' | 'do' | 'double' | 'enum' | 'extern' |
-                                    // 'float' | 'for' | 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' |
-                                    // 'short' | 'signed' | 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+        lookahead3W(80);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
         break;
       }
       break;
@@ -8739,6 +9246,7 @@ function C(string, parsingEventHandler)
      || lk == 69890                 // Identifier ';' FloatingConstant
      || lk == 86274                 // Identifier ';' CharacterConstant
      || lk == 102658                // Identifier ';' StringLiteral
+     || lk == 135426                // Identifier ';' Comment
      || lk == 168194                // Identifier ';' '!'
      || lk == 233730                // Identifier ';' '&'
      || lk == 280706                // Identifier '(' '('
@@ -8787,7 +9295,7 @@ function C(string, parsingEventHandler)
      || lk == 1413378               // Identifier ';' '}'
      || lk == 1429762)              // Identifier ';' '~'
     {
-      lk = memoized(10, e0);
+      lk = memoized(11, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -8807,7 +9315,7 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(10, e0, lk);
+        memoize(11, e0, lk);
       }
     }
     switch (lk)
@@ -8850,31 +9358,30 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(76);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' |
-                                    // '&' | '&&' | '&=' | '(' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' |
-                                    // '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' |
-                                    // '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' |
-                                    // 'volatile' | '|' | '|=' | '||'
+      lookahead2W(78);              // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | '*' |
+                                    // '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' |
+                                    // ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' |
+                                    // '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2434:                    // Identifier '*'
-        lookahead3W(46);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'const' | 'sizeof' | 'volatile' | '~'
+        lookahead3W(47);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'const' | 'sizeof' | 'volatile' | '~'
         break;
       case 4354:                    // Identifier ';'
-        lookahead3W(78);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
-                                    // 'const' | 'continue' | 'default' | 'do' | 'double' | 'enum' | 'extern' |
-                                    // 'float' | 'for' | 'goto' | 'if' | 'int' | 'long' | 'register' | 'return' |
-                                    // 'short' | 'signed' | 'sizeof' | 'static' | 'struct' | 'switch' | 'typedef' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
+        lookahead3W(80);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'break' | 'case' | 'char' | 'const' | 'continue' |
+                                    // 'default' | 'do' | 'double' | 'enum' | 'extern' | 'float' | 'for' | 'goto' |
+                                    // 'if' | 'int' | 'long' | 'register' | 'return' | 'short' | 'signed' | 'sizeof' |
+                                    // 'static' | 'struct' | 'switch' | 'typedef' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | 'while' | '{' | '}' | '~'
         break;
       }
       break;
@@ -8888,6 +9395,7 @@ function C(string, parsingEventHandler)
      || lk == 69890                 // Identifier ';' FloatingConstant
      || lk == 86274                 // Identifier ';' CharacterConstant
      || lk == 102658                // Identifier ';' StringLiteral
+     || lk == 135426                // Identifier ';' Comment
      || lk == 168194                // Identifier ';' '!'
      || lk == 233730                // Identifier ';' '&'
      || lk == 280706                // Identifier '(' '('
@@ -8936,7 +9444,7 @@ function C(string, parsingEventHandler)
      || lk == 1413378               // Identifier ';' '}'
      || lk == 1429762)              // Identifier ';' '~'
     {
-      lk = memoized(10, e0);
+      lk = memoized(11, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -8946,7 +9454,7 @@ function C(string, parsingEventHandler)
         try
         {
           try_statement();
-          memoize(10, e0A, -1);
+          memoize(11, e0A, -1);
           lk = -3;
         }
         catch (p1A)
@@ -8956,7 +9464,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(10, e0A, -2);
+          memoize(11, e0A, -2);
         }
       }
     }
@@ -9002,13 +9510,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 65:                        // 'if'
-      lookahead2W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead2W(1);               // WhiteSpace | '('
       switch (lk)
       {
       case 2241:                    // 'if' '('
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -9017,7 +9525,7 @@ function C(string, parsingEventHandler)
     }
     if (lk != 75)                   // 'switch'
     {
-      lk = memoized(11, e0);
+      lk = memoized(12, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -9027,26 +9535,24 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(65);             // 'if'
-          lookahead1W(1);           // WhiteSpace | Comment | PreprocessingDirective | '('
+          lookahead1W(1);           // WhiteSpace | '('
           consumeT(17);             // '('
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_expression();
           consumeT(18);             // ')'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
           try_statement();
-          lookahead1W(7);           // WhiteSpace | Comment | PreprocessingDirective | 'else'
+          lookahead1W(7);           // WhiteSpace | 'else'
           consumeT(59);             // 'else'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
           try_statement();
           lk = -1;
         }
@@ -9058,71 +9564,67 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(11, e0, lk);
+        memoize(12, e0, lk);
       }
     }
     switch (lk)
     {
     case -1:
       consume(65);                  // 'if'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
-      lookahead1W(7);               // WhiteSpace | Comment | PreprocessingDirective | 'else'
+      lookahead1W(7);               // WhiteSpace | 'else'
       consume(59);                  // 'else'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     case -2:
       consume(65);                  // 'if'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     default:
       consume(75);                  // 'switch'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
     }
@@ -9134,13 +9636,13 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 65:                        // 'if'
-      lookahead2W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead2W(1);               // WhiteSpace | '('
       switch (lk)
       {
       case 2241:                    // 'if' '('
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -9148,137 +9650,6 @@ function C(string, parsingEventHandler)
       lk = l1;
     }
     if (lk != 75)                   // 'switch'
-    {
-      lk = memoized(11, e0);
-      if (lk == 0)
-      {
-        var b0A = b0; var e0A = e0; var l1A = l1;
-        var b1A = b1; var e1A = e1; var l2A = l2;
-        var b2A = b2; var e2A = e2; var l3A = l3;
-        var b3A = b3; var e3A = e3;
-        try
-        {
-          consumeT(65);             // 'if'
-          lookahead1W(1);           // WhiteSpace | Comment | PreprocessingDirective | '('
-          consumeT(17);             // '('
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
-          try_expression();
-          consumeT(18);             // ')'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-          try_statement();
-          lookahead1W(7);           // WhiteSpace | Comment | PreprocessingDirective | 'else'
-          consumeT(59);             // 'else'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-          try_statement();
-          memoize(11, e0A, -1);
-          lk = -4;
-        }
-        catch (p1A)
-        {
-          lk = -2;
-          b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
-          b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
-          b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
-          b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(11, e0A, -2);
-        }
-      }
-    }
-    switch (lk)
-    {
-    case -1:
-      consumeT(65);                 // 'if'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
-      consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
-      try_expression();
-      consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-      try_statement();
-      lookahead1W(7);               // WhiteSpace | Comment | PreprocessingDirective | 'else'
-      consumeT(59);                 // 'else'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-      try_statement();
-      break;
-    case -2:
-      consumeT(65);                 // 'if'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
-      consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
-      try_expression();
-      consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-      try_statement();
-      break;
-    case -4:
-      break;
-    default:
-      consumeT(75);                 // 'switch'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
-      consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
-      try_expression();
-      consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
-      try_statement();
-    }
-  }
-
-  function parse_iterationStatement()
-  {
-    eventHandler.startNonterminal("iterationStatement", e0);
-    switch (l1)
-    {
-    case 63:                        // 'for'
-      lookahead2W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
-      switch (lk)
-      {
-      case 2239:                    // 'for' '('
-        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'char' | 'const' | 'double' |
-                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
-                                    // 'sizeof' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
-                                    // 'volatile' | '~'
-        break;
-      }
-      break;
-    default:
-      lk = l1;
-    }
-    if (lk == 35007)                // 'for' '(' Identifier
     {
       lk = memoized(12, e0);
       if (lk == 0)
@@ -9289,35 +9660,157 @@ function C(string, parsingEventHandler)
         var b3A = b3; var e3A = e3;
         try
         {
-          consumeT(63);             // 'for'
-          lookahead1W(1);           // WhiteSpace | Comment | PreprocessingDirective | '('
+          consumeT(65);             // 'if'
+          lookahead1W(1);           // WhiteSpace | '('
           consumeT(17);             // '('
-          lookahead1W(53);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+          try_expression();
+          consumeT(18);             // ')'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+          try_statement();
+          lookahead1W(7);           // WhiteSpace | 'else'
+          consumeT(59);             // 'else'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+          try_statement();
+          memoize(12, e0A, -1);
+          lk = -4;
+        }
+        catch (p1A)
+        {
+          lk = -2;
+          b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
+          b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
+          b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
+          b3 = b3A; e3 = e3A; end = e3A; }}}
+          memoize(12, e0A, -2);
+        }
+      }
+    }
+    switch (lk)
+    {
+    case -1:
+      consumeT(65);                 // 'if'
+      lookahead1W(1);               // WhiteSpace | '('
+      consumeT(17);                 // '('
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+      try_expression();
+      consumeT(18);                 // ')'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+      try_statement();
+      lookahead1W(7);               // WhiteSpace | 'else'
+      consumeT(59);                 // 'else'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+      try_statement();
+      break;
+    case -2:
+      consumeT(65);                 // 'if'
+      lookahead1W(1);               // WhiteSpace | '('
+      consumeT(17);                 // '('
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+      try_expression();
+      consumeT(18);                 // ')'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+      try_statement();
+      break;
+    case -4:
+      break;
+    default:
+      consumeT(75);                 // 'switch'
+      lookahead1W(1);               // WhiteSpace | '('
+      consumeT(17);                 // '('
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+      try_expression();
+      consumeT(18);                 // ')'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
+      try_statement();
+    }
+  }
+
+  function parse_iterationStatement()
+  {
+    eventHandler.startNonterminal("iterationStatement", e0);
+    switch (l1)
+    {
+    case 63:                        // 'for'
+      lookahead2W(1);               // WhiteSpace | '('
+      switch (lk)
+      {
+      case 2239:                    // 'for' '('
+        lookahead3W(71);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
+                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'sizeof' | 'static' |
+                                    // 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '~'
+        break;
+      }
+      break;
+    default:
+      lk = l1;
+    }
+    if (lk == 35007)                // 'for' '(' Identifier
+    {
+      lk = memoized(13, e0);
+      if (lk == 0)
+      {
+        var b0A = b0; var e0A = e0; var l1A = l1;
+        var b1A = b1; var e1A = e1; var l2A = l2;
+        var b2A = b2; var e2A = e2; var l3A = l3;
+        var b3A = b3; var e3A = e3;
+        try
+        {
+          consumeT(63);             // 'for'
+          lookahead1W(1);           // WhiteSpace | '('
+          consumeT(17);             // '('
+          lookahead1W(53);          // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
           try_declaration();
-          lookahead1W(42);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+          lookahead1W(43);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
           if (l1 != 34)             // ';'
           {
             try_expression();
           }
           consumeT(34);             // ';'
-          lookahead1W(41);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(42);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
           if (l1 != 18)             // ')'
           {
             try_expression();
           }
           consumeT(18);             // ')'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
           try_statement();
           lk = -3;
         }
@@ -9329,49 +9822,47 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(12, e0, lk);
+        memoize(13, e0, lk);
       }
     }
     switch (lk)
     {
     case 81:                        // 'while'
       consume(81);                  // 'while'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     case 57:                        // 'do'
       consume(57);                  // 'do'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
-      lookahead1W(8);               // WhiteSpace | Comment | PreprocessingDirective | 'while'
+      lookahead1W(8);               // WhiteSpace | 'while'
       consume(81);                  // 'while'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consume(34);                  // ';'
       break;
     case -4:
@@ -9379,6 +9870,7 @@ function C(string, parsingEventHandler)
     case 67775:                     // 'for' '(' FloatingConstant
     case 84159:                     // 'for' '(' CharacterConstant
     case 100543:                    // 'for' '(' StringLiteral
+    case 133311:                    // 'for' '(' Comment
     case 166079:                    // 'for' '(' '!'
     case 231615:                    // 'for' '(' '&'
     case 280767:                    // 'for' '(' '('
@@ -9391,11 +9883,20 @@ function C(string, parsingEventHandler)
     case 1181887:                   // 'for' '(' 'sizeof'
     case 1427647:                   // 'for' '(' '~'
       consume(63);                  // 'for'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
+      if (l1 != 34)                 // ';'
+      {
+        whitespace();
+        parse_expression();
+      }
+      consume(34);                  // ';'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         whitespace();
@@ -9403,64 +9904,52 @@ function C(string, parsingEventHandler)
       }
       consume(34);                  // ';'
       lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
-      if (l1 != 34)                 // ';'
-      {
-        whitespace();
-        parse_expression();
-      }
-      consume(34);                  // ';'
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         whitespace();
         parse_expression();
       }
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
       break;
     default:
       consume(63);                  // 'for'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       whitespace();
       parse_declaration();
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         whitespace();
         parse_expression();
       }
       consume(34);                  // ';'
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         whitespace();
         parse_expression();
       }
       consume(18);                  // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       whitespace();
       parse_statement();
     }
@@ -9472,16 +9961,15 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 63:                        // 'for'
-      lookahead2W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead2W(1);               // WhiteSpace | '('
       switch (lk)
       {
       case 2239:                    // 'for' '('
-        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'char' | 'const' | 'double' |
-                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
-                                    // 'sizeof' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' |
-                                    // 'volatile' | '~'
+        lookahead3W(71);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'auto' | 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' |
+                                    // 'int' | 'long' | 'register' | 'short' | 'signed' | 'sizeof' | 'static' |
+                                    // 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' | '~'
         break;
       }
       break;
@@ -9490,7 +9978,7 @@ function C(string, parsingEventHandler)
     }
     if (lk == 35007)                // 'for' '(' Identifier
     {
-      lk = memoized(12, e0);
+      lk = memoized(13, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -9500,36 +9988,34 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(63);             // 'for'
-          lookahead1W(1);           // WhiteSpace | Comment | PreprocessingDirective | '('
+          lookahead1W(1);           // WhiteSpace | '('
           consumeT(17);             // '('
-          lookahead1W(53);          // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+          lookahead1W(53);          // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
           try_declaration();
-          lookahead1W(42);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+          lookahead1W(43);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
           if (l1 != 34)             // ';'
           {
             try_expression();
           }
           consumeT(34);             // ';'
-          lookahead1W(41);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(42);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
           if (l1 != 18)             // ')'
           {
             try_expression();
           }
           consumeT(18);             // ')'
-          lookahead1W(66);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+          lookahead1W(68);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
           try_statement();
-          memoize(12, e0A, -3);
+          memoize(13, e0A, -3);
           lk = -5;
         }
         catch (p3A)
@@ -9539,7 +10025,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(12, e0A, -4);
+          memoize(13, e0A, -4);
         }
       }
     }
@@ -9547,38 +10033,36 @@ function C(string, parsingEventHandler)
     {
     case 81:                        // 'while'
       consumeT(81);                 // 'while'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_expression();
       consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
       break;
     case 57:                        // 'do'
       consumeT(57);                 // 'do'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
-      lookahead1W(8);               // WhiteSpace | Comment | PreprocessingDirective | 'while'
+      lookahead1W(8);               // WhiteSpace | 'while'
       consumeT(81);                 // 'while'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_expression();
       consumeT(18);                 // ')'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consumeT(34);                 // ';'
       break;
     case -4:
@@ -9586,6 +10070,7 @@ function C(string, parsingEventHandler)
     case 67775:                     // 'for' '(' FloatingConstant
     case 84159:                     // 'for' '(' CharacterConstant
     case 100543:                    // 'for' '(' StringLiteral
+    case 133311:                    // 'for' '(' Comment
     case 166079:                    // 'for' '(' '!'
     case 231615:                    // 'for' '(' '&'
     case 280767:                    // 'for' '(' '('
@@ -9598,71 +10083,68 @@ function C(string, parsingEventHandler)
     case 1181887:                   // 'for' '(' 'sizeof'
     case 1427647:                   // 'for' '(' '~'
       consumeT(63);                 // 'for'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consumeT(17);                 // '('
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
+      if (l1 != 34)                 // ';'
+      {
+        try_expression();
+      }
+      consumeT(34);                 // ';'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         try_expression();
       }
       consumeT(34);                 // ';'
       lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
-      if (l1 != 34)                 // ';'
-      {
-        try_expression();
-      }
-      consumeT(34);                 // ';'
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         try_expression();
       }
       consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
       break;
     case -5:
       break;
     default:
       consumeT(63);                 // 'for'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consumeT(17);                 // '('
-      lookahead1W(53);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'auto' | 'char' |
-                                    // 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' |
-                                    // 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' |
-                                    // 'void' | 'volatile'
+      lookahead1W(53);              // Identifier | WhiteSpace | 'auto' | 'char' | 'const' | 'double' | 'enum' |
+                                    // 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile'
       try_declaration();
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         try_expression();
       }
       consumeT(34);                 // ';'
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         try_expression();
       }
       consumeT(18);                 // ')'
-      lookahead1W(66);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+      lookahead1W(68);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
       try_statement();
     }
   }
@@ -9674,26 +10156,26 @@ function C(string, parsingEventHandler)
     {
     case 64:                        // 'goto'
       consume(64);                  // 'goto'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consume(34);                  // ';'
       break;
     case 55:                        // 'continue'
       consume(55);                  // 'continue'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consume(34);                  // ';'
       break;
     case 51:                        // 'break'
       consume(51);                  // 'break'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consume(34);                  // ';'
       break;
     default:
       consume(69);                  // 'return'
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         whitespace();
@@ -9710,26 +10192,26 @@ function C(string, parsingEventHandler)
     {
     case 64:                        // 'goto'
       consumeT(64);                 // 'goto'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consumeT(34);                 // ';'
       break;
     case 55:                        // 'continue'
       consumeT(55);                 // 'continue'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consumeT(34);                 // ';'
       break;
     case 51:                        // 'break'
       consumeT(51);                 // 'break'
-      lookahead1W(5);               // WhiteSpace | Comment | PreprocessingDirective | ';'
+      lookahead1W(5);               // WhiteSpace | ';'
       consumeT(34);                 // ';'
       break;
     default:
       consumeT(69);                 // 'return'
-      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'sizeof' | '~'
+      lookahead1W(43);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'sizeof' | '~'
       if (l1 != 34)                 // ';'
       {
         try_expression();
@@ -9749,9 +10231,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(24);                  // ','
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_assignmentExpression();
     }
@@ -9768,9 +10250,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_assignmentExpression();
     }
   }
@@ -9781,58 +10263,45 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       case 2193:                    // '(' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 6929:                    // '(' 'const'
       case 10257:                   // '(' 'volatile'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 7697:                    // '(' 'enum'
       case 9489:                    // '(' 'struct'
       case 9873:                    // '(' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 401:                     // '(' IntegerConstant
       case 529:                     // '(' FloatingConstant
       case 657:                     // '(' CharacterConstant
       case 785:                     // '(' StringLiteral
-        lookahead3W(72);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
-        break;
-      case 1297:                    // '(' '!'
-      case 1809:                    // '(' '&'
-      case 2449:                    // '(' '*'
-      case 2705:                    // '(' '+'
-      case 2833:                    // '(' '++'
-      case 3217:                    // '(' '-'
-      case 3345:                    // '(' '--'
-      case 9233:                    // '(' 'sizeof'
-      case 11153:                   // '(' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(73);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
         break;
       case 6801:                    // '(' 'char'
       case 7441:                    // '(' 'double'
@@ -9843,19 +10312,38 @@ function C(string, parsingEventHandler)
       case 9105:                    // '(' 'signed'
       case 10001:                   // '(' 'unsigned'
       case 10129:                   // '(' 'void'
-        lookahead3W(40);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | '[' | 'char' |
-                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(39);            // WhiteSpace | '(' | ')' | '*' | '[' | 'char' | 'const' | 'double' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        break;
+      case 1041:                    // '(' Comment
+      case 1297:                    // '(' '!'
+      case 1809:                    // '(' '&'
+      case 2449:                    // '(' '*'
+      case 2705:                    // '(' '+'
+      case 2833:                    // '(' '++'
+      case 3217:                    // '(' '-'
+      case 3345:                    // '(' '--'
+      case 9233:                    // '(' 'sizeof'
+      case 11153:                   // '(' '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
+    case 8:                         // Comment
     case 22:                        // '++'
     case 26:                        // '--'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
+      case 264:                     // Comment Identifier
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
       case 278:                     // '++' Identifier
       case 406:                     // '++' IntegerConstant
       case 534:                     // '++' FloatingConstant
@@ -9866,12 +10354,23 @@ function C(string, parsingEventHandler)
       case 538:                     // '--' FloatingConstant
       case 666:                     // '--' CharacterConstant
       case 794:                     // '--' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1032:                    // Comment Comment
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2184:                    // Comment '('
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+      case 1046:                    // '++' Comment
       case 1302:                    // '++' '!'
       case 1814:                    // '++' '&'
       case 2198:                    // '++' '('
@@ -9882,6 +10381,7 @@ function C(string, parsingEventHandler)
       case 3350:                    // '++' '--'
       case 9238:                    // '++' 'sizeof'
       case 11158:                   // '++' '~'
+      case 1050:                    // '--' Comment
       case 1306:                    // '--' '!'
       case 1818:                    // '--' '&'
       case 2202:                    // '--' '('
@@ -9892,9 +10392,9 @@ function C(string, parsingEventHandler)
       case 3354:                    // '--' '--'
       case 9242:                    // '--' 'sizeof'
       case 11162:                   // '--' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -9903,11 +10403,10 @@ function C(string, parsingEventHandler)
     case 4:                         // FloatingConstant
     case 5:                         // CharacterConstant
     case 6:                         // StringLiteral
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
@@ -9915,9 +10414,9 @@ function C(string, parsingEventHandler)
       case 2180:                    // FloatingConstant '('
       case 2181:                    // CharacterConstant '('
       case 2182:                    // StringLiteral '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
@@ -9929,11 +10428,10 @@ function C(string, parsingEventHandler)
       case 3333:                    // CharacterConstant '--'
       case 2822:                    // StringLiteral '++'
       case 3334:                    // StringLiteral '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
@@ -9945,7 +10443,7 @@ function C(string, parsingEventHandler)
       case 3717:                    // CharacterConstant '.'
       case 3590:                    // StringLiteral '->'
       case 3718:                    // StringLiteral '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -10047,9 +10545,9 @@ function C(string, parsingEventHandler)
       case 6150:                    // StringLiteral '^'
       case 10630:                   // StringLiteral '|'
       case 10886:                   // StringLiteral '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -10060,9 +10558,9 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 72:                        // 'sizeof'
     case 87:                        // '~'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2186:                    // '!' '('
@@ -10072,11 +10570,11 @@ function C(string, parsingEventHandler)
       case 2201:                    // '-' '('
       case 2248:                    // 'sizeof' '('
       case 2263:                    // '~' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 266:                     // '!' Identifier
       case 394:                     // '!' IntegerConstant
@@ -10113,12 +10611,12 @@ function C(string, parsingEventHandler)
       case 599:                     // '~' FloatingConstant
       case 727:                     // '~' CharacterConstant
       case 855:                     // '~' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1034:                    // '!' Comment
       case 1290:                    // '!' '!'
       case 1802:                    // '!' '&'
       case 2442:                    // '!' '*'
@@ -10128,6 +10626,7 @@ function C(string, parsingEventHandler)
       case 3338:                    // '!' '--'
       case 9226:                    // '!' 'sizeof'
       case 11146:                   // '!' '~'
+      case 1038:                    // '&' Comment
       case 1294:                    // '&' '!'
       case 1806:                    // '&' '&'
       case 2446:                    // '&' '*'
@@ -10137,6 +10636,7 @@ function C(string, parsingEventHandler)
       case 3342:                    // '&' '--'
       case 9230:                    // '&' 'sizeof'
       case 11150:                   // '&' '~'
+      case 1043:                    // '*' Comment
       case 1299:                    // '*' '!'
       case 1811:                    // '*' '&'
       case 2451:                    // '*' '*'
@@ -10146,6 +10646,7 @@ function C(string, parsingEventHandler)
       case 3347:                    // '*' '--'
       case 9235:                    // '*' 'sizeof'
       case 11155:                   // '*' '~'
+      case 1045:                    // '+' Comment
       case 1301:                    // '+' '!'
       case 1813:                    // '+' '&'
       case 2453:                    // '+' '*'
@@ -10155,6 +10656,7 @@ function C(string, parsingEventHandler)
       case 3349:                    // '+' '--'
       case 9237:                    // '+' 'sizeof'
       case 11157:                   // '+' '~'
+      case 1049:                    // '-' Comment
       case 1305:                    // '-' '!'
       case 1817:                    // '-' '&'
       case 2457:                    // '-' '*'
@@ -10164,6 +10666,7 @@ function C(string, parsingEventHandler)
       case 3353:                    // '-' '--'
       case 9241:                    // '-' 'sizeof'
       case 11161:                   // '-' '~'
+      case 1096:                    // 'sizeof' Comment
       case 1352:                    // 'sizeof' '!'
       case 1864:                    // 'sizeof' '&'
       case 2504:                    // 'sizeof' '*'
@@ -10173,6 +10676,7 @@ function C(string, parsingEventHandler)
       case 3400:                    // 'sizeof' '--'
       case 9288:                    // 'sizeof' 'sizeof'
       case 11208:                   // 'sizeof' '~'
+      case 1111:                    // '~' Comment
       case 1367:                    // '~' '!'
       case 1879:                    // '~' '&'
       case 2519:                    // '~' '*'
@@ -10182,9 +10686,9 @@ function C(string, parsingEventHandler)
       case 3415:                    // '~' '--'
       case 9303:                    // '~' 'sizeof'
       case 11223:                   // '~' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -10276,6 +10780,7 @@ function C(string, parsingEventHandler)
      && lk != 11012                 // FloatingConstant '}'
      && lk != 11013                 // CharacterConstant '}'
      && lk != 11014                 // StringLiteral '}'
+     && lk != 213256                // Comment Identifier '%='
      && lk != 213258                // '!' Identifier '%='
      && lk != 213262                // '&' Identifier '%='
      && lk != 213267                // '*' Identifier '%='
@@ -10285,6 +10790,7 @@ function C(string, parsingEventHandler)
      && lk != 213274                // '--' Identifier '%='
      && lk != 213320                // 'sizeof' Identifier '%='
      && lk != 213335                // '~' Identifier '%='
+     && lk != 213384                // Comment IntegerConstant '%='
      && lk != 213386                // '!' IntegerConstant '%='
      && lk != 213390                // '&' IntegerConstant '%='
      && lk != 213395                // '*' IntegerConstant '%='
@@ -10294,6 +10800,7 @@ function C(string, parsingEventHandler)
      && lk != 213402                // '--' IntegerConstant '%='
      && lk != 213448                // 'sizeof' IntegerConstant '%='
      && lk != 213463                // '~' IntegerConstant '%='
+     && lk != 213512                // Comment FloatingConstant '%='
      && lk != 213514                // '!' FloatingConstant '%='
      && lk != 213518                // '&' FloatingConstant '%='
      && lk != 213523                // '*' FloatingConstant '%='
@@ -10303,6 +10810,7 @@ function C(string, parsingEventHandler)
      && lk != 213530                // '--' FloatingConstant '%='
      && lk != 213576                // 'sizeof' FloatingConstant '%='
      && lk != 213591                // '~' FloatingConstant '%='
+     && lk != 213640                // Comment CharacterConstant '%='
      && lk != 213642                // '!' CharacterConstant '%='
      && lk != 213646                // '&' CharacterConstant '%='
      && lk != 213651                // '*' CharacterConstant '%='
@@ -10312,6 +10820,7 @@ function C(string, parsingEventHandler)
      && lk != 213658                // '--' CharacterConstant '%='
      && lk != 213704                // 'sizeof' CharacterConstant '%='
      && lk != 213719                // '~' CharacterConstant '%='
+     && lk != 213768                // Comment StringLiteral '%='
      && lk != 213770                // '!' StringLiteral '%='
      && lk != 213774                // '&' StringLiteral '%='
      && lk != 213779                // '*' StringLiteral '%='
@@ -10331,6 +10840,7 @@ function C(string, parsingEventHandler)
      && lk != 216324                // FloatingConstant '--' '%='
      && lk != 216325                // CharacterConstant '--' '%='
      && lk != 216326                // StringLiteral '--' '%='
+     && lk != 262408                // Comment Identifier '&='
      && lk != 262410                // '!' Identifier '&='
      && lk != 262414                // '&' Identifier '&='
      && lk != 262419                // '*' Identifier '&='
@@ -10340,6 +10850,7 @@ function C(string, parsingEventHandler)
      && lk != 262426                // '--' Identifier '&='
      && lk != 262472                // 'sizeof' Identifier '&='
      && lk != 262487                // '~' Identifier '&='
+     && lk != 262536                // Comment IntegerConstant '&='
      && lk != 262538                // '!' IntegerConstant '&='
      && lk != 262542                // '&' IntegerConstant '&='
      && lk != 262547                // '*' IntegerConstant '&='
@@ -10349,6 +10860,7 @@ function C(string, parsingEventHandler)
      && lk != 262554                // '--' IntegerConstant '&='
      && lk != 262600                // 'sizeof' IntegerConstant '&='
      && lk != 262615                // '~' IntegerConstant '&='
+     && lk != 262664                // Comment FloatingConstant '&='
      && lk != 262666                // '!' FloatingConstant '&='
      && lk != 262670                // '&' FloatingConstant '&='
      && lk != 262675                // '*' FloatingConstant '&='
@@ -10358,6 +10870,7 @@ function C(string, parsingEventHandler)
      && lk != 262682                // '--' FloatingConstant '&='
      && lk != 262728                // 'sizeof' FloatingConstant '&='
      && lk != 262743                // '~' FloatingConstant '&='
+     && lk != 262792                // Comment CharacterConstant '&='
      && lk != 262794                // '!' CharacterConstant '&='
      && lk != 262798                // '&' CharacterConstant '&='
      && lk != 262803                // '*' CharacterConstant '&='
@@ -10367,6 +10880,7 @@ function C(string, parsingEventHandler)
      && lk != 262810                // '--' CharacterConstant '&='
      && lk != 262856                // 'sizeof' CharacterConstant '&='
      && lk != 262871                // '~' CharacterConstant '&='
+     && lk != 262920                // Comment StringLiteral '&='
      && lk != 262922                // '!' StringLiteral '&='
      && lk != 262926                // '&' StringLiteral '&='
      && lk != 262931                // '*' StringLiteral '&='
@@ -10386,6 +10900,7 @@ function C(string, parsingEventHandler)
      && lk != 265476                // FloatingConstant '--' '&='
      && lk != 265477                // CharacterConstant '--' '&='
      && lk != 265478                // StringLiteral '--' '&='
+     && lk != 295176                // Comment Identifier ')'
      && lk != 295178                // '!' Identifier ')'
      && lk != 295182                // '&' Identifier ')'
      && lk != 295187                // '*' Identifier ')'
@@ -10395,6 +10910,7 @@ function C(string, parsingEventHandler)
      && lk != 295194                // '--' Identifier ')'
      && lk != 295240                // 'sizeof' Identifier ')'
      && lk != 295255                // '~' Identifier ')'
+     && lk != 295304                // Comment IntegerConstant ')'
      && lk != 295306                // '!' IntegerConstant ')'
      && lk != 295310                // '&' IntegerConstant ')'
      && lk != 295315                // '*' IntegerConstant ')'
@@ -10404,6 +10920,7 @@ function C(string, parsingEventHandler)
      && lk != 295322                // '--' IntegerConstant ')'
      && lk != 295368                // 'sizeof' IntegerConstant ')'
      && lk != 295383                // '~' IntegerConstant ')'
+     && lk != 295432                // Comment FloatingConstant ')'
      && lk != 295434                // '!' FloatingConstant ')'
      && lk != 295438                // '&' FloatingConstant ')'
      && lk != 295443                // '*' FloatingConstant ')'
@@ -10413,6 +10930,7 @@ function C(string, parsingEventHandler)
      && lk != 295450                // '--' FloatingConstant ')'
      && lk != 295496                // 'sizeof' FloatingConstant ')'
      && lk != 295511                // '~' FloatingConstant ')'
+     && lk != 295560                // Comment CharacterConstant ')'
      && lk != 295562                // '!' CharacterConstant ')'
      && lk != 295566                // '&' CharacterConstant ')'
      && lk != 295571                // '*' CharacterConstant ')'
@@ -10422,6 +10940,7 @@ function C(string, parsingEventHandler)
      && lk != 295578                // '--' CharacterConstant ')'
      && lk != 295624                // 'sizeof' CharacterConstant ')'
      && lk != 295639                // '~' CharacterConstant ')'
+     && lk != 295688                // Comment StringLiteral ')'
      && lk != 295690                // '!' StringLiteral ')'
      && lk != 295694                // '&' StringLiteral ')'
      && lk != 295699                // '*' StringLiteral ')'
@@ -10441,6 +10960,7 @@ function C(string, parsingEventHandler)
      && lk != 298244                // FloatingConstant '--' ')'
      && lk != 298245                // CharacterConstant '--' ')'
      && lk != 298246                // StringLiteral '--' ')'
+     && lk != 327944                // Comment Identifier '*='
      && lk != 327946                // '!' Identifier '*='
      && lk != 327950                // '&' Identifier '*='
      && lk != 327955                // '*' Identifier '*='
@@ -10450,6 +10970,7 @@ function C(string, parsingEventHandler)
      && lk != 327962                // '--' Identifier '*='
      && lk != 328008                // 'sizeof' Identifier '*='
      && lk != 328023                // '~' Identifier '*='
+     && lk != 328072                // Comment IntegerConstant '*='
      && lk != 328074                // '!' IntegerConstant '*='
      && lk != 328078                // '&' IntegerConstant '*='
      && lk != 328083                // '*' IntegerConstant '*='
@@ -10459,6 +10980,7 @@ function C(string, parsingEventHandler)
      && lk != 328090                // '--' IntegerConstant '*='
      && lk != 328136                // 'sizeof' IntegerConstant '*='
      && lk != 328151                // '~' IntegerConstant '*='
+     && lk != 328200                // Comment FloatingConstant '*='
      && lk != 328202                // '!' FloatingConstant '*='
      && lk != 328206                // '&' FloatingConstant '*='
      && lk != 328211                // '*' FloatingConstant '*='
@@ -10468,6 +10990,7 @@ function C(string, parsingEventHandler)
      && lk != 328218                // '--' FloatingConstant '*='
      && lk != 328264                // 'sizeof' FloatingConstant '*='
      && lk != 328279                // '~' FloatingConstant '*='
+     && lk != 328328                // Comment CharacterConstant '*='
      && lk != 328330                // '!' CharacterConstant '*='
      && lk != 328334                // '&' CharacterConstant '*='
      && lk != 328339                // '*' CharacterConstant '*='
@@ -10477,6 +11000,7 @@ function C(string, parsingEventHandler)
      && lk != 328346                // '--' CharacterConstant '*='
      && lk != 328392                // 'sizeof' CharacterConstant '*='
      && lk != 328407                // '~' CharacterConstant '*='
+     && lk != 328456                // Comment StringLiteral '*='
      && lk != 328458                // '!' StringLiteral '*='
      && lk != 328462                // '&' StringLiteral '*='
      && lk != 328467                // '*' StringLiteral '*='
@@ -10496,6 +11020,7 @@ function C(string, parsingEventHandler)
      && lk != 331012                // FloatingConstant '--' '*='
      && lk != 331013                // CharacterConstant '--' '*='
      && lk != 331014                // StringLiteral '--' '*='
+     && lk != 377096                // Comment Identifier '+='
      && lk != 377098                // '!' Identifier '+='
      && lk != 377102                // '&' Identifier '+='
      && lk != 377107                // '*' Identifier '+='
@@ -10505,6 +11030,7 @@ function C(string, parsingEventHandler)
      && lk != 377114                // '--' Identifier '+='
      && lk != 377160                // 'sizeof' Identifier '+='
      && lk != 377175                // '~' Identifier '+='
+     && lk != 377224                // Comment IntegerConstant '+='
      && lk != 377226                // '!' IntegerConstant '+='
      && lk != 377230                // '&' IntegerConstant '+='
      && lk != 377235                // '*' IntegerConstant '+='
@@ -10514,6 +11040,7 @@ function C(string, parsingEventHandler)
      && lk != 377242                // '--' IntegerConstant '+='
      && lk != 377288                // 'sizeof' IntegerConstant '+='
      && lk != 377303                // '~' IntegerConstant '+='
+     && lk != 377352                // Comment FloatingConstant '+='
      && lk != 377354                // '!' FloatingConstant '+='
      && lk != 377358                // '&' FloatingConstant '+='
      && lk != 377363                // '*' FloatingConstant '+='
@@ -10523,6 +11050,7 @@ function C(string, parsingEventHandler)
      && lk != 377370                // '--' FloatingConstant '+='
      && lk != 377416                // 'sizeof' FloatingConstant '+='
      && lk != 377431                // '~' FloatingConstant '+='
+     && lk != 377480                // Comment CharacterConstant '+='
      && lk != 377482                // '!' CharacterConstant '+='
      && lk != 377486                // '&' CharacterConstant '+='
      && lk != 377491                // '*' CharacterConstant '+='
@@ -10532,6 +11060,7 @@ function C(string, parsingEventHandler)
      && lk != 377498                // '--' CharacterConstant '+='
      && lk != 377544                // 'sizeof' CharacterConstant '+='
      && lk != 377559                // '~' CharacterConstant '+='
+     && lk != 377608                // Comment StringLiteral '+='
      && lk != 377610                // '!' StringLiteral '+='
      && lk != 377614                // '&' StringLiteral '+='
      && lk != 377619                // '*' StringLiteral '+='
@@ -10551,6 +11080,7 @@ function C(string, parsingEventHandler)
      && lk != 380164                // FloatingConstant '--' '+='
      && lk != 380165                // CharacterConstant '--' '+='
      && lk != 380166                // StringLiteral '--' '+='
+     && lk != 393480                // Comment Identifier ','
      && lk != 393482                // '!' Identifier ','
      && lk != 393486                // '&' Identifier ','
      && lk != 393491                // '*' Identifier ','
@@ -10560,6 +11090,7 @@ function C(string, parsingEventHandler)
      && lk != 393498                // '--' Identifier ','
      && lk != 393544                // 'sizeof' Identifier ','
      && lk != 393559                // '~' Identifier ','
+     && lk != 393608                // Comment IntegerConstant ','
      && lk != 393610                // '!' IntegerConstant ','
      && lk != 393614                // '&' IntegerConstant ','
      && lk != 393619                // '*' IntegerConstant ','
@@ -10569,6 +11100,7 @@ function C(string, parsingEventHandler)
      && lk != 393626                // '--' IntegerConstant ','
      && lk != 393672                // 'sizeof' IntegerConstant ','
      && lk != 393687                // '~' IntegerConstant ','
+     && lk != 393736                // Comment FloatingConstant ','
      && lk != 393738                // '!' FloatingConstant ','
      && lk != 393742                // '&' FloatingConstant ','
      && lk != 393747                // '*' FloatingConstant ','
@@ -10578,6 +11110,7 @@ function C(string, parsingEventHandler)
      && lk != 393754                // '--' FloatingConstant ','
      && lk != 393800                // 'sizeof' FloatingConstant ','
      && lk != 393815                // '~' FloatingConstant ','
+     && lk != 393864                // Comment CharacterConstant ','
      && lk != 393866                // '!' CharacterConstant ','
      && lk != 393870                // '&' CharacterConstant ','
      && lk != 393875                // '*' CharacterConstant ','
@@ -10587,6 +11120,7 @@ function C(string, parsingEventHandler)
      && lk != 393882                // '--' CharacterConstant ','
      && lk != 393928                // 'sizeof' CharacterConstant ','
      && lk != 393943                // '~' CharacterConstant ','
+     && lk != 393992                // Comment StringLiteral ','
      && lk != 393994                // '!' StringLiteral ','
      && lk != 393998                // '&' StringLiteral ','
      && lk != 394003                // '*' StringLiteral ','
@@ -10606,6 +11140,7 @@ function C(string, parsingEventHandler)
      && lk != 396548                // FloatingConstant '--' ','
      && lk != 396549                // CharacterConstant '--' ','
      && lk != 396550                // StringLiteral '--' ','
+     && lk != 442632                // Comment Identifier '-='
      && lk != 442634                // '!' Identifier '-='
      && lk != 442638                // '&' Identifier '-='
      && lk != 442643                // '*' Identifier '-='
@@ -10615,6 +11150,7 @@ function C(string, parsingEventHandler)
      && lk != 442650                // '--' Identifier '-='
      && lk != 442696                // 'sizeof' Identifier '-='
      && lk != 442711                // '~' Identifier '-='
+     && lk != 442760                // Comment IntegerConstant '-='
      && lk != 442762                // '!' IntegerConstant '-='
      && lk != 442766                // '&' IntegerConstant '-='
      && lk != 442771                // '*' IntegerConstant '-='
@@ -10624,6 +11160,7 @@ function C(string, parsingEventHandler)
      && lk != 442778                // '--' IntegerConstant '-='
      && lk != 442824                // 'sizeof' IntegerConstant '-='
      && lk != 442839                // '~' IntegerConstant '-='
+     && lk != 442888                // Comment FloatingConstant '-='
      && lk != 442890                // '!' FloatingConstant '-='
      && lk != 442894                // '&' FloatingConstant '-='
      && lk != 442899                // '*' FloatingConstant '-='
@@ -10633,6 +11170,7 @@ function C(string, parsingEventHandler)
      && lk != 442906                // '--' FloatingConstant '-='
      && lk != 442952                // 'sizeof' FloatingConstant '-='
      && lk != 442967                // '~' FloatingConstant '-='
+     && lk != 443016                // Comment CharacterConstant '-='
      && lk != 443018                // '!' CharacterConstant '-='
      && lk != 443022                // '&' CharacterConstant '-='
      && lk != 443027                // '*' CharacterConstant '-='
@@ -10642,6 +11180,7 @@ function C(string, parsingEventHandler)
      && lk != 443034                // '--' CharacterConstant '-='
      && lk != 443080                // 'sizeof' CharacterConstant '-='
      && lk != 443095                // '~' CharacterConstant '-='
+     && lk != 443144                // Comment StringLiteral '-='
      && lk != 443146                // '!' StringLiteral '-='
      && lk != 443150                // '&' StringLiteral '-='
      && lk != 443155                // '*' StringLiteral '-='
@@ -10661,6 +11200,7 @@ function C(string, parsingEventHandler)
      && lk != 445700                // FloatingConstant '--' '-='
      && lk != 445701                // CharacterConstant '--' '-='
      && lk != 445702                // StringLiteral '--' '-='
+     && lk != 524552                // Comment Identifier '/='
      && lk != 524554                // '!' Identifier '/='
      && lk != 524558                // '&' Identifier '/='
      && lk != 524563                // '*' Identifier '/='
@@ -10670,6 +11210,7 @@ function C(string, parsingEventHandler)
      && lk != 524570                // '--' Identifier '/='
      && lk != 524616                // 'sizeof' Identifier '/='
      && lk != 524631                // '~' Identifier '/='
+     && lk != 524680                // Comment IntegerConstant '/='
      && lk != 524682                // '!' IntegerConstant '/='
      && lk != 524686                // '&' IntegerConstant '/='
      && lk != 524691                // '*' IntegerConstant '/='
@@ -10679,6 +11220,7 @@ function C(string, parsingEventHandler)
      && lk != 524698                // '--' IntegerConstant '/='
      && lk != 524744                // 'sizeof' IntegerConstant '/='
      && lk != 524759                // '~' IntegerConstant '/='
+     && lk != 524808                // Comment FloatingConstant '/='
      && lk != 524810                // '!' FloatingConstant '/='
      && lk != 524814                // '&' FloatingConstant '/='
      && lk != 524819                // '*' FloatingConstant '/='
@@ -10688,6 +11230,7 @@ function C(string, parsingEventHandler)
      && lk != 524826                // '--' FloatingConstant '/='
      && lk != 524872                // 'sizeof' FloatingConstant '/='
      && lk != 524887                // '~' FloatingConstant '/='
+     && lk != 524936                // Comment CharacterConstant '/='
      && lk != 524938                // '!' CharacterConstant '/='
      && lk != 524942                // '&' CharacterConstant '/='
      && lk != 524947                // '*' CharacterConstant '/='
@@ -10697,6 +11240,7 @@ function C(string, parsingEventHandler)
      && lk != 524954                // '--' CharacterConstant '/='
      && lk != 525000                // 'sizeof' CharacterConstant '/='
      && lk != 525015                // '~' CharacterConstant '/='
+     && lk != 525064                // Comment StringLiteral '/='
      && lk != 525066                // '!' StringLiteral '/='
      && lk != 525070                // '&' StringLiteral '/='
      && lk != 525075                // '*' StringLiteral '/='
@@ -10716,6 +11260,7 @@ function C(string, parsingEventHandler)
      && lk != 527620                // FloatingConstant '--' '/='
      && lk != 527621                // CharacterConstant '--' '/='
      && lk != 527622                // StringLiteral '--' '/='
+     && lk != 540936                // Comment Identifier ':'
      && lk != 540938                // '!' Identifier ':'
      && lk != 540942                // '&' Identifier ':'
      && lk != 540947                // '*' Identifier ':'
@@ -10725,6 +11270,7 @@ function C(string, parsingEventHandler)
      && lk != 540954                // '--' Identifier ':'
      && lk != 541000                // 'sizeof' Identifier ':'
      && lk != 541015                // '~' Identifier ':'
+     && lk != 541064                // Comment IntegerConstant ':'
      && lk != 541066                // '!' IntegerConstant ':'
      && lk != 541070                // '&' IntegerConstant ':'
      && lk != 541075                // '*' IntegerConstant ':'
@@ -10734,6 +11280,7 @@ function C(string, parsingEventHandler)
      && lk != 541082                // '--' IntegerConstant ':'
      && lk != 541128                // 'sizeof' IntegerConstant ':'
      && lk != 541143                // '~' IntegerConstant ':'
+     && lk != 541192                // Comment FloatingConstant ':'
      && lk != 541194                // '!' FloatingConstant ':'
      && lk != 541198                // '&' FloatingConstant ':'
      && lk != 541203                // '*' FloatingConstant ':'
@@ -10743,6 +11290,7 @@ function C(string, parsingEventHandler)
      && lk != 541210                // '--' FloatingConstant ':'
      && lk != 541256                // 'sizeof' FloatingConstant ':'
      && lk != 541271                // '~' FloatingConstant ':'
+     && lk != 541320                // Comment CharacterConstant ':'
      && lk != 541322                // '!' CharacterConstant ':'
      && lk != 541326                // '&' CharacterConstant ':'
      && lk != 541331                // '*' CharacterConstant ':'
@@ -10752,6 +11300,7 @@ function C(string, parsingEventHandler)
      && lk != 541338                // '--' CharacterConstant ':'
      && lk != 541384                // 'sizeof' CharacterConstant ':'
      && lk != 541399                // '~' CharacterConstant ':'
+     && lk != 541448                // Comment StringLiteral ':'
      && lk != 541450                // '!' StringLiteral ':'
      && lk != 541454                // '&' StringLiteral ':'
      && lk != 541459                // '*' StringLiteral ':'
@@ -10771,6 +11320,7 @@ function C(string, parsingEventHandler)
      && lk != 544004                // FloatingConstant '--' ':'
      && lk != 544005                // CharacterConstant '--' ':'
      && lk != 544006                // StringLiteral '--' ':'
+     && lk != 557320                // Comment Identifier ';'
      && lk != 557322                // '!' Identifier ';'
      && lk != 557326                // '&' Identifier ';'
      && lk != 557331                // '*' Identifier ';'
@@ -10780,6 +11330,7 @@ function C(string, parsingEventHandler)
      && lk != 557338                // '--' Identifier ';'
      && lk != 557384                // 'sizeof' Identifier ';'
      && lk != 557399                // '~' Identifier ';'
+     && lk != 557448                // Comment IntegerConstant ';'
      && lk != 557450                // '!' IntegerConstant ';'
      && lk != 557454                // '&' IntegerConstant ';'
      && lk != 557459                // '*' IntegerConstant ';'
@@ -10789,6 +11340,7 @@ function C(string, parsingEventHandler)
      && lk != 557466                // '--' IntegerConstant ';'
      && lk != 557512                // 'sizeof' IntegerConstant ';'
      && lk != 557527                // '~' IntegerConstant ';'
+     && lk != 557576                // Comment FloatingConstant ';'
      && lk != 557578                // '!' FloatingConstant ';'
      && lk != 557582                // '&' FloatingConstant ';'
      && lk != 557587                // '*' FloatingConstant ';'
@@ -10798,6 +11350,7 @@ function C(string, parsingEventHandler)
      && lk != 557594                // '--' FloatingConstant ';'
      && lk != 557640                // 'sizeof' FloatingConstant ';'
      && lk != 557655                // '~' FloatingConstant ';'
+     && lk != 557704                // Comment CharacterConstant ';'
      && lk != 557706                // '!' CharacterConstant ';'
      && lk != 557710                // '&' CharacterConstant ';'
      && lk != 557715                // '*' CharacterConstant ';'
@@ -10807,6 +11360,7 @@ function C(string, parsingEventHandler)
      && lk != 557722                // '--' CharacterConstant ';'
      && lk != 557768                // 'sizeof' CharacterConstant ';'
      && lk != 557783                // '~' CharacterConstant ';'
+     && lk != 557832                // Comment StringLiteral ';'
      && lk != 557834                // '!' StringLiteral ';'
      && lk != 557838                // '&' StringLiteral ';'
      && lk != 557843                // '*' StringLiteral ';'
@@ -10826,6 +11380,7 @@ function C(string, parsingEventHandler)
      && lk != 560388                // FloatingConstant '--' ';'
      && lk != 560389                // CharacterConstant '--' ';'
      && lk != 560390                // StringLiteral '--' ';'
+     && lk != 606472                // Comment Identifier '<<='
      && lk != 606474                // '!' Identifier '<<='
      && lk != 606478                // '&' Identifier '<<='
      && lk != 606483                // '*' Identifier '<<='
@@ -10835,6 +11390,7 @@ function C(string, parsingEventHandler)
      && lk != 606490                // '--' Identifier '<<='
      && lk != 606536                // 'sizeof' Identifier '<<='
      && lk != 606551                // '~' Identifier '<<='
+     && lk != 606600                // Comment IntegerConstant '<<='
      && lk != 606602                // '!' IntegerConstant '<<='
      && lk != 606606                // '&' IntegerConstant '<<='
      && lk != 606611                // '*' IntegerConstant '<<='
@@ -10844,6 +11400,7 @@ function C(string, parsingEventHandler)
      && lk != 606618                // '--' IntegerConstant '<<='
      && lk != 606664                // 'sizeof' IntegerConstant '<<='
      && lk != 606679                // '~' IntegerConstant '<<='
+     && lk != 606728                // Comment FloatingConstant '<<='
      && lk != 606730                // '!' FloatingConstant '<<='
      && lk != 606734                // '&' FloatingConstant '<<='
      && lk != 606739                // '*' FloatingConstant '<<='
@@ -10853,6 +11410,7 @@ function C(string, parsingEventHandler)
      && lk != 606746                // '--' FloatingConstant '<<='
      && lk != 606792                // 'sizeof' FloatingConstant '<<='
      && lk != 606807                // '~' FloatingConstant '<<='
+     && lk != 606856                // Comment CharacterConstant '<<='
      && lk != 606858                // '!' CharacterConstant '<<='
      && lk != 606862                // '&' CharacterConstant '<<='
      && lk != 606867                // '*' CharacterConstant '<<='
@@ -10862,6 +11420,7 @@ function C(string, parsingEventHandler)
      && lk != 606874                // '--' CharacterConstant '<<='
      && lk != 606920                // 'sizeof' CharacterConstant '<<='
      && lk != 606935                // '~' CharacterConstant '<<='
+     && lk != 606984                // Comment StringLiteral '<<='
      && lk != 606986                // '!' StringLiteral '<<='
      && lk != 606990                // '&' StringLiteral '<<='
      && lk != 606995                // '*' StringLiteral '<<='
@@ -10881,6 +11440,7 @@ function C(string, parsingEventHandler)
      && lk != 609540                // FloatingConstant '--' '<<='
      && lk != 609541                // CharacterConstant '--' '<<='
      && lk != 609542                // StringLiteral '--' '<<='
+     && lk != 639240                // Comment Identifier '='
      && lk != 639242                // '!' Identifier '='
      && lk != 639246                // '&' Identifier '='
      && lk != 639251                // '*' Identifier '='
@@ -10890,6 +11450,7 @@ function C(string, parsingEventHandler)
      && lk != 639258                // '--' Identifier '='
      && lk != 639304                // 'sizeof' Identifier '='
      && lk != 639319                // '~' Identifier '='
+     && lk != 639368                // Comment IntegerConstant '='
      && lk != 639370                // '!' IntegerConstant '='
      && lk != 639374                // '&' IntegerConstant '='
      && lk != 639379                // '*' IntegerConstant '='
@@ -10899,6 +11460,7 @@ function C(string, parsingEventHandler)
      && lk != 639386                // '--' IntegerConstant '='
      && lk != 639432                // 'sizeof' IntegerConstant '='
      && lk != 639447                // '~' IntegerConstant '='
+     && lk != 639496                // Comment FloatingConstant '='
      && lk != 639498                // '!' FloatingConstant '='
      && lk != 639502                // '&' FloatingConstant '='
      && lk != 639507                // '*' FloatingConstant '='
@@ -10908,6 +11470,7 @@ function C(string, parsingEventHandler)
      && lk != 639514                // '--' FloatingConstant '='
      && lk != 639560                // 'sizeof' FloatingConstant '='
      && lk != 639575                // '~' FloatingConstant '='
+     && lk != 639624                // Comment CharacterConstant '='
      && lk != 639626                // '!' CharacterConstant '='
      && lk != 639630                // '&' CharacterConstant '='
      && lk != 639635                // '*' CharacterConstant '='
@@ -10917,6 +11480,7 @@ function C(string, parsingEventHandler)
      && lk != 639642                // '--' CharacterConstant '='
      && lk != 639688                // 'sizeof' CharacterConstant '='
      && lk != 639703                // '~' CharacterConstant '='
+     && lk != 639752                // Comment StringLiteral '='
      && lk != 639754                // '!' StringLiteral '='
      && lk != 639758                // '&' StringLiteral '='
      && lk != 639763                // '*' StringLiteral '='
@@ -10936,6 +11500,7 @@ function C(string, parsingEventHandler)
      && lk != 642308                // FloatingConstant '--' '='
      && lk != 642309                // CharacterConstant '--' '='
      && lk != 642310                // StringLiteral '--' '='
+     && lk != 721160                // Comment Identifier '>>='
      && lk != 721162                // '!' Identifier '>>='
      && lk != 721166                // '&' Identifier '>>='
      && lk != 721171                // '*' Identifier '>>='
@@ -10945,6 +11510,7 @@ function C(string, parsingEventHandler)
      && lk != 721178                // '--' Identifier '>>='
      && lk != 721224                // 'sizeof' Identifier '>>='
      && lk != 721239                // '~' Identifier '>>='
+     && lk != 721288                // Comment IntegerConstant '>>='
      && lk != 721290                // '!' IntegerConstant '>>='
      && lk != 721294                // '&' IntegerConstant '>>='
      && lk != 721299                // '*' IntegerConstant '>>='
@@ -10954,6 +11520,7 @@ function C(string, parsingEventHandler)
      && lk != 721306                // '--' IntegerConstant '>>='
      && lk != 721352                // 'sizeof' IntegerConstant '>>='
      && lk != 721367                // '~' IntegerConstant '>>='
+     && lk != 721416                // Comment FloatingConstant '>>='
      && lk != 721418                // '!' FloatingConstant '>>='
      && lk != 721422                // '&' FloatingConstant '>>='
      && lk != 721427                // '*' FloatingConstant '>>='
@@ -10963,6 +11530,7 @@ function C(string, parsingEventHandler)
      && lk != 721434                // '--' FloatingConstant '>>='
      && lk != 721480                // 'sizeof' FloatingConstant '>>='
      && lk != 721495                // '~' FloatingConstant '>>='
+     && lk != 721544                // Comment CharacterConstant '>>='
      && lk != 721546                // '!' CharacterConstant '>>='
      && lk != 721550                // '&' CharacterConstant '>>='
      && lk != 721555                // '*' CharacterConstant '>>='
@@ -10972,6 +11540,7 @@ function C(string, parsingEventHandler)
      && lk != 721562                // '--' CharacterConstant '>>='
      && lk != 721608                // 'sizeof' CharacterConstant '>>='
      && lk != 721623                // '~' CharacterConstant '>>='
+     && lk != 721672                // Comment StringLiteral '>>='
      && lk != 721674                // '!' StringLiteral '>>='
      && lk != 721678                // '&' StringLiteral '>>='
      && lk != 721683                // '*' StringLiteral '>>='
@@ -10991,6 +11560,7 @@ function C(string, parsingEventHandler)
      && lk != 724228                // FloatingConstant '--' '>>='
      && lk != 724229                // CharacterConstant '--' '>>='
      && lk != 724230                // StringLiteral '--' '>>='
+     && lk != 770312                // Comment Identifier ']'
      && lk != 770314                // '!' Identifier ']'
      && lk != 770318                // '&' Identifier ']'
      && lk != 770323                // '*' Identifier ']'
@@ -11000,6 +11570,7 @@ function C(string, parsingEventHandler)
      && lk != 770330                // '--' Identifier ']'
      && lk != 770376                // 'sizeof' Identifier ']'
      && lk != 770391                // '~' Identifier ']'
+     && lk != 770440                // Comment IntegerConstant ']'
      && lk != 770442                // '!' IntegerConstant ']'
      && lk != 770446                // '&' IntegerConstant ']'
      && lk != 770451                // '*' IntegerConstant ']'
@@ -11009,6 +11580,7 @@ function C(string, parsingEventHandler)
      && lk != 770458                // '--' IntegerConstant ']'
      && lk != 770504                // 'sizeof' IntegerConstant ']'
      && lk != 770519                // '~' IntegerConstant ']'
+     && lk != 770568                // Comment FloatingConstant ']'
      && lk != 770570                // '!' FloatingConstant ']'
      && lk != 770574                // '&' FloatingConstant ']'
      && lk != 770579                // '*' FloatingConstant ']'
@@ -11018,6 +11590,7 @@ function C(string, parsingEventHandler)
      && lk != 770586                // '--' FloatingConstant ']'
      && lk != 770632                // 'sizeof' FloatingConstant ']'
      && lk != 770647                // '~' FloatingConstant ']'
+     && lk != 770696                // Comment CharacterConstant ']'
      && lk != 770698                // '!' CharacterConstant ']'
      && lk != 770702                // '&' CharacterConstant ']'
      && lk != 770707                // '*' CharacterConstant ']'
@@ -11027,6 +11600,7 @@ function C(string, parsingEventHandler)
      && lk != 770714                // '--' CharacterConstant ']'
      && lk != 770760                // 'sizeof' CharacterConstant ']'
      && lk != 770775                // '~' CharacterConstant ']'
+     && lk != 770824                // Comment StringLiteral ']'
      && lk != 770826                // '!' StringLiteral ']'
      && lk != 770830                // '&' StringLiteral ']'
      && lk != 770835                // '*' StringLiteral ']'
@@ -11046,6 +11620,7 @@ function C(string, parsingEventHandler)
      && lk != 773380                // FloatingConstant '--' ']'
      && lk != 773381                // CharacterConstant '--' ']'
      && lk != 773382                // StringLiteral '--' ']'
+     && lk != 803080                // Comment Identifier '^='
      && lk != 803082                // '!' Identifier '^='
      && lk != 803086                // '&' Identifier '^='
      && lk != 803091                // '*' Identifier '^='
@@ -11055,6 +11630,7 @@ function C(string, parsingEventHandler)
      && lk != 803098                // '--' Identifier '^='
      && lk != 803144                // 'sizeof' Identifier '^='
      && lk != 803159                // '~' Identifier '^='
+     && lk != 803208                // Comment IntegerConstant '^='
      && lk != 803210                // '!' IntegerConstant '^='
      && lk != 803214                // '&' IntegerConstant '^='
      && lk != 803219                // '*' IntegerConstant '^='
@@ -11064,6 +11640,7 @@ function C(string, parsingEventHandler)
      && lk != 803226                // '--' IntegerConstant '^='
      && lk != 803272                // 'sizeof' IntegerConstant '^='
      && lk != 803287                // '~' IntegerConstant '^='
+     && lk != 803336                // Comment FloatingConstant '^='
      && lk != 803338                // '!' FloatingConstant '^='
      && lk != 803342                // '&' FloatingConstant '^='
      && lk != 803347                // '*' FloatingConstant '^='
@@ -11073,6 +11650,7 @@ function C(string, parsingEventHandler)
      && lk != 803354                // '--' FloatingConstant '^='
      && lk != 803400                // 'sizeof' FloatingConstant '^='
      && lk != 803415                // '~' FloatingConstant '^='
+     && lk != 803464                // Comment CharacterConstant '^='
      && lk != 803466                // '!' CharacterConstant '^='
      && lk != 803470                // '&' CharacterConstant '^='
      && lk != 803475                // '*' CharacterConstant '^='
@@ -11082,6 +11660,7 @@ function C(string, parsingEventHandler)
      && lk != 803482                // '--' CharacterConstant '^='
      && lk != 803528                // 'sizeof' CharacterConstant '^='
      && lk != 803543                // '~' CharacterConstant '^='
+     && lk != 803592                // Comment StringLiteral '^='
      && lk != 803594                // '!' StringLiteral '^='
      && lk != 803598                // '&' StringLiteral '^='
      && lk != 803603                // '*' StringLiteral '^='
@@ -11101,6 +11680,7 @@ function C(string, parsingEventHandler)
      && lk != 806148                // FloatingConstant '--' '^='
      && lk != 806149                // CharacterConstant '--' '^='
      && lk != 806150                // StringLiteral '--' '^='
+     && lk != 1376520               // Comment Identifier '|='
      && lk != 1376522               // '!' Identifier '|='
      && lk != 1376526               // '&' Identifier '|='
      && lk != 1376531               // '*' Identifier '|='
@@ -11110,6 +11690,7 @@ function C(string, parsingEventHandler)
      && lk != 1376538               // '--' Identifier '|='
      && lk != 1376584               // 'sizeof' Identifier '|='
      && lk != 1376599               // '~' Identifier '|='
+     && lk != 1376648               // Comment IntegerConstant '|='
      && lk != 1376650               // '!' IntegerConstant '|='
      && lk != 1376654               // '&' IntegerConstant '|='
      && lk != 1376659               // '*' IntegerConstant '|='
@@ -11119,6 +11700,7 @@ function C(string, parsingEventHandler)
      && lk != 1376666               // '--' IntegerConstant '|='
      && lk != 1376712               // 'sizeof' IntegerConstant '|='
      && lk != 1376727               // '~' IntegerConstant '|='
+     && lk != 1376776               // Comment FloatingConstant '|='
      && lk != 1376778               // '!' FloatingConstant '|='
      && lk != 1376782               // '&' FloatingConstant '|='
      && lk != 1376787               // '*' FloatingConstant '|='
@@ -11128,6 +11710,7 @@ function C(string, parsingEventHandler)
      && lk != 1376794               // '--' FloatingConstant '|='
      && lk != 1376840               // 'sizeof' FloatingConstant '|='
      && lk != 1376855               // '~' FloatingConstant '|='
+     && lk != 1376904               // Comment CharacterConstant '|='
      && lk != 1376906               // '!' CharacterConstant '|='
      && lk != 1376910               // '&' CharacterConstant '|='
      && lk != 1376915               // '*' CharacterConstant '|='
@@ -11137,6 +11720,7 @@ function C(string, parsingEventHandler)
      && lk != 1376922               // '--' CharacterConstant '|='
      && lk != 1376968               // 'sizeof' CharacterConstant '|='
      && lk != 1376983               // '~' CharacterConstant '|='
+     && lk != 1377032               // Comment StringLiteral '|='
      && lk != 1377034               // '!' StringLiteral '|='
      && lk != 1377038               // '&' StringLiteral '|='
      && lk != 1377043               // '*' StringLiteral '|='
@@ -11156,6 +11740,7 @@ function C(string, parsingEventHandler)
      && lk != 1379588               // FloatingConstant '--' '|='
      && lk != 1379589               // CharacterConstant '--' '|='
      && lk != 1379590               // StringLiteral '--' '|='
+     && lk != 1409288               // Comment Identifier '}'
      && lk != 1409290               // '!' Identifier '}'
      && lk != 1409294               // '&' Identifier '}'
      && lk != 1409299               // '*' Identifier '}'
@@ -11165,6 +11750,7 @@ function C(string, parsingEventHandler)
      && lk != 1409306               // '--' Identifier '}'
      && lk != 1409352               // 'sizeof' Identifier '}'
      && lk != 1409367               // '~' Identifier '}'
+     && lk != 1409416               // Comment IntegerConstant '}'
      && lk != 1409418               // '!' IntegerConstant '}'
      && lk != 1409422               // '&' IntegerConstant '}'
      && lk != 1409427               // '*' IntegerConstant '}'
@@ -11174,6 +11760,7 @@ function C(string, parsingEventHandler)
      && lk != 1409434               // '--' IntegerConstant '}'
      && lk != 1409480               // 'sizeof' IntegerConstant '}'
      && lk != 1409495               // '~' IntegerConstant '}'
+     && lk != 1409544               // Comment FloatingConstant '}'
      && lk != 1409546               // '!' FloatingConstant '}'
      && lk != 1409550               // '&' FloatingConstant '}'
      && lk != 1409555               // '*' FloatingConstant '}'
@@ -11183,6 +11770,7 @@ function C(string, parsingEventHandler)
      && lk != 1409562               // '--' FloatingConstant '}'
      && lk != 1409608               // 'sizeof' FloatingConstant '}'
      && lk != 1409623               // '~' FloatingConstant '}'
+     && lk != 1409672               // Comment CharacterConstant '}'
      && lk != 1409674               // '!' CharacterConstant '}'
      && lk != 1409678               // '&' CharacterConstant '}'
      && lk != 1409683               // '*' CharacterConstant '}'
@@ -11192,6 +11780,7 @@ function C(string, parsingEventHandler)
      && lk != 1409690               // '--' CharacterConstant '}'
      && lk != 1409736               // 'sizeof' CharacterConstant '}'
      && lk != 1409751               // '~' CharacterConstant '}'
+     && lk != 1409800               // Comment StringLiteral '}'
      && lk != 1409802               // '!' StringLiteral '}'
      && lk != 1409806               // '&' StringLiteral '}'
      && lk != 1409811               // '*' StringLiteral '}'
@@ -11212,7 +11801,7 @@ function C(string, parsingEventHandler)
      && lk != 1412357               // CharacterConstant '--' '}'
      && lk != 1412358)              // StringLiteral '--' '}'
     {
-      lk = memoized(13, e0);
+      lk = memoized(14, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -11223,9 +11812,9 @@ function C(string, parsingEventHandler)
         {
           try_conditionalExpression();
           try_assignmentOperator();
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_assignmentExpression();
           lk = -1;
         }
@@ -11237,7 +11826,7 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(13, e0, lk);
+        memoize(14, e0, lk);
       }
     }
     switch (lk)
@@ -11273,6 +11862,7 @@ function C(string, parsingEventHandler)
     case 11012:                     // FloatingConstant '}'
     case 11013:                     // CharacterConstant '}'
     case 11014:                     // StringLiteral '}'
+    case 295176:                    // Comment Identifier ')'
     case 295178:                    // '!' Identifier ')'
     case 295182:                    // '&' Identifier ')'
     case 295187:                    // '*' Identifier ')'
@@ -11282,6 +11872,7 @@ function C(string, parsingEventHandler)
     case 295194:                    // '--' Identifier ')'
     case 295240:                    // 'sizeof' Identifier ')'
     case 295255:                    // '~' Identifier ')'
+    case 295304:                    // Comment IntegerConstant ')'
     case 295306:                    // '!' IntegerConstant ')'
     case 295310:                    // '&' IntegerConstant ')'
     case 295315:                    // '*' IntegerConstant ')'
@@ -11291,6 +11882,7 @@ function C(string, parsingEventHandler)
     case 295322:                    // '--' IntegerConstant ')'
     case 295368:                    // 'sizeof' IntegerConstant ')'
     case 295383:                    // '~' IntegerConstant ')'
+    case 295432:                    // Comment FloatingConstant ')'
     case 295434:                    // '!' FloatingConstant ')'
     case 295438:                    // '&' FloatingConstant ')'
     case 295443:                    // '*' FloatingConstant ')'
@@ -11300,6 +11892,7 @@ function C(string, parsingEventHandler)
     case 295450:                    // '--' FloatingConstant ')'
     case 295496:                    // 'sizeof' FloatingConstant ')'
     case 295511:                    // '~' FloatingConstant ')'
+    case 295560:                    // Comment CharacterConstant ')'
     case 295562:                    // '!' CharacterConstant ')'
     case 295566:                    // '&' CharacterConstant ')'
     case 295571:                    // '*' CharacterConstant ')'
@@ -11309,6 +11902,7 @@ function C(string, parsingEventHandler)
     case 295578:                    // '--' CharacterConstant ')'
     case 295624:                    // 'sizeof' CharacterConstant ')'
     case 295639:                    // '~' CharacterConstant ')'
+    case 295688:                    // Comment StringLiteral ')'
     case 295690:                    // '!' StringLiteral ')'
     case 295694:                    // '&' StringLiteral ')'
     case 295699:                    // '*' StringLiteral ')'
@@ -11328,6 +11922,7 @@ function C(string, parsingEventHandler)
     case 298244:                    // FloatingConstant '--' ')'
     case 298245:                    // CharacterConstant '--' ')'
     case 298246:                    // StringLiteral '--' ')'
+    case 393480:                    // Comment Identifier ','
     case 393482:                    // '!' Identifier ','
     case 393486:                    // '&' Identifier ','
     case 393491:                    // '*' Identifier ','
@@ -11337,6 +11932,7 @@ function C(string, parsingEventHandler)
     case 393498:                    // '--' Identifier ','
     case 393544:                    // 'sizeof' Identifier ','
     case 393559:                    // '~' Identifier ','
+    case 393608:                    // Comment IntegerConstant ','
     case 393610:                    // '!' IntegerConstant ','
     case 393614:                    // '&' IntegerConstant ','
     case 393619:                    // '*' IntegerConstant ','
@@ -11346,6 +11942,7 @@ function C(string, parsingEventHandler)
     case 393626:                    // '--' IntegerConstant ','
     case 393672:                    // 'sizeof' IntegerConstant ','
     case 393687:                    // '~' IntegerConstant ','
+    case 393736:                    // Comment FloatingConstant ','
     case 393738:                    // '!' FloatingConstant ','
     case 393742:                    // '&' FloatingConstant ','
     case 393747:                    // '*' FloatingConstant ','
@@ -11355,6 +11952,7 @@ function C(string, parsingEventHandler)
     case 393754:                    // '--' FloatingConstant ','
     case 393800:                    // 'sizeof' FloatingConstant ','
     case 393815:                    // '~' FloatingConstant ','
+    case 393864:                    // Comment CharacterConstant ','
     case 393866:                    // '!' CharacterConstant ','
     case 393870:                    // '&' CharacterConstant ','
     case 393875:                    // '*' CharacterConstant ','
@@ -11364,6 +11962,7 @@ function C(string, parsingEventHandler)
     case 393882:                    // '--' CharacterConstant ','
     case 393928:                    // 'sizeof' CharacterConstant ','
     case 393943:                    // '~' CharacterConstant ','
+    case 393992:                    // Comment StringLiteral ','
     case 393994:                    // '!' StringLiteral ','
     case 393998:                    // '&' StringLiteral ','
     case 394003:                    // '*' StringLiteral ','
@@ -11383,6 +11982,7 @@ function C(string, parsingEventHandler)
     case 396548:                    // FloatingConstant '--' ','
     case 396549:                    // CharacterConstant '--' ','
     case 396550:                    // StringLiteral '--' ','
+    case 540936:                    // Comment Identifier ':'
     case 540938:                    // '!' Identifier ':'
     case 540942:                    // '&' Identifier ':'
     case 540947:                    // '*' Identifier ':'
@@ -11392,6 +11992,7 @@ function C(string, parsingEventHandler)
     case 540954:                    // '--' Identifier ':'
     case 541000:                    // 'sizeof' Identifier ':'
     case 541015:                    // '~' Identifier ':'
+    case 541064:                    // Comment IntegerConstant ':'
     case 541066:                    // '!' IntegerConstant ':'
     case 541070:                    // '&' IntegerConstant ':'
     case 541075:                    // '*' IntegerConstant ':'
@@ -11401,6 +12002,7 @@ function C(string, parsingEventHandler)
     case 541082:                    // '--' IntegerConstant ':'
     case 541128:                    // 'sizeof' IntegerConstant ':'
     case 541143:                    // '~' IntegerConstant ':'
+    case 541192:                    // Comment FloatingConstant ':'
     case 541194:                    // '!' FloatingConstant ':'
     case 541198:                    // '&' FloatingConstant ':'
     case 541203:                    // '*' FloatingConstant ':'
@@ -11410,6 +12012,7 @@ function C(string, parsingEventHandler)
     case 541210:                    // '--' FloatingConstant ':'
     case 541256:                    // 'sizeof' FloatingConstant ':'
     case 541271:                    // '~' FloatingConstant ':'
+    case 541320:                    // Comment CharacterConstant ':'
     case 541322:                    // '!' CharacterConstant ':'
     case 541326:                    // '&' CharacterConstant ':'
     case 541331:                    // '*' CharacterConstant ':'
@@ -11419,6 +12022,7 @@ function C(string, parsingEventHandler)
     case 541338:                    // '--' CharacterConstant ':'
     case 541384:                    // 'sizeof' CharacterConstant ':'
     case 541399:                    // '~' CharacterConstant ':'
+    case 541448:                    // Comment StringLiteral ':'
     case 541450:                    // '!' StringLiteral ':'
     case 541454:                    // '&' StringLiteral ':'
     case 541459:                    // '*' StringLiteral ':'
@@ -11438,6 +12042,7 @@ function C(string, parsingEventHandler)
     case 544004:                    // FloatingConstant '--' ':'
     case 544005:                    // CharacterConstant '--' ':'
     case 544006:                    // StringLiteral '--' ':'
+    case 557320:                    // Comment Identifier ';'
     case 557322:                    // '!' Identifier ';'
     case 557326:                    // '&' Identifier ';'
     case 557331:                    // '*' Identifier ';'
@@ -11447,6 +12052,7 @@ function C(string, parsingEventHandler)
     case 557338:                    // '--' Identifier ';'
     case 557384:                    // 'sizeof' Identifier ';'
     case 557399:                    // '~' Identifier ';'
+    case 557448:                    // Comment IntegerConstant ';'
     case 557450:                    // '!' IntegerConstant ';'
     case 557454:                    // '&' IntegerConstant ';'
     case 557459:                    // '*' IntegerConstant ';'
@@ -11456,6 +12062,7 @@ function C(string, parsingEventHandler)
     case 557466:                    // '--' IntegerConstant ';'
     case 557512:                    // 'sizeof' IntegerConstant ';'
     case 557527:                    // '~' IntegerConstant ';'
+    case 557576:                    // Comment FloatingConstant ';'
     case 557578:                    // '!' FloatingConstant ';'
     case 557582:                    // '&' FloatingConstant ';'
     case 557587:                    // '*' FloatingConstant ';'
@@ -11465,6 +12072,7 @@ function C(string, parsingEventHandler)
     case 557594:                    // '--' FloatingConstant ';'
     case 557640:                    // 'sizeof' FloatingConstant ';'
     case 557655:                    // '~' FloatingConstant ';'
+    case 557704:                    // Comment CharacterConstant ';'
     case 557706:                    // '!' CharacterConstant ';'
     case 557710:                    // '&' CharacterConstant ';'
     case 557715:                    // '*' CharacterConstant ';'
@@ -11474,6 +12082,7 @@ function C(string, parsingEventHandler)
     case 557722:                    // '--' CharacterConstant ';'
     case 557768:                    // 'sizeof' CharacterConstant ';'
     case 557783:                    // '~' CharacterConstant ';'
+    case 557832:                    // Comment StringLiteral ';'
     case 557834:                    // '!' StringLiteral ';'
     case 557838:                    // '&' StringLiteral ';'
     case 557843:                    // '*' StringLiteral ';'
@@ -11493,6 +12102,7 @@ function C(string, parsingEventHandler)
     case 560388:                    // FloatingConstant '--' ';'
     case 560389:                    // CharacterConstant '--' ';'
     case 560390:                    // StringLiteral '--' ';'
+    case 770312:                    // Comment Identifier ']'
     case 770314:                    // '!' Identifier ']'
     case 770318:                    // '&' Identifier ']'
     case 770323:                    // '*' Identifier ']'
@@ -11502,6 +12112,7 @@ function C(string, parsingEventHandler)
     case 770330:                    // '--' Identifier ']'
     case 770376:                    // 'sizeof' Identifier ']'
     case 770391:                    // '~' Identifier ']'
+    case 770440:                    // Comment IntegerConstant ']'
     case 770442:                    // '!' IntegerConstant ']'
     case 770446:                    // '&' IntegerConstant ']'
     case 770451:                    // '*' IntegerConstant ']'
@@ -11511,6 +12122,7 @@ function C(string, parsingEventHandler)
     case 770458:                    // '--' IntegerConstant ']'
     case 770504:                    // 'sizeof' IntegerConstant ']'
     case 770519:                    // '~' IntegerConstant ']'
+    case 770568:                    // Comment FloatingConstant ']'
     case 770570:                    // '!' FloatingConstant ']'
     case 770574:                    // '&' FloatingConstant ']'
     case 770579:                    // '*' FloatingConstant ']'
@@ -11520,6 +12132,7 @@ function C(string, parsingEventHandler)
     case 770586:                    // '--' FloatingConstant ']'
     case 770632:                    // 'sizeof' FloatingConstant ']'
     case 770647:                    // '~' FloatingConstant ']'
+    case 770696:                    // Comment CharacterConstant ']'
     case 770698:                    // '!' CharacterConstant ']'
     case 770702:                    // '&' CharacterConstant ']'
     case 770707:                    // '*' CharacterConstant ']'
@@ -11529,6 +12142,7 @@ function C(string, parsingEventHandler)
     case 770714:                    // '--' CharacterConstant ']'
     case 770760:                    // 'sizeof' CharacterConstant ']'
     case 770775:                    // '~' CharacterConstant ']'
+    case 770824:                    // Comment StringLiteral ']'
     case 770826:                    // '!' StringLiteral ']'
     case 770830:                    // '&' StringLiteral ']'
     case 770835:                    // '*' StringLiteral ']'
@@ -11548,6 +12162,7 @@ function C(string, parsingEventHandler)
     case 773380:                    // FloatingConstant '--' ']'
     case 773381:                    // CharacterConstant '--' ']'
     case 773382:                    // StringLiteral '--' ']'
+    case 1409288:                   // Comment Identifier '}'
     case 1409290:                   // '!' Identifier '}'
     case 1409294:                   // '&' Identifier '}'
     case 1409299:                   // '*' Identifier '}'
@@ -11557,6 +12172,7 @@ function C(string, parsingEventHandler)
     case 1409306:                   // '--' Identifier '}'
     case 1409352:                   // 'sizeof' Identifier '}'
     case 1409367:                   // '~' Identifier '}'
+    case 1409416:                   // Comment IntegerConstant '}'
     case 1409418:                   // '!' IntegerConstant '}'
     case 1409422:                   // '&' IntegerConstant '}'
     case 1409427:                   // '*' IntegerConstant '}'
@@ -11566,6 +12182,7 @@ function C(string, parsingEventHandler)
     case 1409434:                   // '--' IntegerConstant '}'
     case 1409480:                   // 'sizeof' IntegerConstant '}'
     case 1409495:                   // '~' IntegerConstant '}'
+    case 1409544:                   // Comment FloatingConstant '}'
     case 1409546:                   // '!' FloatingConstant '}'
     case 1409550:                   // '&' FloatingConstant '}'
     case 1409555:                   // '*' FloatingConstant '}'
@@ -11575,6 +12192,7 @@ function C(string, parsingEventHandler)
     case 1409562:                   // '--' FloatingConstant '}'
     case 1409608:                   // 'sizeof' FloatingConstant '}'
     case 1409623:                   // '~' FloatingConstant '}'
+    case 1409672:                   // Comment CharacterConstant '}'
     case 1409674:                   // '!' CharacterConstant '}'
     case 1409678:                   // '&' CharacterConstant '}'
     case 1409683:                   // '*' CharacterConstant '}'
@@ -11584,6 +12202,7 @@ function C(string, parsingEventHandler)
     case 1409690:                   // '--' CharacterConstant '}'
     case 1409736:                   // 'sizeof' CharacterConstant '}'
     case 1409751:                   // '~' CharacterConstant '}'
+    case 1409800:                   // Comment StringLiteral '}'
     case 1409802:                   // '!' StringLiteral '}'
     case 1409806:                   // '&' StringLiteral '}'
     case 1409811:                   // '*' StringLiteral '}'
@@ -11609,9 +12228,9 @@ function C(string, parsingEventHandler)
       parse_conditionalExpression();
       whitespace();
       parse_assignmentOperator();
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_assignmentExpression();
     }
@@ -11623,58 +12242,45 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       case 2193:                    // '(' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 6929:                    // '(' 'const'
       case 10257:                   // '(' 'volatile'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 7697:                    // '(' 'enum'
       case 9489:                    // '(' 'struct'
       case 9873:                    // '(' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 401:                     // '(' IntegerConstant
       case 529:                     // '(' FloatingConstant
       case 657:                     // '(' CharacterConstant
       case 785:                     // '(' StringLiteral
-        lookahead3W(72);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
-        break;
-      case 1297:                    // '(' '!'
-      case 1809:                    // '(' '&'
-      case 2449:                    // '(' '*'
-      case 2705:                    // '(' '+'
-      case 2833:                    // '(' '++'
-      case 3217:                    // '(' '-'
-      case 3345:                    // '(' '--'
-      case 9233:                    // '(' 'sizeof'
-      case 11153:                   // '(' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(73);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
         break;
       case 6801:                    // '(' 'char'
       case 7441:                    // '(' 'double'
@@ -11685,19 +12291,38 @@ function C(string, parsingEventHandler)
       case 9105:                    // '(' 'signed'
       case 10001:                   // '(' 'unsigned'
       case 10129:                   // '(' 'void'
-        lookahead3W(40);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | '[' | 'char' |
-                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(39);            // WhiteSpace | '(' | ')' | '*' | '[' | 'char' | 'const' | 'double' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        break;
+      case 1041:                    // '(' Comment
+      case 1297:                    // '(' '!'
+      case 1809:                    // '(' '&'
+      case 2449:                    // '(' '*'
+      case 2705:                    // '(' '+'
+      case 2833:                    // '(' '++'
+      case 3217:                    // '(' '-'
+      case 3345:                    // '(' '--'
+      case 9233:                    // '(' 'sizeof'
+      case 11153:                   // '(' '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
+    case 8:                         // Comment
     case 22:                        // '++'
     case 26:                        // '--'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
+      case 264:                     // Comment Identifier
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
       case 278:                     // '++' Identifier
       case 406:                     // '++' IntegerConstant
       case 534:                     // '++' FloatingConstant
@@ -11708,12 +12333,23 @@ function C(string, parsingEventHandler)
       case 538:                     // '--' FloatingConstant
       case 666:                     // '--' CharacterConstant
       case 794:                     // '--' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1032:                    // Comment Comment
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2184:                    // Comment '('
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+      case 1046:                    // '++' Comment
       case 1302:                    // '++' '!'
       case 1814:                    // '++' '&'
       case 2198:                    // '++' '('
@@ -11724,6 +12360,7 @@ function C(string, parsingEventHandler)
       case 3350:                    // '++' '--'
       case 9238:                    // '++' 'sizeof'
       case 11158:                   // '++' '~'
+      case 1050:                    // '--' Comment
       case 1306:                    // '--' '!'
       case 1818:                    // '--' '&'
       case 2202:                    // '--' '('
@@ -11734,9 +12371,9 @@ function C(string, parsingEventHandler)
       case 3354:                    // '--' '--'
       case 9242:                    // '--' 'sizeof'
       case 11162:                   // '--' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -11745,11 +12382,10 @@ function C(string, parsingEventHandler)
     case 4:                         // FloatingConstant
     case 5:                         // CharacterConstant
     case 6:                         // StringLiteral
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
@@ -11757,9 +12393,9 @@ function C(string, parsingEventHandler)
       case 2180:                    // FloatingConstant '('
       case 2181:                    // CharacterConstant '('
       case 2182:                    // StringLiteral '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
@@ -11771,11 +12407,10 @@ function C(string, parsingEventHandler)
       case 3333:                    // CharacterConstant '--'
       case 2822:                    // StringLiteral '++'
       case 3334:                    // StringLiteral '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
@@ -11787,7 +12422,7 @@ function C(string, parsingEventHandler)
       case 3717:                    // CharacterConstant '.'
       case 3590:                    // StringLiteral '->'
       case 3718:                    // StringLiteral '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -11889,9 +12524,9 @@ function C(string, parsingEventHandler)
       case 6150:                    // StringLiteral '^'
       case 10630:                   // StringLiteral '|'
       case 10886:                   // StringLiteral '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -11902,9 +12537,9 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 72:                        // 'sizeof'
     case 87:                        // '~'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2186:                    // '!' '('
@@ -11914,11 +12549,11 @@ function C(string, parsingEventHandler)
       case 2201:                    // '-' '('
       case 2248:                    // 'sizeof' '('
       case 2263:                    // '~' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 266:                     // '!' Identifier
       case 394:                     // '!' IntegerConstant
@@ -11955,12 +12590,12 @@ function C(string, parsingEventHandler)
       case 599:                     // '~' FloatingConstant
       case 727:                     // '~' CharacterConstant
       case 855:                     // '~' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1034:                    // '!' Comment
       case 1290:                    // '!' '!'
       case 1802:                    // '!' '&'
       case 2442:                    // '!' '*'
@@ -11970,6 +12605,7 @@ function C(string, parsingEventHandler)
       case 3338:                    // '!' '--'
       case 9226:                    // '!' 'sizeof'
       case 11146:                   // '!' '~'
+      case 1038:                    // '&' Comment
       case 1294:                    // '&' '!'
       case 1806:                    // '&' '&'
       case 2446:                    // '&' '*'
@@ -11979,6 +12615,7 @@ function C(string, parsingEventHandler)
       case 3342:                    // '&' '--'
       case 9230:                    // '&' 'sizeof'
       case 11150:                   // '&' '~'
+      case 1043:                    // '*' Comment
       case 1299:                    // '*' '!'
       case 1811:                    // '*' '&'
       case 2451:                    // '*' '*'
@@ -11988,6 +12625,7 @@ function C(string, parsingEventHandler)
       case 3347:                    // '*' '--'
       case 9235:                    // '*' 'sizeof'
       case 11155:                   // '*' '~'
+      case 1045:                    // '+' Comment
       case 1301:                    // '+' '!'
       case 1813:                    // '+' '&'
       case 2453:                    // '+' '*'
@@ -11997,6 +12635,7 @@ function C(string, parsingEventHandler)
       case 3349:                    // '+' '--'
       case 9237:                    // '+' 'sizeof'
       case 11157:                   // '+' '~'
+      case 1049:                    // '-' Comment
       case 1305:                    // '-' '!'
       case 1817:                    // '-' '&'
       case 2457:                    // '-' '*'
@@ -12006,6 +12645,7 @@ function C(string, parsingEventHandler)
       case 3353:                    // '-' '--'
       case 9241:                    // '-' 'sizeof'
       case 11161:                   // '-' '~'
+      case 1096:                    // 'sizeof' Comment
       case 1352:                    // 'sizeof' '!'
       case 1864:                    // 'sizeof' '&'
       case 2504:                    // 'sizeof' '*'
@@ -12015,6 +12655,7 @@ function C(string, parsingEventHandler)
       case 3400:                    // 'sizeof' '--'
       case 9288:                    // 'sizeof' 'sizeof'
       case 11208:                   // 'sizeof' '~'
+      case 1111:                    // '~' Comment
       case 1367:                    // '~' '!'
       case 1879:                    // '~' '&'
       case 2519:                    // '~' '*'
@@ -12024,9 +12665,9 @@ function C(string, parsingEventHandler)
       case 3415:                    // '~' '--'
       case 9303:                    // '~' 'sizeof'
       case 11223:                   // '~' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -12118,6 +12759,7 @@ function C(string, parsingEventHandler)
      && lk != 11012                 // FloatingConstant '}'
      && lk != 11013                 // CharacterConstant '}'
      && lk != 11014                 // StringLiteral '}'
+     && lk != 213256                // Comment Identifier '%='
      && lk != 213258                // '!' Identifier '%='
      && lk != 213262                // '&' Identifier '%='
      && lk != 213267                // '*' Identifier '%='
@@ -12127,6 +12769,7 @@ function C(string, parsingEventHandler)
      && lk != 213274                // '--' Identifier '%='
      && lk != 213320                // 'sizeof' Identifier '%='
      && lk != 213335                // '~' Identifier '%='
+     && lk != 213384                // Comment IntegerConstant '%='
      && lk != 213386                // '!' IntegerConstant '%='
      && lk != 213390                // '&' IntegerConstant '%='
      && lk != 213395                // '*' IntegerConstant '%='
@@ -12136,6 +12779,7 @@ function C(string, parsingEventHandler)
      && lk != 213402                // '--' IntegerConstant '%='
      && lk != 213448                // 'sizeof' IntegerConstant '%='
      && lk != 213463                // '~' IntegerConstant '%='
+     && lk != 213512                // Comment FloatingConstant '%='
      && lk != 213514                // '!' FloatingConstant '%='
      && lk != 213518                // '&' FloatingConstant '%='
      && lk != 213523                // '*' FloatingConstant '%='
@@ -12145,6 +12789,7 @@ function C(string, parsingEventHandler)
      && lk != 213530                // '--' FloatingConstant '%='
      && lk != 213576                // 'sizeof' FloatingConstant '%='
      && lk != 213591                // '~' FloatingConstant '%='
+     && lk != 213640                // Comment CharacterConstant '%='
      && lk != 213642                // '!' CharacterConstant '%='
      && lk != 213646                // '&' CharacterConstant '%='
      && lk != 213651                // '*' CharacterConstant '%='
@@ -12154,6 +12799,7 @@ function C(string, parsingEventHandler)
      && lk != 213658                // '--' CharacterConstant '%='
      && lk != 213704                // 'sizeof' CharacterConstant '%='
      && lk != 213719                // '~' CharacterConstant '%='
+     && lk != 213768                // Comment StringLiteral '%='
      && lk != 213770                // '!' StringLiteral '%='
      && lk != 213774                // '&' StringLiteral '%='
      && lk != 213779                // '*' StringLiteral '%='
@@ -12173,6 +12819,7 @@ function C(string, parsingEventHandler)
      && lk != 216324                // FloatingConstant '--' '%='
      && lk != 216325                // CharacterConstant '--' '%='
      && lk != 216326                // StringLiteral '--' '%='
+     && lk != 262408                // Comment Identifier '&='
      && lk != 262410                // '!' Identifier '&='
      && lk != 262414                // '&' Identifier '&='
      && lk != 262419                // '*' Identifier '&='
@@ -12182,6 +12829,7 @@ function C(string, parsingEventHandler)
      && lk != 262426                // '--' Identifier '&='
      && lk != 262472                // 'sizeof' Identifier '&='
      && lk != 262487                // '~' Identifier '&='
+     && lk != 262536                // Comment IntegerConstant '&='
      && lk != 262538                // '!' IntegerConstant '&='
      && lk != 262542                // '&' IntegerConstant '&='
      && lk != 262547                // '*' IntegerConstant '&='
@@ -12191,6 +12839,7 @@ function C(string, parsingEventHandler)
      && lk != 262554                // '--' IntegerConstant '&='
      && lk != 262600                // 'sizeof' IntegerConstant '&='
      && lk != 262615                // '~' IntegerConstant '&='
+     && lk != 262664                // Comment FloatingConstant '&='
      && lk != 262666                // '!' FloatingConstant '&='
      && lk != 262670                // '&' FloatingConstant '&='
      && lk != 262675                // '*' FloatingConstant '&='
@@ -12200,6 +12849,7 @@ function C(string, parsingEventHandler)
      && lk != 262682                // '--' FloatingConstant '&='
      && lk != 262728                // 'sizeof' FloatingConstant '&='
      && lk != 262743                // '~' FloatingConstant '&='
+     && lk != 262792                // Comment CharacterConstant '&='
      && lk != 262794                // '!' CharacterConstant '&='
      && lk != 262798                // '&' CharacterConstant '&='
      && lk != 262803                // '*' CharacterConstant '&='
@@ -12209,6 +12859,7 @@ function C(string, parsingEventHandler)
      && lk != 262810                // '--' CharacterConstant '&='
      && lk != 262856                // 'sizeof' CharacterConstant '&='
      && lk != 262871                // '~' CharacterConstant '&='
+     && lk != 262920                // Comment StringLiteral '&='
      && lk != 262922                // '!' StringLiteral '&='
      && lk != 262926                // '&' StringLiteral '&='
      && lk != 262931                // '*' StringLiteral '&='
@@ -12228,6 +12879,7 @@ function C(string, parsingEventHandler)
      && lk != 265476                // FloatingConstant '--' '&='
      && lk != 265477                // CharacterConstant '--' '&='
      && lk != 265478                // StringLiteral '--' '&='
+     && lk != 295176                // Comment Identifier ')'
      && lk != 295178                // '!' Identifier ')'
      && lk != 295182                // '&' Identifier ')'
      && lk != 295187                // '*' Identifier ')'
@@ -12237,6 +12889,7 @@ function C(string, parsingEventHandler)
      && lk != 295194                // '--' Identifier ')'
      && lk != 295240                // 'sizeof' Identifier ')'
      && lk != 295255                // '~' Identifier ')'
+     && lk != 295304                // Comment IntegerConstant ')'
      && lk != 295306                // '!' IntegerConstant ')'
      && lk != 295310                // '&' IntegerConstant ')'
      && lk != 295315                // '*' IntegerConstant ')'
@@ -12246,6 +12899,7 @@ function C(string, parsingEventHandler)
      && lk != 295322                // '--' IntegerConstant ')'
      && lk != 295368                // 'sizeof' IntegerConstant ')'
      && lk != 295383                // '~' IntegerConstant ')'
+     && lk != 295432                // Comment FloatingConstant ')'
      && lk != 295434                // '!' FloatingConstant ')'
      && lk != 295438                // '&' FloatingConstant ')'
      && lk != 295443                // '*' FloatingConstant ')'
@@ -12255,6 +12909,7 @@ function C(string, parsingEventHandler)
      && lk != 295450                // '--' FloatingConstant ')'
      && lk != 295496                // 'sizeof' FloatingConstant ')'
      && lk != 295511                // '~' FloatingConstant ')'
+     && lk != 295560                // Comment CharacterConstant ')'
      && lk != 295562                // '!' CharacterConstant ')'
      && lk != 295566                // '&' CharacterConstant ')'
      && lk != 295571                // '*' CharacterConstant ')'
@@ -12264,6 +12919,7 @@ function C(string, parsingEventHandler)
      && lk != 295578                // '--' CharacterConstant ')'
      && lk != 295624                // 'sizeof' CharacterConstant ')'
      && lk != 295639                // '~' CharacterConstant ')'
+     && lk != 295688                // Comment StringLiteral ')'
      && lk != 295690                // '!' StringLiteral ')'
      && lk != 295694                // '&' StringLiteral ')'
      && lk != 295699                // '*' StringLiteral ')'
@@ -12283,6 +12939,7 @@ function C(string, parsingEventHandler)
      && lk != 298244                // FloatingConstant '--' ')'
      && lk != 298245                // CharacterConstant '--' ')'
      && lk != 298246                // StringLiteral '--' ')'
+     && lk != 327944                // Comment Identifier '*='
      && lk != 327946                // '!' Identifier '*='
      && lk != 327950                // '&' Identifier '*='
      && lk != 327955                // '*' Identifier '*='
@@ -12292,6 +12949,7 @@ function C(string, parsingEventHandler)
      && lk != 327962                // '--' Identifier '*='
      && lk != 328008                // 'sizeof' Identifier '*='
      && lk != 328023                // '~' Identifier '*='
+     && lk != 328072                // Comment IntegerConstant '*='
      && lk != 328074                // '!' IntegerConstant '*='
      && lk != 328078                // '&' IntegerConstant '*='
      && lk != 328083                // '*' IntegerConstant '*='
@@ -12301,6 +12959,7 @@ function C(string, parsingEventHandler)
      && lk != 328090                // '--' IntegerConstant '*='
      && lk != 328136                // 'sizeof' IntegerConstant '*='
      && lk != 328151                // '~' IntegerConstant '*='
+     && lk != 328200                // Comment FloatingConstant '*='
      && lk != 328202                // '!' FloatingConstant '*='
      && lk != 328206                // '&' FloatingConstant '*='
      && lk != 328211                // '*' FloatingConstant '*='
@@ -12310,6 +12969,7 @@ function C(string, parsingEventHandler)
      && lk != 328218                // '--' FloatingConstant '*='
      && lk != 328264                // 'sizeof' FloatingConstant '*='
      && lk != 328279                // '~' FloatingConstant '*='
+     && lk != 328328                // Comment CharacterConstant '*='
      && lk != 328330                // '!' CharacterConstant '*='
      && lk != 328334                // '&' CharacterConstant '*='
      && lk != 328339                // '*' CharacterConstant '*='
@@ -12319,6 +12979,7 @@ function C(string, parsingEventHandler)
      && lk != 328346                // '--' CharacterConstant '*='
      && lk != 328392                // 'sizeof' CharacterConstant '*='
      && lk != 328407                // '~' CharacterConstant '*='
+     && lk != 328456                // Comment StringLiteral '*='
      && lk != 328458                // '!' StringLiteral '*='
      && lk != 328462                // '&' StringLiteral '*='
      && lk != 328467                // '*' StringLiteral '*='
@@ -12338,6 +12999,7 @@ function C(string, parsingEventHandler)
      && lk != 331012                // FloatingConstant '--' '*='
      && lk != 331013                // CharacterConstant '--' '*='
      && lk != 331014                // StringLiteral '--' '*='
+     && lk != 377096                // Comment Identifier '+='
      && lk != 377098                // '!' Identifier '+='
      && lk != 377102                // '&' Identifier '+='
      && lk != 377107                // '*' Identifier '+='
@@ -12347,6 +13009,7 @@ function C(string, parsingEventHandler)
      && lk != 377114                // '--' Identifier '+='
      && lk != 377160                // 'sizeof' Identifier '+='
      && lk != 377175                // '~' Identifier '+='
+     && lk != 377224                // Comment IntegerConstant '+='
      && lk != 377226                // '!' IntegerConstant '+='
      && lk != 377230                // '&' IntegerConstant '+='
      && lk != 377235                // '*' IntegerConstant '+='
@@ -12356,6 +13019,7 @@ function C(string, parsingEventHandler)
      && lk != 377242                // '--' IntegerConstant '+='
      && lk != 377288                // 'sizeof' IntegerConstant '+='
      && lk != 377303                // '~' IntegerConstant '+='
+     && lk != 377352                // Comment FloatingConstant '+='
      && lk != 377354                // '!' FloatingConstant '+='
      && lk != 377358                // '&' FloatingConstant '+='
      && lk != 377363                // '*' FloatingConstant '+='
@@ -12365,6 +13029,7 @@ function C(string, parsingEventHandler)
      && lk != 377370                // '--' FloatingConstant '+='
      && lk != 377416                // 'sizeof' FloatingConstant '+='
      && lk != 377431                // '~' FloatingConstant '+='
+     && lk != 377480                // Comment CharacterConstant '+='
      && lk != 377482                // '!' CharacterConstant '+='
      && lk != 377486                // '&' CharacterConstant '+='
      && lk != 377491                // '*' CharacterConstant '+='
@@ -12374,6 +13039,7 @@ function C(string, parsingEventHandler)
      && lk != 377498                // '--' CharacterConstant '+='
      && lk != 377544                // 'sizeof' CharacterConstant '+='
      && lk != 377559                // '~' CharacterConstant '+='
+     && lk != 377608                // Comment StringLiteral '+='
      && lk != 377610                // '!' StringLiteral '+='
      && lk != 377614                // '&' StringLiteral '+='
      && lk != 377619                // '*' StringLiteral '+='
@@ -12393,6 +13059,7 @@ function C(string, parsingEventHandler)
      && lk != 380164                // FloatingConstant '--' '+='
      && lk != 380165                // CharacterConstant '--' '+='
      && lk != 380166                // StringLiteral '--' '+='
+     && lk != 393480                // Comment Identifier ','
      && lk != 393482                // '!' Identifier ','
      && lk != 393486                // '&' Identifier ','
      && lk != 393491                // '*' Identifier ','
@@ -12402,6 +13069,7 @@ function C(string, parsingEventHandler)
      && lk != 393498                // '--' Identifier ','
      && lk != 393544                // 'sizeof' Identifier ','
      && lk != 393559                // '~' Identifier ','
+     && lk != 393608                // Comment IntegerConstant ','
      && lk != 393610                // '!' IntegerConstant ','
      && lk != 393614                // '&' IntegerConstant ','
      && lk != 393619                // '*' IntegerConstant ','
@@ -12411,6 +13079,7 @@ function C(string, parsingEventHandler)
      && lk != 393626                // '--' IntegerConstant ','
      && lk != 393672                // 'sizeof' IntegerConstant ','
      && lk != 393687                // '~' IntegerConstant ','
+     && lk != 393736                // Comment FloatingConstant ','
      && lk != 393738                // '!' FloatingConstant ','
      && lk != 393742                // '&' FloatingConstant ','
      && lk != 393747                // '*' FloatingConstant ','
@@ -12420,6 +13089,7 @@ function C(string, parsingEventHandler)
      && lk != 393754                // '--' FloatingConstant ','
      && lk != 393800                // 'sizeof' FloatingConstant ','
      && lk != 393815                // '~' FloatingConstant ','
+     && lk != 393864                // Comment CharacterConstant ','
      && lk != 393866                // '!' CharacterConstant ','
      && lk != 393870                // '&' CharacterConstant ','
      && lk != 393875                // '*' CharacterConstant ','
@@ -12429,6 +13099,7 @@ function C(string, parsingEventHandler)
      && lk != 393882                // '--' CharacterConstant ','
      && lk != 393928                // 'sizeof' CharacterConstant ','
      && lk != 393943                // '~' CharacterConstant ','
+     && lk != 393992                // Comment StringLiteral ','
      && lk != 393994                // '!' StringLiteral ','
      && lk != 393998                // '&' StringLiteral ','
      && lk != 394003                // '*' StringLiteral ','
@@ -12448,6 +13119,7 @@ function C(string, parsingEventHandler)
      && lk != 396548                // FloatingConstant '--' ','
      && lk != 396549                // CharacterConstant '--' ','
      && lk != 396550                // StringLiteral '--' ','
+     && lk != 442632                // Comment Identifier '-='
      && lk != 442634                // '!' Identifier '-='
      && lk != 442638                // '&' Identifier '-='
      && lk != 442643                // '*' Identifier '-='
@@ -12457,6 +13129,7 @@ function C(string, parsingEventHandler)
      && lk != 442650                // '--' Identifier '-='
      && lk != 442696                // 'sizeof' Identifier '-='
      && lk != 442711                // '~' Identifier '-='
+     && lk != 442760                // Comment IntegerConstant '-='
      && lk != 442762                // '!' IntegerConstant '-='
      && lk != 442766                // '&' IntegerConstant '-='
      && lk != 442771                // '*' IntegerConstant '-='
@@ -12466,6 +13139,7 @@ function C(string, parsingEventHandler)
      && lk != 442778                // '--' IntegerConstant '-='
      && lk != 442824                // 'sizeof' IntegerConstant '-='
      && lk != 442839                // '~' IntegerConstant '-='
+     && lk != 442888                // Comment FloatingConstant '-='
      && lk != 442890                // '!' FloatingConstant '-='
      && lk != 442894                // '&' FloatingConstant '-='
      && lk != 442899                // '*' FloatingConstant '-='
@@ -12475,6 +13149,7 @@ function C(string, parsingEventHandler)
      && lk != 442906                // '--' FloatingConstant '-='
      && lk != 442952                // 'sizeof' FloatingConstant '-='
      && lk != 442967                // '~' FloatingConstant '-='
+     && lk != 443016                // Comment CharacterConstant '-='
      && lk != 443018                // '!' CharacterConstant '-='
      && lk != 443022                // '&' CharacterConstant '-='
      && lk != 443027                // '*' CharacterConstant '-='
@@ -12484,6 +13159,7 @@ function C(string, parsingEventHandler)
      && lk != 443034                // '--' CharacterConstant '-='
      && lk != 443080                // 'sizeof' CharacterConstant '-='
      && lk != 443095                // '~' CharacterConstant '-='
+     && lk != 443144                // Comment StringLiteral '-='
      && lk != 443146                // '!' StringLiteral '-='
      && lk != 443150                // '&' StringLiteral '-='
      && lk != 443155                // '*' StringLiteral '-='
@@ -12503,6 +13179,7 @@ function C(string, parsingEventHandler)
      && lk != 445700                // FloatingConstant '--' '-='
      && lk != 445701                // CharacterConstant '--' '-='
      && lk != 445702                // StringLiteral '--' '-='
+     && lk != 524552                // Comment Identifier '/='
      && lk != 524554                // '!' Identifier '/='
      && lk != 524558                // '&' Identifier '/='
      && lk != 524563                // '*' Identifier '/='
@@ -12512,6 +13189,7 @@ function C(string, parsingEventHandler)
      && lk != 524570                // '--' Identifier '/='
      && lk != 524616                // 'sizeof' Identifier '/='
      && lk != 524631                // '~' Identifier '/='
+     && lk != 524680                // Comment IntegerConstant '/='
      && lk != 524682                // '!' IntegerConstant '/='
      && lk != 524686                // '&' IntegerConstant '/='
      && lk != 524691                // '*' IntegerConstant '/='
@@ -12521,6 +13199,7 @@ function C(string, parsingEventHandler)
      && lk != 524698                // '--' IntegerConstant '/='
      && lk != 524744                // 'sizeof' IntegerConstant '/='
      && lk != 524759                // '~' IntegerConstant '/='
+     && lk != 524808                // Comment FloatingConstant '/='
      && lk != 524810                // '!' FloatingConstant '/='
      && lk != 524814                // '&' FloatingConstant '/='
      && lk != 524819                // '*' FloatingConstant '/='
@@ -12530,6 +13209,7 @@ function C(string, parsingEventHandler)
      && lk != 524826                // '--' FloatingConstant '/='
      && lk != 524872                // 'sizeof' FloatingConstant '/='
      && lk != 524887                // '~' FloatingConstant '/='
+     && lk != 524936                // Comment CharacterConstant '/='
      && lk != 524938                // '!' CharacterConstant '/='
      && lk != 524942                // '&' CharacterConstant '/='
      && lk != 524947                // '*' CharacterConstant '/='
@@ -12539,6 +13219,7 @@ function C(string, parsingEventHandler)
      && lk != 524954                // '--' CharacterConstant '/='
      && lk != 525000                // 'sizeof' CharacterConstant '/='
      && lk != 525015                // '~' CharacterConstant '/='
+     && lk != 525064                // Comment StringLiteral '/='
      && lk != 525066                // '!' StringLiteral '/='
      && lk != 525070                // '&' StringLiteral '/='
      && lk != 525075                // '*' StringLiteral '/='
@@ -12558,6 +13239,7 @@ function C(string, parsingEventHandler)
      && lk != 527620                // FloatingConstant '--' '/='
      && lk != 527621                // CharacterConstant '--' '/='
      && lk != 527622                // StringLiteral '--' '/='
+     && lk != 540936                // Comment Identifier ':'
      && lk != 540938                // '!' Identifier ':'
      && lk != 540942                // '&' Identifier ':'
      && lk != 540947                // '*' Identifier ':'
@@ -12567,6 +13249,7 @@ function C(string, parsingEventHandler)
      && lk != 540954                // '--' Identifier ':'
      && lk != 541000                // 'sizeof' Identifier ':'
      && lk != 541015                // '~' Identifier ':'
+     && lk != 541064                // Comment IntegerConstant ':'
      && lk != 541066                // '!' IntegerConstant ':'
      && lk != 541070                // '&' IntegerConstant ':'
      && lk != 541075                // '*' IntegerConstant ':'
@@ -12576,6 +13259,7 @@ function C(string, parsingEventHandler)
      && lk != 541082                // '--' IntegerConstant ':'
      && lk != 541128                // 'sizeof' IntegerConstant ':'
      && lk != 541143                // '~' IntegerConstant ':'
+     && lk != 541192                // Comment FloatingConstant ':'
      && lk != 541194                // '!' FloatingConstant ':'
      && lk != 541198                // '&' FloatingConstant ':'
      && lk != 541203                // '*' FloatingConstant ':'
@@ -12585,6 +13269,7 @@ function C(string, parsingEventHandler)
      && lk != 541210                // '--' FloatingConstant ':'
      && lk != 541256                // 'sizeof' FloatingConstant ':'
      && lk != 541271                // '~' FloatingConstant ':'
+     && lk != 541320                // Comment CharacterConstant ':'
      && lk != 541322                // '!' CharacterConstant ':'
      && lk != 541326                // '&' CharacterConstant ':'
      && lk != 541331                // '*' CharacterConstant ':'
@@ -12594,6 +13279,7 @@ function C(string, parsingEventHandler)
      && lk != 541338                // '--' CharacterConstant ':'
      && lk != 541384                // 'sizeof' CharacterConstant ':'
      && lk != 541399                // '~' CharacterConstant ':'
+     && lk != 541448                // Comment StringLiteral ':'
      && lk != 541450                // '!' StringLiteral ':'
      && lk != 541454                // '&' StringLiteral ':'
      && lk != 541459                // '*' StringLiteral ':'
@@ -12613,6 +13299,7 @@ function C(string, parsingEventHandler)
      && lk != 544004                // FloatingConstant '--' ':'
      && lk != 544005                // CharacterConstant '--' ':'
      && lk != 544006                // StringLiteral '--' ':'
+     && lk != 557320                // Comment Identifier ';'
      && lk != 557322                // '!' Identifier ';'
      && lk != 557326                // '&' Identifier ';'
      && lk != 557331                // '*' Identifier ';'
@@ -12622,6 +13309,7 @@ function C(string, parsingEventHandler)
      && lk != 557338                // '--' Identifier ';'
      && lk != 557384                // 'sizeof' Identifier ';'
      && lk != 557399                // '~' Identifier ';'
+     && lk != 557448                // Comment IntegerConstant ';'
      && lk != 557450                // '!' IntegerConstant ';'
      && lk != 557454                // '&' IntegerConstant ';'
      && lk != 557459                // '*' IntegerConstant ';'
@@ -12631,6 +13319,7 @@ function C(string, parsingEventHandler)
      && lk != 557466                // '--' IntegerConstant ';'
      && lk != 557512                // 'sizeof' IntegerConstant ';'
      && lk != 557527                // '~' IntegerConstant ';'
+     && lk != 557576                // Comment FloatingConstant ';'
      && lk != 557578                // '!' FloatingConstant ';'
      && lk != 557582                // '&' FloatingConstant ';'
      && lk != 557587                // '*' FloatingConstant ';'
@@ -12640,6 +13329,7 @@ function C(string, parsingEventHandler)
      && lk != 557594                // '--' FloatingConstant ';'
      && lk != 557640                // 'sizeof' FloatingConstant ';'
      && lk != 557655                // '~' FloatingConstant ';'
+     && lk != 557704                // Comment CharacterConstant ';'
      && lk != 557706                // '!' CharacterConstant ';'
      && lk != 557710                // '&' CharacterConstant ';'
      && lk != 557715                // '*' CharacterConstant ';'
@@ -12649,6 +13339,7 @@ function C(string, parsingEventHandler)
      && lk != 557722                // '--' CharacterConstant ';'
      && lk != 557768                // 'sizeof' CharacterConstant ';'
      && lk != 557783                // '~' CharacterConstant ';'
+     && lk != 557832                // Comment StringLiteral ';'
      && lk != 557834                // '!' StringLiteral ';'
      && lk != 557838                // '&' StringLiteral ';'
      && lk != 557843                // '*' StringLiteral ';'
@@ -12668,6 +13359,7 @@ function C(string, parsingEventHandler)
      && lk != 560388                // FloatingConstant '--' ';'
      && lk != 560389                // CharacterConstant '--' ';'
      && lk != 560390                // StringLiteral '--' ';'
+     && lk != 606472                // Comment Identifier '<<='
      && lk != 606474                // '!' Identifier '<<='
      && lk != 606478                // '&' Identifier '<<='
      && lk != 606483                // '*' Identifier '<<='
@@ -12677,6 +13369,7 @@ function C(string, parsingEventHandler)
      && lk != 606490                // '--' Identifier '<<='
      && lk != 606536                // 'sizeof' Identifier '<<='
      && lk != 606551                // '~' Identifier '<<='
+     && lk != 606600                // Comment IntegerConstant '<<='
      && lk != 606602                // '!' IntegerConstant '<<='
      && lk != 606606                // '&' IntegerConstant '<<='
      && lk != 606611                // '*' IntegerConstant '<<='
@@ -12686,6 +13379,7 @@ function C(string, parsingEventHandler)
      && lk != 606618                // '--' IntegerConstant '<<='
      && lk != 606664                // 'sizeof' IntegerConstant '<<='
      && lk != 606679                // '~' IntegerConstant '<<='
+     && lk != 606728                // Comment FloatingConstant '<<='
      && lk != 606730                // '!' FloatingConstant '<<='
      && lk != 606734                // '&' FloatingConstant '<<='
      && lk != 606739                // '*' FloatingConstant '<<='
@@ -12695,6 +13389,7 @@ function C(string, parsingEventHandler)
      && lk != 606746                // '--' FloatingConstant '<<='
      && lk != 606792                // 'sizeof' FloatingConstant '<<='
      && lk != 606807                // '~' FloatingConstant '<<='
+     && lk != 606856                // Comment CharacterConstant '<<='
      && lk != 606858                // '!' CharacterConstant '<<='
      && lk != 606862                // '&' CharacterConstant '<<='
      && lk != 606867                // '*' CharacterConstant '<<='
@@ -12704,6 +13399,7 @@ function C(string, parsingEventHandler)
      && lk != 606874                // '--' CharacterConstant '<<='
      && lk != 606920                // 'sizeof' CharacterConstant '<<='
      && lk != 606935                // '~' CharacterConstant '<<='
+     && lk != 606984                // Comment StringLiteral '<<='
      && lk != 606986                // '!' StringLiteral '<<='
      && lk != 606990                // '&' StringLiteral '<<='
      && lk != 606995                // '*' StringLiteral '<<='
@@ -12723,6 +13419,7 @@ function C(string, parsingEventHandler)
      && lk != 609540                // FloatingConstant '--' '<<='
      && lk != 609541                // CharacterConstant '--' '<<='
      && lk != 609542                // StringLiteral '--' '<<='
+     && lk != 639240                // Comment Identifier '='
      && lk != 639242                // '!' Identifier '='
      && lk != 639246                // '&' Identifier '='
      && lk != 639251                // '*' Identifier '='
@@ -12732,6 +13429,7 @@ function C(string, parsingEventHandler)
      && lk != 639258                // '--' Identifier '='
      && lk != 639304                // 'sizeof' Identifier '='
      && lk != 639319                // '~' Identifier '='
+     && lk != 639368                // Comment IntegerConstant '='
      && lk != 639370                // '!' IntegerConstant '='
      && lk != 639374                // '&' IntegerConstant '='
      && lk != 639379                // '*' IntegerConstant '='
@@ -12741,6 +13439,7 @@ function C(string, parsingEventHandler)
      && lk != 639386                // '--' IntegerConstant '='
      && lk != 639432                // 'sizeof' IntegerConstant '='
      && lk != 639447                // '~' IntegerConstant '='
+     && lk != 639496                // Comment FloatingConstant '='
      && lk != 639498                // '!' FloatingConstant '='
      && lk != 639502                // '&' FloatingConstant '='
      && lk != 639507                // '*' FloatingConstant '='
@@ -12750,6 +13449,7 @@ function C(string, parsingEventHandler)
      && lk != 639514                // '--' FloatingConstant '='
      && lk != 639560                // 'sizeof' FloatingConstant '='
      && lk != 639575                // '~' FloatingConstant '='
+     && lk != 639624                // Comment CharacterConstant '='
      && lk != 639626                // '!' CharacterConstant '='
      && lk != 639630                // '&' CharacterConstant '='
      && lk != 639635                // '*' CharacterConstant '='
@@ -12759,6 +13459,7 @@ function C(string, parsingEventHandler)
      && lk != 639642                // '--' CharacterConstant '='
      && lk != 639688                // 'sizeof' CharacterConstant '='
      && lk != 639703                // '~' CharacterConstant '='
+     && lk != 639752                // Comment StringLiteral '='
      && lk != 639754                // '!' StringLiteral '='
      && lk != 639758                // '&' StringLiteral '='
      && lk != 639763                // '*' StringLiteral '='
@@ -12778,6 +13479,7 @@ function C(string, parsingEventHandler)
      && lk != 642308                // FloatingConstant '--' '='
      && lk != 642309                // CharacterConstant '--' '='
      && lk != 642310                // StringLiteral '--' '='
+     && lk != 721160                // Comment Identifier '>>='
      && lk != 721162                // '!' Identifier '>>='
      && lk != 721166                // '&' Identifier '>>='
      && lk != 721171                // '*' Identifier '>>='
@@ -12787,6 +13489,7 @@ function C(string, parsingEventHandler)
      && lk != 721178                // '--' Identifier '>>='
      && lk != 721224                // 'sizeof' Identifier '>>='
      && lk != 721239                // '~' Identifier '>>='
+     && lk != 721288                // Comment IntegerConstant '>>='
      && lk != 721290                // '!' IntegerConstant '>>='
      && lk != 721294                // '&' IntegerConstant '>>='
      && lk != 721299                // '*' IntegerConstant '>>='
@@ -12796,6 +13499,7 @@ function C(string, parsingEventHandler)
      && lk != 721306                // '--' IntegerConstant '>>='
      && lk != 721352                // 'sizeof' IntegerConstant '>>='
      && lk != 721367                // '~' IntegerConstant '>>='
+     && lk != 721416                // Comment FloatingConstant '>>='
      && lk != 721418                // '!' FloatingConstant '>>='
      && lk != 721422                // '&' FloatingConstant '>>='
      && lk != 721427                // '*' FloatingConstant '>>='
@@ -12805,6 +13509,7 @@ function C(string, parsingEventHandler)
      && lk != 721434                // '--' FloatingConstant '>>='
      && lk != 721480                // 'sizeof' FloatingConstant '>>='
      && lk != 721495                // '~' FloatingConstant '>>='
+     && lk != 721544                // Comment CharacterConstant '>>='
      && lk != 721546                // '!' CharacterConstant '>>='
      && lk != 721550                // '&' CharacterConstant '>>='
      && lk != 721555                // '*' CharacterConstant '>>='
@@ -12814,6 +13519,7 @@ function C(string, parsingEventHandler)
      && lk != 721562                // '--' CharacterConstant '>>='
      && lk != 721608                // 'sizeof' CharacterConstant '>>='
      && lk != 721623                // '~' CharacterConstant '>>='
+     && lk != 721672                // Comment StringLiteral '>>='
      && lk != 721674                // '!' StringLiteral '>>='
      && lk != 721678                // '&' StringLiteral '>>='
      && lk != 721683                // '*' StringLiteral '>>='
@@ -12833,6 +13539,7 @@ function C(string, parsingEventHandler)
      && lk != 724228                // FloatingConstant '--' '>>='
      && lk != 724229                // CharacterConstant '--' '>>='
      && lk != 724230                // StringLiteral '--' '>>='
+     && lk != 770312                // Comment Identifier ']'
      && lk != 770314                // '!' Identifier ']'
      && lk != 770318                // '&' Identifier ']'
      && lk != 770323                // '*' Identifier ']'
@@ -12842,6 +13549,7 @@ function C(string, parsingEventHandler)
      && lk != 770330                // '--' Identifier ']'
      && lk != 770376                // 'sizeof' Identifier ']'
      && lk != 770391                // '~' Identifier ']'
+     && lk != 770440                // Comment IntegerConstant ']'
      && lk != 770442                // '!' IntegerConstant ']'
      && lk != 770446                // '&' IntegerConstant ']'
      && lk != 770451                // '*' IntegerConstant ']'
@@ -12851,6 +13559,7 @@ function C(string, parsingEventHandler)
      && lk != 770458                // '--' IntegerConstant ']'
      && lk != 770504                // 'sizeof' IntegerConstant ']'
      && lk != 770519                // '~' IntegerConstant ']'
+     && lk != 770568                // Comment FloatingConstant ']'
      && lk != 770570                // '!' FloatingConstant ']'
      && lk != 770574                // '&' FloatingConstant ']'
      && lk != 770579                // '*' FloatingConstant ']'
@@ -12860,6 +13569,7 @@ function C(string, parsingEventHandler)
      && lk != 770586                // '--' FloatingConstant ']'
      && lk != 770632                // 'sizeof' FloatingConstant ']'
      && lk != 770647                // '~' FloatingConstant ']'
+     && lk != 770696                // Comment CharacterConstant ']'
      && lk != 770698                // '!' CharacterConstant ']'
      && lk != 770702                // '&' CharacterConstant ']'
      && lk != 770707                // '*' CharacterConstant ']'
@@ -12869,6 +13579,7 @@ function C(string, parsingEventHandler)
      && lk != 770714                // '--' CharacterConstant ']'
      && lk != 770760                // 'sizeof' CharacterConstant ']'
      && lk != 770775                // '~' CharacterConstant ']'
+     && lk != 770824                // Comment StringLiteral ']'
      && lk != 770826                // '!' StringLiteral ']'
      && lk != 770830                // '&' StringLiteral ']'
      && lk != 770835                // '*' StringLiteral ']'
@@ -12888,6 +13599,7 @@ function C(string, parsingEventHandler)
      && lk != 773380                // FloatingConstant '--' ']'
      && lk != 773381                // CharacterConstant '--' ']'
      && lk != 773382                // StringLiteral '--' ']'
+     && lk != 803080                // Comment Identifier '^='
      && lk != 803082                // '!' Identifier '^='
      && lk != 803086                // '&' Identifier '^='
      && lk != 803091                // '*' Identifier '^='
@@ -12897,6 +13609,7 @@ function C(string, parsingEventHandler)
      && lk != 803098                // '--' Identifier '^='
      && lk != 803144                // 'sizeof' Identifier '^='
      && lk != 803159                // '~' Identifier '^='
+     && lk != 803208                // Comment IntegerConstant '^='
      && lk != 803210                // '!' IntegerConstant '^='
      && lk != 803214                // '&' IntegerConstant '^='
      && lk != 803219                // '*' IntegerConstant '^='
@@ -12906,6 +13619,7 @@ function C(string, parsingEventHandler)
      && lk != 803226                // '--' IntegerConstant '^='
      && lk != 803272                // 'sizeof' IntegerConstant '^='
      && lk != 803287                // '~' IntegerConstant '^='
+     && lk != 803336                // Comment FloatingConstant '^='
      && lk != 803338                // '!' FloatingConstant '^='
      && lk != 803342                // '&' FloatingConstant '^='
      && lk != 803347                // '*' FloatingConstant '^='
@@ -12915,6 +13629,7 @@ function C(string, parsingEventHandler)
      && lk != 803354                // '--' FloatingConstant '^='
      && lk != 803400                // 'sizeof' FloatingConstant '^='
      && lk != 803415                // '~' FloatingConstant '^='
+     && lk != 803464                // Comment CharacterConstant '^='
      && lk != 803466                // '!' CharacterConstant '^='
      && lk != 803470                // '&' CharacterConstant '^='
      && lk != 803475                // '*' CharacterConstant '^='
@@ -12924,6 +13639,7 @@ function C(string, parsingEventHandler)
      && lk != 803482                // '--' CharacterConstant '^='
      && lk != 803528                // 'sizeof' CharacterConstant '^='
      && lk != 803543                // '~' CharacterConstant '^='
+     && lk != 803592                // Comment StringLiteral '^='
      && lk != 803594                // '!' StringLiteral '^='
      && lk != 803598                // '&' StringLiteral '^='
      && lk != 803603                // '*' StringLiteral '^='
@@ -12943,6 +13659,7 @@ function C(string, parsingEventHandler)
      && lk != 806148                // FloatingConstant '--' '^='
      && lk != 806149                // CharacterConstant '--' '^='
      && lk != 806150                // StringLiteral '--' '^='
+     && lk != 1376520               // Comment Identifier '|='
      && lk != 1376522               // '!' Identifier '|='
      && lk != 1376526               // '&' Identifier '|='
      && lk != 1376531               // '*' Identifier '|='
@@ -12952,6 +13669,7 @@ function C(string, parsingEventHandler)
      && lk != 1376538               // '--' Identifier '|='
      && lk != 1376584               // 'sizeof' Identifier '|='
      && lk != 1376599               // '~' Identifier '|='
+     && lk != 1376648               // Comment IntegerConstant '|='
      && lk != 1376650               // '!' IntegerConstant '|='
      && lk != 1376654               // '&' IntegerConstant '|='
      && lk != 1376659               // '*' IntegerConstant '|='
@@ -12961,6 +13679,7 @@ function C(string, parsingEventHandler)
      && lk != 1376666               // '--' IntegerConstant '|='
      && lk != 1376712               // 'sizeof' IntegerConstant '|='
      && lk != 1376727               // '~' IntegerConstant '|='
+     && lk != 1376776               // Comment FloatingConstant '|='
      && lk != 1376778               // '!' FloatingConstant '|='
      && lk != 1376782               // '&' FloatingConstant '|='
      && lk != 1376787               // '*' FloatingConstant '|='
@@ -12970,6 +13689,7 @@ function C(string, parsingEventHandler)
      && lk != 1376794               // '--' FloatingConstant '|='
      && lk != 1376840               // 'sizeof' FloatingConstant '|='
      && lk != 1376855               // '~' FloatingConstant '|='
+     && lk != 1376904               // Comment CharacterConstant '|='
      && lk != 1376906               // '!' CharacterConstant '|='
      && lk != 1376910               // '&' CharacterConstant '|='
      && lk != 1376915               // '*' CharacterConstant '|='
@@ -12979,6 +13699,7 @@ function C(string, parsingEventHandler)
      && lk != 1376922               // '--' CharacterConstant '|='
      && lk != 1376968               // 'sizeof' CharacterConstant '|='
      && lk != 1376983               // '~' CharacterConstant '|='
+     && lk != 1377032               // Comment StringLiteral '|='
      && lk != 1377034               // '!' StringLiteral '|='
      && lk != 1377038               // '&' StringLiteral '|='
      && lk != 1377043               // '*' StringLiteral '|='
@@ -12998,6 +13719,7 @@ function C(string, parsingEventHandler)
      && lk != 1379588               // FloatingConstant '--' '|='
      && lk != 1379589               // CharacterConstant '--' '|='
      && lk != 1379590               // StringLiteral '--' '|='
+     && lk != 1409288               // Comment Identifier '}'
      && lk != 1409290               // '!' Identifier '}'
      && lk != 1409294               // '&' Identifier '}'
      && lk != 1409299               // '*' Identifier '}'
@@ -13007,6 +13729,7 @@ function C(string, parsingEventHandler)
      && lk != 1409306               // '--' Identifier '}'
      && lk != 1409352               // 'sizeof' Identifier '}'
      && lk != 1409367               // '~' Identifier '}'
+     && lk != 1409416               // Comment IntegerConstant '}'
      && lk != 1409418               // '!' IntegerConstant '}'
      && lk != 1409422               // '&' IntegerConstant '}'
      && lk != 1409427               // '*' IntegerConstant '}'
@@ -13016,6 +13739,7 @@ function C(string, parsingEventHandler)
      && lk != 1409434               // '--' IntegerConstant '}'
      && lk != 1409480               // 'sizeof' IntegerConstant '}'
      && lk != 1409495               // '~' IntegerConstant '}'
+     && lk != 1409544               // Comment FloatingConstant '}'
      && lk != 1409546               // '!' FloatingConstant '}'
      && lk != 1409550               // '&' FloatingConstant '}'
      && lk != 1409555               // '*' FloatingConstant '}'
@@ -13025,6 +13749,7 @@ function C(string, parsingEventHandler)
      && lk != 1409562               // '--' FloatingConstant '}'
      && lk != 1409608               // 'sizeof' FloatingConstant '}'
      && lk != 1409623               // '~' FloatingConstant '}'
+     && lk != 1409672               // Comment CharacterConstant '}'
      && lk != 1409674               // '!' CharacterConstant '}'
      && lk != 1409678               // '&' CharacterConstant '}'
      && lk != 1409683               // '*' CharacterConstant '}'
@@ -13034,6 +13759,7 @@ function C(string, parsingEventHandler)
      && lk != 1409690               // '--' CharacterConstant '}'
      && lk != 1409736               // 'sizeof' CharacterConstant '}'
      && lk != 1409751               // '~' CharacterConstant '}'
+     && lk != 1409800               // Comment StringLiteral '}'
      && lk != 1409802               // '!' StringLiteral '}'
      && lk != 1409806               // '&' StringLiteral '}'
      && lk != 1409811               // '*' StringLiteral '}'
@@ -13054,7 +13780,7 @@ function C(string, parsingEventHandler)
      && lk != 1412357               // CharacterConstant '--' '}'
      && lk != 1412358)              // StringLiteral '--' '}'
     {
-      lk = memoized(13, e0);
+      lk = memoized(14, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -13065,11 +13791,11 @@ function C(string, parsingEventHandler)
         {
           try_conditionalExpression();
           try_assignmentOperator();
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_assignmentExpression();
-          memoize(13, e0A, -1);
+          memoize(14, e0A, -1);
           lk = -3;
         }
         catch (p1A)
@@ -13079,7 +13805,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(13, e0A, -2);
+          memoize(14, e0A, -2);
         }
       }
     }
@@ -13116,6 +13842,7 @@ function C(string, parsingEventHandler)
     case 11012:                     // FloatingConstant '}'
     case 11013:                     // CharacterConstant '}'
     case 11014:                     // StringLiteral '}'
+    case 295176:                    // Comment Identifier ')'
     case 295178:                    // '!' Identifier ')'
     case 295182:                    // '&' Identifier ')'
     case 295187:                    // '*' Identifier ')'
@@ -13125,6 +13852,7 @@ function C(string, parsingEventHandler)
     case 295194:                    // '--' Identifier ')'
     case 295240:                    // 'sizeof' Identifier ')'
     case 295255:                    // '~' Identifier ')'
+    case 295304:                    // Comment IntegerConstant ')'
     case 295306:                    // '!' IntegerConstant ')'
     case 295310:                    // '&' IntegerConstant ')'
     case 295315:                    // '*' IntegerConstant ')'
@@ -13134,6 +13862,7 @@ function C(string, parsingEventHandler)
     case 295322:                    // '--' IntegerConstant ')'
     case 295368:                    // 'sizeof' IntegerConstant ')'
     case 295383:                    // '~' IntegerConstant ')'
+    case 295432:                    // Comment FloatingConstant ')'
     case 295434:                    // '!' FloatingConstant ')'
     case 295438:                    // '&' FloatingConstant ')'
     case 295443:                    // '*' FloatingConstant ')'
@@ -13143,6 +13872,7 @@ function C(string, parsingEventHandler)
     case 295450:                    // '--' FloatingConstant ')'
     case 295496:                    // 'sizeof' FloatingConstant ')'
     case 295511:                    // '~' FloatingConstant ')'
+    case 295560:                    // Comment CharacterConstant ')'
     case 295562:                    // '!' CharacterConstant ')'
     case 295566:                    // '&' CharacterConstant ')'
     case 295571:                    // '*' CharacterConstant ')'
@@ -13152,6 +13882,7 @@ function C(string, parsingEventHandler)
     case 295578:                    // '--' CharacterConstant ')'
     case 295624:                    // 'sizeof' CharacterConstant ')'
     case 295639:                    // '~' CharacterConstant ')'
+    case 295688:                    // Comment StringLiteral ')'
     case 295690:                    // '!' StringLiteral ')'
     case 295694:                    // '&' StringLiteral ')'
     case 295699:                    // '*' StringLiteral ')'
@@ -13171,6 +13902,7 @@ function C(string, parsingEventHandler)
     case 298244:                    // FloatingConstant '--' ')'
     case 298245:                    // CharacterConstant '--' ')'
     case 298246:                    // StringLiteral '--' ')'
+    case 393480:                    // Comment Identifier ','
     case 393482:                    // '!' Identifier ','
     case 393486:                    // '&' Identifier ','
     case 393491:                    // '*' Identifier ','
@@ -13180,6 +13912,7 @@ function C(string, parsingEventHandler)
     case 393498:                    // '--' Identifier ','
     case 393544:                    // 'sizeof' Identifier ','
     case 393559:                    // '~' Identifier ','
+    case 393608:                    // Comment IntegerConstant ','
     case 393610:                    // '!' IntegerConstant ','
     case 393614:                    // '&' IntegerConstant ','
     case 393619:                    // '*' IntegerConstant ','
@@ -13189,6 +13922,7 @@ function C(string, parsingEventHandler)
     case 393626:                    // '--' IntegerConstant ','
     case 393672:                    // 'sizeof' IntegerConstant ','
     case 393687:                    // '~' IntegerConstant ','
+    case 393736:                    // Comment FloatingConstant ','
     case 393738:                    // '!' FloatingConstant ','
     case 393742:                    // '&' FloatingConstant ','
     case 393747:                    // '*' FloatingConstant ','
@@ -13198,6 +13932,7 @@ function C(string, parsingEventHandler)
     case 393754:                    // '--' FloatingConstant ','
     case 393800:                    // 'sizeof' FloatingConstant ','
     case 393815:                    // '~' FloatingConstant ','
+    case 393864:                    // Comment CharacterConstant ','
     case 393866:                    // '!' CharacterConstant ','
     case 393870:                    // '&' CharacterConstant ','
     case 393875:                    // '*' CharacterConstant ','
@@ -13207,6 +13942,7 @@ function C(string, parsingEventHandler)
     case 393882:                    // '--' CharacterConstant ','
     case 393928:                    // 'sizeof' CharacterConstant ','
     case 393943:                    // '~' CharacterConstant ','
+    case 393992:                    // Comment StringLiteral ','
     case 393994:                    // '!' StringLiteral ','
     case 393998:                    // '&' StringLiteral ','
     case 394003:                    // '*' StringLiteral ','
@@ -13226,6 +13962,7 @@ function C(string, parsingEventHandler)
     case 396548:                    // FloatingConstant '--' ','
     case 396549:                    // CharacterConstant '--' ','
     case 396550:                    // StringLiteral '--' ','
+    case 540936:                    // Comment Identifier ':'
     case 540938:                    // '!' Identifier ':'
     case 540942:                    // '&' Identifier ':'
     case 540947:                    // '*' Identifier ':'
@@ -13235,6 +13972,7 @@ function C(string, parsingEventHandler)
     case 540954:                    // '--' Identifier ':'
     case 541000:                    // 'sizeof' Identifier ':'
     case 541015:                    // '~' Identifier ':'
+    case 541064:                    // Comment IntegerConstant ':'
     case 541066:                    // '!' IntegerConstant ':'
     case 541070:                    // '&' IntegerConstant ':'
     case 541075:                    // '*' IntegerConstant ':'
@@ -13244,6 +13982,7 @@ function C(string, parsingEventHandler)
     case 541082:                    // '--' IntegerConstant ':'
     case 541128:                    // 'sizeof' IntegerConstant ':'
     case 541143:                    // '~' IntegerConstant ':'
+    case 541192:                    // Comment FloatingConstant ':'
     case 541194:                    // '!' FloatingConstant ':'
     case 541198:                    // '&' FloatingConstant ':'
     case 541203:                    // '*' FloatingConstant ':'
@@ -13253,6 +13992,7 @@ function C(string, parsingEventHandler)
     case 541210:                    // '--' FloatingConstant ':'
     case 541256:                    // 'sizeof' FloatingConstant ':'
     case 541271:                    // '~' FloatingConstant ':'
+    case 541320:                    // Comment CharacterConstant ':'
     case 541322:                    // '!' CharacterConstant ':'
     case 541326:                    // '&' CharacterConstant ':'
     case 541331:                    // '*' CharacterConstant ':'
@@ -13262,6 +14002,7 @@ function C(string, parsingEventHandler)
     case 541338:                    // '--' CharacterConstant ':'
     case 541384:                    // 'sizeof' CharacterConstant ':'
     case 541399:                    // '~' CharacterConstant ':'
+    case 541448:                    // Comment StringLiteral ':'
     case 541450:                    // '!' StringLiteral ':'
     case 541454:                    // '&' StringLiteral ':'
     case 541459:                    // '*' StringLiteral ':'
@@ -13281,6 +14022,7 @@ function C(string, parsingEventHandler)
     case 544004:                    // FloatingConstant '--' ':'
     case 544005:                    // CharacterConstant '--' ':'
     case 544006:                    // StringLiteral '--' ':'
+    case 557320:                    // Comment Identifier ';'
     case 557322:                    // '!' Identifier ';'
     case 557326:                    // '&' Identifier ';'
     case 557331:                    // '*' Identifier ';'
@@ -13290,6 +14032,7 @@ function C(string, parsingEventHandler)
     case 557338:                    // '--' Identifier ';'
     case 557384:                    // 'sizeof' Identifier ';'
     case 557399:                    // '~' Identifier ';'
+    case 557448:                    // Comment IntegerConstant ';'
     case 557450:                    // '!' IntegerConstant ';'
     case 557454:                    // '&' IntegerConstant ';'
     case 557459:                    // '*' IntegerConstant ';'
@@ -13299,6 +14042,7 @@ function C(string, parsingEventHandler)
     case 557466:                    // '--' IntegerConstant ';'
     case 557512:                    // 'sizeof' IntegerConstant ';'
     case 557527:                    // '~' IntegerConstant ';'
+    case 557576:                    // Comment FloatingConstant ';'
     case 557578:                    // '!' FloatingConstant ';'
     case 557582:                    // '&' FloatingConstant ';'
     case 557587:                    // '*' FloatingConstant ';'
@@ -13308,6 +14052,7 @@ function C(string, parsingEventHandler)
     case 557594:                    // '--' FloatingConstant ';'
     case 557640:                    // 'sizeof' FloatingConstant ';'
     case 557655:                    // '~' FloatingConstant ';'
+    case 557704:                    // Comment CharacterConstant ';'
     case 557706:                    // '!' CharacterConstant ';'
     case 557710:                    // '&' CharacterConstant ';'
     case 557715:                    // '*' CharacterConstant ';'
@@ -13317,6 +14062,7 @@ function C(string, parsingEventHandler)
     case 557722:                    // '--' CharacterConstant ';'
     case 557768:                    // 'sizeof' CharacterConstant ';'
     case 557783:                    // '~' CharacterConstant ';'
+    case 557832:                    // Comment StringLiteral ';'
     case 557834:                    // '!' StringLiteral ';'
     case 557838:                    // '&' StringLiteral ';'
     case 557843:                    // '*' StringLiteral ';'
@@ -13336,6 +14082,7 @@ function C(string, parsingEventHandler)
     case 560388:                    // FloatingConstant '--' ';'
     case 560389:                    // CharacterConstant '--' ';'
     case 560390:                    // StringLiteral '--' ';'
+    case 770312:                    // Comment Identifier ']'
     case 770314:                    // '!' Identifier ']'
     case 770318:                    // '&' Identifier ']'
     case 770323:                    // '*' Identifier ']'
@@ -13345,6 +14092,7 @@ function C(string, parsingEventHandler)
     case 770330:                    // '--' Identifier ']'
     case 770376:                    // 'sizeof' Identifier ']'
     case 770391:                    // '~' Identifier ']'
+    case 770440:                    // Comment IntegerConstant ']'
     case 770442:                    // '!' IntegerConstant ']'
     case 770446:                    // '&' IntegerConstant ']'
     case 770451:                    // '*' IntegerConstant ']'
@@ -13354,6 +14102,7 @@ function C(string, parsingEventHandler)
     case 770458:                    // '--' IntegerConstant ']'
     case 770504:                    // 'sizeof' IntegerConstant ']'
     case 770519:                    // '~' IntegerConstant ']'
+    case 770568:                    // Comment FloatingConstant ']'
     case 770570:                    // '!' FloatingConstant ']'
     case 770574:                    // '&' FloatingConstant ']'
     case 770579:                    // '*' FloatingConstant ']'
@@ -13363,6 +14112,7 @@ function C(string, parsingEventHandler)
     case 770586:                    // '--' FloatingConstant ']'
     case 770632:                    // 'sizeof' FloatingConstant ']'
     case 770647:                    // '~' FloatingConstant ']'
+    case 770696:                    // Comment CharacterConstant ']'
     case 770698:                    // '!' CharacterConstant ']'
     case 770702:                    // '&' CharacterConstant ']'
     case 770707:                    // '*' CharacterConstant ']'
@@ -13372,6 +14122,7 @@ function C(string, parsingEventHandler)
     case 770714:                    // '--' CharacterConstant ']'
     case 770760:                    // 'sizeof' CharacterConstant ']'
     case 770775:                    // '~' CharacterConstant ']'
+    case 770824:                    // Comment StringLiteral ']'
     case 770826:                    // '!' StringLiteral ']'
     case 770830:                    // '&' StringLiteral ']'
     case 770835:                    // '*' StringLiteral ']'
@@ -13391,6 +14142,7 @@ function C(string, parsingEventHandler)
     case 773380:                    // FloatingConstant '--' ']'
     case 773381:                    // CharacterConstant '--' ']'
     case 773382:                    // StringLiteral '--' ']'
+    case 1409288:                   // Comment Identifier '}'
     case 1409290:                   // '!' Identifier '}'
     case 1409294:                   // '&' Identifier '}'
     case 1409299:                   // '*' Identifier '}'
@@ -13400,6 +14152,7 @@ function C(string, parsingEventHandler)
     case 1409306:                   // '--' Identifier '}'
     case 1409352:                   // 'sizeof' Identifier '}'
     case 1409367:                   // '~' Identifier '}'
+    case 1409416:                   // Comment IntegerConstant '}'
     case 1409418:                   // '!' IntegerConstant '}'
     case 1409422:                   // '&' IntegerConstant '}'
     case 1409427:                   // '*' IntegerConstant '}'
@@ -13409,6 +14162,7 @@ function C(string, parsingEventHandler)
     case 1409434:                   // '--' IntegerConstant '}'
     case 1409480:                   // 'sizeof' IntegerConstant '}'
     case 1409495:                   // '~' IntegerConstant '}'
+    case 1409544:                   // Comment FloatingConstant '}'
     case 1409546:                   // '!' FloatingConstant '}'
     case 1409550:                   // '&' FloatingConstant '}'
     case 1409555:                   // '*' FloatingConstant '}'
@@ -13418,6 +14172,7 @@ function C(string, parsingEventHandler)
     case 1409562:                   // '--' FloatingConstant '}'
     case 1409608:                   // 'sizeof' FloatingConstant '}'
     case 1409623:                   // '~' FloatingConstant '}'
+    case 1409672:                   // Comment CharacterConstant '}'
     case 1409674:                   // '!' CharacterConstant '}'
     case 1409678:                   // '&' CharacterConstant '}'
     case 1409683:                   // '*' CharacterConstant '}'
@@ -13427,6 +14182,7 @@ function C(string, parsingEventHandler)
     case 1409690:                   // '--' CharacterConstant '}'
     case 1409736:                   // 'sizeof' CharacterConstant '}'
     case 1409751:                   // '~' CharacterConstant '}'
+    case 1409800:                   // Comment StringLiteral '}'
     case 1409802:                   // '!' StringLiteral '}'
     case 1409806:                   // '&' StringLiteral '}'
     case 1409811:                   // '*' StringLiteral '}'
@@ -13453,9 +14209,9 @@ function C(string, parsingEventHandler)
     default:
       try_conditionalExpression();
       try_assignmentOperator();
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_assignmentExpression();
     }
   }
@@ -13546,58 +14302,45 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       case 2193:                    // '(' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 6929:                    // '(' 'const'
       case 10257:                   // '(' 'volatile'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 7697:                    // '(' 'enum'
       case 9489:                    // '(' 'struct'
       case 9873:                    // '(' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 401:                     // '(' IntegerConstant
       case 529:                     // '(' FloatingConstant
       case 657:                     // '(' CharacterConstant
       case 785:                     // '(' StringLiteral
-        lookahead3W(72);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
-        break;
-      case 1297:                    // '(' '!'
-      case 1809:                    // '(' '&'
-      case 2449:                    // '(' '*'
-      case 2705:                    // '(' '+'
-      case 2833:                    // '(' '++'
-      case 3217:                    // '(' '-'
-      case 3345:                    // '(' '--'
-      case 9233:                    // '(' 'sizeof'
-      case 11153:                   // '(' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(73);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
         break;
       case 6801:                    // '(' 'char'
       case 7441:                    // '(' 'double'
@@ -13608,19 +14351,38 @@ function C(string, parsingEventHandler)
       case 9105:                    // '(' 'signed'
       case 10001:                   // '(' 'unsigned'
       case 10129:                   // '(' 'void'
-        lookahead3W(40);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | '[' | 'char' |
-                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(39);            // WhiteSpace | '(' | ')' | '*' | '[' | 'char' | 'const' | 'double' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        break;
+      case 1041:                    // '(' Comment
+      case 1297:                    // '(' '!'
+      case 1809:                    // '(' '&'
+      case 2449:                    // '(' '*'
+      case 2705:                    // '(' '+'
+      case 2833:                    // '(' '++'
+      case 3217:                    // '(' '-'
+      case 3345:                    // '(' '--'
+      case 9233:                    // '(' 'sizeof'
+      case 11153:                   // '(' '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
+    case 8:                         // Comment
     case 22:                        // '++'
     case 26:                        // '--'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
+      case 264:                     // Comment Identifier
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
       case 278:                     // '++' Identifier
       case 406:                     // '++' IntegerConstant
       case 534:                     // '++' FloatingConstant
@@ -13631,12 +14393,23 @@ function C(string, parsingEventHandler)
       case 538:                     // '--' FloatingConstant
       case 666:                     // '--' CharacterConstant
       case 794:                     // '--' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1032:                    // Comment Comment
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2184:                    // Comment '('
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+      case 1046:                    // '++' Comment
       case 1302:                    // '++' '!'
       case 1814:                    // '++' '&'
       case 2198:                    // '++' '('
@@ -13647,6 +14420,7 @@ function C(string, parsingEventHandler)
       case 3350:                    // '++' '--'
       case 9238:                    // '++' 'sizeof'
       case 11158:                   // '++' '~'
+      case 1050:                    // '--' Comment
       case 1306:                    // '--' '!'
       case 1818:                    // '--' '&'
       case 2202:                    // '--' '('
@@ -13657,9 +14431,9 @@ function C(string, parsingEventHandler)
       case 3354:                    // '--' '--'
       case 9242:                    // '--' 'sizeof'
       case 11162:                   // '--' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -13668,11 +14442,10 @@ function C(string, parsingEventHandler)
     case 4:                         // FloatingConstant
     case 5:                         // CharacterConstant
     case 6:                         // StringLiteral
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
@@ -13680,9 +14453,9 @@ function C(string, parsingEventHandler)
       case 2180:                    // FloatingConstant '('
       case 2181:                    // CharacterConstant '('
       case 2182:                    // StringLiteral '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
@@ -13694,11 +14467,10 @@ function C(string, parsingEventHandler)
       case 3333:                    // CharacterConstant '--'
       case 2822:                    // StringLiteral '++'
       case 3334:                    // StringLiteral '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
@@ -13710,7 +14482,7 @@ function C(string, parsingEventHandler)
       case 3717:                    // CharacterConstant '.'
       case 3590:                    // StringLiteral '->'
       case 3718:                    // StringLiteral '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -13807,9 +14579,9 @@ function C(string, parsingEventHandler)
       case 6150:                    // StringLiteral '^'
       case 10630:                   // StringLiteral '|'
       case 10886:                   // StringLiteral '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -13820,9 +14592,9 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 72:                        // 'sizeof'
     case 87:                        // '~'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2186:                    // '!' '('
@@ -13832,11 +14604,11 @@ function C(string, parsingEventHandler)
       case 2201:                    // '-' '('
       case 2248:                    // 'sizeof' '('
       case 2263:                    // '~' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 266:                     // '!' Identifier
       case 394:                     // '!' IntegerConstant
@@ -13873,12 +14645,12 @@ function C(string, parsingEventHandler)
       case 599:                     // '~' FloatingConstant
       case 727:                     // '~' CharacterConstant
       case 855:                     // '~' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1034:                    // '!' Comment
       case 1290:                    // '!' '!'
       case 1802:                    // '!' '&'
       case 2442:                    // '!' '*'
@@ -13888,6 +14660,7 @@ function C(string, parsingEventHandler)
       case 3338:                    // '!' '--'
       case 9226:                    // '!' 'sizeof'
       case 11146:                   // '!' '~'
+      case 1038:                    // '&' Comment
       case 1294:                    // '&' '!'
       case 1806:                    // '&' '&'
       case 2446:                    // '&' '*'
@@ -13897,6 +14670,7 @@ function C(string, parsingEventHandler)
       case 3342:                    // '&' '--'
       case 9230:                    // '&' 'sizeof'
       case 11150:                   // '&' '~'
+      case 1043:                    // '*' Comment
       case 1299:                    // '*' '!'
       case 1811:                    // '*' '&'
       case 2451:                    // '*' '*'
@@ -13906,6 +14680,7 @@ function C(string, parsingEventHandler)
       case 3347:                    // '*' '--'
       case 9235:                    // '*' 'sizeof'
       case 11155:                   // '*' '~'
+      case 1045:                    // '+' Comment
       case 1301:                    // '+' '!'
       case 1813:                    // '+' '&'
       case 2453:                    // '+' '*'
@@ -13915,6 +14690,7 @@ function C(string, parsingEventHandler)
       case 3349:                    // '+' '--'
       case 9237:                    // '+' 'sizeof'
       case 11157:                   // '+' '~'
+      case 1049:                    // '-' Comment
       case 1305:                    // '-' '!'
       case 1817:                    // '-' '&'
       case 2457:                    // '-' '*'
@@ -13924,6 +14700,7 @@ function C(string, parsingEventHandler)
       case 3353:                    // '-' '--'
       case 9241:                    // '-' 'sizeof'
       case 11161:                   // '-' '~'
+      case 1096:                    // 'sizeof' Comment
       case 1352:                    // 'sizeof' '!'
       case 1864:                    // 'sizeof' '&'
       case 2504:                    // 'sizeof' '*'
@@ -13933,6 +14710,7 @@ function C(string, parsingEventHandler)
       case 3400:                    // 'sizeof' '--'
       case 9288:                    // 'sizeof' 'sizeof'
       case 11208:                   // 'sizeof' '~'
+      case 1111:                    // '~' Comment
       case 1367:                    // '~' '!'
       case 1879:                    // '~' '&'
       case 2519:                    // '~' '*'
@@ -13942,9 +14720,9 @@ function C(string, parsingEventHandler)
       case 3415:                    // '~' '--'
       case 9303:                    // '~' 'sizeof'
       case 11223:                   // '~' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -14041,6 +14819,7 @@ function C(string, parsingEventHandler)
      && lk != 11012                 // FloatingConstant '}'
      && lk != 11013                 // CharacterConstant '}'
      && lk != 11014                 // StringLiteral '}'
+     && lk != 213256                // Comment Identifier '%='
      && lk != 213258                // '!' Identifier '%='
      && lk != 213262                // '&' Identifier '%='
      && lk != 213267                // '*' Identifier '%='
@@ -14050,6 +14829,7 @@ function C(string, parsingEventHandler)
      && lk != 213274                // '--' Identifier '%='
      && lk != 213320                // 'sizeof' Identifier '%='
      && lk != 213335                // '~' Identifier '%='
+     && lk != 213384                // Comment IntegerConstant '%='
      && lk != 213386                // '!' IntegerConstant '%='
      && lk != 213390                // '&' IntegerConstant '%='
      && lk != 213395                // '*' IntegerConstant '%='
@@ -14059,6 +14839,7 @@ function C(string, parsingEventHandler)
      && lk != 213402                // '--' IntegerConstant '%='
      && lk != 213448                // 'sizeof' IntegerConstant '%='
      && lk != 213463                // '~' IntegerConstant '%='
+     && lk != 213512                // Comment FloatingConstant '%='
      && lk != 213514                // '!' FloatingConstant '%='
      && lk != 213518                // '&' FloatingConstant '%='
      && lk != 213523                // '*' FloatingConstant '%='
@@ -14068,6 +14849,7 @@ function C(string, parsingEventHandler)
      && lk != 213530                // '--' FloatingConstant '%='
      && lk != 213576                // 'sizeof' FloatingConstant '%='
      && lk != 213591                // '~' FloatingConstant '%='
+     && lk != 213640                // Comment CharacterConstant '%='
      && lk != 213642                // '!' CharacterConstant '%='
      && lk != 213646                // '&' CharacterConstant '%='
      && lk != 213651                // '*' CharacterConstant '%='
@@ -14077,6 +14859,7 @@ function C(string, parsingEventHandler)
      && lk != 213658                // '--' CharacterConstant '%='
      && lk != 213704                // 'sizeof' CharacterConstant '%='
      && lk != 213719                // '~' CharacterConstant '%='
+     && lk != 213768                // Comment StringLiteral '%='
      && lk != 213770                // '!' StringLiteral '%='
      && lk != 213774                // '&' StringLiteral '%='
      && lk != 213779                // '*' StringLiteral '%='
@@ -14096,6 +14879,7 @@ function C(string, parsingEventHandler)
      && lk != 216324                // FloatingConstant '--' '%='
      && lk != 216325                // CharacterConstant '--' '%='
      && lk != 216326                // StringLiteral '--' '%='
+     && lk != 262408                // Comment Identifier '&='
      && lk != 262410                // '!' Identifier '&='
      && lk != 262414                // '&' Identifier '&='
      && lk != 262419                // '*' Identifier '&='
@@ -14105,6 +14889,7 @@ function C(string, parsingEventHandler)
      && lk != 262426                // '--' Identifier '&='
      && lk != 262472                // 'sizeof' Identifier '&='
      && lk != 262487                // '~' Identifier '&='
+     && lk != 262536                // Comment IntegerConstant '&='
      && lk != 262538                // '!' IntegerConstant '&='
      && lk != 262542                // '&' IntegerConstant '&='
      && lk != 262547                // '*' IntegerConstant '&='
@@ -14114,6 +14899,7 @@ function C(string, parsingEventHandler)
      && lk != 262554                // '--' IntegerConstant '&='
      && lk != 262600                // 'sizeof' IntegerConstant '&='
      && lk != 262615                // '~' IntegerConstant '&='
+     && lk != 262664                // Comment FloatingConstant '&='
      && lk != 262666                // '!' FloatingConstant '&='
      && lk != 262670                // '&' FloatingConstant '&='
      && lk != 262675                // '*' FloatingConstant '&='
@@ -14123,6 +14909,7 @@ function C(string, parsingEventHandler)
      && lk != 262682                // '--' FloatingConstant '&='
      && lk != 262728                // 'sizeof' FloatingConstant '&='
      && lk != 262743                // '~' FloatingConstant '&='
+     && lk != 262792                // Comment CharacterConstant '&='
      && lk != 262794                // '!' CharacterConstant '&='
      && lk != 262798                // '&' CharacterConstant '&='
      && lk != 262803                // '*' CharacterConstant '&='
@@ -14132,6 +14919,7 @@ function C(string, parsingEventHandler)
      && lk != 262810                // '--' CharacterConstant '&='
      && lk != 262856                // 'sizeof' CharacterConstant '&='
      && lk != 262871                // '~' CharacterConstant '&='
+     && lk != 262920                // Comment StringLiteral '&='
      && lk != 262922                // '!' StringLiteral '&='
      && lk != 262926                // '&' StringLiteral '&='
      && lk != 262931                // '*' StringLiteral '&='
@@ -14151,6 +14939,7 @@ function C(string, parsingEventHandler)
      && lk != 265476                // FloatingConstant '--' '&='
      && lk != 265477                // CharacterConstant '--' '&='
      && lk != 265478                // StringLiteral '--' '&='
+     && lk != 295176                // Comment Identifier ')'
      && lk != 295178                // '!' Identifier ')'
      && lk != 295182                // '&' Identifier ')'
      && lk != 295187                // '*' Identifier ')'
@@ -14160,6 +14949,7 @@ function C(string, parsingEventHandler)
      && lk != 295194                // '--' Identifier ')'
      && lk != 295240                // 'sizeof' Identifier ')'
      && lk != 295255                // '~' Identifier ')'
+     && lk != 295304                // Comment IntegerConstant ')'
      && lk != 295306                // '!' IntegerConstant ')'
      && lk != 295310                // '&' IntegerConstant ')'
      && lk != 295315                // '*' IntegerConstant ')'
@@ -14169,6 +14959,7 @@ function C(string, parsingEventHandler)
      && lk != 295322                // '--' IntegerConstant ')'
      && lk != 295368                // 'sizeof' IntegerConstant ')'
      && lk != 295383                // '~' IntegerConstant ')'
+     && lk != 295432                // Comment FloatingConstant ')'
      && lk != 295434                // '!' FloatingConstant ')'
      && lk != 295438                // '&' FloatingConstant ')'
      && lk != 295443                // '*' FloatingConstant ')'
@@ -14178,6 +14969,7 @@ function C(string, parsingEventHandler)
      && lk != 295450                // '--' FloatingConstant ')'
      && lk != 295496                // 'sizeof' FloatingConstant ')'
      && lk != 295511                // '~' FloatingConstant ')'
+     && lk != 295560                // Comment CharacterConstant ')'
      && lk != 295562                // '!' CharacterConstant ')'
      && lk != 295566                // '&' CharacterConstant ')'
      && lk != 295571                // '*' CharacterConstant ')'
@@ -14187,6 +14979,7 @@ function C(string, parsingEventHandler)
      && lk != 295578                // '--' CharacterConstant ')'
      && lk != 295624                // 'sizeof' CharacterConstant ')'
      && lk != 295639                // '~' CharacterConstant ')'
+     && lk != 295688                // Comment StringLiteral ')'
      && lk != 295690                // '!' StringLiteral ')'
      && lk != 295694                // '&' StringLiteral ')'
      && lk != 295699                // '*' StringLiteral ')'
@@ -14206,6 +14999,7 @@ function C(string, parsingEventHandler)
      && lk != 298244                // FloatingConstant '--' ')'
      && lk != 298245                // CharacterConstant '--' ')'
      && lk != 298246                // StringLiteral '--' ')'
+     && lk != 327944                // Comment Identifier '*='
      && lk != 327946                // '!' Identifier '*='
      && lk != 327950                // '&' Identifier '*='
      && lk != 327955                // '*' Identifier '*='
@@ -14215,6 +15009,7 @@ function C(string, parsingEventHandler)
      && lk != 327962                // '--' Identifier '*='
      && lk != 328008                // 'sizeof' Identifier '*='
      && lk != 328023                // '~' Identifier '*='
+     && lk != 328072                // Comment IntegerConstant '*='
      && lk != 328074                // '!' IntegerConstant '*='
      && lk != 328078                // '&' IntegerConstant '*='
      && lk != 328083                // '*' IntegerConstant '*='
@@ -14224,6 +15019,7 @@ function C(string, parsingEventHandler)
      && lk != 328090                // '--' IntegerConstant '*='
      && lk != 328136                // 'sizeof' IntegerConstant '*='
      && lk != 328151                // '~' IntegerConstant '*='
+     && lk != 328200                // Comment FloatingConstant '*='
      && lk != 328202                // '!' FloatingConstant '*='
      && lk != 328206                // '&' FloatingConstant '*='
      && lk != 328211                // '*' FloatingConstant '*='
@@ -14233,6 +15029,7 @@ function C(string, parsingEventHandler)
      && lk != 328218                // '--' FloatingConstant '*='
      && lk != 328264                // 'sizeof' FloatingConstant '*='
      && lk != 328279                // '~' FloatingConstant '*='
+     && lk != 328328                // Comment CharacterConstant '*='
      && lk != 328330                // '!' CharacterConstant '*='
      && lk != 328334                // '&' CharacterConstant '*='
      && lk != 328339                // '*' CharacterConstant '*='
@@ -14242,6 +15039,7 @@ function C(string, parsingEventHandler)
      && lk != 328346                // '--' CharacterConstant '*='
      && lk != 328392                // 'sizeof' CharacterConstant '*='
      && lk != 328407                // '~' CharacterConstant '*='
+     && lk != 328456                // Comment StringLiteral '*='
      && lk != 328458                // '!' StringLiteral '*='
      && lk != 328462                // '&' StringLiteral '*='
      && lk != 328467                // '*' StringLiteral '*='
@@ -14261,6 +15059,7 @@ function C(string, parsingEventHandler)
      && lk != 331012                // FloatingConstant '--' '*='
      && lk != 331013                // CharacterConstant '--' '*='
      && lk != 331014                // StringLiteral '--' '*='
+     && lk != 377096                // Comment Identifier '+='
      && lk != 377098                // '!' Identifier '+='
      && lk != 377102                // '&' Identifier '+='
      && lk != 377107                // '*' Identifier '+='
@@ -14270,6 +15069,7 @@ function C(string, parsingEventHandler)
      && lk != 377114                // '--' Identifier '+='
      && lk != 377160                // 'sizeof' Identifier '+='
      && lk != 377175                // '~' Identifier '+='
+     && lk != 377224                // Comment IntegerConstant '+='
      && lk != 377226                // '!' IntegerConstant '+='
      && lk != 377230                // '&' IntegerConstant '+='
      && lk != 377235                // '*' IntegerConstant '+='
@@ -14279,6 +15079,7 @@ function C(string, parsingEventHandler)
      && lk != 377242                // '--' IntegerConstant '+='
      && lk != 377288                // 'sizeof' IntegerConstant '+='
      && lk != 377303                // '~' IntegerConstant '+='
+     && lk != 377352                // Comment FloatingConstant '+='
      && lk != 377354                // '!' FloatingConstant '+='
      && lk != 377358                // '&' FloatingConstant '+='
      && lk != 377363                // '*' FloatingConstant '+='
@@ -14288,6 +15089,7 @@ function C(string, parsingEventHandler)
      && lk != 377370                // '--' FloatingConstant '+='
      && lk != 377416                // 'sizeof' FloatingConstant '+='
      && lk != 377431                // '~' FloatingConstant '+='
+     && lk != 377480                // Comment CharacterConstant '+='
      && lk != 377482                // '!' CharacterConstant '+='
      && lk != 377486                // '&' CharacterConstant '+='
      && lk != 377491                // '*' CharacterConstant '+='
@@ -14297,6 +15099,7 @@ function C(string, parsingEventHandler)
      && lk != 377498                // '--' CharacterConstant '+='
      && lk != 377544                // 'sizeof' CharacterConstant '+='
      && lk != 377559                // '~' CharacterConstant '+='
+     && lk != 377608                // Comment StringLiteral '+='
      && lk != 377610                // '!' StringLiteral '+='
      && lk != 377614                // '&' StringLiteral '+='
      && lk != 377619                // '*' StringLiteral '+='
@@ -14316,6 +15119,7 @@ function C(string, parsingEventHandler)
      && lk != 380164                // FloatingConstant '--' '+='
      && lk != 380165                // CharacterConstant '--' '+='
      && lk != 380166                // StringLiteral '--' '+='
+     && lk != 393480                // Comment Identifier ','
      && lk != 393482                // '!' Identifier ','
      && lk != 393486                // '&' Identifier ','
      && lk != 393491                // '*' Identifier ','
@@ -14325,6 +15129,7 @@ function C(string, parsingEventHandler)
      && lk != 393498                // '--' Identifier ','
      && lk != 393544                // 'sizeof' Identifier ','
      && lk != 393559                // '~' Identifier ','
+     && lk != 393608                // Comment IntegerConstant ','
      && lk != 393610                // '!' IntegerConstant ','
      && lk != 393614                // '&' IntegerConstant ','
      && lk != 393619                // '*' IntegerConstant ','
@@ -14334,6 +15139,7 @@ function C(string, parsingEventHandler)
      && lk != 393626                // '--' IntegerConstant ','
      && lk != 393672                // 'sizeof' IntegerConstant ','
      && lk != 393687                // '~' IntegerConstant ','
+     && lk != 393736                // Comment FloatingConstant ','
      && lk != 393738                // '!' FloatingConstant ','
      && lk != 393742                // '&' FloatingConstant ','
      && lk != 393747                // '*' FloatingConstant ','
@@ -14343,6 +15149,7 @@ function C(string, parsingEventHandler)
      && lk != 393754                // '--' FloatingConstant ','
      && lk != 393800                // 'sizeof' FloatingConstant ','
      && lk != 393815                // '~' FloatingConstant ','
+     && lk != 393864                // Comment CharacterConstant ','
      && lk != 393866                // '!' CharacterConstant ','
      && lk != 393870                // '&' CharacterConstant ','
      && lk != 393875                // '*' CharacterConstant ','
@@ -14352,6 +15159,7 @@ function C(string, parsingEventHandler)
      && lk != 393882                // '--' CharacterConstant ','
      && lk != 393928                // 'sizeof' CharacterConstant ','
      && lk != 393943                // '~' CharacterConstant ','
+     && lk != 393992                // Comment StringLiteral ','
      && lk != 393994                // '!' StringLiteral ','
      && lk != 393998                // '&' StringLiteral ','
      && lk != 394003                // '*' StringLiteral ','
@@ -14371,6 +15179,7 @@ function C(string, parsingEventHandler)
      && lk != 396548                // FloatingConstant '--' ','
      && lk != 396549                // CharacterConstant '--' ','
      && lk != 396550                // StringLiteral '--' ','
+     && lk != 442632                // Comment Identifier '-='
      && lk != 442634                // '!' Identifier '-='
      && lk != 442638                // '&' Identifier '-='
      && lk != 442643                // '*' Identifier '-='
@@ -14380,6 +15189,7 @@ function C(string, parsingEventHandler)
      && lk != 442650                // '--' Identifier '-='
      && lk != 442696                // 'sizeof' Identifier '-='
      && lk != 442711                // '~' Identifier '-='
+     && lk != 442760                // Comment IntegerConstant '-='
      && lk != 442762                // '!' IntegerConstant '-='
      && lk != 442766                // '&' IntegerConstant '-='
      && lk != 442771                // '*' IntegerConstant '-='
@@ -14389,6 +15199,7 @@ function C(string, parsingEventHandler)
      && lk != 442778                // '--' IntegerConstant '-='
      && lk != 442824                // 'sizeof' IntegerConstant '-='
      && lk != 442839                // '~' IntegerConstant '-='
+     && lk != 442888                // Comment FloatingConstant '-='
      && lk != 442890                // '!' FloatingConstant '-='
      && lk != 442894                // '&' FloatingConstant '-='
      && lk != 442899                // '*' FloatingConstant '-='
@@ -14398,6 +15209,7 @@ function C(string, parsingEventHandler)
      && lk != 442906                // '--' FloatingConstant '-='
      && lk != 442952                // 'sizeof' FloatingConstant '-='
      && lk != 442967                // '~' FloatingConstant '-='
+     && lk != 443016                // Comment CharacterConstant '-='
      && lk != 443018                // '!' CharacterConstant '-='
      && lk != 443022                // '&' CharacterConstant '-='
      && lk != 443027                // '*' CharacterConstant '-='
@@ -14407,6 +15219,7 @@ function C(string, parsingEventHandler)
      && lk != 443034                // '--' CharacterConstant '-='
      && lk != 443080                // 'sizeof' CharacterConstant '-='
      && lk != 443095                // '~' CharacterConstant '-='
+     && lk != 443144                // Comment StringLiteral '-='
      && lk != 443146                // '!' StringLiteral '-='
      && lk != 443150                // '&' StringLiteral '-='
      && lk != 443155                // '*' StringLiteral '-='
@@ -14426,6 +15239,7 @@ function C(string, parsingEventHandler)
      && lk != 445700                // FloatingConstant '--' '-='
      && lk != 445701                // CharacterConstant '--' '-='
      && lk != 445702                // StringLiteral '--' '-='
+     && lk != 524552                // Comment Identifier '/='
      && lk != 524554                // '!' Identifier '/='
      && lk != 524558                // '&' Identifier '/='
      && lk != 524563                // '*' Identifier '/='
@@ -14435,6 +15249,7 @@ function C(string, parsingEventHandler)
      && lk != 524570                // '--' Identifier '/='
      && lk != 524616                // 'sizeof' Identifier '/='
      && lk != 524631                // '~' Identifier '/='
+     && lk != 524680                // Comment IntegerConstant '/='
      && lk != 524682                // '!' IntegerConstant '/='
      && lk != 524686                // '&' IntegerConstant '/='
      && lk != 524691                // '*' IntegerConstant '/='
@@ -14444,6 +15259,7 @@ function C(string, parsingEventHandler)
      && lk != 524698                // '--' IntegerConstant '/='
      && lk != 524744                // 'sizeof' IntegerConstant '/='
      && lk != 524759                // '~' IntegerConstant '/='
+     && lk != 524808                // Comment FloatingConstant '/='
      && lk != 524810                // '!' FloatingConstant '/='
      && lk != 524814                // '&' FloatingConstant '/='
      && lk != 524819                // '*' FloatingConstant '/='
@@ -14453,6 +15269,7 @@ function C(string, parsingEventHandler)
      && lk != 524826                // '--' FloatingConstant '/='
      && lk != 524872                // 'sizeof' FloatingConstant '/='
      && lk != 524887                // '~' FloatingConstant '/='
+     && lk != 524936                // Comment CharacterConstant '/='
      && lk != 524938                // '!' CharacterConstant '/='
      && lk != 524942                // '&' CharacterConstant '/='
      && lk != 524947                // '*' CharacterConstant '/='
@@ -14462,6 +15279,7 @@ function C(string, parsingEventHandler)
      && lk != 524954                // '--' CharacterConstant '/='
      && lk != 525000                // 'sizeof' CharacterConstant '/='
      && lk != 525015                // '~' CharacterConstant '/='
+     && lk != 525064                // Comment StringLiteral '/='
      && lk != 525066                // '!' StringLiteral '/='
      && lk != 525070                // '&' StringLiteral '/='
      && lk != 525075                // '*' StringLiteral '/='
@@ -14481,6 +15299,7 @@ function C(string, parsingEventHandler)
      && lk != 527620                // FloatingConstant '--' '/='
      && lk != 527621                // CharacterConstant '--' '/='
      && lk != 527622                // StringLiteral '--' '/='
+     && lk != 540936                // Comment Identifier ':'
      && lk != 540938                // '!' Identifier ':'
      && lk != 540942                // '&' Identifier ':'
      && lk != 540947                // '*' Identifier ':'
@@ -14490,6 +15309,7 @@ function C(string, parsingEventHandler)
      && lk != 540954                // '--' Identifier ':'
      && lk != 541000                // 'sizeof' Identifier ':'
      && lk != 541015                // '~' Identifier ':'
+     && lk != 541064                // Comment IntegerConstant ':'
      && lk != 541066                // '!' IntegerConstant ':'
      && lk != 541070                // '&' IntegerConstant ':'
      && lk != 541075                // '*' IntegerConstant ':'
@@ -14499,6 +15319,7 @@ function C(string, parsingEventHandler)
      && lk != 541082                // '--' IntegerConstant ':'
      && lk != 541128                // 'sizeof' IntegerConstant ':'
      && lk != 541143                // '~' IntegerConstant ':'
+     && lk != 541192                // Comment FloatingConstant ':'
      && lk != 541194                // '!' FloatingConstant ':'
      && lk != 541198                // '&' FloatingConstant ':'
      && lk != 541203                // '*' FloatingConstant ':'
@@ -14508,6 +15329,7 @@ function C(string, parsingEventHandler)
      && lk != 541210                // '--' FloatingConstant ':'
      && lk != 541256                // 'sizeof' FloatingConstant ':'
      && lk != 541271                // '~' FloatingConstant ':'
+     && lk != 541320                // Comment CharacterConstant ':'
      && lk != 541322                // '!' CharacterConstant ':'
      && lk != 541326                // '&' CharacterConstant ':'
      && lk != 541331                // '*' CharacterConstant ':'
@@ -14517,6 +15339,7 @@ function C(string, parsingEventHandler)
      && lk != 541338                // '--' CharacterConstant ':'
      && lk != 541384                // 'sizeof' CharacterConstant ':'
      && lk != 541399                // '~' CharacterConstant ':'
+     && lk != 541448                // Comment StringLiteral ':'
      && lk != 541450                // '!' StringLiteral ':'
      && lk != 541454                // '&' StringLiteral ':'
      && lk != 541459                // '*' StringLiteral ':'
@@ -14536,6 +15359,7 @@ function C(string, parsingEventHandler)
      && lk != 544004                // FloatingConstant '--' ':'
      && lk != 544005                // CharacterConstant '--' ':'
      && lk != 544006                // StringLiteral '--' ':'
+     && lk != 557320                // Comment Identifier ';'
      && lk != 557322                // '!' Identifier ';'
      && lk != 557326                // '&' Identifier ';'
      && lk != 557331                // '*' Identifier ';'
@@ -14545,6 +15369,7 @@ function C(string, parsingEventHandler)
      && lk != 557338                // '--' Identifier ';'
      && lk != 557384                // 'sizeof' Identifier ';'
      && lk != 557399                // '~' Identifier ';'
+     && lk != 557448                // Comment IntegerConstant ';'
      && lk != 557450                // '!' IntegerConstant ';'
      && lk != 557454                // '&' IntegerConstant ';'
      && lk != 557459                // '*' IntegerConstant ';'
@@ -14554,6 +15379,7 @@ function C(string, parsingEventHandler)
      && lk != 557466                // '--' IntegerConstant ';'
      && lk != 557512                // 'sizeof' IntegerConstant ';'
      && lk != 557527                // '~' IntegerConstant ';'
+     && lk != 557576                // Comment FloatingConstant ';'
      && lk != 557578                // '!' FloatingConstant ';'
      && lk != 557582                // '&' FloatingConstant ';'
      && lk != 557587                // '*' FloatingConstant ';'
@@ -14563,6 +15389,7 @@ function C(string, parsingEventHandler)
      && lk != 557594                // '--' FloatingConstant ';'
      && lk != 557640                // 'sizeof' FloatingConstant ';'
      && lk != 557655                // '~' FloatingConstant ';'
+     && lk != 557704                // Comment CharacterConstant ';'
      && lk != 557706                // '!' CharacterConstant ';'
      && lk != 557710                // '&' CharacterConstant ';'
      && lk != 557715                // '*' CharacterConstant ';'
@@ -14572,6 +15399,7 @@ function C(string, parsingEventHandler)
      && lk != 557722                // '--' CharacterConstant ';'
      && lk != 557768                // 'sizeof' CharacterConstant ';'
      && lk != 557783                // '~' CharacterConstant ';'
+     && lk != 557832                // Comment StringLiteral ';'
      && lk != 557834                // '!' StringLiteral ';'
      && lk != 557838                // '&' StringLiteral ';'
      && lk != 557843                // '*' StringLiteral ';'
@@ -14591,6 +15419,7 @@ function C(string, parsingEventHandler)
      && lk != 560388                // FloatingConstant '--' ';'
      && lk != 560389                // CharacterConstant '--' ';'
      && lk != 560390                // StringLiteral '--' ';'
+     && lk != 606472                // Comment Identifier '<<='
      && lk != 606474                // '!' Identifier '<<='
      && lk != 606478                // '&' Identifier '<<='
      && lk != 606483                // '*' Identifier '<<='
@@ -14600,6 +15429,7 @@ function C(string, parsingEventHandler)
      && lk != 606490                // '--' Identifier '<<='
      && lk != 606536                // 'sizeof' Identifier '<<='
      && lk != 606551                // '~' Identifier '<<='
+     && lk != 606600                // Comment IntegerConstant '<<='
      && lk != 606602                // '!' IntegerConstant '<<='
      && lk != 606606                // '&' IntegerConstant '<<='
      && lk != 606611                // '*' IntegerConstant '<<='
@@ -14609,6 +15439,7 @@ function C(string, parsingEventHandler)
      && lk != 606618                // '--' IntegerConstant '<<='
      && lk != 606664                // 'sizeof' IntegerConstant '<<='
      && lk != 606679                // '~' IntegerConstant '<<='
+     && lk != 606728                // Comment FloatingConstant '<<='
      && lk != 606730                // '!' FloatingConstant '<<='
      && lk != 606734                // '&' FloatingConstant '<<='
      && lk != 606739                // '*' FloatingConstant '<<='
@@ -14618,6 +15449,7 @@ function C(string, parsingEventHandler)
      && lk != 606746                // '--' FloatingConstant '<<='
      && lk != 606792                // 'sizeof' FloatingConstant '<<='
      && lk != 606807                // '~' FloatingConstant '<<='
+     && lk != 606856                // Comment CharacterConstant '<<='
      && lk != 606858                // '!' CharacterConstant '<<='
      && lk != 606862                // '&' CharacterConstant '<<='
      && lk != 606867                // '*' CharacterConstant '<<='
@@ -14627,6 +15459,7 @@ function C(string, parsingEventHandler)
      && lk != 606874                // '--' CharacterConstant '<<='
      && lk != 606920                // 'sizeof' CharacterConstant '<<='
      && lk != 606935                // '~' CharacterConstant '<<='
+     && lk != 606984                // Comment StringLiteral '<<='
      && lk != 606986                // '!' StringLiteral '<<='
      && lk != 606990                // '&' StringLiteral '<<='
      && lk != 606995                // '*' StringLiteral '<<='
@@ -14646,6 +15479,7 @@ function C(string, parsingEventHandler)
      && lk != 609540                // FloatingConstant '--' '<<='
      && lk != 609541                // CharacterConstant '--' '<<='
      && lk != 609542                // StringLiteral '--' '<<='
+     && lk != 639240                // Comment Identifier '='
      && lk != 639242                // '!' Identifier '='
      && lk != 639246                // '&' Identifier '='
      && lk != 639251                // '*' Identifier '='
@@ -14655,6 +15489,7 @@ function C(string, parsingEventHandler)
      && lk != 639258                // '--' Identifier '='
      && lk != 639304                // 'sizeof' Identifier '='
      && lk != 639319                // '~' Identifier '='
+     && lk != 639368                // Comment IntegerConstant '='
      && lk != 639370                // '!' IntegerConstant '='
      && lk != 639374                // '&' IntegerConstant '='
      && lk != 639379                // '*' IntegerConstant '='
@@ -14664,6 +15499,7 @@ function C(string, parsingEventHandler)
      && lk != 639386                // '--' IntegerConstant '='
      && lk != 639432                // 'sizeof' IntegerConstant '='
      && lk != 639447                // '~' IntegerConstant '='
+     && lk != 639496                // Comment FloatingConstant '='
      && lk != 639498                // '!' FloatingConstant '='
      && lk != 639502                // '&' FloatingConstant '='
      && lk != 639507                // '*' FloatingConstant '='
@@ -14673,6 +15509,7 @@ function C(string, parsingEventHandler)
      && lk != 639514                // '--' FloatingConstant '='
      && lk != 639560                // 'sizeof' FloatingConstant '='
      && lk != 639575                // '~' FloatingConstant '='
+     && lk != 639624                // Comment CharacterConstant '='
      && lk != 639626                // '!' CharacterConstant '='
      && lk != 639630                // '&' CharacterConstant '='
      && lk != 639635                // '*' CharacterConstant '='
@@ -14682,6 +15519,7 @@ function C(string, parsingEventHandler)
      && lk != 639642                // '--' CharacterConstant '='
      && lk != 639688                // 'sizeof' CharacterConstant '='
      && lk != 639703                // '~' CharacterConstant '='
+     && lk != 639752                // Comment StringLiteral '='
      && lk != 639754                // '!' StringLiteral '='
      && lk != 639758                // '&' StringLiteral '='
      && lk != 639763                // '*' StringLiteral '='
@@ -14701,6 +15539,7 @@ function C(string, parsingEventHandler)
      && lk != 642308                // FloatingConstant '--' '='
      && lk != 642309                // CharacterConstant '--' '='
      && lk != 642310                // StringLiteral '--' '='
+     && lk != 721160                // Comment Identifier '>>='
      && lk != 721162                // '!' Identifier '>>='
      && lk != 721166                // '&' Identifier '>>='
      && lk != 721171                // '*' Identifier '>>='
@@ -14710,6 +15549,7 @@ function C(string, parsingEventHandler)
      && lk != 721178                // '--' Identifier '>>='
      && lk != 721224                // 'sizeof' Identifier '>>='
      && lk != 721239                // '~' Identifier '>>='
+     && lk != 721288                // Comment IntegerConstant '>>='
      && lk != 721290                // '!' IntegerConstant '>>='
      && lk != 721294                // '&' IntegerConstant '>>='
      && lk != 721299                // '*' IntegerConstant '>>='
@@ -14719,6 +15559,7 @@ function C(string, parsingEventHandler)
      && lk != 721306                // '--' IntegerConstant '>>='
      && lk != 721352                // 'sizeof' IntegerConstant '>>='
      && lk != 721367                // '~' IntegerConstant '>>='
+     && lk != 721416                // Comment FloatingConstant '>>='
      && lk != 721418                // '!' FloatingConstant '>>='
      && lk != 721422                // '&' FloatingConstant '>>='
      && lk != 721427                // '*' FloatingConstant '>>='
@@ -14728,6 +15569,7 @@ function C(string, parsingEventHandler)
      && lk != 721434                // '--' FloatingConstant '>>='
      && lk != 721480                // 'sizeof' FloatingConstant '>>='
      && lk != 721495                // '~' FloatingConstant '>>='
+     && lk != 721544                // Comment CharacterConstant '>>='
      && lk != 721546                // '!' CharacterConstant '>>='
      && lk != 721550                // '&' CharacterConstant '>>='
      && lk != 721555                // '*' CharacterConstant '>>='
@@ -14737,6 +15579,7 @@ function C(string, parsingEventHandler)
      && lk != 721562                // '--' CharacterConstant '>>='
      && lk != 721608                // 'sizeof' CharacterConstant '>>='
      && lk != 721623                // '~' CharacterConstant '>>='
+     && lk != 721672                // Comment StringLiteral '>>='
      && lk != 721674                // '!' StringLiteral '>>='
      && lk != 721678                // '&' StringLiteral '>>='
      && lk != 721683                // '*' StringLiteral '>>='
@@ -14756,6 +15599,7 @@ function C(string, parsingEventHandler)
      && lk != 724228                // FloatingConstant '--' '>>='
      && lk != 724229                // CharacterConstant '--' '>>='
      && lk != 724230                // StringLiteral '--' '>>='
+     && lk != 737544                // Comment Identifier '?'
      && lk != 737546                // '!' Identifier '?'
      && lk != 737550                // '&' Identifier '?'
      && lk != 737555                // '*' Identifier '?'
@@ -14765,6 +15609,7 @@ function C(string, parsingEventHandler)
      && lk != 737562                // '--' Identifier '?'
      && lk != 737608                // 'sizeof' Identifier '?'
      && lk != 737623                // '~' Identifier '?'
+     && lk != 737672                // Comment IntegerConstant '?'
      && lk != 737674                // '!' IntegerConstant '?'
      && lk != 737678                // '&' IntegerConstant '?'
      && lk != 737683                // '*' IntegerConstant '?'
@@ -14774,6 +15619,7 @@ function C(string, parsingEventHandler)
      && lk != 737690                // '--' IntegerConstant '?'
      && lk != 737736                // 'sizeof' IntegerConstant '?'
      && lk != 737751                // '~' IntegerConstant '?'
+     && lk != 737800                // Comment FloatingConstant '?'
      && lk != 737802                // '!' FloatingConstant '?'
      && lk != 737806                // '&' FloatingConstant '?'
      && lk != 737811                // '*' FloatingConstant '?'
@@ -14783,6 +15629,7 @@ function C(string, parsingEventHandler)
      && lk != 737818                // '--' FloatingConstant '?'
      && lk != 737864                // 'sizeof' FloatingConstant '?'
      && lk != 737879                // '~' FloatingConstant '?'
+     && lk != 737928                // Comment CharacterConstant '?'
      && lk != 737930                // '!' CharacterConstant '?'
      && lk != 737934                // '&' CharacterConstant '?'
      && lk != 737939                // '*' CharacterConstant '?'
@@ -14792,6 +15639,7 @@ function C(string, parsingEventHandler)
      && lk != 737946                // '--' CharacterConstant '?'
      && lk != 737992                // 'sizeof' CharacterConstant '?'
      && lk != 738007                // '~' CharacterConstant '?'
+     && lk != 738056                // Comment StringLiteral '?'
      && lk != 738058                // '!' StringLiteral '?'
      && lk != 738062                // '&' StringLiteral '?'
      && lk != 738067                // '*' StringLiteral '?'
@@ -14811,6 +15659,7 @@ function C(string, parsingEventHandler)
      && lk != 740612                // FloatingConstant '--' '?'
      && lk != 740613                // CharacterConstant '--' '?'
      && lk != 740614                // StringLiteral '--' '?'
+     && lk != 770312                // Comment Identifier ']'
      && lk != 770314                // '!' Identifier ']'
      && lk != 770318                // '&' Identifier ']'
      && lk != 770323                // '*' Identifier ']'
@@ -14820,6 +15669,7 @@ function C(string, parsingEventHandler)
      && lk != 770330                // '--' Identifier ']'
      && lk != 770376                // 'sizeof' Identifier ']'
      && lk != 770391                // '~' Identifier ']'
+     && lk != 770440                // Comment IntegerConstant ']'
      && lk != 770442                // '!' IntegerConstant ']'
      && lk != 770446                // '&' IntegerConstant ']'
      && lk != 770451                // '*' IntegerConstant ']'
@@ -14829,6 +15679,7 @@ function C(string, parsingEventHandler)
      && lk != 770458                // '--' IntegerConstant ']'
      && lk != 770504                // 'sizeof' IntegerConstant ']'
      && lk != 770519                // '~' IntegerConstant ']'
+     && lk != 770568                // Comment FloatingConstant ']'
      && lk != 770570                // '!' FloatingConstant ']'
      && lk != 770574                // '&' FloatingConstant ']'
      && lk != 770579                // '*' FloatingConstant ']'
@@ -14838,6 +15689,7 @@ function C(string, parsingEventHandler)
      && lk != 770586                // '--' FloatingConstant ']'
      && lk != 770632                // 'sizeof' FloatingConstant ']'
      && lk != 770647                // '~' FloatingConstant ']'
+     && lk != 770696                // Comment CharacterConstant ']'
      && lk != 770698                // '!' CharacterConstant ']'
      && lk != 770702                // '&' CharacterConstant ']'
      && lk != 770707                // '*' CharacterConstant ']'
@@ -14847,6 +15699,7 @@ function C(string, parsingEventHandler)
      && lk != 770714                // '--' CharacterConstant ']'
      && lk != 770760                // 'sizeof' CharacterConstant ']'
      && lk != 770775                // '~' CharacterConstant ']'
+     && lk != 770824                // Comment StringLiteral ']'
      && lk != 770826                // '!' StringLiteral ']'
      && lk != 770830                // '&' StringLiteral ']'
      && lk != 770835                // '*' StringLiteral ']'
@@ -14866,6 +15719,7 @@ function C(string, parsingEventHandler)
      && lk != 773380                // FloatingConstant '--' ']'
      && lk != 773381                // CharacterConstant '--' ']'
      && lk != 773382                // StringLiteral '--' ']'
+     && lk != 803080                // Comment Identifier '^='
      && lk != 803082                // '!' Identifier '^='
      && lk != 803086                // '&' Identifier '^='
      && lk != 803091                // '*' Identifier '^='
@@ -14875,6 +15729,7 @@ function C(string, parsingEventHandler)
      && lk != 803098                // '--' Identifier '^='
      && lk != 803144                // 'sizeof' Identifier '^='
      && lk != 803159                // '~' Identifier '^='
+     && lk != 803208                // Comment IntegerConstant '^='
      && lk != 803210                // '!' IntegerConstant '^='
      && lk != 803214                // '&' IntegerConstant '^='
      && lk != 803219                // '*' IntegerConstant '^='
@@ -14884,6 +15739,7 @@ function C(string, parsingEventHandler)
      && lk != 803226                // '--' IntegerConstant '^='
      && lk != 803272                // 'sizeof' IntegerConstant '^='
      && lk != 803287                // '~' IntegerConstant '^='
+     && lk != 803336                // Comment FloatingConstant '^='
      && lk != 803338                // '!' FloatingConstant '^='
      && lk != 803342                // '&' FloatingConstant '^='
      && lk != 803347                // '*' FloatingConstant '^='
@@ -14893,6 +15749,7 @@ function C(string, parsingEventHandler)
      && lk != 803354                // '--' FloatingConstant '^='
      && lk != 803400                // 'sizeof' FloatingConstant '^='
      && lk != 803415                // '~' FloatingConstant '^='
+     && lk != 803464                // Comment CharacterConstant '^='
      && lk != 803466                // '!' CharacterConstant '^='
      && lk != 803470                // '&' CharacterConstant '^='
      && lk != 803475                // '*' CharacterConstant '^='
@@ -14902,6 +15759,7 @@ function C(string, parsingEventHandler)
      && lk != 803482                // '--' CharacterConstant '^='
      && lk != 803528                // 'sizeof' CharacterConstant '^='
      && lk != 803543                // '~' CharacterConstant '^='
+     && lk != 803592                // Comment StringLiteral '^='
      && lk != 803594                // '!' StringLiteral '^='
      && lk != 803598                // '&' StringLiteral '^='
      && lk != 803603                // '*' StringLiteral '^='
@@ -14921,6 +15779,7 @@ function C(string, parsingEventHandler)
      && lk != 806148                // FloatingConstant '--' '^='
      && lk != 806149                // CharacterConstant '--' '^='
      && lk != 806150                // StringLiteral '--' '^='
+     && lk != 1376520               // Comment Identifier '|='
      && lk != 1376522               // '!' Identifier '|='
      && lk != 1376526               // '&' Identifier '|='
      && lk != 1376531               // '*' Identifier '|='
@@ -14930,6 +15789,7 @@ function C(string, parsingEventHandler)
      && lk != 1376538               // '--' Identifier '|='
      && lk != 1376584               // 'sizeof' Identifier '|='
      && lk != 1376599               // '~' Identifier '|='
+     && lk != 1376648               // Comment IntegerConstant '|='
      && lk != 1376650               // '!' IntegerConstant '|='
      && lk != 1376654               // '&' IntegerConstant '|='
      && lk != 1376659               // '*' IntegerConstant '|='
@@ -14939,6 +15799,7 @@ function C(string, parsingEventHandler)
      && lk != 1376666               // '--' IntegerConstant '|='
      && lk != 1376712               // 'sizeof' IntegerConstant '|='
      && lk != 1376727               // '~' IntegerConstant '|='
+     && lk != 1376776               // Comment FloatingConstant '|='
      && lk != 1376778               // '!' FloatingConstant '|='
      && lk != 1376782               // '&' FloatingConstant '|='
      && lk != 1376787               // '*' FloatingConstant '|='
@@ -14948,6 +15809,7 @@ function C(string, parsingEventHandler)
      && lk != 1376794               // '--' FloatingConstant '|='
      && lk != 1376840               // 'sizeof' FloatingConstant '|='
      && lk != 1376855               // '~' FloatingConstant '|='
+     && lk != 1376904               // Comment CharacterConstant '|='
      && lk != 1376906               // '!' CharacterConstant '|='
      && lk != 1376910               // '&' CharacterConstant '|='
      && lk != 1376915               // '*' CharacterConstant '|='
@@ -14957,6 +15819,7 @@ function C(string, parsingEventHandler)
      && lk != 1376922               // '--' CharacterConstant '|='
      && lk != 1376968               // 'sizeof' CharacterConstant '|='
      && lk != 1376983               // '~' CharacterConstant '|='
+     && lk != 1377032               // Comment StringLiteral '|='
      && lk != 1377034               // '!' StringLiteral '|='
      && lk != 1377038               // '&' StringLiteral '|='
      && lk != 1377043               // '*' StringLiteral '|='
@@ -14976,6 +15839,7 @@ function C(string, parsingEventHandler)
      && lk != 1379588               // FloatingConstant '--' '|='
      && lk != 1379589               // CharacterConstant '--' '|='
      && lk != 1379590               // StringLiteral '--' '|='
+     && lk != 1409288               // Comment Identifier '}'
      && lk != 1409290               // '!' Identifier '}'
      && lk != 1409294               // '&' Identifier '}'
      && lk != 1409299               // '*' Identifier '}'
@@ -14985,6 +15849,7 @@ function C(string, parsingEventHandler)
      && lk != 1409306               // '--' Identifier '}'
      && lk != 1409352               // 'sizeof' Identifier '}'
      && lk != 1409367               // '~' Identifier '}'
+     && lk != 1409416               // Comment IntegerConstant '}'
      && lk != 1409418               // '!' IntegerConstant '}'
      && lk != 1409422               // '&' IntegerConstant '}'
      && lk != 1409427               // '*' IntegerConstant '}'
@@ -14994,6 +15859,7 @@ function C(string, parsingEventHandler)
      && lk != 1409434               // '--' IntegerConstant '}'
      && lk != 1409480               // 'sizeof' IntegerConstant '}'
      && lk != 1409495               // '~' IntegerConstant '}'
+     && lk != 1409544               // Comment FloatingConstant '}'
      && lk != 1409546               // '!' FloatingConstant '}'
      && lk != 1409550               // '&' FloatingConstant '}'
      && lk != 1409555               // '*' FloatingConstant '}'
@@ -15003,6 +15869,7 @@ function C(string, parsingEventHandler)
      && lk != 1409562               // '--' FloatingConstant '}'
      && lk != 1409608               // 'sizeof' FloatingConstant '}'
      && lk != 1409623               // '~' FloatingConstant '}'
+     && lk != 1409672               // Comment CharacterConstant '}'
      && lk != 1409674               // '!' CharacterConstant '}'
      && lk != 1409678               // '&' CharacterConstant '}'
      && lk != 1409683               // '*' CharacterConstant '}'
@@ -15012,6 +15879,7 @@ function C(string, parsingEventHandler)
      && lk != 1409690               // '--' CharacterConstant '}'
      && lk != 1409736               // 'sizeof' CharacterConstant '}'
      && lk != 1409751               // '~' CharacterConstant '}'
+     && lk != 1409800               // Comment StringLiteral '}'
      && lk != 1409802               // '!' StringLiteral '}'
      && lk != 1409806               // '&' StringLiteral '}'
      && lk != 1409811               // '*' StringLiteral '}'
@@ -15032,7 +15900,7 @@ function C(string, parsingEventHandler)
      && lk != 1412357               // CharacterConstant '--' '}'
      && lk != 1412358)              // StringLiteral '--' '}'
     {
-      lk = memoized(14, e0);
+      lk = memoized(15, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -15043,14 +15911,14 @@ function C(string, parsingEventHandler)
         {
           try_logicalOrExpression();
           consumeT(45);             // '?'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_expression();
           consumeT(33);             // ':'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_conditionalExpression();
           lk = -1;
         }
@@ -15062,7 +15930,7 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(14, e0, lk);
+        memoize(15, e0, lk);
       }
     }
     switch (lk)
@@ -15073,6 +15941,7 @@ function C(string, parsingEventHandler)
     case 5764:                      // FloatingConstant '?'
     case 5765:                      // CharacterConstant '?'
     case 5766:                      // StringLiteral '?'
+    case 737544:                    // Comment Identifier '?'
     case 737546:                    // '!' Identifier '?'
     case 737550:                    // '&' Identifier '?'
     case 737555:                    // '*' Identifier '?'
@@ -15082,6 +15951,7 @@ function C(string, parsingEventHandler)
     case 737562:                    // '--' Identifier '?'
     case 737608:                    // 'sizeof' Identifier '?'
     case 737623:                    // '~' Identifier '?'
+    case 737672:                    // Comment IntegerConstant '?'
     case 737674:                    // '!' IntegerConstant '?'
     case 737678:                    // '&' IntegerConstant '?'
     case 737683:                    // '*' IntegerConstant '?'
@@ -15091,6 +15961,7 @@ function C(string, parsingEventHandler)
     case 737690:                    // '--' IntegerConstant '?'
     case 737736:                    // 'sizeof' IntegerConstant '?'
     case 737751:                    // '~' IntegerConstant '?'
+    case 737800:                    // Comment FloatingConstant '?'
     case 737802:                    // '!' FloatingConstant '?'
     case 737806:                    // '&' FloatingConstant '?'
     case 737811:                    // '*' FloatingConstant '?'
@@ -15100,6 +15971,7 @@ function C(string, parsingEventHandler)
     case 737818:                    // '--' FloatingConstant '?'
     case 737864:                    // 'sizeof' FloatingConstant '?'
     case 737879:                    // '~' FloatingConstant '?'
+    case 737928:                    // Comment CharacterConstant '?'
     case 737930:                    // '!' CharacterConstant '?'
     case 737934:                    // '&' CharacterConstant '?'
     case 737939:                    // '*' CharacterConstant '?'
@@ -15109,6 +15981,7 @@ function C(string, parsingEventHandler)
     case 737946:                    // '--' CharacterConstant '?'
     case 737992:                    // 'sizeof' CharacterConstant '?'
     case 738007:                    // '~' CharacterConstant '?'
+    case 738056:                    // Comment StringLiteral '?'
     case 738058:                    // '!' StringLiteral '?'
     case 738062:                    // '&' StringLiteral '?'
     case 738067:                    // '*' StringLiteral '?'
@@ -15130,15 +16003,15 @@ function C(string, parsingEventHandler)
     case 740614:                    // StringLiteral '--' '?'
       parse_logicalOrExpression();
       consume(45);                  // '?'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(33);                  // ':'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_conditionalExpression();
       break;
@@ -15153,58 +16026,45 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       case 2193:                    // '(' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 6929:                    // '(' 'const'
       case 10257:                   // '(' 'volatile'
-        lookahead3W(39);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+        lookahead3W(38);            // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
         break;
       case 7697:                    // '(' 'enum'
       case 9489:                    // '(' 'struct'
       case 9873:                    // '(' 'union'
-        lookahead3W(12);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '{'
+        lookahead3W(12);            // Identifier | WhiteSpace | '{'
         break;
       case 401:                     // '(' IntegerConstant
       case 529:                     // '(' FloatingConstant
       case 657:                     // '(' CharacterConstant
       case 785:                     // '(' StringLiteral
-        lookahead3W(72);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | '|' | '|=' | '||'
-        break;
-      case 1297:                    // '(' '!'
-      case 1809:                    // '(' '&'
-      case 2449:                    // '(' '*'
-      case 2705:                    // '(' '+'
-      case 2833:                    // '(' '++'
-      case 3217:                    // '(' '-'
-      case 3345:                    // '(' '--'
-      case 9233:                    // '(' 'sizeof'
-      case 11153:                   // '(' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(73);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | '|' | '|=' | '||'
         break;
       case 6801:                    // '(' 'char'
       case 7441:                    // '(' 'double'
@@ -15215,19 +16075,38 @@ function C(string, parsingEventHandler)
       case 9105:                    // '(' 'signed'
       case 10001:                   // '(' 'unsigned'
       case 10129:                   // '(' 'void'
-        lookahead3W(40);            // WhiteSpace | Comment | PreprocessingDirective | '(' | ')' | '*' | '[' | 'char' |
-                                    // 'const' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' |
-                                    // 'void' | 'volatile'
+        lookahead3W(39);            // WhiteSpace | '(' | ')' | '*' | '[' | 'char' | 'const' | 'double' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' | 'volatile'
+        break;
+      case 1041:                    // '(' Comment
+      case 1297:                    // '(' '!'
+      case 1809:                    // '(' '&'
+      case 2449:                    // '(' '*'
+      case 2705:                    // '(' '+'
+      case 2833:                    // '(' '++'
+      case 3217:                    // '(' '-'
+      case 3345:                    // '(' '--'
+      case 9233:                    // '(' 'sizeof'
+      case 11153:                   // '(' '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
+    case 8:                         // Comment
     case 22:                        // '++'
     case 26:                        // '--'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
+      case 264:                     // Comment Identifier
+      case 392:                     // Comment IntegerConstant
+      case 520:                     // Comment FloatingConstant
+      case 648:                     // Comment CharacterConstant
+      case 776:                     // Comment StringLiteral
       case 278:                     // '++' Identifier
       case 406:                     // '++' IntegerConstant
       case 534:                     // '++' FloatingConstant
@@ -15238,12 +16117,23 @@ function C(string, parsingEventHandler)
       case 538:                     // '--' FloatingConstant
       case 666:                     // '--' CharacterConstant
       case 794:                     // '--' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1032:                    // Comment Comment
+      case 1288:                    // Comment '!'
+      case 1800:                    // Comment '&'
+      case 2184:                    // Comment '('
+      case 2440:                    // Comment '*'
+      case 2696:                    // Comment '+'
+      case 2824:                    // Comment '++'
+      case 3208:                    // Comment '-'
+      case 3336:                    // Comment '--'
+      case 9224:                    // Comment 'sizeof'
+      case 11144:                   // Comment '~'
+      case 1046:                    // '++' Comment
       case 1302:                    // '++' '!'
       case 1814:                    // '++' '&'
       case 2198:                    // '++' '('
@@ -15254,6 +16144,7 @@ function C(string, parsingEventHandler)
       case 3350:                    // '++' '--'
       case 9238:                    // '++' 'sizeof'
       case 11158:                   // '++' '~'
+      case 1050:                    // '--' Comment
       case 1306:                    // '--' '!'
       case 1818:                    // '--' '&'
       case 2202:                    // '--' '('
@@ -15264,9 +16155,9 @@ function C(string, parsingEventHandler)
       case 3354:                    // '--' '--'
       case 9242:                    // '--' 'sizeof'
       case 11162:                   // '--' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -15275,11 +16166,10 @@ function C(string, parsingEventHandler)
     case 4:                         // FloatingConstant
     case 5:                         // CharacterConstant
     case 6:                         // StringLiteral
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
@@ -15287,9 +16177,9 @@ function C(string, parsingEventHandler)
       case 2180:                    // FloatingConstant '('
       case 2181:                    // CharacterConstant '('
       case 2182:                    // StringLiteral '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
@@ -15301,11 +16191,10 @@ function C(string, parsingEventHandler)
       case 3333:                    // CharacterConstant '--'
       case 2822:                    // StringLiteral '++'
       case 3334:                    // StringLiteral '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
@@ -15317,7 +16206,7 @@ function C(string, parsingEventHandler)
       case 3717:                    // CharacterConstant '.'
       case 3590:                    // StringLiteral '->'
       case 3718:                    // StringLiteral '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -15414,9 +16303,9 @@ function C(string, parsingEventHandler)
       case 6150:                    // StringLiteral '^'
       case 10630:                   // StringLiteral '|'
       case 10886:                   // StringLiteral '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -15427,9 +16316,9 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 72:                        // 'sizeof'
     case 87:                        // '~'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2186:                    // '!' '('
@@ -15439,11 +16328,11 @@ function C(string, parsingEventHandler)
       case 2201:                    // '-' '('
       case 2248:                    // 'sizeof' '('
       case 2263:                    // '~' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       case 266:                     // '!' Identifier
       case 394:                     // '!' IntegerConstant
@@ -15480,12 +16369,12 @@ function C(string, parsingEventHandler)
       case 599:                     // '~' FloatingConstant
       case 727:                     // '~' CharacterConstant
       case 855:                     // '~' StringLiteral
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
+      case 1034:                    // '!' Comment
       case 1290:                    // '!' '!'
       case 1802:                    // '!' '&'
       case 2442:                    // '!' '*'
@@ -15495,6 +16384,7 @@ function C(string, parsingEventHandler)
       case 3338:                    // '!' '--'
       case 9226:                    // '!' 'sizeof'
       case 11146:                   // '!' '~'
+      case 1038:                    // '&' Comment
       case 1294:                    // '&' '!'
       case 1806:                    // '&' '&'
       case 2446:                    // '&' '*'
@@ -15504,6 +16394,7 @@ function C(string, parsingEventHandler)
       case 3342:                    // '&' '--'
       case 9230:                    // '&' 'sizeof'
       case 11150:                   // '&' '~'
+      case 1043:                    // '*' Comment
       case 1299:                    // '*' '!'
       case 1811:                    // '*' '&'
       case 2451:                    // '*' '*'
@@ -15513,6 +16404,7 @@ function C(string, parsingEventHandler)
       case 3347:                    // '*' '--'
       case 9235:                    // '*' 'sizeof'
       case 11155:                   // '*' '~'
+      case 1045:                    // '+' Comment
       case 1301:                    // '+' '!'
       case 1813:                    // '+' '&'
       case 2453:                    // '+' '*'
@@ -15522,6 +16414,7 @@ function C(string, parsingEventHandler)
       case 3349:                    // '+' '--'
       case 9237:                    // '+' 'sizeof'
       case 11157:                   // '+' '~'
+      case 1049:                    // '-' Comment
       case 1305:                    // '-' '!'
       case 1817:                    // '-' '&'
       case 2457:                    // '-' '*'
@@ -15531,6 +16424,7 @@ function C(string, parsingEventHandler)
       case 3353:                    // '-' '--'
       case 9241:                    // '-' 'sizeof'
       case 11161:                   // '-' '~'
+      case 1096:                    // 'sizeof' Comment
       case 1352:                    // 'sizeof' '!'
       case 1864:                    // 'sizeof' '&'
       case 2504:                    // 'sizeof' '*'
@@ -15540,6 +16434,7 @@ function C(string, parsingEventHandler)
       case 3400:                    // 'sizeof' '--'
       case 9288:                    // 'sizeof' 'sizeof'
       case 11208:                   // 'sizeof' '~'
+      case 1111:                    // '~' Comment
       case 1367:                    // '~' '!'
       case 1879:                    // '~' '&'
       case 2519:                    // '~' '*'
@@ -15549,9 +16444,9 @@ function C(string, parsingEventHandler)
       case 3415:                    // '~' '--'
       case 9303:                    // '~' 'sizeof'
       case 11223:                   // '~' '~'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -15648,6 +16543,7 @@ function C(string, parsingEventHandler)
      && lk != 11012                 // FloatingConstant '}'
      && lk != 11013                 // CharacterConstant '}'
      && lk != 11014                 // StringLiteral '}'
+     && lk != 213256                // Comment Identifier '%='
      && lk != 213258                // '!' Identifier '%='
      && lk != 213262                // '&' Identifier '%='
      && lk != 213267                // '*' Identifier '%='
@@ -15657,6 +16553,7 @@ function C(string, parsingEventHandler)
      && lk != 213274                // '--' Identifier '%='
      && lk != 213320                // 'sizeof' Identifier '%='
      && lk != 213335                // '~' Identifier '%='
+     && lk != 213384                // Comment IntegerConstant '%='
      && lk != 213386                // '!' IntegerConstant '%='
      && lk != 213390                // '&' IntegerConstant '%='
      && lk != 213395                // '*' IntegerConstant '%='
@@ -15666,6 +16563,7 @@ function C(string, parsingEventHandler)
      && lk != 213402                // '--' IntegerConstant '%='
      && lk != 213448                // 'sizeof' IntegerConstant '%='
      && lk != 213463                // '~' IntegerConstant '%='
+     && lk != 213512                // Comment FloatingConstant '%='
      && lk != 213514                // '!' FloatingConstant '%='
      && lk != 213518                // '&' FloatingConstant '%='
      && lk != 213523                // '*' FloatingConstant '%='
@@ -15675,6 +16573,7 @@ function C(string, parsingEventHandler)
      && lk != 213530                // '--' FloatingConstant '%='
      && lk != 213576                // 'sizeof' FloatingConstant '%='
      && lk != 213591                // '~' FloatingConstant '%='
+     && lk != 213640                // Comment CharacterConstant '%='
      && lk != 213642                // '!' CharacterConstant '%='
      && lk != 213646                // '&' CharacterConstant '%='
      && lk != 213651                // '*' CharacterConstant '%='
@@ -15684,6 +16583,7 @@ function C(string, parsingEventHandler)
      && lk != 213658                // '--' CharacterConstant '%='
      && lk != 213704                // 'sizeof' CharacterConstant '%='
      && lk != 213719                // '~' CharacterConstant '%='
+     && lk != 213768                // Comment StringLiteral '%='
      && lk != 213770                // '!' StringLiteral '%='
      && lk != 213774                // '&' StringLiteral '%='
      && lk != 213779                // '*' StringLiteral '%='
@@ -15703,6 +16603,7 @@ function C(string, parsingEventHandler)
      && lk != 216324                // FloatingConstant '--' '%='
      && lk != 216325                // CharacterConstant '--' '%='
      && lk != 216326                // StringLiteral '--' '%='
+     && lk != 262408                // Comment Identifier '&='
      && lk != 262410                // '!' Identifier '&='
      && lk != 262414                // '&' Identifier '&='
      && lk != 262419                // '*' Identifier '&='
@@ -15712,6 +16613,7 @@ function C(string, parsingEventHandler)
      && lk != 262426                // '--' Identifier '&='
      && lk != 262472                // 'sizeof' Identifier '&='
      && lk != 262487                // '~' Identifier '&='
+     && lk != 262536                // Comment IntegerConstant '&='
      && lk != 262538                // '!' IntegerConstant '&='
      && lk != 262542                // '&' IntegerConstant '&='
      && lk != 262547                // '*' IntegerConstant '&='
@@ -15721,6 +16623,7 @@ function C(string, parsingEventHandler)
      && lk != 262554                // '--' IntegerConstant '&='
      && lk != 262600                // 'sizeof' IntegerConstant '&='
      && lk != 262615                // '~' IntegerConstant '&='
+     && lk != 262664                // Comment FloatingConstant '&='
      && lk != 262666                // '!' FloatingConstant '&='
      && lk != 262670                // '&' FloatingConstant '&='
      && lk != 262675                // '*' FloatingConstant '&='
@@ -15730,6 +16633,7 @@ function C(string, parsingEventHandler)
      && lk != 262682                // '--' FloatingConstant '&='
      && lk != 262728                // 'sizeof' FloatingConstant '&='
      && lk != 262743                // '~' FloatingConstant '&='
+     && lk != 262792                // Comment CharacterConstant '&='
      && lk != 262794                // '!' CharacterConstant '&='
      && lk != 262798                // '&' CharacterConstant '&='
      && lk != 262803                // '*' CharacterConstant '&='
@@ -15739,6 +16643,7 @@ function C(string, parsingEventHandler)
      && lk != 262810                // '--' CharacterConstant '&='
      && lk != 262856                // 'sizeof' CharacterConstant '&='
      && lk != 262871                // '~' CharacterConstant '&='
+     && lk != 262920                // Comment StringLiteral '&='
      && lk != 262922                // '!' StringLiteral '&='
      && lk != 262926                // '&' StringLiteral '&='
      && lk != 262931                // '*' StringLiteral '&='
@@ -15758,6 +16663,7 @@ function C(string, parsingEventHandler)
      && lk != 265476                // FloatingConstant '--' '&='
      && lk != 265477                // CharacterConstant '--' '&='
      && lk != 265478                // StringLiteral '--' '&='
+     && lk != 295176                // Comment Identifier ')'
      && lk != 295178                // '!' Identifier ')'
      && lk != 295182                // '&' Identifier ')'
      && lk != 295187                // '*' Identifier ')'
@@ -15767,6 +16673,7 @@ function C(string, parsingEventHandler)
      && lk != 295194                // '--' Identifier ')'
      && lk != 295240                // 'sizeof' Identifier ')'
      && lk != 295255                // '~' Identifier ')'
+     && lk != 295304                // Comment IntegerConstant ')'
      && lk != 295306                // '!' IntegerConstant ')'
      && lk != 295310                // '&' IntegerConstant ')'
      && lk != 295315                // '*' IntegerConstant ')'
@@ -15776,6 +16683,7 @@ function C(string, parsingEventHandler)
      && lk != 295322                // '--' IntegerConstant ')'
      && lk != 295368                // 'sizeof' IntegerConstant ')'
      && lk != 295383                // '~' IntegerConstant ')'
+     && lk != 295432                // Comment FloatingConstant ')'
      && lk != 295434                // '!' FloatingConstant ')'
      && lk != 295438                // '&' FloatingConstant ')'
      && lk != 295443                // '*' FloatingConstant ')'
@@ -15785,6 +16693,7 @@ function C(string, parsingEventHandler)
      && lk != 295450                // '--' FloatingConstant ')'
      && lk != 295496                // 'sizeof' FloatingConstant ')'
      && lk != 295511                // '~' FloatingConstant ')'
+     && lk != 295560                // Comment CharacterConstant ')'
      && lk != 295562                // '!' CharacterConstant ')'
      && lk != 295566                // '&' CharacterConstant ')'
      && lk != 295571                // '*' CharacterConstant ')'
@@ -15794,6 +16703,7 @@ function C(string, parsingEventHandler)
      && lk != 295578                // '--' CharacterConstant ')'
      && lk != 295624                // 'sizeof' CharacterConstant ')'
      && lk != 295639                // '~' CharacterConstant ')'
+     && lk != 295688                // Comment StringLiteral ')'
      && lk != 295690                // '!' StringLiteral ')'
      && lk != 295694                // '&' StringLiteral ')'
      && lk != 295699                // '*' StringLiteral ')'
@@ -15813,6 +16723,7 @@ function C(string, parsingEventHandler)
      && lk != 298244                // FloatingConstant '--' ')'
      && lk != 298245                // CharacterConstant '--' ')'
      && lk != 298246                // StringLiteral '--' ')'
+     && lk != 327944                // Comment Identifier '*='
      && lk != 327946                // '!' Identifier '*='
      && lk != 327950                // '&' Identifier '*='
      && lk != 327955                // '*' Identifier '*='
@@ -15822,6 +16733,7 @@ function C(string, parsingEventHandler)
      && lk != 327962                // '--' Identifier '*='
      && lk != 328008                // 'sizeof' Identifier '*='
      && lk != 328023                // '~' Identifier '*='
+     && lk != 328072                // Comment IntegerConstant '*='
      && lk != 328074                // '!' IntegerConstant '*='
      && lk != 328078                // '&' IntegerConstant '*='
      && lk != 328083                // '*' IntegerConstant '*='
@@ -15831,6 +16743,7 @@ function C(string, parsingEventHandler)
      && lk != 328090                // '--' IntegerConstant '*='
      && lk != 328136                // 'sizeof' IntegerConstant '*='
      && lk != 328151                // '~' IntegerConstant '*='
+     && lk != 328200                // Comment FloatingConstant '*='
      && lk != 328202                // '!' FloatingConstant '*='
      && lk != 328206                // '&' FloatingConstant '*='
      && lk != 328211                // '*' FloatingConstant '*='
@@ -15840,6 +16753,7 @@ function C(string, parsingEventHandler)
      && lk != 328218                // '--' FloatingConstant '*='
      && lk != 328264                // 'sizeof' FloatingConstant '*='
      && lk != 328279                // '~' FloatingConstant '*='
+     && lk != 328328                // Comment CharacterConstant '*='
      && lk != 328330                // '!' CharacterConstant '*='
      && lk != 328334                // '&' CharacterConstant '*='
      && lk != 328339                // '*' CharacterConstant '*='
@@ -15849,6 +16763,7 @@ function C(string, parsingEventHandler)
      && lk != 328346                // '--' CharacterConstant '*='
      && lk != 328392                // 'sizeof' CharacterConstant '*='
      && lk != 328407                // '~' CharacterConstant '*='
+     && lk != 328456                // Comment StringLiteral '*='
      && lk != 328458                // '!' StringLiteral '*='
      && lk != 328462                // '&' StringLiteral '*='
      && lk != 328467                // '*' StringLiteral '*='
@@ -15868,6 +16783,7 @@ function C(string, parsingEventHandler)
      && lk != 331012                // FloatingConstant '--' '*='
      && lk != 331013                // CharacterConstant '--' '*='
      && lk != 331014                // StringLiteral '--' '*='
+     && lk != 377096                // Comment Identifier '+='
      && lk != 377098                // '!' Identifier '+='
      && lk != 377102                // '&' Identifier '+='
      && lk != 377107                // '*' Identifier '+='
@@ -15877,6 +16793,7 @@ function C(string, parsingEventHandler)
      && lk != 377114                // '--' Identifier '+='
      && lk != 377160                // 'sizeof' Identifier '+='
      && lk != 377175                // '~' Identifier '+='
+     && lk != 377224                // Comment IntegerConstant '+='
      && lk != 377226                // '!' IntegerConstant '+='
      && lk != 377230                // '&' IntegerConstant '+='
      && lk != 377235                // '*' IntegerConstant '+='
@@ -15886,6 +16803,7 @@ function C(string, parsingEventHandler)
      && lk != 377242                // '--' IntegerConstant '+='
      && lk != 377288                // 'sizeof' IntegerConstant '+='
      && lk != 377303                // '~' IntegerConstant '+='
+     && lk != 377352                // Comment FloatingConstant '+='
      && lk != 377354                // '!' FloatingConstant '+='
      && lk != 377358                // '&' FloatingConstant '+='
      && lk != 377363                // '*' FloatingConstant '+='
@@ -15895,6 +16813,7 @@ function C(string, parsingEventHandler)
      && lk != 377370                // '--' FloatingConstant '+='
      && lk != 377416                // 'sizeof' FloatingConstant '+='
      && lk != 377431                // '~' FloatingConstant '+='
+     && lk != 377480                // Comment CharacterConstant '+='
      && lk != 377482                // '!' CharacterConstant '+='
      && lk != 377486                // '&' CharacterConstant '+='
      && lk != 377491                // '*' CharacterConstant '+='
@@ -15904,6 +16823,7 @@ function C(string, parsingEventHandler)
      && lk != 377498                // '--' CharacterConstant '+='
      && lk != 377544                // 'sizeof' CharacterConstant '+='
      && lk != 377559                // '~' CharacterConstant '+='
+     && lk != 377608                // Comment StringLiteral '+='
      && lk != 377610                // '!' StringLiteral '+='
      && lk != 377614                // '&' StringLiteral '+='
      && lk != 377619                // '*' StringLiteral '+='
@@ -15923,6 +16843,7 @@ function C(string, parsingEventHandler)
      && lk != 380164                // FloatingConstant '--' '+='
      && lk != 380165                // CharacterConstant '--' '+='
      && lk != 380166                // StringLiteral '--' '+='
+     && lk != 393480                // Comment Identifier ','
      && lk != 393482                // '!' Identifier ','
      && lk != 393486                // '&' Identifier ','
      && lk != 393491                // '*' Identifier ','
@@ -15932,6 +16853,7 @@ function C(string, parsingEventHandler)
      && lk != 393498                // '--' Identifier ','
      && lk != 393544                // 'sizeof' Identifier ','
      && lk != 393559                // '~' Identifier ','
+     && lk != 393608                // Comment IntegerConstant ','
      && lk != 393610                // '!' IntegerConstant ','
      && lk != 393614                // '&' IntegerConstant ','
      && lk != 393619                // '*' IntegerConstant ','
@@ -15941,6 +16863,7 @@ function C(string, parsingEventHandler)
      && lk != 393626                // '--' IntegerConstant ','
      && lk != 393672                // 'sizeof' IntegerConstant ','
      && lk != 393687                // '~' IntegerConstant ','
+     && lk != 393736                // Comment FloatingConstant ','
      && lk != 393738                // '!' FloatingConstant ','
      && lk != 393742                // '&' FloatingConstant ','
      && lk != 393747                // '*' FloatingConstant ','
@@ -15950,6 +16873,7 @@ function C(string, parsingEventHandler)
      && lk != 393754                // '--' FloatingConstant ','
      && lk != 393800                // 'sizeof' FloatingConstant ','
      && lk != 393815                // '~' FloatingConstant ','
+     && lk != 393864                // Comment CharacterConstant ','
      && lk != 393866                // '!' CharacterConstant ','
      && lk != 393870                // '&' CharacterConstant ','
      && lk != 393875                // '*' CharacterConstant ','
@@ -15959,6 +16883,7 @@ function C(string, parsingEventHandler)
      && lk != 393882                // '--' CharacterConstant ','
      && lk != 393928                // 'sizeof' CharacterConstant ','
      && lk != 393943                // '~' CharacterConstant ','
+     && lk != 393992                // Comment StringLiteral ','
      && lk != 393994                // '!' StringLiteral ','
      && lk != 393998                // '&' StringLiteral ','
      && lk != 394003                // '*' StringLiteral ','
@@ -15978,6 +16903,7 @@ function C(string, parsingEventHandler)
      && lk != 396548                // FloatingConstant '--' ','
      && lk != 396549                // CharacterConstant '--' ','
      && lk != 396550                // StringLiteral '--' ','
+     && lk != 442632                // Comment Identifier '-='
      && lk != 442634                // '!' Identifier '-='
      && lk != 442638                // '&' Identifier '-='
      && lk != 442643                // '*' Identifier '-='
@@ -15987,6 +16913,7 @@ function C(string, parsingEventHandler)
      && lk != 442650                // '--' Identifier '-='
      && lk != 442696                // 'sizeof' Identifier '-='
      && lk != 442711                // '~' Identifier '-='
+     && lk != 442760                // Comment IntegerConstant '-='
      && lk != 442762                // '!' IntegerConstant '-='
      && lk != 442766                // '&' IntegerConstant '-='
      && lk != 442771                // '*' IntegerConstant '-='
@@ -15996,6 +16923,7 @@ function C(string, parsingEventHandler)
      && lk != 442778                // '--' IntegerConstant '-='
      && lk != 442824                // 'sizeof' IntegerConstant '-='
      && lk != 442839                // '~' IntegerConstant '-='
+     && lk != 442888                // Comment FloatingConstant '-='
      && lk != 442890                // '!' FloatingConstant '-='
      && lk != 442894                // '&' FloatingConstant '-='
      && lk != 442899                // '*' FloatingConstant '-='
@@ -16005,6 +16933,7 @@ function C(string, parsingEventHandler)
      && lk != 442906                // '--' FloatingConstant '-='
      && lk != 442952                // 'sizeof' FloatingConstant '-='
      && lk != 442967                // '~' FloatingConstant '-='
+     && lk != 443016                // Comment CharacterConstant '-='
      && lk != 443018                // '!' CharacterConstant '-='
      && lk != 443022                // '&' CharacterConstant '-='
      && lk != 443027                // '*' CharacterConstant '-='
@@ -16014,6 +16943,7 @@ function C(string, parsingEventHandler)
      && lk != 443034                // '--' CharacterConstant '-='
      && lk != 443080                // 'sizeof' CharacterConstant '-='
      && lk != 443095                // '~' CharacterConstant '-='
+     && lk != 443144                // Comment StringLiteral '-='
      && lk != 443146                // '!' StringLiteral '-='
      && lk != 443150                // '&' StringLiteral '-='
      && lk != 443155                // '*' StringLiteral '-='
@@ -16033,6 +16963,7 @@ function C(string, parsingEventHandler)
      && lk != 445700                // FloatingConstant '--' '-='
      && lk != 445701                // CharacterConstant '--' '-='
      && lk != 445702                // StringLiteral '--' '-='
+     && lk != 524552                // Comment Identifier '/='
      && lk != 524554                // '!' Identifier '/='
      && lk != 524558                // '&' Identifier '/='
      && lk != 524563                // '*' Identifier '/='
@@ -16042,6 +16973,7 @@ function C(string, parsingEventHandler)
      && lk != 524570                // '--' Identifier '/='
      && lk != 524616                // 'sizeof' Identifier '/='
      && lk != 524631                // '~' Identifier '/='
+     && lk != 524680                // Comment IntegerConstant '/='
      && lk != 524682                // '!' IntegerConstant '/='
      && lk != 524686                // '&' IntegerConstant '/='
      && lk != 524691                // '*' IntegerConstant '/='
@@ -16051,6 +16983,7 @@ function C(string, parsingEventHandler)
      && lk != 524698                // '--' IntegerConstant '/='
      && lk != 524744                // 'sizeof' IntegerConstant '/='
      && lk != 524759                // '~' IntegerConstant '/='
+     && lk != 524808                // Comment FloatingConstant '/='
      && lk != 524810                // '!' FloatingConstant '/='
      && lk != 524814                // '&' FloatingConstant '/='
      && lk != 524819                // '*' FloatingConstant '/='
@@ -16060,6 +16993,7 @@ function C(string, parsingEventHandler)
      && lk != 524826                // '--' FloatingConstant '/='
      && lk != 524872                // 'sizeof' FloatingConstant '/='
      && lk != 524887                // '~' FloatingConstant '/='
+     && lk != 524936                // Comment CharacterConstant '/='
      && lk != 524938                // '!' CharacterConstant '/='
      && lk != 524942                // '&' CharacterConstant '/='
      && lk != 524947                // '*' CharacterConstant '/='
@@ -16069,6 +17003,7 @@ function C(string, parsingEventHandler)
      && lk != 524954                // '--' CharacterConstant '/='
      && lk != 525000                // 'sizeof' CharacterConstant '/='
      && lk != 525015                // '~' CharacterConstant '/='
+     && lk != 525064                // Comment StringLiteral '/='
      && lk != 525066                // '!' StringLiteral '/='
      && lk != 525070                // '&' StringLiteral '/='
      && lk != 525075                // '*' StringLiteral '/='
@@ -16088,6 +17023,7 @@ function C(string, parsingEventHandler)
      && lk != 527620                // FloatingConstant '--' '/='
      && lk != 527621                // CharacterConstant '--' '/='
      && lk != 527622                // StringLiteral '--' '/='
+     && lk != 540936                // Comment Identifier ':'
      && lk != 540938                // '!' Identifier ':'
      && lk != 540942                // '&' Identifier ':'
      && lk != 540947                // '*' Identifier ':'
@@ -16097,6 +17033,7 @@ function C(string, parsingEventHandler)
      && lk != 540954                // '--' Identifier ':'
      && lk != 541000                // 'sizeof' Identifier ':'
      && lk != 541015                // '~' Identifier ':'
+     && lk != 541064                // Comment IntegerConstant ':'
      && lk != 541066                // '!' IntegerConstant ':'
      && lk != 541070                // '&' IntegerConstant ':'
      && lk != 541075                // '*' IntegerConstant ':'
@@ -16106,6 +17043,7 @@ function C(string, parsingEventHandler)
      && lk != 541082                // '--' IntegerConstant ':'
      && lk != 541128                // 'sizeof' IntegerConstant ':'
      && lk != 541143                // '~' IntegerConstant ':'
+     && lk != 541192                // Comment FloatingConstant ':'
      && lk != 541194                // '!' FloatingConstant ':'
      && lk != 541198                // '&' FloatingConstant ':'
      && lk != 541203                // '*' FloatingConstant ':'
@@ -16115,6 +17053,7 @@ function C(string, parsingEventHandler)
      && lk != 541210                // '--' FloatingConstant ':'
      && lk != 541256                // 'sizeof' FloatingConstant ':'
      && lk != 541271                // '~' FloatingConstant ':'
+     && lk != 541320                // Comment CharacterConstant ':'
      && lk != 541322                // '!' CharacterConstant ':'
      && lk != 541326                // '&' CharacterConstant ':'
      && lk != 541331                // '*' CharacterConstant ':'
@@ -16124,6 +17063,7 @@ function C(string, parsingEventHandler)
      && lk != 541338                // '--' CharacterConstant ':'
      && lk != 541384                // 'sizeof' CharacterConstant ':'
      && lk != 541399                // '~' CharacterConstant ':'
+     && lk != 541448                // Comment StringLiteral ':'
      && lk != 541450                // '!' StringLiteral ':'
      && lk != 541454                // '&' StringLiteral ':'
      && lk != 541459                // '*' StringLiteral ':'
@@ -16143,6 +17083,7 @@ function C(string, parsingEventHandler)
      && lk != 544004                // FloatingConstant '--' ':'
      && lk != 544005                // CharacterConstant '--' ':'
      && lk != 544006                // StringLiteral '--' ':'
+     && lk != 557320                // Comment Identifier ';'
      && lk != 557322                // '!' Identifier ';'
      && lk != 557326                // '&' Identifier ';'
      && lk != 557331                // '*' Identifier ';'
@@ -16152,6 +17093,7 @@ function C(string, parsingEventHandler)
      && lk != 557338                // '--' Identifier ';'
      && lk != 557384                // 'sizeof' Identifier ';'
      && lk != 557399                // '~' Identifier ';'
+     && lk != 557448                // Comment IntegerConstant ';'
      && lk != 557450                // '!' IntegerConstant ';'
      && lk != 557454                // '&' IntegerConstant ';'
      && lk != 557459                // '*' IntegerConstant ';'
@@ -16161,6 +17103,7 @@ function C(string, parsingEventHandler)
      && lk != 557466                // '--' IntegerConstant ';'
      && lk != 557512                // 'sizeof' IntegerConstant ';'
      && lk != 557527                // '~' IntegerConstant ';'
+     && lk != 557576                // Comment FloatingConstant ';'
      && lk != 557578                // '!' FloatingConstant ';'
      && lk != 557582                // '&' FloatingConstant ';'
      && lk != 557587                // '*' FloatingConstant ';'
@@ -16170,6 +17113,7 @@ function C(string, parsingEventHandler)
      && lk != 557594                // '--' FloatingConstant ';'
      && lk != 557640                // 'sizeof' FloatingConstant ';'
      && lk != 557655                // '~' FloatingConstant ';'
+     && lk != 557704                // Comment CharacterConstant ';'
      && lk != 557706                // '!' CharacterConstant ';'
      && lk != 557710                // '&' CharacterConstant ';'
      && lk != 557715                // '*' CharacterConstant ';'
@@ -16179,6 +17123,7 @@ function C(string, parsingEventHandler)
      && lk != 557722                // '--' CharacterConstant ';'
      && lk != 557768                // 'sizeof' CharacterConstant ';'
      && lk != 557783                // '~' CharacterConstant ';'
+     && lk != 557832                // Comment StringLiteral ';'
      && lk != 557834                // '!' StringLiteral ';'
      && lk != 557838                // '&' StringLiteral ';'
      && lk != 557843                // '*' StringLiteral ';'
@@ -16198,6 +17143,7 @@ function C(string, parsingEventHandler)
      && lk != 560388                // FloatingConstant '--' ';'
      && lk != 560389                // CharacterConstant '--' ';'
      && lk != 560390                // StringLiteral '--' ';'
+     && lk != 606472                // Comment Identifier '<<='
      && lk != 606474                // '!' Identifier '<<='
      && lk != 606478                // '&' Identifier '<<='
      && lk != 606483                // '*' Identifier '<<='
@@ -16207,6 +17153,7 @@ function C(string, parsingEventHandler)
      && lk != 606490                // '--' Identifier '<<='
      && lk != 606536                // 'sizeof' Identifier '<<='
      && lk != 606551                // '~' Identifier '<<='
+     && lk != 606600                // Comment IntegerConstant '<<='
      && lk != 606602                // '!' IntegerConstant '<<='
      && lk != 606606                // '&' IntegerConstant '<<='
      && lk != 606611                // '*' IntegerConstant '<<='
@@ -16216,6 +17163,7 @@ function C(string, parsingEventHandler)
      && lk != 606618                // '--' IntegerConstant '<<='
      && lk != 606664                // 'sizeof' IntegerConstant '<<='
      && lk != 606679                // '~' IntegerConstant '<<='
+     && lk != 606728                // Comment FloatingConstant '<<='
      && lk != 606730                // '!' FloatingConstant '<<='
      && lk != 606734                // '&' FloatingConstant '<<='
      && lk != 606739                // '*' FloatingConstant '<<='
@@ -16225,6 +17173,7 @@ function C(string, parsingEventHandler)
      && lk != 606746                // '--' FloatingConstant '<<='
      && lk != 606792                // 'sizeof' FloatingConstant '<<='
      && lk != 606807                // '~' FloatingConstant '<<='
+     && lk != 606856                // Comment CharacterConstant '<<='
      && lk != 606858                // '!' CharacterConstant '<<='
      && lk != 606862                // '&' CharacterConstant '<<='
      && lk != 606867                // '*' CharacterConstant '<<='
@@ -16234,6 +17183,7 @@ function C(string, parsingEventHandler)
      && lk != 606874                // '--' CharacterConstant '<<='
      && lk != 606920                // 'sizeof' CharacterConstant '<<='
      && lk != 606935                // '~' CharacterConstant '<<='
+     && lk != 606984                // Comment StringLiteral '<<='
      && lk != 606986                // '!' StringLiteral '<<='
      && lk != 606990                // '&' StringLiteral '<<='
      && lk != 606995                // '*' StringLiteral '<<='
@@ -16253,6 +17203,7 @@ function C(string, parsingEventHandler)
      && lk != 609540                // FloatingConstant '--' '<<='
      && lk != 609541                // CharacterConstant '--' '<<='
      && lk != 609542                // StringLiteral '--' '<<='
+     && lk != 639240                // Comment Identifier '='
      && lk != 639242                // '!' Identifier '='
      && lk != 639246                // '&' Identifier '='
      && lk != 639251                // '*' Identifier '='
@@ -16262,6 +17213,7 @@ function C(string, parsingEventHandler)
      && lk != 639258                // '--' Identifier '='
      && lk != 639304                // 'sizeof' Identifier '='
      && lk != 639319                // '~' Identifier '='
+     && lk != 639368                // Comment IntegerConstant '='
      && lk != 639370                // '!' IntegerConstant '='
      && lk != 639374                // '&' IntegerConstant '='
      && lk != 639379                // '*' IntegerConstant '='
@@ -16271,6 +17223,7 @@ function C(string, parsingEventHandler)
      && lk != 639386                // '--' IntegerConstant '='
      && lk != 639432                // 'sizeof' IntegerConstant '='
      && lk != 639447                // '~' IntegerConstant '='
+     && lk != 639496                // Comment FloatingConstant '='
      && lk != 639498                // '!' FloatingConstant '='
      && lk != 639502                // '&' FloatingConstant '='
      && lk != 639507                // '*' FloatingConstant '='
@@ -16280,6 +17233,7 @@ function C(string, parsingEventHandler)
      && lk != 639514                // '--' FloatingConstant '='
      && lk != 639560                // 'sizeof' FloatingConstant '='
      && lk != 639575                // '~' FloatingConstant '='
+     && lk != 639624                // Comment CharacterConstant '='
      && lk != 639626                // '!' CharacterConstant '='
      && lk != 639630                // '&' CharacterConstant '='
      && lk != 639635                // '*' CharacterConstant '='
@@ -16289,6 +17243,7 @@ function C(string, parsingEventHandler)
      && lk != 639642                // '--' CharacterConstant '='
      && lk != 639688                // 'sizeof' CharacterConstant '='
      && lk != 639703                // '~' CharacterConstant '='
+     && lk != 639752                // Comment StringLiteral '='
      && lk != 639754                // '!' StringLiteral '='
      && lk != 639758                // '&' StringLiteral '='
      && lk != 639763                // '*' StringLiteral '='
@@ -16308,6 +17263,7 @@ function C(string, parsingEventHandler)
      && lk != 642308                // FloatingConstant '--' '='
      && lk != 642309                // CharacterConstant '--' '='
      && lk != 642310                // StringLiteral '--' '='
+     && lk != 721160                // Comment Identifier '>>='
      && lk != 721162                // '!' Identifier '>>='
      && lk != 721166                // '&' Identifier '>>='
      && lk != 721171                // '*' Identifier '>>='
@@ -16317,6 +17273,7 @@ function C(string, parsingEventHandler)
      && lk != 721178                // '--' Identifier '>>='
      && lk != 721224                // 'sizeof' Identifier '>>='
      && lk != 721239                // '~' Identifier '>>='
+     && lk != 721288                // Comment IntegerConstant '>>='
      && lk != 721290                // '!' IntegerConstant '>>='
      && lk != 721294                // '&' IntegerConstant '>>='
      && lk != 721299                // '*' IntegerConstant '>>='
@@ -16326,6 +17283,7 @@ function C(string, parsingEventHandler)
      && lk != 721306                // '--' IntegerConstant '>>='
      && lk != 721352                // 'sizeof' IntegerConstant '>>='
      && lk != 721367                // '~' IntegerConstant '>>='
+     && lk != 721416                // Comment FloatingConstant '>>='
      && lk != 721418                // '!' FloatingConstant '>>='
      && lk != 721422                // '&' FloatingConstant '>>='
      && lk != 721427                // '*' FloatingConstant '>>='
@@ -16335,6 +17293,7 @@ function C(string, parsingEventHandler)
      && lk != 721434                // '--' FloatingConstant '>>='
      && lk != 721480                // 'sizeof' FloatingConstant '>>='
      && lk != 721495                // '~' FloatingConstant '>>='
+     && lk != 721544                // Comment CharacterConstant '>>='
      && lk != 721546                // '!' CharacterConstant '>>='
      && lk != 721550                // '&' CharacterConstant '>>='
      && lk != 721555                // '*' CharacterConstant '>>='
@@ -16344,6 +17303,7 @@ function C(string, parsingEventHandler)
      && lk != 721562                // '--' CharacterConstant '>>='
      && lk != 721608                // 'sizeof' CharacterConstant '>>='
      && lk != 721623                // '~' CharacterConstant '>>='
+     && lk != 721672                // Comment StringLiteral '>>='
      && lk != 721674                // '!' StringLiteral '>>='
      && lk != 721678                // '&' StringLiteral '>>='
      && lk != 721683                // '*' StringLiteral '>>='
@@ -16363,6 +17323,7 @@ function C(string, parsingEventHandler)
      && lk != 724228                // FloatingConstant '--' '>>='
      && lk != 724229                // CharacterConstant '--' '>>='
      && lk != 724230                // StringLiteral '--' '>>='
+     && lk != 737544                // Comment Identifier '?'
      && lk != 737546                // '!' Identifier '?'
      && lk != 737550                // '&' Identifier '?'
      && lk != 737555                // '*' Identifier '?'
@@ -16372,6 +17333,7 @@ function C(string, parsingEventHandler)
      && lk != 737562                // '--' Identifier '?'
      && lk != 737608                // 'sizeof' Identifier '?'
      && lk != 737623                // '~' Identifier '?'
+     && lk != 737672                // Comment IntegerConstant '?'
      && lk != 737674                // '!' IntegerConstant '?'
      && lk != 737678                // '&' IntegerConstant '?'
      && lk != 737683                // '*' IntegerConstant '?'
@@ -16381,6 +17343,7 @@ function C(string, parsingEventHandler)
      && lk != 737690                // '--' IntegerConstant '?'
      && lk != 737736                // 'sizeof' IntegerConstant '?'
      && lk != 737751                // '~' IntegerConstant '?'
+     && lk != 737800                // Comment FloatingConstant '?'
      && lk != 737802                // '!' FloatingConstant '?'
      && lk != 737806                // '&' FloatingConstant '?'
      && lk != 737811                // '*' FloatingConstant '?'
@@ -16390,6 +17353,7 @@ function C(string, parsingEventHandler)
      && lk != 737818                // '--' FloatingConstant '?'
      && lk != 737864                // 'sizeof' FloatingConstant '?'
      && lk != 737879                // '~' FloatingConstant '?'
+     && lk != 737928                // Comment CharacterConstant '?'
      && lk != 737930                // '!' CharacterConstant '?'
      && lk != 737934                // '&' CharacterConstant '?'
      && lk != 737939                // '*' CharacterConstant '?'
@@ -16399,6 +17363,7 @@ function C(string, parsingEventHandler)
      && lk != 737946                // '--' CharacterConstant '?'
      && lk != 737992                // 'sizeof' CharacterConstant '?'
      && lk != 738007                // '~' CharacterConstant '?'
+     && lk != 738056                // Comment StringLiteral '?'
      && lk != 738058                // '!' StringLiteral '?'
      && lk != 738062                // '&' StringLiteral '?'
      && lk != 738067                // '*' StringLiteral '?'
@@ -16418,6 +17383,7 @@ function C(string, parsingEventHandler)
      && lk != 740612                // FloatingConstant '--' '?'
      && lk != 740613                // CharacterConstant '--' '?'
      && lk != 740614                // StringLiteral '--' '?'
+     && lk != 770312                // Comment Identifier ']'
      && lk != 770314                // '!' Identifier ']'
      && lk != 770318                // '&' Identifier ']'
      && lk != 770323                // '*' Identifier ']'
@@ -16427,6 +17393,7 @@ function C(string, parsingEventHandler)
      && lk != 770330                // '--' Identifier ']'
      && lk != 770376                // 'sizeof' Identifier ']'
      && lk != 770391                // '~' Identifier ']'
+     && lk != 770440                // Comment IntegerConstant ']'
      && lk != 770442                // '!' IntegerConstant ']'
      && lk != 770446                // '&' IntegerConstant ']'
      && lk != 770451                // '*' IntegerConstant ']'
@@ -16436,6 +17403,7 @@ function C(string, parsingEventHandler)
      && lk != 770458                // '--' IntegerConstant ']'
      && lk != 770504                // 'sizeof' IntegerConstant ']'
      && lk != 770519                // '~' IntegerConstant ']'
+     && lk != 770568                // Comment FloatingConstant ']'
      && lk != 770570                // '!' FloatingConstant ']'
      && lk != 770574                // '&' FloatingConstant ']'
      && lk != 770579                // '*' FloatingConstant ']'
@@ -16445,6 +17413,7 @@ function C(string, parsingEventHandler)
      && lk != 770586                // '--' FloatingConstant ']'
      && lk != 770632                // 'sizeof' FloatingConstant ']'
      && lk != 770647                // '~' FloatingConstant ']'
+     && lk != 770696                // Comment CharacterConstant ']'
      && lk != 770698                // '!' CharacterConstant ']'
      && lk != 770702                // '&' CharacterConstant ']'
      && lk != 770707                // '*' CharacterConstant ']'
@@ -16454,6 +17423,7 @@ function C(string, parsingEventHandler)
      && lk != 770714                // '--' CharacterConstant ']'
      && lk != 770760                // 'sizeof' CharacterConstant ']'
      && lk != 770775                // '~' CharacterConstant ']'
+     && lk != 770824                // Comment StringLiteral ']'
      && lk != 770826                // '!' StringLiteral ']'
      && lk != 770830                // '&' StringLiteral ']'
      && lk != 770835                // '*' StringLiteral ']'
@@ -16473,6 +17443,7 @@ function C(string, parsingEventHandler)
      && lk != 773380                // FloatingConstant '--' ']'
      && lk != 773381                // CharacterConstant '--' ']'
      && lk != 773382                // StringLiteral '--' ']'
+     && lk != 803080                // Comment Identifier '^='
      && lk != 803082                // '!' Identifier '^='
      && lk != 803086                // '&' Identifier '^='
      && lk != 803091                // '*' Identifier '^='
@@ -16482,6 +17453,7 @@ function C(string, parsingEventHandler)
      && lk != 803098                // '--' Identifier '^='
      && lk != 803144                // 'sizeof' Identifier '^='
      && lk != 803159                // '~' Identifier '^='
+     && lk != 803208                // Comment IntegerConstant '^='
      && lk != 803210                // '!' IntegerConstant '^='
      && lk != 803214                // '&' IntegerConstant '^='
      && lk != 803219                // '*' IntegerConstant '^='
@@ -16491,6 +17463,7 @@ function C(string, parsingEventHandler)
      && lk != 803226                // '--' IntegerConstant '^='
      && lk != 803272                // 'sizeof' IntegerConstant '^='
      && lk != 803287                // '~' IntegerConstant '^='
+     && lk != 803336                // Comment FloatingConstant '^='
      && lk != 803338                // '!' FloatingConstant '^='
      && lk != 803342                // '&' FloatingConstant '^='
      && lk != 803347                // '*' FloatingConstant '^='
@@ -16500,6 +17473,7 @@ function C(string, parsingEventHandler)
      && lk != 803354                // '--' FloatingConstant '^='
      && lk != 803400                // 'sizeof' FloatingConstant '^='
      && lk != 803415                // '~' FloatingConstant '^='
+     && lk != 803464                // Comment CharacterConstant '^='
      && lk != 803466                // '!' CharacterConstant '^='
      && lk != 803470                // '&' CharacterConstant '^='
      && lk != 803475                // '*' CharacterConstant '^='
@@ -16509,6 +17483,7 @@ function C(string, parsingEventHandler)
      && lk != 803482                // '--' CharacterConstant '^='
      && lk != 803528                // 'sizeof' CharacterConstant '^='
      && lk != 803543                // '~' CharacterConstant '^='
+     && lk != 803592                // Comment StringLiteral '^='
      && lk != 803594                // '!' StringLiteral '^='
      && lk != 803598                // '&' StringLiteral '^='
      && lk != 803603                // '*' StringLiteral '^='
@@ -16528,6 +17503,7 @@ function C(string, parsingEventHandler)
      && lk != 806148                // FloatingConstant '--' '^='
      && lk != 806149                // CharacterConstant '--' '^='
      && lk != 806150                // StringLiteral '--' '^='
+     && lk != 1376520               // Comment Identifier '|='
      && lk != 1376522               // '!' Identifier '|='
      && lk != 1376526               // '&' Identifier '|='
      && lk != 1376531               // '*' Identifier '|='
@@ -16537,6 +17513,7 @@ function C(string, parsingEventHandler)
      && lk != 1376538               // '--' Identifier '|='
      && lk != 1376584               // 'sizeof' Identifier '|='
      && lk != 1376599               // '~' Identifier '|='
+     && lk != 1376648               // Comment IntegerConstant '|='
      && lk != 1376650               // '!' IntegerConstant '|='
      && lk != 1376654               // '&' IntegerConstant '|='
      && lk != 1376659               // '*' IntegerConstant '|='
@@ -16546,6 +17523,7 @@ function C(string, parsingEventHandler)
      && lk != 1376666               // '--' IntegerConstant '|='
      && lk != 1376712               // 'sizeof' IntegerConstant '|='
      && lk != 1376727               // '~' IntegerConstant '|='
+     && lk != 1376776               // Comment FloatingConstant '|='
      && lk != 1376778               // '!' FloatingConstant '|='
      && lk != 1376782               // '&' FloatingConstant '|='
      && lk != 1376787               // '*' FloatingConstant '|='
@@ -16555,6 +17533,7 @@ function C(string, parsingEventHandler)
      && lk != 1376794               // '--' FloatingConstant '|='
      && lk != 1376840               // 'sizeof' FloatingConstant '|='
      && lk != 1376855               // '~' FloatingConstant '|='
+     && lk != 1376904               // Comment CharacterConstant '|='
      && lk != 1376906               // '!' CharacterConstant '|='
      && lk != 1376910               // '&' CharacterConstant '|='
      && lk != 1376915               // '*' CharacterConstant '|='
@@ -16564,6 +17543,7 @@ function C(string, parsingEventHandler)
      && lk != 1376922               // '--' CharacterConstant '|='
      && lk != 1376968               // 'sizeof' CharacterConstant '|='
      && lk != 1376983               // '~' CharacterConstant '|='
+     && lk != 1377032               // Comment StringLiteral '|='
      && lk != 1377034               // '!' StringLiteral '|='
      && lk != 1377038               // '&' StringLiteral '|='
      && lk != 1377043               // '*' StringLiteral '|='
@@ -16583,6 +17563,7 @@ function C(string, parsingEventHandler)
      && lk != 1379588               // FloatingConstant '--' '|='
      && lk != 1379589               // CharacterConstant '--' '|='
      && lk != 1379590               // StringLiteral '--' '|='
+     && lk != 1409288               // Comment Identifier '}'
      && lk != 1409290               // '!' Identifier '}'
      && lk != 1409294               // '&' Identifier '}'
      && lk != 1409299               // '*' Identifier '}'
@@ -16592,6 +17573,7 @@ function C(string, parsingEventHandler)
      && lk != 1409306               // '--' Identifier '}'
      && lk != 1409352               // 'sizeof' Identifier '}'
      && lk != 1409367               // '~' Identifier '}'
+     && lk != 1409416               // Comment IntegerConstant '}'
      && lk != 1409418               // '!' IntegerConstant '}'
      && lk != 1409422               // '&' IntegerConstant '}'
      && lk != 1409427               // '*' IntegerConstant '}'
@@ -16601,6 +17583,7 @@ function C(string, parsingEventHandler)
      && lk != 1409434               // '--' IntegerConstant '}'
      && lk != 1409480               // 'sizeof' IntegerConstant '}'
      && lk != 1409495               // '~' IntegerConstant '}'
+     && lk != 1409544               // Comment FloatingConstant '}'
      && lk != 1409546               // '!' FloatingConstant '}'
      && lk != 1409550               // '&' FloatingConstant '}'
      && lk != 1409555               // '*' FloatingConstant '}'
@@ -16610,6 +17593,7 @@ function C(string, parsingEventHandler)
      && lk != 1409562               // '--' FloatingConstant '}'
      && lk != 1409608               // 'sizeof' FloatingConstant '}'
      && lk != 1409623               // '~' FloatingConstant '}'
+     && lk != 1409672               // Comment CharacterConstant '}'
      && lk != 1409674               // '!' CharacterConstant '}'
      && lk != 1409678               // '&' CharacterConstant '}'
      && lk != 1409683               // '*' CharacterConstant '}'
@@ -16619,6 +17603,7 @@ function C(string, parsingEventHandler)
      && lk != 1409690               // '--' CharacterConstant '}'
      && lk != 1409736               // 'sizeof' CharacterConstant '}'
      && lk != 1409751               // '~' CharacterConstant '}'
+     && lk != 1409800               // Comment StringLiteral '}'
      && lk != 1409802               // '!' StringLiteral '}'
      && lk != 1409806               // '&' StringLiteral '}'
      && lk != 1409811               // '*' StringLiteral '}'
@@ -16639,7 +17624,7 @@ function C(string, parsingEventHandler)
      && lk != 1412357               // CharacterConstant '--' '}'
      && lk != 1412358)              // StringLiteral '--' '}'
     {
-      lk = memoized(14, e0);
+      lk = memoized(15, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -16650,16 +17635,16 @@ function C(string, parsingEventHandler)
         {
           try_logicalOrExpression();
           consumeT(45);             // '?'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_expression();
           consumeT(33);             // ':'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_conditionalExpression();
-          memoize(14, e0A, -1);
+          memoize(15, e0A, -1);
           lk = -3;
         }
         catch (p1A)
@@ -16669,7 +17654,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(14, e0A, -2);
+          memoize(15, e0A, -2);
         }
       }
     }
@@ -16681,6 +17666,7 @@ function C(string, parsingEventHandler)
     case 5764:                      // FloatingConstant '?'
     case 5765:                      // CharacterConstant '?'
     case 5766:                      // StringLiteral '?'
+    case 737544:                    // Comment Identifier '?'
     case 737546:                    // '!' Identifier '?'
     case 737550:                    // '&' Identifier '?'
     case 737555:                    // '*' Identifier '?'
@@ -16690,6 +17676,7 @@ function C(string, parsingEventHandler)
     case 737562:                    // '--' Identifier '?'
     case 737608:                    // 'sizeof' Identifier '?'
     case 737623:                    // '~' Identifier '?'
+    case 737672:                    // Comment IntegerConstant '?'
     case 737674:                    // '!' IntegerConstant '?'
     case 737678:                    // '&' IntegerConstant '?'
     case 737683:                    // '*' IntegerConstant '?'
@@ -16699,6 +17686,7 @@ function C(string, parsingEventHandler)
     case 737690:                    // '--' IntegerConstant '?'
     case 737736:                    // 'sizeof' IntegerConstant '?'
     case 737751:                    // '~' IntegerConstant '?'
+    case 737800:                    // Comment FloatingConstant '?'
     case 737802:                    // '!' FloatingConstant '?'
     case 737806:                    // '&' FloatingConstant '?'
     case 737811:                    // '*' FloatingConstant '?'
@@ -16708,6 +17696,7 @@ function C(string, parsingEventHandler)
     case 737818:                    // '--' FloatingConstant '?'
     case 737864:                    // 'sizeof' FloatingConstant '?'
     case 737879:                    // '~' FloatingConstant '?'
+    case 737928:                    // Comment CharacterConstant '?'
     case 737930:                    // '!' CharacterConstant '?'
     case 737934:                    // '&' CharacterConstant '?'
     case 737939:                    // '*' CharacterConstant '?'
@@ -16717,6 +17706,7 @@ function C(string, parsingEventHandler)
     case 737946:                    // '--' CharacterConstant '?'
     case 737992:                    // 'sizeof' CharacterConstant '?'
     case 738007:                    // '~' CharacterConstant '?'
+    case 738056:                    // Comment StringLiteral '?'
     case 738058:                    // '!' StringLiteral '?'
     case 738062:                    // '&' StringLiteral '?'
     case 738067:                    // '*' StringLiteral '?'
@@ -16738,14 +17728,14 @@ function C(string, parsingEventHandler)
     case 740614:                    // StringLiteral '--' '?'
       try_logicalOrExpression();
       consumeT(45);                 // '?'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_expression();
       consumeT(33);                 // ':'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_conditionalExpression();
       break;
     case -3:
@@ -16778,9 +17768,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(85);                  // '||'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_logicalAndExpression();
     }
@@ -16797,9 +17787,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(85);                 // '||'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_logicalAndExpression();
     }
   }
@@ -16815,9 +17805,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(15);                  // '&&'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_inclusiveOrExpression();
     }
@@ -16834,9 +17824,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(15);                 // '&&'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_inclusiveOrExpression();
     }
   }
@@ -16852,9 +17842,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(83);                  // '|'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_exclusiveOrExpression();
     }
@@ -16871,9 +17861,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(83);                 // '|'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_exclusiveOrExpression();
     }
   }
@@ -16889,9 +17879,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(48);                  // '^'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_andExpression();
     }
@@ -16908,9 +17898,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(48);                 // '^'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_andExpression();
     }
   }
@@ -16926,9 +17916,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(14);                  // '&'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_equalityExpression();
     }
@@ -16945,9 +17935,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(14);                 // '&'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_equalityExpression();
     }
   }
@@ -16971,9 +17961,9 @@ function C(string, parsingEventHandler)
       default:
         consume(11);                // '!='
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_relationalExpression();
     }
@@ -16998,9 +17988,9 @@ function C(string, parsingEventHandler)
       default:
         consumeT(11);               // '!='
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_relationalExpression();
     }
   }
@@ -17032,9 +18022,9 @@ function C(string, parsingEventHandler)
       default:
         consume(42);                // '>='
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_shiftExpression();
     }
@@ -17067,9 +18057,9 @@ function C(string, parsingEventHandler)
       default:
         consumeT(42);               // '>='
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_shiftExpression();
     }
   }
@@ -17093,9 +18083,9 @@ function C(string, parsingEventHandler)
       default:
         consume(43);                // '>>'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_additiveExpression();
     }
@@ -17120,9 +18110,9 @@ function C(string, parsingEventHandler)
       default:
         consumeT(43);               // '>>'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_additiveExpression();
     }
   }
@@ -17146,9 +18136,9 @@ function C(string, parsingEventHandler)
       default:
         consume(25);                // '-'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_multiplicativeExpression();
     }
@@ -17173,9 +18163,9 @@ function C(string, parsingEventHandler)
       default:
         consumeT(25);               // '-'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_multiplicativeExpression();
     }
   }
@@ -17186,10 +18176,10 @@ function C(string, parsingEventHandler)
     parse_castExpression();
     for (;;)
     {
-      lookahead1W(71);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | ')' | '*' | '*=' | '+' | '+=' | ',' | '-' | '-=' | '/' | '/=' | ':' |
-                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
+      lookahead1W(72);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '*=' | '+' |
+                                    // '+=' | ',' | '-' | '-=' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' |
+                                    // '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | ']' | '^' | '^=' | '|' | '|=' |
+                                    // '||' | '}'
       if (l1 != 12                  // '%'
        && l1 != 19                  // '*'
        && l1 != 31)                 // '/'
@@ -17207,9 +18197,9 @@ function C(string, parsingEventHandler)
       default:
         consume(12);                // '%'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_castExpression();
     }
@@ -17221,10 +18211,10 @@ function C(string, parsingEventHandler)
     try_castExpression();
     for (;;)
     {
-      lookahead1W(71);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | ')' | '*' | '*=' | '+' | '+=' | ',' | '-' | '-=' | '/' | '/=' | ':' |
-                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
-                                    // ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
+      lookahead1W(72);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | ')' | '*' | '*=' | '+' |
+                                    // '+=' | ',' | '-' | '-=' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' |
+                                    // '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | ']' | '^' | '^=' | '|' | '|=' |
+                                    // '||' | '}'
       if (l1 != 12                  // '%'
        && l1 != 19                  // '*'
        && l1 != 31)                 // '/'
@@ -17242,9 +18232,9 @@ function C(string, parsingEventHandler)
       default:
         consumeT(12);               // '%'
       }
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_castExpression();
     }
   }
@@ -17255,18 +18245,18 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       }
       break;
@@ -17278,7 +18268,7 @@ function C(string, parsingEventHandler)
      || lk == 311569                // '(' Identifier '*'
      || lk == 753937)               // '(' Identifier '['
     {
-      lk = memoized(15, e0);
+      lk = memoized(16, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -17298,7 +18288,7 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(15, e0, lk);
+        memoize(16, e0, lk);
       }
     }
     switch (lk)
@@ -17321,15 +18311,15 @@ function C(string, parsingEventHandler)
     case 885009:                    // '(' Identifier 'const'
     case 1310993:                   // '(' Identifier 'volatile'
       consume(17);                  // '('
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       whitespace();
       parse_typeName();
       consume(18);                  // ')'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_castExpression();
       break;
@@ -17344,18 +18334,18 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 17:                        // '('
-      lookahead2W(69);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+      lookahead2W(70);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
       switch (lk)
       {
       case 273:                     // '(' Identifier
-        lookahead3W(75);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' |
-                                    // '>>' | '>>=' | '?' | '[' | '^' | '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
+        lookahead3W(77);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | '<' |
+                                    // '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | '^' |
+                                    // '^=' | 'const' | 'volatile' | '|' | '|=' | '||'
         break;
       }
       break;
@@ -17367,7 +18357,7 @@ function C(string, parsingEventHandler)
      || lk == 311569                // '(' Identifier '*'
      || lk == 753937)               // '(' Identifier '['
     {
-      lk = memoized(15, e0);
+      lk = memoized(16, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -17377,7 +18367,7 @@ function C(string, parsingEventHandler)
         try
         {
           try_unaryExpression();
-          memoize(15, e0A, -1);
+          memoize(16, e0A, -1);
           lk = -3;
         }
         catch (p1A)
@@ -17387,7 +18377,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(15, e0A, -2);
+          memoize(16, e0A, -2);
         }
       }
     }
@@ -17411,14 +18401,14 @@ function C(string, parsingEventHandler)
     case 885009:                    // '(' Identifier 'const'
     case 1310993:                   // '(' Identifier 'volatile'
       consumeT(17);                 // '('
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       try_typeName();
       consumeT(18);                 // ')'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_castExpression();
       break;
     case -3:
@@ -17434,17 +18424,17 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 72:                        // 'sizeof'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2248:                    // 'sizeof' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       }
       break;
@@ -17453,7 +18443,7 @@ function C(string, parsingEventHandler)
     }
     if (lk == 35016)                // 'sizeof' '(' Identifier
     {
-      lk = memoized(16, e0);
+      lk = memoized(17, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -17463,21 +18453,21 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(72);             // 'sizeof'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_unaryExpression();
-          lk = -5;
-        }
-        catch (p5A)
-        {
           lk = -6;
+        }
+        catch (p6A)
+        {
+          lk = -7;
         }
         b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(16, e0, lk);
+        memoize(17, e0, lk);
       }
     }
     switch (lk)
@@ -17490,19 +18480,27 @@ function C(string, parsingEventHandler)
     case 17:                        // '('
       parse_postfixExpression();
       break;
+    case 8:                         // Comment
+      consume(8);                   // Comment
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+      whitespace();
+      parse_unaryExpression();
+      break;
     case 22:                        // '++'
       consume(22);                  // '++'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_unaryExpression();
       break;
     case 26:                        // '--'
       consume(26);                  // '--'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_unaryExpression();
       break;
@@ -17513,13 +18511,13 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 87:                        // '~'
       parse_unaryOperator();
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_castExpression();
       break;
-    case -6:
+    case -7:
     case 870600:                    // 'sizeof' '(' 'char'
     case 886984:                    // 'sizeof' '(' 'const'
     case 952520:                    // 'sizeof' '(' 'double'
@@ -17535,20 +18533,20 @@ function C(string, parsingEventHandler)
     case 1296584:                   // 'sizeof' '(' 'void'
     case 1312968:                   // 'sizeof' '(' 'volatile'
       consume(72);                  // 'sizeof'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consume(17);                  // '('
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       whitespace();
       parse_typeName();
       consume(18);                  // ')'
       break;
     default:
       consume(72);                  // 'sizeof'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_unaryExpression();
     }
@@ -17560,17 +18558,17 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 72:                        // 'sizeof'
-      lookahead2W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead2W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       switch (lk)
       {
       case 2248:                    // 'sizeof' '('
-        lookahead3W(69);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'char' | 'const' | 'double' | 'enum' | 'float' |
-                                    // 'int' | 'long' | 'short' | 'signed' | 'sizeof' | 'struct' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '~'
+        lookahead3W(70);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'char' | 'const' | 'double' | 'enum' | 'float' | 'int' | 'long' |
+                                    // 'short' | 'signed' | 'sizeof' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile' | '~'
         break;
       }
       break;
@@ -17579,7 +18577,7 @@ function C(string, parsingEventHandler)
     }
     if (lk == 35016)                // 'sizeof' '(' Identifier
     {
-      lk = memoized(16, e0);
+      lk = memoized(17, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -17589,21 +18587,21 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(72);             // 'sizeof'
-          lookahead1W(37);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+          lookahead1W(40);          // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
           try_unaryExpression();
-          memoize(16, e0A, -5);
-          lk = -7;
+          memoize(17, e0A, -6);
+          lk = -8;
         }
-        catch (p5A)
+        catch (p6A)
         {
-          lk = -6;
+          lk = -7;
           b0 = b0A; e0 = e0A; l1 = l1A; if (l1 == 0) {end = e0A;} else {
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(16, e0A, -6);
+          memoize(17, e0A, -7);
         }
       }
     }
@@ -17617,18 +18615,25 @@ function C(string, parsingEventHandler)
     case 17:                        // '('
       try_postfixExpression();
       break;
+    case 8:                         // Comment
+      consumeT(8);                  // Comment
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
+      try_unaryExpression();
+      break;
     case 22:                        // '++'
       consumeT(22);                 // '++'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_unaryExpression();
       break;
     case 26:                        // '--'
       consumeT(26);                 // '--'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_unaryExpression();
       break;
     case 10:                        // '!'
@@ -17638,12 +18643,12 @@ function C(string, parsingEventHandler)
     case 25:                        // '-'
     case 87:                        // '~'
       try_unaryOperator();
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_castExpression();
       break;
-    case -6:
+    case -7:
     case 870600:                    // 'sizeof' '(' 'char'
     case 886984:                    // 'sizeof' '(' 'const'
     case 952520:                    // 'sizeof' '(' 'double'
@@ -17659,21 +18664,21 @@ function C(string, parsingEventHandler)
     case 1296584:                   // 'sizeof' '(' 'void'
     case 1312968:                   // 'sizeof' '(' 'volatile'
       consumeT(72);                 // 'sizeof'
-      lookahead1W(1);               // WhiteSpace | Comment | PreprocessingDirective | '('
+      lookahead1W(1);               // WhiteSpace | '('
       consumeT(17);                 // '('
-      lookahead1W(39);              // Identifier | WhiteSpace | Comment | PreprocessingDirective | 'char' | 'const' |
-                                    // 'double' | 'enum' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'struct' |
-                                    // 'union' | 'unsigned' | 'void' | 'volatile'
+      lookahead1W(38);              // Identifier | WhiteSpace | 'char' | 'const' | 'double' | 'enum' | 'float' |
+                                    // 'int' | 'long' | 'short' | 'signed' | 'struct' | 'union' | 'unsigned' | 'void' |
+                                    // 'volatile'
       try_typeName();
       consumeT(18);                 // ')'
       break;
-    case -7:
+    case -8:
       break;
     default:
       consumeT(72);                 // 'sizeof'
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_unaryExpression();
     }
   }
@@ -17734,11 +18739,10 @@ function C(string, parsingEventHandler)
     parse_primaryExpression();
     for (;;)
     {
-      lookahead1W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead1W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       if (l1 != 17                  // '('
        && l1 != 22                  // '++'
        && l1 != 26                  // '--'
@@ -17759,11 +18763,10 @@ function C(string, parsingEventHandler)
     try_primaryExpression();
     for (;;)
     {
-      lookahead1W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead1W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       if (l1 != 17                  // '('
        && l1 != 22                  // '++'
        && l1 != 26                  // '--'
@@ -17784,18 +18787,18 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consume(46);                  // '['
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(47);                  // ']'
       break;
     case 17:                        // '('
       consume(17);                  // '('
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         whitespace();
@@ -17805,12 +18808,12 @@ function C(string, parsingEventHandler)
       break;
     case 29:                        // '.'
       consume(29);                  // '.'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
       break;
     case 28:                        // '->'
       consume(28);                  // '->'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consume(2);                   // Identifier
       break;
     case 22:                        // '++'
@@ -17828,17 +18831,17 @@ function C(string, parsingEventHandler)
     {
     case 46:                        // '['
       consumeT(46);                 // '['
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_expression();
       consumeT(47);                 // ']'
       break;
     case 17:                        // '('
       consumeT(17);                 // '('
-      lookahead1W(41);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(42);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
       if (l1 != 18)                 // ')'
       {
         try_argumentExpressionList();
@@ -17847,12 +18850,12 @@ function C(string, parsingEventHandler)
       break;
     case 29:                        // '.'
       consumeT(29);                 // '.'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
       break;
     case 28:                        // '->'
       consumeT(28);                 // '->'
-      lookahead1W(0);               // Identifier | WhiteSpace | Comment | PreprocessingDirective
+      lookahead1W(0);               // Identifier | WhiteSpace
       consumeT(2);                  // Identifier
       break;
     case 22:                        // '++'
@@ -17869,41 +18872,39 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2306:                    // Identifier ')'
-        lookahead3W(80);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '!=' |
-                                    // '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' |
-                                    // ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' |
-                                    // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' |
-                                    // '^=' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' | 'if' |
-                                    // 'return' | 'sizeof' | 'switch' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        lookahead3W(84);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '!=' | '%' | '%=' | '&' | '&&' |
+                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
+                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
+                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | 'break' | 'case' |
+                                    // 'continue' | 'default' | 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' |
+                                    // 'switch' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       case 3074:                    // Identifier ','
-        lookahead3W(49);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ':' | 'sizeof' | '{' | '}' | '~'
+        lookahead3W(50);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ':' | 'sizeof' | '{' | '}' | '~'
         break;
       case 4226:                    // Identifier ':'
-        lookahead3W(66);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+        lookahead3W(68);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
         break;
       case 4354:                    // Identifier ';'
-        lookahead3W(79);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+        lookahead3W(83);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
                                     // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
                                     // ')' | '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
                                     // 'const' | 'continue' | 'default' | 'do' | 'double' | 'else' | 'enum' | 'extern' |
@@ -17912,29 +18913,28 @@ function C(string, parsingEventHandler)
                                     // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
         break;
       case 6018:                    // Identifier ']'
-        lookahead3W(81);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' |
-                                    // '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' |
-                                    // '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' |
-                                    // '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '{' | '|' | '|=' | '||' | '}'
+        lookahead3W(85);            // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' |
+                                    // '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
+                                    // '>>=' | '?' | '[' | ']' | '^' | '^=' | 'auto' | 'char' | 'const' | 'double' |
+                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
+                                    // '{' | '|' | '|=' | '||' | '}'
         break;
       case 11010:                   // Identifier '}'
-        lookahead3W(35);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '}'
+        lookahead3W(35);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '}'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -17967,9 +18967,9 @@ function C(string, parsingEventHandler)
       case 10626:                   // Identifier '|'
       case 10754:                   // Identifier '|='
       case 10882:                   // Identifier '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -17982,7 +18982,7 @@ function C(string, parsingEventHandler)
      && lk != 6                     // StringLiteral
      && lk != 17)                   // '('
     {
-      lk = memoized(17, e0);
+      lk = memoized(18, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -18002,7 +19002,7 @@ function C(string, parsingEventHandler)
         b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
         b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
         b3 = b3A; e3 = e3A; end = e3A; }}}
-        memoize(17, e0, lk);
+        memoize(18, e0, lk);
       }
     }
     switch (lk)
@@ -18015,9 +19015,9 @@ function C(string, parsingEventHandler)
       break;
     case 17:                        // '('
       consume(17);                  // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_expression();
       consume(18);                  // ')'
@@ -18033,41 +19033,39 @@ function C(string, parsingEventHandler)
     switch (l1)
     {
     case 2:                         // Identifier
-      lookahead2W(77);              // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+      lookahead2W(79);              // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
       switch (lk)
       {
       case 2178:                    // Identifier '('
-        lookahead3W(41);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // ')' | '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(42);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | ')' | '*' | '+' | '++' |
+                                    // '-' | '--' | 'sizeof' | '~'
         break;
       case 2306:                    // Identifier ')'
-        lookahead3W(80);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '!=' |
-                                    // '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' |
-                                    // ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' |
-                                    // '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' |
-                                    // '^=' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' | 'if' |
-                                    // 'return' | 'sizeof' | 'switch' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
+        lookahead3W(84);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '!=' | '%' | '%=' | '&' | '&&' |
+                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
+                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
+                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | 'break' | 'case' |
+                                    // 'continue' | 'default' | 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' |
+                                    // 'switch' | 'while' | '{' | '|' | '|=' | '||' | '}' | '~'
         break;
       case 3074:                    // Identifier ','
-        lookahead3W(49);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ':' | 'sizeof' | '{' | '}' | '~'
+        lookahead3W(50);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ':' | 'sizeof' | '{' | '}' | '~'
         break;
       case 4226:                    // Identifier ':'
-        lookahead3W(66);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | ';' | 'break' | 'case' | 'continue' | 'default' |
-                                    // 'do' | 'for' | 'goto' | 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' |
-                                    // '~'
+        lookahead3W(68);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | ';' | 'break' | 'case' | 'continue' | 'default' | 'do' | 'for' | 'goto' |
+                                    // 'if' | 'return' | 'sizeof' | 'switch' | 'while' | '{' | '~'
         break;
       case 4354:                    // Identifier ';'
-        lookahead3W(79);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+        lookahead3W(83);            // %OTHER | Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
                                     // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
                                     // ')' | '*' | '+' | '++' | '-' | '--' | ';' | 'auto' | 'break' | 'case' | 'char' |
                                     // 'const' | 'continue' | 'default' | 'do' | 'double' | 'else' | 'enum' | 'extern' |
@@ -18076,29 +19074,28 @@ function C(string, parsingEventHandler)
                                     // 'union' | 'unsigned' | 'void' | 'volatile' | 'while' | '{' | '}' | '~'
         break;
       case 6018:                    // Identifier ']'
-        lookahead3W(81);            // Identifier | WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' |
-                                    // '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' |
-                                    // '--' | '-=' | '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' |
-                                    // '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | 'auto' |
-                                    // 'char' | 'const' | 'double' | 'enum' | 'extern' | 'float' | 'int' | 'long' |
-                                    // 'register' | 'short' | 'signed' | 'static' | 'struct' | 'typedef' | 'union' |
-                                    // 'unsigned' | 'void' | 'volatile' | '{' | '|' | '|=' | '||' | '}'
+        lookahead3W(85);            // Identifier | WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' |
+                                    // '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' |
+                                    // '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' |
+                                    // '>>=' | '?' | '[' | ']' | '^' | '^=' | 'auto' | 'char' | 'const' | 'double' |
+                                    // 'enum' | 'extern' | 'float' | 'int' | 'long' | 'register' | 'short' | 'signed' |
+                                    // 'static' | 'struct' | 'typedef' | 'union' | 'unsigned' | 'void' | 'volatile' |
+                                    // '{' | '|' | '|=' | '||' | '}'
         break;
       case 11010:                   // Identifier '}'
-        lookahead3W(35);            // %OTHER | Identifier | WhiteSpace | Comment | PreprocessingDirective | '(' | ')' |
-                                    // '*' | ',' | ':' | ';' | '[' | 'const' | 'volatile' | '}'
+        lookahead3W(35);            // %OTHER | Identifier | WhiteSpace | '(' | ')' | '*' | ',' | ':' | ';' | '[' |
+                                    // 'const' | 'volatile' | '}'
         break;
       case 2818:                    // Identifier '++'
       case 3330:                    // Identifier '--'
-        lookahead3W(77);            // WhiteSpace | Comment | PreprocessingDirective | '!=' | '%' | '%=' | '&' | '&&' |
-                                    // '&=' | '(' | ')' | '*' | '*=' | '+' | '++' | '+=' | ',' | '-' | '--' | '-=' |
-                                    // '->' | '.' | '/' | '/=' | ':' | ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' |
-                                    // '>' | '>=' | '>>' | '>>=' | '?' | '[' | ']' | '^' | '^=' | '|' | '|=' | '||' |
-                                    // '}'
+        lookahead3W(79);            // WhiteSpace | '!=' | '%' | '%=' | '&' | '&&' | '&=' | '(' | ')' | '*' | '*=' |
+                                    // '+' | '++' | '+=' | ',' | '-' | '--' | '-=' | '->' | '.' | '/' | '/=' | ':' |
+                                    // ';' | '<' | '<<' | '<<=' | '<=' | '=' | '==' | '>' | '>=' | '>>' | '>>=' | '?' |
+                                    // '[' | ']' | '^' | '^=' | '|' | '|=' | '||' | '}'
         break;
       case 3586:                    // Identifier '->'
       case 3714:                    // Identifier '.'
-        lookahead3W(0);             // Identifier | WhiteSpace | Comment | PreprocessingDirective
+        lookahead3W(0);             // Identifier | WhiteSpace
         break;
       case 1410:                    // Identifier '!='
       case 1538:                    // Identifier '%'
@@ -18131,9 +19128,9 @@ function C(string, parsingEventHandler)
       case 10626:                   // Identifier '|'
       case 10754:                   // Identifier '|='
       case 10882:                   // Identifier '||'
-        lookahead3W(37);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+        lookahead3W(40);            // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
         break;
       }
       break;
@@ -18146,7 +19143,7 @@ function C(string, parsingEventHandler)
      && lk != 6                     // StringLiteral
      && lk != 17)                   // '('
     {
-      lk = memoized(17, e0);
+      lk = memoized(18, e0);
       if (lk == 0)
       {
         var b0A = b0; var e0A = e0; var l1A = l1;
@@ -18156,7 +19153,7 @@ function C(string, parsingEventHandler)
         try
         {
           consumeT(2);              // Identifier
-          memoize(17, e0A, -1);
+          memoize(18, e0A, -1);
           lk = -5;
         }
         catch (p1A)
@@ -18166,7 +19163,7 @@ function C(string, parsingEventHandler)
           b1 = b1A; e1 = e1A; l2 = l2A; if (l2 == 0) {end = e1A;} else {
           b2 = b2A; e2 = e2A; l3 = l3A; if (l3 == 0) {end = e2A;} else {
           b3 = b3A; e3 = e3A; end = e3A; }}}
-          memoize(17, e0A, -2);
+          memoize(18, e0A, -2);
         }
       }
     }
@@ -18180,9 +19177,9 @@ function C(string, parsingEventHandler)
       break;
     case 17:                        // '('
       consumeT(17);                 // '('
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_expression();
       consumeT(18);                 // ')'
       break;
@@ -18204,9 +19201,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consume(24);                  // ','
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       whitespace();
       parse_assignmentExpression();
     }
@@ -18223,9 +19220,9 @@ function C(string, parsingEventHandler)
         break;
       }
       consumeT(24);                 // ','
-      lookahead1W(37);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
-                                    // StringLiteral | WhiteSpace | Comment | PreprocessingDirective | '!' | '&' | '(' |
-                                    // '*' | '+' | '++' | '-' | '--' | 'sizeof' | '~'
+      lookahead1W(40);              // Identifier | IntegerConstant | FloatingConstant | CharacterConstant |
+                                    // StringLiteral | WhiteSpace | Comment | '!' | '&' | '(' | '*' | '+' | '++' | '-' |
+                                    // '--' | 'sizeof' | '~'
       try_assignmentExpression();
     }
   }
@@ -18313,9 +19310,7 @@ function C(string, parsingEventHandler)
     for (;;)
     {
       code = match(tokenSetId);
-      if (code != 7                 // WhiteSpace
-       && code != 8                 // Comment
-       && code != 9)                // PreprocessingDirective
+      if (code != 7)                // WhiteSpace
       {
         break;
       }
@@ -18438,7 +19433,7 @@ function C(string, parsingEventHandler)
 
       state = code;
       var i0 = (charclass << 9) + code - 1;
-      code = C.TRANSITION[(i0 & 15) + C.TRANSITION[i0 >> 4]];
+      code = C.TRANSITION[(i0 & 7) + C.TRANSITION[i0 >> 3]];
 
       if (code > 511)
       {
@@ -18569,8 +19564,9 @@ C.getTokenSet = function(tokenSetId)
   for (var i = 0; i < 88; i += 32)
   {
     var j = i;
-    var i0 = (i >> 5) * 415 + s - 1;
-    var f = C.EXPECTED[(i0 & 3) + C.EXPECTED[i0 >> 2]];
+    var i0 = (i >> 5) * 487 + s - 1;
+    var i1 = i0 >> 2;
+    var f = C.EXPECTED[(i0 & 3) + C.EXPECTED[(i1 & 15) + C.EXPECTED[i1 >> 4]]];
     for ( ; f != 0; f >>>= 1, ++j)
     {
       if ((f & 1) != 0)
@@ -18664,11 +19660,11 @@ C.Nonterminal = function(name, begin, end, children)
 
 C.MAP0 =
 [
-  /*   0 */ 73, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 6, 7,
-  /*  36 */ 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 22, 22, 22, 22, 22, 23, 23, 24, 25, 26, 27, 28,
-  /*  63 */ 29, 8, 30, 31, 30, 30, 32, 33, 34, 34, 34, 34, 34, 35, 34, 34, 34, 36, 34, 34, 34, 34, 34, 34, 34, 37, 34,
-  /*  90 */ 34, 38, 39, 40, 41, 34, 8, 42, 43, 44, 45, 46, 47, 48, 49, 50, 34, 51, 52, 53, 54, 55, 56, 34, 57, 58, 59,
-  /* 117 */ 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70
+  /*   0 */ 74, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 7, 8,
+  /*  36 */ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 23, 23, 23, 23, 23, 24, 24, 25, 26, 27, 28, 29,
+  /*  63 */ 30, 9, 31, 32, 31, 31, 33, 34, 35, 35, 35, 35, 35, 36, 35, 35, 35, 37, 35, 35, 35, 35, 35, 35, 35, 38, 35,
+  /*  90 */ 35, 39, 40, 41, 42, 35, 9, 43, 44, 45, 46, 47, 48, 49, 50, 51, 35, 52, 53, 54, 55, 56, 57, 35, 58, 59, 60,
+  /* 117 */ 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71
 ];
 
 C.MAP1 =
@@ -18684,490 +19680,552 @@ C.MAP1 =
   /* 168 */ 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 394, 394, 394, 394, 394, 394, 394, 394,
   /* 189 */ 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394, 394,
   /* 210 */ 394, 394, 394, 441, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442,
-  /* 231 */ 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 394, 73, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 256 */ 1, 2, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-  /* 290 */ 17, 18, 19, 20, 21, 22, 22, 22, 22, 22, 22, 23, 23, 24, 25, 26, 27, 28, 29, 8, 30, 31, 30, 30, 32, 33, 34,
-  /* 317 */ 34, 34, 34, 34, 35, 34, 34, 34, 36, 34, 34, 34, 34, 34, 34, 34, 37, 34, 34, 38, 39, 40, 41, 34, 8, 42, 43,
-  /* 344 */ 44, 45, 46, 47, 48, 49, 50, 34, 51, 52, 53, 54, 55, 56, 34, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
-  /* 371 */ 69, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 72, 72, 70, 70, 70, 70, 70, 70, 70, 71, 70, 70, 70, 70,
-  /* 398 */ 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71,
-  /* 425 */ 71, 71, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 70, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72,
-  /* 452 */ 72, 72, 72, 72, 72, 72
+  /* 231 */ 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 442, 394, 74, 0, 0, 0, 0, 0, 0, 0, 0,
+  /* 256 */ 1, 2, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+  /* 289 */ 17, 18, 19, 20, 21, 22, 23, 23, 23, 23, 23, 23, 24, 24, 25, 26, 27, 28, 29, 30, 9, 31, 32, 31, 31, 33, 34,
+  /* 316 */ 35, 35, 35, 35, 35, 36, 35, 35, 35, 37, 35, 35, 35, 35, 35, 35, 35, 38, 35, 35, 39, 40, 41, 42, 35, 9, 43,
+  /* 343 */ 44, 45, 46, 47, 48, 49, 50, 51, 35, 52, 53, 54, 55, 56, 57, 35, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+  /* 370 */ 69, 70, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 73, 73, 71, 71, 71, 71, 71, 71, 71, 72, 71, 71, 71,
+  /* 397 */ 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72,
+  /* 424 */ 72, 72, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 71, 73, 73, 73, 73, 73, 73, 73, 73, 73,
+  /* 451 */ 73, 73, 73, 73, 73, 73, 73
 ];
 
 C.MAP2 =
 [
-  /*  0 */ 57344, 63744, 64976, 65008, 65536, 983040, 63743, 64975, 65007, 65533, 983039, 1114111, 70, 72, 70, 72, 72,
-  /* 17 */ 70
+  /*  0 */ 57344, 63744, 64976, 65008, 65536, 983040, 63743, 64975, 65007, 65533, 983039, 1114111, 71, 73, 71, 73, 73,
+  /* 17 */ 71
 ];
 
 C.INITIAL =
 [
   /*  0 */ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
   /* 29 */ 30, 31, 32, 33, 34, 1059, 1060, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
-  /* 55 */ 56, 57, 58, 1082, 59, 60, 61, 62, 63, 64, 65, 66, 67, 1090, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 1102, 79,
-  /* 81 */ 80
+  /* 55 */ 56, 57, 58, 59, 60, 61, 62, 63, 1085, 64, 65, 66, 67, 68, 1092, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+  /* 81 */ 1103, 1104, 1105, 82, 83
 ];
 
 C.TRANSITION =
 [
-  /*    0 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*   18 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2368, 2368, 2368, 2368,
-  /*   36 */ 2368, 2401, 2384, 3335, 2384, 2384, 2647, 2384, 2384, 5070, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384,
-  /*   54 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2368, 2368, 2368, 2368, 2368, 2420, 2384, 2384,
-  /*   72 */ 2384, 2384, 2864, 2384, 2384, 2384, 2384, 2384, 5065, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*   90 */ 2384, 2384, 2384, 2384, 2384, 2384, 2368, 2368, 2368, 2368, 2368, 2383, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  108 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  126 */ 2384, 2384, 2368, 2368, 2368, 2368, 2368, 2401, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384,
-  /*  144 */ 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  162 */ 8045, 2438, 2456, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384,
-  /*  180 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3454, 3338, 2490, 2472,
-  /*  198 */ 2384, 2521, 2384, 2384, 2647, 2384, 2384, 3186, 2384, 2384, 5065, 2384, 2474, 2384, 2384, 2384, 2384, 2384,
-  /*  216 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2544, 2544, 2544, 2544, 2544, 2472, 2384, 3842, 2384, 2384,
-  /*  234 */ 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  252 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201,
-  /*  270 */ 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  288 */ 2384, 2384, 2384, 2384, 8160, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384,
-  /*  306 */ 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 8294, 2560,
-  /*  324 */ 2578, 2472, 2384, 3842, 2384, 3207, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384,
-  /*  342 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3757, 2627, 2594, 2472, 2384, 3842,
-  /*  360 */ 2384, 2384, 2647, 2384, 2384, 2977, 2625, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  378 */ 2384, 2384, 2384, 2384, 2384, 2384, 2645, 2663, 2690, 2674, 2698, 2472, 2384, 3842, 2384, 2384, 2647, 2384,
-  /*  396 */ 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  414 */ 2384, 2384, 2714, 2738, 2767, 2727, 2754, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384,
-  /*  432 */ 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2793,
-  /*  450 */ 2816, 2805, 2827, 2843, 2384, 3842, 2384, 2403, 2898, 2384, 2384, 7201, 2384, 2384, 7196, 2384, 2385, 2384,
-  /*  468 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 8356, 2862, 2880, 2472,
-  /*  486 */ 2384, 4826, 2384, 2384, 5407, 2384, 2384, 7201, 2896, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384,
-  /*  504 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2846, 2956, 2914, 2945, 2934, 2472, 2384, 3842, 2384, 2384,
-  /*  522 */ 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  540 */ 2384, 2384, 2384, 2384, 2384, 2384, 4023, 2972, 2993, 3009, 3994, 6978, 3951, 8133, 2777, 3012, 4790, 4904,
-  /*  558 */ 3030, 3013, 7599, 3014, 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  576 */ 3056, 2384, 3811, 3052, 3072, 3009, 4893, 7419, 3951, 8133, 3695, 3012, 5541, 7221, 3088, 3013, 7599, 3014,
-  /*  594 */ 4900, 3113, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3133, 3133, 3133, 3133,
-  /*  612 */ 3144, 3160, 2384, 3842, 2384, 2422, 2647, 2384, 2384, 7201, 2384, 2384, 3181, 2384, 2385, 2384, 2384, 2384,
-  /*  630 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 5764, 3202, 3223, 3009, 3994, 5445,
-  /*  648 */ 3951, 8133, 3695, 3012, 4790, 5218, 3254, 3013, 7599, 3014, 4900, 3279, 3012, 6294, 5016, 4768, 5920, 6564,
-  /*  666 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 6648, 3299, 3320, 3009, 3994, 5445, 3951, 8133, 3695, 3012,
-  /*  684 */ 4790, 5218, 3254, 3013, 7599, 3014, 4900, 3279, 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384,
-  /*  702 */ 2384, 2384, 2384, 2384, 6648, 3299, 3320, 3009, 3994, 5445, 3951, 8133, 3695, 3012, 4790, 5218, 3356, 3013,
-  /*  720 */ 7599, 3014, 4900, 3279, 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  738 */ 6648, 3299, 3320, 3009, 3994, 5816, 3951, 8133, 3695, 3012, 4790, 4155, 3356, 3013, 7599, 3014, 4900, 3279,
-  /*  756 */ 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 4287, 4276, 3418, 3381, 3406, 2472,
-  /*  774 */ 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384,
-  /*  792 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 6735, 4834, 3443, 3470, 3484, 2472, 2384, 3842, 2384, 2384,
-  /*  810 */ 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  828 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 5487, 2472, 2384, 3842, 2384, 2384, 3500, 2384, 2384, 7201,
-  /*  846 */ 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  864 */ 3526, 3516, 2384, 2629, 3551, 2472, 2384, 3842, 2384, 2528, 3567, 2384, 2384, 7201, 2384, 2562, 3583, 2384,
-  /*  882 */ 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  900 */ 7862, 2472, 2384, 3842, 2384, 2384, 3608, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384,
-  /*  918 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 6230, 2472, 2384, 3842,
-  /*  936 */ 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /*  954 */ 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253, 3951, 8133, 3695, 3012,
-  /*  972 */ 4790, 4904, 3624, 3013, 7599, 3014, 4900, 3649, 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384,
-  /*  990 */ 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 7458, 3951, 8133, 3695, 3012, 4790, 4904, 3624, 3013,
-  /* 1008 */ 7599, 3014, 4900, 3649, 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519,
-  /* 1026 */ 4586, 3012, 7524, 3009, 3994, 7809, 3951, 8133, 3695, 3012, 4790, 7544, 3624, 3013, 7599, 3014, 4900, 3649,
-  /* 1044 */ 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009,
-  /* 1062 */ 3994, 4564, 3951, 8133, 3695, 3012, 4790, 6274, 3624, 3013, 7599, 3014, 4900, 3669, 3012, 6294, 5016, 4768,
-  /* 1080 */ 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253, 3951, 8133,
-  /* 1098 */ 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014, 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384,
-  /* 1116 */ 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 4564, 3951, 8133, 3695, 3012, 4790, 6274,
-  /* 1134 */ 5025, 3013, 7599, 3014, 4900, 3689, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1152 */ 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253, 3951, 8133, 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014,
-  /* 1170 */ 4900, 3711, 3012, 6294, 6058, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012,
-  /* 1188 */ 7524, 3009, 3994, 4098, 3951, 8133, 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014, 4900, 8325, 3012, 6294,
-  /* 1206 */ 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3733, 3746, 3784, 3773, 2472, 2384, 3842,
-  /* 1224 */ 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1242 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 4050, 3800, 3827, 2384, 2384, 5395, 2384, 2384, 2404, 2384,
-  /* 1260 */ 2384, 3165, 2384, 2384, 5065, 2384, 2440, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1278 */ 2384, 2384, 2384, 2384, 3304, 2384, 5364, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384,
-  /* 1296 */ 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1314 */ 2384, 2384, 2505, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384,
-  /* 1332 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3864, 3876, 3892, 3903, 3919, 3935,
-  /* 1350 */ 6845, 6692, 8329, 3943, 3592, 3969, 3989, 4010, 4039, 4066, 7776, 8070, 4087, 4124, 4149, 6294, 5016, 4768,
-  /* 1368 */ 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 4210, 4222, 4179, 4171, 4195, 3009, 3994, 7458, 3951, 8133,
-  /* 1386 */ 3695, 3012, 4790, 4904, 3624, 3013, 6426, 3014, 4553, 4238, 3012, 6294, 5016, 4768, 5920, 6564, 2384, 2384,
-  /* 1404 */ 2384, 2384, 2384, 2384, 4263, 4312, 4326, 4342, 4357, 3009, 3994, 6253, 3951, 8133, 3695, 3012, 4790, 4904,
-  /* 1422 */ 3624, 3013, 7599, 3014, 4900, 3649, 3012, 4373, 4400, 4425, 6342, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1440 */ 4470, 4482, 4455, 4498, 4513, 3009, 3994, 6253, 3951, 8133, 3695, 3012, 4790, 4904, 3624, 3013, 7599, 7604,
-  /* 1458 */ 6939, 4529, 3012, 7397, 5016, 4580, 4602, 5593, 2384, 2384, 2384, 2384, 2384, 2384, 4626, 4638, 4654, 4668,
-  /* 1476 */ 4684, 4700, 6669, 7809, 4750, 4742, 3390, 4766, 4790, 7544, 3624, 4784, 6322, 4811, 4900, 4850, 4881, 5794,
-  /* 1494 */ 4920, 4955, 4994, 5050, 2384, 2384, 2384, 2384, 2384, 2384, 5101, 5113, 5086, 5129, 5144, 5160, 4795, 4564,
-  /* 1512 */ 3951, 5188, 4296, 5212, 4790, 6274, 3624, 5874, 7599, 3014, 4900, 3669, 3012, 6294, 5016, 7047, 5234, 6553,
-  /* 1530 */ 2384, 2384, 2384, 2384, 2384, 2384, 5301, 5313, 5270, 5262, 5286, 3009, 3994, 6253, 3951, 8133, 3695, 7165,
-  /* 1548 */ 5329, 6722, 5350, 5380, 4439, 3014, 5805, 5423, 3012, 4542, 5461, 4768, 5920, 6564, 2384, 2384, 2384, 2384,
-  /* 1566 */ 2384, 2384, 3036, 6519, 4586, 3012, 7524, 5503, 5529, 5567, 4865, 5513, 3535, 3012, 4790, 4904, 5025, 3013,
-  /* 1584 */ 7599, 3014, 4900, 8325, 3012, 6294, 5960, 3973, 6779, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 5624, 5636,
-  /* 1602 */ 5609, 5652, 5667, 5683, 3994, 5699, 5861, 5753, 5034, 3012, 5780, 7248, 5832, 4978, 7599, 5848, 8093, 5899,
-  /* 1620 */ 5737, 5915, 6474, 5936, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009,
-  /* 1638 */ 3994, 6253, 3951, 8133, 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014, 4900, 8325, 4938, 6294, 5960, 5952,
-  /* 1656 */ 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 5991, 6003, 5976, 6032, 6019, 6048, 7014, 4564, 4715, 6083,
-  /* 1674 */ 3427, 4726, 6605, 6437, 5551, 3013, 7042, 4610, 4900, 3689, 5006, 4071, 5883, 6382, 7269, 5582, 2384, 2384,
-  /* 1692 */ 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253, 3951, 8133, 3695, 3012, 4790, 4904,
-  /* 1710 */ 5025, 3013, 6370, 3014, 5434, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 1728 */ 6107, 6119, 6155, 6147, 6135, 6987, 6171, 6187, 7488, 7786, 3365, 6203, 5246, 6246, 6067, 7738, 6269, 6290,
-  /* 1746 */ 7408, 6310, 3012, 7608, 6358, 6466, 6398, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012,
-  /* 1764 */ 7524, 6453, 6490, 6591, 6621, 6637, 3633, 7634, 6664, 6685, 4247, 3013, 4932, 6818, 4108, 6708, 6751, 6774,
-  /* 1782 */ 7747, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253,
-  /* 1800 */ 3951, 8133, 3695, 3012, 6795, 4904, 5025, 6834, 7599, 3014, 4900, 3711, 3012, 6294, 6058, 4768, 5920, 6564,
-  /* 1818 */ 2384, 2384, 2384, 2384, 2384, 2384, 6861, 6873, 6889, 6900, 6916, 6806, 6932, 6253, 3117, 8133, 3953, 4939,
-  /* 1836 */ 6955, 5474, 5025, 7003, 7599, 8128, 6967, 7030, 6812, 6294, 7833, 7063, 5920, 6575, 2384, 2384, 2384, 2384,
-  /* 1854 */ 2384, 2384, 7087, 7099, 7115, 7131, 7146, 3009, 3994, 6253, 3951, 8133, 3695, 7162, 6413, 7571, 7181, 6505,
-  /* 1872 */ 8122, 3014, 7217, 8325, 7237, 7264, 7071, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 7285, 7297,
-  /* 1890 */ 7313, 7324, 7340, 7356, 3994, 7382, 3673, 7366, 3097, 7435, 4790, 7451, 4133, 7474, 4969, 7515, 7540, 8325,
-  /* 1908 */ 7560, 7499, 7587, 5172, 7624, 6531, 2384, 2384, 2384, 2384, 2384, 2384, 7665, 7677, 7650, 7693, 7708, 7724,
-  /* 1926 */ 3994, 6253, 6091, 8133, 3695, 5729, 7763, 7802, 4409, 3013, 7599, 6333, 4384, 8325, 5714, 6294, 5960, 7825,
-  /* 1944 */ 5920, 6542, 2384, 2384, 2384, 2384, 2384, 2384, 7849, 7878, 7892, 7921, 7908, 3009, 3994, 6253, 3951, 8133,
-  /* 1962 */ 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014, 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384,
-  /* 1980 */ 2384, 2384, 2384, 2384, 7976, 7988, 7945, 7937, 7961, 8004, 3994, 8018, 3653, 8034, 3263, 3012, 4790, 4904,
-  /* 1998 */ 5025, 3013, 7599, 3014, 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2016 */ 3036, 6519, 4586, 3012, 7524, 8061, 5334, 4098, 5196, 8133, 3717, 3012, 4790, 4904, 5025, 3013, 7599, 3014,
-  /* 2034 */ 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012,
-  /* 2052 */ 7524, 3009, 8086, 6253, 3283, 8133, 3695, 3012, 4790, 4904, 5025, 3013, 7599, 3014, 4900, 8325, 3012, 6294,
-  /* 2070 */ 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 3036, 6519, 4586, 3012, 7524, 3009, 3994, 6253,
-  /* 2088 */ 3951, 8133, 3695, 3012, 8109, 6217, 8149, 6758, 7599, 3014, 4900, 8325, 3012, 6294, 5960, 4768, 5920, 6564,
-  /* 2106 */ 2384, 2384, 2384, 2384, 2384, 2384, 8179, 2918, 8176, 8195, 8208, 2472, 2384, 3842, 2384, 2384, 2647, 2384,
-  /* 2124 */ 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2142 */ 2384, 2384, 2384, 2384, 2384, 2384, 2609, 2472, 2384, 3842, 2384, 2384, 8224, 2384, 2384, 7201, 2384, 2384,
-  /* 2160 */ 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3848, 8240,
-  /* 2178 */ 8259, 8243, 8267, 2472, 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384,
-  /* 2196 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3238, 8283, 8310, 2472,
-  /* 2214 */ 2384, 3842, 2384, 2384, 2647, 2384, 2384, 7201, 2384, 2384, 5065, 2384, 2385, 2384, 2384, 2384, 2384, 2384,
-  /* 2232 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2472, 2384, 2384, 2384, 2384,
-  /* 2250 */ 2647, 2384, 2384, 2384, 2384, 2384, 5065, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2268 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 3009, 3994, 3948, 3951, 8133, 3695, 3012, 4790, 8131,
-  /* 2286 */ 5025, 3013, 7599, 3014, 5240, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2304 */ 3036, 6519, 4586, 3012, 7524, 3009, 3994, 3948, 3951, 8133, 3695, 3012, 4790, 8131, 5025, 3013, 7599, 3014,
-  /* 2322 */ 5240, 8325, 3012, 6294, 5960, 4768, 5920, 6564, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2340 */ 2384, 8345, 2384, 2384, 2384, 2384, 3340, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384,
-  /* 2358 */ 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 2384, 4177, 4177, 4177, 4177, 4177, 4177, 4177, 4177,
-  /* 2376 */ 4177, 4177, 4177, 4177, 4177, 4177, 4177, 4177, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 4177,
-  /* 2402 */ 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 4177, 5202, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 2435 */ 0, 0, 176, 0, 5632, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 304, 0, 5632, 0, 5632, 5632, 154, 154,
-  /* 2463 */ 154, 154, 154, 154, 154, 5632, 5632, 5786, 154, 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3701,
-  /* 2490 */ 0, 117, 0, 117, 117, 0, 0, 0, 0, 0, 0, 0, 117, 117, 117, 0, 0, 0, 0, 0, 25252, 25252, 25252, 25252, 25252,
-  /* 2515 */ 25252, 25252, 0, 0, 25252, 25252, 0, 0, 0, 0, 3584, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6144, 7168, 8704,
-  /* 2540 */ 10752, 12288, 14336, 16896, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 0, 7680, 0, 0,
-  /* 2564 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19456, 0, 7680, 0, 7680, 7680, 7836, 7836, 7836, 7836, 7836, 7836,
-  /* 2589 */ 7836, 7680, 7680, 7836, 7836, 0, 118, 0, 118, 118, 0, 0, 0, 0, 0, 0, 0, 118, 118, 118, 0, 0, 0, 0, 0,
-  /* 2614 */ 43173, 43173, 43173, 43173, 43173, 43173, 43173, 0, 0, 43173, 43173, 0, 0, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 2637 */ 0, 0, 0, 0, 0, 0, 0, 20480, 0, 9216, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 176, 9216, 9216, 9216,
-  /* 2666 */ 0, 0, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 0, 0, 0, 0, 9216, 9216, 9216, 9216,
-  /* 2687 */ 9216, 9216, 9216, 9216, 9216, 9216, 9216, 0, 9216, 9216, 0, 9216, 9216, 9216, 9216, 9216, 0, 9216, 9216,
-  /* 2706 */ 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 0, 0, 9728, 0, 0, 0, 0, 0, 0, 0, 0, 9728, 0, 9728, 0, 0,
-  /* 2730 */ 9728, 9728, 0, 9728, 0, 0, 0, 9728, 0, 9728, 0, 0, 0, 0, 9728, 0, 0, 0, 0, 9728, 0, 9728, 9728, 9728, 0, 0,
-  /* 2756 */ 9728, 0, 0, 9728, 9728, 0, 0, 9728, 0, 9728, 0, 9728, 9728, 9728, 9728, 0, 0, 0, 0, 9728, 9728, 0, 0, 0, 0,
-  /* 2781 */ 0, 0, 13824, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 175, 176, 10240, 0, 10240, 10240, 0, 10240, 0,
-  /* 2800 */ 10240, 0, 0, 10240, 0, 10240, 10240, 10240, 10240, 10240, 0, 0, 0, 0, 10240, 10240, 10240, 10240, 10240,
-  /* 2819 */ 10240, 0, 10240, 10240, 0, 10240, 10240, 10240, 10240, 10240, 0, 10240, 10240, 10397, 10397, 10397, 10397,
-  /* 2836 */ 10397, 10397, 10397, 10240, 10240, 10397, 10397, 0, 82, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12800,
-  /* 2860 */ 12800, 12800, 0, 11383, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 4784, 0, 11383, 0, 11383, 11383,
-  /* 2885 */ 11422, 11430, 11430, 11430, 11430, 11430, 11430, 11383, 11383, 11430, 11430, 0, 305, 0, 0, 0, 0, 0, 0, 0,
-  /* 2905 */ 0, 0, 0, 0, 0, 0, 0, 261, 176, 12800, 12800, 12800, 12800, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42496, 0, 0,
-  /* 2933 */ 0, 12800, 0, 12800, 0, 0, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 0, 0, 12800, 12800, 0, 0, 0, 0,
-  /* 2954 */ 0, 0, 0, 0, 0, 0, 12800, 0, 12800, 0, 12800, 12800, 0, 12800, 0, 12800, 12800, 0, 0, 13432, 0, 0, 0, 0, 0,
-  /* 2979 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 3293, 0, 0, 0, 0, 13432, 0, 13432, 13432, 13471, 13479, 13479, 13479,
-  /* 3002 */ 13479, 13479, 13479, 13432, 13432, 13479, 13479, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 3020 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 305, 0, 0, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0,
-  /* 3044 */ 0, 0, 0, 1620, 1620, 0, 0, 0, 0, 121, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0,
-  /* 3075 */ 121, 121, 0, 15360, 15360, 15360, 15360, 15360, 15360, 121, 121, 15481, 15360, 0, 0, 307, 0, 1620, 1620,
-  /* 3094 */ 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1780, 1620, 175, 176, 0, 0, 0, 359, 1620, 0,
-  /* 3119 */ 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1733, 1782, 1620, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83,
-  /* 3144 */ 83, 83, 83, 83, 83, 16544, 16544, 16544, 16544, 16544, 16544, 16544, 83, 83, 16544, 16544, 0, 82, 176, 0,
-  /* 3164 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 304, 221, 0, 0, 0, 0, 0, 0, 0, 4608, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 3197 */ 3584, 221, 0, 0, 0, 0, 2170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8192, 0, 0, 0, 0, 0, 2170, 0, 2170,
-  /* 3227 */ 2170, 0, 0, 0, 0, 0, 0, 0, 2170, 2170, 2170, 0, 0, 0, 0, 0, 45056, 0, 0, 0, 45056, 45056, 45056, 45056, 0,
-  /* 3252 */ 45056, 45056, 2273, 2866, 2356, 0, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620,
-  /* 3274 */ 1620, 1789, 1620, 175, 176, 2866, 2866, 359, 2356, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620,
-  /* 3296 */ 1781, 1620, 1620, 0, 2171, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24576, 0, 0, 0, 0, 0, 2171, 0, 2171,
-  /* 3324 */ 2171, 0, 0, 0, 0, 0, 0, 0, 2171, 2171, 2171, 0, 0, 0, 0, 117, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 3355 */ 4608, 0, 2866, 2356, 0, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1749, 1620, 1620,
-  /* 3378 */ 1747, 175, 0, 0, 17408, 0, 17408, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1785, 1620, 1620, 1795, 1620,
-  /* 3403 */ 1620, 175, 176, 0, 0, 17408, 0, 0, 17408, 0, 0, 17408, 0, 17408, 17408, 0, 0, 17408, 17408, 0, 0, 0, 0, 0,
-  /* 3427 */ 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1748, 1620, 1620, 1620, 1796, 175, 176, 17920, 0, 17920, 17920, 0, 0,
-  /* 3449 */ 17920, 0, 0, 0, 17920, 0, 0, 0, 0, 0, 117, 0, 0, 0, 117, 117, 117, 117, 0, 117, 117, 0, 0, 17920, 17920, 0,
-  /* 3475 */ 0, 0, 0, 0, 0, 0, 17920, 0, 0, 17920, 17920, 17920, 0, 17920, 17920, 0, 0, 17920, 0, 17920, 17920, 17920,
-  /* 3497 */ 17920, 17920, 17920, 19200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 176, 0, 0, 0, 0, 20480, 0, 0, 0, 0,
-  /* 3525 */ 20480, 0, 0, 0, 0, 0, 0, 20480, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1745, 1620, 1620, 1620, 1620, 1751, 1620, 175,
-  /* 3550 */ 176, 20480, 0, 20480, 0, 0, 20642, 20642, 20642, 20642, 20642, 20642, 20642, 0, 0, 20642, 20642, 19968,
-  /* 3568 */ 20992, 22016, 25600, 43520, 12288, 14336, 0, 0, 0, 0, 0, 0, 0, 175, 176, 23040, 0, 0, 0, 175, 0, 0, 0, 0,
-  /* 3592 */ 0, 0, 0, 0, 0, 0, 0, 1783, 1620, 1722, 1620, 1620, 1620, 1620, 175, 176, 0, 0, 22785, 0, 0, 0, 14848, 0, 0,
-  /* 3617 */ 0, 0, 0, 0, 0, 175, 176, 0, 0, 2356, 0, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1794, 29906, 1786,
-  /* 3643 */ 1620, 1620, 1620, 1620, 175, 176, 0, 0, 359, 2356, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1732,
-  /* 3666 */ 1620, 1620, 1620, 0, 2560, 359, 2356, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1780, 1620, 1620,
-  /* 3688 */ 1620, 0, 2560, 0, 0, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 175, 176, 0,
-  /* 3712 */ 0, 0, 226, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1778, 175, 176, 0, 24064,
-  /* 3735 */ 24064, 0, 0, 0, 24064, 0, 24064, 24064, 0, 24064, 0, 24064, 24064, 24064, 24064, 0, 0, 0, 0, 24064, 0, 0,
-  /* 3757 */ 0, 0, 0, 0, 0, 118, 0, 0, 0, 118, 118, 118, 118, 0, 118, 118, 24064, 0, 24064, 0, 0, 0, 24064, 24064,
-  /* 3781 */ 24064, 24064, 24064, 24064, 0, 0, 24064, 24064, 0, 0, 0, 0, 0, 0, 0, 24064, 24064, 24064, 24064, 0, 124, 0,
-  /* 3803 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0, 0, 0, 121, 121, 121, 121, 0, 121, 121, 0, 124, 0, 124, 124,
-  /* 3832 */ 0, 0, 0, 0, 0, 0, 0, 124, 124, 124, 0, 0, 0, 0, 117, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44544, 0, 0, 0, 0,
-  /* 3863 */ 44544, 1621, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1621, 1621, 0, 0, 0, 0, 1621, 0, 1621, 0, 0, 1621, 1621, 1621,
-  /* 3889 */ 0, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 0, 1621, 1621, 1621, 1621, 1621, 1621, 1621,
-  /* 3908 */ 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1674, 1621, 1674, 1621, 1674, 0, 0, 0, 0,
-  /* 3928 */ 0, 1621, 0, 1674, 1674, 1621, 1674, 0, 82, 0, 1620, 1620, 1620, 1715, 1620, 1620, 1722, 1620, 1620, 1620,
-  /* 3948 */ 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 175, 0, 1620,
-  /* 3970 */ 1620, 1620, 1724, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 84, 1620, 0,
-  /* 3988 */ 1620, 1620, 1620, 1814, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620,
-  /* 4008 */ 1620, 1620, 1829, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1814, 1620, 1620, 117, 221, 0, 0, 0, 0, 0,
-  /* 4028 */ 13432, 0, 0, 0, 13432, 13432, 13432, 13432, 0, 13432, 13432, 0, 0, 2356, 0, 1620, 1620, 1620, 310, 0, 0, 0,
-  /* 4050 */ 0, 0, 0, 0, 0, 124, 0, 0, 0, 124, 124, 124, 124, 0, 124, 124, 1620, 1620, 1620, 1857, 1620, 1620, 1620,
-  /* 4073 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 1620, 1620, 1921, 0, 349, 1620, 1887, 1620, 1620,
-  /* 4093 */ 1620, 1889, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 0, 227, 0, 0, 1620, 1620, 1620, 1620,
-  /* 4114 */ 1620, 1620, 1620, 1620, 1620, 1620, 1893, 1620, 1620, 117, 0, 0, 359, 2356, 1620, 0, 0, 362, 0, 0, 0, 0, 0,
-  /* 4137 */ 1620, 1620, 1620, 0, 0, 0, 34304, 0, 0, 0, 0, 0, 1620, 1620, 1906, 1620, 1620, 1908, 1620, 1620, 1620,
-  /* 4158 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 2782, 224, 224, 1622, 1622, 1622, 1622, 1622,
-  /* 4176 */ 1622, 1622, 1622, 1622, 1622, 1622, 1622, 1622, 1622, 1622, 1622, 0, 1622, 1622, 1622, 1622, 1622, 1622,
-  /* 4194 */ 1622, 1622, 1679, 1622, 1622, 1622, 0, 0, 0, 0, 0, 1622, 0, 1679, 1679, 1679, 1622, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 4219 */ 0, 0, 1622, 1622, 0, 0, 0, 0, 1622, 0, 1622, 0, 0, 1622, 1622, 1622, 0, 1622, 1622, 0, 0, 359, 2356, 1620,
-  /* 4243 */ 0, 361, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 0, 0, 312, 0, 0, 314, 0, 0, 0, 1623, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 4273 */ 0, 1623, 1623, 0, 0, 0, 0, 0, 17408, 0, 0, 17408, 0, 0, 0, 0, 0, 0, 17408, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 4303 */ 1620, 1620, 1620, 33876, 1620, 1620, 1620, 175, 176, 1623, 0, 0, 104, 0, 1623, 0, 1642, 0, 0, 1642, 1642,
-  /* 4324 */ 1642, 104, 1642, 1642, 1642, 1642, 1644, 1623, 1662, 1662, 130, 1623, 1623, 1623, 1623, 1662, 1642, 1623,
-  /* 4342 */ 1662, 1623, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1662, 1680, 1662,
-  /* 4360 */ 1662, 1662, 0, 0, 0, 0, 104, 1642, 0, 1704, 1704, 1680, 1662, 1620, 1620, 1620, 1620, 1725, 1917, 1620,
-  /* 4380 */ 1620, 1620, 1620, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1892, 1620, 1620, 1620,
-  /* 4399 */ 117, 1620, 1620, 1620, 1923, 1620, 1620, 359, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 0, 311, 0, 0, 0, 0, 0,
-  /* 4423 */ 0, 0, 1620, 1620, 1620, 1620, 1620, 1936, 1620, 1620, 1620, 1620, 1620, 84, 1620, 1620, 0, 1620, 1856,
-  /* 4442 */ 1620, 175, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 84, 1620, 1624, 1624, 1624, 1624, 1645,
-  /* 4460 */ 1624, 1645, 1645, 131, 1624, 1624, 1624, 1624, 1645, 1624, 1624, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1624, 1624,
-  /* 4483 */ 0, 0, 0, 0, 1624, 0, 1624, 0, 0, 1624, 1624, 1624, 0, 1624, 1624, 1645, 1624, 1645, 1645, 1645, 1645, 1645,
-  /* 4505 */ 1645, 1645, 1645, 1645, 1645, 1645, 1645, 1645, 1645, 1681, 1645, 1645, 1645, 0, 0, 0, 0, 0, 1624, 0, 1705,
-  /* 4526 */ 1705, 1681, 1645, 0, 0, 359, 2356, 1620, 0, 0, 0, 0, 0, 0, 0, 40960, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4548 */ 1620, 1620, 1812, 1620, 0, 0, 0, 1620, 1620, 1620, 1888, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4567 */ 1620, 117, 221, 0, 0, 0, 2560, 2560, 0, 1620, 1620, 1620, 1620, 1932, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4587 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 36948, 1620,
-  /* 4605 */ 1620, 1620, 0, 36864, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4623 */ 1800, 0, 347, 1625, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 1625, 1625, 0, 0, 0, 0, 1625, 0, 1625, 0, 0, 1625,
-  /* 4649 */ 1625, 1625, 0, 1625, 1625, 1625, 1625, 1625, 1625, 1646, 1625, 1625, 1646, 0, 1625, 1625, 1625, 1625, 1646,
-  /* 4668 */ 1625, 1625, 1646, 1625, 1646, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1675, 1625,
-  /* 4686 */ 1675, 1646, 1675, 0, 0, 0, 0, 0, 1625, 0, 1675, 1710, 1625, 1675, 0, 82, 0, 1620, 1620, 1620, 1620, 1718,
-  /* 4708 */ 1620, 1620, 1620, 1620, 1620, 1620, 1728, 1620, 0, 0, 234, 0, 0, 0, 0, 0, 1620, 1715, 1620, 1620, 1620,
-  /* 4729 */ 1620, 1620, 1620, 1620, 1620, 1620, 1715, 1620, 1620, 1620, 1620, 1808, 1620, 1785, 1620, 1620, 1620, 1788,
-  /* 4747 */ 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1779, 1620, 1620, 1620, 1620, 1620, 1799, 1620,
-  /* 4769 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 1620, 1620, 1620,
-  /* 4787 */ 1620, 1620, 1859, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620,
-  /* 4807 */ 1620, 1620, 1620, 84, 1620, 1620, 1620, 1620, 1875, 1620, 1620, 1620, 1879, 1620, 1620, 1620, 1620, 1620,
-  /* 4825 */ 30720, 0, 0, 0, 0, 117, 221, 11776, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17920, 17920, 17920, 0, 17920, 0, 0, 0, 0,
-  /* 4851 */ 0, 359, 2356, 1896, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1902, 1620, 232, 0, 0, 0, 0, 237, 0, 0, 1620, 1620, 1620,
-  /* 4877 */ 1751, 1620, 1620, 1716, 1620, 1905, 1620, 27220, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 30804, 1620,
-  /* 4894 */ 1620, 1620, 1620, 202, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4914 */ 1620, 117, 221, 0, 0, 0, 1620, 1620, 1922, 1620, 1620, 1620, 359, 1620, 0, 0, 0, 391, 0, 1620, 1620, 1620,
-  /* 4936 */ 175, 84, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 84, 1620, 1620, 1620,
-  /* 4954 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 42068, 1620, 1620, 1620, 1620, 1620, 1620, 1915, 0, 1620, 1864,
-  /* 4972 */ 1620, 175, 1620, 1620, 1620, 1870, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 4990 */ 1865, 1866, 1620, 0, 30292, 1620, 1620, 1620, 1620, 30208, 0, 0, 1620, 1620, 1620, 1943, 1620, 1620, 1620,
-  /* 5009 */ 1620, 1620, 1620, 1620, 1620, 1620, 1911, 1620, 1620, 1620, 1620, 1620, 1620, 359, 1620, 0, 0, 0, 0, 0,
-  /* 5029 */ 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1791, 1620, 175, 176, 1724, 0,
-  /* 5052 */ 1620, 1948, 413, 1950, 1620, 1620, 1620, 41472, 41556, 1620, 0, 1620, 28756, 0, 0, 0, 0, 175, 0, 0, 0, 0,
-  /* 5074 */ 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 0, 0, 1626, 1626, 1626, 1626, 1647, 1626, 1647, 1647, 132, 1626, 1626,
-  /* 5097 */ 1626, 1626, 1647, 1626, 1626, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1626, 1626, 0, 0, 0, 0, 1626, 0, 1626, 0, 0,
-  /* 5123 */ 1626, 1626, 1626, 0, 1626, 1626, 1647, 1626, 1647, 1647, 1647, 1647, 1647, 1647, 1647, 1647, 1647, 1647,
-  /* 5141 */ 1647, 1647, 1647, 1647, 1682, 1647, 1647, 1647, 0, 0, 0, 0, 0, 1626, 0, 1706, 1706, 1682, 1647, 0, 82, 0,
-  /* 5163 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 84, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5181 */ 1937, 1620, 1620, 1620, 1620, 0, 1620, 1620, 1620, 1620, 33876, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0,
-  /* 5201 */ 0, 0, 0, 0, 1620, 1778, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1802, 1620, 1620, 1620,
-  /* 5221 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 2782, 2271, 224, 1620, 1620, 1620, 1620, 37460,
-  /* 5239 */ 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 289, 0,
-  /* 5260 */ 1827, 1620, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627,
-  /* 5278 */ 0, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1627, 1683, 1627, 1627, 1627, 0, 0, 0, 0, 0, 1627, 0, 1683,
-  /* 5299 */ 1683, 1683, 1627, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1627, 1627, 0, 0, 0, 0, 1627, 0, 1627, 0, 0, 1627, 1627,
-  /* 5325 */ 1627, 0, 1627, 1627, 1620, 1812, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620,
-  /* 5346 */ 1620, 1721, 1620, 1620, 0, 0, 0, 0, 1812, 1620, 1620, 0, 0, 0, 0, 0, 0, 315, 0, 0, 0, 0, 0, 24576, 0, 0, 0,
-  /* 5373 */ 0, 0, 24576, 0, 0, 24576, 24576, 1620, 1620, 1856, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1809,
-  /* 5392 */ 1620, 1620, 1835, 0, 0, 0, 0, 220, 221, 0, 0, 0, 0, 0, 228, 0, 0, 0, 0, 0, 11776, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 5421 */ 175, 176, 0, 0, 0, 0, 1620, 0, 0, 0, 34816, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 31316, 1620, 1620, 1620,
-  /* 5444 */ 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 2782, 2271, 2171, 0, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5463 */ 1620, 1620, 1620, 1924, 0, 1620, 0, 0, 0, 0, 392, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1836,
-  /* 5483 */ 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 18593, 18593, 18593, 18593, 18593, 18593, 18593, 0, 0, 18593, 18593,
-  /* 5503 */ 0, 82, 0, 1620, 1620, 1620, 1716, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1729, 1790, 1751, 1751,
-  /* 5522 */ 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1737, 0, 0, 204, 0, 0, 1716, 1620, 1745, 1620, 1620, 1620, 1620,
-  /* 5545 */ 1620, 1620, 1620, 1620, 1620, 15872, 0, 0, 0, 0, 1620, 1620, 1828, 0, 0, 0, 0, 0, 0, 0, 0, 290, 1620, 1751,
-  /* 5569 */ 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 0, 1729, 1745, 1751, 1620, 410, 1947, 1620, 0, 1620, 1620, 1620, 1620,
-  /* 5591 */ 0, 1620, 1620, 0, 1620, 1620, 0, 1620, 1620, 1620, 1620, 0, 1620, 40532, 40448, 1620, 1620, 0, 1628, 1628,
-  /* 5611 */ 1628, 1628, 1648, 1628, 1648, 1648, 133, 1628, 1628, 1628, 1628, 1648, 1628, 1628, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 5633 */ 0, 0, 1628, 1628, 0, 0, 0, 0, 1628, 0, 1628, 0, 0, 1628, 1628, 1628, 0, 1628, 1628, 1648, 1628, 1648, 1648,
-  /* 5656 */ 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1684, 1648, 1648, 1648, 0, 0, 0, 0,
-  /* 5676 */ 0, 1628, 0, 1707, 1707, 1684, 1648, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5696 */ 1620, 1620, 1730, 1620, 1752, 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 0, 1765, 1620, 1752, 1620, 1620, 1620,
-  /* 5717 */ 1620, 1620, 1620, 1620, 1909, 1620, 1620, 1620, 1620, 1620, 1620, 1913, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5735 */ 1803, 1804, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1912, 1620, 1620,
-  /* 5753 */ 1620, 1620, 1620, 1620, 1620, 1765, 1620, 1791, 1791, 0, 0, 0, 0, 0, 0, 0, 2170, 0, 0, 0, 2170, 2170, 2170,
-  /* 5776 */ 2170, 0, 2170, 2170, 1620, 1620, 1620, 1816, 1620, 1620, 1818, 1820, 1822, 0, 0, 288, 0, 0, 1620, 1820,
-  /* 5796 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 41984, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 34900,
-  /* 5814 */ 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 2782, 224, 2171, 0, 1620, 1620, 1620, 1620, 0, 0, 0, 0,
-  /* 5836 */ 1620, 1818, 1839, 0, 0, 0, 0, 0, 0, 0, 0, 317, 1873, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5858 */ 1881, 1620, 1620, 1620, 0, 0, 0, 0, 0, 238, 0, 0, 1620, 1620, 1620, 1752, 1620, 1620, 1620, 1620, 1620,
-  /* 5879 */ 1620, 1620, 1620, 1862, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 390, 0, 0, 0, 0, 1620, 1620, 1620, 0,
-  /* 5900 */ 0, 0, 0, 1620, 0, 0, 0, 0, 0, 0, 365, 0, 1620, 1620, 1903, 1620, 1620, 1620, 1916, 1620, 1620, 1620, 1620,
-  /* 5923 */ 1620, 1620, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1933, 1620, 1620, 1620,
-  /* 5942 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 402, 1939, 1620, 26708, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 5960 */ 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1629, 1629, 1629, 1629, 1649,
-  /* 5981 */ 1629, 1649, 1649, 134, 1629, 1629, 1629, 1629, 1649, 1629, 1629, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1629, 1629,
-  /* 6004 */ 0, 0, 0, 0, 1629, 0, 1629, 0, 0, 1629, 1629, 1629, 0, 1629, 1629, 1649, 1629, 1649, 1649, 1649, 0, 0, 0, 0,
-  /* 6028 */ 0, 1629, 0, 1649, 1649, 1629, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649,
-  /* 6047 */ 1649, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1715, 1723, 1620, 1620, 1620, 1620, 1620, 1620, 226, 1620, 0,
-  /* 6067 */ 0, 0, 0, 0, 1620, 1620, 1620, 0, 0, 0, 0, 313, 0, 0, 0, 0, 1620, 1723, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6091 */ 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1777, 1620, 1620, 1620, 1620, 1620, 1620, 1630, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 6118 */ 1630, 1630, 0, 0, 0, 0, 1630, 0, 1630, 0, 0, 1630, 1630, 1630, 0, 1630, 1630, 1630, 1630, 1630, 1630, 1630,
-  /* 6140 */ 0, 0, 0, 0, 0, 1630, 0, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1630,
-  /* 6161 */ 1630, 1630, 0, 1630, 1630, 1630, 1630, 1630, 1630, 1630, 1620, 1735, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620,
-  /* 6182 */ 1620, 1620, 1747, 1620, 1749, 1620, 1620, 1754, 1620, 117, 221, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1766,
-  /* 6203 */ 1620, 1620, 1620, 1620, 1801, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1807, 1620, 1620, 1620, 1620,
-  /* 6221 */ 1620, 1620, 1620, 1813, 1620, 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 23552, 23552, 23552, 23552, 23552,
-  /* 6240 */ 23552, 23552, 0, 0, 23552, 23552, 1620, 1620, 1620, 1620, 1620, 1833, 1620, 1620, 1620, 1620, 1620, 117,
-  /* 6258 */ 221, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 0, 1867, 1620, 1620, 175, 1620, 1620, 1620, 1620, 1620,
-  /* 6279 */ 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 2560, 2560, 2560, 1620, 1620, 1620, 1874, 1620, 1620, 1620,
-  /* 6297 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 1620, 1620, 1620, 0, 0, 0, 0, 1620, 0, 0, 0, 0, 0, 364,
-  /* 6321 */ 0, 0, 1620, 1620, 1620, 175, 1620, 1620, 84, 1620, 1620, 1620, 1620, 1872, 1620, 1620, 1620, 1620, 1877,
-  /* 6340 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 1620, 1620, 37972, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6359 */ 1620, 1620, 1620, 40020, 1620, 0, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 175, 1620, 1620, 1620, 1620, 1620,
-  /* 6380 */ 1620, 84, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1725, 1620, 1620, 1620, 1620, 1620, 0, 1620,
-  /* 6398 */ 1620, 1620, 1620, 1940, 1620, 0, 0, 405, 31828, 1620, 1620, 1620, 1944, 1620, 35924, 1620, 1620, 1620,
-  /* 6416 */ 1620, 1620, 1620, 1819, 1620, 1620, 0, 287, 0, 0, 0, 1620, 1620, 1620, 175, 1620, 1620, 1620, 1620, 1620,
-  /* 6436 */ 1822, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1821, 117, 221, 2560, 2560, 2560, 0, 82,
-  /* 6455 */ 0, 1620, 1620, 1620, 1717, 183, 1620, 1724, 1713, 1620, 1726, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6473 */ 1733, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1931, 1620, 1620, 1736, 1620,
-  /* 6494 */ 0, 0, 0, 205, 206, 1743, 1744, 1717, 210, 1620, 1724, 1620, 1620, 1620, 1620, 1620, 1620, 1860, 1620, 1620,
-  /* 6514 */ 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 1620, 0, 1620, 0, 0, 1620, 1620, 1620, 0, 1620, 1620, 0,
-  /* 6536 */ 1620, 1620, 1620, 29268, 0, 1620, 1620, 0, 1620, 1620, 0, 1620, 1620, 1951, 1620, 0, 1620, 1620, 0, 1620,
-  /* 6556 */ 1620, 0, 1620, 39508, 1620, 1620, 0, 1620, 1620, 0, 1620, 1620, 0, 1620, 1620, 1620, 1620, 0, 1620, 1620,
-  /* 6576 */ 0, 1620, 1620, 0, 1620, 1620, 1620, 1620, 0, 1620, 1620, 0, 35412, 1620, 0, 1750, 1620, 1620, 1755, 117,
-  /* 6596 */ 221, 0, 0, 0, 0, 0, 0, 1620, 1743, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1821, 1620, 0, 0, 0, 0, 290,
-  /* 6619 */ 1620, 1828, 1767, 205, 233, 0, 0, 236, 0, 0, 240, 1620, 1620, 1620, 1620, 1620, 1620, 1784, 29879, 1786,
-  /* 6639 */ 1787, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 2171, 0, 0, 0, 2171, 2171, 2171, 2171, 0,
-  /* 6662 */ 2171, 2171, 1811, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1718,
-  /* 6682 */ 1620, 1620, 1620, 1620, 1620, 1620, 1832, 1620, 1620, 1834, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 0, 0,
-  /* 6702 */ 0, 0, 1620, 1715, 1620, 1620, 0, 0, 0, 0, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 26196, 1620, 1620, 1620, 1620,
-  /* 6726 */ 1620, 1620, 1620, 1835, 1620, 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 17920, 0, 0, 0, 0, 0, 0, 0, 0, 17920, 0,
-  /* 6751 */ 1620, 1620, 1620, 1620, 1620, 1620, 33364, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6768 */ 1620, 1620, 1620, 1620, 1845, 0, 1620, 1620, 1915, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 1620,
-  /* 6788 */ 1620, 1620, 1620, 1620, 1620, 1620, 38996, 1620, 1620, 1620, 1620, 1620, 1817, 1620, 1620, 1620, 0, 0, 0,
-  /* 6807 */ 0, 0, 1620, 1620, 1714, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6826 */ 1620, 1880, 1620, 1620, 1620, 1620, 0, 0, 1620, 1620, 1620, 1620, 1858, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6845 */ 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1715, 1620, 1715, 1620, 1620, 1722, 1620, 1631, 0, 0, 0, 0, 0, 0, 0,
-  /* 6869 */ 0, 0, 0, 1631, 1631, 0, 0, 0, 0, 1631, 0, 1631, 0, 0, 1631, 1631, 1631, 0, 1631, 1631, 1631, 1631, 1631,
-  /* 6892 */ 1631, 1631, 1631, 1631, 1631, 0, 1631, 1631, 1631, 1631, 1631, 1631, 1631, 1676, 1676, 1676, 1676, 1676,
-  /* 6910 */ 1676, 1676, 1676, 1676, 1676, 1676, 1676, 1685, 1676, 1631, 1676, 0, 0, 0, 0, 0, 1631, 0, 1708, 1708, 1685,
-  /* 6931 */ 1676, 1733, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 6951 */ 1620, 1620, 41044, 117, 1620, 1620, 1815, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620,
-  /* 6971 */ 27732, 1620, 1620, 1620, 1620, 1890, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 13824, 0, 0, 0, 0, 1620,
-  /* 6991 */ 1620, 1620, 1620, 1620, 1720, 1620, 1620, 1725, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1836, 1620, 1620,
-  /* 7009 */ 1620, 1620, 1620, 32852, 1620, 1620, 1620, 1620, 1620, 0, 203, 0, 0, 0, 1620, 1620, 1620, 1620, 1715, 1748,
-  /* 7029 */ 1620, 0, 0, 0, 0, 1620, 27648, 0, 0, 0, 363, 0, 0, 0, 1620, 1620, 1620, 175, 1620, 1620, 1620, 1620, 1620,
-  /* 7052 */ 1620, 1620, 1620, 1620, 1620, 84, 1620, 1620, 1620, 0, 1620, 1620, 1620, 1620, 1620, 1935, 1620, 1620,
-  /* 7070 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 0, 0, 0, 0, 0, 1620, 1930, 1620, 1632, 0, 0, 0, 0, 0, 0,
-  /* 7094 */ 0, 0, 0, 0, 1632, 1632, 0, 0, 0, 0, 1632, 0, 1632, 0, 0, 1632, 1632, 1632, 0, 1632, 1632, 1632, 1632, 1632,
-  /* 7118 */ 1632, 1650, 1661, 1663, 1650, 135, 1661, 1661, 1661, 1661, 1650, 1661, 1661, 1663, 1661, 1650, 1663, 1650,
-  /* 7136 */ 1677, 1677, 1677, 1677, 1677, 1677, 1677, 1677, 1677, 1677, 1677, 1686, 1677, 1688, 1689, 0, 0, 0, 0, 0,
-  /* 7156 */ 1632, 0, 1709, 1709, 1686, 1677, 1620, 1620, 1800, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7174 */ 1620, 1620, 1620, 1620, 1620, 1620, 1809, 0, 0, 0, 0, 1620, 1838, 1620, 0, 0, 0, 0, 0, 0, 0, 316, 0, 0, 0,
-  /* 7199 */ 0, 261, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 221, 0, 0, 0, 348, 0, 1886, 1620, 1620, 1620, 1620, 1620,
-  /* 7225 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 2782, 2782, 1620, 1620, 1620, 1620, 1725, 1620,
-  /* 7243 */ 1620, 1620, 1620, 1620, 1886, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1837, 1839, 117, 221,
-  /* 7261 */ 0, 0, 0, 1914, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 1620, 1620, 1620, 1620, 1620,
-  /* 7282 */ 1945, 1620, 1620, 1633, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1633, 1633, 0, 0, 0, 0, 1633, 0, 1633, 0, 0, 1633,
-  /* 7308 */ 1633, 1633, 0, 1633, 1633, 1633, 1633, 1633, 1633, 1633, 1633, 1633, 1633, 0, 1633, 1633, 1633, 1633, 1633,
-  /* 7327 */ 1633, 1633, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1633, 1678, 1633, 1678,
-  /* 7345 */ 0, 0, 0, 0, 0, 1633, 0, 1678, 1678, 1633, 1678, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7367 */ 1620, 1620, 1620, 1620, 1731, 1620, 1753, 1780, 0, 0, 0, 0, 0, 0, 0, 1620, 1753, 1620, 1620, 117, 221, 0,
-  /* 7389 */ 0, 0, 0, 0, 0, 1731, 1620, 1731, 1620, 1620, 1620, 1620, 1620, 1620, 1918, 1620, 1620, 1620, 0, 0, 0, 1620,
-  /* 7411 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1891, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 0, 2782, 2782, 0,
-  /* 7431 */ 1620, 1620, 1620, 1620, 1798, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1805, 1620, 1620, 1620, 84, 1620,
-  /* 7449 */ 1620, 1810, 1620, 1620, 1620, 1620, 34388, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 0, 225, 0,
-  /* 7469 */ 0, 1620, 1620, 1620, 1620, 1854, 1855, 1810, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1863, 1864, 1620,
-  /* 7487 */ 1620, 1620, 0, 0, 0, 235, 0, 0, 239, 0, 1620, 1747, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7508 */ 1737, 0, 28160, 383, 28244, 1920, 1620, 1620, 1620, 1620, 1620, 1620, 1876, 1620, 1878, 1620, 1620, 1620,
-  /* 7526 */ 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 0, 1620, 1620, 1620, 1620, 0, 0, 1870, 1620, 1620, 1620, 1620, 1620,
-  /* 7548 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 226, 226, 226, 1904, 1620, 1620, 1620, 1907, 1620,
-  /* 7566 */ 1620, 1620, 1910, 1620, 1907, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1838, 1620, 117, 221,
-  /* 7584 */ 0, 0, 0, 32340, 36436, 1620, 1620, 1620, 1620, 0, 1620, 0, 32256, 36352, 0, 0, 1620, 1620, 1620, 175, 1620,
-  /* 7605 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 84, 1620, 1620, 0, 0, 0, 1620, 1620, 1620,
-  /* 7624 */ 1620, 1620, 38484, 1620, 1620, 0, 0, 0, 1620, 1942, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7643 */ 1620, 1806, 1620, 1620, 1620, 1620, 1620, 1634, 1634, 1634, 1634, 1651, 1634, 1664, 1651, 136, 1634, 1634,
-  /* 7661 */ 1634, 1634, 1651, 1634, 1634, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1634, 1634, 0, 0, 0, 0, 1634, 0, 1634, 0, 0,
-  /* 7687 */ 1634, 1634, 1634, 0, 1634, 1634, 1664, 1634, 1651, 1664, 1651, 1651, 1651, 1651, 1651, 1651, 1651, 1651,
-  /* 7705 */ 1651, 1651, 1651, 1651, 1634, 1651, 1651, 1651, 0, 0, 0, 0, 0, 1634, 0, 1651, 1651, 1634, 1651, 0, 82, 0,
-  /* 7727 */ 1620, 1713, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1727, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7745 */ 1861, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1925, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7766 */ 1620, 1800, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 175, 1620, 1869, 1620, 1620, 1871,
-  /* 7786 */ 1620, 1620, 1620, 1725, 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 1620, 1830, 1831, 1620, 1620,
-  /* 7807 */ 1620, 1620, 1620, 1620, 1620, 1620, 117, 221, 0, 0, 0, 226, 226, 0, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 7827 */ 1620, 1934, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 0, 1620, 0, 0, 0, 0, 0, 1929, 1620,
-  /* 7848 */ 1620, 1635, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1635, 1635, 0, 0, 0, 0, 0, 21667, 21667, 21667, 21667, 21667,
-  /* 7872 */ 21667, 21667, 0, 0, 21667, 21667, 1635, 0, 0, 105, 0, 1635, 0, 1643, 0, 0, 1643, 1643, 1643, 105, 1643,
-  /* 7893 */ 1643, 1643, 1643, 1652, 1635, 1665, 1665, 137, 1635, 1635, 1635, 1635, 1665, 1643, 1635, 1665, 1635, 1665,
-  /* 7911 */ 1665, 1665, 0, 0, 0, 0, 105, 1643, 0, 1665, 1665, 1635, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665,
-  /* 7931 */ 1665, 1665, 1665, 1665, 1665, 1665, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636,
-  /* 7949 */ 1636, 1636, 1636, 1636, 0, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1636, 1687, 1636, 1636, 1636, 0, 0, 0,
-  /* 7969 */ 0, 0, 1636, 0, 1687, 1687, 1687, 1636, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 1636, 1636, 0, 0, 0, 0, 1636, 0,
-  /* 7995 */ 1636, 0, 0, 1636, 1636, 1636, 0, 1636, 1636, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 8015 */ 1620, 1620, 1620, 1620, 1732, 1620, 1620, 117, 221, 0, 0, 0, 0, 0, 0, 1732, 1620, 1732, 1620, 1620, 1620,
-  /* 8036 */ 1620, 1620, 1620, 1789, 1620, 1732, 1732, 0, 0, 0, 0, 0, 0, 0, 5632, 0, 0, 0, 5632, 5632, 5632, 5632, 0,
-  /* 8059 */ 5632, 5632, 0, 82, 0, 1620, 1620, 1620, 1620, 1620, 1721, 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 8078 */ 1620, 1620, 1620, 1620, 1882, 1620, 0, 0, 1734, 1620, 1620, 1620, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620,
-  /* 8099 */ 1620, 1620, 1620, 1620, 1620, 1620, 1620, 1894, 1620, 117, 1620, 1813, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 8117 */ 1620, 0, 0, 0, 0, 0, 1620, 1620, 1868, 175, 1620, 1620, 1620, 1725, 1620, 1620, 1620, 1620, 1620, 1620,
-  /* 8137 */ 1620, 1620, 1620, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1845, 1620, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 8165 */ 6811, 6811, 6811, 6811, 6811, 6811, 6811, 0, 0, 6811, 6811, 0, 42496, 42496, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 8188 */ 42496, 0, 0, 42496, 0, 0, 0, 0, 42496, 0, 0, 0, 0, 0, 0, 42496, 0, 0, 0, 0, 42496, 42496, 42496, 0, 0, 0,
-  /* 8214 */ 0, 0, 0, 0, 0, 0, 42496, 42496, 42496, 42496, 0, 0, 0, 0, 44032, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 176, 0, 0,
-  /* 8242 */ 0, 0, 44544, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44544, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44544, 0,
-  /* 8274 */ 44544, 0, 0, 0, 44544, 44544, 44544, 44544, 44544, 0, 45056, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  /* 8299 */ 7680, 0, 0, 0, 7680, 7680, 7680, 7680, 0, 7680, 7680, 0, 45056, 0, 45056, 45056, 0, 0, 0, 0, 0, 0, 0,
-  /* 8322 */ 45056, 45056, 45056, 0, 0, 0, 0, 1620, 0, 0, 0, 0, 0, 0, 0, 0, 1620, 1620, 1620, 1620, 1620, 1620, 1783, 0,
-  /* 8346 */ 5120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11383, 0, 0, 0, 11383, 11383, 11383, 11383, 0, 11383,
-  /* 8371 */ 11383
+  /*    0 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*   18 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*   36 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*   54 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800,
+  /*   72 */ 4800, 4800, 4804, 4849, 4849, 4849, 4849, 4849, 5031, 4849, 4848, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*   90 */ 4849, 4849, 4849, 4816, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 6250, 4849,
+  /*  108 */ 4849, 4849, 4849, 4849, 4849, 6249, 4849, 4849, 4849, 5559, 7011, 4849, 4840, 5143, 4858, 4880, 4888, 4849,
+  /*  126 */ 4849, 4849, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4804, 4849, 4849, 4849, 4849, 4849,
+  /*  144 */ 4849, 4849, 6642, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5315, 4849, 6641, 4849, 4849,
+  /*  162 */ 4849, 4849, 4849, 4849, 4849, 4849, 5367, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6640, 4849, 4849,
+  /*  180 */ 4849, 8131, 4849, 4849, 6642, 5446, 8135, 4909, 4849, 4849, 4849, 4849, 4800, 4800, 4800, 4800, 4800, 4800,
+  /*  198 */ 4800, 4800, 4800, 4800, 4804, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4848, 4849, 4849, 4849, 4849, 4849,
+  /*  216 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  234 */ 6250, 4849, 4849, 4849, 4849, 4849, 4849, 6249, 4849, 4849, 4849, 5510, 7011, 4849, 4840, 5143, 4858, 4930,
+  /*  252 */ 7601, 4849, 4849, 4849, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 4804, 4849, 4849, 4849,
+  /*  270 */ 4849, 4849, 4849, 4849, 7338, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5315, 4849, 4849,
+  /*  288 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5367, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 7336,
+  /*  306 */ 4849, 4849, 4849, 6135, 4849, 4849, 7338, 5455, 6139, 4938, 4849, 4849, 4849, 4849, 4800, 4800, 4800, 4800,
+  /*  324 */ 4800, 4800, 4800, 4800, 4800, 4800, 4804, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4848, 4849, 4849, 4849,
+  /*  342 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  360 */ 4829, 4849, 6250, 4849, 4849, 4849, 4849, 4849, 4849, 6249, 4849, 4849, 4849, 5559, 7011, 4849, 4840, 5143,
+  /*  378 */ 4858, 4880, 4888, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4998, 5003, 4849, 5958, 4991, 5014, 4849,
+  /*  396 */ 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972,
+  /*  414 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  432 */ 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849,
+  /*  450 */ 4849, 4849, 4849, 5025, 5030, 4849, 4977, 4983, 4981, 4849, 4849, 4849, 4849, 4849, 5039, 4849, 4849, 4849,
+  /*  468 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5050, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  486 */ 4849, 4849, 5069, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849,
+  /*  504 */ 4849, 4849, 7014, 7181, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4844, 4849, 4849,
+  /*  522 */ 4848, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  540 */ 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849,
+  /*  558 */ 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849,
+  /*  576 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4961, 4849,
+  /*  594 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  612 */ 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339,
+  /*  630 */ 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  648 */ 6348, 5080, 5098, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  666 */ 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849,
+  /*  684 */ 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849,
+  /*  702 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5117, 5122, 4849, 6426, 5110, 6431, 4849, 4849, 4849, 4849, 4849,
+  /*  720 */ 4961, 4849, 4849, 6358, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849,
+  /*  738 */ 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849,
+  /*  756 */ 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5134,
+  /*  774 */ 5139, 4849, 5055, 5061, 5059, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  792 */ 4849, 4849, 4849, 4849, 4849, 5151, 5086, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849,
+  /*  810 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186,
+  /*  828 */ 8190, 4849, 4849, 4849, 5164, 4849, 5174, 5191, 5201, 5189, 5179, 5190, 5199, 5191, 5181, 4849, 4849, 4849,
+  /*  846 */ 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849,
+  /*  864 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564,
+  /*  882 */ 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 5209, 8190, 4849, 4849, 4849, 7534, 5233, 5230, 5249,
+  /*  900 */ 5241, 5246, 7508, 7531, 7505, 5233, 5257, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849,
+  /*  918 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /*  936 */ 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849,
+  /*  954 */ 4849, 7398, 5269, 4849, 4849, 4849, 4849, 4849, 5339, 5294, 5334, 5296, 5305, 5297, 5343, 5328, 5351, 4849,
+  /*  972 */ 4849, 4849, 4849, 4849, 5363, 4849, 4849, 4849, 4849, 4849, 5368, 4849, 4849, 4849, 4849, 4849, 4849, 5376,
+  /*  990 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5394, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1008 */ 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849,
+  /* 1026 */ 4849, 4849, 4849, 5413, 5418, 4849, 7952, 5406, 5430, 4849, 4849, 4849, 4849, 4849, 5442, 4849, 4849, 4849,
+  /* 1044 */ 4849, 5445, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 5454, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1062 */ 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849,
+  /* 1080 */ 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 5567, 5222, 5463, 5497, 5220, 5485, 4849, 5482, 5495,
+  /* 1098 */ 5487, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1116 */ 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849,
+  /* 1134 */ 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 5505, 4849, 4849, 4849,
+  /* 1152 */ 4849, 4849, 4849, 4849, 4849, 5525, 5530, 4849, 8005, 5518, 5542, 5594, 5597, 5592, 5594, 5601, 5554, 5592,
+  /* 1170 */ 5593, 5598, 4849, 5575, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5591, 5601, 5594, 8687, 5594, 5594,
+  /* 1188 */ 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204,
+  /* 1206 */ 5613, 7902, 8193, 6186, 7167, 5623, 5645, 4849, 4849, 4849, 5673, 4849, 4849, 4849, 4849, 5664, 5669, 4849,
+  /* 1224 */ 7186, 5657, 5685, 5594, 8882, 5592, 5594, 5601, 5697, 5711, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 7670,
+  /* 1242 */ 5594, 5595, 4849, 5705, 5721, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5731, 5597, 8192, 5594,
+  /* 1260 */ 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 6186, 7167, 5751, 5759, 4849,
+  /* 1278 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5783, 5788, 4808, 5156, 5776, 5800, 4849, 4849, 4849, 4849, 4849,
+  /* 1296 */ 5812, 4849, 4849, 4849, 4849, 4849, 5817, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849,
+  /* 1314 */ 4849, 4849, 4849, 4849, 4849, 4849, 5827, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849,
+  /* 1332 */ 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5839,
+  /* 1350 */ 5844, 4849, 7558, 6268, 7562, 5594, 5597, 5592, 5594, 5601, 5856, 5864, 5593, 5598, 4849, 5592, 8982, 5594,
+  /* 1368 */ 5594, 5599, 5594, 5595, 4849, 5874, 5882, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5892, 5597,
+  /* 1386 */ 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 6118, 8291, 5931, 5939,
+  /* 1404 */ 5645, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5966, 5971, 4849, 7645, 6278, 7649, 5594, 5597, 5592,
+  /* 1422 */ 5594, 5601, 5856, 5864, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 5874, 5882, 5601,
+  /* 1440 */ 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5892, 5597, 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041,
+  /* 1458 */ 5594, 8476, 8706, 8204, 5613, 7902, 6202, 8291, 5931, 5939, 5645, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1476 */ 4849, 5966, 5971, 4849, 7645, 6278, 7649, 5594, 5597, 5592, 5594, 5601, 5856, 5864, 5593, 5598, 4849, 5592,
+  /* 1494 */ 8982, 5594, 5594, 5599, 5594, 5595, 4849, 5983, 5882, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601,
+  /* 1512 */ 5892, 5597, 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 6202, 8291,
+  /* 1530 */ 6002, 6017, 5645, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5966, 5971, 4849, 7645, 6278, 7649, 5594,
+  /* 1548 */ 5597, 5592, 5594, 5601, 6036, 5864, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 6044,
+  /* 1566 */ 5882, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5892, 5597, 8192, 5594, 5594, 5596, 5593, 8089,
+  /* 1584 */ 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 6202, 6186, 6069, 6017, 5645, 4849, 4849, 4849, 6084, 4849,
+  /* 1602 */ 6083, 6081, 6092, 4849, 6092, 4849, 6101, 6105, 6093, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849,
+  /* 1620 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1638 */ 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849,
+  /* 1656 */ 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 6726, 6725, 4849, 6113, 6154, 8127, 6131, 8123, 6151, 6147,
+  /* 1674 */ 6162, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1692 */ 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849,
+  /* 1710 */ 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849,
+  /* 1728 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6297, 6174, 6197, 4849, 4849, 4849, 4849, 4849, 4961, 4849,
+  /* 1746 */ 4849, 4849, 8181, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1764 */ 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339,
+  /* 1782 */ 4849, 4849, 4849, 4849, 4964, 7393, 8190, 4849, 4849, 4849, 6336, 4849, 6338, 6215, 4849, 4849, 4849, 4849,
+  /* 1800 */ 6225, 6243, 6230, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 6166, 6258, 6266, 6276, 4849, 4849, 4849,
+  /* 1818 */ 4849, 4849, 4849, 4972, 4849, 4849, 4849, 6286, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849,
+  /* 1836 */ 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849,
+  /* 1854 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6396, 6305, 6325, 4849, 4849, 4849, 4849, 4849,
+  /* 1872 */ 4961, 4849, 4849, 4849, 5042, 6346, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849,
+  /* 1890 */ 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849,
+  /* 1908 */ 4849, 7339, 4849, 4849, 4849, 4849, 4849, 7016, 6356, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1926 */ 4849, 4849, 6814, 6366, 6385, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 1944 */ 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849,
+  /* 1962 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186,
+  /* 1980 */ 8190, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592,
+  /* 1998 */ 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 6404, 5601,
+  /* 2016 */ 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 6414, 5597, 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041,
+  /* 2034 */ 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6443, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709,
+  /* 2052 */ 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 6462, 5592, 5593, 5598, 4849, 5592,
+  /* 2070 */ 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 6404, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601,
+  /* 2088 */ 6414, 5597, 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 6483,
+  /* 2106 */ 6803, 6443, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594,
+  /* 2124 */ 5597, 5592, 5594, 5601, 6470, 6497, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 6491,
+  /* 2142 */ 6404, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 6414, 5597, 8192, 5594, 5594, 5596, 5593, 8089,
+  /* 2160 */ 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6443, 6451, 4849, 4849, 4849, 5601, 6314,
+  /* 2178 */ 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 6507, 6533, 5593, 5598,
+  /* 2196 */ 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 6527, 6404, 5601, 5594, 8687, 5594, 5594, 5594, 5613,
+  /* 2214 */ 5594, 5601, 6543, 5597, 8192, 5594, 5594, 5596, 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902,
+  /* 2232 */ 8193, 7165, 6803, 6443, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895,
+  /* 2250 */ 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595,
+  /* 2268 */ 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596,
+  /* 2286 */ 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849,
+  /* 2304 */ 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 6507, 6533,
+  /* 2322 */ 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 6527, 5614, 5601, 5594, 8687, 5594, 5594,
+  /* 2340 */ 5594, 5613, 5594, 5601, 6581, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204,
+  /* 2358 */ 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594,
+  /* 2376 */ 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599,
+  /* 2394 */ 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 6594, 5597, 8192, 5594,
+  /* 2412 */ 5594, 5596, 5593, 6317, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849,
+  /* 2430 */ 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601,
+  /* 2448 */ 6625, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687,
+  /* 2466 */ 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476,
+  /* 2484 */ 8706, 8204, 5613, 7902, 8193, 7490, 6803, 6568, 6451, 4849, 4849, 4849, 4849, 4849, 6633, 6651, 6672, 7127,
+  /* 2502 */ 6660, 5072, 6656, 6670, 6662, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 2520 */ 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849,
+  /* 2538 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186,
+  /* 2556 */ 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6680, 6685, 4849, 5214, 5166, 5218, 4849, 4849, 4849,
+  /* 2574 */ 4849, 4849, 6702, 6723, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6734, 4849, 4849,
+  /* 2592 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6753, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564,
+  /* 2610 */ 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 2628 */ 4849, 6715, 4849, 4849, 6713, 6714, 6772, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849,
+  /* 2646 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 2664 */ 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849,
+  /* 2682 */ 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6745, 6791, 6822, 4849,
+  /* 2700 */ 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972,
+  /* 2718 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 2736 */ 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 6295, 6291,
+  /* 2754 */ 6845, 8103, 8110, 8109, 6852, 6865, 6857, 5090, 6872, 4950, 5597, 4945, 8551, 5601, 4961, 5592, 6889, 5598,
+  /* 2772 */ 4849, 6051, 8285, 5594, 7812, 5599, 8574, 7814, 4849, 4972, 6906, 5601, 5594, 8687, 6914, 5594, 6535, 5386,
+  /* 2790 */ 6933, 7142, 6414, 5597, 5126, 6943, 5594, 5596, 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902,
+  /* 2808 */ 6435, 7165, 6803, 6443, 6451, 4849, 4849, 4849, 6334, 6330, 6958, 8327, 8334, 8333, 8333, 8333, 6953, 5261,
+  /* 2826 */ 6966, 5594, 5597, 5592, 5594, 5601, 6462, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595,
+  /* 2844 */ 4849, 4972, 6404, 5601, 5594, 8687, 8934, 5594, 5594, 7044, 5594, 8029, 6414, 5597, 8192, 5594, 5594, 5596,
+  /* 2862 */ 5593, 8089, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 6483, 6803, 6443, 6451, 4849, 4849, 4849,
+  /* 2880 */ 6394, 6390, 6978, 4895, 4901, 6986, 6994, 6997, 7005, 4821, 7024, 5594, 5597, 5592, 5594, 5601, 4961, 5592,
+  /* 2898 */ 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 6404, 5601, 5594, 8687, 5594, 5594,
+  /* 2916 */ 5594, 5613, 5594, 5601, 6414, 5597, 6311, 5594, 5594, 6921, 8983, 8089, 5597, 7041, 7808, 8979, 8706, 7036,
+  /* 2934 */ 5613, 7902, 8193, 7165, 6803, 6443, 6451, 4849, 4849, 4849, 6812, 6808, 7052, 8491, 8497, 7059, 7064, 7067,
+  /* 2952 */ 7075, 5355, 7103, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 7115, 5598, 4849, 5592, 8982, 5594, 5594, 5599,
+  /* 2970 */ 5594, 5595, 4849, 4972, 6404, 5601, 5594, 8687, 5594, 5594, 8594, 5613, 5594, 7125, 7135, 7476, 7159, 5594,
+  /* 2988 */ 5594, 8683, 5593, 8089, 7466, 7041, 5594, 5546, 7886, 8204, 5613, 7902, 7081, 7175, 6803, 6443, 6451, 4849,
+  /* 3006 */ 4849, 4849, 6694, 6690, 7194, 8528, 7205, 7201, 7213, 7226, 7218, 5398, 7234, 7246, 5597, 8766, 5594, 5601,
+  /* 3024 */ 6470, 6477, 7254, 5598, 4849, 7783, 8930, 5594, 5594, 5599, 5594, 5595, 4849, 6491, 6404, 7975, 7262, 8687,
+  /* 3042 */ 7271, 6499, 8591, 7282, 5594, 5601, 7291, 7299, 6217, 8235, 8404, 7824, 5884, 8302, 8168, 6797, 7795, 5286,
+  /* 3060 */ 8763, 7316, 5613, 8072, 8343, 7329, 7347, 6443, 6451, 4849, 4849, 4849, 6711, 6707, 7364, 8643, 8649, 7371,
+  /* 3078 */ 7376, 7379, 7387, 5422, 7406, 8595, 5597, 5592, 7861, 5601, 6507, 6533, 6406, 5598, 4849, 6586, 9012, 5594,
+  /* 3096 */ 5594, 5599, 5594, 5595, 4849, 6527, 6404, 5738, 7091, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 6543, 7545,
+  /* 3114 */ 8192, 5594, 5594, 5596, 5593, 8089, 8577, 7041, 5594, 7418, 8158, 8354, 7427, 7905, 8193, 7165, 6803, 6443,
+  /* 3132 */ 6451, 4849, 4849, 4849, 6743, 6739, 7442, 8725, 8732, 8731, 8731, 8731, 7437, 5434, 7450, 5594, 5597, 5592,
+  /* 3150 */ 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 7462, 5599, 5594, 7474, 4832, 4972, 5743, 5601,
+  /* 3168 */ 5866, 7484, 5594, 7861, 5594, 5613, 8879, 5899, 5610, 5597, 8192, 5594, 5594, 7028, 5593, 7498, 5597, 8057,
+  /* 3186 */ 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709,
+  /* 3204 */ 5595, 5594, 5594, 5594, 5596, 8895, 7419, 5594, 7516, 5276, 5474, 7524, 4961, 5470, 7542, 7553, 4849, 6009,
+  /* 3222 */ 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601,
+  /* 3240 */ 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 9009, 8706, 8204, 7713, 7902, 8193, 7165,
+  /* 3258 */ 6803, 6568, 6451, 4849, 4849, 4849, 6762, 6758, 7572, 8817, 8823, 7579, 7584, 7587, 7595, 5534, 7609, 5594,
+  /* 3276 */ 7621, 5592, 6028, 6189, 4961, 6024, 7631, 7640, 4849, 7429, 8982, 5594, 8514, 7659, 7682, 6061, 6643, 4972,
+  /* 3294 */ 5614, 5923, 7632, 7692, 5594, 8548, 7410, 5613, 7833, 8014, 5610, 8663, 8192, 5594, 7702, 5596, 5593, 5600,
+  /* 3312 */ 6519, 7710, 7721, 5689, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314,
+  /* 3330 */ 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598,
+  /* 3348 */ 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613,
+  /* 3366 */ 5594, 5601, 5610, 5597, 8192, 5594, 7861, 5596, 5593, 5600, 5597, 7321, 5594, 8476, 8706, 8204, 5613, 7902,
+  /* 3384 */ 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 6781, 6777, 7730, 8909, 8915, 7737, 7742, 7745, 7753, 5649,
+  /* 3402 */ 7791, 6878, 6898, 7694, 5594, 5953, 6507, 6514, 7803, 5598, 4849, 7665, 7822, 8553, 7832, 7841, 7849, 7238,
+  /* 3420 */ 4850, 6527, 5614, 6421, 5594, 8687, 5594, 7860, 7116, 7870, 5594, 5601, 6581, 5597, 8192, 8952, 5594, 5596,
+  /* 3438 */ 7880, 7947, 5597, 6372, 5577, 8476, 8706, 8204, 5768, 7899, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849,
+  /* 3456 */ 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592,
+  /* 3474 */ 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 8594, 5594,
+  /* 3492 */ 5594, 5613, 7913, 5601, 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204,
+  /* 3510 */ 5628, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 6831, 6827, 7922, 8997, 7932, 7931, 7931, 7931,
+  /* 3528 */ 7933, 7923, 9003, 7941, 8086, 8776, 7960, 8964, 4961, 6377, 5723, 5598, 4849, 6560, 7968, 7263, 5594, 7623,
+  /* 3546 */ 7992, 5595, 5381, 8000, 5614, 6550, 8511, 7086, 5594, 8749, 5594, 5613, 7095, 5637, 5610, 5597, 6556, 5594,
+  /* 3564 */ 5594, 6617, 5593, 8013, 5597, 7041, 6881, 8476, 8022, 8052, 5975, 7902, 8193, 7165, 6803, 6568, 6451, 4849,
+  /* 3582 */ 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8711, 8046, 5633, 8065, 8080, 8097,
+  /* 3600 */ 8118, 5592, 8143, 5598, 4849, 6608, 8982, 6970, 8401, 5599, 8840, 8166, 8176, 4972, 5614, 5601, 5594, 6925,
+  /* 3618 */ 5594, 5594, 5909, 5613, 6935, 5601, 5610, 8201, 8192, 8837, 6945, 5596, 5593, 5600, 8212, 8223, 5594, 8476,
+  /* 3636 */ 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594,
+  /* 3654 */ 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 8234, 5598, 4849, 5592, 8982, 5594,
+  /* 3672 */ 7862, 5599, 5594, 5595, 4849, 4972, 5614, 8243, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 6594, 5597,
+  /* 3690 */ 8192, 5594, 5594, 5596, 5593, 6317, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568,
+  /* 3708 */ 6451, 4849, 4849, 4849, 7151, 7147, 8253, 9036, 9043, 9042, 8260, 8265, 8270, 5677, 8278, 5594, 8299, 5592,
+  /* 3726 */ 5594, 5601, 4961, 5615, 8310, 5598, 4849, 5592, 8982, 8594, 7107, 5599, 5594, 8473, 4849, 8000, 7283, 6601,
+  /* 3744 */ 7613, 8687, 5594, 5579, 5594, 8226, 5914, 8321, 5610, 5597, 8342, 5594, 5909, 5596, 5593, 5600, 8351, 7041,
+  /* 3762 */ 8746, 8476, 8706, 8215, 5613, 7902, 8193, 7777, 6803, 6568, 6451, 4849, 4849, 4849, 8038, 8034, 8362, 9066,
+  /* 3780 */ 9072, 8370, 8377, 8382, 8387, 7674, 8395, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592,
+  /* 3798 */ 8568, 5594, 5594, 8412, 5594, 7891, 5819, 4972, 5614, 5601, 8429, 6123, 5581, 5594, 5594, 6180, 5594, 5601,
+  /* 3816 */ 5610, 4953, 8192, 5583, 7454, 5596, 5593, 5600, 8703, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165,
+  /* 3834 */ 6803, 6568, 6451, 4849, 4849, 4849, 7984, 7980, 8440, 9086, 9093, 9092, 8447, 8460, 8452, 5792, 8467, 5594,
+  /* 3852 */ 8155, 5592, 8149, 5601, 4961, 5946, 5593, 8485, 4849, 8689, 8949, 6614, 8505, 5599, 7684, 5595, 8522, 4972,
+  /* 3870 */ 6235, 5601, 8313, 6207, 8542, 7722, 8536, 5848, 5594, 5601, 5610, 5919, 8192, 8561, 5594, 7852, 8585, 7765,
+  /* 3888 */ 5597, 7041, 7914, 8476, 8603, 8204, 5613, 7902, 5006, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 7308, 7304,
+  /* 3906 */ 8611, 9142, 9148, 8618, 8625, 8629, 8637, 5804, 8657, 5713, 5597, 5592, 5594, 5601, 4961, 7771, 8671, 5598,
+  /* 3924 */ 4849, 5592, 8982, 8697, 7117, 5599, 6056, 5595, 8719, 4972, 5614, 5601, 5594, 8687, 5594, 7274, 8740, 5613,
+  /* 3942 */ 8432, 5601, 5610, 5597, 8192, 5281, 8677, 5596, 5593, 5600, 5597, 7041, 8757, 8476, 8706, 8204, 8774, 7902,
+  /* 3960 */ 5017, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 7356, 7352, 8784, 4916, 4922, 8792, 8800, 8803, 8811, 5320,
+  /* 3978 */ 8831, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595,
+  /* 3996 */ 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596,
+  /* 4014 */ 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849,
+  /* 4032 */ 8852, 8848, 8865, 4865, 4872, 4871, 4871, 4871, 8860, 5831, 8873, 5594, 8890, 5592, 5994, 5601, 4961, 5990,
+  /* 4050 */ 5593, 8903, 4849, 7651, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594,
+  /* 4068 */ 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204,
+  /* 4086 */ 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594,
+  /* 4104 */ 5596, 8895, 8477, 8923, 5597, 7872, 5594, 5601, 6625, 7759, 5593, 5598, 4849, 5592, 8942, 5594, 5594, 5599,
+  /* 4122 */ 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594,
+  /* 4140 */ 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7490, 6803, 6568, 6451, 4849,
+  /* 4158 */ 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594, 5596, 8895, 8477, 5594, 8960, 5592, 5594, 5601,
+  /* 4176 */ 4961, 7564, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 4972, 5614, 5601, 5594, 8687,
+  /* 4194 */ 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476,
+  /* 4212 */ 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568, 6451, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594,
+  /* 4230 */ 5594, 5594, 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4961, 5592, 5593, 5598, 4849, 5592, 8982, 5594,
+  /* 4248 */ 6894, 5599, 5594, 6896, 4849, 4972, 5904, 5601, 5594, 8972, 5594, 5594, 5594, 5613, 5594, 5601, 5610, 5597,
+  /* 4266 */ 8192, 5594, 5594, 5596, 5593, 5600, 5597, 7041, 5594, 8476, 8706, 8204, 5613, 7902, 8193, 7165, 6803, 6568,
+  /* 4284 */ 6451, 4849, 4849, 4849, 4849, 8991, 4849, 5102, 9020, 5101, 9030, 9022, 9051, 6764, 9052, 4849, 4849, 4849,
+  /* 4302 */ 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849,
+  /* 4320 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564,
+  /* 4338 */ 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4356 */ 4849, 4849, 4849, 4849, 6783, 9060, 9080, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 5602, 4849,
+  /* 4374 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4392 */ 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849,
+  /* 4410 */ 4849, 8186, 8190, 4849, 4849, 4849, 4849, 6837, 6835, 4849, 6836, 9102, 9101, 4849, 6833, 9110, 9115, 4849,
+  /* 4428 */ 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972,
+  /* 4446 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4464 */ 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849, 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849,
+  /* 4482 */ 4849, 4849, 4849, 9123, 9128, 4849, 8417, 8245, 8421, 4849, 4849, 4849, 4849, 4849, 4961, 4849, 4849, 4849,
+  /* 4500 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4972, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4518 */ 4849, 4849, 4829, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5564, 4849, 4849, 4849, 7339, 4849, 4849,
+  /* 4536 */ 4849, 4849, 4849, 8186, 8190, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4554 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4572 */ 4849, 5310, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5367, 4849, 4849, 4849, 4849, 4849,
+  /* 4590 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4608 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 5613, 5594, 5597, 5592, 5594, 5601, 4849, 5592,
+  /* 4626 */ 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599, 5594, 5595, 4849, 5310, 5614, 5601, 5594, 8687, 5594, 5594,
+  /* 4644 */ 5594, 5613, 5594, 5601, 5765, 5597, 8192, 5594, 5594, 5596, 5593, 5600, 5597, 8191, 5594, 8476, 8706, 5600,
+  /* 4662 */ 5613, 7902, 8193, 6186, 7167, 9136, 6454, 4849, 4849, 4849, 5601, 6314, 8894, 8709, 5595, 5594, 5594, 5594,
+  /* 4680 */ 5596, 8895, 8477, 5594, 5597, 5592, 5594, 5601, 4849, 5592, 5593, 5598, 4849, 5592, 8982, 5594, 5594, 5599,
+  /* 4698 */ 5594, 5595, 4849, 5310, 5614, 5601, 5594, 8687, 5594, 5594, 5594, 5613, 5594, 5601, 5765, 5597, 8192, 5594,
+  /* 4716 */ 5594, 5596, 5593, 5600, 5597, 8191, 5594, 8476, 8706, 5600, 5613, 7902, 8193, 7165, 6803, 9156, 6573, 4849,
+  /* 4734 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849,
+  /* 4752 */ 4849, 4849, 6642, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6073, 4849, 4849, 4849, 4849,
+  /* 4770 */ 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 4849, 6640, 4849, 4849,
+  /* 4788 */ 4849, 8131, 4849, 4849, 6642, 5446, 8135, 4909, 4849, 4849, 4849, 4849, 4180, 4180, 4180, 4180, 4180, 4180,
+  /* 4806 */ 4180, 4180, 0, 0, 0, 0, 135, 0, 0, 0, 130, 0, 0, 236, 237, 0, 0, 0, 105, 1643, 0, 1707, 1707, 0, 130, 236,
+  /* 4832 */ 0, 0, 0, 0, 0, 319, 0, 0, 395, 462, 0, 452, 0, 0, 0, 0, 145, 0, 0, 0, 0, 0, 0, 0, 0, 300, 470, 0, 467, 429,
+  /* 4862 */ 475, 470, 470, 0, 0, 1637, 1637, 1637, 0, 1637, 1637, 1637, 1637, 1637, 1637, 1637, 1637, 0, 0, 395, 475,
+  /* 4883 */ 476, 481, 470, 470, 480, 481, 0, 485, 0, 485, 486, 487, 0, 0, 1643, 1643, 1643, 105, 1643, 1643, 1643,
+  /* 4904 */ 1643, 1645, 1654, 1654, 122, 0, 5120, 0, 0, 0, 5120, 5120, 0, 0, 1644, 1644, 1644, 106, 1644, 1644, 1644,
+  /* 4925 */ 1644, 1653, 1657, 1657, 129, 0, 395, 475, 0, 0, 470, 470, 480, 0, 5370, 0, 0, 0, 5370, 5370, 0, 0, 1717,
+  /* 4948 */ 1621, 1717, 1621, 1621, 1724, 1621, 1621, 1621, 1621, 1621, 0, 392, 0, 0, 130, 234, 0, 0, 0, 0, 0, 477, 0,
+  /* 4971 */ 0, 130, 234, 0, 236, 237, 0, 0, 0, 130, 130, 130, 0, 0, 0, 0, 0, 0, 130, 130, 157, 157, 157, 157, 157, 157,
+  /* 4997 */ 5632, 5632, 0, 5632, 5632, 5632, 5632, 0, 5632, 0, 0, 0, 0, 0, 1621, 29269, 0, 5632, 5789, 157, 0, 0, 0, 0,
+  /* 5021 */ 0, 2002, 1621, 0, 130, 0, 130, 130, 130, 130, 0, 130, 0, 0, 0, 0, 0, 0, 0, 3584, 234, 0, 0, 0, 0, 0, 22796,
+  /* 5048 */ 0, 0, 3584, 234, 0, 236, 237, 0, 0, 0, 131, 131, 131, 0, 0, 0, 0, 0, 0, 131, 131, 0, 3714, 236, 0, 0, 0, 0,
+  /* 5076 */ 0, 24064, 24064, 24064, 6814, 6814, 6814, 6814, 6814, 6814, 0, 0, 131, 0, 0, 0, 0, 0, 1622, 0, 1676, 1676,
+  /* 5098 */ 0, 6814, 6814, 0, 0, 0, 0, 0, 42496, 0, 0, 0, 7839, 7839, 7839, 7839, 7839, 7839, 7680, 7680, 0, 7680,
+  /* 5120 */ 7680, 7680, 7680, 0, 7680, 0, 0, 0, 0, 0, 399, 0, 1936, 1621, 131, 0, 131, 131, 131, 131, 0, 131, 0, 0, 0,
+  /* 5145 */ 0, 0, 467, 462, 0, 470, 130, 3306, 0, 236, 237, 0, 0, 0, 135, 135, 135, 16547, 16547, 0, 9216, 0, 0, 0, 0,
+  /* 5170 */ 0, 0, 138, 138, 9216, 9216, 9216, 0, 0, 9216, 9216, 9216, 9216, 9216, 0, 0, 0, 0, 0, 9216, 0, 9216, 9216,
+  /* 5193 */ 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 9216, 0, 9216, 0, 9216, 0, 480, 0, 476,
+  /* 5213 */ 481, 0, 0, 0, 138, 138, 138, 0, 0, 0, 0, 0, 0, 12800, 0, 12800, 0, 0, 9728, 0, 0, 0, 0, 9728, 0, 9728, 0,
+  /* 5240 */ 0, 9728, 9728, 9728, 9728, 0, 0, 0, 9728, 0, 0, 0, 9728, 0, 9728, 9728, 9728, 9728, 9728, 9728, 0, 0, 0, 0,
+  /* 5264 */ 0, 1623, 0, 1682, 1682, 481, 0, 449, 0, 449, 0, 449, 0, 0, 1718, 1621, 1747, 1621, 1621, 1621, 1939, 1621,
+  /* 5286 */ 1621, 1621, 1621, 1945, 0, 1621, 30293, 1621, 0, 0, 10240, 0, 10240, 10240, 10240, 10240, 10240, 10240,
+  /* 5304 */ 10240, 10240, 10240, 10240, 10240, 10240, 0, 0, 0, 236, 237, 0, 0, 0, 236, 4845, 0, 0, 0, 106, 1644, 0,
+  /* 5326 */ 1657, 1657, 10400, 10400, 10400, 10400, 10400, 10400, 10240, 10240, 10240, 10240, 0, 10240, 0, 10240,
+  /* 5342 */ 10240, 0, 10240, 0, 10240, 10240, 10240, 10400, 10400, 10240, 10400, 10400, 0, 0, 0, 0, 0, 1625, 0, 1708,
+  /* 5362 */ 1708, 0, 130, 234, 0, 0, 0, 236, 0, 0, 0, 0, 0, 0, 130, 234, 0, 323, 237, 0, 0, 0, 317, 0, 0, 0, 0, 369,
+  /* 5390 */ 1621, 1907, 1621, 1621, 0, 130, 323, 0, 0, 0, 0, 0, 1626, 0, 1677, 1713, 11433, 11433, 11433, 11433, 11433,
+  /* 5411 */ 11433, 11396, 11396, 0, 11396, 11396, 11396, 11396, 0, 11396, 0, 0, 0, 0, 0, 1627, 0, 1709, 1709, 11396,
+  /* 5431 */ 11433, 11433, 0, 0, 0, 0, 0, 1628, 0, 1686, 1686, 0, 130, 234, 11776, 0, 0, 0, 0, 0, 0, 0, 5120, 324, 0, 0,
+  /* 5457 */ 0, 0, 0, 0, 0, 5370, 12800, 12800, 0, 12800, 0, 12800, 12800, 0, 0, 1731, 1621, 1621, 1621, 1753, 1621,
+  /* 5478 */ 1621, 1747, 1753, 1621, 12800, 12800, 12800, 0, 0, 0, 12800, 12800, 0, 0, 0, 0, 0, 12800, 12800, 12800,
+  /* 5498 */ 12800, 12800, 12800, 0, 0, 0, 0, 481, 0, 486, 0, 486, 0, 0, 0, 395, 429, 0, 0, 429, 13482, 13482, 13482,
+  /* 5521 */ 13482, 13482, 13482, 13445, 13445, 0, 13445, 13445, 13445, 13445, 0, 13445, 0, 0, 0, 0, 0, 1629, 0, 1710,
+  /* 5541 */ 1710, 13445, 13482, 13482, 0, 1621, 1621, 1621, 1621, 0, 1621, 1621, 36949, 0, 130, 234, 0, 13824, 0, 0, 0,
+  /* 5562 */ 395, 429, 0, 0, 432, 0, 0, 0, 0, 0, 12800, 12800, 12800, 0, 13824, 1621, 1621, 1621, 1621, 1621, 1621,
+  /* 5583 */ 1727, 1621, 1621, 1621, 1621, 1621, 1906, 1621, 324, 0, 0, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1621,
+  /* 5602 */ 0, 0, 0, 0, 0, 0, 0, 44032, 0, 130, 236, 0, 0, 0, 0, 1621, 1621, 1621, 1621, 1621, 1735, 0, 474, 0, 476,
+  /* 5627 */ 481, 0, 0, 0, 453, 1621, 1621, 1621, 1621, 1738, 1621, 0, 0, 0, 0, 0, 382, 0, 481, 0, 483, 0, 0, 0, 0, 0,
+  /* 5653 */ 1630, 0, 1650, 1650, 15360, 15360, 15360, 15360, 15360, 15360, 134, 134, 0, 134, 134, 134, 134, 0, 134, 0,
+  /* 5673 */ 0, 0, 0, 102, 0, 0, 0, 0, 1632, 0, 1711, 1711, 134, 15494, 15360, 0, 1621, 1621, 1621, 1621, 442, 1979,
+  /* 5695 */ 1621, 1621, 0, 130, 234, 0, 0, 0, 0, 2795, 130, 234, 0, 236, 237, 2795, 2795, 0, 1621, 1621, 1621, 1621,
+  /* 5717 */ 1621, 1621, 1729, 1621, 0, 326, 0, 1621, 1621, 1621, 1621, 1621, 1727, 1621, 0, 130, 236, 0, 0, 0, 384,
+  /* 5738 */ 1621, 0, 0, 0, 338, 0, 0, 0, 1822, 1621, 1621, 1867, 1621, 0, 474, 0, 476, 481, 0, 0, 482, 481, 484, 483,
+  /* 5762 */ 487, 0, 482, 0, 0, 236, 0, 0, 0, 0, 1621, 1991, 1621, 1621, 16547, 16547, 16547, 16547, 16547, 16547, 135,
+  /* 5783 */ 135, 0, 135, 135, 135, 135, 0, 135, 0, 0, 0, 0, 0, 1634, 0, 1680, 1680, 135, 16562, 16547, 0, 0, 0, 0, 0,
+  /* 5808 */ 1635, 0, 1652, 1652, 0, 130, 234, 0, 0, 0, 237, 0, 0, 0, 0, 0, 0, 320, 0, 0, 130, 4608, 0, 0, 0, 0, 0,
+  /* 5835 */ 1637, 0, 1690, 1690, 2184, 0, 2184, 2184, 2184, 2184, 0, 2184, 0, 0, 0, 0, 0, 1890, 1621, 1621, 1621, 0,
+  /* 5857 */ 130, 234, 0, 0, 2795, 0, 2286, 2185, 0, 1621, 1621, 1621, 1621, 1621, 1621, 1819, 1621, 130, 234, 2795,
+  /* 5877 */ 236, 237, 2286, 239, 2288, 2885, 2375, 0, 1621, 1621, 1621, 1621, 1621, 1952, 1621, 0, 130, 236, 2885,
+  /* 5896 */ 2885, 384, 2375, 1621, 0, 0, 0, 34816, 0, 0, 0, 1864, 1621, 1621, 1621, 1621, 1900, 1621, 1621, 1621, 1621,
+  /* 5917 */ 1910, 1621, 1621, 1621, 1621, 1924, 1621, 0, 0, 0, 0, 340, 0, 0, 465, 1621, 0, 468, 0, 0, 471, 478, 479,
+  /* 5940 */ 474, 0, 476, 481, 478, 479, 0, 0, 1733, 1621, 1621, 1621, 1784, 1621, 0, 0, 226, 0, 0, 0, 0, 5632, 5632,
+  /* 5963 */ 5632, 157, 157, 2185, 0, 2185, 2185, 2185, 2185, 0, 2185, 0, 0, 0, 0, 0, 1990, 1621, 35925, 1621, 130, 234,
+  /* 5985 */ 2795, 236, 237, 2286, 239, 0, 0, 1734, 1621, 1621, 1621, 1734, 1621, 1621, 1621, 1734, 1621, 465, 1621, 0,
+  /* 6005 */ 468, 0, 0, 471, 0, 0, 1747, 1621, 1621, 1621, 1621, 1753, 479, 474, 0, 476, 481, 0, 479, 0, 0, 1780, 1621,
+  /* 6028 */ 1621, 1621, 1754, 1621, 1621, 1621, 1754, 1621, 0, 130, 234, 0, 0, 2795, 0, 239, 130, 234, 2795, 236, 237,
+  /* 6049 */ 239, 239, 0, 0, 1794, 1621, 1724, 1621, 1621, 1621, 1840, 1841, 1621, 1621, 1621, 1847, 1849, 1828, 1849,
+  /* 6068 */ 0, 465, 1621, 0, 468, 0, 0, 0, 0, 4608, 0, 0, 0, 17408, 0, 0, 0, 0, 0, 0, 17408, 0, 0, 0, 0, 0, 17408,
+  /* 6095 */ 17408, 0, 0, 0, 0, 0, 0, 0, 17408, 0, 0, 0, 17408, 0, 17408, 17408, 0, 0, 17920, 17920, 17920, 0, 17920, 0,
+  /* 6119 */ 0, 0, 464, 0, 1621, 1621, 0, 0, 1621, 1621, 1888, 1621, 0, 17920, 0, 17920, 0, 0, 0, 0, 5370, 0, 0, 5370,
+  /* 6143 */ 0, 5370, 5370, 0, 17920, 0, 17920, 0, 17920, 17920, 17920, 17920, 0, 17920, 17920, 0, 17920, 0, 0, 17920,
+  /* 6163 */ 17920, 17920, 0, 0, 0, 0, 0, 6144, 7168, 8704, 10752, 18596, 18596, 18596, 18596, 18596, 18596, 0, 0, 368,
+  /* 6183 */ 0, 1906, 1621, 1621, 1621, 0, 1621, 0, 0, 0, 0, 0, 230, 0, 0, 18596, 18596, 0, 0, 0, 0, 0, 465, 0, 1621,
+  /* 6208 */ 1621, 0, 0, 1621, 1884, 1621, 1621, 0, 20480, 0, 0, 0, 0, 0, 0, 1621, 27221, 20480, 20480, 20480, 0, 0, 0,
+  /* 6231 */ 20645, 20645, 0, 0, 0, 0, 0, 1621, 1865, 1866, 1820, 1621, 20645, 20645, 20645, 20645, 20645, 20645, 0, 0,
+  /* 6251 */ 395, 0, 0, 0, 0, 0, 0, 12288, 14336, 16896, 19968, 20992, 22016, 25600, 43520, 12288, 14336, 0, 0, 0, 0, 0,
+  /* 6273 */ 0, 2184, 2184, 0, 16896, 0, 0, 0, 0, 0, 0, 2185, 2185, 0, 0, 19456, 23040, 0, 0, 0, 0, 1622, 1622, 0, 0, 0,
+  /* 6299 */ 0, 0, 0, 0, 18596, 18596, 21670, 21670, 21670, 21670, 21670, 21670, 0, 0, 397, 0, 0, 0, 1621, 1621, 0, 0,
+  /* 6321 */ 0, 0, 0, 241, 0, 21670, 21670, 0, 0, 0, 0, 0, 1623, 1623, 0, 0, 0, 0, 0, 0, 0, 20480, 0, 0, 0, 0, 14848, 0,
+  /* 6349 */ 0, 0, 0, 0, 0, 6814, 6814, 429, 0, 0, 0, 0, 0, 0, 0, 8192, 0, 23552, 23552, 23552, 23552, 23552, 23552, 0,
+  /* 6373 */ 0, 432, 0, 434, 0, 0, 1621, 1621, 1749, 1621, 1621, 1621, 0, 23552, 23552, 0, 0, 0, 0, 0, 1624, 1624, 0, 0,
+  /* 6397 */ 0, 0, 0, 0, 0, 21670, 21670, 0, 2375, 0, 1621, 1621, 1621, 1621, 1621, 33877, 1621, 0, 130, 236, 0, 0, 384,
+  /* 6420 */ 2375, 1621, 0, 0, 335, 0, 0, 0, 0, 7680, 7680, 7680, 7839, 7839, 0, 0, 0, 0, 0, 449, 1621, 1621, 0, 479,
+  /* 6444 */ 474, 0, 476, 481, 0, 479, 483, 481, 0, 483, 0, 0, 483, 0, 0, 0, 0, 0, 0, 130, 234, 0, 0, 0, 0, 240, 0, 130,
+  /* 6472 */ 234, 0, 0, 0, 0, 241, 0, 1621, 1621, 1621, 1783, 1621, 1621, 0, 1621, 0, 468, 0, 472, 130, 234, 241, 236,
+  /* 6495 */ 237, 241, 241, 0, 1621, 1621, 1621, 1621, 1621, 1621, 1895, 1621, 0, 130, 234, 0, 0, 0, 0, 2560, 0, 1621,
+  /* 6517 */ 1621, 1717, 1621, 1621, 1621, 1961, 1621, 427, 0, 0, 130, 234, 2560, 236, 237, 2560, 2560, 0, 1621, 1621,
+  /* 6537 */ 1621, 1621, 1621, 1621, 1902, 1621, 0, 130, 236, 0, 2560, 384, 2375, 1621, 0, 0, 336, 339, 0, 0, 342, 0,
+  /* 6559 */ 398, 0, 0, 1621, 1621, 1621, 1751, 1621, 1621, 0, 474, 0, 476, 481, 0, 0, 483, 0, 0, 483, 0, 0, 0, 130,
+  /* 6583 */ 236, 0, 2560, 0, 0, 1621, 1621, 1621, 33877, 1621, 1621, 0, 130, 236, 0, 0, 0, 241, 1621, 0, 0, 337, 0, 0,
+  /* 6607 */ 341, 0, 0, 1805, 29908, 1797, 1621, 1621, 1621, 1815, 1621, 1621, 1621, 85, 1621, 1621, 0, 0, 0, 130, 234,
+  /* 6628 */ 0, 0, 0, 0, 242, 0, 24064, 24064, 0, 0, 0, 24064, 0, 0, 5120, 0, 0, 0, 0, 0, 0, 0, 321, 24064, 24064, 0,
+  /* 6654 */ 24064, 0, 24064, 24064, 24064, 0, 0, 0, 0, 24064, 24064, 0, 0, 0, 0, 0, 24064, 24064, 24064, 24064, 24064,
+  /* 6675 */ 24064, 0, 0, 0, 24064, 138, 0, 138, 138, 138, 138, 0, 138, 0, 0, 0, 0, 0, 1626, 1626, 0, 0, 0, 0, 0, 0,
+  /* 6701 */ 103, 0, 233, 234, 0, 0, 0, 0, 0, 1627, 1627, 0, 0, 0, 0, 0, 0, 0, 24576, 0, 0, 0, 0, 243, 0, 0, 0, 0, 0, 0,
+  /* 6731 */ 17920, 0, 0, 322, 234, 0, 236, 0, 0, 0, 0, 1628, 1628, 0, 0, 0, 0, 0, 0, 0, 25255, 25255, 0, 322, 236, 0,
+  /* 6757 */ 0, 0, 0, 0, 1629, 1629, 0, 0, 0, 0, 0, 0, 0, 42496, 42496, 0, 24576, 24576, 0, 0, 0, 0, 0, 1630, 1630, 0,
+  /* 6783 */ 0, 0, 0, 0, 0, 0, 43176, 43176, 25255, 25255, 25255, 25255, 25255, 25255, 0, 0, 432, 433, 0, 435, 0, 1621,
+  /* 6805 */ 474, 468, 0, 0, 0, 0, 1625, 1625, 0, 0, 0, 0, 0, 0, 0, 23552, 23552, 0, 25255, 25255, 0, 0, 0, 0, 0, 1631,
+  /* 6831 */ 1631, 0, 0, 0, 0, 0, 0, 0, 44544, 0, 0, 0, 0, 44544, 1622, 0, 0, 0, 0, 1622, 0, 1622, 1622, 1622, 1622,
+  /* 6856 */ 1622, 1676, 1676, 1676, 1622, 1622, 1676, 0, 0, 1676, 1676, 1676, 1676, 1676, 1676, 1676, 1676, 1622, 1676,
+  /* 6875 */ 0, 1621, 1621, 1621, 1717, 1725, 1621, 1621, 1621, 1621, 1621, 1735, 1621, 1621, 0, 1621, 1794, 1621, 1724,
+  /* 6894 */ 1621, 1621, 1621, 1823, 1621, 1621, 1621, 1621, 1621, 0, 205, 0, 0, 2375, 0, 1621, 1621, 1621, 1621, 1868,
+  /* 6914 */ 1889, 1621, 1621, 1891, 1621, 1621, 1621, 1727, 1947, 1621, 1621, 1621, 1621, 0, 0, 1621, 1621, 1621, 85,
+  /* 6933 */ 1621, 1909, 1621, 1621, 1621, 1621, 1621, 1621, 1913, 1621, 1621, 1938, 1621, 1621, 1621, 1621, 1621, 1621,
+  /* 6951 */ 1945, 1621, 1623, 1623, 1623, 1682, 1623, 1623, 0, 0, 0, 0, 1623, 0, 1623, 1682, 1682, 1623, 0, 1621, 1621,
+  /* 6972 */ 1621, 1621, 1816, 1621, 1621, 1621, 1624, 0, 0, 105, 0, 1624, 0, 1643, 1624, 1654, 1624, 1624, 1624, 1624,
+  /* 6992 */ 1654, 1643, 1624, 1654, 1624, 1654, 1654, 1654, 1654, 1654, 1654, 1654, 1654, 1654, 1654, 1654, 1683, 1654,
+  /* 7010 */ 1654, 0, 0, 452, 0, 0, 0, 0, 0, 476, 0, 0, 0, 0, 1707, 1683, 1654, 0, 1621, 1621, 1621, 1621, 1822, 1621,
+  /* 7034 */ 0, 0, 37973, 1621, 0, 0, 0, 0, 0, 432, 0, 0, 0, 0, 1621, 1621, 1621, 1908, 1625, 0, 0, 0, 0, 1625, 0, 1625,
+  /* 7060 */ 1646, 1625, 1625, 1625, 1625, 1646, 1625, 1646, 1646, 1646, 1646, 1646, 1646, 1646, 1646, 1646, 1646, 1646,
+  /* 7078 */ 1684, 1646, 1646, 0, 0, 463, 0, 0, 1621, 1621, 0, 0, 1887, 1621, 1621, 1621, 1882, 1621, 1621, 1621, 1621,
+  /* 7099 */ 1911, 1621, 1621, 1621, 1708, 1684, 1646, 0, 1621, 1621, 1621, 1621, 1825, 1621, 1621, 1621, 251, 1621,
+  /* 7117 */ 1621, 1621, 1621, 1621, 1621, 1621, 1810, 1621, 41045, 0, 0, 0, 0, 0, 0, 0, 24064, 0, 40960, 130, 236, 0,
+  /* 7139 */ 0, 384, 2375, 1621, 0, 0, 380, 0, 0, 0, 0, 1632, 1632, 0, 0, 0, 0, 0, 0, 0, 0, 396, 0, 0, 0, 396, 1621,
+  /* 7166 */ 1621, 0, 1621, 0, 468, 0, 0, 0, 0, 1621, 40533, 40448, 1621, 0, 468, 0, 0, 476, 429, 481, 0, 0, 0, 134,
+  /* 7190 */ 134, 134, 0, 15360, 1626, 0, 0, 0, 0, 1626, 0, 1626, 1647, 1626, 1626, 1626, 1626, 1626, 1626, 1647, 1626,
+  /* 7211 */ 1647, 0, 1626, 1647, 1626, 1626, 1647, 1677, 1677, 1677, 1626, 1647, 1677, 0, 0, 1677, 1677, 1677, 1677,
+  /* 7230 */ 1677, 1677, 1677, 1677, 1713, 1626, 1677, 0, 1621, 1621, 1621, 1621, 1831, 1621, 1838, 0, 1720, 1621, 1621,
+  /* 7249 */ 1621, 1621, 1621, 1621, 1730, 252, 1621, 1621, 1796, 1621, 1621, 1621, 1799, 1879, 1621, 1621, 1621, 1621,
+  /* 7267 */ 1621, 1621, 1621, 1817, 1621, 85, 1621, 1621, 1621, 1621, 1892, 1621, 1621, 1621, 1621, 30720, 0, 0, 0,
+  /* 7286 */ 1621, 1621, 1621, 1621, 1846, 0, 130, 236, 0, 0, 384, 2375, 1921, 1621, 1922, 1621, 1621, 1925, 0, 0, 0,
+  /* 7307 */ 1635, 1635, 0, 0, 0, 0, 0, 0, 0, 1621, 1983, 0, 0, 0, 0, 0, 432, 0, 0, 0, 0, 26709, 41557, 1621, 0, 1621,
+  /* 7333 */ 0, 468, 469, 0, 0, 5370, 0, 0, 0, 0, 0, 0, 0, 432, 0, 28757, 474, 468, 0, 0, 0, 0, 1636, 1636, 0, 0, 0, 0,
+  /* 7361 */ 0, 0, 0, 1627, 0, 0, 0, 0, 1627, 0, 1627, 1648, 1627, 1627, 1627, 1627, 1648, 1627, 1648, 1648, 1648, 1648,
+  /* 7383 */ 1648, 1648, 1648, 1648, 1648, 1648, 1648, 1685, 1648, 1648, 0, 0, 477, 476, 481, 0, 0, 0, 476, 481, 0, 0,
+  /* 7405 */ 449, 1709, 1685, 1648, 0, 1621, 1621, 1621, 1621, 1901, 1621, 1621, 1621, 85, 1621, 1621, 1621, 0, 1621,
+  /* 7424 */ 1621, 1621, 1718, 450, 0, 0, 0, 1621, 1621, 1621, 1621, 1621, 1802, 1628, 1628, 1628, 1686, 1628, 1628, 0,
+  /* 7444 */ 0, 0, 0, 1628, 0, 1628, 1686, 1686, 1628, 0, 1621, 1621, 1621, 1621, 1944, 1621, 1621, 1621, 1621, 1819,
+  /* 7464 */ 1621, 1822, 1621, 1621, 1621, 1621, 1962, 0, 0, 0, 1621, 1845, 1621, 1621, 1621, 1621, 1621, 0, 0, 393,
+  /* 7484 */ 1621, 1845, 0, 0, 1621, 1867, 1621, 1621, 0, 1621, 0, 468, 0, 473, 1621, 1954, 0, 0, 0, 0, 421, 0, 0, 9728,
+  /* 7508 */ 0, 0, 0, 9728, 9728, 0, 9728, 0, 1731, 1621, 1621, 1621, 1739, 0, 0, 206, 1621, 224, 0, 0, 0, 0, 229, 0, 0,
+  /* 7533 */ 9728, 0, 0, 9728, 0, 0, 0, 0, 0, 0, 1621, 1718, 1621, 1621, 1621, 1621, 1621, 390, 0, 0, 1731, 1801, 1753,
+  /* 7556 */ 1753, 0, 0, 0, 0, 2184, 2184, 2184, 0, 0, 1621, 1621, 1621, 1621, 1621, 1785, 1629, 0, 0, 0, 0, 1629, 0,
+  /* 7579 */ 1629, 1649, 1629, 1629, 1629, 1629, 1649, 1629, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649, 1649,
+  /* 7597 */ 1649, 1687, 1649, 1649, 0, 0, 485, 0, 485, 486, 487, 0, 1710, 1687, 1649, 0, 1621, 1621, 1621, 1621, 32853,
+  /* 7618 */ 1621, 1621, 1621, 1732, 1621, 1621, 1621, 1621, 0, 0, 0, 299, 0, 253, 1621, 1621, 1621, 1621, 1621, 1621,
+  /* 7638 */ 1621, 1885, 1780, 1621, 1802, 1802, 0, 0, 0, 0, 2185, 2185, 2185, 0, 0, 1621, 1621, 1621, 1621, 1621, 1800,
+  /* 7659 */ 1828, 1830, 1832, 0, 0, 298, 0, 0, 1621, 1621, 1750, 1621, 1621, 1621, 15872, 0, 0, 0, 0, 1633, 0, 1712,
+  /* 7681 */ 1712, 1621, 1830, 1621, 1621, 1621, 1621, 1621, 1621, 34389, 1621, 1886, 1621, 0, 0, 1621, 1621, 1621,
+  /* 7699 */ 1621, 1717, 1750, 1621, 1942, 1621, 1621, 1621, 1621, 1621, 1946, 430, 0, 432, 0, 0, 0, 0, 1621, 1621,
+  /* 7719 */ 1621, 38997, 1973, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1896, 1630, 0, 0, 0, 0, 1630, 0, 1630, 1650,
+  /* 7739 */ 1630, 1630, 1630, 1630, 1650, 1630, 1650, 1650, 1650, 1650, 1650, 1650, 1650, 1650, 1650, 1650, 1650, 1630,
+  /* 7757 */ 1650, 1650, 0, 0, 1621, 1621, 1782, 1621, 1621, 1621, 0, 32256, 36352, 0, 0, 0, 1621, 1781, 1621, 1621,
+  /* 7777 */ 1621, 1621, 0, 35413, 0, 468, 0, 0, 1621, 1796, 1621, 1621, 1806, 1621, 1650, 1630, 1650, 0, 1621, 1621,
+  /* 7797 */ 1621, 1621, 42069, 1621, 1621, 1621, 254, 1621, 1621, 1621, 1725, 1621, 1621, 1621, 1976, 1621, 1621, 1621,
+  /* 7815 */ 1621, 1824, 1621, 1621, 1621, 1621, 314, 1807, 0, 1621, 1621, 1621, 1621, 1621, 1621, 41984, 0, 1818, 1621,
+  /* 7834 */ 1621, 1621, 1621, 1621, 1621, 1621, 1914, 1621, 1831, 1621, 0, 0, 0, 0, 300, 1621, 1838, 1621, 1621, 1621,
+  /* 7854 */ 1621, 1621, 1621, 1739, 0, 28160, 1621, 85, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1827, 0, 367, 0, 0,
+  /* 7874 */ 1621, 1621, 1621, 1621, 1723, 1621, 0, 1621, 1621, 1951, 1621, 1621, 1621, 1621, 0, 36864, 0, 1621, 1621,
+  /* 7893 */ 1621, 1848, 1621, 1848, 1621, 0, 1621, 456, 1993, 1621, 0, 1621, 1621, 0, 1621, 1621, 0, 1621, 39509, 0,
+  /* 7913 */ 31317, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1977, 1631, 0, 0, 0, 0, 1631, 0, 1631, 1631, 1631, 1631,
+  /* 7933 */ 1631, 1631, 1631, 1631, 1631, 1631, 0, 0, 1621, 1722, 1621, 1621, 1727, 1621, 1621, 1621, 419, 0, 0, 0, 0,
+  /* 7954 */ 0, 11396, 11396, 11396, 11425, 11433, 1751, 1621, 1621, 1756, 1621, 1621, 1621, 1758, 1749, 0, 1621, 1621,
+  /* 7972 */ 1621, 1621, 1811, 1621, 0, 334, 0, 0, 0, 0, 0, 1634, 1634, 0, 0, 0, 0, 0, 0, 0, 1837, 1621, 1621, 1621,
+  /* 7996 */ 1621, 1621, 1621, 1843, 130, 234, 0, 236, 0, 0, 0, 0, 13445, 13445, 13445, 13474, 13482, 40021, 1621, 0, 0,
+  /* 8017 */ 0, 0, 0, 0, 383, 1621, 1980, 0, 0, 445, 1621, 31829, 1621, 0, 379, 0, 0, 0, 0, 0, 1633, 1633, 0, 0, 0, 0,
+  /* 8043 */ 0, 0, 0, 185, 1621, 1726, 1715, 1621, 1728, 1621, 1621, 448, 0, 0, 0, 0, 432, 0, 0, 0, 436, 1621, 207, 208,
+  /* 8067 */ 1745, 1746, 1719, 212, 1621, 1726, 0, 1621, 1994, 459, 1996, 1621, 461, 1621, 1752, 1621, 1621, 1757, 1745,
+  /* 8086 */ 1621, 1621, 1737, 1621, 1621, 0, 0, 0, 0, 0, 384, 1759, 207, 225, 0, 0, 228, 0, 0, 1622, 1622, 1622, 0,
+  /* 8109 */ 1622, 1622, 1622, 1622, 1622, 1622, 1622, 1622, 0, 232, 130, 234, 0, 0, 0, 0, 0, 17920, 0, 0, 0, 17920, 0,
+  /* 8132 */ 0, 0, 0, 5120, 0, 0, 5120, 0, 5120, 5120, 0, 0, 1621, 1795, 29881, 1797, 1798, 1621, 1621, 1755, 1621,
+  /* 8153 */ 1621, 1621, 1733, 1621, 1621, 1621, 1621, 0, 0, 0, 37461, 1621, 1621, 1844, 1621, 1621, 1621, 1621, 1621,
+  /* 8172 */ 1621, 0, 0, 429, 0, 316, 0, 0, 318, 0, 0, 0, 19211, 0, 0, 0, 0, 476, 481, 0, 0, 0, 0, 0, 0, 0, 1621, 1621,
+  /* 8200 */ 0, 26197, 1621, 1621, 1621, 1621, 0, 0, 0, 0, 0, 432, 1958, 1621, 1621, 1621, 1621, 0, 0, 0, 0, 449, 432,
+  /* 8223 */ 0, 431, 432, 0, 0, 0, 0, 1621, 1621, 27733, 1621, 255, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 30805,
+  /* 8243 */ 1869, 0, 0, 0, 0, 0, 0, 0, 45056, 45056, 1632, 0, 0, 0, 0, 1632, 0, 1632, 1632, 1632, 1632, 1632, 1678,
+  /* 8266 */ 1678, 1678, 1678, 1678, 1678, 1678, 1678, 1688, 1632, 1678, 0, 0, 1711, 1688, 1678, 0, 1621, 1621, 1716,
+  /* 8285 */ 1621, 0, 1621, 1621, 1621, 1726, 1621, 1621, 0, 1621, 0, 0, 0, 471, 1621, 1735, 1621, 1621, 1621, 0, 0, 0,
+  /* 8307 */ 420, 0, 384, 0, 1793, 1621, 1621, 1621, 1621, 1621, 1621, 1883, 1884, 1621, 1621, 27648, 0, 0, 0, 381, 0,
+  /* 8328 */ 0, 1623, 1623, 1623, 0, 1623, 1623, 1623, 1623, 1623, 1623, 1623, 1623, 0, 394, 0, 0, 0, 0, 0, 1621, 1621,
+  /* 8350 */ 41472, 1621, 1959, 1621, 1621, 1621, 0, 0, 0, 429, 0, 432, 1633, 0, 0, 0, 0, 1633, 0, 1633, 1675, 1651,
+  /* 8372 */ 1675, 1675, 1675, 1675, 1655, 1675, 1651, 1675, 1655, 1651, 1679, 1679, 1679, 1679, 1679, 1679, 1679, 1679,
+  /* 8390 */ 1689, 1691, 1692, 0, 0, 1712, 1689, 1679, 0, 1621, 1621, 1621, 1621, 1821, 1621, 1621, 1621, 1621, 1621,
+  /* 8409 */ 1830, 1621, 1621, 1829, 1621, 1621, 0, 297, 0, 0, 0, 45056, 45056, 45056, 0, 0, 0, 0, 0, 0, 1621, 1880,
+  /* 8431 */ 1621, 1621, 1621, 1621, 1621, 1621, 1912, 1621, 1621, 1634, 0, 0, 0, 0, 1634, 0, 1634, 1634, 1634, 1634,
+  /* 8451 */ 1634, 1680, 1680, 1680, 1634, 1634, 1680, 0, 0, 1680, 1680, 1680, 1680, 1680, 1680, 1680, 1680, 1634, 1680,
+  /* 8470 */ 0, 1621, 1621, 1621, 1621, 1846, 1621, 1621, 1621, 1621, 0, 1621, 1621, 1621, 1621, 1733, 1621, 1755, 1784,
+  /* 8489 */ 0, 0, 0, 0, 1625, 1625, 1625, 0, 1625, 1625, 1625, 1625, 1646, 1646, 1646, 123, 1621, 1820, 1621, 1621,
+  /* 8509 */ 1621, 1621, 1621, 1621, 1881, 1621, 1621, 1621, 1621, 1621, 1826, 1621, 1621, 0, 0, 34304, 0, 0, 0, 0, 0,
+  /* 8530 */ 1626, 1626, 1626, 0, 1626, 1626, 1621, 1898, 1621, 1621, 1621, 1621, 1621, 1621, 1890, 1621, 1621, 1621,
+  /* 8548 */ 1621, 1621, 1893, 1621, 1621, 1621, 1621, 1621, 1717, 1621, 1621, 1621, 1621, 1937, 1621, 1621, 1621, 1940,
+  /* 8566 */ 1621, 1937, 1621, 0, 1621, 1621, 1810, 1621, 1621, 1621, 1839, 1621, 1621, 1621, 1621, 1621, 0, 428, 0,
+  /* 8585 */ 413, 28245, 1950, 1621, 32341, 36437, 1621, 1621, 1899, 1621, 1621, 1621, 1621, 1621, 85, 1621, 1621, 1621,
+  /* 8603 */ 38485, 1621, 0, 0, 0, 1621, 1621, 1982, 1635, 0, 0, 0, 0, 1635, 0, 1635, 1652, 1635, 1635, 1635, 1635,
+  /* 8624 */ 1656, 1635, 1652, 1635, 1656, 1652, 1652, 1652, 1652, 1652, 1652, 1652, 1652, 1652, 1652, 1652, 1635, 1652,
+  /* 8642 */ 1652, 0, 0, 1627, 1627, 1627, 0, 1627, 1627, 1627, 1627, 1648, 1648, 1648, 124, 1652, 1635, 1652, 0, 1621,
+  /* 8662 */ 1715, 1621, 1621, 1923, 1621, 1621, 0, 391, 0, 256, 1621, 1621, 1621, 1621, 1621, 1621, 1621, 1943, 1621,
+  /* 8681 */ 1621, 1621, 1621, 1621, 1948, 1621, 1621, 1621, 0, 0, 1621, 1621, 1621, 1621, 1621, 1784, 1813, 1814, 1621,
+  /* 8700 */ 1621, 1621, 1621, 1621, 1621, 1960, 1621, 1621, 0, 0, 0, 1621, 1621, 1621, 0, 1621, 1621, 1621, 1719, 315,
+  /* 8720 */ 0, 0, 0, 0, 0, 0, 0, 1628, 1628, 1628, 0, 1628, 1628, 1628, 1628, 1628, 1628, 1628, 1628, 0, 1897, 1621,
+  /* 8742 */ 1621, 1621, 1621, 1621, 1621, 1621, 1975, 1621, 1621, 1621, 1621, 1621, 1894, 1621, 1621, 1621, 1974, 1621,
+  /* 8760 */ 1621, 1621, 1621, 1621, 1621, 30208, 0, 0, 1621, 1621, 1621, 1720, 1621, 1621, 0, 451, 0, 0, 1621, 1621,
+  /* 8780 */ 1621, 1621, 1749, 1621, 1636, 0, 0, 106, 0, 1636, 0, 1644, 1636, 1657, 1636, 1636, 1636, 1636, 1657, 1644,
+  /* 8800 */ 1636, 1657, 1636, 1657, 1657, 1657, 1657, 1657, 1657, 1657, 1657, 1657, 1657, 1657, 1636, 1657, 1657, 0, 0,
+  /* 8819 */ 1629, 1629, 1629, 0, 1629, 1629, 1629, 1629, 1649, 1649, 1649, 125, 1657, 1636, 1657, 0, 1621, 1621, 1621,
+  /* 8838 */ 1621, 33365, 1621, 1621, 1621, 1621, 1621, 1842, 1621, 1621, 104, 0, 0, 1637, 1637, 0, 0, 0, 0, 0, 0, 0,
+  /* 8860 */ 1637, 1637, 1637, 1690, 1637, 1637, 0, 0, 0, 0, 1637, 0, 1637, 1690, 1690, 1637, 0, 1621, 1621, 1621, 1621,
+  /* 8881 */ 34901, 1621, 1621, 1621, 1621, 1621, 204, 0, 0, 1734, 1621, 1621, 1621, 1621, 0, 0, 0, 0, 1621, 0, 1621,
+  /* 8902 */ 1621, 1800, 1621, 1734, 1734, 0, 0, 0, 0, 1630, 1630, 1630, 0, 1630, 1630, 1630, 1630, 1650, 1650, 1650,
+  /* 8922 */ 126, 1621, 1723, 1621, 1621, 1621, 1621, 1621, 1621, 0, 1621, 1809, 1621, 1621, 1621, 1621, 1832, 1621,
+  /* 8940 */ 1621, 1621, 1782, 0, 1621, 1621, 1621, 1621, 1621, 1621, 0, 1808, 1621, 1621, 1621, 1621, 1621, 1941, 1621,
+  /* 8959 */ 1621, 1621, 1736, 1621, 1621, 1621, 0, 0, 0, 227, 0, 0, 231, 1621, 1864, 0, 0, 1621, 1621, 1621, 1621, 85,
+  /* 8981 */ 1621, 1621, 0, 1621, 1621, 1621, 1621, 1621, 1621, 1953, 0, 42496, 0, 0, 42496, 0, 0, 0, 1631, 1631, 1631,
+  /* 9002 */ 0, 1631, 1631, 1631, 0, 1621, 1621, 1621, 1621, 85, 1621, 0, 1621, 1621, 1621, 1621, 1621, 1812, 0, 42496,
+  /* 9022 */ 42496, 0, 0, 0, 0, 0, 42496, 42496, 42496, 0, 42496, 0, 0, 0, 0, 0, 1632, 1632, 1632, 0, 1632, 1632, 1632,
+  /* 9045 */ 1632, 1632, 1632, 1632, 1632, 0, 42496, 42496, 42496, 42496, 0, 0, 0, 0, 0, 43176, 43176, 43176, 43176,
+  /* 9064 */ 43176, 43176, 0, 0, 1633, 1633, 1633, 0, 1633, 1633, 1633, 1633, 1651, 1655, 1651, 127, 0, 43176, 43176, 0,
+  /* 9084 */ 0, 0, 0, 0, 1634, 1634, 1634, 0, 1634, 1634, 1634, 1634, 1634, 1634, 1634, 1634, 0, 44544, 0, 44544, 0, 0,
+  /* 9106 */ 0, 0, 0, 0, 0, 44544, 0, 0, 0, 44544, 44544, 44544, 0, 0, 0, 0, 0, 45056, 0, 45056, 45056, 45056, 45056, 0,
+  /* 9130 */ 45056, 0, 0, 0, 0, 0, 0, 474, 0, 0, 0, 0, 0, 0, 1635, 1635, 1635, 0, 1635, 1635, 1635, 1635, 1652, 1656,
+  /* 9154 */ 1652, 128, 0, 474, 0, 0, 0, 0, 0, 483
 ];
 
 C.EXPECTED =
 [
-  /*   0 */ 338, 312, 313, 317, 323, 320, 327, 331, 355, 335, 342, 371, 352, 358, 362, 364, 368, 345, 348, 374, 722,
-  /*  21 */ 516, 516, 516, 516, 405, 515, 516, 516, 701, 418, 516, 519, 520, 515, 516, 516, 516, 378, 382, 520, 394,
-  /*  42 */ 516, 400, 516, 516, 516, 516, 516, 516, 404, 511, 516, 516, 725, 413, 410, 517, 520, 520, 516, 516, 516,
-  /*  63 */ 517, 515, 724, 516, 516, 516, 516, 516, 518, 511, 516, 516, 725, 416, 519, 520, 515, 516, 516, 516, 516,
-  /*  84 */ 516, 516, 518, 515, 516, 397, 520, 515, 516, 516, 516, 513, 516, 519, 516, 516, 514, 515, 514, 512, 521,
-  /* 105 */ 422, 520, 487, 719, 434, 438, 442, 446, 450, 502, 454, 458, 462, 464, 468, 472, 476, 480, 484, 520, 520,
-  /* 126 */ 520, 520, 520, 555, 430, 549, 520, 520, 520, 493, 499, 520, 509, 694, 525, 520, 520, 489, 385, 505, 530,
-  /* 147 */ 536, 520, 520, 520, 520, 520, 520, 554, 429, 548, 520, 520, 520, 520, 685, 405, 406, 561, 746, 525, 583,
-  /* 168 */ 553, 520, 520, 520, 520, 520, 520, 554, 429, 548, 520, 520, 520, 687, 520, 560, 745, 581, 565, 520, 520,
-  /* 189 */ 520, 428, 575, 520, 526, 405, 561, 579, 520, 520, 526, 520, 704, 494, 581, 520, 495, 520, 732, 520, 679,
-  /* 210 */ 544, 556, 542, 656, 588, 587, 592, 599, 595, 603, 607, 611, 610, 615, 619, 623, 626, 630, 520, 520, 520,
-  /* 231 */ 520, 520, 655, 657, 390, 636, 520, 734, 641, 389, 641, 673, 520, 647, 670, 520, 520, 425, 520, 651, 520,
-  /* 252 */ 520, 520, 520, 520, 520, 520, 654, 656, 389, 663, 637, 520, 632, 643, 661, 642, 742, 520, 667, 677, 683,
-  /* 273 */ 520, 520, 520, 520, 520, 520, 654, 656, 532, 716, 637, 734, 532, 691, 568, 520, 667, 520, 520, 520, 520,
-  /* 294 */ 655, 698, 716, 735, 708, 569, 538, 387, 520, 713, 729, 709, 570, 540, 739, 571, 739, 520, 896, 896, 896,
-  /* 315 */ 896, 263044, 900, 17040256, 16778112, 16778112, 656260, 17171328, 656260, 394112, 656256, 525184, 16909184,
-  /* 328 */ 16909184, 656260, 17171332, 656260, 17695616, 17695620, 918404, 900, 107628540, 656260, 900, 131968, 263040,
-  /* 341 */ 1073742720, 918400, 107890684, 107628540, 107628540, -1950483584, -1073742976, -1074005120, -1073742976,
-  /* 350 */ -1074005116, -1073742976, 17695620, 107628540, 656260, 17695620, 17695620, 17695620, 17695620, 900, 263044,
-  /* 361 */ 1073742724, 900, 656260, 918404, 656260, 656260, 16909188, 17433476, 107628540, 17171332, 107628540, 900,
-  /* 373 */ 107628540, 107628540, 107890684, -1073741828, -1073742972, 4, 2048, 8192, 98304, 1048576, 8388608,
-  /* 384 */ 134217728, 256, 7168, 131072, 0, 0, 0, 4, 8, 1216, 0, 12582912, 469762048, 4, 4, 16, 4, 4, 256, 256, 4,
-  /* 405 */ 1073741824, 0, 0, 0, 262144, 8, 16, 24, 32, 16, 24, 16, 16, 16, 24, 24, 32, 4, 128, 134217728, 0, 0,
-  /* 427 */ 3145728, 0, 0, 4194304, 0, 2097152, 67108864, 2, 16384, 4194304, 16390, 16516, 4194308, 4210688, 4194308,
-  /* 442 */ 4210688, 4210688, 4210690, 4210692, 4210688, 4210694, 4210694, 1411383296, 0, 1147142148, 1415577600,
-  /* 453 */ 1147158528, 1415577600, 4194304, 0, 1147158528, 2, 1415577604, 1147158534, 1415593984, 1952710656,
-  /* 463 */ 1952710656, 1952710656, 1952710656, 1952710660, 1952727040, 1952727040, 1952727044, 1952727172, 1952727172,
-  /* 472 */ -2087190524, 1952727174, 1415577600, 1952710660, 245759, 229369, 229369, 229375, 4423673, 4423679, 262143,
-  /* 483 */ -134479868, -262140, -2086928385, 1952972799, 0, 4, 0, 0, 1, 112, 6291456, 0, 0, 0, 8388608, 16777216,
-  /* 499 */ 6291456, 67108864, 1073741824, 0, 4, 32768, 0, 0, 15728640, 117440512, 262144, 805306368, 0, 0, 4, 4, 0, 4,
-  /* 517 */ 4, 4, 4, 0, 0, 0, 0, 2, 0x80000000, 0, 0, 0, 67108864, -1073741824, 0, 0, 0, 8, 64, 939524096, 0, 0, 0, 32,
-  /* 541 */ 2048, 0, 65536, 4194304, 0, 262144, 0, 67108864, 268435456, 1073741824, 0, 0, 12582912, 0, 134217728, 0,
-  /* 557 */ 4194304, 0, 0, 262144, 536870912, 0, 0, 0, 0, 12582912, 134217728, 0, 16, 512, 4096, 0, 0, 65536, 4194304,
-  /* 576 */ 0, 67108864, 1073741824, 524288, 8388608, 16777216, 0, 0, 0, 32, 4096, 65536, 65536, 65536, 327680, 65536,
-  /* 592 */ 327680, 4259840, 58572, 8388864, 8388864, 8651008, 4318412, 114892, 124108, 114892, 8388864, 8454400,
-  /* 604 */ 12845312, 114892, 12845312, 124108, 114892, 124108, 128732, 128732, 128732, 390876, 128732, 390876, 390876,
-  /* 617 */ 390876, 8784163, 390876, 8512972, 8517596, 7864320, 3670016, 7864320, 3670016, 3735552, 7864320, 13107199,
-  /* 629 */ 13107199, 16648483, 8255196, 0, 0, 256, 16384, 24576, 32768, 0, 0, 0, 192, 16384, 98304, 0, 0, 0, 1, 2, 32,
-  /* 650 */ 2304, 6, 48, 4032, 0, 131072, 0, 65536, 0, 0, 0, 4, 8, 64, 128, 1024, 24576, 1, 32, 2048, 131072, 1472,
-  /* 672 */ 1984, 0, 16, 1728, 4096, 384, 0, 0, 0, 131072, 262144, 48, 0, 0, 0, 2097152, 67108864, 1073741824, 0, 128,
-  /* 692 */ 16384, 32768, 0, 524288, 9437184, 50331648, 65536, 0, 0, 64, 32, 4194304, 67108864, 0, 0, 536870912, 64,
-  /* 709 */ 128, 16384, 0, 16, 65536, 65536, 0, 128, 1024, 8192, 16384, 16384, 4194304, 128, 512, 256, 4, 4, 4, 64,
-  /* 729 */ 1024, 16384, 256, 0, 8388608, 0, 0, 256, 0, 0, 65536, 16384, 16384, 16, 1536, 4096, 0, 524288, 1048576,
-  /* 748 */ 8388608, 16777216
+  /*   0 */ 23, 39, 99, 113, 142, 182, 126, 198, 214, 83, 331, 69, 340, 230, 54, 166, 246, 262, 285, 278, 301, 317, 157,
+  /*  23 */ 356, 421, 422, 360, 366, 363, 370, 381, 401, 374, 395, 392, 398, 404, 378, 385, 389, 414, 408, 412, 418,
+  /*  44 */ 494, 494, 494, 494, 634, 492, 494, 494, 494, 497, 498, 640, 640, 647, 498, 498, 733, 654, 498, 498, 498,
+  /*  65 */ 653, 498, 498, 660, 498, 642, 635, 498, 498, 498, 661, 648, 498, 713, 782, 498, 572, 608, 498, 498, 498,
+  /*  86 */ 550, 552, 556, 498, 564, 569, 498, 498, 498, 662, 498, 585, 498, 618, 426, 452, 494, 432, 494, 494, 437,
+  /* 107 */ 441, 498, 575, 494, 631, 494, 494, 494, 433, 498, 494, 494, 494, 495, 498, 498, 447, 428, 451, 494, 466,
+  /* 128 */ 458, 459, 494, 494, 494, 493, 496, 493, 465, 458, 458, 494, 463, 464, 494, 494, 496, 494, 494, 494, 494,
+  /* 149 */ 494, 494, 494, 498, 494, 494, 494, 497, 498, 805, 816, 738, 498, 611, 818, 498, 498, 498, 498, 498, 498,
+  /* 170 */ 498, 656, 505, 750, 809, 759, 667, 666, 671, 677, 681, 674, 625, 628, 494, 466, 458, 460, 494, 494, 494,
+  /* 191 */ 494, 494, 496, 493, 494, 496, 600, 458, 461, 462, 458, 456, 458, 458, 458, 458, 467, 636, 578, 498, 490,
+  /* 212 */ 768, 471, 475, 479, 483, 487, 525, 503, 509, 513, 515, 519, 522, 529, 533, 537, 541, 498, 654, 622, 498,
+  /* 233 */ 498, 498, 749, 811, 498, 812, 498, 648, 498, 498, 714, 654, 498, 685, 690, 688, 694, 697, 704, 701, 708,
+  /* 254 */ 712, 498, 498, 498, 498, 757, 759, 543, 718, 730, 543, 730, 498, 498, 726, 737, 499, 743, 747, 498, 498,
+  /* 275 */ 793, 565, 754, 725, 777, 498, 498, 499, 786, 649, 498, 498, 498, 498, 498, 498, 655, 807, 498, 545, 765,
+  /* 296 */ 732, 545, 731, 498, 498, 546, 773, 591, 790, 498, 725, 560, 498, 498, 498, 800, 498, 498, 498, 498, 758,
+  /* 317 */ 760, 771, 761, 724, 560, 498, 498, 498, 801, 498, 610, 721, 796, 559, 498, 498, 581, 589, 595, 443, 599,
+  /* 338 */ 498, 498, 498, 498, 498, 739, 604, 643, 635, 498, 615, 498, 498, 661, 648, 498, 498, 780, 132, 131200,
+  /* 358 */ 262272, 1073741952, 132, 17039488, 16777344, 16777344, 655492, 17170560, 655492, 393344, 655488, 524416,
+  /* 370 */ 16908416, 16908416, 655492, 17170564, 132, 655492, 132, 917632, 132, 655492, 917636, 655492, 17694848,
+  /* 383 */ 17694852, 917636, 656260, 917636, 655492, 655492, 16908420, 17432708, 17170564, 107628028, 107628028,
+  /* 394 */ 17694852, 107628028, 132, 107890172, 107628028, 655492, 107628028, 17694852, 17694852, 17694852, 17694852,
+  /* 405 */ 132, 262276, 1073741956, -1074005888, -1074005888, -1074005888, -1073743744, -1074005884, -1073743744,
+  /* 414 */ 107628028, 107628028, -1950484352, -1073743744, 107890684, -1073742340, -1073743740, 128, 128, 128, 128,
+  /* 425 */ 262276, 67108864, 16, 256, 24, 16, 8, 512, 4, 4, 4, 1073741824, 2048, 8192, 98304, 1048576, 8388608,
+  /* 442 */ 134217728, 0, 0, 0, 939524096, 64, 32, 16, 256, 16, 24, 32, 4, 4, 512, 4, 512, 512, 512, 512, 4, 4, 0, 4, 4,
+  /* 467 */ 512, 512, 512, 0, 2, 16384, 4194304, 16390, 16516, 4194308, 4210688, 4194308, 4210688, 4210688, 4210690,
+  /* 482 */ 4210692, 4210688, 4210694, 4210694, 1411383296, 1147142148, 1415577600, 1147158528, 0, 4, 0, 0, 4, 4, 4, 4,
+  /* 498 */ 0, 0, 0, 0, 1, 0, 1147158528, 4194304, 0, 262144, 0, 1415577604, 2, 1147158534, 1415593984, 1952710656,
+  /* 514 */ 1952710656, 1952710656, 1952710656, 1952710660, 1952710656, 1952727040, 1952727040, 1952727044, 1952727172,
+  /* 523 */ 1952727174, -2087190524, 1415577600, 0, 4, 32768, 1952710660, 245759, 229369, 229373, 229369, 229375,
+  /* 535 */ 4423673, 4423679, 262143, -134479868, -262140, -262140, -2086928385, 1952972799, 0, 0, 4, 8, 64, 128, 1024,
+  /* 550 */ 0, 134217728, 0, 4194304, 0, 2097152, 67108864, 268435456, 1073741824, 0, 16, 512, 4096, 0, 6291456, 0, 0,
+  /* 567 */ 0, 6, 6291456, 67108864, 1073741824, 0, 32, 4096, 12582912, 469762048, 4, 4, 128, 134217728, 0, 1, 112, 256,
+  /* 585 */ 524288, 9437184, 50331648, 0x80000000, 7168, 131072, 0, 0, 8, 64, 0, 15728640, 117440512, -1073741824, 1, 0,
+  /* 601 */ 0, 0, 16, 0, 4194304, 0, 4194304, 0, 134217728, 0, 0, 65536, 65536, 16384, 2097152, 67108864, 1073741824, 0,
+  /* 619 */ 64, 32, 4194304, 0, 12582912, 134217728, 0, 64, 256, 16, 16, 24, 4, 256, 4, 4, 1073741824, 0, 0, 0, 2, 0,
+  /* 641 */ 67108864, 0, 0, 2097152, 67108864, 268435456, 0, 536870912, 0, 0, 0, 48, 8388608, 16777216, 0, 0, 0, 131072,
+  /* 659 */ 262144, 8388608, 0, 0, 0, 262144, 805306368, 65536, 65536, 65536, 327680, 65536, 327680, 4259840, 58572,
+  /* 674 */ 114892, 8454400, 12845312, 124108, 114892, 8388864, 4318412, 8388864, 8388864, 8388864, 8651008, 12845312,
+  /* 686 */ 114892, 124108, 128732, 128732, 128732, 128732, 390876, 128732, 390876, 390876, 390876, 390876, 8784163,
+  /* 699 */ 8512972, 8517596, 3670016, 3735552, 3735552, 7864320, 3670016, 3670016, 7864320, 13107199, 13107199,
+  /* 710 */ 13107199, 16648483, 8255196, 0, 0, 0, 524288, 8388608, 1216, 24576, 32768, 0, 128, 1024, 16384, 0, 256, 0,
+  /* 728 */ 0, 16, 192, 16384, 98304, 0, 0, 0, 8388608, 1728, 4096, 0, 0, 0, 134217728, 2, 32, 2304, 131072, 1472, 1984,
+  /* 749 */ 0, 0, 4194304, 0, 0, 48, 4032, 0, 0, 131072, 0, 65536, 0, 0, 64, 128, 1024, 24576, 32768, 16384, 16384,
+  /* 770 */ 4194304, 128, 1024, 8192, 16384, 32768, 0, 16, 1536, 4096, 0, 524288, 1048576, 8388608, 16777216,
+  /* 785 */ 0x80000000, 32, 2048, 131072, 384, 128, 16384, 32768, 0, 3145728, 0, 0, 128, 16384, 256, 1, 32, 2048,
+  /* 803 */ 131072, 0, 32, 2048, 0, 65536, 0, 65536, 4194304, 0, 67108864, 1073741824, 0, 65536, 16384, 16384, 16, 0, 0
 ];
 
 C.TOKEN =

@@ -1,2 +1,2 @@
 #include <stdio.h
-int x = 1;
+int bad1 = 0;

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translationUnit>
   <translationUnitItem>
+    <PreprocessingDirective>#include &lt;stdio.h&gt;
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
     <externalDeclaration>
       <declaration>
         <declarationSpecifiers>
@@ -15,7 +19,7 @@
             <declarator>
               <directDeclarator>
                 <directDeclaratorBase>
-                  <Identifier>x</Identifier>
+                  <Identifier>z</Identifier>
                 </directDeclaratorBase>
               </directDeclarator>
             </declarator> 
@@ -38,7 +42,7 @@
                                           <postfixExpression>
                                             <primaryExpression>
                                               <constant>
-                                                <IntegerConstant>10</IntegerConstant>
+                                                <IntegerConstant>2</IntegerConstant>
                                               </constant>
                                             </primaryExpression>
                                           </postfixExpression>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translationUnit>
   <translationUnitItem>
+    <PreprocessingDirective>#define VALUE 42
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
     <externalDeclaration>
       <declaration>
         <declarationSpecifiers>
@@ -37,9 +41,7 @@
                                         <unaryExpression>
                                           <postfixExpression>
                                             <primaryExpression>
-                                              <constant>
-                                                <IntegerConstant>10</IntegerConstant>
-                                              </constant>
+                                              <Identifier>VALUE</Identifier>
                                             </primaryExpression>
                                           </postfixExpression>
                                         </unaryExpression>

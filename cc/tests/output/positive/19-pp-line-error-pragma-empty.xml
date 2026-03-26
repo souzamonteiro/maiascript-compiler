@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translationUnit>
   <translationUnitItem>
+    <PreprocessingDirective>#line 120 "virtual.c"
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
+    <PreprocessingDirective>#error this is an error directive test
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
+    <PreprocessingDirective>#pragma once
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
+    <PreprocessingDirective>#
+</PreprocessingDirective>
+  </translationUnitItem>
+  <translationUnitItem>
     <externalDeclaration>
       <declaration>
         <declarationSpecifiers>
@@ -15,7 +31,7 @@
             <declarator>
               <directDeclarator>
                 <directDeclaratorBase>
-                  <Identifier>x</Identifier>
+                  <Identifier>b</Identifier>
                 </directDeclaratorBase>
               </directDeclarator>
             </declarator> 
@@ -38,7 +54,7 @@
                                           <postfixExpression>
                                             <primaryExpression>
                                               <constant>
-                                                <IntegerConstant>10</IntegerConstant>
+                                                <IntegerConstant>4</IntegerConstant>
                                               </constant>
                                             </primaryExpression>
                                           </postfixExpression>
