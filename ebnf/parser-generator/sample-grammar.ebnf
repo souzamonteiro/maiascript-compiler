@@ -2,10 +2,11 @@
 Expression ::= Term ( '+' Term )*
 Term       ::= Factor ( '*' Factor )*
 Factor     ::= Number
-            | '(' Expression ')'
-Number     ::= [0-9]+
+             | '(' Expression ')'
 
 <?TOKENS?>
 
-Whitespace ::= [ \t\n\r]+ /* ws: definition */
 Number     ::= [0-9]+
+
+Whitespace ::= [#x0009#x000A#x000D#x0020]+
+               /* ws: definition */
