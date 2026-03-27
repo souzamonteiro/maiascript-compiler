@@ -301,11 +301,13 @@ class CodeGenerator {
     for (let i = 0; i < orderedSequences.length; i++) {
       const seq = orderedSequences[i];
       alternatives += `    if (!_matched) {\n`;
+      alternatives += `      const _ruleMark = this.markEventState();\n`;
       alternatives += `      try {\n`;
       alternatives += this.generateSequence(seq);
       alternatives += `        _matched = true;\n`;
       alternatives += `      } catch (e) {\n`;
       alternatives += `        this.position = _ruleStart;\n`;
+      alternatives += `        this.restoreEventState(_ruleMark);\n`;
       alternatives += `      }\n`;
       alternatives += `    }\n`;
     }
@@ -376,10 +378,12 @@ class CodeGenerator {
         return `    // Optional: try parsing ${item.value}\n` +
                `    {\n` +
                `      const savePos = this.position;\n` +
+               `      const saveMark = this.markEventState();\n` +
                `      try {\n` +
                `        this.parse${item.value}();\n` +
                `      } catch(e) {\n` +
                `        this.position = savePos;\n` +
+               `        this.restoreEventState(saveMark);\n` +
                `      }\n` +
                `    }\n`;
       case 'zeroOrMore':
@@ -388,17 +392,20 @@ class CodeGenerator {
             ? `        // Stop at production header boundary: Name ::= ...\n` +
               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
               `          this.position = savePos;\n` +
+              `          this.restoreEventState(saveMark);\n` +
               `          break;\n` +
               `        }\n`
             : '';
         return `    while (true) {\n` +
                `      const savePos = this.position;\n` +
+           `      const saveMark = this.markEventState();\n` +
                `      try {\n` +
                `        this.parse${item.value}();\n` +
                boundaryCheck +
                `        if (this.position === savePos) break;\n` +
                `      } catch(e) {\n` +
                `        this.position = savePos;\n` +
+           `        this.restoreEventState(saveMark);\n` +
                `        break;\n` +
                `      }\n` +
                `    }\n`;
@@ -409,12 +416,14 @@ class CodeGenerator {
             ? `        // Stop at production header boundary: Name ::= ...\n` +
               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
               `          this.position = savePos;\n` +
+              `          this.restoreEventState(saveMark);\n` +
               `          break;\n` +
               `        }\n`
             : '';
         return `    let count = 0;\n` +
                `    while (true) {\n` +
                `      const savePos = this.position;\n` +
+           `      const saveMark = this.markEventState();\n` +
                `      try {\n` +
                `        this.parse${item.value}();\n` +
                boundaryCheck +
@@ -422,6 +431,7 @@ class CodeGenerator {
                `        count++;\n` +
                `      } catch(e) {\n` +
                `        this.position = savePos;\n` +
+           `        this.restoreEventState(saveMark);\n` +
                `        break;\n` +
                `      }\n` +
                `    }\n` +
@@ -444,11 +454,13 @@ class CodeGenerator {
       for (const seq of item.sequences) {
         attempt += '      if (!_matchedAlt) {\n';
         attempt += '        const _altStart = this.position;\n';
+        attempt += '        const _altMark = this.markEventState();\n';
         attempt += '        try {\n';
         attempt += this.generateSequence(seq);
         attempt += '          _matchedAlt = true;\n';
         attempt += '        } catch (e) {\n';
         attempt += '          this.position = _altStart;\n';
+        attempt += '          this.restoreEventState(_altMark);\n';
         attempt += '        }\n';
         attempt += '      }\n';
       }
@@ -457,11 +469,11 @@ class CodeGenerator {
 
     switch (item.quantifier) {
       case 'zeroOrMore':
-        return `    // Group *\n    while (true) {\n      const _loopStart = this.position;\n      try {\n${attempt}      } catch (e) {\n        this.position = _loopStart;\n        break;\n      }\n      if (this.position === _loopStart) break;\n    }\n`;
+        return `    // Group *\n    while (true) {\n      const _loopStart = this.position;\n      const _loopMark = this.markEventState();\n      try {\n${attempt}      } catch (e) {\n        this.position = _loopStart;\n        this.restoreEventState(_loopMark);\n        break;\n      }\n      if (this.position === _loopStart) break;\n    }\n`;
       case 'oneOrMore':
-        return `    // Group +\n    {\n      let _count = 0;\n      while (true) {\n        const _loopStart = this.position;\n        try {\n${attempt}        } catch (e) {\n          this.position = _loopStart;\n          break;\n        }\n        if (this.position === _loopStart) break;\n        _count++;\n      }\n      if (_count === 0) throw new Error('Expected at least one group match');\n    }\n`;
+        return `    // Group +\n    {\n      let _count = 0;\n      while (true) {\n        const _loopStart = this.position;\n        const _loopMark = this.markEventState();\n        try {\n${attempt}        } catch (e) {\n          this.position = _loopStart;\n          this.restoreEventState(_loopMark);\n          break;\n        }\n        if (this.position === _loopStart) break;\n        _count++;\n      }\n      if (_count === 0) throw new Error('Expected at least one group match');\n    }\n`;
       case 'optional':
-        return `    // Group ?\n    {\n      const _optStart = this.position;\n      try {\n${attempt}      } catch (e) {\n        this.position = _optStart;\n      }\n    }\n`;
+        return `    // Group ?\n    {\n      const _optStart = this.position;\n      const _optMark = this.markEventState();\n      try {\n${attempt}      } catch (e) {\n        this.position = _optStart;\n        this.restoreEventState(_optMark);\n      }\n    }\n`;
       default:
         return `    // Group\n    {\n${attempt}    }\n`;
     }

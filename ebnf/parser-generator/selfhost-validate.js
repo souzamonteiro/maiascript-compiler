@@ -9,6 +9,7 @@ const { execFileSync } = require('child_process');
 const root = __dirname;
 const ebnfFile = path.join(root, '../REx.ebnf');
 const rexMain = path.join(root, '../REx-main.js');
+const rexCli = path.join(root, 'REx.js');
 
 const grammarXml = path.join(root, 'rex-grammar.xml');
 const grammarTestXml = path.join(root, 'rex-grammar-test.xml');
@@ -58,7 +59,7 @@ function ensureFile(filePath) {
 
 function main() {
   ensureFile(ebnfFile);
-  ensureFile(rexMain);
+  ensureFile(rexCli);
   ensureFile(parserBase);
 
   printStep('1) Parse REx.ebnf with rex-parser.js (self-host parser)');
@@ -72,8 +73,7 @@ function main() {
   console.log('OK: rex-parser.js parsed REx.ebnf');
 
   printStep('2) Generate rex-grammar-test.xml');
-  // Note: Current generator runtime parser validates syntax only; XML emission still relies on REx serializer.
-  const xml = runNode([rexMain, ebnfFile]);
+  const xml = runNode([rexCli, ebnfFile]);
   fs.writeFileSync(grammarTestXml, xml, 'utf8');
   console.log(`OK: wrote ${path.basename(grammarTestXml)}`);
 
@@ -100,6 +100,14 @@ function main() {
   const testXmlHash = sha256(grammarTestXml);
   const xmlEqual = baseXmlHash ? baseXmlHash === testXmlHash : null;
 
+  let legacyValidation = 'skipped';
+  if (fs.existsSync(rexMain)) {
+    const legacyXml = runNode([rexMain, ebnfFile]);
+    const legacyXmlHash = crypto.createHash('sha256').update(legacyXml).digest('hex');
+    legacyValidation = legacyXmlHash === testXmlHash ? 'IDENTICAL' : 'DIFFERENT';
+    console.log(`legacy xml hash: ${legacyXmlHash}`);
+  }
+
   console.log(`parser base hash: ${baseHash}`);
   console.log(`parser test hash: ${testHash}`);
   if (parserDiff.equal) {
@@ -118,6 +126,7 @@ function main() {
     console.log(`xml test hash: ${testXmlHash}`);
     console.log('xml comparison: skipped (rex-grammar.xml not found)');
   }
+  console.log(`legacy validation: ${legacyValidation}`);
 
   printStep('RESULT');
   if (parserDiff.equal) {

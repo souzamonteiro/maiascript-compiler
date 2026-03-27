@@ -3,6 +3,7 @@ class Lexer {
     this.input = input;
     this.position = 0;
     this.tokens = [];
+    this.charClassDepth = 0;
     this.tokenPatterns = [    { type: 'TOKEN__3C__3F_', regex: /^<\?/ },    { type: 'TOKEN__3F__3E_', regex: /^\?>/ },    { type: 'TOKEN__3A__3A__3D_', regex: /^::=/ },    { type: 'TOKEN__7C_', regex: /^\|/ },    { type: 'TOKEN__2F_', regex: /^\// },    { type: 'TOKEN__3F_', regex: /^\?/ },    { type: 'TOKEN__2A_', regex: /^\*/ },    { type: 'TOKEN__2B_', regex: /^\+/ },    { type: 'TOKEN__28_', regex: /^\(/ },    { type: 'TOKEN__29_', regex: /^\)/ },    { type: 'TOKEN__3C__3F_TOKENS_3F__3E_', regex: /^<\?TOKENS\?>/ },    { type: 'TOKEN__2E_', regex: /^\./ },    { type: 'TOKEN__26_', regex: /^&/ },    { type: 'TOKEN__2D_', regex: /^-/ },    { type: 'TOKEN__24_', regex: /^\$/ },    { type: 'TOKEN__5B_', regex: /^\[/ },    { type: 'TOKEN__5B__5E_', regex: /^\[\^/ },    { type: 'TOKEN__5D_', regex: /^\]/ },    { type: 'TOKEN__2F__2A_', regex: /^\/\*/ },    { type: 'TOKEN_ws', regex: /^ws/ },    { type: 'TOKEN__3A_', regex: /^:/ },    { type: 'TOKEN_explicit', regex: /^explicit/ },    { type: 'TOKEN_definition', regex: /^definition/ },    { type: 'TOKEN__2A__2F_', regex: /^\*\// },    { type: 'TOKEN__3E__3E_', regex: /^>>/ },    { type: 'TOKEN__3C__3C_', regex: /^<</ },    { type: 'TOKEN__5C__5C_', regex: /^\\\\/ },    { type: 'TOKEN__3D__3D_', regex: /^==/ },    { type: 'TOKEN__3C__3F_ENCORE_3F__3E_', regex: /^<\?ENCORE\?>/ },    { type: 'Name', regex: /^(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*/ },    { type: 'Space', regex: /^(?:(?:(?:\u0009|\u000d| ))+|\u000a)/ },    { type: 'StringLiteral', regex: /^(?:"(?:[^"\u0009\u000a\u000d])*"|'(?:[^'\u0009\u000a\u000d])*')/ },    { type: 'CaretName', regex: /^\^(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*)?/ },    { type: 'CharCode', regex: /^#x(?:[0-9a-fA-F])+/ },    { type: 'Char', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharRange', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)-(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharCodeRange', regex: /^#x(?:[0-9a-fA-F])+-#x(?:[0-9a-fA-F])+/ },    { type: 'skip', regex: /^(?:[\u0009\u000A\u000D\u0020]+|\/\/[^\n]*\n?|\/\*(?!\s*ws\s*:)[\s\S]*?\*\/)+/, skip: true },    ];
   }
   
@@ -10,6 +11,7 @@ class Lexer {
     while (this.position < this.input.length) {
       let bestPattern = null;
       let bestMatch = null;
+      const candidates = [];
 
       const isGenericNameType = (type) => (
         type === 'Name' || type === 'NameChar' || type === 'NameStartChar'
@@ -20,6 +22,7 @@ class Lexer {
         const match = this.input.substring(this.position).match(regex);
 
         if (match && match.index === 0 && match[0].length > 0) {
+          candidates.push({ pattern, match });
           if (!bestMatch
               || match[0].length > bestMatch[0].length
               || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)
@@ -30,6 +33,39 @@ class Lexer {
             bestPattern = pattern;
             bestMatch = match;
           }
+        }
+      }
+
+      // Inside character classes, prefer Char/CharCode/CharRange-like tokens
+      // over generic global terminals such as '?>' that can overmatch.
+      if (this.charClassDepth > 0 && candidates.length > 0) {
+        const preferredTypes = new Set(['CharCodeRange', 'CharRange', 'CharCode', 'Char', 'TOKEN__5D_']);
+        const preferred = candidates.filter(c => preferredTypes.has(c.pattern.type));
+        if (preferred.length > 0) {
+          let localBest = preferred[0];
+          for (const c of preferred) {
+            if (c.match[0].length > localBest.match[0].length) {
+              localBest = c;
+            }
+          }
+          bestPattern = localBest.pattern;
+          bestMatch = localBest.match;
+        }
+      }
+
+      // If current input starts with whitespace and a skip token is available,
+      // prefer skipping whitespace first instead of consuming it as grammar data.
+      if (candidates.length > 0 && /^\s/.test(this.input.substring(this.position, this.position + 1))) {
+        const skipCandidates = candidates.filter(c => c.pattern.skip);
+        if (skipCandidates.length > 0) {
+          let localBest = skipCandidates[0];
+          for (const c of skipCandidates) {
+            if (c.match[0].length > localBest.match[0].length) {
+              localBest = c;
+            }
+          }
+          bestPattern = localBest.pattern;
+          bestMatch = localBest.match;
         }
       }
 
@@ -45,6 +81,12 @@ class Lexer {
           end: this.position + bestMatch[0].length
         };
         this.tokens.push(matchedToken);
+
+        if (bestPattern.type === 'TOKEN__5B_' || bestPattern.type === 'TOKEN__5B__5E_') {
+          this.charClassDepth++;
+        } else if (bestPattern.type === 'TOKEN__5D_' && this.charClassDepth > 0) {
+          this.charClassDepth--;
+        }
       }
 
       this.position += bestMatch[0].length;
@@ -100,6 +142,19 @@ class Parser {
     }
     return false;
   }
+
+  markEventState() {
+    if (this.eventHandler && typeof this.eventHandler.checkpoint === 'function') {
+      return this.eventHandler.checkpoint();
+    }
+    return null;
+  }
+
+  restoreEventState(mark) {
+    if (mark !== null && this.eventHandler && typeof this.eventHandler.restore === 'function') {
+      this.eventHandler.restore(mark);
+    }
+  }
   
   getErrorMessage() {
     if (this.errors.length === 0) return 'No errors';
@@ -109,6 +164,9 @@ class Parser {
   parse() {
     const result = this.parseGrammar();
     const next = this.peek();
+    if (!next && this.position === this.tokens.length) {
+      return result;
+    }
     if (!next || next.type !== 'EOF') {
       throw new Error(`Unexpected token at end: ${next ? next.type : 'EOF(consumed)'}`);
     }
@@ -125,19 +183,23 @@ class Parser {
     // Optional: try parsing LexicalDefinition
     {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseLexicalDefinition();
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
       }
     }
     // Optional: try parsing Encore
     {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseEncore();
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
       }
     }
     this.consume('EOF');
@@ -162,11 +224,13 @@ class Parser {
     try {
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseProcessingInstruction();
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -194,12 +258,14 @@ class Parser {
     // Group ?
     {
       const _optStart = this.position;
+      const _optMark = this.markEventState();
       try {
     this.consume('Space');
     while (this.match('Space')) { /* one or more */ }
     if (this.match('DirPIContents')) { /* optional token matched */ }
       } catch (e) {
         this.position = _optStart;
+        this.restoreEventState(_optMark);
       }
     }
     this.consume('TOKEN__3F__3E_');
@@ -225,12 +291,14 @@ class Parser {
     let count = 0;
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseSyntaxProduction();
         if (this.position === savePos) break;
         count++;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -261,11 +329,13 @@ class Parser {
     this.parseSyntaxChoice();
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseOption();
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -292,21 +362,25 @@ class Parser {
     // Group ?
     {
       const _optStart = this.position;
+      const _optMark = this.markEventState();
       try {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     // Group +
     {
       let _count = 0;
       while (true) {
         const _loopStart = this.position;
+        const _loopMark = this.markEventState();
         try {
     this.consume('TOKEN__7C_');
     this.parseSyntaxSequence();
         } catch (e) {
           this.position = _loopStart;
+          this.restoreEventState(_loopMark);
           break;
         }
         if (this.position === _loopStart) break;
@@ -317,21 +391,25 @@ class Parser {
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     // Group +
     {
       let _count = 0;
       while (true) {
         const _loopStart = this.position;
+        const _loopMark = this.markEventState();
         try {
     this.consume('TOKEN__2F_');
     this.parseSyntaxSequence();
         } catch (e) {
           this.position = _loopStart;
+          this.restoreEventState(_loopMark);
           break;
         }
         if (this.position === _loopStart) break;
@@ -342,11 +420,13 @@ class Parser {
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
       } catch (e) {
         this.position = _optStart;
+        this.restoreEventState(_optMark);
       }
     }
 
@@ -370,16 +450,19 @@ class Parser {
     try {
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseSyntaxItem();
         // Stop at production header boundary: Name ::= ...
         if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
           this.position = savePos;
+          this.restoreEventState(saveMark);
           break;
         }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -406,38 +489,46 @@ class Parser {
     // Group ?
     {
       const _optStart = this.position;
+      const _optMark = this.markEventState();
       try {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__3F_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2A_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2B_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
       } catch (e) {
         this.position = _optStart;
+        this.restoreEventState(_optMark);
       }
     }
 
@@ -462,14 +553,17 @@ class Parser {
     const _ruleStart = this.position;
     let _matched = false;
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.parseNameOrString();
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('TOKEN__28_');
     this.parseSyntaxChoice();
@@ -477,14 +571,17 @@ class Parser {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.parseProcessingInstruction();
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
@@ -513,47 +610,57 @@ class Parser {
     // Group *
     while (true) {
       const _loopStart = this.position;
+      const _loopMark = this.markEventState();
       try {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.parseLexicalProduction();
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.parsePreference();
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.parseDelimiter();
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.parseEquivalence();
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
       } catch (e) {
         this.position = _loopStart;
+        this.restoreEventState(_loopMark);
         break;
       }
       if (this.position === _loopStart) break;
@@ -582,20 +689,24 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('Name');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2E_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -605,11 +716,13 @@ class Parser {
     this.parseContextChoice();
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseOption();
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -636,11 +749,13 @@ class Parser {
     // Group *
     while (true) {
       const _loopStart = this.position;
+      const _loopMark = this.markEventState();
       try {
     this.consume('TOKEN__7C_');
     this.parseContextExpression();
       } catch (e) {
         this.position = _loopStart;
+        this.restoreEventState(_loopMark);
         break;
       }
       if (this.position === _loopStart) break;
@@ -668,11 +783,13 @@ class Parser {
     // Group *
     while (true) {
       const _loopStart = this.position;
+      const _loopMark = this.markEventState();
       try {
     this.consume('TOKEN__7C_');
     this.parseLexicalSequence();
       } catch (e) {
         this.position = _loopStart;
+        this.restoreEventState(_loopMark);
         break;
       }
       if (this.position === _loopStart) break;
@@ -700,11 +817,13 @@ class Parser {
     // Group ?
     {
       const _optStart = this.position;
+      const _optMark = this.markEventState();
       try {
     this.consume('TOKEN__26_');
     this.parseLexicalItem();
       } catch (e) {
         this.position = _optStart;
+        this.restoreEventState(_optMark);
       }
     }
 
@@ -729,6 +848,7 @@ class Parser {
     const _ruleStart = this.position;
     let _matched = false;
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.parseLexicalItem();
     // Group
@@ -736,35 +856,42 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2D_');
     this.parseLexicalItem();
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseLexicalItem();
         // Stop at production header boundary: Name ::= ...
         if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
           this.position = savePos;
+          this.restoreEventState(saveMark);
           break;
         }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -772,13 +899,16 @@ class Parser {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
@@ -807,38 +937,46 @@ class Parser {
     // Group ?
     {
       const _optStart = this.position;
+      const _optMark = this.markEventState();
       try {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__3F_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2A_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2B_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
       } catch (e) {
         this.position = _optStart;
+        this.restoreEventState(_optMark);
       }
     }
 
@@ -863,26 +1001,31 @@ class Parser {
     const _ruleStart = this.position;
     let _matched = false;
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     // Group
     {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('Name');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__2E_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -890,17 +1033,21 @@ class Parser {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('StringLiteral');
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('TOKEN__28_');
     this.parseLexicalChoice();
@@ -908,30 +1055,37 @@ class Parser {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('TOKEN__24_');
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('CharCode');
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.parseCharClass();
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
@@ -959,37 +1113,45 @@ class Parser {
     const _ruleStart = this.position;
     let _matched = false;
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('Name');
     // Optional: try parsing Context
     {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseContext();
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
       }
     }
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('StringLiteral');
     // Optional: try parsing Context
     {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseContext();
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
       }
     }
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
@@ -1039,20 +1201,24 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__5B_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__5B__5E_');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -1062,47 +1228,57 @@ class Parser {
       let _count = 0;
       while (true) {
         const _loopStart = this.position;
+        const _loopMark = this.markEventState();
         try {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('Char');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharCode');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharRange');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharCodeRange');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
         } catch (e) {
           this.position = _loopStart;
+          this.restoreEventState(_loopMark);
           break;
         }
         if (this.position === _loopStart) break;
@@ -1140,20 +1316,24 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN_explicit');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN_definition');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -1185,17 +1365,20 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__3E__3E_');
     let count = 0;
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseNameOrString();
         if (this.position === savePos) break;
         count++;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -1205,21 +1388,25 @@ class Parser {
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('TOKEN__3C__3C_');
     let count = 0;
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseNameOrString();
         if (this.position === savePos) break;
         count++;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -1229,6 +1416,7 @@ class Parser {
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -1257,12 +1445,14 @@ class Parser {
     let count = 0;
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseNameOrString();
         if (this.position === savePos) break;
         count++;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
@@ -1314,14 +1504,17 @@ class Parser {
     const _ruleStart = this.position;
     let _matched = false;
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('StringLiteral');
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
+      const _ruleMark = this.markEventState();
       try {
     this.consume('TOKEN__5B_');
     // Group
@@ -1329,38 +1522,46 @@ class Parser {
       let _matchedAlt = false;
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('Char');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharCode');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharRange');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) {
         const _altStart = this.position;
+        const _altMark = this.markEventState();
         try {
     this.consume('CharCodeRange');
           _matchedAlt = true;
         } catch (e) {
           this.position = _altStart;
+          this.restoreEventState(_altMark);
         }
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
@@ -1369,6 +1570,7 @@ class Parser {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
+        this.restoreEventState(_ruleMark);
       }
     }
     if (!_matched) {
@@ -1396,11 +1598,13 @@ class Parser {
     this.consume('TOKEN__3C__3F_ENCORE_3F__3E_');
     while (true) {
       const savePos = this.position;
+      const saveMark = this.markEventState();
       try {
         this.parseProcessingInstruction();
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
+        this.restoreEventState(saveMark);
         break;
       }
     }
