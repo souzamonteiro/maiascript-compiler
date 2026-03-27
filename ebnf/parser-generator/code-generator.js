@@ -203,7 +203,14 @@ class CodeGenerator {
       const suppressedContextTokens = new Set(['EOF', 'DirPIContents']);
       const shouldEmit = !suppressedContextTokens.has(name) && (token.isSkip || referencedLexicalTokens.has(name));
       if (shouldEmit && token.patterns.length > 0 && !emitted.has(name)) {
-        const pattern = this.tokenPatternToRegex(token);
+        let pattern = this.tokenPatternToRegex(token);
+
+        // Special-case REx whitespace: avoid over-greedy comment regexes that can
+        // swallow the remainder of the file in single-state lexers.
+        if (token.isSkip && name === 'Whitespace') {
+          pattern = '(?:[\\u0009\\u000A\\u000D\\u0020]+|\\/\\/[^\\n]*\\n?|\\/\\*(?!\\s*ws\\s*:)[\\s\\S]*?\\*\\/)+';
+        }
+
         if (pattern && !this.regexCanMatchEmpty(pattern)) {
           emitted.add(name);
           if (token.isSkip) {
@@ -280,21 +287,32 @@ class CodeGenerator {
       return this.generateSequence(rule.sequences[0]);
     }
 
-    // Multiple alternatives with backtracking
+    // Multiple alternatives with backtracking (no early return)
     let alternatives = '    const _ruleStart = this.position;\n';
+    alternatives += '    let _matched = false;\n';
 
-    for (let i = 0; i < rule.sequences.length; i++) {
-      const seq = rule.sequences[i];
-      alternatives += `    try {\n`;
+    const orderedSequences = [...rule.sequences].sort((a, b) => {
+      const aEmpty = a.length === 0;
+      const bEmpty = b.length === 0;
+      if (aEmpty === bEmpty) return 0;
+      return aEmpty ? 1 : -1; // non-empty alternatives first
+    });
+
+    for (let i = 0; i < orderedSequences.length; i++) {
+      const seq = orderedSequences[i];
+      alternatives += `    if (!_matched) {\n`;
+      alternatives += `      try {\n`;
       alternatives += this.generateSequence(seq);
-      alternatives += `      return;\n`;
-      alternatives += `    } catch (e) {\n`;
-      alternatives += `      this.position = _ruleStart;\n`;
-      if (i === rule.sequences.length - 1) {
-        alternatives += `      throw new Error(\`Expected one of: ${rule.sequences.length} alternatives\`);\n`;
-      }
+      alternatives += `        _matched = true;\n`;
+      alternatives += `      } catch (e) {\n`;
+      alternatives += `        this.position = _ruleStart;\n`;
+      alternatives += `      }\n`;
       alternatives += `    }\n`;
     }
+
+    alternatives += `    if (!_matched) {\n`;
+    alternatives += `      throw new Error(\`Expected one of: ${rule.sequences.length} alternatives\`);\n`;
+    alternatives += `    }\n`;
 
     return alternatives;
   }
@@ -365,32 +383,41 @@ class CodeGenerator {
                `      }\n` +
                `    }\n`;
       case 'zeroOrMore':
+        {
+          const boundaryCheck = (item.value === 'SyntaxItem' || item.value === 'LexicalItem')
+            ? `        // Stop at production header boundary: Name ::= ...\n` +
+              `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
+              `          this.position = savePos;\n` +
+              `          break;\n` +
+              `        }\n`
+            : '';
         return `    while (true) {\n` +
                `      const savePos = this.position;\n` +
                `      try {\n` +
                `        this.parse${item.value}();\n` +
-               `        // Heuristic: avoid consuming the Name from a "Name ::= ..." header\n` +
-               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
-               `          this.position = savePos;\n` +
-               `          break;\n` +
-               `        }\n` +
+               boundaryCheck +
                `        if (this.position === savePos) break;\n` +
                `      } catch(e) {\n` +
                `        this.position = savePos;\n` +
                `        break;\n` +
                `      }\n` +
                `    }\n`;
+        }
       case 'oneOrMore':
+        {
+          const boundaryCheck = (item.value === 'SyntaxItem' || item.value === 'LexicalItem')
+            ? `        // Stop at production header boundary: Name ::= ...\n` +
+              `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
+              `          this.position = savePos;\n` +
+              `          break;\n` +
+              `        }\n`
+            : '';
         return `    let count = 0;\n` +
                `    while (true) {\n` +
                `      const savePos = this.position;\n` +
                `      try {\n` +
                `        this.parse${item.value}();\n` +
-               `        // Heuristic: avoid consuming the Name from a "Name ::= ..." header\n` +
-               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
-               `          this.position = savePos;\n` +
-               `          break;\n` +
-               `        }\n` +
+               boundaryCheck +
                `        if (this.position === savePos) break;\n` +
                `        count++;\n` +
                `      } catch(e) {\n` +
@@ -401,6 +428,7 @@ class CodeGenerator {
                `    if (count === 0) {\n` +
                `      throw new Error('Expected at least one ${item.value}');\n` +
                `    }\n`;
+        }
       default:
         return `    this.parse${item.value}();\n`;
     }

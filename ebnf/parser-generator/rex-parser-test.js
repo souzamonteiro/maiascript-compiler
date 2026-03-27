@@ -3,17 +3,13 @@ class Lexer {
     this.input = input;
     this.position = 0;
     this.tokens = [];
-    this.tokenPatterns = [    { type: 'TOKEN__3C__3F_', regex: /^<\?/ },    { type: 'TOKEN__3F__3E_', regex: /^\?>/ },    { type: 'TOKEN__3A__3A__3D_', regex: /^::=/ },    { type: 'TOKEN__7C_', regex: /^\|/ },    { type: 'TOKEN__2F_', regex: /^\// },    { type: 'TOKEN__3F_', regex: /^\?/ },    { type: 'TOKEN__2A_', regex: /^\*/ },    { type: 'TOKEN__2B_', regex: /^\+/ },    { type: 'TOKEN__28_', regex: /^\(/ },    { type: 'TOKEN__29_', regex: /^\)/ },    { type: 'TOKEN__3C__3F_TOKENS_3F__3E_', regex: /^<\?TOKENS\?>/ },    { type: 'TOKEN__2E_', regex: /^\./ },    { type: 'TOKEN__26_', regex: /^&/ },    { type: 'TOKEN__2D_', regex: /^-/ },    { type: 'TOKEN__24_', regex: /^\$/ },    { type: 'TOKEN__5B_', regex: /^\[/ },    { type: 'TOKEN__5B__5E_', regex: /^\[\^/ },    { type: 'TOKEN__5D_', regex: /^\]/ },    { type: 'TOKEN__2F__2A_', regex: /^\/\*/ },    { type: 'TOKEN_ws', regex: /^ws/ },    { type: 'TOKEN__3A_', regex: /^:/ },    { type: 'TOKEN_explicit', regex: /^explicit/ },    { type: 'TOKEN_definition', regex: /^definition/ },    { type: 'TOKEN__2A__2F_', regex: /^\*\// },    { type: 'TOKEN__3E__3E_', regex: /^>>/ },    { type: 'TOKEN__3C__3C_', regex: /^<</ },    { type: 'TOKEN__5C__5C_', regex: /^\\\\/ },    { type: 'TOKEN__3D__3D_', regex: /^==/ },    { type: 'TOKEN__3C__3F_ENCORE_3F__3E_', regex: /^<\?ENCORE\?>/ },    { type: 'Name', regex: /^(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*/ },    { type: 'Space', regex: /^(?:(?:(?:\u0009|\u000d| ))+|\u000a)/ },    { type: 'StringLiteral', regex: /^(?:"(?:[^"\u0009\u000a\u000d])*"|'(?:[^'\u0009\u000a\u000d])*')/ },    { type: 'CaretName', regex: /^\^(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*)?/ },    { type: 'CharCode', regex: /^#x(?:[0-9a-fA-F])+/ },    { type: 'Char', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharRange', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)-(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharCodeRange', regex: /^#x(?:[0-9a-fA-F])+-#x(?:[0-9a-fA-F])+/ },    { type: 'skip', regex: /^(?:[\u0009\u000A\u000D\u0020]+|\/\/[^\n]*\n?|\/\*(?!\s*ws\s*:)[\s\S]*?\*\/)+/, skip: true },    ];
+    this.tokenPatterns = [    { type: 'TOKEN__3C__3F_', regex: /^<\?/ },    { type: 'TOKEN__3F__3E_', regex: /^\?>/ },    { type: 'TOKEN__3A__3A__3D_', regex: /^::=/ },    { type: 'TOKEN__7C_', regex: /^\|/ },    { type: 'TOKEN__2F_', regex: /^\// },    { type: 'TOKEN__3F_', regex: /^\?/ },    { type: 'TOKEN__2A_', regex: /^\*/ },    { type: 'TOKEN__2B_', regex: /^\+/ },    { type: 'TOKEN__28_', regex: /^\(/ },    { type: 'TOKEN__29_', regex: /^\)/ },    { type: 'TOKEN__3C__3F_TOKENS_3F__3E_', regex: /^<\?TOKENS\?>/ },    { type: 'TOKEN__2E_', regex: /^\./ },    { type: 'TOKEN__26_', regex: /^&/ },    { type: 'TOKEN__2D_', regex: /^-/ },    { type: 'TOKEN__24_', regex: /^\$/ },    { type: 'TOKEN__5B_', regex: /^\[/ },    { type: 'TOKEN__5B__5E_', regex: /^\[\^/ },    { type: 'TOKEN__5D_', regex: /^\]/ },    { type: 'TOKEN__2F__2A_', regex: /^\/\*/ },    { type: 'TOKEN_ws', regex: /^ws/ },    { type: 'TOKEN__3A_', regex: /^:/ },    { type: 'TOKEN_explicit', regex: /^explicit/ },    { type: 'TOKEN_definition', regex: /^definition/ },    { type: 'TOKEN__2A__2F_', regex: /^\*\// },    { type: 'TOKEN__3E__3E_', regex: /^>>/ },    { type: 'TOKEN__3C__3C_', regex: /^<</ },    { type: 'TOKEN__5C__5C_', regex: /^\\\\/ },    { type: 'TOKEN__3D__3D_', regex: /^==/ },    { type: 'TOKEN__3C__3F_ENCORE_3F__3E_', regex: /^<\?ENCORE\?>/ },    { type: 'Name', regex: /^(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*/ },    { type: 'Space', regex: /^(?:(?:(?:\u0009|\u000d| ))+|\u000a)/ },    { type: 'StringLiteral', regex: /^(?:"(?:[^"\u0009\u000a\u000d])*"|'(?:[^'\u0009\u000a\u000d])*')/ },    { type: 'CaretName', regex: /^\^(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])(?:(?:(?:[A-Z]|_|[a-z]|[À-Ö]|[Ø-ö]|[ø-˿]|[Ͱ-ͽ]|[Ϳ-῿]|[‌-‍]|[⁰-↏]|[Ⰰ-⿯]|[、-퟿]|[豈-﷏]|[ﷰ-�])|-|\.|[0-9]|·|[̀-ͯ]|[‿-⁀]))*)?/ },    { type: 'CharCode', regex: /^#x(?:[0-9a-fA-F])+/ },    { type: 'Char', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharRange', regex: /^(?:[^\u0009\u000a\u000d#\]]|#)-(?:[^\u0009\u000a\u000d#\]]|#)/ },    { type: 'CharCodeRange', regex: /^#x(?:[0-9a-fA-F])+-#x(?:[0-9a-fA-F])+/ },    { type: 'skip', regex: /^(?:(?:(?:(?:(?:\u0009|\u000d| ))+|\u000a)|\/\/(?:[^\u000a])*(?:\u000a)?|\/\*(?:(?:(?:[\s\S])*(?:(?:[\s\S])*\*\/(?:[\s\S])*))(?:(?:(?:(?:(?:\u0009|\u000d| ))+|\u000a))*ws(?:(?:(?:(?:\u0009|\u000d| ))+|\u000a))*:(?:[\s\S])*))\*\/))+/, skip: true },    ];
   }
   
   tokenize() {
     while (this.position < this.input.length) {
       let bestPattern = null;
       let bestMatch = null;
-
-      const isGenericNameType = (type) => (
-        type === 'Name' || type === 'NameChar' || type === 'NameStartChar'
-      );
 
       for (const pattern of this.tokenPatterns) {
         const regex = pattern.regex;
@@ -22,11 +18,7 @@ class Lexer {
         if (match && match.index === 0 && match[0].length > 0) {
           if (!bestMatch
               || match[0].length > bestMatch[0].length
-              || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)
-              || (match[0].length === bestMatch[0].length
-                  && bestPattern
-                  && isGenericNameType(bestPattern.type)
-                  && !isGenericNameType(pattern.type))) {
+              || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)) {
             bestPattern = pattern;
             bestMatch = match;
           }
@@ -72,7 +64,12 @@ class Parser {
   }
   
   peek() {
-    return this.tokens[this.position];
+    return this.tokens[this.position] || {
+      type: 'EOF',
+      value: '',
+      start: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0,
+      end: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0
+    };
   }
   
   consume(expectedType) {
@@ -108,9 +105,8 @@ class Parser {
   }
   parse() {
     const result = this.parseGrammar();
-    const next = this.peek();
-    if (!next || next.type !== 'EOF') {
-      throw new Error(`Unexpected token at end: ${next ? next.type : 'EOF(consumed)'}`);
+    if (this.peek().type !== 'EOF') {
+      throw new Error(`Unexpected token at end: ${this.peek().type}`);
     }
     return result;
   }
@@ -164,6 +160,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseProcessingInstruction();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
@@ -227,6 +228,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseSyntaxProduction();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
         count++;
       } catch(e) {
@@ -263,6 +269,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseOption();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
@@ -372,7 +383,7 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseSyntaxItem();
-        // Stop at production header boundary: Name ::= ...
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
         if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
           this.position = savePos;
           break;
@@ -607,6 +618,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseOption();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;
@@ -730,6 +746,13 @@ class Parser {
     let _matched = false;
     if (!_matched) {
       try {
+        _matched = true;
+      } catch (e) {
+        this.position = _ruleStart;
+      }
+    }
+    if (!_matched) {
+      try {
     this.parseLexicalItem();
     // Group
     {
@@ -751,7 +774,7 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseLexicalItem();
-        // Stop at production header boundary: Name ::= ...
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
         if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
           this.position = savePos;
           break;
@@ -769,13 +792,6 @@ class Parser {
       }
       if (!_matchedAlt) { throw new Error('No group alternative matched'); }
     }
-        _matched = true;
-      } catch (e) {
-        this.position = _ruleStart;
-      }
-    }
-    if (!_matched) {
-      try {
         _matched = true;
       } catch (e) {
         this.position = _ruleStart;
@@ -1192,6 +1208,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseNameOrString();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
         count++;
       } catch(e) {
@@ -1216,6 +1237,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseNameOrString();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
         count++;
       } catch(e) {
@@ -1259,6 +1285,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseNameOrString();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
         count++;
       } catch(e) {
@@ -1398,6 +1429,11 @@ class Parser {
       const savePos = this.position;
       try {
         this.parseProcessingInstruction();
+        // Heuristic: avoid consuming the Name from a "Name ::= ..." header
+        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {
+          this.position = savePos;
+          break;
+        }
         if (this.position === savePos) break;
       } catch(e) {
         this.position = savePos;

@@ -23,6 +23,10 @@ module.exports = {
       let bestPattern = null;
       let bestMatch = null;
 
+      const isGenericNameType = (type) => (
+        type === 'Name' || type === 'NameChar' || type === 'NameStartChar'
+      );
+
       for (const pattern of this.tokenPatterns) {
         const regex = pattern.regex;
         const match = this.input.substring(this.position).match(regex);
@@ -30,7 +34,11 @@ module.exports = {
         if (match && match.index === 0 && match[0].length > 0) {
           if (!bestMatch
               || match[0].length > bestMatch[0].length
-              || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)) {
+              || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)
+              || (match[0].length === bestMatch[0].length
+                  && bestPattern
+                  && isGenericNameType(bestPattern.type)
+                  && !isGenericNameType(pattern.type))) {
             bestPattern = pattern;
             bestMatch = match;
           }
@@ -68,20 +76,16 @@ module.exports = {
   
   // Parser header
   parserHeader: `class Parser {
-  constructor(input) {
+  constructor(input, eventHandler = null) {
     this.lexer = new Lexer(input);
     this.tokens = this.lexer.tokenize();
     this.position = 0;
     this.errors = [];
+    this.eventHandler = eventHandler;
   }
   
   peek() {
-    return this.tokens[this.position] || {
-      type: 'EOF',
-      value: '',
-      start: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0,
-      end: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0
-    };
+    return this.tokens[this.position];
   }
   
   consume(expectedType) {
@@ -93,6 +97,9 @@ module.exports = {
         position: this.position
       });
       throw new Error(\`Expected '\${expectedType}', got '\${token ? token.type : 'EOF'}'\`);
+    }
+    if (this.eventHandler && typeof this.eventHandler.terminal === 'function') {
+      this.eventHandler.terminal(expectedType, token.value, this.position);
     }
     this.position++;
     return token;
@@ -117,8 +124,9 @@ module.exports = {
   startRule: `
   parse() {
     const result = this.parse{{startRule}}();
-    if (this.peek().type !== 'EOF') {
-      throw new Error(\`Unexpected token at end: \${this.peek().type}\`);
+    const next = this.peek();
+    if (!next || next.type !== 'EOF') {
+      throw new Error(\`Unexpected token at end: \${next ? next.type : 'EOF(consumed)'}\`);
     }
     return result;
   }`,
@@ -126,7 +134,23 @@ module.exports = {
   // Rule function template
   ruleFunction: `
   parse{{ruleName}}() {
-    {{ruleBody}}
+    if (this.eventHandler && typeof this.eventHandler.startNonterminal === 'function') {
+      this.eventHandler.startNonterminal('{{ruleName}}', this.position);
+    }
+    let __ok = false;
+    try {
+{{ruleBody}}
+      __ok = true;
+    } finally {
+      if (this.eventHandler) {
+        if (__ok && typeof this.eventHandler.endNonterminal === 'function') {
+          this.eventHandler.endNonterminal('{{ruleName}}', this.position);
+        }
+        if (!__ok && typeof this.eventHandler.abortNonterminal === 'function') {
+          this.eventHandler.abortNonterminal('{{ruleName}}', this.position);
+        }
+      }
+    }
   }`,
   
   // Sequence template (AND)
