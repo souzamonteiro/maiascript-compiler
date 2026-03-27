@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "generate": "node index.js",
-    "test": "node test.js"
+    "build": "bash build.sh",
+    "test": "node --test --test-reporter=spec tests/unit/grammar-parser.test.js tests/unit/code-generator.test.js tests/integration/arithmetic.test.js",
+    "test:unit": "node --test --test-reporter=spec tests/unit/grammar-parser.test.js tests/unit/code-generator.test.js",
+    "test:integration": "node --test --test-reporter=spec tests/integration/arithmetic.test.js"
   },
   "dependencies": {
     "xml2js": "^0.6.2"

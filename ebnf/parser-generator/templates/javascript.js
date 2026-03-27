@@ -1,6 +1,6 @@
 // templates/javascript.js
 module.exports = {
-  // Cabeçalho do lexer
+  // Lexer header
   lexerHeader: `class Lexer {
   constructor(input) {
     this.input = input;
@@ -8,50 +8,53 @@ module.exports = {
     this.tokens = [];
     this.tokenPatterns = [`,
   
-  // Definição de token
+  // Token definition
   token: `    { type: '{{name}}', regex: /^{{pattern}}/ },`,
   
-  // Token que deve ser ignorado (whitespace)
+  // Token that should be skipped (whitespace)
   skipToken: `    { type: 'skip', regex: /^{{pattern}}/, skip: true },`,
   
-  // Rodapé do lexer
+  // Lexer footer
   lexerFooter: `    ];
   }
   
   tokenize() {
     while (this.position < this.input.length) {
-      let matched = false;
-      let matchedToken = null;
-      
+      let bestPattern = null;
+      let bestMatch = null;
+
       for (const pattern of this.tokenPatterns) {
         const regex = pattern.regex;
         const match = this.input.substring(this.position).match(regex);
-        
-        if (match && match.index === 0) {
-          matched = true;
-          if (!pattern.skip) {
-            matchedToken = {
-              type: pattern.type,
-              value: match[0],
-              start: this.position,
-              end: this.position + match[0].length
-            };
+
+        if (match && match.index === 0 && match[0].length > 0) {
+          if (!bestMatch
+              || match[0].length > bestMatch[0].length
+              || (match[0].length === bestMatch[0].length && pattern.skip && !bestPattern.skip)) {
+            bestPattern = pattern;
+            bestMatch = match;
           }
-          this.position += match[0].length;
-          break;
         }
       }
-      
-      if (!matched) {
+
+      if (!bestMatch) {
         throw new Error(\`Unexpected character at position \${this.position}: '\${this.input[this.position]}'\`);
       }
-      
-      if (matchedToken) {
+
+      if (!bestPattern.skip) {
+        const matchedToken = {
+          type: bestPattern.type,
+          value: bestMatch[0],
+          start: this.position,
+          end: this.position + bestMatch[0].length
+        };
         this.tokens.push(matchedToken);
       }
+
+      this.position += bestMatch[0].length;
     }
     
-    // Adiciona token EOF
+    // Add EOF token
     this.tokens.push({
       type: 'EOF',
       value: '',
@@ -63,7 +66,7 @@ module.exports = {
   }
 }`,
   
-  // Cabeçalho do parser
+  // Parser header
   parserHeader: `class Parser {
   constructor(input) {
     this.lexer = new Lexer(input);
@@ -73,7 +76,12 @@ module.exports = {
   }
   
   peek() {
-    return this.tokens[this.position];
+    return this.tokens[this.position] || {
+      type: 'EOF',
+      value: '',
+      start: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0,
+      end: this.tokens.length > 0 ? this.tokens[this.tokens.length - 1].end : 0
+    };
   }
   
   consume(expectedType) {
@@ -105,7 +113,7 @@ module.exports = {
     return \`Syntax error: expected \${err.expected}, got \${err.found}\`;
   }`,
   
-  // Método de parsing inicial
+  // Entry parse method
   startRule: `
   parse() {
     const result = this.parse{{startRule}}();
@@ -115,17 +123,17 @@ module.exports = {
     return result;
   }`,
   
-  // Template para função de regra
+  // Rule function template
   ruleFunction: `
   parse{{ruleName}}() {
     {{ruleBody}}
   }`,
   
-  // Template para sequência (AND)
+  // Sequence template (AND)
   sequence: `    // Sequence
     {{items}}`,
   
-  // Template para alternativas (OR)
+  // Alternatives template (OR)
   alternatives: `    // Alternatives
     {{#each alternatives}}
     if ({{condition}}) {
@@ -136,29 +144,30 @@ module.exports = {
       throw new Error(\`Expected one of: {{expected}}\`);
     }`,
   
-  // Consumir token
+  // Consume token
   consumeToken: `    this.consume('{{token}}');`,
   
-  // Match opcional
+  // Optional match
   optional: `    if (this.match('{{token}}')) {
       // Optional matched
     }`,
   
-  // Match zero ou mais
+  // Zero-or-more match
   zeroOrMore: `    while (this.match('{{token}}')) {
       // Zero or more matched
     }`,
   
-  // Match um ou mais
+  // One-or-more match
   oneOrMore: `    do {
       // One or more matched
     } while (this.match('{{token}}'));`,
   
-  // Chamar regra
+  // Call rule
   parseRule: `    this.parse{{rule}}();`,
   
-  // Rodapé do parser
-  parserFooter: `}
-  
+  // Parser footer
+  parserFooter: `
+}
+
 module.exports = Parser;`
 };

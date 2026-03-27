@@ -1,4 +1,4 @@
-// code-generator.js - Gera código JavaScript a partir da gramática parseada
+// code-generator.js - Generates JavaScript code from a parsed grammar
 const templates = require('./templates/javascript');
 
 class CodeGenerator {
@@ -10,30 +10,41 @@ class CodeGenerator {
   buildTokenMap() {
     const tokenMap = new Map();
     let tokenId = 1;
-    
-    // Primeiro, mapeia tokens literais das regras sintáticas
-    for (const [name, rule] of this.grammar.rules) {
-      for (const sequence of rule.sequences) {
-        for (const item of sequence) {
-          if (item.type === 'terminal' && !tokenMap.has(item.value)) {
-            tokenMap.set(item.value, {
-              id: tokenId++,
-              name: `TOKEN_${this.sanitizeName(item.value)}`,
-              pattern: this.escapeRegex(item.value)
-            });
+
+    // Collect all terminals recursively (including nested groups)
+    const collectTerminals = (items) => {
+      for (const item of items) {
+        if (item.type === 'terminal' && !tokenMap.has(item.value)) {
+          tokenMap.set(item.value, {
+            id: tokenId++,
+            name: `TOKEN_${this.sanitizeName(item.value)}`,
+            pattern: this.escapeRegex(item.value),
+            source: 'literal'
+          });
+        } else if (item.type === 'group' && item.sequences) {
+          for (const seq of item.sequences) {
+            collectTerminals(seq);
           }
         }
       }
+    };
+
+    // First, map literal tokens from syntax rules
+    for (const [name, rule] of this.grammar.rules) {
+      for (const sequence of rule.sequences) {
+        collectTerminals(sequence);
+      }
     }
     
-    // Depois, adiciona tokens léxicos
+    // Then, add lexical tokens
     for (const [name, token] of this.grammar.tokens) {
       if (!tokenMap.has(name)) {
         tokenMap.set(name, {
           id: tokenId++,
           name: name,
           pattern: this.tokenPatternToRegex(token),
-          isSkip: token.isSkip
+          isSkip: token.isSkip,
+          source: 'lexical'
         });
       }
     }
@@ -42,44 +53,127 @@ class CodeGenerator {
   }
   
   tokenPatternToRegex(token) {
-    if (token.patterns.length === 0) return '';
-    
-    const pattern = token.patterns[0];
-    let regex = '';
-    
-    for (const item of pattern) {
-      if (item.type === 'literal') {
-        regex += this.escapeRegex(item.value);
-      } else if (item.type === 'tokenRef') {
+    return this.tokenPatternToRegexInternal(token, new Set());
+  }
+
+  tokenPatternToRegexInternal(token, visiting) {
+    if (!token || !token.patterns || token.patterns.length === 0) return '';
+    if (visiting.has(token.name)) return '';
+
+    visiting.add(token.name);
+
+    const alternatives = token.patterns
+      .map(pattern => this.lexicalSequenceToRegex(pattern, visiting))
+      .filter(Boolean);
+
+    visiting.delete(token.name);
+
+    if (alternatives.length === 0) return '';
+    if (alternatives.length === 1) return alternatives[0];
+    return `(?:${alternatives.join('|')})`;
+  }
+
+  lexicalSequenceToRegex(pattern, visiting) {
+    return pattern.map(item => this.lexicalItemToRegex(item, visiting)).join('');
+  }
+
+  lexicalItemToRegex(item, visiting) {
+    let base = '';
+
+    if (item.type === 'literal') {
+      base = this.escapeRegex(item.value);
+    } else if (item.type === 'tokenRef') {
+      // EOF is handled by the lexer automatically as the final token.
+      if (item.value === 'EOF') {
+        base = '';
+      } else {
         const refToken = this.grammar.tokens.get(item.value);
-        if (refToken) {
-          regex += this.tokenPatternToRegex(refToken);
-        }
-      } else if (item.type === 'charclass') {
-        regex += `[${item.value}]`;
+        base = refToken ? this.tokenPatternToRegexInternal(refToken, visiting) : '';
       }
-    }
-    
-    // Aplica quantificadores
-    for (const item of pattern) {
-      if (item.quantifier === 'optional') {
-        regex = `(?:${regex})?`;
-      } else if (item.quantifier === 'zeroOrMore') {
-        regex = `(?:${regex})*`;
-      } else if (item.quantifier === 'oneOrMore') {
-        regex = `(?:${regex})+`;
+    } else if (item.type === 'charclass') {
+      if (!item.value) {
+        // Empty class: avoid generating [] (invalid regex)
+        base = item.negated ? '[\\s\\S]' : '';
+      } else {
+        const prefix = item.negated ? '^' : '';
+        base = `[${prefix}${this.escapeCharClassContent(item.value)}]`;
       }
+    } else if (item.type === 'group') {
+      const groupAlternatives = (item.patterns || [])
+        .map(pattern => this.lexicalSequenceToRegex(pattern, visiting))
+        .filter(Boolean);
+      if (groupAlternatives.length === 1) {
+        base = `(?:${groupAlternatives[0]})`;
+      } else if (groupAlternatives.length > 1) {
+        base = `(?:${groupAlternatives.join('|')})`;
+      }
+    } else if (item.type === 'anyChar') {
+      base = '[\\s\\S]';
     }
-    
-    return regex;
+
+    if (!base) return '';
+
+    switch (item.quantifier) {
+      case 'optional':
+        return `(?:${base})?`;
+      case 'zeroOrMore':
+        return `(?:${base})*`;
+      case 'oneOrMore':
+        return `(?:${base})+`;
+      default:
+        return base;
+    }
   }
   
   escapeRegex(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    let escaped = '';
+    for (const char of str) {
+      const code = char.codePointAt(0);
+      if (code < 0x20 || code === 0x7F) {
+        escaped += `\\u${code.toString(16).padStart(4, '0')}`;
+      } else if (/[.*+?^${}()|[\]\\/]/.test(char)) {
+        escaped += `\\${char}`;
+      } else {
+        escaped += char;
+      }
+    }
+    return escaped;
+  }
+
+  // Escape raw characters in a char-class string so they're safe inside a regex literal
+  escapeCharClassContent(content) {
+    let result = '';
+    for (const char of content) {
+      const code = char.codePointAt(0);
+      if (code < 0x20 || code === 0x7F) {
+        result += `\\u${code.toString(16).padStart(4, '0')}`;
+      } else if (char === '\\') {
+        result += '\\\\';
+      } else if (char === ']') {
+        result += '\\]';
+      } else {
+        result += char;
+      }
+    }
+    return result;
   }
   
   sanitizeName(name) {
-    return name.replace(/[^a-zA-Z0-9]/g, '_');
+    // Convert each non-alphanumeric character to its hex code point for uniqueness
+    return name.replace(/[^a-zA-Z0-9]/g, c => {
+      const code = c.codePointAt(0);
+      return `_${code.toString(16).toUpperCase()}_`;
+    });
+  }
+
+  regexCanMatchEmpty(pattern) {
+    if (!pattern) return true;
+    try {
+      const re = new RegExp(`^${pattern}`);
+      return re.test('');
+    } catch {
+      return true;
+    }
   }
   
   generate() {
@@ -91,21 +185,27 @@ class CodeGenerator {
   
   generateLexer() {
     let code = templates.lexerHeader;
+    const emitted = new Set();
+    const referencedLexicalTokens = this.collectReferencedLexicalTokens();
     
-    // Adiciona tokens literais
+    // Add literal tokens
     for (const [value, token] of this.tokenMap) {
-      if (token.pattern && !token.isSkip) {
+      if (token.source === 'literal' && token.pattern && !this.regexCanMatchEmpty(token.pattern) && !token.isSkip && !emitted.has(token.name)) {
+        emitted.add(token.name);
         code += templates.token
           .replace(/{{name}}/g, token.name)
           .replace(/{{pattern}}/g, token.pattern);
       }
     }
     
-    // Adiciona tokens léxicos
+    // Add lexical tokens
     for (const [name, token] of this.grammar.tokens) {
-      if (token.patterns.length > 0) {
+      const suppressedContextTokens = new Set(['EOF', 'DirPIContents']);
+      const shouldEmit = !suppressedContextTokens.has(name) && (token.isSkip || referencedLexicalTokens.has(name));
+      if (shouldEmit && token.patterns.length > 0 && !emitted.has(name)) {
         const pattern = this.tokenPatternToRegex(token);
-        if (pattern) {
+        if (pattern && !this.regexCanMatchEmpty(pattern)) {
+          emitted.add(name);
           if (token.isSkip) {
             code += templates.skipToken
               .replace(/{{name}}/g, name)
@@ -122,15 +222,39 @@ class CodeGenerator {
     code += templates.lexerFooter;
     return code;
   }
+
+  collectReferencedLexicalTokens() {
+    const referenced = new Set();
+
+    const visitItems = (items) => {
+      for (const item of items) {
+        if (item.type === 'nonterminal' && this.grammar.tokens.has(item.value)) {
+          referenced.add(item.value);
+        } else if (item.type === 'group' && item.sequences) {
+          for (const seq of item.sequences) {
+            visitItems(seq);
+          }
+        }
+      }
+    };
+
+    for (const [, rule] of this.grammar.rules) {
+      for (const sequence of rule.sequences) {
+        visitItems(sequence);
+      }
+    }
+
+    return referenced;
+  }
   
   generateParser() {
     let code = templates.parserHeader;
     
-    // Adiciona método de parsing inicial
+    // Add the entry parse method
     code += templates.startRule
       .replace(/{{startRule}}/g, this.grammar.startSymbol);
     
-    // Gera funções para cada regra
+    // Generate one function per rule
     for (const [name, rule] of this.grammar.rules) {
       code += this.generateRuleFunction(rule);
     }
@@ -155,34 +279,23 @@ class CodeGenerator {
     if (rule.sequences.length === 1) {
       return this.generateSequence(rule.sequences[0]);
     }
-    
-    // Múltiplas alternativas
-    let alternatives = '';
+
+    // Multiple alternatives with backtracking
+    let alternatives = '    const _ruleStart = this.position;\n';
+
     for (let i = 0; i < rule.sequences.length; i++) {
       const seq = rule.sequences[i];
-      const firstItem = seq[0];
-      
-      let condition;
-      if (firstItem && firstItem.type === 'terminal') {
-        condition = `this.peek().type === '${this.getTokenName(firstItem.value)}'`;
-      } else if (firstItem && firstItem.type === 'nonterminal') {
-        // Para não-terminais, precisamos de lookahead mais complexo
-        condition = `true // Try alternative ${i + 1}`;
-      } else {
-        condition = `true // Try alternative ${i + 1}`;
-      }
-      
-      alternatives += `    if (${condition}) {\n`;
+      alternatives += `    try {\n`;
       alternatives += this.generateSequence(seq);
-      alternatives += `      return;\n    }`;
-      
-      if (i < rule.sequences.length - 1) {
-        alternatives += ` else `;
+      alternatives += `      return;\n`;
+      alternatives += `    } catch (e) {\n`;
+      alternatives += `      this.position = _ruleStart;\n`;
+      if (i === rule.sequences.length - 1) {
+        alternatives += `      throw new Error(\`Expected one of: ${rule.sequences.length} alternatives\`);\n`;
       }
+      alternatives += `    }\n`;
     }
-    
-    alternatives += ` else {\n      throw new Error(\`Expected one of: ${rule.sequences.length} alternatives\`);\n    }`;
-    
+
     return alternatives;
   }
   
@@ -225,32 +338,63 @@ class CodeGenerator {
   }
   
   generateNonterminal(item) {
+    // If the name is a lexical token, consume it instead of calling a parse rule
+    if (this.grammar.tokens.has(item.value)) {
+      switch (item.quantifier) {
+        case 'optional':
+          return `    if (this.match('${item.value}')) { /* optional token matched */ }\n`;
+        case 'zeroOrMore':
+          return `    while (this.match('${item.value}')) { /* zero or more */ }\n`;
+        case 'oneOrMore':
+          return `    this.consume('${item.value}');\n` +
+                 `    while (this.match('${item.value}')) { /* one or more */ }\n`;
+        default:
+          return `    this.consume('${item.value}');\n`;
+      }
+    }
+
     switch (item.quantifier) {
       case 'optional':
         return `    // Optional: try parsing ${item.value}\n` +
-               `    try {\n` +
+               `    {\n` +
                `      const savePos = this.position;\n` +
-               `      this.parse${item.value}();\n` +
-               `    } catch(e) {\n` +
-               `      this.position = savePos;\n` +
+               `      try {\n` +
+               `        this.parse${item.value}();\n` +
+               `      } catch(e) {\n` +
+               `        this.position = savePos;\n` +
+               `      }\n` +
                `    }\n`;
       case 'zeroOrMore':
         return `    while (true) {\n` +
+               `      const savePos = this.position;\n` +
                `      try {\n` +
-               `        const savePos = this.position;\n` +
                `        this.parse${item.value}();\n` +
+               `        // Heuristic: avoid consuming the Name from a "Name ::= ..." header\n` +
+               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
+               `          this.position = savePos;\n` +
+               `          break;\n` +
+               `        }\n` +
+               `        if (this.position === savePos) break;\n` +
                `      } catch(e) {\n` +
+               `        this.position = savePos;\n` +
                `        break;\n` +
                `      }\n` +
                `    }\n`;
       case 'oneOrMore':
         return `    let count = 0;\n` +
                `    while (true) {\n` +
+               `      const savePos = this.position;\n` +
                `      try {\n` +
-               `        const savePos = this.position;\n` +
                `        this.parse${item.value}();\n` +
+               `        // Heuristic: avoid consuming the Name from a "Name ::= ..." header\n` +
+               `        if (this.peek() && this.peek().type === 'TOKEN__3A__3A__3D_') {\n` +
+               `          this.position = savePos;\n` +
+               `          break;\n` +
+               `        }\n` +
+               `        if (this.position === savePos) break;\n` +
                `        count++;\n` +
                `      } catch(e) {\n` +
+               `        this.position = savePos;\n` +
                `        break;\n` +
                `      }\n` +
                `    }\n` +
@@ -263,27 +407,46 @@ class CodeGenerator {
   }
   
   generateGroup(item) {
-    // Para grupos, geramos uma função inline
-    let code = `    // Group\n`;
-    for (const seq of item.sequences) {
-      code += `    try {\n`;
-      code += this.generateSequence(seq);
-      code += `      // Group matched\n`;
-      code += `    } catch(e) {\n`;
-      code += `      // Try next alternative\n`;
-      code += `    }\n`;
+    // Body that tries to match the group once and throws on failure.
+    let attempt = '';
+    if (item.sequences.length === 1) {
+      attempt += this.generateSequence(item.sequences[0]);
+    } else {
+      attempt += '      let _matchedAlt = false;\n';
+      for (const seq of item.sequences) {
+        attempt += '      if (!_matchedAlt) {\n';
+        attempt += '        const _altStart = this.position;\n';
+        attempt += '        try {\n';
+        attempt += this.generateSequence(seq);
+        attempt += '          _matchedAlt = true;\n';
+        attempt += '        } catch (e) {\n';
+        attempt += '          this.position = _altStart;\n';
+        attempt += '        }\n';
+        attempt += '      }\n';
+      }
+      attempt += '      if (!_matchedAlt) { throw new Error(\'No group alternative matched\'); }\n';
     }
-    return code;
+
+    switch (item.quantifier) {
+      case 'zeroOrMore':
+        return `    // Group *\n    while (true) {\n      const _loopStart = this.position;\n      try {\n${attempt}      } catch (e) {\n        this.position = _loopStart;\n        break;\n      }\n      if (this.position === _loopStart) break;\n    }\n`;
+      case 'oneOrMore':
+        return `    // Group +\n    {\n      let _count = 0;\n      while (true) {\n        const _loopStart = this.position;\n        try {\n${attempt}        } catch (e) {\n          this.position = _loopStart;\n          break;\n        }\n        if (this.position === _loopStart) break;\n        _count++;\n      }\n      if (_count === 0) throw new Error('Expected at least one group match');\n    }\n`;
+      case 'optional':
+        return `    // Group ?\n    {\n      const _optStart = this.position;\n      try {\n${attempt}      } catch (e) {\n        this.position = _optStart;\n      }\n    }\n`;
+      default:
+        return `    // Group\n    {\n${attempt}    }\n`;
+    }
   }
   
   getTokenName(value) {
-    // Busca o nome do token mapeado
+    // Look up the mapped token name
     for (const [tokenValue, token] of this.tokenMap) {
       if (tokenValue === value) {
         return token.name;
       }
     }
-    // Se não encontrar, cria um nome baseado no valor
+    // If not found, create a name based on the literal value
     return `TOKEN_${this.sanitizeName(value)}`;
   }
 }
