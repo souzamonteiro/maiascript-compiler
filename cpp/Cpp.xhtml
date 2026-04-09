@@ -4632,7 +4632,7 @@
          <xhtml:ul>
             <xhtml:li><xhtml:a href="#idExpression" title="idExpression">idExpression</xhtml:a></xhtml:li>
          </xhtml:ul>
-      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="operatorFunctionId">operatorFunctionId:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="233" height="37">
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="operatorFunctionId">operatorFunctionId:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="269" height="37">
          <defs>
             <style type="text/css">
     @namespace "http://www.w3.org/2000/svg";
@@ -4666,20 +4666,241 @@
          <polygon points="17 17 9 13 9 21"></polygon>
          <rect x="31" y="3" width="78" height="32" rx="10"></rect>
          <rect x="29" y="1" width="78" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="39" y="21">operator</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Operator" xlink:title="Operator">
-            <rect x="129" y="3" width="76" height="32"></rect>
-            <rect x="127" y="1" width="76" height="32" class="nonterminal"></rect>
-            <text class="nonterminal" x="137" y="21">Operator</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m78 0 h10 m0 0 h10 m76 0 h10 m3 0 h-3"></svg:path>
-         <polygon points="223 17 231 13 231 21"></polygon>
-         <polygon points="223 17 215 13 215 21"></polygon></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <text class="terminal" x="39" y="21">operator</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#operatorToken" xlink:title="operatorToken">
+            <rect x="129" y="3" width="112" height="32"></rect>
+            <rect x="127" y="1" width="112" height="32" class="nonterminal"></rect>
+            <text class="nonterminal" x="137" y="21">operatorToken</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m78 0 h10 m0 0 h10 m112 0 h10 m3 0 h-3"></svg:path>
+         <polygon points="259 17 267 13 267 21"></polygon>
+         <polygon points="259 17 251 13 251 21"></polygon></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
          <xhtml:div class="ebnf"><xhtml:code>
                <div><a href="#operatorFunctionId" title="operatorFunctionId">operatorFunctionId</a></div>
-               <div>         ::= 'operator' <a href="#Operator" title="Operator">Operator</a></div></xhtml:code></xhtml:div>
+               <div>         ::= 'operator' <a href="#operatorToken" title="operatorToken">operatorToken</a></div></xhtml:code></xhtml:div>
       </xhtml:p>
       <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
          <xhtml:ul>
             <xhtml:li><xhtml:a href="#qualifiedId" title="qualifiedId">qualifiedId</xhtml:a></xhtml:li>
             <xhtml:li><xhtml:a href="#unqualifiedId" title="unqualifiedId">unqualifiedId</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="operatorToken">operatorToken:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="333" height="1905">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #332900; stroke-width: 1;}
+    .bold-line            {stroke: #141000; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #1F1800; shape-rendering: crispEdges}
+    .filled               {fill: #332900; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #141000;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #1A1400;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #1F1800;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #332900; stroke: #332900;}
+    rect.terminal         {fill: #FFDB4D; stroke: #332900; stroke-width: 1;}
+    rect.nonterminal      {fill: #FFEC9E; stroke: #332900; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #FFF4C7; stroke: #332900; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"></polygon>
+         <polygon points="17 17 9 13 9 21"></polygon>
+         <rect x="71" y="3" width="48" height="32" rx="10"></rect>
+         <rect x="69" y="1" width="48" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="79" y="21">new</text>
+         <rect x="71" y="47" width="62" height="32" rx="10"></rect>
+         <rect x="69" y="45" width="62" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="79" y="65">delete</text>
+         <rect x="193" y="35" width="26" height="32" rx="10"></rect>
+         <rect x="191" y="33" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="201" y="53">[</text>
+         <rect x="239" y="35" width="26" height="32" rx="10"></rect>
+         <rect x="237" y="33" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="247" y="53">]</text>
+         <rect x="51" y="91" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="89" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="109">[</text>
+         <rect x="117" y="123" width="26" height="32" rx="10"></rect>
+         <rect x="115" y="121" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="125" y="141">]</text>
+         <rect x="51" y="167" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="165" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="185">(</text>
+         <rect x="117" y="199" width="26" height="32" rx="10"></rect>
+         <rect x="115" y="197" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="125" y="217">)</text>
+         <rect x="51" y="243" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="241" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="261">+</text>
+         <rect x="51" y="287" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="285" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="305">-</text>
+         <rect x="51" y="331" width="28" height="32" rx="10"></rect>
+         <rect x="49" y="329" width="28" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="349">*</text>
+         <rect x="51" y="375" width="28" height="32" rx="10"></rect>
+         <rect x="49" y="373" width="28" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="393">/</text>
+         <rect x="51" y="419" width="34" height="32" rx="10"></rect>
+         <rect x="49" y="417" width="34" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="437">%</text>
+         <rect x="51" y="463" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="461" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="481">^</text>
+         <rect x="51" y="507" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="505" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="525">&amp;</text>
+         <rect x="51" y="551" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="549" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="569">|</text>
+         <rect x="51" y="595" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="593" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="613">~</text>
+         <rect x="51" y="639" width="24" height="32" rx="10"></rect>
+         <rect x="49" y="637" width="24" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="657">!</text>
+         <rect x="51" y="683" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="681" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="701">=</text>
+         <rect x="51" y="727" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="725" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="745">&lt;</text>
+         <rect x="51" y="771" width="30" height="32" rx="10"></rect>
+         <rect x="49" y="769" width="30" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="789">&gt;</text>
+         <rect x="51" y="815" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="813" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="833">+=</text>
+         <rect x="51" y="859" width="36" height="32" rx="10"></rect>
+         <rect x="49" y="857" width="36" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="877">-=</text>
+         <rect x="51" y="903" width="38" height="32" rx="10"></rect>
+         <rect x="49" y="901" width="38" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="921">*=</text>
+         <rect x="51" y="947" width="38" height="32" rx="10"></rect>
+         <rect x="49" y="945" width="38" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="965">/=</text>
+         <rect x="51" y="991" width="46" height="32" rx="10"></rect>
+         <rect x="49" y="989" width="46" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1009">%=</text>
+         <rect x="51" y="1035" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1033" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1053">^=</text>
+         <rect x="51" y="1079" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1077" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1097">&amp;=</text>
+         <rect x="51" y="1123" width="36" height="32" rx="10"></rect>
+         <rect x="49" y="1121" width="36" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1141">|=</text>
+         <rect x="51" y="1167" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1165" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1185">&lt;&lt;</text>
+         <rect x="51" y="1211" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1209" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1229">&gt;&gt;</text>
+         <rect x="51" y="1255" width="50" height="32" rx="10"></rect>
+         <rect x="49" y="1253" width="50" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1273">&gt;&gt;=</text>
+         <rect x="51" y="1299" width="50" height="32" rx="10"></rect>
+         <rect x="49" y="1297" width="50" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1317">&lt;&lt;=</text>
+         <rect x="51" y="1343" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1341" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1361">==</text>
+         <rect x="51" y="1387" width="34" height="32" rx="10"></rect>
+         <rect x="49" y="1385" width="34" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1405">!=</text>
+         <rect x="51" y="1431" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1429" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1449">&lt;=</text>
+         <rect x="51" y="1475" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1473" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1493">&gt;=</text>
+         <rect x="51" y="1519" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1517" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1537">&amp;&amp;</text>
+         <rect x="51" y="1563" width="32" height="32" rx="10"></rect>
+         <rect x="49" y="1561" width="32" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1581">||</text>
+         <rect x="51" y="1607" width="40" height="32" rx="10"></rect>
+         <rect x="49" y="1605" width="40" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1625">++</text>
+         <rect x="51" y="1651" width="32" height="32" rx="10"></rect>
+         <rect x="49" y="1649" width="32" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1669">--</text>
+         <rect x="51" y="1695" width="24" height="32" rx="10"></rect>
+         <rect x="49" y="1693" width="24" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1713">,</text>
+         <rect x="51" y="1739" width="44" height="32" rx="10"></rect>
+         <rect x="49" y="1737" width="44" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1757">-&gt;*</text>
+         <rect x="51" y="1783" width="36" height="32" rx="10"></rect>
+         <rect x="49" y="1781" width="36" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1801">-&gt;</text>
+         <rect x="51" y="1827" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="1825" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1845">)</text>
+         <rect x="51" y="1871" width="26" height="32" rx="10"></rect>
+         <rect x="49" y="1869" width="26" height="32" class="terminal" rx="10"></rect>
+         <text class="terminal" x="59" y="1889">]</text>
+         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m40 0 h10 m48 0 h10 m0 0 h14 m-102 0 h20 m82 0 h20 m-122 0 q10 0 10 10 m102 0 q0 -10 10 -10 m-112 10 v24 m102 0 v-24 m-102 24 q0 10 10 10 m82 0 q10 0 10 -10 m-92 10 h10 m62 0 h10 m40 -44 h10 m0 0 h82 m-112 0 h20 m92 0 h20 m-132 0 q10 0 10 10 m112 0 q0 -10 10 -10 m-122 10 v12 m112 0 v-12 m-112 12 q0 10 10 10 m92 0 q10 0 10 -10 m-102 10 h10 m26 0 h10 m0 0 h10 m26 0 h10 m-254 -32 h20 m254 0 h20 m-294 0 q10 0 10 10 m274 0 q0 -10 10 -10 m-284 10 v68 m274 0 v-68 m-274 68 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m20 0 h10 m0 0 h36 m-66 0 h20 m46 0 h20 m-86 0 q10 0 10 10 m66 0 q0 -10 10 -10 m-76 10 v12 m66 0 v-12 m-66 12 q0 10 10 10 m46 0 q10 0 10 -10 m-56 10 h10 m26 0 h10 m20 -32 h122 m-264 -10 v20 m274 0 v-20 m-274 20 v56 m274 0 v-56 m-274 56 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m20 0 h10 m0 0 h36 m-66 0 h20 m46 0 h20 m-86 0 q10 0 10 10 m66 0 q0 -10 10 -10 m-76 10 v12 m66 0 v-12 m-66 12 q0 10 10 10 m46 0 q10 0 10 -10 m-56 10 h10 m26 0 h10 m20 -32 h122 m-264 -10 v20 m274 0 v-20 m-274 20 v56 m274 0 v-56 m-274 56 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m0 0 h208 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m28 0 h10 m0 0 h206 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m28 0 h10 m0 0 h206 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m34 0 h10 m0 0 h200 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m0 0 h208 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m24 0 h10 m0 0 h210 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m30 0 h10 m0 0 h204 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m36 0 h10 m0 0 h198 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m38 0 h10 m0 0 h196 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m38 0 h10 m0 0 h196 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m46 0 h10 m0 0 h188 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m36 0 h10 m0 0 h198 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m50 0 h10 m0 0 h184 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m50 0 h10 m0 0 h184 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m34 0 h10 m0 0 h200 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m32 0 h10 m0 0 h202 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m40 0 h10 m0 0 h194 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m32 0 h10 m0 0 h202 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m24 0 h10 m0 0 h210 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m44 0 h10 m0 0 h190 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m36 0 h10 m0 0 h198 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m0 0 h208 m-264 -10 v20 m274 0 v-20 m-274 20 v24 m274 0 v-24 m-274 24 q0 10 10 10 m254 0 q10 0 10 -10 m-264 10 h10 m26 0 h10 m0 0 h208 m23 -1868 h-3"></svg:path>
+         <polygon points="323 17 331 13 331 21"></polygon>
+         <polygon points="323 17 315 13 315 21"></polygon></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#operatorToken" title="operatorToken">operatorToken</a></div>
+               <div>         ::= ( 'new' | 'delete' ) ( '[' ']' )?</div>
+               <div>           | '[' ']'?</div>
+               <div>           | '(' ')'?</div>
+               <div>           | '+'</div>
+               <div>           | '-'</div>
+               <div>           | '*'</div>
+               <div>           | '/'</div>
+               <div>           | '%'</div>
+               <div>           | '^'</div>
+               <div>           | '&amp;'</div>
+               <div>           | '|'</div>
+               <div>           | '~'</div>
+               <div>           | '!'</div>
+               <div>           | '='</div>
+               <div>           | '&lt;'</div>
+               <div>           | '&gt;'</div>
+               <div>           | '+='</div>
+               <div>           | '-='</div>
+               <div>           | '*='</div>
+               <div>           | '/='</div>
+               <div>           | '%='</div>
+               <div>           | '^='</div>
+               <div>           | '&amp;='</div>
+               <div>           | '|='</div>
+               <div>           | '&lt;&lt;'</div>
+               <div>           | '&gt;&gt;'</div>
+               <div>           | '&gt;&gt;='</div>
+               <div>           | '&lt;&lt;='</div>
+               <div>           | '=='</div>
+               <div>           | '!='</div>
+               <div>           | '&lt;='</div>
+               <div>           | '&gt;='</div>
+               <div>           | '&amp;&amp;'</div>
+               <div>           | '||'</div>
+               <div>           | '++'</div>
+               <div>           | '--'</div>
+               <div>           | ','</div>
+               <div>           | '-&gt;*'</div>
+               <div>           | '-&gt;'</div>
+               <div>           | ')'</div>
+               <div>           | ']'</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#operatorFunctionId" title="operatorFunctionId">operatorFunctionId</xhtml:a></xhtml:li>
          </xhtml:ul>
       </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="conversionFunctionId">conversionFunctionId:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="289" height="37">
          <defs>
@@ -9912,231 +10133,6 @@
       <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
          <xhtml:ul>
             <xhtml:li><xhtml:a href="#Identifier" title="Identifier">Identifier</xhtml:a></xhtml:li>
-         </xhtml:ul>
-      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Operator">Operator:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="173" height="2017">
-         <defs>
-            <style type="text/css">
-    @namespace "http://www.w3.org/2000/svg";
-    .line                 {fill: none; stroke: #332900; stroke-width: 1;}
-    .bold-line            {stroke: #141000; shape-rendering: crispEdges; stroke-width: 2;}
-    .thin-line            {stroke: #1F1800; shape-rendering: crispEdges}
-    .filled               {fill: #332900; stroke: none;}
-    text.terminal         {font-family: Verdana, Sans-serif;
-                            font-size: 12px;
-                            fill: #141000;
-                            font-weight: bold;
-                          }
-    text.nonterminal      {font-family: Verdana, Sans-serif;
-                            font-size: 12px;
-                            fill: #1A1400;
-                            font-weight: normal;
-                          }
-    text.regexp           {font-family: Verdana, Sans-serif;
-                            font-size: 12px;
-                            fill: #1F1800;
-                            font-weight: normal;
-                          }
-    rect, circle, polygon {fill: #332900; stroke: #332900;}
-    rect.terminal         {fill: #FFDB4D; stroke: #332900; stroke-width: 1;}
-    rect.nonterminal      {fill: #FFEC9E; stroke: #332900; stroke-width: 1;}
-    rect.text             {fill: none; stroke: none;}
-    polygon.regexp        {fill: #FFF4C7; stroke: #332900; stroke-width: 1;}
-  </style>
-         </defs>
-         <polygon points="9 17 1 13 1 21"></polygon>
-         <polygon points="17 17 9 13 9 21"></polygon>
-         <rect x="51" y="3" width="48" height="32" rx="10"></rect>
-         <rect x="49" y="1" width="48" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="21">new</text>
-         <rect x="51" y="47" width="62" height="32" rx="10"></rect>
-         <rect x="49" y="45" width="62" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="65">delete</text>
-         <rect x="51" y="91" width="62" height="32" rx="10"></rect>
-         <rect x="49" y="89" width="62" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="109">new[]</text>
-         <rect x="51" y="135" width="74" height="32" rx="10"></rect>
-         <rect x="49" y="133" width="74" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="153">delete[]</text>
-         <rect x="51" y="179" width="32" height="32" rx="10"></rect>
-         <rect x="49" y="177" width="32" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="197">[]</text>
-         <rect x="51" y="223" width="34" height="32" rx="10"></rect>
-         <rect x="49" y="221" width="34" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="241">()</text>
-         <rect x="51" y="267" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="265" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="285">+</text>
-         <rect x="51" y="311" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="309" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="329">-</text>
-         <rect x="51" y="355" width="28" height="32" rx="10"></rect>
-         <rect x="49" y="353" width="28" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="373">*</text>
-         <rect x="51" y="399" width="28" height="32" rx="10"></rect>
-         <rect x="49" y="397" width="28" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="417">/</text>
-         <rect x="51" y="443" width="34" height="32" rx="10"></rect>
-         <rect x="49" y="441" width="34" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="461">%</text>
-         <rect x="51" y="487" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="485" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="505">^</text>
-         <rect x="51" y="531" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="529" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="549">&amp;</text>
-         <rect x="51" y="575" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="573" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="593">|</text>
-         <rect x="51" y="619" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="617" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="637">~</text>
-         <rect x="51" y="663" width="24" height="32" rx="10"></rect>
-         <rect x="49" y="661" width="24" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="681">!</text>
-         <rect x="51" y="707" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="705" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="725">=</text>
-         <rect x="51" y="751" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="749" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="769">&lt;</text>
-         <rect x="51" y="795" width="30" height="32" rx="10"></rect>
-         <rect x="49" y="793" width="30" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="813">&gt;</text>
-         <rect x="51" y="839" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="837" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="857">+=</text>
-         <rect x="51" y="883" width="36" height="32" rx="10"></rect>
-         <rect x="49" y="881" width="36" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="901">-=</text>
-         <rect x="51" y="927" width="38" height="32" rx="10"></rect>
-         <rect x="49" y="925" width="38" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="945">*=</text>
-         <rect x="51" y="971" width="38" height="32" rx="10"></rect>
-         <rect x="49" y="969" width="38" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="989">/=</text>
-         <rect x="51" y="1015" width="46" height="32" rx="10"></rect>
-         <rect x="49" y="1013" width="46" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1033">%=</text>
-         <rect x="51" y="1059" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1057" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1077">^=</text>
-         <rect x="51" y="1103" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1101" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1121">&amp;=</text>
-         <rect x="51" y="1147" width="36" height="32" rx="10"></rect>
-         <rect x="49" y="1145" width="36" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1165">|=</text>
-         <rect x="51" y="1191" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1189" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1209">&lt;&lt;</text>
-         <rect x="51" y="1235" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1233" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1253">&gt;&gt;</text>
-         <rect x="51" y="1279" width="50" height="32" rx="10"></rect>
-         <rect x="49" y="1277" width="50" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1297">&gt;&gt;=</text>
-         <rect x="51" y="1323" width="50" height="32" rx="10"></rect>
-         <rect x="49" y="1321" width="50" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1341">&lt;&lt;=</text>
-         <rect x="51" y="1367" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1365" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1385">==</text>
-         <rect x="51" y="1411" width="34" height="32" rx="10"></rect>
-         <rect x="49" y="1409" width="34" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1429">!=</text>
-         <rect x="51" y="1455" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1453" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1473">&lt;=</text>
-         <rect x="51" y="1499" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1497" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1517">&gt;=</text>
-         <rect x="51" y="1543" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1541" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1561">&amp;&amp;</text>
-         <rect x="51" y="1587" width="32" height="32" rx="10"></rect>
-         <rect x="49" y="1585" width="32" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1605">||</text>
-         <rect x="51" y="1631" width="40" height="32" rx="10"></rect>
-         <rect x="49" y="1629" width="40" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1649">++</text>
-         <rect x="51" y="1675" width="32" height="32" rx="10"></rect>
-         <rect x="49" y="1673" width="32" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1693">--</text>
-         <rect x="51" y="1719" width="24" height="32" rx="10"></rect>
-         <rect x="49" y="1717" width="24" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1737">,</text>
-         <rect x="51" y="1763" width="44" height="32" rx="10"></rect>
-         <rect x="49" y="1761" width="44" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1781">-&gt;*</text>
-         <rect x="51" y="1807" width="36" height="32" rx="10"></rect>
-         <rect x="49" y="1805" width="36" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1825">-&gt;</text>
-         <rect x="51" y="1851" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="1849" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1869">(</text>
-         <rect x="51" y="1895" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="1893" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1913">)</text>
-         <rect x="51" y="1939" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="1937" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="1957">[</text>
-         <rect x="51" y="1983" width="26" height="32" rx="10"></rect>
-         <rect x="49" y="1981" width="26" height="32" class="terminal" rx="10"></rect>
-         <text class="terminal" x="59" y="2001">]</text>
-         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m20 0 h10 m48 0 h10 m0 0 h26 m-114 0 h20 m94 0 h20 m-134 0 q10 0 10 10 m114 0 q0 -10 10 -10 m-124 10 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m62 0 h10 m0 0 h12 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m62 0 h10 m0 0 h12 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m74 0 h10 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m32 0 h10 m0 0 h42 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m34 0 h10 m0 0 h40 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m28 0 h10 m0 0 h46 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m28 0 h10 m0 0 h46 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m34 0 h10 m0 0 h40 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m24 0 h10 m0 0 h50 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m30 0 h10 m0 0 h44 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m36 0 h10 m0 0 h38 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m38 0 h10 m0 0 h36 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m38 0 h10 m0 0 h36 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m46 0 h10 m0 0 h28 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m36 0 h10 m0 0 h38 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m50 0 h10 m0 0 h24 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m50 0 h10 m0 0 h24 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m34 0 h10 m0 0 h40 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m32 0 h10 m0 0 h42 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m40 0 h10 m0 0 h34 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m32 0 h10 m0 0 h42 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m24 0 h10 m0 0 h50 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m44 0 h10 m0 0 h30 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m36 0 h10 m0 0 h38 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m-104 -10 v20 m114 0 v-20 m-114 20 v24 m114 0 v-24 m-114 24 q0 10 10 10 m94 0 q10 0 10 -10 m-104 10 h10 m26 0 h10 m0 0 h48 m23 -1980 h-3"></svg:path>
-         <polygon points="163 17 171 13 171 21"></polygon>
-         <polygon points="163 17 155 13 155 21"></polygon></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
-         <xhtml:div class="ebnf"><xhtml:code>
-               <div><a href="#Operator" title="Operator">Operator</a> ::= 'new'</div>
-               <div>           | 'delete'</div>
-               <div>           | 'new[]'</div>
-               <div>           | 'delete[]'</div>
-               <div>           | '[]'</div>
-               <div>           | '()'</div>
-               <div>           | '+'</div>
-               <div>           | '-'</div>
-               <div>           | '*'</div>
-               <div>           | '/'</div>
-               <div>           | '%'</div>
-               <div>           | '^'</div>
-               <div>           | '&amp;'</div>
-               <div>           | '|'</div>
-               <div>           | '~'</div>
-               <div>           | '!'</div>
-               <div>           | '='</div>
-               <div>           | '&lt;'</div>
-               <div>           | '&gt;'</div>
-               <div>           | '+='</div>
-               <div>           | '-='</div>
-               <div>           | '*='</div>
-               <div>           | '/='</div>
-               <div>           | '%='</div>
-               <div>           | '^='</div>
-               <div>           | '&amp;='</div>
-               <div>           | '|='</div>
-               <div>           | '&lt;&lt;'</div>
-               <div>           | '&gt;&gt;'</div>
-               <div>           | '&gt;&gt;='</div>
-               <div>           | '&lt;&lt;='</div>
-               <div>           | '=='</div>
-               <div>           | '!='</div>
-               <div>           | '&lt;='</div>
-               <div>           | '&gt;='</div>
-               <div>           | '&amp;&amp;'</div>
-               <div>           | '||'</div>
-               <div>           | '++'</div>
-               <div>           | '--'</div>
-               <div>           | ','</div>
-               <div>           | '-&gt;*'</div>
-               <div>           | '-&gt;'</div>
-               <div>           | '('</div>
-               <div>           | ')'</div>
-               <div>           | '['</div>
-               <div>           | ']'</div></xhtml:code></xhtml:div>
-      </xhtml:p>
-      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
-         <xhtml:ul>
-            <xhtml:li><xhtml:a href="#operatorFunctionId" title="operatorFunctionId">operatorFunctionId</xhtml:a></xhtml:li>
          </xhtml:ul>
       </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="IntegerConstant">IntegerConstant:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="417" height="395">
          <defs>
